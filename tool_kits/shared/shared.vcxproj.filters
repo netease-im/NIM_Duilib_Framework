@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="cmd_line.cpp" />
+    <ClCompile Include="image_ole_i.c" />
+    <ClCompile Include="ipc_manager.cpp" />
+    <ClCompile Include="tool.cpp" />
+    <ClCompile Include="utf8_file_util.cpp" />
+    <ClCompile Include="closure.cpp" />
+    <ClCompile Include="log.cpp" />
+    <ClCompile Include="pin_yin_helper.cpp" />
+    <ClCompile Include="zoom_image.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="util.cpp" />
+    <ClCompile Include="ring.cpp" />
+    <ClCompile Include="misc_thread.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="cmd_line.h" />
+    <ClInclude Include="image_ole_i.h" />
+    <ClInclude Include="ipc_manager.h" />
+    <ClInclude Include="threads.h" />
+    <ClInclude Include="tool.h" />
+    <ClInclude Include="utf8_file_util.h" />
+    <ClInclude Include="closure.h" />
+    <ClInclude Include="log.h" />
+    <ClInclude Include="pin_yin_helper.h" />
+    <ClInclude Include="zoom_image.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="auto_unregister.h" />
+    <ClInclude Include="util.h" />
+    <ClInclude Include="ring.h" />
+    <ClInclude Include="templated_object_factory.h" />
+    <ClInclude Include="shared.h" />
+    <ClInclude Include="misc_thread.h" />
+  </ItemGroup>
+</Project>

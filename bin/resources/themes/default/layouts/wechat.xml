@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="1024,768" caption="0,0,0,35">
+  <HBox>
+    <!-- 左侧菜单栏 -->
+    <VBox width="60" bkcolor="darkcolor">
+      <Control bkimage="head.png" width="40" height="40" margin="10,10"/>
+    </VBox>
+    <!-- 好友列表 -->
+    <VBox width="270" bkcolor="light_gray">
+      <Box padding="10,8,10,8" height="auto">
+        <RichEdit class="simple prompt input" name="nickname" width="stretch" height="35" padding="25,8,8,8" font="1" borderround="5,5" prompttext="搜索"/>
+        <Control width="auto" height="auto" margin="6,9" bkimage="search_icon.png"/>
+      </Box>
+      <VBox>
+        <!-- Firends -->
+      </VBox>
+    </VBox>
+    <!-- 聊天区域 -->
+    <VBox>
+      <HBox height="80" bkcolor="bk_wnd_darkcolor">
+      </HBox>
+      <Control class="splitline_hor_level1"/>
+      <VBox bkcolor="bk_wnd_darkcolor">
+      </VBox>
+      <VBox height="150" bkcolor="bk_wnd_lightcolor">
+      </VBox>
+    </VBox>
+  </HBox>
+</Window>

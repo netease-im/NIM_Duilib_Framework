@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="340,180" caption="0,0,0,34">
+    <VBox width="340" height="auto" bkcolor="bk_wnd_lightcolor">
+        <HBox class="caption">
+            <Label class="font_title" name="title" width="stretch" valign="center" normaltextcolor="darkcolor"/>
+            <Button class="btn_wnd_close" name="closebtn" margin="10,6,0,0"/>
+        </HBox>
+
+        <RichEdit name="content" width="300" margin="20,30,20,30" font="3" multiline="true" vscrollbar="false" autovscroll="false" enabled="false" rich="true"/>
+
+        <HBox height="auto" margin="0,0,20,20" childmargin="10">
+            <Control />
+            <Button  class="btn_global_blue_80x30" name="btn_yes" normaltextcolor="white"/>
+            <Button  class="btn_global_white_80x30" name="btn_no" normaltextcolor="darkcolor"/>
+        </HBox>
+    </VBox>
+</Window>
