@@ -155,7 +155,7 @@ int64_t GetFileSize(const PathString &filepath)
 
 	if (file == INVALID_HANDLE_VALUE)
 		return -1;
-	LARGE_INTEGER li = { file_data.nFileSizeLow, file_data.nFileSizeHigh };
+	LARGE_INTEGER li = { file_data.nFileSizeLow, (LONG)file_data.nFileSizeHigh };
 	FindClose(file);
 	return li.QuadPart;
 }

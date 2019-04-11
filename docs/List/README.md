@@ -4,5 +4,5 @@
 
  - [Combo](Combo.md) 下拉列表
  - [ListBox](ListBox.md) 普通列表
- - [TreeView](TreeView.md) 属性列表
+ - [TreeView](TreeView.md) 树形列表
  - [VirtualListBox](VirtualListBox.md) 虚拟列表

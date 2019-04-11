@@ -618,23 +618,23 @@ void yxDES::ConvertCiphertext2Hex(char *szPlainInBytes)
 //16进制密文转字符串
 int yxDES::ConvertHex2Ciphertext(const char *szCipherInBytes)
 {
-	char* bitsCiphertextAnyLength = new char[data_base_length_*4];
-	char* hexCiphertextAnyLength = new char[data_base_length_*2];
+	char* bitsTmpCiphertextAnyLength = new char[data_base_length_*4];
+	char* hexTmpCiphertextAnyLength = new char[data_base_length_*2];
 
 	int iLen = 0;
 
 	memset(szCiphertextData,0,data_base_length_);
-	memset(hexCiphertextAnyLength,0,data_base_length_*2);
+	memset(hexTmpCiphertextAnyLength,0,data_base_length_*2);
 	
 
 	iLen = (((int)strlen(szCipherInBytes)>>2) + ((int)strlen(szCipherInBytes) % 4 == 0 ? 0 : 1))<<4;
 	
-	memcpy(hexCiphertextAnyLength,szCipherInBytes,strlen(szCipherInBytes));
-	Hex2Bits(hexCiphertextAnyLength,bitsCiphertextAnyLength,iLen);
-	Bits2Bytes(szCiphertextData,bitsCiphertextAnyLength,iLen);
+	memcpy(hexTmpCiphertextAnyLength,szCipherInBytes,strlen(szCipherInBytes));
+	Hex2Bits(hexTmpCiphertextAnyLength,bitsTmpCiphertextAnyLength,iLen);
+	Bits2Bytes(szCiphertextData,bitsTmpCiphertextAnyLength,iLen);
 
-	delete[] bitsCiphertextAnyLength;
-	delete[] hexCiphertextAnyLength;
+	delete[] bitsTmpCiphertextAnyLength;
+	delete[] hexTmpCiphertextAnyLength;
 
 	return iLen >>3;
 }
