@@ -134,6 +134,10 @@ CSize Layout::AjustSizeByChild(const std::vector<Control*>& items, CSize szAvail
 		if (!(*it)->IsVisible())
 			continue;
 
+        // 当控件为浮动状态时，不点位
+        if ((*it)->IsFloat())
+            continue;
+
 		itemSize = (*it)->EstimateSize(szAvailable);
 		if( itemSize.cx < (*it)->GetMinWidth() ) itemSize.cx = (*it)->GetMinWidth();
 		if( (*it)->GetMaxWidth() >= 0 && itemSize.cx > (*it)->GetMaxWidth() ) itemSize.cx = (*it)->GetMaxWidth();
