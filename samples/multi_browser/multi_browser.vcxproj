@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FDB5539F-1060-4975-B603-B66454C8C897}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>multi_browser</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PlatformToolset>v120_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\bin\</OutDir>
+    <IntDir>$(ProjectDir)..\..\tmp\$(PlatformName)\$(ProjectName)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_d</TargetName>
+    <IncludePath>.\;..\;..\..\;..\..\tool_kits\;..\..\tool_kits\ui_components\;..\..\third_party\cef_wrapper\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\libs\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>.\;..\;..\..\;..\..\tool_kits\;..\..\tool_kits\ui_components\;..\..\third_party\cef_wrapper\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\libs\;$(LibraryPath)</LibraryPath>
+    <OutDir>..\..\bin\</OutDir>
+    <IntDir>$(ProjectDir)..\..\tmp\$(PlatformName)\$(ProjectName)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\..\bin\</OutDir>
+    <IntDir>$(ProjectDir)..\..\tmp\$(PlatformName)\$(ProjectName)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)64_d</TargetName>
+    <IncludePath>.\;..\;..\..\;..\..\tool_kits\;..\..\tool_kits\ui_components\;..\..\third_party\cef_wrapper\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\libs\x64\;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>.\;..\;..\..\;..\..\tool_kits\;..\..\tool_kits\ui_components\;..\..\third_party\cef_wrapper\;$(IncludePath)</IncludePath>
+    <LibraryPath>..\..\libs\x64\;$(LibraryPath)</LibraryPath>
+    <OutDir>..\..\bin\</OutDir>
+    <IntDir>$(ProjectDir)..\..\tmp\$(PlatformName)\$(ProjectName)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)64</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>..\..\third_party\cef_wrapper;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <DelayLoadDLLs>nim_libcef.dll</DelayLoadDLLs>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <DelayLoadDLLs>nim_libcef.dll</DelayLoadDLLs>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <DelayLoadDLLs>nim_libcef.dll</DelayLoadDLLs>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <DelayLoadDLLs>nim_libcef.dll</DelayLoadDLLs>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="browser\browser_box.h" />
+    <ClInclude Include="browser\custom_layout.h" />
+    <ClInclude Include="browser\multi_browser_form.h" />
+    <ClInclude Include="browser\multi_browser_manager.h" />
+    <ClInclude Include="control\browser_tab_item.h" />
+    <ClInclude Include="dragdrop\bitmap_control.h" />
+    <ClInclude Include="dragdrop\drag_drop.h" />
+    <ClInclude Include="dragdrop\drag_form.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="taskbar\dwm_util.h" />
+    <ClInclude Include="taskbar\taskbar_manager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="browser\browser_box.cpp" />
+    <ClCompile Include="browser\custom_layout.cpp" />
+    <ClCompile Include="browser\multi_browser_form.cpp" />
+    <ClCompile Include="browser\multi_browser_form_dragdrop.cpp" />
+    <ClCompile Include="browser\multi_browser_manager.cpp" />
+    <ClCompile Include="control\browser_tab_item.cpp" />
+    <ClCompile Include="dragdrop\bitmap_control.cpp" />
+    <ClCompile Include="dragdrop\drag_drop.cpp" />
+    <ClCompile Include="dragdrop\drag_form.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="taskbar\dwm_util.cpp" />
+    <ClCompile Include="taskbar\taskbar_manager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="multi_browser.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="multi_browser.ico" />
+    <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\tool_kits\base\base.vcxproj">
+      <Project>{8d9a6595-717a-41c8-b468-0011a72be3d1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\tool_kits\duilib\duilib.vcxproj">
+      <Project>{e106acd7-4e53-4aee-942b-d0dd426db34e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\tool_kits\shared\shared.vcxproj">
+      <Project>{9951345f-620b-4bed-bb51-4f928cafd454}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\tool_kits\ui_components\ui_components.vcxproj">
+      <Project>{0149ba6e-3c0a-426d-aa0a-0b9ec7742f19}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

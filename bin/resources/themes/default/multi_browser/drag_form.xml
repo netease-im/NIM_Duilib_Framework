@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Window caption="0,0,0,160" shadowattached="false">
+	<Box>
+		<BitmapControl name="bitmap"/>
+	</Box>
+</Window>

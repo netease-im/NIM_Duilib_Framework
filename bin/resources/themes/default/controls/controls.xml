@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="800,600" caption="0,0,0,35">
+  <VBox bkcolor="bk_wnd_darkcolor">
+    <HBox width="stretch" height="35" bkcolor="bk_wnd_lightcolor">
+      <Control width="auto" height="auto" bkimage="logo_18x18.png" valign="center" margin="8"/>
+      <Label text="Controls" valign="center" margin="8"/>
+      <Control />
+      <Button class="btn_wnd_settings" name="settings" margin="4,6,0,0"/>
+      <Button class="btn_wnd_min" name="minbtn" margin="4,6,0,0"/>
+      <Box width="21" margin="4,6,0,0">
+        <Button class="btn_wnd_max" name="maxbtn"/>
+        <Button class="btn_wnd_restore" name="restorebtn" visible="false"/>
+      </Box>
+      <Button class="btn_wnd_close" name="closebtn" margin="4,6,8,0"/>
+    </HBox>
+    <VBox padding="30,30,30,30">
+      <HBox height="110" padding="0,0,0,20">
+        <!-- Buttons -->
+        <VBox>
+          <Button class="btn_global_blue_80x30" text="blue"/>
+          <Button class="btn_global_white_80x30" text="white"/>
+          <Button class="btn_global_red_80x30" text="red"/>
+        </VBox>
+        <!-- Checkbox -->
+        <VBox>
+          <CheckBox class="checkbox_font12" text="checkbox1" margin="0,5,0,10" selected="true"/>
+          <CheckBox class="checkbox_font12" text="checkbox2" margin="0,5,0,10"/>
+          <CheckBox class="checkbox_font12" text="checkbox3" margin="0,5,0,10"/>
+        </VBox>
+        <!-- Option -->
+        <VBox>
+          <Option class="circle_option_2" group="option_group" text="option1" margin="0,3,0,10" selected="true"/>
+          <Option class="circle_option_2" group="option_group" text="option2" margin="0,3,0,10"/>
+          <Option class="circle_option_2" group="option_group" text="option3" margin="0,3,0,10"/>
+        </VBox>
+        <!-- List -->
+        <VListBox class="list" name="list" padding="5,3,5,3">
+          
+        </VListBox>
+        <!-- TreeView -->
+        <TreeView class="list" name="tree" padding="5,3,5,3" margin="20">
+          
+        </TreeView>
+      </HBox>
+      <Control class="splitline_hor_level1"/>
+      <!-- Progress -->
+      <HBox margin="0,10" height="30">
+        <Control width="auto" height="auto" bkimage="../public/animation/ani_loading.gif" valign="center"/>
+        <Progress class="progress_blue" name="progress" value="0" margin="10"/>
+      </HBox>
+      <HBox margin="0,0,0,10" height="30">
+        <Control width="auto" height="auto" bkimage="set_speaker.png" valign="center"/>
+        <Slider class="slider_green" value="70" margin="10"/>
+      </HBox>
+      <Control class="splitline_hor_level1"/>
+      <!-- RichEdit -->
+      <RichEdit class="prompt" name="edit" bkcolor="bk_wnd_lightcolor" width="stretch" height="stretch" 
+                  font="1" multiline="true" vscrollbar="true" hscrollbar="true" autovscroll="true" 
+                  normaltextcolor="darkcolor" wantreturnmsg="true" rich="true"/>
+    </VBox>
+  </VBox>
+</Window>

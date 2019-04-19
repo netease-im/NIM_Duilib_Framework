@@ -1,0 +1,376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="encrypt">
+      <UniqueIdentifier>{204f0949-2ae4-4658-a6f9-bbf5ad75d457}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="file">
+      <UniqueIdentifier>{83ac3967-f616-4b9d-93b8-655e031a4a42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework">
+      <UniqueIdentifier>{17150c8d-a799-4dbf-a929-a38f1c91f352}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hardware">
+      <UniqueIdentifier>{66c26c49-1e2e-444b-a1bc-96558946eb57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="memory">
+      <UniqueIdentifier>{41e320fc-3c2e-4b37-a52c-16642af9e165}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="synchronization">
+      <UniqueIdentifier>{a31e74c9-3013-45d6-89d7-b96371695552}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party">
+      <UniqueIdentifier>{0b952d26-7582-4959-bc92-87c48c117cd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\convert_utf">
+      <UniqueIdentifier>{ea8cdbca-b867-483f-8cff-0e7c9e901ab8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\modp_b64">
+      <UniqueIdentifier>{69d641dc-bb35-4439-bd84-5457b897da8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="third_party\chrome">
+      <UniqueIdentifier>{29152b5f-7909-4ab7-a826-6598f91a9433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thread">
+      <UniqueIdentifier>{256c20e7-1168-47ca-81ea-21fa3562044d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="time">
+      <UniqueIdentifier>{356c8fde-63c6-43d0-b973-878660a14638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{be58b19f-6b36-43de-96d7-4620fbd5163f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="win32">
+      <UniqueIdentifier>{d8d8c2b3-a579-4ef9-826b-3d42d8da2fbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="build">
+      <UniqueIdentifier>{81d54a74-a608-47a2-b6da-47a63bc375d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="callback">
+      <UniqueIdentifier>{9984baab-b827-45b7-b783-08683bf4e02b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="network">
+      <UniqueIdentifier>{0da576a2-a5a3-4f60-8f13-5cca6c3b2bd0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="port.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="encrypt\encrypt.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="encrypt\encrypt_impl.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="file\file_util.h">
+      <Filter>file</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\default_message_pump.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\message_loop.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\message_pump.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\observer_list.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\task.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\win_io_message_pump.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\win_message_pump.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\win_ui_message_pump.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="hardware\cpu.h">
+      <Filter>hardware</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\blockbuffer.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\lazy_instance.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="synchronization\lock.h">
+      <Filter>synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="synchronization\semaphore.h">
+      <Filter>synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="synchronization\waitable_event.h">
+      <Filter>synchronization</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\convert_utf\ConvertUTF.h">
+      <Filter>third_party\convert_utf</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\modp_b64\modp_b64.h">
+      <Filter>third_party\modp_b64</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\modp_b64\modp_b64_data.h">
+      <Filter>third_party\modp_b64</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\chrome\atomicops.h">
+      <Filter>third_party\chrome</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\chrome\atomicops_internals_arm_gcc.h">
+      <Filter>third_party\chrome</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\chrome\atomicops_internals_atomicword_compat.h">
+      <Filter>third_party\chrome</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\chrome\atomicops_internals_x86_gcc.h">
+      <Filter>third_party\chrome</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\chrome\atomicops_internals_x86_macosx.h">
+      <Filter>third_party\chrome</Filter>
+    </ClInclude>
+    <ClInclude Include="third_party\chrome\atomicops_internals_x86_msvc.h">
+      <Filter>third_party\chrome</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\framework_thread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\thread.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\thread_local.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="thread\thread_manager.h">
+      <Filter>thread</Filter>
+    </ClInclude>
+    <ClInclude Include="time\time.h">
+      <Filter>time</Filter>
+    </ClInclude>
+    <ClInclude Include="util\base64.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\cmd_line_args.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\string_util.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\template_util.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\valuemap.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\scoped_win_handle.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\shared_memory.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\win_util.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="base_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="macros.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\build\build_config.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\build\winsdk_config.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\build\xp_style_manifest_win.h">
+      <Filter>build</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\path_util.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\security_util.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\message_loop_proxy.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="util\string_number_conversions.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\platform_string_util.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="win32\object_watcher.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="file\file_path.h">
+      <Filter>file</Filter>
+    </ClInclude>
+    <ClInclude Include="util\unicode.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="util\at_exit.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\singleton.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="encrypt\des.h">
+      <Filter>encrypt</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\deleter.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="callback\callback.h">
+      <Filter>callback</Filter>
+    </ClInclude>
+    <ClInclude Include="network\network_util.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="network\nio_base.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="file\file_util.cpp">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="file\file_util_posix.cpp">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="file\file_util_win.cpp">
+      <Filter>file</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\default_message_pump.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\message_loop.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\message_pump.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\win_io_message_pump.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\win_message_pump.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\win_ui_message_pump.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="hardware\cpu.cpp">
+      <Filter>hardware</Filter>
+    </ClCompile>
+    <ClCompile Include="synchronization\lock_posix.cpp">
+      <Filter>synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="synchronization\lock_win.cpp">
+      <Filter>synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="synchronization\semaphore_posix.cpp">
+      <Filter>synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="synchronization\semaphore_win.cpp">
+      <Filter>synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="synchronization\waitable_event_posix.cpp">
+      <Filter>synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="synchronization\waitable_event_win.cpp">
+      <Filter>synchronization</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\convert_utf\ConvertUTF.c">
+      <Filter>third_party\convert_utf</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\modp_b64\modp_b64.cc">
+      <Filter>third_party\modp_b64</Filter>
+    </ClCompile>
+    <ClCompile Include="third_party\chrome\atomicops_internals_x86_gcc.cc">
+      <Filter>third_party\chrome</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\framework_thread.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\thread_local_posix.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\thread_local_win.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\thread_manager.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\thread_posix.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="thread\thread_win.cpp">
+      <Filter>thread</Filter>
+    </ClCompile>
+    <ClCompile Include="time\time.cpp">
+      <Filter>time</Filter>
+    </ClCompile>
+    <ClCompile Include="time\time_posix.cpp">
+      <Filter>time</Filter>
+    </ClCompile>
+    <ClCompile Include="time\time_win.cpp">
+      <Filter>time</Filter>
+    </ClCompile>
+    <ClCompile Include="util\base64.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\cmd_line_args.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="util\string_util.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\shared_memory.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\win_util.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\path_util.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\security_util.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\message_loop_proxy.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="util\string_number_conversions.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\platform_string_util.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="win32\object_watcher.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="util\at_exit.cpp">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="encrypt\des.cpp">
+      <Filter>encrypt</Filter>
+    </ClCompile>
+    <ClCompile Include="network\network_util.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="browser">
+      <UniqueIdentifier>{cb4e3f7f-99c3-4721-8777-1d7624c6cac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="control">
+      <UniqueIdentifier>{fe5c6456-4694-4c06-b9db-813feeaa7633}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dragdrop">
+      <UniqueIdentifier>{39ffc9f6-a6ef-4a3c-99f8-97c06128b731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="taskbar">
+      <UniqueIdentifier>{275b7dcc-edae-40fc-a380-26e4371d0859}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="browser\multi_browser_manager.h">
+      <Filter>browser</Filter>
+    </ClInclude>
+    <ClInclude Include="browser\browser_box.h">
+      <Filter>browser</Filter>
+    </ClInclude>
+    <ClInclude Include="browser\multi_browser_form.h">
+      <Filter>browser</Filter>
+    </ClInclude>
+    <ClInclude Include="control\browser_tab_item.h">
+      <Filter>control</Filter>
+    </ClInclude>
+    <ClInclude Include="dragdrop\drag_form.h">
+      <Filter>dragdrop</Filter>
+    </ClInclude>
+    <ClInclude Include="dragdrop\bitmap_control.h">
+      <Filter>dragdrop</Filter>
+    </ClInclude>
+    <ClInclude Include="dragdrop\drag_drop.h">
+      <Filter>dragdrop</Filter>
+    </ClInclude>
+    <ClInclude Include="taskbar\taskbar_manager.h">
+      <Filter>taskbar</Filter>
+    </ClInclude>
+    <ClInclude Include="taskbar\dwm_util.h">
+      <Filter>taskbar</Filter>
+    </ClInclude>
+    <ClInclude Include="browser\custom_layout.h">
+      <Filter>browser</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="browser\browser_box.cpp">
+      <Filter>browser</Filter>
+    </ClCompile>
+    <ClCompile Include="browser\multi_browser_form.cpp">
+      <Filter>browser</Filter>
+    </ClCompile>
+    <ClCompile Include="browser\multi_browser_form_dragdrop.cpp">
+      <Filter>browser</Filter>
+    </ClCompile>
+    <ClCompile Include="browser\multi_browser_manager.cpp">
+      <Filter>browser</Filter>
+    </ClCompile>
+    <ClCompile Include="control\browser_tab_item.cpp">
+      <Filter>control</Filter>
+    </ClCompile>
+    <ClCompile Include="dragdrop\bitmap_control.cpp">
+      <Filter>dragdrop</Filter>
+    </ClCompile>
+    <ClCompile Include="dragdrop\drag_drop.cpp">
+      <Filter>dragdrop</Filter>
+    </ClCompile>
+    <ClCompile Include="dragdrop\drag_form.cpp">
+      <Filter>dragdrop</Filter>
+    </ClCompile>
+    <ClCompile Include="taskbar\dwm_util.cpp">
+      <Filter>taskbar</Filter>
+    </ClCompile>
+    <ClCompile Include="taskbar\taskbar_manager.cpp">
+      <Filter>taskbar</Filter>
+    </ClCompile>
+    <ClCompile Include="browser\custom_layout.cpp">
+      <Filter>browser</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="multi_browser.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="multi_browser.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
