@@ -14,7 +14,7 @@
 #define BUILD_BUILD_CONFIG_H_
 
 // Define platform macro
-#if defined(WIN32)
+#if defined(_WIN32)
 #define OS_WIN      1
 #elif defined(__APPLE__) && (defined(__i386__) || defined(__ARMEL__))
 #define OS_IOS      1
