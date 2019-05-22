@@ -1,7 +1,6 @@
 ﻿#include "stdafx.h"
 #include "tool.h"
 
-#include <atlbase.h>
 #include <shlwapi.h>
 #include <shlobj.h>
 #include <io.h>

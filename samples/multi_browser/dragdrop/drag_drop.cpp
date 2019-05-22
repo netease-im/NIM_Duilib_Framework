@@ -1,6 +1,5 @@
 #include "drag_drop.h"
 #include <shlobj.h>
-#include <atlbase.h>
 #include <shlobj.h>
 #include <shlwapi.h>
 
@@ -327,7 +326,7 @@ STDMETHODIMP_(ULONG) SdkDropSource::Release( void)
 {
   long nTemp;
    nTemp = --m_cRefCount;
-   ATLASSERT(nTemp >= 0);
+   ASSERT(nTemp >= 0);
    if(nTemp==0)
       delete this;
    return nTemp;
