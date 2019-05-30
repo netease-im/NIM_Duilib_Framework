@@ -58,10 +58,12 @@ UiRect Shadow::GetShadowCorner() const
 
 void Shadow::ResetShadowBox()
 {
-	auto rcTempShadowCorner = m_rcDefaultShadowCorner;
-	DpiManager::GetInstance()->ScaleRect(rcTempShadowCorner);
-	m_rcShadowCornerBackup = m_rcCurShadowCorner = rcTempShadowCorner;
-	m_pRoot->GetLayout()->SetPadding(m_rcDefaultShadowCorner);
+	if (m_bShadowAttached && m_pRoot) {
+		auto rcTempShadowCorner = m_rcDefaultShadowCorner;
+		DpiManager::GetInstance()->ScaleRect(rcTempShadowCorner);
+		m_rcShadowCornerBackup = m_rcCurShadowCorner = rcTempShadowCorner;
+		m_pRoot->GetLayout()->SetPadding(m_rcDefaultShadowCorner);
+	}
 }
 
 Box*Shadow::AttachShadow(Box* pRoot)
