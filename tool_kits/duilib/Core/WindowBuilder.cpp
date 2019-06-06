@@ -235,10 +235,15 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 							strClassName = strValue;
 						}
 						else if( strName == _T("value") ) {
-							strAttribute = strValue;
+							strAttribute.append(strValue);
+						}
+						else {
+							strAttribute.append(StringHelper::Printf(L" %s=\"%s\"",
+								strName.c_str(), strValue.c_str()));
 						}
 					}
 					if( !strClassName.empty() ) {
+						StringHelper::TrimLeft(strAttribute);
 						GlobalManager::AddClass(strClassName, strAttribute);
 					}
 				}
@@ -277,11 +282,16 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 							strClassName = strValue;
 						}
 						else if( strName == _T("value") ) {
-							strAttribute = strValue;
+							strAttribute.append(strValue);
+						}
+						else {
+							strAttribute.append(StringHelper::Printf(L" %s=\"%s\"",
+								strName.c_str(), strValue.c_str()));
 						}
 					}
 					if( !strClassName.empty() ) {
 						ASSERT( GlobalManager::GetClassAttributes(strClassName).empty() );	//窗口中的Class不能与全局的重名
+						StringHelper::TrimLeft(strAttribute);
 						pManager->AddClass(strClassName, strAttribute);
 					}
 				}
