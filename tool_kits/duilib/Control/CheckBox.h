@@ -225,7 +225,7 @@ void CheckBoxTemplate<InheritType>::PaintText(IRenderContext* pRender)
 	std::wstring newTextColor = m_dwSelectedTextColor.empty() ? this->m_textColorMap[kControlStateNormal] : m_dwSelectedTextColor;
 	DWORD dwTextColor = GlobalManager::GetTextColor(newTextColor);
 	DWORD dwDisabledTextColor = GlobalManager::GetTextColor(this->m_textColorMap[kControlStateDisabled]);
-	pRender->DrawText(rc, this->GetText(), this->IsEnabled() ? dwTextColor : dwDisabledTextColor, this->m_iFont, this->m_uTextStyle);
+	pRender->DrawText(rc, this->GetText(), this->IsEnabled() ? dwTextColor : dwDisabledTextColor, this->m_sFontId, this->m_uTextStyle);
 }
 
 template<typename InheritType>

@@ -14,7 +14,7 @@ CreateControlCallback GlobalManager::m_createControlCallback;
 GlobalManager::MapStringToImagePtr GlobalManager::m_mImageHash;
 std::map<std::wstring, DWORD> GlobalManager::m_mapTextColor;
 std::map<std::wstring, std::wstring> GlobalManager::m_mGlobalClass;
-std::vector<TFontInfo*> GlobalManager::m_aCustomFonts;
+std::map<std::wstring, TFontInfo*> GlobalManager::m_mCustomFonts;
 
 short GlobalManager::m_H = 180;
 short GlobalManager::m_S = 100;
@@ -366,8 +366,17 @@ void GlobalManager::RemoveAllImages()
 	m_mImageHash.clear();
 }
 
-HFONT GlobalManager::AddFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
+	std::wstring strNewFontId = strFontId;
+	if (strNewFontId.empty())
+	{
+		strNewFontId = std::to_wstring(m_mCustomFonts.size());
+	} 
+
+	auto iter = m_mCustomFonts.find(strNewFontId);
+	ASSERT(iter == m_mCustomFonts.end());
+
 	static bool bOsOverXp = IsWindowsVistaOrGreater();
 	std::wstring fontName = strFontName;
 	if ( fontName == L"system" ) {
@@ -395,23 +404,32 @@ HFONT GlobalManager::AddFont(const std::wstring& strFontName, int nSize, bool bB
 	pFontInfo->bItalic = bItalic;
 	::ZeroMemory(&pFontInfo->tm, sizeof(pFontInfo->tm));
 
-	m_aCustomFonts.push_back(pFontInfo);
+	m_mCustomFonts.insert(std::make_pair(strNewFontId, pFontInfo));
 
 	return hFont;
 }
 
-TFontInfo* GlobalManager::GetTFontInfo(std::size_t index)
+TFontInfo* GlobalManager::GetTFontInfo(const std::wstring& strFontId)
 {
-	ASSERT(index >= 0 || index < m_aCustomFonts.size());
-	if (index < 0 && index >= m_aCustomFonts.size())
+	if (strFontId.empty())
+	{
+		for (auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++)
+		{
+			return it->second;
+		}
 		return NULL;
-	TFontInfo* pFontInfo = static_cast<TFontInfo*>(m_aCustomFonts[index]);
+	}
+
+	auto iter = m_mCustomFonts.find(strFontId);
+	ASSERT(iter != m_mCustomFonts.end());
+
+	TFontInfo* pFontInfo = static_cast<TFontInfo*>(iter->second);
 	return pFontInfo;
 }
 
-HFONT GlobalManager::GetFont(std::size_t index)
+HFONT GlobalManager::GetFont(const std::wstring& strFontId)
 {
-	TFontInfo* pFontInfo = GetTFontInfo(index);
+	TFontInfo* pFontInfo = GetTFontInfo(strFontId);
 	if (pFontInfo)
 		return pFontInfo->hFont;
 	return nullptr;
@@ -419,8 +437,8 @@ HFONT GlobalManager::GetFont(std::size_t index)
 
 HFONT GlobalManager::GetFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
-	for( auto it = m_aCustomFonts.begin(); it != m_aCustomFonts.end(); it++ ) {
-		auto pFontInfo = *it;
+	for (auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++) {
+		auto pFontInfo = it->second;
 		if( pFontInfo->sFontName == strFontName && pFontInfo->iSize == nSize && 
 			pFontInfo->bBold == bBold && pFontInfo->bUnderline == bUnderline && pFontInfo->bItalic == bItalic) 
 			return pFontInfo->hFont;
@@ -428,12 +446,9 @@ HFONT GlobalManager::GetFont(const std::wstring& strFontName, int nSize, bool bB
 	return NULL;
 }
 
-TFontInfo* GlobalManager::GetFontInfo(std::size_t index, HDC hDcPaint)
+TFontInfo* GlobalManager::GetFontInfo(const std::wstring& strFontId, HDC hDcPaint)
 {
-	ASSERT(index >= 0 || index < m_aCustomFonts.size());
-	if (index < 0 && index >= m_aCustomFonts.size())
-		return NULL;
-	TFontInfo* pFontInfo = static_cast<TFontInfo*>(m_aCustomFonts[index]);
+	TFontInfo* pFontInfo = GetTFontInfo(strFontId);
 	if( pFontInfo->tm.tmHeight == 0 ) {
 		HFONT hOldFont = (HFONT) ::SelectObject(hDcPaint, pFontInfo->hFont);
 		::GetTextMetrics(hDcPaint, &pFontInfo->tm);
@@ -444,8 +459,8 @@ TFontInfo* GlobalManager::GetFontInfo(std::size_t index, HDC hDcPaint)
 
 TFontInfo* GlobalManager::GetFontInfo(HFONT hFont, HDC hDcPaint)
 {
-	for( auto it = m_aCustomFonts.begin(); it != m_aCustomFonts.end(); it++ ) {
-		auto pFontInfo = *it;
+	for( auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++ ) {
+		auto pFontInfo = it->second;
 		if( pFontInfo->hFont == hFont ) {
 			if( pFontInfo->tm.tmHeight == 0 ) {
 				HFONT hOldFont = (HFONT) ::SelectObject(hDcPaint, pFontInfo->hFont);
@@ -462,8 +477,8 @@ TFontInfo* GlobalManager::GetFontInfo(HFONT hFont, HDC hDcPaint)
 
 bool GlobalManager::FindFont(HFONT hFont)
 {
-	for( auto it = m_aCustomFonts.begin(); it != m_aCustomFonts.end(); it++ ) {
-		auto pFontInfo = *it;
+	for( auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++ ) {
+		auto pFontInfo = it->second;
 		if( pFontInfo->hFont == hFont ) 
 			return true;
 	}
@@ -472,8 +487,8 @@ bool GlobalManager::FindFont(HFONT hFont)
 
 bool GlobalManager::FindFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
 {
-	for( auto it = m_aCustomFonts.begin(); it != m_aCustomFonts.end(); it++ ) {
-		auto pFontInfo = *it;
+	for (auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++) {
+		auto pFontInfo = it->second;
 		if( pFontInfo->sFontName == strFontName && pFontInfo->iSize == nSize && 
 			pFontInfo->bBold == bBold && pFontInfo->bUnderline == bUnderline && pFontInfo->bItalic == bItalic) 
 			return true;
@@ -481,24 +496,28 @@ bool GlobalManager::FindFont(const std::wstring& strFontName, int nSize, bool bB
 	return false;
 }
 
-bool GlobalManager::RemoveFontAt(std::size_t index)
+bool GlobalManager::RemoveFontAt(const std::wstring& strFontId)
 {
-	if( index < 0 || index >= m_aCustomFonts.size() ) return false;
-	TFontInfo* pFontInfo = static_cast<TFontInfo*>(m_aCustomFonts[index]);
+	auto iter = m_mCustomFonts.find(strFontId);
+	if (iter == m_mCustomFonts.end()) return false;
+
+	TFontInfo* pFontInfo = static_cast<TFontInfo*>(iter->second);
 	::DeleteObject(pFontInfo->hFont);
 	delete pFontInfo;
-	m_aCustomFonts.erase(m_aCustomFonts.begin() + index);
+
+	m_mCustomFonts.erase(iter);
+
 	return true;
 }
 
 void GlobalManager::RemoveAllFonts()
 {
-	for( auto it = m_aCustomFonts.begin(); it != m_aCustomFonts.end(); it++ ) {
-		auto pFontInfo = *it;
+	for (auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++) {
+		auto pFontInfo = it->second;
 		::DeleteObject(pFontInfo->hFont);
 		delete pFontInfo;
 	}
-	m_aCustomFonts.clear();
+	m_mCustomFonts.clear();
 }
 
 std::wstring GlobalManager::GetDefaultDisabledTextColor()

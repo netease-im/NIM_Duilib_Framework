@@ -200,6 +200,7 @@ public:
 
 	/**
 	 * @brief 添加一个字体
+	 * @param[in] strFontId 指定字体的ID标记
 	 * @param[in] strFontName 字体名称
 	 * @param[in] nSize 字体大小
 	 * @param[in] bBold 是否粗体
@@ -207,22 +208,21 @@ public:
 	 * @param[in] bItalic 是否倾斜
 	 * @return 返回字体的 HFONT 句柄
 	 */
-	static HFONT AddFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+	static HFONT AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
 
 	/**
 	 * @brief 根据索引返回一个字体信息
-	 * @param[in] index 字体索引
+	 * @param[in] strFontId 字体ID
 	 * @return 返回字体的 TFontInfo 信息
 	 */
-	static TFontInfo* GetTFontInfo(std::size_t index);
+	static TFontInfo* GetTFontInfo(const std::wstring& strFontId);
 
 	/**
-	 * @brief 根据索引返回一个字体对象
-	 * @param[in] index 字体索引
+	 * @brief 根据字体ID返回一个字体对象
+	 * @param[in] strFontId 字体ID
 	 * @return 返回字体的 HFONT 句柄
 	 */
-	static HFONT GetFont(std::size_t index);
-
+	static HFONT GetFont(const std::wstring& strFontId);
 	/**
 	 * @brief 根据字体属性获取字体对象
 	 * @param[in] strFontName 字体名称
@@ -236,11 +236,11 @@ public:
 
 	/**
 	 * @brief 获取字体信息
-	 * @param[in] index 字体索引
+	 * @param[in] strFontId 字体ID
 	 * @param[in] hDcPaint 设备句柄
 	 * @return 返回字体的 TFontInfo 信息
 	 */
-	static TFontInfo* GetFontInfo(std::size_t index, HDC hDcPaint);
+	static TFontInfo* GetFontInfo(const std::wstring& strFontId, HDC hDcPaint);
 
 	/**
 	 * @brief 获取字体信息
@@ -274,12 +274,12 @@ public:
 
 	/**
 	 * @brief 根据字体索引删除字体
-	 * @param[in] index 字体索引
+	 * @param[in] strFontId 字体ID
 	 * @return 返回是否删除成功
 	 *     @retval true 删除成功
 	 *     @retval false 字体不存在或删除失败
 	 */
-	static bool RemoveFontAt(std::size_t index);
+	static bool RemoveFontAt(const std::wstring& strFontId);
 
 	/**
 	 * @brief 删除所有字体
@@ -457,7 +457,7 @@ private:
 	static MapStringToImagePtr m_mImageHash;
 	static std::map<std::wstring, DWORD> m_mapTextColor;
 	static std::map<std::wstring, std::wstring> m_mGlobalClass;
-	static std::vector<TFontInfo*> m_aCustomFonts;
+	static std::map<std::wstring, TFontInfo*> m_mCustomFonts;
 
 	static short m_H;
 	static short m_S;

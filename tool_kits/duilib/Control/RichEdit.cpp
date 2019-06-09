@@ -1172,7 +1172,7 @@ RichEdit::RichEdit() :
 	m_iCaretPosY(0),
 	m_iCaretWidth(0),
 	m_iCaretHeight(0),
-	m_iFont(0),
+	m_sFontId(0),
 	m_iLimitText(0),
 	m_lTwhStyle(ES_MULTILINE),
 	m_textVerAlignType(kVerAlignTop),
@@ -1274,16 +1274,16 @@ void RichEdit::SetWordWrap(bool bWordWrap)
     if( m_pTwh ) m_pTwh->SetWordWrap(bWordWrap);
 }
 
-int RichEdit::GetFont()
+std::wstring RichEdit::GetFont() const
 {
-    return m_iFont;
+    return m_sFontId;
 }
 
-void RichEdit::SetFont(int index)
+void RichEdit::SetFont(const std::wstring& strFontId)
 {
-    m_iFont = index;
+    m_sFontId = strFontId;
     if( m_pTwh ) {
-        m_pTwh->SetFont(GlobalManager::GetFont(m_iFont));
+		m_pTwh->SetFont(GlobalManager::GetFont(m_sFontId));
     }
 }
 
@@ -2745,7 +2745,7 @@ void RichEdit::SetAttribute(const std::wstring& strName, const std::wstring& str
 	else if (strName == _T("prompttext")) SetPromptText(strValue);
 	else if (strName == _T("prompttextid")) SetPromptTextId(strValue);
 	else if (strName == _T("focusedimage")) SetFocusedImage(strValue);
-	else if (strName == _T("font")) SetFont(_ttoi(strValue.c_str()));
+	else if (strName == _T("font")) SetFont(strValue);
 	else if (strName == _T("text")) SetText(strValue.c_str());
 	else if (strName == _T("textid")) SetTextId(strValue.c_str());
 	else if (strName == _T("wanttab")) SetWantTab(strValue == _T("true"));
@@ -2899,7 +2899,7 @@ void RichEdit::PaintPromptText(IRenderContext* pRender)
 
 	DWORD dwClrColor = GlobalManager::GetTextColor(m_sPromptColor);
 	UINT dwStyle = DT_NOCLIP;
-	pRender->DrawText(rc, strPrompt, dwClrColor, m_iFont, dwStyle);
+	pRender->DrawText(rc, strPrompt, dwClrColor, m_sFontId, dwStyle);
 }
 
 std::wstring RichEdit::GetFocusedImage()
@@ -2995,23 +2995,23 @@ void RichEdit::AddLinkColorText(const std::wstring &str, const std::wstring &col
 	GetDefaultCharFormat(cf);
 	SetSelectionCharFormat(cf);
 }
-void  RichEdit::AddLinkColorTextEx(const std::wstring& str, const std::wstring &color, const std::wstring &linkInfo, int font)
+void  RichEdit::AddLinkColorTextEx(const std::wstring& str, const std::wstring &color, const std::wstring &linkInfo, const std::wstring& strFontId)
 {
 	if (!m_bRich || str.empty() || color.empty()) {
 		ASSERT(FALSE);
 		return;
 	}
-	int ifont = font >= 0 ? font : m_iFont; 
+	
 	std::string link;
 	std::string text;
 	std::string font_face;
 	StringHelper::UnicodeToMBCS(linkInfo, link);
 	StringHelper::UnicodeToMBCS(str, text);
-	auto hFont = GlobalManager::GetFont(ifont);
+	auto hFont = GlobalManager::GetFont(strFontId);
 	if (hFont == NULL)
-		hFont = GlobalManager::GetFont(m_iFont);
+		hFont = GlobalManager::GetFont(m_sFontId);
 	if (hFont == NULL)
-		hFont = GlobalManager::GetFont(0);
+		hFont = GlobalManager::GetFont(L"");
 	LOGFONT lf;
 	::GetObject(hFont, sizeof(LOGFONT), &lf);
 	StringHelper::UnicodeToMBCS(lf.lfFaceName, font_face);

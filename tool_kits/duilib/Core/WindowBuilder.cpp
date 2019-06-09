@@ -193,6 +193,7 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 				}
 				else if( strClass == _T("Font") ) {
 					nAttributes = node.GetAttributeCount();
+					std::wstring strFontId;
 					std::wstring strFontName;
 					int size = 12;
 					bool bold = false;
@@ -201,7 +202,11 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 					for( int i = 0; i < nAttributes; i++ ) {
 						strName = node.GetAttributeName(i);
 						strValue = node.GetAttributeValue(i);
-						if( strName == _T("name") ) {
+						if (strName == _T("id"))
+						{
+							strFontId = strValue;
+						}
+						else if( strName == _T("name") ) {
 							strFontName = strValue;
 						}
 						else if( strName == _T("size") ) {
@@ -221,7 +226,7 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 						}
 					}
 					if( !strFontName.empty() ) {
-						GlobalManager::AddFont(strFontName, size, bold, underline, italic);
+						GlobalManager::AddFont(strFontId, strFontName, size, bold, underline, italic);
 					}
 				}
 				else if( strClass == _T("Class") ) {

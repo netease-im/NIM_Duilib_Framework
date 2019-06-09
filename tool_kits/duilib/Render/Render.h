@@ -51,12 +51,12 @@ public:
 	virtual void DrawLine(const IPen* pen, int x1, int y1, int x2, int y2) override;
 	virtual void DrawBezier(const IPen* pen, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) override;
 	virtual void DrawRect(const UiRect& rc, int nSize, DWORD dwPenColor) override;
-	virtual void DrawText(const UiRect& rc, const std::wstring& strText, DWORD dwTextColor, int iFont, UINT uStyle, BYTE uFade = 255, bool bLineLimit = false) override;
+	virtual void DrawText(const UiRect& rc, const std::wstring& strText, DWORD dwTextColor, const std::wstring& strFontId, UINT uStyle, BYTE uFade = 255, bool bLineLimit = false) override;
 
 	virtual void DrawEllipse(const UiRect& rc, int nSize, DWORD dwColor) override;
 	virtual void FillEllipse(const UiRect& rc, DWORD dwColor) override;
 
-	virtual UiRect MeasureText(const std::wstring& strText, int iFont, UINT uStyle, int width = DUI_NOSET_VALUE) override;
+	virtual UiRect MeasureText(const std::wstring& strText, const std::wstring& strFontId, UINT uStyle, int width = DUI_NOSET_VALUE) override;
 
 	virtual void DrawPath(const IPath* path, const IPen* pen) override;
 	virtual void FillPath(const IPath* path, const IBrush* brush) override;
