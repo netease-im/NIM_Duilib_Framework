@@ -1172,7 +1172,7 @@ RichEdit::RichEdit() :
 	m_iCaretPosY(0),
 	m_iCaretWidth(0),
 	m_iCaretHeight(0),
-	m_sFontId(0),
+	m_sFontId(),
 	m_iLimitText(0),
 	m_lTwhStyle(ES_MULTILINE),
 	m_textVerAlignType(kVerAlignTop),
