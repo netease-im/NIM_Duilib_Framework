@@ -206,9 +206,10 @@ public:
 	 * @param[in] bBold 是否粗体
 	 * @param[in] bUnderline 是否有下划线
 	 * @param[in] bItalic 是否倾斜
+	 * @param[in] bDefault 是否默认
 	 * @return 返回字体的 HFONT 句柄
 	 */
-	static HFONT AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+	static HFONT AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic, bool bDefault);
 
 	/**
 	 * @brief 根据索引返回一个字体信息
@@ -458,6 +459,8 @@ private:
 	static std::map<std::wstring, DWORD> m_mapTextColor;
 	static std::map<std::wstring, std::wstring> m_mGlobalClass;
 	static std::map<std::wstring, TFontInfo*> m_mCustomFonts;
+
+	static std::wstring m_sDefaultFontId;
 
 	static short m_H;
 	static short m_S;

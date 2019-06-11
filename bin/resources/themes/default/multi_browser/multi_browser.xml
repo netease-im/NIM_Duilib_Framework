@@ -10,14 +10,14 @@
     </HBox>
 
     <HBox height="30" margin="10,2,10,2" childmargin="3">
-        <Button class="btn_global_blue_80x30" name="btn_back" width="50" height="30" textid="STRID_CEF_BROWSER_BACKWARD" valign="center" font="1" />
-        <Button class="btn_global_blue_80x30" name="btn_forward" width="50" height="30" textid="STRID_CEF_BROWSER_FORWARD" valign="center" font="1" />
-        <Button class="btn_global_blue_80x30" name="btn_refresh" width="50" height="30" textid="STRID_CEF_BROWSER_REFRESH" valign="center" font="1" />
+        <Button class="btn_global_blue_80x30" name="btn_back" width="50" height="30" textid="STRID_CEF_BROWSER_BACKWARD" valign="center" font="system_12" />
+        <Button class="btn_global_blue_80x30" name="btn_forward" width="50" height="30" textid="STRID_CEF_BROWSER_FORWARD" valign="center" font="system_12" />
+        <Button class="btn_global_blue_80x30" name="btn_refresh" width="50" height="30" textid="STRID_CEF_BROWSER_REFRESH" valign="center" font="system_12" />
         <RichEdit class="simple prompt" name="edit_url" width="400" height="30" padding="5,2,5,0" valign="center" 
-        bordercolor="gray" bordersize="1" font="2" prompttextid="STRID_CEF_BROWSER_INPUT_ADDRESS" vscrollbar="false" autovscroll="false" hscrollbar="false" autohscroll="true" wantreturnmsg="true" />
+        bordercolor="gray" bordersize="1" font="system_14" prompttextid="STRID_CEF_BROWSER_INPUT_ADDRESS" vscrollbar="false" autovscroll="false" hscrollbar="false" autohscroll="true" wantreturnmsg="true" />
 		<!-- 顶部标签列表 -->
 		<HListBox class="list" name="tab_list" >
-			<Button class="btn_global_blue_80x30" name="btn_add" text="+" width="20" height="20" valign="center" font="3" />
+			<Button class="btn_global_blue_80x30" name="btn_add" text="+" width="20" height="20" valign="center" font="system_16" />
 		</HListBox>
     </HBox>
     <Control class="splitline_hor_level1" margin="0,0,0,0" />

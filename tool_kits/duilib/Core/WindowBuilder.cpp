@@ -199,6 +199,7 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 					bool bold = false;
 					bool underline = false;
 					bool italic = false;
+					bool isDefault = false;
 					for( int i = 0; i < nAttributes; i++ ) {
 						strName = node.GetAttributeName(i);
 						strValue = node.GetAttributeValue(i);
@@ -222,11 +223,11 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 							italic = (strValue == _T("true"));
 						}
 						else if( strName == _T("default") ) {
-							ASSERT(FALSE);//·ÏÆú
+							isDefault = (strValue == _T("true"));
 						}
 					}
 					if( !strFontName.empty() ) {
-						GlobalManager::AddFont(strFontId, strFontName, size, bold, underline, italic);
+						GlobalManager::AddFont(strFontId, strFontName, size, bold, underline, italic, isDefault);
 					}
 				}
 				else if( strClass == _T("Class") ) {

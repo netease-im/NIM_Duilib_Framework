@@ -15,6 +15,7 @@ GlobalManager::MapStringToImagePtr GlobalManager::m_mImageHash;
 std::map<std::wstring, DWORD> GlobalManager::m_mapTextColor;
 std::map<std::wstring, std::wstring> GlobalManager::m_mGlobalClass;
 std::map<std::wstring, TFontInfo*> GlobalManager::m_mCustomFonts;
+std::wstring GlobalManager::m_sDefaultFontId;
 
 short GlobalManager::m_H = 180;
 short GlobalManager::m_S = 100;
@@ -366,7 +367,7 @@ void GlobalManager::RemoveAllImages()
 	m_mImageHash.clear();
 }
 
-HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic, bool bDefault)
 {
 	std::wstring strNewFontId = strFontId;
 	if (strNewFontId.empty())
@@ -406,21 +407,21 @@ HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& 
 
 	m_mCustomFonts.insert(std::make_pair(strNewFontId, pFontInfo));
 
+	if (bDefault) m_sDefaultFontId = strNewFontId;
+
 	return hFont;
 }
 
 TFontInfo* GlobalManager::GetTFontInfo(const std::wstring& strFontId)
 {
-	if (strFontId.empty())
+	std::wstring strFindId = strFontId;
+	if (strFindId.empty())
 	{
-		for (auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++)
-		{
-			return it->second;
-		}
-		return NULL;
+		ASSERT(!m_sDefaultFontId.empty());
+		strFindId = m_sDefaultFontId;
 	}
 
-	auto iter = m_mCustomFonts.find(strFontId);
+	auto iter = m_mCustomFonts.find(strFindId);
 	ASSERT(iter != m_mCustomFonts.end());
 
 	TFontInfo* pFontInfo = static_cast<TFontInfo*>(iter->second);
