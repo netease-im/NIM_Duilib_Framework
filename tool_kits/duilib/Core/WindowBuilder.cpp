@@ -193,15 +193,21 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 				}
 				else if( strClass == _T("Font") ) {
 					nAttributes = node.GetAttributeCount();
+					std::wstring strFontId;
 					std::wstring strFontName;
 					int size = 12;
 					bool bold = false;
 					bool underline = false;
 					bool italic = false;
+					bool isDefault = false;
 					for( int i = 0; i < nAttributes; i++ ) {
 						strName = node.GetAttributeName(i);
 						strValue = node.GetAttributeValue(i);
-						if( strName == _T("name") ) {
+						if (strName == _T("id"))
+						{
+							strFontId = strValue;
+						}
+						else if( strName == _T("name") ) {
 							strFontName = strValue;
 						}
 						else if( strName == _T("size") ) {
@@ -217,11 +223,11 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 							italic = (strValue == _T("true"));
 						}
 						else if( strName == _T("default") ) {
-							ASSERT(FALSE);//·ÏÆú
+							isDefault = (strValue == _T("true"));
 						}
 					}
 					if( !strFontName.empty() ) {
-						GlobalManager::AddFont(strFontName, size, bold, underline, italic);
+						GlobalManager::AddFont(strFontId, strFontName, size, bold, underline, italic, isDefault);
 					}
 				}
 				else if( strClass == _T("Class") ) {

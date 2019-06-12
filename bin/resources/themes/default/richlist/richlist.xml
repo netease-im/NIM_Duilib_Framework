@@ -2,7 +2,7 @@
 <Window size="400,600" caption="0,0,0,35">
   <VBox bkcolor="bk_wnd_darkcolor">
     <HBox width="stretch" height="35" bkcolor="bk_wnd_lightcolor">
-      <Label text="自定义列表示例" font="2" valign="center" margin="8"/>
+      <Label text="自定义列表示例" font="system_14" valign="center" margin="8"/>
       <Control />
       <Button class="btn_wnd_min" name="minbtn" margin="4,6,0,0"/>
       <Box width="21" margin="4,6,0,0">

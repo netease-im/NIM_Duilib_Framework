@@ -118,14 +118,14 @@ public:
 	 * @brief 获取当前设置的字体索引
 	 * @return 返回字体索引（对应 global.xml 中字体的顺序）
 	 */
-	int GetFont();
+	std::wstring GetFont() const;
 
 	/**
 	 * @brief 设置字体索引
 	 * @param[in] index 要设置的字体索引（对应 global.xml 中字体的顺序）
 	 * @return 无
 	 */
-	void SetFont(int index);
+	void SetFont(const std::wstring& strFontId);
 	void SetFont(HFONT font);
 	/**
 	 * @brief 根据字体名称设置字体
@@ -875,7 +875,7 @@ public:
 	 * @param[in] font 字体索引
 	 * @return 无
 	 */
-	void AddLinkColorTextEx(const std::wstring& str, const std::wstring &color, const std::wstring &linkInfo = L"", int font = -1);
+	void AddLinkColorTextEx(const std::wstring& str, const std::wstring &color, const std::wstring &linkInfo = L"", const std::wstring& strFontId = L"");
 
 	/**
 	 * @brief 添加一个范围用于 hittest 判断是否是链接信息
@@ -956,7 +956,7 @@ protected:
 	int  m_iCaretPosY;
 	int  m_iCaretWidth;
 	int  m_iCaretHeight;
-	int  m_iFont;
+	std::wstring m_sFontId;
 	int  m_iLimitText;
 	LONG m_lTwhStyle;
 	VerAlignType m_textVerAlignType;

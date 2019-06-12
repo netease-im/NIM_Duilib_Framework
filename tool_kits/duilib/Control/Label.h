@@ -56,14 +56,14 @@ public:
 	 * @brief 获取当前字体编号
 	 * @return 返回字体编号，该编号在 global.xml 中标识
 	 */
-	int GetFont() const;
+	std::wstring GetFont() const;
 
 	/**
 	 * @brief 设置当前字体
 	 * @param[in] index 要设置的字体编号，该编号必须在 global.xml 中存在
 	 * @return 无
 	 */
-	void SetFont(int index);
+	void SetFont(const std::wstring& strFontId);
 
 	/**
 	 * @brief 获取文字边距
@@ -105,7 +105,7 @@ public:
 	void SetLineLimit(bool bLineLimit);
 
 protected:
-	int		m_iFont;
+	std::wstring m_sFontId;
 	UINT	m_uTextStyle;
 	bool    m_bSingleLine;
 	bool    m_bLineLimit;
@@ -119,7 +119,7 @@ protected:
 
 template<typename InheritType>
 LabelTemplate<InheritType>::LabelTemplate() :
-	m_iFont(1),
+	m_sFontId(),
 	m_uTextStyle(DT_LEFT | DT_TOP | DT_END_ELLIPSIS | DT_NOCLIP | DT_SINGLELINE),
 	m_bSingleLine(true),
 	m_bLineLimit(false),
@@ -226,7 +226,7 @@ CSize LabelTemplate<InheritType>::EstimateText(CSize szAvailable, bool& bReEstim
 	CSize fixedSize;
 	if (!GetText().empty()) {
 		auto pRender = this->m_pWindow->GetRenderContext();
-		UiRect rect = pRender->MeasureText(GetText(), m_iFont, m_uTextStyle, width);
+		UiRect rect = pRender->MeasureText(GetText(), m_sFontId, m_uTextStyle, width);
 		if (this->GetFixedWidth() == DUI_LENGTH_AUTO) {
 			fixedSize.cx = rect.right - rect.left + m_rcTextPadding.left + m_rcTextPadding.right;
 		}
@@ -239,7 +239,7 @@ CSize LabelTemplate<InheritType>::EstimateText(CSize szAvailable, bool& bReEstim
 				int maxWidth = szAvailable.cx - m_rcTextPadding.left - m_rcTextPadding.right;
 				if (estimateWidth > maxWidth) {
 					estimateWidth = maxWidth;
-					UiRect newRect = pRender->MeasureText(GetText(), m_iFont, m_uTextStyle, estimateWidth);
+					UiRect newRect = pRender->MeasureText(GetText(), m_sFontId, m_uTextStyle, estimateWidth);
 					estimateHeight = newRect.bottom - newRect.top;
 				}
 			}
@@ -288,7 +288,7 @@ void LabelTemplate<InheritType>::SetAttribute(const std::wstring& strName, const
 	else if (strName == _T("singleline")) SetSingleLine(strValue == _T("true"));
 	else if (strName == _T("text")) SetText(strValue);
 	else if (strName == _T("textid")) SetTextId(strValue);
-	else if (strName == _T("font")) SetFont(_ttoi(strValue.c_str()));
+	else if (strName == _T("font")) SetFont(strValue);
 	else if (strName == _T("normaltextcolor")) SetStateTextColor(kControlStateNormal, strValue);
 	else if (strName == _T("hottextcolor"))	SetStateTextColor(kControlStateHot, strValue);
 	else if (strName == _T("pushedtextcolor"))	SetStateTextColor(kControlStatePushed, strValue);
@@ -339,14 +339,14 @@ void LabelTemplate<InheritType>::PaintText(IRenderContext* pRender)
 			std::wstring clrColor = GetStateTextColor(kControlStateNormal);
 			if (!clrColor.empty()) {
 				DWORD dwClrColor = GlobalManager::GetTextColor(clrColor);
-				pRender->DrawText(rc, GetText(), dwClrColor, m_iFont, m_uTextStyle, 255, m_bLineLimit);
+				pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit);
 			}
 
 			if (this->m_nHotAlpha > 0) {
 				std::wstring clrColor = GetStateTextColor(kControlStateHot);
 				if (!clrColor.empty()) {
 					DWORD dwClrColor = GlobalManager::GetTextColor(clrColor);
-					pRender->DrawText(rc, GetText(), dwClrColor, m_iFont, m_uTextStyle, (BYTE)this->m_nHotAlpha, m_bLineLimit);
+					pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, (BYTE)this->m_nHotAlpha, m_bLineLimit);
 				}
 			}
 
@@ -354,7 +354,7 @@ void LabelTemplate<InheritType>::PaintText(IRenderContext* pRender)
 		}
 	}
 
-	pRender->DrawText(rc, GetText(), dwClrColor, m_iFont, m_uTextStyle, 255, m_bLineLimit);
+	pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit);
 }
 
 template<typename InheritType>
@@ -387,15 +387,15 @@ void LabelTemplate<InheritType>::SetStateTextColor(ControlStateType stateType, c
 }
 
 template<typename InheritType>
-int LabelTemplate<InheritType>::GetFont() const
+std::wstring LabelTemplate<InheritType>::GetFont() const
 {
-	return m_iFont;
+	return m_sFontId;
 }
 
 template<typename InheritType>
-void LabelTemplate<InheritType>::SetFont(int index)
+void LabelTemplate<InheritType>::SetFont(const std::wstring& strFontId)
 {
-	m_iFont = index;
+	m_sFontId = strFontId;
 	this->Invalidate();
 }
 

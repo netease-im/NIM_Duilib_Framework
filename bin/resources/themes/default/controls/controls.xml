@@ -55,7 +55,7 @@
       <Control class="splitline_hor_level1"/>
       <!-- RichEdit -->
       <RichEdit class="prompt" name="edit" bkcolor="bk_wnd_lightcolor" width="stretch" height="stretch" 
-                  font="1" multiline="true" vscrollbar="true" hscrollbar="true" autovscroll="true" 
+                  multiline="true" vscrollbar="true" hscrollbar="true" autovscroll="true" 
                   normaltextcolor="darkcolor" wantreturnmsg="true" rich="true"/>
     </VBox>
   </VBox>

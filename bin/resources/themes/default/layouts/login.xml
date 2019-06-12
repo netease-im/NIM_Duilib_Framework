@@ -14,33 +14,33 @@
           </HBox>
           <HBox height="auto">
             <Control />
-            <Button name="register_account" margin="0,5,15,10" halign="right" text="注册" cursortype="hand" font="24" normaltextcolor="link_green"/>
-            <Button name="enter_login" margin="0,5,15,10" halign="right" text="直接登录" cursortype="hand" font="24" normaltextcolor="link_green" visible="false"/>
+            <Button name="register_account" margin="0,5,15,10" halign="right" text="注册" cursortype="hand" font="system_underline_12" normaltextcolor="link_green"/>
+            <Button name="enter_login" margin="0,5,15,10" halign="right" text="直接登录" cursortype="hand" font="system_underline_12" normaltextcolor="link_green" visible="false"/>
           </HBox>
           <!--帐号和密码-->
           <VBox name="enter_panel" width="240" height="auto" margin="20,0,20,0" bkimage="user_password.png">
             <HBox height="41" padding="14,1,10,0">
               <Control name="usericon" width="16" height="16" valign="center" normalimage="user_1.png" disabledimage="user_2.png"/>
-              <RichEdit class="simple prompt" name="username" width="stretch" height="auto" margin="10,0,10,0" valign="center" font="2" prompttext="帐号"/>
+              <RichEdit class="simple prompt" name="username" width="stretch" height="auto" margin="10,0,10,0" valign="center" font="system_14" prompttext="帐号"/>
             </HBox>
             <HBox name="nick_name_panel" height="40" padding="14,1,0,0" visible="false" margin="0,0,0,0">
               <Control name="nick_name_icon" width="16" height="16" valign="center" normalimage="nickname.png" disabledimage="nickname.png"/>
-              <RichEdit class="simple prompt" name="nickname" width="stretch" height="auto" margin="10,0,10,0" valign="center" font="2" prompttext="昵称"/>
+              <RichEdit class="simple prompt" name="nickname" width="stretch" height="auto" margin="10,0,10,0" valign="center" font="system_14" prompttext="昵称"/>
             </HBox>
             <HBox height="41" padding="14,0,10,1" margin="0,2,0,0">
               <Control name="passwordicon" width="16" height="16" valign="center" normalimage="password_1.png" disabledimage="password_2.png"/>
-              <RichEdit class="simple prompt" name="password" width="stretch" height="auto" margin="10,0,10,0" valign="center" font="2" password="true" prompttext="密码"/>
+              <RichEdit class="simple prompt" name="password" width="stretch" height="auto" margin="10,0,10,0" valign="center" font="system_14" password="true" prompttext="密码"/>
             </HBox>
           </VBox>
         </VBox>
         <!--登录提示-->
-        <Label name="login_ing_tip" margin="20,20,20,0" font="1" text="正在登录..." visible="false"/>
-        <Label name="login_error_tip" margin="20,20,20,0" font="1" normaltextcolor="obvious_tip" visible="false"/>
+        <Label name="login_ing_tip" margin="20,20,20,0" font="system_12" text="正在登录..." visible="false"/>
+        <Label name="login_error_tip" margin="20,20,20,0" font="system_12" normaltextcolor="obvious_tip" visible="false"/>
         <!--登录和取消按钮-->
         <Box width="240" height="40" margin="20,20,20,20">
-          <Button class="btn_global_blue_80x30" name="btn_login" width="240" height="40" font="8" text="登录"/>
-          <Button class="btn_global_blue_80x30" name="btn_register" width="240" height="40" font="8" text="注册" visible="false"/>
-          <Button class="btn_global_red_80x30" name="btn_cancel" width="240" height="40" font="8" text="取消登录" visible="false"/>
+          <Button class="btn_global_blue_80x30" name="btn_login" width="240" height="40" font="system_bold_16" text="登录"/>
+          <Button class="btn_global_blue_80x30" name="btn_register" width="240" height="40" font="system_bold_16" text="注册" visible="false"/>
+          <Button class="btn_global_red_80x30" name="btn_cancel" width="240" height="40" font="system_bold_16" text="取消登录" visible="false"/>
         </Box>
       </VBox>
     </Box>
