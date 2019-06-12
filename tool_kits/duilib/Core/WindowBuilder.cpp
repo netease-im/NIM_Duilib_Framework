@@ -243,6 +243,9 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 						else if( strName == _T("value") ) {
 							strAttribute.append(strValue);
 						}
+						else if (strName == _T("_value")) {
+							strAttribute.append(StringHelper::Printf(L" value=\"%s\"",strValue.c_str()));
+						}
 						else {
 							strAttribute.append(StringHelper::Printf(L" %s=\"%s\"",
 								strName.c_str(), strValue.c_str()));
@@ -289,6 +292,9 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 						}
 						else if( strName == _T("value") ) {
 							strAttribute.append(strValue);
+						}
+						else if (strName == _T("_value")) {
+							strAttribute.append(StringHelper::Printf(L" value=\"%s\"", strValue.c_str()));
 						}
 						else {
 							strAttribute.append(StringHelper::Printf(L" %s=\"%s\"",

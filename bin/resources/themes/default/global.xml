@@ -146,7 +146,7 @@
     <Class name="btn_wnd_close" width="20" height="20" normalimage="file='../public/button/btn_wnd_gray_close.png' dest='4,4,16,16'" hotimage="../public/button/btn_wnd_white_close_hovered.png" pushedimage="../public/button/btn_wnd_white_close_pushed.png" fadehot="false"/>
     <Class name="btn_wnd_max" width="auto" height="auto" forenormalimage="file='../public/button/btn_wnd_gray_max.png' dest='4,4,16,16'" normalimage="" hotimage="../public/button/btn_wnd_gray_max_hovered.png" pushedimage="../public/button/btn_wnd_gray_max_pushed.png"/>
     <Class name="btn_wnd_restore" width="auto" height="auto" forenormalimage="file='../public/button/btn_wnd_gray_restore.png' dest='4,4,16,16'" normalimage="" hotimage="../public/button/btn_wnd_gray_restore_hovered.png" pushedimage="../public/button/btn_wnd_gray_restore_pushed.png"/>
-    <Class name="btn_wnd_settings" width="auto" height="auto" forenormalimage="file='../public/button/btn_wnd_settings.png' source=&apos;1,1,21,21&apos;" hotimage="../public/button/btn_wnd_bk_hovered.png" pushedimage="../public/button/btn_wnd_bk_pushed.png"/>
+    <Class name="btn_wnd_settings" width="auto" height="auto" forenormalimage="file='../public/button/btn_wnd_settings.png' source='1,1,21,21'" hotimage="../public/button/btn_wnd_bk_hovered.png" pushedimage="../public/button/btn_wnd_bk_pushed.png"/>
 
     <!--窗口右上角按钮 白色版 -->
     <Class name="btn_wnd_white_min" width="auto" height="auto" forenormalimage="file='../public/button/btn_wnd_white_min.png'" normalimage="" hotimage="../public/button/btn_wnd_white_min_hovered.png" pushedimage="../public/button/btn_wnd_white_min_pushed.png"/>
@@ -165,9 +165,9 @@
     <Class name="listitem" hotcolor="bk_listitem_hovered" pushedcolor="bk_listitem_selected" selectednormalcolor="bk_listitem_selected" fadehot="false"/>
     <Class name="list_topitem" normalcolor="bk_topitem_normal" hotcolor="bk_topitem_hovered" pushedcolor="bk_topitem_selected" selectednormalcolor="bk_topitem_selected" fadehot="false"/>
 
-    <!--进度条通用样式-->
-    <Class name="progress_blue" valign="center" value="0" bkimage="../public/progress/progress_blue_bg.png" height="3" width="stretch" hor="true" max="100" min="0" progressimage="../public/progress/progress_blue_fg.png"/>
-    <Class name="slider_green" width="stretch" height="14" margin="4,0,0,0" valign="center" thumbsize="14,14" min="0" max="255" progressbarpadding="0,6,0,6" bkimage="file=&apos;../public/slider/slider_hor_bk.png&apos; dest=&apos;0,6,1000,8&apos;" progresscolor="bk_progress_progress" thumbnormalimage="../public/slider/slider_thumb.png"/>
+    <!--进度条通用样式, 注意进度条的值使用`_value`属性-->
+    <Class name="progress_blue" valign="center" _value="0" bkimage="../public/progress/progress_blue_bg.png" height="3" width="stretch" hor="true" max="100" min="0" progressimage="../public/progress/progress_blue_fg.png"/>
+    <Class name="slider_green" width="stretch" height="14" margin="4,0,0,0" valign="center" thumbsize="14,14" min="0" max="255" progressbarpadding="0,6,0,6" bkimage="file='../public/slider/slider_hor_bk.png' dest='0,6,1000,8'" progresscolor="bk_progress_progress" thumbnormalimage="../public/slider/slider_thumb.png"/>
 
     <!--菜单通用样式-->
     <Class name="menu" width="auto" height="auto" bkcolor="bk_wnd_lightcolor"/>
