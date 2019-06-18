@@ -144,8 +144,6 @@ Combo::Combo() :
 	// the items back to the righfull owner/manager when the window closes.
 	m_pLayout.reset(new ListBox(new VLayout));
 	m_pLayout->GetLayout()->SetPadding(UiRect(1, 1, 1, 1));
-	m_pLayout->SetBkColor(L"bk_wnd_lightcolor");
-	m_pLayout->SetBorderColor(L"combobox_border");
 	m_pLayout->SetBorderSize(UiRect(1, 1, 1, 1));
 	m_pLayout->SetAutoDestroy(false);
 	m_pLayout->EnableScrollBar();

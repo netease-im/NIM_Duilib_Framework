@@ -43,14 +43,22 @@
         </TreeView>
       </HBox>
       <Control class="splitline_hor_level1"/>
-      <!-- Progress -->
-      <HBox margin="0,10" height="30">
-        <Control width="auto" height="auto" bkimage="../public/animation/ani_loading.gif" valign="center"/>
-        <Progress class="progress_blue" name="progress" value="0" margin="10"/>
-      </HBox>
-      <HBox margin="0,0,0,10" height="30">
-        <Control width="auto" height="auto" bkimage="set_speaker.png" valign="center"/>
-        <Slider class="slider_green" value="70" margin="10"/>
+      <HBox height="85">
+        <VBox margin="0,0,10">
+          <Combo class="list" name="combo" height="30" margin="0,12,0,0" padding="6" bkimage="file='../public/combo/normal.png' corner='5,5,30,5'"/>
+          <RichEdit class="simple input" height="30" margin="0,3" padding="6,6,6" promptmode="true" prompttext="Single line text control" promptcolor="lightcolor"/>
+        </VBox>
+        <!-- Progress -->
+        <VBox>
+          <HBox margin="0,10" height="32">
+            <Control width="auto" height="auto" bkimage="../public/animation/ani_loading.gif" valign="center"/>
+            <Progress class="progress_blue" name="progress" value="0" margin="10"/>
+          </HBox>
+          <HBox margin="0,0,0,10" height="32">
+            <Control width="auto" height="auto" bkimage="set_speaker.png" valign="center"/>
+            <Slider class="slider_green" value="70" margin="10"/>
+          </HBox>
+        </VBox>
       </HBox>
       <Control class="splitline_hor_level1"/>
       <!-- RichEdit -->

@@ -20,7 +20,6 @@
 | number | false | BOOL | 是否只允许输入数字,如(false) |
 | align | left | STRING | 文字对齐方式,取值left、right、hcenter、top、vcenter、bottom,如(right) |
 | font | -1 | INT | 字体id,如(0) |
-| promptmode | false | BOOL | 是否显示提示文字,如(true) |
 | vscrollbar | false | BOOL | 是否使用竖向滚动条,如(true) |
 | autovscroll | false | BOOL | 是否随输入竖向滚动,如(true) |
 | hscrollbar | false | BOOL | 是否使用横向滚动条,如(true) |

@@ -70,6 +70,19 @@ void ControlForm::InitWindow()
 		}
 	}
 
+	/* Initialize ComboBox data */
+	ui::Combo* combo = dynamic_cast<ui::Combo*>(FindControl(L"combo"));
+	for (auto i = 0; i < 10; i++)
+	{
+		ui::ListContainerElement* element = new ui::ListContainerElement;
+		element->SetClass(L"listitem");
+		element->SetFixedHeight(30);
+		element->SetBkColor(L"white");
+		element->SetTextPadding({ 6,0,6,0 });
+		element->SetText(nbase::StringPrintf(L"Combo element %d", i));
+		combo->Add(element);
+	}
+
 	/* Load xml file content in global misc thread, and post update RichEdit task to UI thread */
 	StdClosure closure = [this]() {
 		std::streamoff length = 0;
