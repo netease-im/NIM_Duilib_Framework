@@ -1,64 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Global>
     <!--所有字体-->
-    <!--0-->
     <Font id="system_12" name="system" size="12" default="true"/>
-    <!--1-->
-    <Font id="system_10" name="system" size="10"/>
-    <!--2-->
     <Font id="system_14" name="system" size="14"/>
-    <!--3-->
     <Font id="system_16" name="system" size="16"/>
-    <!--4-->
     <Font id="system_18" name="system" size="18"/>
-    <!--5-->
-    <Font id="system_bold_10" name="system" size="10" bold="true"/>
-    <!--6-->
-    <Font id="system_bold_12" name="system" size="12" bold="true"/>
-    <!--7-->
-    <Font id="system_bold_14" name="system" size="14" bold="true"/>
-    <!--8-->
-    <Font id="system_bold_16" name="system" size="16" bold="true"/>
-    <!--9-->
-    <Font id="system_bold_18"  name="system" size="18" bold="true"/>
-    <!--10-->
-    <Font id="arial_10" name="arial" size="10"/>
-    <!--11-->
-    <Font id="arial_12" name="arial" size="12"/>
-    <!--12-->
-    <Font id="arial_14" name="arial" size="14"/>
-    <!--13-->
-    <Font id="arial_16" name="arial" size="16"/>
-    <!--14-->
-    <Font id="arial_18" name="arial" size="18"/>
-    <!--15-->
-    <Font id="arial_bold_10" name="arial" size="10" bold="true"/>
-    <!--16-->
-    <Font id="arial_bold_12" name="arial" size="12" bold="true"/>
-    <!--17-->
-    <Font id="arial_bold_14" name="arial" size="14" bold="true"/>
-    <!--18-->
-    <Font id="arial_bold_16" name="arial" size="16" bold="true"/>
-    <!--19-->
-    <Font id="arial_bold_18" name="arial" size="18" bold="true"/>
-    <!--20-->
     <Font id="system_20" name="system" size="20"/>
-    <!--21-->
-    <Font id="system_bold_20" name="system" size="20" bold="true"/>
-    <!--22-->
     <Font id="system_22" name="system" size="22"/>
-    <!--23-->
+    <Font id="system_bold_12" name="system" size="12" bold="true"/>
+    <Font id="system_bold_14" name="system" size="14" bold="true"/>
+    <Font id="system_bold_16" name="system" size="16" bold="true"/>
+    <Font id="system_bold_18" name="system" size="18" bold="true"/>
+    <Font id="system_bold_20" name="system" size="20" bold="true"/>
     <Font id="system_bold_22" name="system" size="22" bold="true"/>
-    <!--24-->
+    <Font id="arial_12" name="arial" size="12"/>
+    <Font id="arial_14" name="arial" size="14"/>
+    <Font id="arial_16" name="arial" size="16"/>
+    <Font id="arial_18" name="arial" size="18"/>
+    <Font id="arial_20" name="arial" size="20"/>
+    <Font id="arial_22" name="arial" size="22"/>
+    <Font id="arial_bold_12" name="arial" size="12" bold="true"/>
+    <Font id="arial_bold_14" name="arial" size="14" bold="true"/>
+    <Font id="arial_bold_16" name="arial" size="16" bold="true"/>
+    <Font id="arial_bold_18" name="arial" size="18" bold="true"/>
+    <Font id="arial_bold_20" name="arial" size="20" bold="true"/>
+    <Font id="arial_bold_22" name="arial" size="22" bold="true"/>
     <Font id="system_underline_12" name="system" size="12" underline="true"/>
-    <!--25-->
-    <Font id="system_24" name="system" size="24"/>
-    <!--26-->
     <Font id="system_underline_14" name="system" size="14" underline="true"/>
-    <!--27-->
     <Font id="system_underline_16" name="system" size="16" underline="true"/>
-    <!--28-->
-    <Font id="system_32" name="system" size="32" />
+    <Font id="system_underline_18" name="system" size="18" underline="true"/>
+    <Font id="system_underline_20" name="system" size="20" underline="true"/>
+    <Font id="system_underline_22" name="system" size="22" underline="true"/>
 
     <!--一些常规固定颜色-->
     <TextColor name="white" value="#ffffffff"/>
@@ -184,9 +156,7 @@
     <Class name="prompt" promptmode="true" promptcolor="light_gray"/>
     <Class name="edit" hotimage="file='../public/edit/edit1.png' corner='10,10,10,10'" focusedimage="file='../public/edit/edit2.png' corner='10,10,10,10'"/>
     <Class name="input" normalimage="file='../public/edit/edit0.png' corner='10,10,10,10'" hotimage="file='../public/edit/edit0.png' corner='10,10,10,10'" focusedimage="file='../public/edit/edit0.png' corner='10,10,10,10'" disabledimage="file='../public/edit/edit0.png' corner='10,10,10,10' fade='80'"/>
- 
+
    <!--头像蒙版-->
     <Class name="icon_headimage_mask_40x40" width="40" height="40" bkimage="../public/headmask/icon_headimage_mask_40x40_normal.png"/>
-    
-
 </Global>
