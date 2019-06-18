@@ -19,7 +19,7 @@ NIM Duilib is a UI development framework for Windows, extend some new features b
 
 ## Preview
 
-![preview](docs/PREVIEW.png)
+![preview](docs/PREVIEW.gif)
 
 ## Start
 

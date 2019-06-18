@@ -19,7 +19,7 @@ NIM Duilib 包含了一整套桌面软件的开发部件，与其说这是一个
 
 ## 预览
 
-![preview](docs/PREVIEW.png)
+![preview](docs/PREVIEW.gif)
 
 ## 开始
 
