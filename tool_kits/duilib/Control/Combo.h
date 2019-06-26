@@ -25,6 +25,13 @@ public:
 	virtual void PaintText(IRenderContext* pRender) override;
 
 	/**
+	 * @brief 获取当前选择项指定状态下的图片位置
+	 * @param[in] 要获取当前选择项何种状态下的图片，参考 ControlStateType 枚举
+	 * @return 返回当前选择项指定状态下的图片位置
+	 */
+	std::wstring GetStateImage(ControlStateType stateType) const;
+
+	/**
 	 * @brief 获取当前选择项文本
 	 * @return 返回当前选择项文本
 	 */
