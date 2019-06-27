@@ -16,8 +16,10 @@ bool TabBox::Add(Control* pControl)
 
 	if(m_iCurSel == -1 && pControl->IsVisible()) {
 		m_iCurSel = GetItemIndex(pControl);
-	}
-	else {
+	} 
+
+	if (m_iCurSel != GetItemIndex(pControl) || !pControl->IsVisible())
+	{
 		if (!IsFadeSwitch()) {
 			pControl->SetVisible(false);
 		}
@@ -27,7 +29,6 @@ bool TabBox::Add(Control* pControl)
 		}
 		pControl->SetAlpha(0);
 	}
-
 	return ret;
 }
 
@@ -221,7 +222,7 @@ bool TabBox::SelectItem(const std::wstring& pControlName)
 
 void TabBox::SetAttribute(const std::wstring& strName, const std::wstring& strValue)
 {
-	if( strName == _T("selectedid") ) SelectItem(_ttoi(strValue.c_str()));
+	if (strName == _T("selectedid")) m_iCurSel = _ttoi(strValue.c_str());
 	else if( strName == _T("fadeswitch") ) SetFadeSwitch(strValue == _T("true"));
 	else Box::SetAttribute(strName, strValue);
 }
