@@ -15,6 +15,7 @@ public:
 	virtual bool Add(Control* pControl) override;
 	virtual bool AddAt(Control* pControl, std::size_t iIndex) override;
 	virtual bool Remove(Control* pControl) override;
+	virtual bool RemoveAt(std::size_t iIndex) override;
 	virtual void RemoveAll() override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 

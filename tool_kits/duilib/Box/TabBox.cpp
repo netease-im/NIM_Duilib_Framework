@@ -90,6 +90,13 @@ bool TabBox::Remove(Control* pControl)
 	return ret;
 }
 
+bool TabBox::RemoveAt(std::size_t iIndex)
+{
+	Control* pControl = GetItemAt(iIndex);
+	if (pControl == NULL) return false;
+	return Remove(pControl);
+}
+
 void TabBox::RemoveAll()
 {
 	m_iCurSel = -1;
