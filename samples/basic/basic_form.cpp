@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "resource.h"
 #include "basic_form.h"
 
 const std::wstring BasicForm::kClassName = L"Basic";
@@ -29,11 +30,26 @@ std::wstring BasicForm::GetWindowClassName() const
 
 void BasicForm::InitWindow()
 {
+	TrayIcon::GetInstance()->Init(this);
+	TrayIcon::GetInstance()->SetTrayIcon(::LoadIconW(nbase::win32::GetCurrentModuleHandle(), MAKEINTRESOURCE(IDI_BASIC)), L"base");
+}
 
+void BasicForm::LeftClick()
+{
+	this->ActiveWindow();
+	::SetForegroundWindow(m_hWnd);
+	::BringWindowToTop(m_hWnd);
+}
+
+
+void BasicForm::RightClick()
+{
+	MessageBox(NULL, L"test", TEXT("RightClick"), MB_OK);
 }
 
 LRESULT BasicForm::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-	PostQuitMessage(0L);
-	return __super::OnClose(uMsg, wParam, lParam, bHandled);
+	return 0;
+	/*PostQuitMessage(0L);
+	return __super::OnClose(uMsg, wParam, lParam, bHandled);*/
 }

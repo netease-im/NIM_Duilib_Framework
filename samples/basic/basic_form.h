@@ -1,6 +1,9 @@
 #pragma once
+#include "tray_icon.h"
 
-class BasicForm : public ui::WindowImplBase
+class BasicForm : 
+	public ui::WindowImplBase,
+	public ITrayIconDelegate
 {
 public:
 	BasicForm();
@@ -27,5 +30,12 @@ public:
 	virtual LRESULT OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	static const std::wstring kClassName;
+
+	/**
+	* 实现ITrayIconDelegate接口函数
+	* @return void	无返回值
+	*/
+	virtual void LeftClick() override;
+	virtual void RightClick() override;
 };
 

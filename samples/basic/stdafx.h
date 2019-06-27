@@ -21,3 +21,8 @@
 
 // duilib
 #include "duilib/UIlib.h"
+
+//window header
+#include <atlbase.h>
+#include <WTypes.h>
+#include <shellapi.h>

@@ -30,6 +30,9 @@
     <ClInclude Include="basic_form.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="tray_icon.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -39,6 +42,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tray_icon.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

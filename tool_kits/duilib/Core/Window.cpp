@@ -223,7 +223,8 @@ void Window::Close(UINT nRet)
 	if (!::IsWindow(m_hWnd)) return;
 
 	if (m_pRoot && IsWindowsVistaOrGreater()) {
-		m_pRoot->SetVisible(false);
+		//m_pRoot->SetVisible(false);//只隐藏根节点，导致任务栏的项无法点击，效果不好。
+		ShowWindow(false, false);
 		auto closeCallback = [this, nRet]() {
 			this->PostMessage(WM_CLOSE, (WPARAM)nRet, 0L);
 		};
