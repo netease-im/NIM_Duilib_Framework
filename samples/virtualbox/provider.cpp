@@ -62,10 +62,7 @@ void Provider::SetTotal(int nTotal)
 }
 
 void Provider::RemoveTask(int nIndex)
-{
-	// ¼ÓËø
-	nbase::NAutoLock auto_lock(&lock_);
-	
+{	
 	lock_.Lock();
 
 	auto iter =	m_vTasks.begin() + nIndex;
