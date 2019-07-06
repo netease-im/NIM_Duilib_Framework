@@ -3,7 +3,7 @@
 typedef function<void(int nStartIndex, int nEndIndex)> DataChangedNotify;
 typedef function<void()> CountChangedNotify;
 
-class UILIB_API VirtualTileInterface
+class UILIB_API VirtualTileInterface: public nbase::SupportWeakCallback
 {
 public:
 	VirtualTileInterface();
