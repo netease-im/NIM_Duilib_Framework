@@ -29,7 +29,7 @@ void Provider::FillElement(ui::Control *control, int index)
 	
 	std::wstring img = L"icon.png";
 	std::wstring title = nbase::StringPrintf(L"%s [%02d]", m_vTasks[index].sName.c_str(), m_vTasks[index].nId);
-	pItem->InitSubControls(img, title);
+	pItem->InitSubControls(img, title, index);
 
 }
 

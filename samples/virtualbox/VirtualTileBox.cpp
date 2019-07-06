@@ -203,6 +203,11 @@ void VirtualTileBox::SetDataProvider(VirtualTileInterface *pProvider)
 }
 
 
+VirtualTileInterface* VirtualTileBox::GetDataProvider()
+{
+	return m_pDataProvider;
+}
+
 void VirtualTileBox::Refresh()
 {
 	m_nMaxItemCount = GetTileLayout()->AjustMaxItem();
@@ -528,11 +533,8 @@ void VirtualTileBox::OnModelDataChanged(int nStartIndex, int nEndIndex)
 {
 	for (auto i = nStartIndex; i <= nEndIndex; i++)
 	{
-		if (IsElementDisplay(i))
-		{
-			int nTopItemHeight = 0;
-			int nItemIndex = i - GetTopElementIndex(nTopItemHeight);
-			ASSERT(nItemIndex > 0);
+	 	int nItemIndex = ElementIndexToItemIndex(nStartIndex);
+		if (nItemIndex >= 0) {
 			FillElement(m_items[nItemIndex], i);
 		}
 	}
@@ -541,5 +543,21 @@ void VirtualTileBox::OnModelDataChanged(int nStartIndex, int nEndIndex)
 void VirtualTileBox::OnModelCountChanged()
 {
 	Refresh();
+}
+
+int VirtualTileBox::ElementIndexToItemIndex(int nElementIndex)
+{
+	if (IsElementDisplay(nElementIndex))
+	{
+		int nTopItemHeight = 0;
+		return nElementIndex - GetTopElementIndex(nTopItemHeight);
+	}
+	return -1;
+}
+
+int VirtualTileBox::ItemIndexToElementIndex(int nItemIndex)
+{
+	int nTopItemHeight = 0;
+	return GetTopElementIndex(nTopItemHeight) + nItemIndex;
 }
 

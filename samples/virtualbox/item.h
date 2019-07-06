@@ -8,7 +8,7 @@ public:
 	~Item();
 
 	// 提供外部调用来初始化 item 数据
-	void InitSubControls(const std::wstring& img, const std::wstring& title);	
+	void InitSubControls(const std::wstring& img, const std::wstring& title, int nDataIndex);
 private:
 	bool OnRemove(ui::EventArgs* args);
 
@@ -20,5 +20,6 @@ private:
 	ui::Progress*	progress_;
 	ui::Button*		btn_del_;
 	int64_t         t_time;
+	int m_nDataIndex;
 };
 

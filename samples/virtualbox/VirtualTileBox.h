@@ -66,6 +66,8 @@ public:
 	*/
 	virtual void SetDataProvider(VirtualTileInterface *pProvider);
 
+	virtual VirtualTileInterface* GetDataProvider();
+
 	/**
 	* @brief 刷新列表
 	* @return 无
@@ -193,6 +195,10 @@ private:
 	void OnModelDataChanged(int nStartIndex, int nEndIndex);
 	
 	void OnModelCountChanged();
+
+	int ElementIndexToItemIndex(int nElementIndex);
+
+	int ItemIndexToElementIndex(int nItemIndex);
 
 private:
 	VirtualTileInterface *m_pDataProvider;

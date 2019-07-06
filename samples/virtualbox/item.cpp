@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "item.h"
-
+#include "VirtualTileBox.h"
+#include "provider.h"
 
 Item::Item()
 :control_img_(nullptr)
@@ -9,10 +10,9 @@ Item::Item()
 
 
 Item::~Item()
-{
-}
+= default;
 
-void Item::InitSubControls(const std::wstring& img, const std::wstring& title)
+void Item::InitSubControls(const std::wstring& img, const std::wstring& title, int nDataIndex)
 {
 	// 查找 Item 下的控件
 	if (control_img_ == nullptr)
@@ -35,7 +35,7 @@ void Item::InitSubControls(const std::wstring& img, const std::wstring& title)
 
 
 	label_title_->SetText(nbase::StringPrintf(L"%s %d%%", title.c_str(), t_time % 100));
-
+	m_nDataIndex = nDataIndex;
 
 }
 
@@ -43,5 +43,8 @@ void Item::InitSubControls(const std::wstring& img, const std::wstring& title)
 bool Item::OnRemove(ui::EventArgs* args)
 {
 	// 删除时，只需删除数据就可以了，不要删除界面上的元素
+	VirtualTileBox* pTileBox = dynamic_cast<VirtualTileBox*>(m_pOwner);
+	Provider* pProvider = dynamic_cast<Provider*>(pTileBox->GetDataProvider());
+	pProvider->RemoveTask(m_nDataIndex);
 	return true;
 }
