@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+  <ListContainerElement class="listitem">
+    <HBox mouse="false" padding="10,5,10,5">
+      <Control name="control_img" width="auto" height="auto" margin="0,0,10,0" mouse="false"/>
+      <VBox margin="0,3,0,5" mouse="false">
+        <HBox height="auto" mouse="false">
+          <Label name="label_title" width="stretch" mouse="false"/>
+          <Button class="btn_recycle" name="btn_del" width="auto" height="auto"/>
+        </HBox>
+        <Control height="stretch" mouse="false"/>
+        <Progress class="progress_blue" name="progress" value="30" mouse="false"/>
+      </VBox>
+    </HBox>
+  </ListContainerElement>
+</Window>

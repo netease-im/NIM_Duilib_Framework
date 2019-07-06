@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="1200,800" caption="0,0,0,35">
+  <VBox bkcolor="bk_wnd_darkcolor">
+    <HBox width="stretch" height="35" bkcolor="bk_wnd_lightcolor">
+      <Label text="TileBox数据懒加载实现" font="system_14" valign="center" margin="8"/>
+      <Control />
+      <Button class="btn_wnd_min" name="minbtn" margin="4,6,0,0"/>
+      <Box width="21" margin="4,6,0,0">
+        <Button class="btn_wnd_max" name="maxbtn"/>
+        <Button class="btn_wnd_restore" name="restorebtn" visible="false"/>
+      </Box>
+      <Button class="btn_wnd_close" name="closebtn" margin="4,6,8,0"/>
+    </HBox>
+    <HBox childmargin="5" bkcolor="white" padding="5,5,5,10">
+      <VBox width="300" bordersize="1" bordercolor="splitline_level2" padding="5,10,5,10" childmargin="10">
+        <HBox height="30" childmargin="10">
+            <Label font="system_bold_14" text="列设置:"  width="auto" height="auto" valign="center" />
+            <Option class="circle_option_2" name="option_column_auto" group="option_group" text="自动计算" margin="0,5,0,10" selected="true"/>
+            <Option class="circle_option_2" name="option_column_fix"  group="option_group" text="固定列数" margin="0,5,0,10">
+                <Event type="select" receiver="box_column_op" applyattribute="visible=&quot;true&quot;" />
+                <Event type="unselect" receiver="box_column_op" applyattribute="visible=&quot;false&quot;" />
+            </Option>
+        </HBox>
+        
+        <HBox name="box_column_op" height="30" childmargin="10" visible="false">
+            <Control width="45" />
+            <Box bordersize="1" bordercolor="splitline_level1" width="80"  height="26">
+                <RichEdit name="edit_column" margin="10,0,10,0"  font="system_14" width="stretch" height="auto" valign="center" normaltextcolor="black" multiline="false" promptmode="true" prompttext="列数" align="vcenter,hcenter" text="3" promptcolor="splitline_level1" autohscroll="true" />                  
+            </Box>
+            <CheckBox class="checkbox_font12" name="checkbox_item_center" text="列表居中" margin="0,5,0,10" selected="true" />            
+        </HBox>     
+        <Control height="1" bkcolor="splitline_level2" />
+        <HBox height="30" childmargin="10">
+            <Label font="system_bold_14" text="子项间隙:"  width="auto" height="auto" valign="center" />
+            <Box bordersize="1" bordercolor="splitline_level1" width="80"  height="26">
+                <RichEdit name="edit_child_margin" margin="10,0,10,0"  font="system_14" width="stretch" height="auto" valign="center" normaltextcolor="black" multiline="false" promptmode="true" prompttext="子项间隙" align="vcenter,hcenter" text="" promptcolor="splitline_level1" autohscroll="true" />                  
+            </Box>           
+        </HBox>          
+        <HBox height="30" childmargin="10">
+            <Label font="system_bold_14" text="总数据:"  width="auto" height="auto" valign="center" />
+            <Box bordersize="1" bordercolor="splitline_level1" width="180" >
+                <RichEdit name="edit_total" margin="10,0,10,0"  font="system_14" width="stretch" height="auto" valign="center" normaltextcolor="black" multiline="false" promptmode="true" prompttext="总数据" promptcolor="splitline_level1" autohscroll="true"  />                    
+            </Box>
+           
+        </HBox>
+        
+        <Box height="30" childmargin="10" width="stretch">
+            <Button class="btn_global_blue_80x30" halign="center" valign="center" name="btn_set_total" text="更改/设置" />
+        </Box>
+        
+        <Control height="1" bkcolor="splitline_level2" />
+        
+        <HBox height="30" childmargin="10">
+            <Label font="system_bold_14" text="改变数据:"  width="auto" height="auto" valign="center" />
+            <Box bordersize="1" bordercolor="splitline_level1" height="26">
+                <RichEdit name="edit_update" margin="10,0,10,0"  font="system_14" width="stretch" height="auto" valign="center" normaltextcolor="black" multiline="false" promptmode="true" prompttext="序号(下标1)" promptcolor="splitline_level1" autohscroll="true" align="vcenter,hcenter" />                  
+            </Box>
+            <Box bordersize="1" bordercolor="splitline_level1" height="26">
+                <RichEdit name="edit_task_name" margin="10,0,10,0"  font="system_14" width="stretch" height="auto" valign="center" normaltextcolor="black" multiline="false" promptmode="true" prompttext="新的任务名称" promptcolor="splitline_level1" autohscroll="true" />                  
+            </Box>           
+        </HBox>         
+
+        
+        <Box height="30" childmargin="10" width="stretch">
+            <Button class="btn_global_blue_80x30" halign="center" valign="center" name="btn_update" text="更新数据" />
+        </Box>
+        
+        <Control height="1" bkcolor="splitline_level2" />        
+
+        <HBox height="30" childmargin="10">
+            <Label font="system_bold_14" text="删除数据:"  width="auto" height="auto" valign="center" />
+            <Box bordersize="1" bordercolor="splitline_level1" >
+                <RichEdit name="edit_delete" margin="10,0,10,0"  font="system_14" width="stretch" height="auto" valign="center" normaltextcolor="black" multiline="false" promptmode="true" prompttext="序号(下标1)" promptcolor="splitline_level1" autohscroll="true" align="vcenter,hcenter" />                    
+            </Box>   
+            <Button class="btn_global_red_80x30" halign="center" valign="center" name="btn_delete" text="删除数据" />            
+        </HBox>
+        
+        
+      </VBox>
+      <!--column="3" width="auto" halign="center" childmargin="10" -->
+      <Box>
+          <VirtualTileBox class="list" name="list"  vscrollunit="70" itemsize="220,60" bordersize="1" bordercolor="splitline_level2" padding="1,1,1,1">
+          </VirtualTileBox>      
+      </Box>
+
+    </HBox>
+  </VBox>
+</Window>
