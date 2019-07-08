@@ -257,6 +257,7 @@ std::wstring Combo::GetDropBoxAttributeList()
 void Combo::SetDropBoxAttributeList(const std::wstring& pstrList)
 {
     m_sDropBoxAttributes = pstrList;
+    m_pLayout->ApplyAttributeList(pstrList);
 }
 
 CSize Combo::GetDropBoxSize() const
