@@ -1015,7 +1015,8 @@ void ScrollableBox::PaintChild(IRenderContext* pRender, const UiRect& rcPaint)
 		}
 		else {
 			CSize scrollPos = GetScrollPos();
-			UiRect rcNewPaint = rcPaint;
+			UiRect rcNewPaint = GetPaddingPos();
+			AutoClip alphaClip(pRender, rcNewPaint, m_bClip);
 			rcNewPaint.Offset(scrollPos.cx, scrollPos.cy);
 			rcNewPaint.Offset(GetRenderOffset().x, GetRenderOffset().y);
 
