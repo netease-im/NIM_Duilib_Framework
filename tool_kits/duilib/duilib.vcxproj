@@ -368,12 +368,8 @@
     <ClInclude Include="Box\TabBox.h" />
     <ClInclude Include="Box\TileBox.h" />
     <ClInclude Include="Box\VBox.h" />
-    <ClInclude Include="Control\ButtonImpl.h" />
-    <ClInclude Include="Control\CheckBoxImpl.h" />
-    <ClInclude Include="Control\OptionImpl.h" />
     <ClInclude Include="Control\VirtualListBox.h" />
     <ClInclude Include="Core\Image.h" />
-    <ClInclude Include="Control\LabelImpl.h" />
     <ClInclude Include="Core\Placeholder.h" />
     <ClInclude Include="Render\Bitmap.h" />
     <ClInclude Include="Render\Brush.h" />
