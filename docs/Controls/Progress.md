@@ -11,11 +11,6 @@
 | max | 100 | INT | 进度最大值,如(100) |
 | value | 0 | INT | 进度值,如(50) |
 | isstretchfore | TRUE | BOOL | 指定进度条前景图片是否缩放显示 |
-| hor | true | BOOL | 水平或垂直,如(true) |
-| min | 0 | INT | 进度最小值,如(0) |
-| max | 100 | INT | 进度最大值,如(100) |
-| value | 0 | INT | 进度值,如(50) |
-| isstretchfore | TRUE | BOOL | 指定进度条前景图片是否缩放显示 |
 | progresscolor |  | STRING | 进度条前景颜色,不指定则使用默认颜色,如(blue) |
 | progressimage |  | STRING | 进度条前景图片 |
 
