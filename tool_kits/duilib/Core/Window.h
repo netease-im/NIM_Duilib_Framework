@@ -8,6 +8,10 @@ namespace ui
 
 class Box;
 
+// Flags for Control::GetControlFlags()
+#define UIFLAG_DEFAULT       0x00000000		// 默认状态
+#define UIFLAG_TABSTOP       0x00000001		// 标识控件是否在收到 TAB 切换焦点时允许设置焦点
+
 // Flags for FindControl()
 #define UIFIND_ALL           0x00000000
 #define UIFIND_VISIBLE       0x00000001
@@ -15,14 +19,6 @@ class Box;
 #define UIFIND_HITTEST       0x00000004
 #define UIFIND_TOP_FIRST     0x00000008
 #define UIFIND_ME_FIRST      0x80000000
-
-// Flags for the CDialogLayout stretching
-#define UISTRETCH_NEWGROUP   0x00000001
-#define UISTRETCH_NEWLINE    0x00000002
-#define UISTRETCH_MOVE_X     0x00000004
-#define UISTRETCH_MOVE_Y     0x00000008
-#define UISTRETCH_SIZE_X     0x00000010
-#define UISTRETCH_SIZE_Y     0x00000020
 
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -146,12 +142,6 @@ public:
 	 * @return 无
 	 */
 	virtual void ShowWindow(bool bShow = true, bool bTakeFocus = true);
-	
-	/**
-	 * @brief 显示模态对话框（不推荐）
-	 * @return 接收到的消息
-	 */
-    UINT ShowModal();
 	
 	/**
 	 * @brief 显示模态对话框（推荐）
@@ -537,21 +527,6 @@ public:
 	 */
 	void SetInitSize(int cx, int cy, bool bContainShadow = false, bool bNeedDpiScale = true);
 
-	/// 窗口内部消息处理
-	/**
-	 * @brief 添加一个消息被派发到窗口前的消息过滤器
-	 * @param[in] pFilter 一个继承了 IUIMessageFilter 的对象实例，需要实现 MessageHandler 方法
-	 * @return 始终返回 true
-	 */
-	bool AddPreMessageFilter(IUIMessageFilter* pFilter);
-
-	/**
-	 * @brief 移除一个消息被派发到窗口前的消息过滤器
-	 * @param[in] pFilter 一个继承了 IUIMessageFilter 的对象实例
-	 * @return 返回 true 表示移除成功，否则可能该过滤器不存在
-	 */
-	bool RemovePreMessageFilter(IUIMessageFilter* pFilter);
-
 	/**
 	 * @brief 添加一个消息过滤器，此时消息已经派发
 	 * @param[in] pFilter 一个继承了 IUIMessageFilter 的对象实例，需要实现 MessageHandler 方法
@@ -600,16 +575,6 @@ public:
 	 * @return 返回 true 成功处理消息，否则返回 false
 	 */
 	bool TranslateAccelerator(LPMSG pMsg);
-
-	/**
-	 * @brief 执行派发消前的过滤器
-	 * @param[in] uMsg 消息体
-	 * @param[in] wParam 消息附加参数
-	 * @param[in] lParam 消息附加参数
-	 * @param[in] lRes 处理结果
-	 * @return 返回 true 则继续派发该消息，否则不再派发该消息
-	 */
-	bool PreMessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT& lRes);
 
 	/**
 	 * @brief 窗口消息的派发函数
@@ -726,7 +691,12 @@ public:
 	 */
 	HWND GetTooltipWindow() const;
 
-	//bool SetNextTabControl(bool bForward = true);
+	/**
+	 * @brief 切换控件焦点到下一个（或上一个）控件
+	 * @param[in] bForward true 为上一个控件，否则为 false，默认为 true
+	 * @return 始终返回 true，暂无参考意义
+	 */
+	bool SetNextTabControl(bool bForward = true);
 
 	/// 控件相关
 	/**
@@ -877,7 +847,7 @@ private:
 	static Control* CALLBACK __FindControlFromNameHash(Control* pThis, LPVOID pData);
 	static Control* CALLBACK __FindControlFromCount(Control* pThis, LPVOID pData);
 	static Control* CALLBACK __FindControlFromPoint(Control* pThis, LPVOID pData);
-	//static Control* CALLBACK __FindControlFromTab(Control* pThis, LPVOID pData);
+	static Control* CALLBACK __FindControlFromTab(Control* pThis, LPVOID pData);
 	//static Control* CALLBACK __FindControlFromShortcut(Control* pThis, LPVOID pData);
 	static Control* CALLBACK __FindControlFromUpdate(Control* pThis, LPVOID pData);
 	static Control* CALLBACK __FindControlFromName(Control* pThis, LPVOID pData);

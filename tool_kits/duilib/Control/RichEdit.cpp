@@ -2268,6 +2268,11 @@ void RichEdit::SetPos(UiRect rc)
     }
 }
 
+UINT RichEdit::GetControlFlags() const
+{
+	return IsEnabled() ? UIFLAG_TABSTOP : UIFLAG_DEFAULT;
+}
+
 void RichEdit::HandleMessage(EventArgs& event)
 {
 	if ((!IsMouseEnabled() && event.Type > kEventMouseBegin && event.Type < kEventMouseEnd) ||

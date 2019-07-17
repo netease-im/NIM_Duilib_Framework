@@ -735,6 +735,11 @@ void Box::ClearImageCache()
 	}
 }
 
+UINT Box::GetControlFlags() const
+{
+	return UIFLAG_DEFAULT; // Box 默认不支持 TAB 切换焦点
+}
+
 /////////////////////////////////////////////////////////////////////////////////////
 //
 //

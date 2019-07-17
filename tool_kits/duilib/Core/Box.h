@@ -119,8 +119,10 @@ public:
 	virtual void InvokeLoadImageCache() override;
 	virtual void UnLoadImageCache() override;
 	virtual void ClearImageCache() override;
+	virtual UINT GetControlFlags() const override;
 
-	/// 容器自有方法                                                          */
+
+	/// 容器自有方法
 	/**
 	 * @brief 查找指定子控件
 	 * @param[in] pstrSubControlName 子控件名称

@@ -99,8 +99,6 @@ Window::~Window()
 	// Reset other parts...
 	if (m_hwndTooltip != NULL) ::DestroyWindow(m_hwndTooltip);
 	if (m_hDcPaint != NULL) ::ReleaseDC(m_hWnd, m_hDcPaint);
-
-	GlobalManager::RemovePreMessage(this);
 }
 
 HWND Window::GetHWND() const 
@@ -239,33 +237,6 @@ void Window::ShowWindow(bool bShow /*= true*/, bool bTakeFocus /*= false*/)
     ASSERT(::IsWindow(m_hWnd));
     if( !::IsWindow(m_hWnd) ) return;
     ::ShowWindow(m_hWnd, bShow ? (bTakeFocus ? SW_SHOWNORMAL : SW_SHOWNOACTIVATE) : SW_HIDE);
-}
-
-UINT Window::ShowModal()
-{
-    ASSERT(::IsWindow(m_hWnd));
-    UINT nRet = 0;
-    HWND hWndParent = GetWindowOwner(m_hWnd);
-    ::ShowWindow(m_hWnd, SW_SHOWNORMAL);
-    ::EnableWindow(hWndParent, FALSE);
-    MSG msg = { 0 };
-	HWND hTempWnd = m_hWnd;
-    while( ::IsWindow(hTempWnd) && ::GetMessage(&msg, NULL, 0, 0) ) {
-        if( msg.message == WM_CLOSE && msg.hwnd == m_hWnd ) {
-            nRet = msg.wParam;
-            ::EnableWindow(hWndParent, TRUE);
-            ::SetFocus(hWndParent);
-        }
-        if( !GlobalManager::TranslateMessage(&msg) ) {
-            ::TranslateMessage(&msg);
-            ::DispatchMessage(&msg);
-        }
-        if( msg.message == WM_QUIT ) break;
-    }
-    ::EnableWindow(hWndParent, TRUE);
-    ::SetFocus(hWndParent);
-    if( msg.message == WM_QUIT ) ::PostQuitMessage(msg.wParam);
-    return nRet;
 }
 
 void Window::ShowModalFake(HWND parent_hwnd)
@@ -420,8 +391,6 @@ void Window::Init(HWND hWnd)
 	ASSERT(::IsWindow(hWnd));
 	// Remember the window context we came from
 	m_hDcPaint = ::GetDC(hWnd);
-	// We'll want to filter messages globally too
-	GlobalManager::AddPreMessage(this);
 	m_renderContext = GlobalManager::CreateRenderContext();
 
 	RegisterTouchWindowWrapper(hWnd, 0);
@@ -840,24 +809,6 @@ void Window::SetInitSize(int cx, int cy, bool bContainShadow, bool bNeedDpiScale
 	}
 }
 
-bool Window::AddPreMessageFilter(IUIMessageFilter* pFilter)
-{
-	ASSERT(std::find(m_aPreMessageFilters.begin(), m_aPreMessageFilters.end(), pFilter) == m_aPreMessageFilters.end());
-	m_aPreMessageFilters.push_back(pFilter);
-	return true;
-}
-
-bool Window::RemovePreMessageFilter(IUIMessageFilter* pFilter)
-{
-	for (auto it = m_aPreMessageFilters.begin(); it != m_aPreMessageFilters.end(); it++) {
-		if (*it == pFilter) {
-			m_aPreMessageFilters.erase(it);
-			return true;
-		}
-	}
-	return false;
-}
-
 bool Window::AddMessageFilter(IUIMessageFilter* pFilter)
 {
 	ASSERT(std::find(m_aMessageFilters.begin(), m_aMessageFilters.end(), pFilter) == m_aMessageFilters.end());
@@ -916,28 +867,6 @@ bool Window::TranslateAccelerator(LPMSG pMsg)
 	for (auto it = m_aTranslateAccelerator.begin(); it != m_aTranslateAccelerator.end(); it++) {
 		LRESULT lResult = (*it)->TranslateAccelerator(pMsg);
 		if (lResult == S_OK) return true;
-	}
-	return false;
-}
-
-bool Window::PreMessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT& /*lRes*/)
-{
-	for (auto it = m_aPreMessageFilters.begin(); it != m_aPreMessageFilters.end(); it++)
-	{
-		BOOL bHandled = false;
-		(*it)->MessageHandler(uMsg, wParam, lParam, bHandled);
-		if( bHandled ) {
-			return true;
-		}
-	}
-	switch( uMsg ) {
-	case WM_SYSKEYDOWN:
-		{
-			if( m_pFocus != NULL ) {
-				m_pFocus->HandleMessageTemplate(kEventSystemKey, 0, 0, wParam);
-			}
-		}
-		break;
 	}
 	return false;
 }
@@ -1433,6 +1362,15 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 	{
 		if (m_pFocus == NULL) break;
 
+		// Tabbing between controls
+		if (wParam == VK_TAB) {
+			if (m_pFocus && m_pFocus->IsVisible() && m_pFocus->IsEnabled() && dynamic_cast<RichEdit*>(m_pFocus) != nullptr) {
+				if (dynamic_cast<RichEdit*>(m_pFocus)->IsWantTab()) return false;
+			}
+			SetNextTabControl(::GetKeyState(VK_SHIFT) >= 0);
+			return true;
+		}
+
 		m_pEventKey = m_pFocus;
 		m_pFocus->HandleMessageTemplate(kEventKeyDown, wParam, lParam, wParam);
 	}
@@ -1459,8 +1397,6 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		m_ptLastMousePos = pt;
 		Control* pControl = FindControl(pt);
 		if (pControl == NULL) break;
-		//if( (pControl->GetControlFlags() & UIFLAG_SETCURSOR) == 0 ) break;
-
 		pControl->HandleMessageTemplate(kEventSetCursor, wParam, lParam, 0, pt);
 	}
 	handled = true;
@@ -1571,7 +1507,7 @@ void Window::SetFocusNeeded(Control* pControl)
 	FINDTABINFO info = { 0 };
 	info.pFocus = pControl;
 	info.bForward = false;
-	m_pFocus = nullptr; //m_pRoot->FindControl(__FindControlFromTab, &info, UIFIND_VISIBLE | UIFIND_ENABLED | UIFIND_ME_FIRST);
+	m_pFocus = m_pRoot->FindControl(__FindControlFromTab, &info, UIFIND_VISIBLE | UIFIND_ENABLED | UIFIND_ME_FIRST);
 	m_bFocusNeeded = true;
 	if (m_pRoot != NULL) m_pRoot->Arrange();
 }
@@ -1623,36 +1559,36 @@ HWND Window::GetTooltipWindow() const
 	return m_hwndTooltip;
 }
 
-//bool Window::SetNextTabControl(bool bForward)
-//{
-//	// If we're in the process of restructuring the layout we can delay the
-//	// focus calulation until the next repaint.
-//	if( m_bIsArranged && bForward ) {
-//		m_bFocusNeeded = true;
-//		::InvalidateRect(m_hWnd, NULL, FALSE);
-//		return true;
-//	}
-//	// Find next/previous tabbable control
-//	FINDTABINFO info1 = { 0 };
-//	info1.pFocus = m_pFocus;
-//	info1.bForward = bForward;
-//	Control* pControl = m_pRoot->FindControl(__FindControlFromTab, &info1, UIFIND_VISIBLE | UIFIND_ENABLED | UIFIND_ME_FIRST);
-//	if( pControl == NULL ) {  
-//		if( bForward ) {
-//			// Wrap around
-//			FINDTABINFO info2 = { 0 };
-//			info2.pFocus = bForward ? NULL : info1.pLast;
-//			info2.bForward = bForward;
-//			pControl = m_pRoot->FindControl(__FindControlFromTab, &info2, UIFIND_VISIBLE | UIFIND_ENABLED | UIFIND_ME_FIRST);
-//		}
-//		else {
-//			pControl = info1.pLast;
-//		}
-//	}
-//	if( pControl != NULL ) SetFocus(pControl);
-//	m_bFocusNeeded = false;
-//	return true;
-//}
+bool Window::SetNextTabControl(bool bForward)
+{
+	// If we're in the process of restructuring the layout we can delay the
+	// focus calulation until the next repaint.
+	if (m_bIsArranged && bForward) {
+		m_bFocusNeeded = true;
+		::InvalidateRect(m_hWnd, NULL, FALSE);
+		return true;
+	}
+	// Find next/previous tabbable control
+	FINDTABINFO info1 = { 0 };
+	info1.pFocus = m_pFocus;
+	info1.bForward = bForward;
+	Control* pControl = m_pRoot->FindControl(__FindControlFromTab, &info1, UIFIND_VISIBLE | UIFIND_ENABLED | UIFIND_ME_FIRST);
+	if (pControl == NULL) {
+		if (bForward) {
+			// Wrap around
+			FINDTABINFO info2 = { 0 };
+			info2.pFocus = bForward ? NULL : info1.pLast;
+			info2.bForward = bForward;
+			pControl = m_pRoot->FindControl(__FindControlFromTab, &info2, UIFIND_VISIBLE | UIFIND_ENABLED | UIFIND_ME_FIRST);
+		}
+		else {
+			pControl = info1.pLast;
+		}
+	}
+	if (pControl != NULL) SetFocus(pControl);
+	m_bFocusNeeded = false;
+	return true;
+}
 
 Control* Window::GetRoot() const
 {
@@ -2038,19 +1974,19 @@ Control* CALLBACK Window::__FindControlFromPoint(Control* pThis, LPVOID pData)
 	return ::PtInRect(&pos, *pPoint) ? pThis : NULL;
 }
 
-//Control* CALLBACK Window::__FindControlFromTab(Control* pThis, LPVOID pData)
-//{
-//	FINDTABINFO* pInfo = static_cast<FINDTABINFO*>(pData);
-//	if( pInfo->pFocus == pThis ) {
-//		if( pInfo->bForward ) pInfo->bNextIsIt = true;
-//		return pInfo->bForward ? NULL : pInfo->pLast;
-//	}
-//	if( (pThis->GetControlFlags() & UIFLAG_TABSTOP) == 0 ) return NULL;
-//	pInfo->pLast = pThis;
-//	if( pInfo->bNextIsIt ) return pThis;
-//	if( pInfo->pFocus == NULL ) return pThis;
-//	return NULL;  // Examine all controls
-//}
+Control* CALLBACK Window::__FindControlFromTab(Control* pThis, LPVOID pData)
+{
+	FINDTABINFO* pInfo = static_cast<FINDTABINFO*>(pData);
+	if (pInfo->pFocus == pThis) {
+		if (pInfo->bForward) pInfo->bNextIsIt = true;
+		return pInfo->bForward ? NULL : pInfo->pLast;
+	}
+	if ((pThis->GetControlFlags() & UIFLAG_TABSTOP) == 0) return NULL;
+	pInfo->pLast = pThis;
+	if (pInfo->bNextIsIt) return pThis;
+	if (pInfo->pFocus == NULL) return pThis;
+	return NULL;  // Examine all controls
+}
 
 //Control* CALLBACK Window::__FindControlFromShortcut(Control* pThis, LPVOID pData)
 //{

@@ -3,7 +3,7 @@
 #include <shlwapi.h>
 #include "Utils/UnZip.h"
 
-namespace ui 
+namespace ui
 {
 
 std::wstring GlobalManager::m_pStrResourcePath;
@@ -60,7 +60,7 @@ void GlobalManager::Startup(const std::wstring& strResourcePath, const CreateCon
 	else {
 		MutiLanSupport::GetInstance()->LoadStringTable(strResourcePath + language + L"\\gdstrings.ini");
 	}
-	
+
 	GdiplusStartup(&g_gdiplusToken, &g_gdiplusStartupInput, NULL);
 	// Boot Windows Common Controls (for the ToolTip control)
 	::InitCommonControls();
@@ -80,27 +80,27 @@ void GlobalManager::Shutdown()
 
 std::wstring GlobalManager::GetCurrentPath()
 {
-    TCHAR tszModule[MAX_PATH + 1] = { 0 };
-    ::GetCurrentDirectory(MAX_PATH, tszModule);
-    return tszModule;
+	TCHAR tszModule[MAX_PATH + 1] = { 0 };
+	::GetCurrentDirectory(MAX_PATH, tszModule);
+	return tszModule;
 }
 
 std::wstring GlobalManager::GetResourcePath()
 {
-    return m_pStrResourcePath;
+	return m_pStrResourcePath;
 }
 
 void GlobalManager::SetCurrentPath(const std::wstring& strPath)
 {
-    ::SetCurrentDirectory(strPath.c_str());
+	::SetCurrentDirectory(strPath.c_str());
 }
 
 void GlobalManager::SetResourcePath(const std::wstring& strPath)
 {
-    m_pStrResourcePath = strPath;
-    if( m_pStrResourcePath.empty() ) return;
-    TCHAR cEnd = m_pStrResourcePath.at(m_pStrResourcePath.length() - 1);
-    if( cEnd != _T('\\') && cEnd != _T('/') ) m_pStrResourcePath += _T('\\');
+	m_pStrResourcePath = strPath;
+	if (m_pStrResourcePath.empty()) return;
+	TCHAR cEnd = m_pStrResourcePath.at(m_pStrResourcePath.length() - 1);
+	if (cEnd != _T('\\') && cEnd != _T('/')) m_pStrResourcePath += _T('\\');
 }
 
 void GlobalManager::LoadGlobalResource()
@@ -163,78 +163,6 @@ std::unique_ptr<ui::IPath> GlobalManager::CreatePath()
 	std::unique_ptr<ui::IPath> p;
 	p.reset(m_renderFactory->CreatePath());
 	return p;
-}
-
-void GlobalManager::MessageLoop()
-{
-	MSG msg = { 0 };
-	while( ::GetMessage(&msg, NULL, 0, 0) ) {
-		if( !GlobalManager::TranslateMessage(&msg) ) {
-			::TranslateMessage(&msg);
-			::DispatchMessage(&msg);
-		}
-	}
-}
-
-bool GlobalManager::TranslateMessage(const LPMSG pMsg)
-{
-	// Pretranslate Message takes care of system-wide messages, such as
-	// tabbing and shortcut key-combos. We'll look for all messages for
-	// each window and any child control attached.
-	UINT uStyle = GetWindowStyle(pMsg->hwnd);
-	UINT uChildRes = uStyle & WS_CHILD;	
-	LRESULT lRes = 0;
-	if (uChildRes != 0)
-	{
-		HWND hWndParent = ::GetParent(pMsg->hwnd);
-
-		for( auto it = m_aPreMessages.begin(); it != m_aPreMessages.end(); it++ ) {
-			auto pT = *it;    
-			HWND hTempParent = hWndParent;
-			while(hTempParent)
-			{
-				if(pMsg->hwnd == pT->GetHWND() || hTempParent == pT->GetHWND())	{
-					if (pT->TranslateAccelerator(pMsg))
-						return true;
-
-					if( pT->PreMessageHandler(pMsg->message, pMsg->wParam, pMsg->lParam, lRes) ) 
-						return true;
-
-					return false;
-				}
-				hTempParent = GetParent(hTempParent);
-			}
-		}
-	}
-	else
-	{
-		for( auto it = m_aPreMessages.begin(); it != m_aPreMessages.end(); it++ ) {
-			auto pT = *it;
-			if(pMsg->hwnd == pT->GetHWND())	{
-				if (pT->TranslateAccelerator(pMsg))
-					return true;
-
-				if( pT->PreMessageHandler(pMsg->message, pMsg->wParam, pMsg->lParam, lRes) ) 
-					return true;
-
-				return false;
-			}
-		}
-	}
-	return false;
-}
-
-void GlobalManager::AddPreMessage(Window* pWindow)
-{
-	m_aPreMessages.push_back(pWindow);
-}
-
-void GlobalManager::RemovePreMessage(Window* pWindow)
-{
-	auto it = std::find(m_aPreMessages.begin(), m_aPreMessages.end(), pWindow);
-	if (it != m_aPreMessages.end())	{
-		m_aPreMessages.erase(it);
-	}
 }
 
 void GlobalManager::AddClass(const std::wstring& strClassName, const std::wstring& strControlAttrList)
@@ -373,14 +301,14 @@ HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& 
 	if (strNewFontId.empty())
 	{
 		strNewFontId = std::to_wstring(m_mCustomFonts.size());
-	} 
+	}
 
 	auto iter = m_mCustomFonts.find(strNewFontId);
 	ASSERT(iter == m_mCustomFonts.end());
 
 	static bool bOsOverXp = IsWindowsVistaOrGreater();
 	std::wstring fontName = strFontName;
-	if ( fontName == L"system" ) {
+	if (fontName == L"system") {
 		fontName = bOsOverXp ? L"Î¢ÈíÑÅºÚ" : L"ÐÂËÎÌå";
 	}
 
@@ -389,14 +317,14 @@ HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& 
 	_tcscpy(lf.lfFaceName, fontName.c_str());
 	lf.lfCharSet = DEFAULT_CHARSET;
 	lf.lfHeight = -DpiManager::GetInstance()->ScaleInt(nSize);
-	if( bBold ) lf.lfWeight += FW_BOLD;
-	if( bUnderline ) lf.lfUnderline = TRUE;
-	if( bItalic ) lf.lfItalic = TRUE;
+	if (bBold) lf.lfWeight += FW_BOLD;
+	if (bUnderline) lf.lfUnderline = TRUE;
+	if (bItalic) lf.lfItalic = TRUE;
 	HFONT hFont = ::CreateFontIndirect(&lf);
-	if( hFont == NULL ) return NULL;
+	if (hFont == NULL) return NULL;
 
 	TFontInfo* pFontInfo = new TFontInfo;
-	if( !pFontInfo ) return false;
+	if (!pFontInfo) return false;
 	pFontInfo->hFont = hFont;
 	pFontInfo->sFontName = fontName;
 	pFontInfo->iSize = nSize;
@@ -440,8 +368,8 @@ HFONT GlobalManager::GetFont(const std::wstring& strFontName, int nSize, bool bB
 {
 	for (auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++) {
 		auto pFontInfo = it->second;
-		if( pFontInfo->sFontName == strFontName && pFontInfo->iSize == nSize && 
-			pFontInfo->bBold == bBold && pFontInfo->bUnderline == bUnderline && pFontInfo->bItalic == bItalic) 
+		if (pFontInfo->sFontName == strFontName && pFontInfo->iSize == nSize &&
+			pFontInfo->bBold == bBold && pFontInfo->bUnderline == bUnderline && pFontInfo->bItalic == bItalic)
 			return pFontInfo->hFont;
 	}
 	return NULL;
@@ -450,7 +378,7 @@ HFONT GlobalManager::GetFont(const std::wstring& strFontName, int nSize, bool bB
 TFontInfo* GlobalManager::GetFontInfo(const std::wstring& strFontId, HDC hDcPaint)
 {
 	TFontInfo* pFontInfo = GetTFontInfo(strFontId);
-	if( pFontInfo->tm.tmHeight == 0 ) {
+	if (pFontInfo->tm.tmHeight == 0) {
 		HFONT hOldFont = (HFONT) ::SelectObject(hDcPaint, pFontInfo->hFont);
 		::GetTextMetrics(hDcPaint, &pFontInfo->tm);
 		::SelectObject(hDcPaint, hOldFont);
@@ -460,10 +388,10 @@ TFontInfo* GlobalManager::GetFontInfo(const std::wstring& strFontId, HDC hDcPain
 
 TFontInfo* GlobalManager::GetFontInfo(HFONT hFont, HDC hDcPaint)
 {
-	for( auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++ ) {
+	for (auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++) {
 		auto pFontInfo = it->second;
-		if( pFontInfo->hFont == hFont ) {
-			if( pFontInfo->tm.tmHeight == 0 ) {
+		if (pFontInfo->hFont == hFont) {
+			if (pFontInfo->tm.tmHeight == 0) {
 				HFONT hOldFont = (HFONT) ::SelectObject(hDcPaint, pFontInfo->hFont);
 				::GetTextMetrics(hDcPaint, &pFontInfo->tm);
 				::SelectObject(hDcPaint, hOldFont);
@@ -478,9 +406,9 @@ TFontInfo* GlobalManager::GetFontInfo(HFONT hFont, HDC hDcPaint)
 
 bool GlobalManager::FindFont(HFONT hFont)
 {
-	for( auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++ ) {
+	for (auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++) {
 		auto pFontInfo = it->second;
-		if( pFontInfo->hFont == hFont ) 
+		if (pFontInfo->hFont == hFont)
 			return true;
 	}
 	return false;
@@ -490,8 +418,8 @@ bool GlobalManager::FindFont(const std::wstring& strFontName, int nSize, bool bB
 {
 	for (auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++) {
 		auto pFontInfo = it->second;
-		if( pFontInfo->sFontName == strFontName && pFontInfo->iSize == nSize && 
-			pFontInfo->bBold == bBold && pFontInfo->bUnderline == bUnderline && pFontInfo->bItalic == bItalic) 
+		if (pFontInfo->sFontName == strFontName && pFontInfo->iSize == nSize &&
+			pFontInfo->bBold == bBold && pFontInfo->bUnderline == bUnderline && pFontInfo->bItalic == bItalic)
 			return true;
 	}
 	return false;

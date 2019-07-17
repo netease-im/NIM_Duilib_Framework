@@ -14,6 +14,7 @@ public:
 	/// 重写父类方法，提供个性化功能，请参考父类声明
 	virtual void Activate() override;
 	virtual void HandleMessage(EventArgs& event) override;
+	virtual UINT GetControlFlags() const override;
 
 	/**
 	 * @brief 绑定鼠标点击处理函数
@@ -22,6 +23,12 @@ public:
 	 */
 	void AttachClick(const EventCallback& callback)	{ this->OnEvent[kEventClick] += callback;	}
 };
+
+template<typename InheritType>
+UINT ui::ButtonTemplate<InheritType>::GetControlFlags() const
+{
+	return IsKeyboardEnabled() && IsEnabled() ? UIFLAG_TABSTOP : UIFLAG_DEFAULT;
+}
 
 template<typename InheritType>
 ButtonTemplate<InheritType>::ButtonTemplate()

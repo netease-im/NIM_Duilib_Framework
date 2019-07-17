@@ -104,11 +104,6 @@ public:
 	 */
 	static std::unique_ptr<IPath> CreatePath();
 
-	static void MessageLoop();
-	static bool TranslateMessage(const LPMSG pMsg);
-	static void AddPreMessage(Window* pWindow);
-	static void RemovePreMessage(Window* pWindow);
-
 	/**
 	 * @brief 添加一个全局 class 属性
 	 * @param[in] strClassName 全局 class 名称

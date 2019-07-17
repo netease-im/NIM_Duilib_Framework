@@ -424,6 +424,12 @@ public:
     virtual void SetFocus();
 
 	/**
+	 * @brief 返回控件的标识，用于判断是否可以响应 TAB 切换事件
+	 * @return 返回控件的标识类型
+	 */
+	virtual UINT GetControlFlags() const;
+
+	/**
 	 * @brief 让控件设置永远获取不到焦点
 	 * @return 无
 	 */

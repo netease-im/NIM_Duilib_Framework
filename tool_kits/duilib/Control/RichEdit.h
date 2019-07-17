@@ -686,6 +686,7 @@ public:
 	virtual void SetEnabled(bool bEnable = true) override;
 	virtual CSize EstimateSize(CSize szAvailable) override;
 	virtual void SetPos(UiRect rc) override;
+	virtual UINT GetControlFlags() const override;
 	virtual void HandleMessage(EventArgs& event) override;
 	void OnSetCursor(EventArgs& event);
 	void OnSetFocus(EventArgs& event);

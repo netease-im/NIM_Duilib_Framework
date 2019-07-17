@@ -540,6 +540,11 @@ void Control::SetFocus()
     if( m_pWindow != NULL ) m_pWindow->SetFocus(this);
 }
 
+UINT Control::GetControlFlags() const
+{
+	return UIFLAG_TABSTOP;
+}
+
 void Control::SetNoFocus()
 {
 	m_bNoFocus = true;
@@ -798,11 +803,13 @@ void Control::HandleMessage(EventArgs& msg)
 		}
 	}
 	else if (msg.Type == kEventInternalSetFocus) {
+		SetState(kControlStateHot);
         m_bFocused = true;
         Invalidate();
 		return;
     }
 	else if (msg.Type == kEventInternalKillFocus) {
+		SetState(kControlStateNormal);
         m_bFocused = false;
         Invalidate();
 		return;

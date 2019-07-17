@@ -17,7 +17,6 @@ WindowImplBase::~WindowImplBase()
 void WindowImplBase::OnFinalMessage( HWND hWnd )
 {
 	__super::OnFinalMessage(hWnd);
-	RemovePreMessageFilter(this);
 	ReapObjects(GetRoot());
 	delete this;
 }
@@ -289,7 +288,6 @@ LRESULT WindowImplBase::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& 
 	::SetWindowLong(this->GetHWND(), GWL_STYLE, GetStyle());
 
 	Init(m_hWnd);
-	AddPreMessageFilter(this);
 	SetWindowResourcePath(GetSkinFolder());
 
 	WindowBuilder builder;
