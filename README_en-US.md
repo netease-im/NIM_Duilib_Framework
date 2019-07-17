@@ -3,7 +3,7 @@
 NIM Duilib is a UI development framework for Windows, extend some new features based on the original [Duilib](https://github.com/duilib/duilib). Integrated Google base library with threads/memory/closures. You can use this framework to develop any desktop application you want.
 
 ![GitHub](https://img.shields.io/badge/license-MIT-green.svg)
-![Build status](https://ci.appveyor.com/api/projects/status/u29yl0j7pasopm3h/branch/master?svg=true)
+[![Build status](https://ci.appveyor.com/api/projects/status/u29yl0j7pasopm3h?svg=true)](https://ci.appveyor.com/project/nmgwddj/nim-duilib-framework)
 
 [中文介绍](README.md)
 
@@ -33,6 +33,7 @@ Enter the `NIM_Duilib_Framework/samples` directory，Open `samples.sln` with Vis
 
 ## Documentation
 
+ - [Getting Started](docs/GETTING-STARTED.md)
  - [Docs](docs/SUMMARY.md)
     
 ## Structure

@@ -3,7 +3,7 @@
 NIM Duilib 包含了一整套桌面软件的开发部件，与其说这是一个界面库，不如说它是一个开发框架。从原有 Duilib 基础上拓展了一些新的能力，并整合了 Google base 基础类库（线程、内存、闭包等）。您完全可以直接使用这个框架来开发任何你想要的桌面应用。
 
 ![GitHub](https://img.shields.io/badge/license-MIT-green.svg)
-![Build status](https://ci.appveyor.com/api/projects/status/u29yl0j7pasopm3h/branch/master?svg=true)
+[![Build status](https://ci.appveyor.com/api/projects/status/u29yl0j7pasopm3h?svg=true)](https://ci.appveyor.com/project/nmgwddj/nim-duilib-framework)
 
 [English](README_en-US.md)
 
@@ -33,6 +33,7 @@ git clone https://github.com/netease-im/NIM_Duilib_Framework
 
 ## 文档
 
+ - [快速上手](docs/GETTING-STARTED.md)
  - [中文文档](docs/SUMMARY.md)
 
 ## 目录
