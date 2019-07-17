@@ -8,8 +8,6 @@
 | :--- | :--- | :--- | :--- |
 | fadeswitch | false | BOOL | 当切换页面时是否使用动画效果,如(false) |
 | selectedid | 0 | INT | 默认选中的页面id,如(0) |
-| fadeswitch | false | BOOL | 当切换页面时是否使用动画效果,如(false) |
-| selectedid | 0 | INT | 默认选中的页面id,如(0) |
 
 ## 可用接口
 
