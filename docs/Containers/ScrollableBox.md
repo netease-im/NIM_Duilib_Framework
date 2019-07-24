@@ -1,6 +1,8 @@
 # ScrollableBox（可滚动布局容器）
 
-`ScrollableBox` 继承了 `Box` 容器属性和方法，更多可用属性和方法请参考：[Box](Box.md) 容器
+`ScrollableBox` 继承了 `Box` 容器属性和方法，更多可用属性和方法请参考：[Box](Box.md) 容器。
+
+注意：此控件不能在 XML 中直接使用，仅作为可滚动布局容器的基类，此处仅记录继承该容器的其他容器所拥有的公共属性和方法。请参考使用 [ListBox](../List/ListBox.md)。
 
 ## 可用属性
 
