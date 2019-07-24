@@ -10,7 +10,7 @@ TreeNode::TreeNode() :
 	m_pTreeView(nullptr),
 	m_pParentTreeNode(nullptr),
 	m_iDepth(ROOT_NODE_DEPTH),
-	mTreeNodes()
+	m_aTreeNodes()
 {
 	
 }
@@ -37,9 +37,12 @@ void TreeNode::SetInternVisible(bool bVisible)
 
 void TreeNode::SetWindow(Window* pManager, Box* pParent, bool bInit)
 {
-	for (auto it = mTreeNodes.begin(); it != mTreeNodes.end(); it++)
+	for (auto it = m_aTreeNodes.begin(); it != m_aTreeNodes.end(); it++)
 	{
-		(*it)->SetWindow(pManager, this, bInit);
+		// 将所有子控件的父节点（GetParent）都设置为 TreeView 中隐藏的 TreeNode
+		// 在 TreeView 递归销毁子控件时不会因为获取不到父容器指针而崩溃
+		// RootNode 是一个智能指针，在 TreeView 完全销毁以后会自动销毁
+		(*it)->SetWindow(pManager, m_pTreeView->GetRootNode(), bInit);
 	}
 
 	ListContainerElement::SetWindow(pManager, pParent, bInit);
@@ -75,8 +78,8 @@ bool TreeNode::AddChildNode(TreeNode* pTreeNode)
 
 bool TreeNode::AddChildNodeAt(TreeNode* pTreeNode, std::size_t iIndex)
 {
-	if( iIndex < 0 || iIndex > mTreeNodes.size() ) return false;
-	mTreeNodes.insert(mTreeNodes.begin() + iIndex, pTreeNode);
+	if( iIndex < 0 || iIndex > m_aTreeNodes.size() ) return false;
+	m_aTreeNodes.insert(m_aTreeNodes.begin() + iIndex, pTreeNode);
 		
 	pTreeNode->m_iDepth = m_iDepth + 1;
 	pTreeNode->SetParentNode(this);
@@ -95,7 +98,7 @@ bool TreeNode::AddChildNodeAt(TreeNode* pTreeNode, std::size_t iIndex)
 	std::size_t nGlobalIndex = iIndex;
 	for (std::size_t i = 0; i < iIndex; i++)
 	{
-		nGlobalIndex += ((TreeNode*)mTreeNodes[i])->GetDescendantNodeCount();
+		nGlobalIndex += ((TreeNode*)m_aTreeNodes[i])->GetDescendantNodeCount();
 	}
 
 	return m_pTreeView->ListBox::AddAt(pTreeNode, (int)(nodeIndex + nGlobalIndex + 1));
@@ -103,30 +106,30 @@ bool TreeNode::AddChildNodeAt(TreeNode* pTreeNode, std::size_t iIndex)
 
 bool TreeNode::RemoveChildNodeAt(std::size_t iIndex)
 {
-	if (iIndex < 0 || iIndex >= mTreeNodes.size()) {
+	if (iIndex < 0 || iIndex >= m_aTreeNodes.size()) {
 		return false;
 	}
 
-	TreeNode* pTreeNode = ((TreeNode*)mTreeNodes[iIndex]);
-	mTreeNodes.erase(mTreeNodes.begin() + iIndex);
+	TreeNode* pTreeNode = ((TreeNode*)m_aTreeNodes[iIndex]);
+	m_aTreeNodes.erase(m_aTreeNodes.begin() + iIndex);
 
 	return pTreeNode->RemoveSelf();
 }
 
 bool TreeNode::RemoveChildNode(TreeNode* pTreeNode)
 {
-	auto it = std::find(mTreeNodes.begin(), mTreeNodes.end(), pTreeNode);
-	if (it == mTreeNodes.end()) {
+	auto it = std::find(m_aTreeNodes.begin(), m_aTreeNodes.end(), pTreeNode);
+	if (it == m_aTreeNodes.end()) {
 		return false;
 	}
 		
-	int iIndex = it - mTreeNodes.begin();
+	int iIndex = it - m_aTreeNodes.begin();
 	return RemoveChildNodeAt(iIndex);
 }
 	
 void TreeNode::RemoveAllChildNode()
 {
-	while (mTreeNodes.size() > 0)
+	while (m_aTreeNodes.size() > 0)
 	{
 		RemoveChildNodeAt(0);
 	}
@@ -134,11 +137,11 @@ void TreeNode::RemoveAllChildNode()
 
 bool TreeNode::RemoveSelf()
 {
-	for( auto it = mTreeNodes.begin(); it != mTreeNodes.end(); it++ ) 
+	for( auto it = m_aTreeNodes.begin(); it != m_aTreeNodes.end(); it++ ) 
 	{
 		(*it)->RemoveSelf();
 	}
-	mTreeNodes.clear();
+	m_aTreeNodes.clear();
 
 	if (m_iDepth != ROOT_NODE_DEPTH) {
 		return m_pTreeView->ListBox::RemoveAt(GetIndex());
@@ -150,7 +153,7 @@ bool TreeNode::RemoveSelf()
 int TreeNode::GetDescendantNodeCount()
 {
 	int nodeCount = (int)GetChildNodeCount();
-	for( auto it = mTreeNodes.begin(); it != mTreeNodes.end(); it++ )
+	for( auto it = m_aTreeNodes.begin(); it != m_aTreeNodes.end(); it++ )
 	{
 		nodeCount += (*it)->GetDescendantNodeCount();
 	}
@@ -160,22 +163,22 @@ int TreeNode::GetDescendantNodeCount()
 
 std::size_t TreeNode::GetChildNodeCount()
 {
-	return mTreeNodes.size();
+	return m_aTreeNodes.size();
 }
 	
 TreeNode* TreeNode::GetChildNode(std::size_t iIndex)
 {
-	if( iIndex < 0 || iIndex >= mTreeNodes.size() ) return NULL;
-	return static_cast<TreeNode*>(mTreeNodes[iIndex]);
+	if( iIndex < 0 || iIndex >= m_aTreeNodes.size() ) return NULL;
+	return static_cast<TreeNode*>(m_aTreeNodes[iIndex]);
 }
 	
 int TreeNode::GetChildNodeIndex(TreeNode* pTreeNode)
 {
-	auto it = std::find(mTreeNodes.begin(), mTreeNodes.end(), pTreeNode);
-	if (it == mTreeNodes.end()) {
+	auto it = std::find(m_aTreeNodes.begin(), m_aTreeNodes.end(), pTreeNode);
+	if (it == m_aTreeNodes.end()) {
 		return -1;
 	}
-	return it - mTreeNodes.begin();
+	return it - m_aTreeNodes.begin();
 }
 
 bool TreeNode::IsExpand() const
