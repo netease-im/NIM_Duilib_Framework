@@ -248,7 +248,7 @@ void TreeView::RemoveAll()
 void TreeView::SetWindow(Window* pManager, Box* pParent, bool bInit)
 {
 	ListBox::SetWindow(pManager, pParent, bInit);
-	m_rootNode->SetWindow(pManager, pParent, bInit);
+	if (NULL != pParent) m_rootNode->SetWindow(pManager, pParent, bInit);
 }
 
 }
