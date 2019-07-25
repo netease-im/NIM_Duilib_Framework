@@ -140,7 +140,7 @@ private:
 	bool m_bExpand;
 	TreeView *m_pTreeView;
 	TreeNode *m_pParentTreeNode;
-	std::vector<TreeNode*> m_aTreeNodes;
+	std::vector<TreeNode*> mTreeNodes;
 };
 
 class UILIB_API TreeView : public ListBox
