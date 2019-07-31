@@ -51,7 +51,7 @@ void GlobalManager::Startup(const std::wstring& strResourcePath, const CreateCon
 
 	// 加载多语言文件，如果使用了资源压缩包则从内存中加载语言文件
 	if (g_hzip) {
-		HGLOBAL hGlobal = GetData(m_pStrResourcePath + language + L"\\gdstrings.ini");
+		HGLOBAL hGlobal = GetData(strResourcePath + language + L"\\gdstrings.ini");
 		if (hGlobal) {
 			ui::MutiLanSupport::GetInstance()->LoadStringTable(hGlobal);
 			GlobalFree(hGlobal);
