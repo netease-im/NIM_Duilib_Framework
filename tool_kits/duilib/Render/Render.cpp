@@ -470,6 +470,27 @@ void RenderContext_GdiPlus::DrawRect(const UiRect& rc, int nSize, DWORD dwPenCol
 	graphics.DrawRectangle(&pen, rc.left, rc.top, rc.GetWidth(), rc.GetHeight());
 }
 
+
+void RenderContext_GdiPlus::DrawRoundRect(const UiRect& rc, const SIZE& round, int nSize, DWORD dwPenColor)
+{
+	Gdiplus::Graphics graphics(m_hDC);
+	graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
+	Gdiplus::Pen pen(Gdiplus::Color(dwPenColor), (Gdiplus::REAL)nSize);
+	Gdiplus::SolidBrush brShadow(Gdiplus::Color(255, 255, 255));
+	Gdiplus::GraphicsPath m_pPath;
+	m_pPath.AddArc(rc.left, rc.top, round.cx * 2, round.cy * 2, 180, 90);
+	m_pPath.AddLine(rc.left + round.cx, rc.top, rc.right - round.cx * 2, rc.top);
+	m_pPath.AddArc(rc.left + rc.GetWidth() - round.cx * 2, rc.top, round.cx * 2, round.cy * 2, 270, 90);
+	m_pPath.AddLine(rc.right, rc.top + round.cy * 2, rc.right, rc.top + rc.GetHeight() - round.cy * 2);
+	m_pPath.AddArc(rc.left + rc.GetWidth() - round.cx * 2, rc.top + rc.GetHeight() - round.cy * 2, round.cx * 2, round.cy * 2, 0, 90);
+	m_pPath.AddLine(rc.right - round.cx * 2, rc.bottom, rc.left + round.cx * 2, rc.bottom);
+	m_pPath.AddArc(rc.left, rc.bottom - round.cy * 2, round.cx * 2, round.cy * 2, 90, 90);
+	m_pPath.AddLine(rc.left, rc.bottom - round.cy * 2, rc.left, rc.top + round.cy * 2);
+	m_pPath.CloseFigure();
+	graphics.FillPath(&brShadow, &m_pPath);
+	graphics.DrawPath(&pen, &m_pPath);
+}
+
 void RenderContext_GdiPlus::DrawText(const UiRect& rc, const std::wstring& strText, DWORD dwTextColor, const std::wstring& strFontId, UINT uStyle, BYTE uFade /*= 255*/, bool bLineLimit /*= false*/)
 {
 	ASSERT(::GetObjectType(m_hDC)==OBJ_DC || ::GetObjectType(m_hDC)==OBJ_MEMDC);

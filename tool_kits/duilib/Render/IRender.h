@@ -204,6 +204,8 @@ public:
 	virtual void DrawLine(const IPen* pen, int x1, int y1, int x2, int y2) = 0;
 	virtual void DrawBezier(const IPen* pen, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) = 0;
 	virtual void DrawRect(const UiRect& rc, int nSize, DWORD dwPenColor) = 0;
+	virtual void DrawRoundRect(const UiRect& rc, const SIZE& round, int nSize, DWORD dwPenColor) = 0;
+
 	virtual void DrawText(const UiRect& rc, const std::wstring& strText, DWORD dwTextColor, const std::wstring& strFontId, UINT uStyle, BYTE uFade = 255, bool bLineLimit = false) = 0;
 
 	virtual void DrawEllipse(const UiRect& rc, int nSize, DWORD dwColor) = 0;
