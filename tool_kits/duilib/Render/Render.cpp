@@ -476,19 +476,26 @@ void RenderContext_GdiPlus::DrawRoundRect(const UiRect& rc, const SIZE& round, i
 	Gdiplus::Graphics graphics(m_hDC);
 	graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
 	Gdiplus::Pen pen(Gdiplus::Color(dwPenColor), (Gdiplus::REAL)nSize);
-	Gdiplus::SolidBrush brShadow(Gdiplus::Color(255, 255, 255));
-	Gdiplus::GraphicsPath m_pPath;
-	m_pPath.AddArc(rc.left, rc.top, round.cx * 2, round.cy * 2, 180, 90);
-	m_pPath.AddLine(rc.left + round.cx, rc.top, rc.right - round.cx * 2, rc.top);
-	m_pPath.AddArc(rc.left + rc.GetWidth() - round.cx * 2, rc.top, round.cx * 2, round.cy * 2, 270, 90);
-	m_pPath.AddLine(rc.right, rc.top + round.cy * 2, rc.right, rc.top + rc.GetHeight() - round.cy * 2);
-	m_pPath.AddArc(rc.left + rc.GetWidth() - round.cx * 2, rc.top + rc.GetHeight() - round.cy * 2, round.cx * 2, round.cy * 2, 0, 90);
-	m_pPath.AddLine(rc.right - round.cx * 2, rc.bottom, rc.left + round.cx * 2, rc.bottom);
-	m_pPath.AddArc(rc.left, rc.bottom - round.cy * 2, round.cx * 2, round.cy * 2, 90, 90);
-	m_pPath.AddLine(rc.left, rc.bottom - round.cy * 2, rc.left, rc.top + round.cy * 2);
-	m_pPath.CloseFigure();
-	graphics.FillPath(&brShadow, &m_pPath);
-	graphics.DrawPath(&pen, &m_pPath);
+    //裁剪区域不能作画，导致边框有时不全，往里收缩一个像素 
+	UiRect _rc = rc;
+	_rc.left += 1;
+	_rc.top += 1;
+	_rc.right -= 1;
+	_rc.bottom -= 1;
+	//透明画刷
+	Gdiplus::SolidBrush brShadow(Gdiplus::Color(0,0, 0, 0));
+	Gdiplus::GraphicsPath pPath;
+	pPath.AddArc(_rc.left, _rc.top, round.cx, round.cy, 180, 90);
+	pPath.AddLine(_rc.left + round.cx, _rc.top, _rc.right - round.cx, _rc.top);
+	pPath.AddArc(_rc.right - round.cx, _rc.top, round.cx, round.cy, 270, 90);
+	pPath.AddLine(_rc.right, _rc.top + round.cy, _rc.right, _rc.bottom - round.cy);
+	pPath.AddArc(_rc.right - round.cx, _rc.bottom - round.cy, round.cx, round.cy, 0, 90);
+	pPath.AddLine(_rc.right - round.cx, _rc.bottom, _rc.left + round.cx, _rc.bottom);
+	pPath.AddArc(_rc.left, _rc.bottom - round.cy, round.cx, round.cy, 90, 90);
+	pPath.AddLine(_rc.left, _rc.bottom - round.cy, _rc.left, _rc.top + round.cy);
+	pPath.CloseFigure();
+	graphics.FillPath(&brShadow, &pPath);
+	graphics.DrawPath(&pen, &pPath);
 }
 
 void RenderContext_GdiPlus::DrawText(const UiRect& rc, const std::wstring& strText, DWORD dwTextColor, const std::wstring& strFontId, UINT uStyle, BYTE uFade /*= 255*/, bool bLineLimit /*= false*/)
