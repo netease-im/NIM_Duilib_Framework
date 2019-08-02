@@ -1428,10 +1428,43 @@ void Control::PaintBorder(IRenderContext* pRender)
 		dwBorderColor = GlobalManager::GetTextColor(m_strBorderColor);
 	}
 
-	if(dwBorderColor != 0) {
-		//ÅÐ¶ÏÊÇ·ñÐèÒª»­Ô²½Ç¾ØÕó
-		if ((m_cxyBorderRound.cx > 0 || m_cxyBorderRound.cy > 0) && m_nBorderSize > 0)
-		{
+	if (dwBorderColor != 0) {
+		if (m_rcBorderSize.left > 0 || m_rcBorderSize.top > 0 || m_rcBorderSize.right > 0 || m_rcBorderSize.bottom > 0) {
+			UiRect rcBorder;
+			if (m_rcBorderSize.left > 0) {
+				rcBorder = m_rcItem;
+				rcBorder.right = rcBorder.left = m_rcItem.left + m_rcBorderSize.left / 2;
+				if (m_rcBorderSize.left == 1) {
+					rcBorder.bottom -= 1;
+				}
+				pRender->DrawLine(rcBorder, m_rcBorderSize.left, dwBorderColor);
+			}
+			if (m_rcBorderSize.top > 0) {
+				rcBorder = m_rcItem;
+				rcBorder.bottom = rcBorder.top = m_rcItem.top + m_rcBorderSize.top / 2;
+				if (m_rcBorderSize.top == 1) {
+					rcBorder.right -= 1;
+				}
+				pRender->DrawLine(rcBorder, m_rcBorderSize.top, dwBorderColor);
+			}
+			if (m_rcBorderSize.right > 0) {
+				rcBorder = m_rcItem;
+				rcBorder.left = rcBorder.right = m_rcItem.right - (m_rcBorderSize.right + 1) / 2;
+				if (m_rcBorderSize.right == 1) {
+					rcBorder.bottom -= 1;
+				}
+				pRender->DrawLine(rcBorder, m_rcBorderSize.right, dwBorderColor);
+			}
+			if (m_rcBorderSize.bottom > 0) {
+				rcBorder = m_rcItem;
+				rcBorder.top = rcBorder.bottom = m_rcItem.bottom - (m_rcBorderSize.bottom + 1) / 2;
+				if (m_rcBorderSize.bottom == 1) {
+					rcBorder.right -= 1;
+				}
+				pRender->DrawLine(rcBorder, m_rcBorderSize.bottom, dwBorderColor);
+			}
+		}
+		else if (m_nBorderSize > 0) {
 			UiRect rcDraw = m_rcItem;
 			int nDeltaValue = m_nBorderSize / 2;
 			rcDraw.top += nDeltaValue;
@@ -1444,60 +1477,11 @@ void Control::PaintBorder(IRenderContext* pRender)
 			if (m_nBorderSize % 2 != 0) {
 				rcDraw.right -= 1;
 			}
-			pRender->DrawRoundRect(rcDraw, m_cxyBorderRound, m_nBorderSize, dwBorderColor);
-		}
-		else
-		{
-			if (m_rcBorderSize.left > 0 || m_rcBorderSize.top > 0 || m_rcBorderSize.right > 0 || m_rcBorderSize.bottom > 0) {
-				UiRect rcBorder;
-				if (m_rcBorderSize.left > 0) {
-					rcBorder = m_rcItem;
-					rcBorder.right = rcBorder.left = m_rcItem.left + m_rcBorderSize.left / 2;
-					if (m_rcBorderSize.left == 1) {
-						rcBorder.bottom -= 1;
-					}
-					pRender->DrawLine(rcBorder, m_rcBorderSize.left, dwBorderColor);
-				}
-				if (m_rcBorderSize.top > 0) {
-					rcBorder = m_rcItem;
-					rcBorder.bottom = rcBorder.top = m_rcItem.top + m_rcBorderSize.top / 2;
-					if (m_rcBorderSize.top == 1) {
-						rcBorder.right -= 1;
-					}
-					pRender->DrawLine(rcBorder, m_rcBorderSize.top, dwBorderColor);
-				}
-				if (m_rcBorderSize.right > 0) {
-					rcBorder = m_rcItem;
-					rcBorder.left = rcBorder.right = m_rcItem.right - (m_rcBorderSize.right + 1) / 2;
-					if (m_rcBorderSize.right == 1) {
-						rcBorder.bottom -= 1;
-					}
-					pRender->DrawLine(rcBorder, m_rcBorderSize.right, dwBorderColor);
-				}
-				if (m_rcBorderSize.bottom > 0) {
-					rcBorder = m_rcItem;
-					rcBorder.top = rcBorder.bottom = m_rcItem.bottom - (m_rcBorderSize.bottom + 1) / 2;
-					if (m_rcBorderSize.bottom == 1) {
-						rcBorder.right -= 1;
-					}
-					pRender->DrawLine(rcBorder, m_rcBorderSize.bottom, dwBorderColor);
-				}
-			}
-			else if (m_nBorderSize > 0) {
-				UiRect rcDraw = m_rcItem;
-				int nDeltaValue = m_nBorderSize / 2;
-				rcDraw.top += nDeltaValue;
-				rcDraw.bottom -= nDeltaValue;
-				if (m_nBorderSize % 2 != 0) {
-					rcDraw.bottom -= 1;
-				}
-				rcDraw.left += nDeltaValue;
-				rcDraw.right -= nDeltaValue;
-				if (m_nBorderSize % 2 != 0) {
-					rcDraw.right -= 1;
-				}
+
+			if (m_cxyBorderRound.cx > 0 || m_cxyBorderRound.cy > 0)
+				pRender->DrawRoundRect(rcDraw, m_cxyBorderRound, m_nBorderSize, dwBorderColor);
+			else
 				pRender->DrawRect(rcDraw, m_nBorderSize, dwBorderColor);
-			}
 		}
 	}
 }

@@ -34,12 +34,10 @@
           <Option class="circle_option_2" group="option_group" text="option3" margin="0,3,0,10"/>
         </VBox>
         <!-- List -->
-        <VListBox class="list" name="list" padding="5,3,5,3" bordersize="1" bordercolor="red" borderround="5,5">
-          
+        <VListBox class="list" name="list" padding="5,3,5,3">
         </VListBox>
         <!-- TreeView -->
         <TreeView class="list" name="tree" padding="5,3,5,3" margin="20">
-          
         </TreeView>
       </HBox>
       <Control class="splitline_hor_level1"/>

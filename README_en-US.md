@@ -43,7 +43,7 @@ Enter the `NIM_Duilib_Framework/samples` directory，Open `samples.sln` with Vis
 ├─`libs` Static library output directories, include CEF static library.  
 ├─`samples` Samples of Duilib.  
 ├─`third_party` Third party for CEF.  
-├─`toolkits`       
+├─`toolkits`  
 │  ├─`base` Base libraries.  
 │  ├─`duilib` Duilib core, depend on base project.  
 │  ├─`shared` Utils, such as logs/string/path utils.  
@@ -52,5 +52,5 @@ Enter the `NIM_Duilib_Framework/samples` directory，Open `samples.sln` with Vis
 ## Communication
 
  - Question: Read the [Documentation](docs/SUMMARY.md) and [Samples code](samples/README.md) to help you.
- - Report: File a bug in GitHub issues
+ - Report: File a bug in GitHub issues.
  - Suggestion: Request a new feature in Github issues.
