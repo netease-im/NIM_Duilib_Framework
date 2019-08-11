@@ -196,7 +196,7 @@ bool CefJSBridge::ExecuteJSFunc(const CefString& function_name, const CefString&
 				CefRefPtr<CefListValue> args = message->GetArgumentList();
 				args->SetString(0, json_string->GetStringValue());
 				args->SetInt(1, cpp_callback_id);
-				context->GetBrowser()->SendProcessMessage(PID_RENDERER, message);
+				context->GetBrowser()->SendProcessMessage(PID_BROWSER, message);
 			}
 
 			context->Exit();
