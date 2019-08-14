@@ -179,6 +179,9 @@
     <ClCompile Include="Utils\UnZip.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Control\CircleProgress.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StdAfx.h">
@@ -336,6 +339,9 @@
     </ClInclude>
     <ClInclude Include="Utils\UnZip.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\CircleProgress.h">
+      <Filter>Header Files\Control</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

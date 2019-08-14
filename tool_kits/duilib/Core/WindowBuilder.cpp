@@ -493,6 +493,7 @@ Control* WindowBuilder::CreateControlByClass(const std::wstring& strControlClass
 		break;
 	case 14:
 		if (strControlClass == DUI_CTR_VIRTUALLISTBOX)			pControl = new VirtualListBox;
+		else if (strControlClass == DUI_CTR_CIRCLEPROGRESS)     pControl = new CircleProgress;
 		break;
 	case 15:
 		break;

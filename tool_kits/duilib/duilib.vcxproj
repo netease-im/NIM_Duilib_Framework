@@ -317,6 +317,7 @@
     <ClCompile Include="Box\TabBox.cpp" />
     <ClCompile Include="Box\TileBox.cpp" />
     <ClCompile Include="Box\VBox.cpp" />
+    <ClCompile Include="Control\CircleProgress.cpp" />
     <ClCompile Include="Control\VirtualListBox.cpp" />
     <ClCompile Include="Core\Define.cpp" />
     <ClCompile Include="Core\Image.cpp" />
@@ -368,6 +369,7 @@
     <ClInclude Include="Box\TabBox.h" />
     <ClInclude Include="Box\TileBox.h" />
     <ClInclude Include="Box\VBox.h" />
+    <ClInclude Include="Control\CircleProgress.h" />
     <ClInclude Include="Control\VirtualListBox.h" />
     <ClInclude Include="Core\Image.h" />
     <ClInclude Include="Core\Placeholder.h" />
