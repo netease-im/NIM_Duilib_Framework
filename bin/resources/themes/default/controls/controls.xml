@@ -57,7 +57,13 @@
             <Slider class="slider_green" value="70" margin="10"/>
           </HBox>
         </VBox>
+		<VBox width="120">
+             <CircleProgress name="circleprogress" circular="true"  height="80" width="80" 
+             circlewidth="10" bgcolor="gray" fgcolor="green"  clockwise="true"  min="1" max="100" value="75" margin="10"
+             textpadding="10,32,10,10" normaltextcolor="darkcolor" indicator="logo_18x18.png"/>
+		</VBox>
       </HBox>
+	
       <Control class="splitline_hor_level1"/>
       <!-- RichEdit -->
       <RichEdit class="prompt" name="edit" bkcolor="bk_wnd_lightcolor" width="stretch" height="stretch" 

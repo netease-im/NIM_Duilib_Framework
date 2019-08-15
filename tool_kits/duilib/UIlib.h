@@ -127,6 +127,7 @@
 #include "Control/Option.h"
 
 #include "Control/Progress.h"
+#include "Control/CircleProgress.h"
 #include "Control/Slider.h"
 
 #include "Control/RichEdit.h"

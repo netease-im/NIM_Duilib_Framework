@@ -154,4 +154,9 @@ void ControlForm::OnProgressValueChagned(float value)
 {
 	auto progress = dynamic_cast<ui::Progress*>(FindControl(L"progress"));
 	progress->SetValue(value);
+	auto circleprogress = dynamic_cast<ui::Progress*>(FindControl(L"circleprogress"));
+	circleprogress->SetValue(value);
+	TCHAR szBuffer[32] = {0};
+	swprintf_s(szBuffer, _T("%.0f%%"), value);
+	circleprogress->SetText(szBuffer);
 }

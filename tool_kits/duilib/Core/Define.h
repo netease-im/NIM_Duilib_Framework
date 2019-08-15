@@ -239,6 +239,7 @@ EventType StringToEnum(const std::wstring& messageType);
 #define  DUI_CTR_COMBO                           (_T("Combo"))
 #define  DUI_CTR_SLIDER                          (_T("Slider"))
 #define  DUI_CTR_PROGRESS                        (_T("Progress"))
+#define  DUI_CTR_CIRCLEPROGRESS                  (_T("CircleProgress"))
 #define  DUI_CTR_SCROLLBAR                       (_T("ScrollBar"))
 
 }// namespace ui
