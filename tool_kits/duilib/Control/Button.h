@@ -27,7 +27,7 @@ public:
 template<typename InheritType>
 UINT ui::ButtonTemplate<InheritType>::GetControlFlags() const
 {
-	return IsKeyboardEnabled() && IsEnabled() ? UIFLAG_TABSTOP : UIFLAG_DEFAULT;
+	return this->IsKeyboardEnabled() && this->IsEnabled() ? UIFLAG_TABSTOP : UIFLAG_DEFAULT;
 }
 
 template<typename InheritType>

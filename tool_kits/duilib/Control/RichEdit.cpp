@@ -301,7 +301,9 @@ CTxtWinHost::~CTxtWinHost()
 
 BOOL CTxtWinHost::Init(RichEdit *re, const CREATESTRUCT *pcs)
 {
+	PCreateTextServices TextServicesProc = nullptr;
     IUnknown *pUnk = nullptr;
+	HMODULE hmod = NULL;
     HRESULT hr;
 	std::wstring edit_dll(L"msftedit.dll");
     m_re = re;
@@ -349,7 +351,6 @@ BOOL CTxtWinHost::Init(RichEdit *re, const CREATESTRUCT *pcs)
     //if(FAILED(CreateTextServices(NULL, this, &pUnk)))
     //    goto err;
 
-	PCreateTextServices TextServicesProc = nullptr;
 	//解决32位系统下跨窗口间拖拽文字在win7及win7以下系统上会出现重复的问题（64位暂不修复） lty 20170714
 #if defined(_M_X64) || defined(__x86_64__)
 	edit_dll = L"msftedit.dll";
@@ -358,7 +359,7 @@ BOOL CTxtWinHost::Init(RichEdit *re, const CREATESTRUCT *pcs)
 	if (!(::GetFileAttributesW(edit_dll.c_str()) != INVALID_FILE_ATTRIBUTES))
 		edit_dll = L"msftedit.dll";
 #endif
-	HMODULE hmod = LoadLibraryW(edit_dll.c_str()); //msftedit.dll
+	hmod = LoadLibraryW(edit_dll.c_str()); //msftedit.dll
 	if (hmod)
 	{
 		TextServicesProc = (PCreateTextServices)GetProcAddress(hmod,"CreateTextServices");
