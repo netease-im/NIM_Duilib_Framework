@@ -17,7 +17,7 @@
 
 | 接口名称 | 用途 |
 | :--- | :--- |
-| [SetCircular](#SetCircular) | 设置圆形滚动条样式，默认为普通进度条 |
+| [SetCircular](#SetCircular) | 设置环形进度条样式，默认为普通进度条 |
 | [SetClockwiseRotation](#SetClockwiseRotation) | 设置递增方向 |
 | [SetCircleWidth](#SetCircleWidth) | 设置圆环宽度 |
 | [SetBackgroudColor](#SetBackgroudColor) | 设置进度条背景颜色 |
@@ -28,14 +28,14 @@
 
 ### SetCircular
 
-设置圆形滚动条，默认为普通进度条
+设置环形进度条，默认为普通进度条
 
 ```cpp
 void SetCircular(bool bCircular = true)
 ```
 
  - 参&emsp;数：  
-    - `bCircular` bCircular 为 true 时设置为圆形滚动条，false 时设置为父级滚动条，默认为 true
+    - `bCircular` bCircular 为 true 时设置为环形进度条，false 时设置为父级滚动条样式，默认为 true
  - 返回值：无
 
 ### SetClockwiseRotation
