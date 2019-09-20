@@ -9,7 +9,8 @@ enum MsgBoxRet
 
 typedef std::function<void(MsgBoxRet)> MsgboxCallback;
 
-void ShowMsgBox(HWND hwnd, MsgboxCallback cb,
+class MsgBox;
+MsgBox* ShowMsgBox(HWND hwnd, MsgboxCallback cb,
     const std::wstring &content = L"", bool content_is_id = true,
     const std::wstring &title = L"STRING_TIPS", bool title_is_id = true,
     const std::wstring &yes = L"STRING_OK", bool btn_yes_is_id = true,
@@ -18,7 +19,7 @@ void ShowMsgBox(HWND hwnd, MsgboxCallback cb,
 class MsgBox : public ui::WindowImplBase
 {
 public:
-	friend void ShowMsgBox(HWND hwnd, MsgboxCallback cb,
+	friend MsgBox* ShowMsgBox(HWND hwnd, MsgboxCallback cb,
         const std::wstring &content, bool content_is_id,
         const std::wstring &title, bool title_is_id,
         const std::wstring &yes, bool btn_yes_is_id,
@@ -38,6 +39,9 @@ public:
 	virtual std::wstring GetWindowId() const /*override*/;
 	virtual UINT GetClassStyle() const override;
 	virtual void InitWindow() override;
+
+	void resetContent(const std::wstring &str);
+
 private:
 	bool OnClicked(ui::EventArgs* msg);
 

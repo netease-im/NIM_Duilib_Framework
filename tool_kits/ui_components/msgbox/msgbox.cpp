@@ -4,7 +4,7 @@
 
 using namespace ui;
 
-void ShowMsgBox(HWND hwnd, MsgboxCallback cb,
+MsgBox* ShowMsgBox(HWND hwnd, MsgboxCallback cb,
 	const std::wstring &content, bool content_is_id,
 	const std::wstring &title, bool title_is_id,
 	const std::wstring &yes, bool btn_yes_is_id,
@@ -13,22 +13,30 @@ void ShowMsgBox(HWND hwnd, MsgboxCallback cb,
 	MsgBox* msgbox = new MsgBox;
 	HWND hWnd = msgbox->Create(hwnd, L"", WS_OVERLAPPEDWINDOW & ~WS_MAXIMIZEBOX, 0);
 	if (hWnd == NULL)
-		return;
+		return NULL;
 	MutiLanSupport *multilan = MutiLanSupport::GetInstance();
 	msgbox->SetTitle(title_is_id ? multilan->GetStringViaID(title) : title);
 	msgbox->SetContent(content_is_id ? multilan->GetStringViaID(content) : content);
 	msgbox->SetButton(btn_yes_is_id ? multilan->GetStringViaID(yes) : yes, btn_no_is_id ? multilan->GetStringViaID(no) : no);
 	msgbox->Show(hwnd, cb);
+
+	return msgbox;
 }
 
 const LPCTSTR MsgBox::kClassName = L"MsgBox";
 
 MsgBox::MsgBox()
 {
+
 }
 
 MsgBox::~MsgBox()
 {
+}
+
+void MsgBox::resetContent(const std::wstring &str)
+{
+	SetContent(str);
 }
 
 std::wstring MsgBox::GetSkinFolder()
