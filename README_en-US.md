@@ -29,7 +29,7 @@ Clone the repo into your disk.
 git clone https://github.com/netease-im/NIM_Duilib_Framework
 ```
 
-Enter the `NIM_Duilib_Framework/samples` directory，Open `samples.sln` with Visual Studio 2013 Update 5 or higher ，press `F7` to compile all projects.
+Enter the `NIM_Duilib_Framework/examples` directory，Open `examples.sln` with Visual Studio 2013 Update 5 or higher ，press `F7` to compile all projects.
 
 ## Documentation
 
@@ -38,19 +38,17 @@ Enter the `NIM_Duilib_Framework/samples` directory，Open `samples.sln` with Vis
     
 ## Structure
 
-├─`bin` Samples output directories，include skin and language files and CEF dependencies.  
+├─`base` Base libraries.  
+├─`bin` Examples output directories，include skin and language files and CEF dependencies.  
 ├─`docs` Documentation of Duilib.  
+├─`duilib` Duilib core, depend on base project.  
 ├─`libs` Static library output directories, include CEF static library.  
-├─`samples` Samples of Duilib.  
+├─`examples` Examples of Duilib.  
 ├─`third_party` Third party for CEF.  
-├─`toolkits`  
-│  ├─`base` Base libraries.  
-│  ├─`duilib` Duilib core, depend on base project.  
-│  ├─`shared` Utils, such as logs/string/path utils.  
-│  ├─`ui_components` UI components based on Duilib, such as `msgbox`,`toast`,`cef_control`  
+├─`ui_components` UI components based on Duilib, such as `msgbox`,`toast`,`cef_control`  
 
 ## Communication
 
- - Question: Read the [Documentation](docs/SUMMARY.md) and [Samples code](samples/README.md) to help you.
+ - Question: Read the [Documentation](docs/SUMMARY.md) and [Examples code](examples/README.md) to help you.
  - Report: File a bug in GitHub issues.
  - Suggestion: Request a new feature in Github issues.
