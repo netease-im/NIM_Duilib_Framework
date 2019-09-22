@@ -2,7 +2,7 @@
 #include "cef_js_bridge.h"
 #include "ipc_string_define.h"
 
-namespace nim_cef {
+namespace nim_comp {
 
 CefJSBridge::CefJSBridge()
 {
@@ -245,7 +245,7 @@ bool CefJSBridge::ExecuteCppCallbackFunc(int cpp_callback_id, const CefString& j
 		auto callback = it->second;
 		if (callback)
 		{
-			nbase::ThreadManager::PostTask(kThreadMain, [=]() { callback(json_string); });
+			nbase::ThreadManager::PostTask(kThreadUI, [=]() { callback(json_string); });
 		}
 		
 		// 执行完成后从缓存中移除
@@ -291,7 +291,7 @@ bool CefJSBridge::ExecuteCppFunc(const CefString& function_name, const CefString
 	if (it != browser_registered_function_.cend())
 	{
 		auto function = it->second;
-		nbase::ThreadManager::PostTask(kThreadMain, [=]() {
+		nbase::ThreadManager::PostTask(kThreadUI, [=]() {
 			function(params, [=](bool has_error, const std::string& json_result) {
 				// 测试代码，需要封装到管理器中
 				args->SetInt(0, js_callback_id);
@@ -307,7 +307,7 @@ bool CefJSBridge::ExecuteCppFunc(const CefString& function_name, const CefString
 	if (it != browser_registered_function_.cend())
 	{
 		auto function = it->second;
-		nbase::ThreadManager::PostTask(kThreadMain, [=]() {
+		nbase::ThreadManager::PostTask(kThreadUI, [=]() {
 			function(params, [=](bool has_error, const std::string& json_result) {
 				// 测试代码，需要封装到管理器中
 				args->SetInt(0, js_callback_id);

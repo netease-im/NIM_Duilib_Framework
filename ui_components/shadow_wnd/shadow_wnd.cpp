@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "shadow_wnd.h"
 
-namespace ui {
+namespace nim_comp {
 
 ShadowWnd::ShadowWnd()
 {

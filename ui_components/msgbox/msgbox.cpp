@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "msgbox.h"
 
+namespace nim_comp {
 
 using namespace ui;
 
@@ -178,6 +179,8 @@ void MsgBox::EndMsgBox(MsgBoxRet ret)
 
 	if (msgbox_callback_)
 	{
-		nbase::ThreadManager::PostTask(kThreadMain, nbase::Bind(msgbox_callback_, ret));
+		nbase::ThreadManager::PostTask(kThreadUI, nbase::Bind(msgbox_callback_, ret));
 	}
+}
+
 }

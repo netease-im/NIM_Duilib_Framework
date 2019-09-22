@@ -9,7 +9,7 @@
 #include "include/cef_app.h"
 #include "cef_control/app/cef_js_bridge.h"
 
-namespace nim_cef
+namespace nim_comp
 {
 	
 class CefJSHandler : public CefV8Handler

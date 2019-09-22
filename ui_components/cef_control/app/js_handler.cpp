@@ -4,7 +4,7 @@
 #include "cef_control/app/ipc_string_define.h"
 #include "cef_control/app/cef_js_bridge.h"
 
-namespace nim_cef
+namespace nim_comp
 {
 
 bool CefJSHandler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception)

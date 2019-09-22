@@ -6,7 +6,7 @@
 #include "cef_control/app/client_app.h"
 #include "cef_control/handler/browser_handler.h"
 
-namespace nim_cef
+namespace nim_comp
 {
 
 BOOL CefMessageLoopDispatcher::IsIdleMessage(const MSG* pMsg)
@@ -173,7 +173,7 @@ void CefManager::PostQuitMessage(int nExitCode)
 	// 应该等所有浏览器对象都销毁后再调用::PostQuitMessage
 	if (browser_count_ == 0)
 	{
-		nbase::ThreadManager::PostTask(kThreadMain, [nExitCode]()
+		nbase::ThreadManager::PostTask(kThreadUI, [nExitCode]()
 	 	{
 			::PostQuitMessage(nExitCode);
 		});
@@ -185,7 +185,7 @@ void CefManager::PostQuitMessage(int nExitCode)
 			CefManager::GetInstance()->PostQuitMessage(nExitCode);
 		};
 
-		nbase::ThreadManager::PostDelayedTask(kThreadMain, cb, nbase::TimeDelta::FromMilliseconds(500));
+		nbase::ThreadManager::PostDelayedTask(kThreadUI, cb, nbase::TimeDelta::FromMilliseconds(500));
 	}
 }
 

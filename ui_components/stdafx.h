@@ -20,6 +20,9 @@
 #include <mutex>
 #include <atomic>
 
+// public define
+#include "public_define.h"
+
 // base
 #include "base/base.h"
 

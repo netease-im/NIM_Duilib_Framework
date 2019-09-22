@@ -1,7 +1,6 @@
 #pragma once
 
-namespace shared
-{
+namespace nim_comp {
 /** @class Toast
  * @brief 提供一个简易的提示窗体，相当于MessageBox的简化版
  * @copyright (c) 2016, NetEase Inc. All rights reserved

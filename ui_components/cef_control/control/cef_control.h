@@ -8,8 +8,7 @@
 #include "cef_control_base.h"
 #include "cef_control/util/memory_dc.h"
 
-namespace ui 
-{
+namespace nim_comp {
 
 class CefControl :public CefControlBase, public IUIMessageFilter
 {	

@@ -14,7 +14,7 @@
 #include "include/cef_app.h"
 #include "cef_control/app/cef_js_bridge.h"
 
-namespace nim_cef
+namespace nim_comp
 {
 class ClientApp : public CefApp,
                   public CefBrowserProcessHandler,

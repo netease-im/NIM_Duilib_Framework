@@ -2,7 +2,7 @@
 #include "include/cef_app.h"
 #include "base/memory/singleton.h"
 
-namespace nim_cef
+namespace nim_comp
 {
 
 typedef std::function<void(bool has_error, const std::string& result)> ReportResultFunction;

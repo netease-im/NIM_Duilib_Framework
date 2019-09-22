@@ -9,7 +9,7 @@
 #include "cef_control/manager/cef_manager.h"
 #include "cef_control/util/util.h"
 
-namespace nim_cef
+namespace nim_comp
 {
 
 ClientApp::ClientApp() 

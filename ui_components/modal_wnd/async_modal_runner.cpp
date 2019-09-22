@@ -4,6 +4,8 @@
 
 #include <algorithm>
 
+namespace nim_comp {
+
 static const char kModalThreadName[] = "AsyncModalRunner";
 
 AsyncModalRunner::AsyncModalRunner(Delegate *delegate)
@@ -102,7 +104,7 @@ void AsyncModalRunnerManager::CancelAllThreads()
 
 void AsyncModalRunnerManager::OnThreadWillExit(AsyncModalRunner *runner)
 {
-	nbase::ThreadManager::PostTask(kThreadMain, nbase::Bind(&AsyncModalRunnerManager::Deregister, this, runner));
+	nbase::ThreadManager::PostTask(kThreadUI, nbase::Bind(&AsyncModalRunnerManager::Deregister, this, runner));
 }
 
 void AsyncModalRunnerManager::Deregister(AsyncModalRunner *runner)
@@ -120,4 +122,6 @@ void AsyncModalRunnerManager::Deregister(AsyncModalRunner *runner)
 	}
 	// If the runner is found,
 	// it will be destroyed out of the scope of the lock
+}
+
 }

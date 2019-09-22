@@ -10,10 +10,11 @@
 #include "cef_control/app/cef_js_bridge.h"
 #include "cef_control/handler/browser_handler.h"
 
-namespace ui 
-{
+namespace nim_comp {
 
-class CefControlBase : public Control, public nim_cef::BrowserHandler::HandlerDelegate
+using namespace ui;
+
+class CefControlBase : public Control, public nim_comp::BrowserHandler::HandlerDelegate
 {
 public:
 	CefControlBase(void);
@@ -123,7 +124,7 @@ public:
 	* @param[in] global_function 是否是一个全局方法
 	* @return 返回 true 表示注册成功，false 可能已经注册
 	*/
-	bool RegisterCppFunc(const std::wstring& function_name, nim_cef::CppFunction function, bool global_function = false);
+	bool RegisterCppFunc(const std::wstring& function_name, nim_comp::CppFunction function, bool global_function = false);
 
 	/**
 	* @brief 反注册一个 C++ 方法
@@ -140,7 +141,7 @@ public:
 	* @param[in] frame_name 要调用哪个名称 frame 下的方法，默认使用主 frame
 	* @return 返回 true 表示成功调用，false 表示调用失败，方法可能不存在
 	*/
-	bool CallJSFunction(const std::wstring& js_function_name, const std::wstring& params, nim_cef::CallJsFunctionCallback callback, const std::wstring& frame_name = L"");
+	bool CallJSFunction(const std::wstring& js_function_name, const std::wstring& params, nim_comp::CallJsFunctionCallback callback, const std::wstring& frame_name = L"");
 
 	/**
 	* @brief 调用一个前端已经注册好的方法
@@ -150,7 +151,7 @@ public:
 	* @param[in] frame_id 要调用哪个 ID frame 下的方法，默认使用主 frame
 	* @return 返回 true 表示成功调用，false 表示调用失败，方法可能不存在
 	*/
-	bool CallJSFunction(const std::wstring& js_function_name, const std::wstring& params, nim_cef::CallJsFunctionCallback callback, int frame_id);
+	bool CallJSFunction(const std::wstring& js_function_name, const std::wstring& params, nim_comp::CallJsFunctionCallback callback, int frame_id);
 
 	/**
 	* @brief 修复浏览器
@@ -413,8 +414,8 @@ private:
 	virtual bool OnExecuteCppCallbackFunc(int cpp_callback_id, const CefString& json_string) OVERRIDE;
 
 protected:
-	CefRefPtr<nim_cef::BrowserHandler> browser_handler_ = nullptr;
-	std::shared_ptr<nim_cef::CefJSBridge> js_bridge_;
+	CefRefPtr<nim_comp::BrowserHandler> browser_handler_ = nullptr;
+	std::shared_ptr<nim_comp::CefJSBridge> js_bridge_;
 	CefString url_;
 	bool devtool_attached_;
 

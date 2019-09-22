@@ -9,18 +9,9 @@
 #include "base/thread/framework_thread.h"
 #include "base/memory/singleton.h"
 
-/**
- * 一些预定义的线程 ID 值，提供开发者使用
- */
-enum ThreadIds
-{
-	kThreadMain,
-	kThreadDatabase,
-	kThreadGlobalMisc,
-};
-
 namespace nbase
 {
+	
 class MessageLoop;
 class MessageLoopProxy;
 

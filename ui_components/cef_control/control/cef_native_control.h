@@ -7,8 +7,9 @@
 #pragma once
 #include "cef_control_base.h"
 
-namespace ui 
-{
+namespace nim_comp {
+
+using namespace ui;
 
 class CefNativeControl : public CefControlBase
 {

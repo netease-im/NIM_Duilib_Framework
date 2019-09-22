@@ -10,7 +10,7 @@
 #include "cef_control/util/auto_unregister.h"
 #include "cef_control/app/cef_js_bridge.h"
 
-namespace nim_cef
+namespace nim_comp
 {
 // BrowserHandler implements CefClient and a number of other interfaces.
 class BrowserHandler : 

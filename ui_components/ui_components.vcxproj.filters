@@ -132,6 +132,9 @@
     <ClInclude Include="cef_control\util\auto_unregister.h">
       <Filter>cef_control\util</Filter>
     </ClInclude>
+    <ClInclude Include="public_define.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

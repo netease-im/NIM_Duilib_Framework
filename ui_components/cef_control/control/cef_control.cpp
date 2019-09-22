@@ -2,8 +2,7 @@
 #include "cef_control.h"
 #include "cef_control/util/util.h"
 
-namespace ui
-{
+namespace nim_comp {
 
 void CefControl::OnPaint(CefRefPtr<CefBrowser> browser, CefRenderHandler::PaintElementType type, const CefRenderHandler::RectList& dirtyRects, const std::string* buffer, int width, int height)
 {

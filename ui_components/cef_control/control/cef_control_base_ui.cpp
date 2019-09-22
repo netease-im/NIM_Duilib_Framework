@@ -7,8 +7,7 @@
 #include "cef_control/manager/cef_manager.h"
 #include "cef_control/app/cef_js_bridge.h"
 
-namespace ui
-{
+namespace nim_comp {
 
 CefControlBase::CefControlBase(void)
 {
@@ -179,7 +178,7 @@ CefString CefControlBase::GetMainURL(const CefString& url)
 	return CefString(temp.c_str());
 }
 
-bool CefControlBase::RegisterCppFunc(const std::wstring& function_name, nim_cef::CppFunction function, bool global_function/* = false*/)
+bool CefControlBase::RegisterCppFunc(const std::wstring& function_name, nim_comp::CppFunction function, bool global_function/* = false*/)
 {
 	if (browser_handler_.get() && browser_handler_->GetBrowser().get() && js_bridge_.get())
 	{
@@ -197,7 +196,7 @@ void CefControlBase::UnRegisterCppFunc(const std::wstring& function_name)
 	}
 }
 
-bool CefControlBase::CallJSFunction(const std::wstring& js_function_name, const std::wstring& params, nim_cef::CallJsFunctionCallback callback, const std::wstring& frame_name /*= L""*/)
+bool CefControlBase::CallJSFunction(const std::wstring& js_function_name, const std::wstring& params, nim_comp::CallJsFunctionCallback callback, const std::wstring& frame_name /*= L""*/)
 {
 	if (browser_handler_.get() && browser_handler_->GetBrowser().get() && js_bridge_.get())
 	{
@@ -215,7 +214,7 @@ bool CefControlBase::CallJSFunction(const std::wstring& js_function_name, const 
 	return false;
 }
 
-bool CefControlBase::CallJSFunction(const std::wstring& js_function_name, const std::wstring& params, nim_cef::CallJsFunctionCallback callback, int frame_id)
+bool CefControlBase::CallJSFunction(const std::wstring& js_function_name, const std::wstring& params, nim_comp::CallJsFunctionCallback callback, int frame_id)
 {
 	if (browser_handler_.get() && browser_handler_->GetBrowser().get() && js_bridge_.get())
 	{

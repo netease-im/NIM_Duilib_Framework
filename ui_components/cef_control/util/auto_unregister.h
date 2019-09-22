@@ -2,6 +2,8 @@
 #include <unordered_map>
 typedef std::function<void()> UnregisterCallback;
 
+namespace nim_comp {
+
 class AutoUnregister 
 {
 public:
@@ -64,3 +66,5 @@ public:
 private:
 	std::unordered_map<int, std::shared_ptr<TCallback>> element_list_;
 };
+
+}

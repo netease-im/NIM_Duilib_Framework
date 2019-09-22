@@ -1,6 +1,8 @@
 #pragma once
 #include "duilib/UIlib.h"
 
+namespace nim_comp {
+
 enum MsgBoxRet
 {
 	MB_YES,
@@ -57,3 +59,5 @@ private:
 
 	MsgboxCallback	 msgbox_callback_;
 };
+
+}

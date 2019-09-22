@@ -5,6 +5,8 @@
 
 #include <commdlg.h>
 
+namespace nim_comp {
+
 struct __POSITION {};
 typedef __POSITION* POSITION;
 
@@ -57,5 +59,7 @@ private:
 	FileDialogType file_dialog_type_;
 	FileDialogCallback2 file_dialog_callback2_;
 };
+
+}
 
 #endif //_TOOL_FILE_DIALOGEX_H_

@@ -3,8 +3,8 @@
 
 using namespace ui;
 
-namespace shared
-{
+namespace nim_comp {
+
 const LPCTSTR Toast::kClassName = L"Toast";
 
 void Toast::ShowToast(const std::wstring &content, int duration, HWND parent)
@@ -90,7 +90,7 @@ void Toast::SetDuration(int duration)
 	if (duration <= 0)
 		return;
 
-	nbase::ThreadManager::PostDelayedTask(kThreadMain, ToWeakCallback([this]()
+	nbase::ThreadManager::PostDelayedTask(kThreadUI, ToWeakCallback([this]()
 	{
 		this->Close();
 	}), nbase::TimeDelta::FromMilliseconds(duration));

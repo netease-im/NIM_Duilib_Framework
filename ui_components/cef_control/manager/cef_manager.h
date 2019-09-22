@@ -7,7 +7,7 @@
 #pragma once
 #include "include/cef_app.h"
 
-namespace nim_cef
+namespace nim_comp
 { 
 /** @class CefMessageLoopDispatcher
  * @brief 当multi_threaded_message_loop为false时，需要我们在自己的消息循环中主动调用Cef的消息循环接口

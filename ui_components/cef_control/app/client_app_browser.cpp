@@ -7,7 +7,7 @@
 #include "include/cef_v8.h"
 #include "cef_control/util/util.h"
 
-namespace nim_cef
+namespace nim_comp
 {
 //////////////////////////////////////////////////////////////////////////////////////////
 // CefBrowserProcessHandler methods.

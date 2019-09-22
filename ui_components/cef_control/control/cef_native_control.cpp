@@ -6,8 +6,7 @@
 #include "cef_control/handler/browser_handler.h"
 #include "cef_control/manager/cef_manager.h"
 
-namespace ui
-{
+namespace nim_comp {
 
 CefNativeControl::CefNativeControl(void)
 {
@@ -33,7 +32,7 @@ void CefNativeControl::Init()
 		SetWindowLong(m_pWindow->GetHWND(), GWL_STYLE, style | WS_CLIPSIBLINGS | WS_CLIPCHILDREN);
 		ASSERT((GetWindowExStyle(m_pWindow->GetHWND()) & WS_EX_LAYERED) == 0 && L"无法在分层窗口内使用本控件");
 
-		browser_handler_ = new nim_cef::BrowserHandler;
+		browser_handler_ = new nim_comp::BrowserHandler;
 		browser_handler_->SetHostWindow(m_pWindow->GetHWND());
 		browser_handler_->SetHandlerDelegate(this);
 		ReCreateBrowser();
@@ -41,7 +40,7 @@ void CefNativeControl::Init()
 
 	if (!js_bridge_.get())
 	{
-		js_bridge_.reset(new nim_cef::CefJSBridge);
+		js_bridge_.reset(new nim_comp::CefJSBridge);
 	}
 
 	__super::Init();
@@ -151,7 +150,7 @@ bool CefNativeControl::AttachDevTools(Control* /*view*/)
 	{
 		auto task = ToWeakCallback([this]()
 		{
-			nbase::ThreadManager::PostTask(kThreadMain, ToWeakCallback([this](){
+			nbase::ThreadManager::PostTask(kThreadUI, ToWeakCallback([this](){
 				AttachDevTools(nullptr);
 			}));
 		});
@@ -165,7 +164,7 @@ bool CefNativeControl::AttachDevTools(Control* /*view*/)
 		CefBrowserSettings settings;
 		windowInfo.width = 900;
 		windowInfo.height = 700;
-		browser->GetHost()->ShowDevTools(windowInfo, new nim_cef::BrowserHandler, settings, CefPoint());
+		browser->GetHost()->ShowDevTools(windowInfo, new nim_comp::BrowserHandler, settings, CefPoint());
 		devtool_attached_ = true;
 		if (cb_devtool_visible_change_ != nullptr)
 			cb_devtool_visible_change_(devtool_attached_);

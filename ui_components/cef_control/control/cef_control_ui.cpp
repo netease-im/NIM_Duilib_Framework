@@ -7,13 +7,12 @@
 #include "cef_control/manager/cef_manager.h"
 #include "cef_control/app/cef_js_bridge.h"
 
-namespace ui
-{
-	namespace
-	{
-#define GET_X_LPARAM(lp)                        ((int)(short)LOWORD(lp))
-#define GET_Y_LPARAM(lp)                        ((int)(short)HIWORD(lp))
-	}
+namespace nim_comp {
+
+namespace {
+	#define GET_X_LPARAM(lp)                        ((int)(short)LOWORD(lp))
+	#define GET_Y_LPARAM(lp)                        ((int)(short)HIWORD(lp))
+}
 
 CefControl::CefControl(void)
 {
@@ -39,7 +38,7 @@ void CefControl::Init()
 	{
 		m_pWindow->AddMessageFilter(this);
 		
-		browser_handler_ = new nim_cef::BrowserHandler;
+		browser_handler_ = new nim_comp::BrowserHandler;
 		browser_handler_->SetHostWindow(m_pWindow->GetHWND());
 		browser_handler_->SetHandlerDelegate(this);
 		ReCreateBrowser();
@@ -47,7 +46,7 @@ void CefControl::Init()
 
 	if (!js_bridge_.get())
 	{
-		js_bridge_.reset(new nim_cef::CefJSBridge);
+		js_bridge_.reset(new nim_comp::CefJSBridge);
 	}
 
 	__super::Init();
@@ -280,7 +279,7 @@ bool CefControl::AttachDevTools(Control* control)
 	{
 		auto weak = view->GetWeakFlag();
 		auto task = [this, weak, view](){
-			nbase::ThreadManager::PostTask(kThreadMain, ToWeakCallback([this, weak, view](){
+			nbase::ThreadManager::PostTask(kThreadUI, ToWeakCallback([this, weak, view](){
 				if (weak.expired())
 					return;
 				AttachDevTools(view);

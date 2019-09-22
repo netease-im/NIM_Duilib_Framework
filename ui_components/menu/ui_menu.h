@@ -3,10 +3,9 @@
 
 #pragma once
 
-namespace ui
-{
-/////////////////////////////////////////////////////////////////////////////////////
-//
+namespace nim_comp {
+
+using namespace ui;
 
 enum MenuAlignment
 {
@@ -56,7 +55,7 @@ public:
 };
 
 class ListContainerElement;
-class CMenuElementUI : public ListContainerElement
+class CMenuElementUI : public ui::ListContainerElement
 {
 	friend CMenuWnd;
 public:
@@ -66,6 +65,6 @@ public:
 	virtual bool ButtonUp(EventArgs& msg) override;
 };
 
-} // namespace ui
+} // namespace nim_comp
 
 #endif // __UIMENU_H__

@@ -18,8 +18,9 @@
 #ifndef NIM_WIN_GUI_MSG_BOX_ASYNC_MODAL_RUNNER_H_
 #define NIM_WIN_GUI_MSG_BOX_ASYNC_MODAL_RUNNER_H_
 
-
 #include "modal_wnd_base.h"
+
+namespace nim_comp {
 
 class AsyncModalRunner : protected nbase::Thread
 {
@@ -42,7 +43,7 @@ private:
 	friend class AsyncModalRunnerManager;
 	friend class std::shared_ptr<AsyncModalRunner>;
 	friend class std::_Ref_count<AsyncModalRunner>;
-	
+
 	AsyncModalRunner(Delegate *delegate);
 	virtual ~AsyncModalRunner();
 
@@ -75,5 +76,7 @@ private:
 	nbase::NLock threads_lock_;
 	std::list<std::shared_ptr<AsyncModalRunner> > runners_;
 };
+
+}
 
 #endif //NIM_WIN_GUI_MSG_BOX_ASYNC_MODAL_RUNNER_H_
