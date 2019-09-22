@@ -1,6 +1,11 @@
 ﻿#pragma once
 #include "browser_box.h"
 
+enum ThreadId
+{
+	kThreadUI
+};
+
 /** @class MultiBrowserManager
   * @brief 多标签浏览器管理类，用于统一管理多标签浏览器打开、合并、拆分、拖拽功能
   * @date 2019/3/20

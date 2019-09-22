@@ -30,7 +30,7 @@ void MiscThread::Cleanup()
 
 void MainThread::Init()
 {
-	nbase::ThreadManager::RegisterThread(kThreadMain);
+	nbase::ThreadManager::RegisterThread(kThreadUI);
 
 	// 启动杂事处理线程
 	misc_thread_.reset(new MiscThread(kThreadGlobalMisc, "Global Misc Thread"));

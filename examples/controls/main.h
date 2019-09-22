@@ -10,7 +10,7 @@
 class MiscThread : public nbase::FrameworkThread
 {
 public:
-	MiscThread(enum ThreadIds thread_id, const char *name)
+	MiscThread(enum ThreadId thread_id, const char *name)
 		: FrameworkThread(name)
 		, thread_id_(thread_id) {}
 
@@ -30,7 +30,7 @@ private:
 	virtual void Cleanup() override;
 
 private:
-	enum ThreadIds thread_id_;
+	enum ThreadId thread_id_;
 };
 
 /** @class MainThread

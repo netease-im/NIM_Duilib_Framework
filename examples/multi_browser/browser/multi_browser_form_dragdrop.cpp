@@ -175,7 +175,7 @@ bool MultiBrowserForm::OnProcessTabItemDrag(ui::EventArgs* param)
 
 			// 把被拖拽的浏览器盒子生成一个宽度300的位图
 			HBITMAP bitmap = NULL;
-			if (nim_cef::CefManager::GetInstance()->IsEnableOffsetRender())
+			if (nim_comp::CefManager::GetInstance()->IsEnableOffsetRender())
 				bitmap = GenerateBoxOffsetRenderBitmap(borwser_box_tab_->GetPos(true));
 			else
 				bitmap = GenerateBoxWindowBitmap();
@@ -186,7 +186,7 @@ bool MultiBrowserForm::OnProcessTabItemDrag(ui::EventArgs* param)
 			StdClosure cb = [=]{
 				MultiBrowserManager::GetInstance()->DoDragBorwserBox(active_browser_box_, bitmap, pt);
 			};
-			nbase::ThreadManager::PostTask(kThreadMain, cb);
+			nbase::ThreadManager::PostTask(kThreadUI, cb);
 		}
 	}
 	break;

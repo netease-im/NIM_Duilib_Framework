@@ -103,7 +103,7 @@ void ControlForm::InitWindow()
 		}
 
 		// Post task to UI thread
-		nbase::ThreadManager::PostTask(kThreadMain, nbase::Bind(&ControlForm::OnLoadedResourceFile, this, xml)); // or Post2UI(nbase::Bind(&ControlForm::OnLoadedResourceFile, this, xml));
+		nbase::ThreadManager::PostTask(kThreadUI, nbase::Bind(&ControlForm::OnLoadedResourceFile, this, xml)); // or Post2UI(nbase::Bind(&ControlForm::OnLoadedResourceFile, this, xml));
 	};
 	// Using ToWeakCallback to protect closure when if [ControlForm] was destoryed
 	nbase::ThreadManager::PostTask(kThreadGlobalMisc, ToWeakCallback(closure)); // or Post2GlobalMisc(ToWeakCallback(closure));
@@ -111,7 +111,7 @@ void ControlForm::InitWindow()
 	/* Post repeat task to update progress value 200 milliseconds once */
 	StdClosure repeat_task = [this]() {
 		nbase::TimeDelta time_delta = nbase::TimeDelta::FromMicroseconds(nbase::Time::Now().ToInternalValue());
-		nbase::ThreadManager::PostTask(kThreadMain, nbase::Bind(&ControlForm::OnProgressValueChagned, this, time_delta.ToMilliseconds() % 100));
+		nbase::ThreadManager::PostTask(kThreadUI, nbase::Bind(&ControlForm::OnProgressValueChagned, this, time_delta.ToMilliseconds() % 100));
 	};
 	nbase::ThreadManager::PostRepeatedTask(kThreadGlobalMisc, ToWeakCallback(repeat_task), nbase::TimeDelta::FromMilliseconds(200));
 
@@ -124,7 +124,7 @@ void ControlForm::InitWindow()
 		point.y = rect.top + 10;
 		ClientToScreen(m_hWnd, &point);
 
-		ui::CMenuWnd* pMenu = new ui::CMenuWnd(NULL);
+		nim_comp::CMenuWnd* pMenu = new nim_comp::CMenuWnd(NULL);
 		ui::STRINGorID xml(L"settings_menu.xml");
 		pMenu->Init(xml, _T("xml"), point);
 		return true;

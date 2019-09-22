@@ -4,7 +4,7 @@
 // 当为 false 时因使用了真窗口模式不支持带有 WS_EX_LAYERED 属性窗口，所以使用外置窗口阴影方案，需要在 xml 中将窗口 shadowattached 属性设置为 false
 const bool kEnableOffsetRender = false;
 
-class CefForm : public std::conditional<kEnableOffsetRender, ui::WindowImplBase, ui::ShadowWndBase>::type
+class CefForm : public std::conditional<kEnableOffsetRender, ui::WindowImplBase, nim_comp::ShadowWndBase>::type
 {
 public:
 	CefForm();
@@ -39,8 +39,8 @@ private:
 	void OnLoadEnd(int httpStatusCode);
 
 private:
-	ui::CefControlBase* cef_control_;
-	ui::CefControlBase* cef_control_dev_;
+	nim_comp::CefControlBase* cef_control_;
+	nim_comp::CefControlBase* cef_control_dev_;
 	ui::Button*			btn_dev_tool_;
 	ui::RichEdit*		edit_url_;
 };

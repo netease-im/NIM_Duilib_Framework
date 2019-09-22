@@ -21,7 +21,7 @@ MultiBrowserForm* BrowserBox::GetBrowserForm() const
 	return browser_form_;
 }
 
-ui::CefControlBase* BrowserBox::GetCefControl()
+nim_comp::CefControlBase* BrowserBox::GetCefControl()
 {
 	return cef_control_;
 }
@@ -33,7 +33,7 @@ std::wstring& BrowserBox::GetTitle()
 
 void BrowserBox::InitBrowserBox(const std::wstring &url)
 {
-	cef_control_ = static_cast<CefControlBase*>(FindSubControl(L"cef_control"));
+	cef_control_ = static_cast<nim_comp::CefControlBase*>(FindSubControl(L"cef_control"));
 	cef_control_->AttachBeforeContextMenu(nbase::Bind(&BrowserBox::OnBeforeMenu, this, std::placeholders::_1, std::placeholders::_2));
 	cef_control_->AttachMenuCommand(nbase::Bind(&BrowserBox::OnMenuCommand, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 	cef_control_->AttachTitleChange(nbase::Bind(&BrowserBox::OnTitleChange, this, std::placeholders::_1));
@@ -80,10 +80,10 @@ ui::Control* BrowserBox::CreateControl(const std::wstring& pstrClass)
 {
 	if (pstrClass == L"CefControl")
 	{
-		if (nim_cef::CefManager::GetInstance()->IsEnableOffsetRender())
-			return new CefControl;
+		if (nim_comp::CefManager::GetInstance()->IsEnableOffsetRender())
+			return new nim_comp::CefControl;
 		else
-			return new CefNativeControl;
+			return new nim_comp::CefNativeControl;
 	}
 
 	return NULL;
@@ -173,7 +173,7 @@ void BrowserBox::OnLoadStart()
 void BrowserBox::OnLoadEnd(int httpStatusCode)
 {
 	// 注册一个方法提供前端调用
-	cef_control_->RegisterCppFunc(L"ShowMessageBox", ToWeakCallback([](const std::string& params, nim_cef::ReportResultFunction callback) {
+	cef_control_->RegisterCppFunc(L"ShowMessageBox", ToWeakCallback([](const std::string& params, nim_comp::ReportResultFunction callback) {
 		MessageBoxA(NULL, params.c_str(), "接收到 JavaScript 发来的消息", MB_OK);
 		callback(false, R"({ "message": "Success." })");
 	}));

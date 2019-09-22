@@ -31,10 +31,10 @@ ui::Control* CefForm::CreateControl(const std::wstring& pstrClass)
 	// 扫描 XML 发现有名称为 CefControl 的节点，则创建一个 ui::CefControl 控件
 	if (pstrClass == L"CefControl")
 	{
-		if (nim_cef::CefManager::GetInstance()->IsEnableOffsetRender())
-			return new ui::CefControl;
+		if (nim_comp::CefManager::GetInstance()->IsEnableOffsetRender())
+			return new nim_comp::CefControl;
 		else
-			return new ui::CefNativeControl;
+			return new nim_comp::CefNativeControl;
 	}
 
 	return NULL;
@@ -46,8 +46,8 @@ void CefForm::InitWindow()
 	m_pRoot->AttachBubbledEvent(ui::kEventClick, nbase::Bind(&CefForm::OnClicked, this, std::placeholders::_1));
 
 	// 从 XML 中查找指定控件
-	cef_control_		= dynamic_cast<ui::CefControlBase*>(FindControl(L"cef_control"));
-	cef_control_dev_	= dynamic_cast<ui::CefControlBase*>(FindControl(L"cef_control_dev"));
+	cef_control_		= dynamic_cast<nim_comp::CefControlBase*>(FindControl(L"cef_control"));
+	cef_control_dev_	= dynamic_cast<nim_comp::CefControlBase*>(FindControl(L"cef_control_dev"));
 	btn_dev_tool_		= dynamic_cast<ui::Button*>(FindControl(L"btn_dev_tool"));
 	edit_url_			= dynamic_cast<ui::RichEdit*>(FindControl(L"edit_url"));
 
@@ -64,13 +64,13 @@ void CefForm::InitWindow()
 	// 加载皮肤目录下的 html 文件
 	cef_control_->LoadURL(nbase::win32::GetCurrentModuleDirectory() + L"resources\\themes\\default\\cef\\cef.html");
 
-	if (!nim_cef::CefManager::GetInstance()->IsEnableOffsetRender())
+	if (!nim_comp::CefManager::GetInstance()->IsEnableOffsetRender())
 		cef_control_dev_->SetVisible(false);
 }
 
 LRESULT CefForm::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-	nim_cef::CefManager::GetInstance()->PostQuitMessage(0L);
+	nim_comp::CefManager::GetInstance()->PostQuitMessage(0L);
 	return __super::OnClose(uMsg, wParam, lParam, bHandled);
 }
 
@@ -89,7 +89,7 @@ bool CefForm::OnClicked(ui::EventArgs* msg)
 			cef_control_->AttachDevTools(cef_control_dev_);
 		}
 
-		if (nim_cef::CefManager::GetInstance()->IsEnableOffsetRender())
+		if (nim_comp::CefManager::GetInstance()->IsEnableOffsetRender())
 		{
 			cef_control_dev_->SetVisible(cef_control_->IsAttachedDevTools());
 		}
@@ -131,8 +131,8 @@ void CefForm::OnLoadEnd(int httpStatusCode)
 	FindControl(L"btn_forward")->SetEnabled(cef_control_->CanGoForward());
 
 	// 注册一个方法提供前端调用
-	cef_control_->RegisterCppFunc(L"ShowMessageBox", ToWeakCallback([this](const std::string& params, nim_cef::ReportResultFunction callback) {
-		shared::Toast::ShowToast(nbase::UTF8ToUTF16(params), 3000, GetHWND());
+	cef_control_->RegisterCppFunc(L"ShowMessageBox", ToWeakCallback([this](const std::string& params, nim_comp::ReportResultFunction callback) {
+		nim_comp::Toast::ShowToast(nbase::UTF8ToUTF16(params), 3000, GetHWND());
 		callback(false, R"({ "message": "Success." })");
 	}));
 }

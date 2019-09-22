@@ -6,6 +6,7 @@
 
 using namespace ui;
 using namespace std;
+using namespace nim_comp;
 
 namespace
 {

@@ -5,6 +5,11 @@
 #include "main.h"
 #include "richlist_form.h"
 
+enum ThreadId
+{
+	kThreadUI
+};
+
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
                      _In_ LPWSTR    lpCmdLine,
@@ -24,7 +29,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 void MainThread::Init()
 {
-	nbase::ThreadManager::RegisterThread(kThreadMain);
+	nbase::ThreadManager::RegisterThread(kThreadUI);
 
 	// 获取资源路径，初始化全局参数
 	std::wstring theme_dir = nbase::win32::GetCurrentModuleDirectory();

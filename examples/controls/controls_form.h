@@ -1,5 +1,11 @@
 #pragma once
 
+enum ThreadId
+{
+	kThreadUI,
+	kThreadGlobalMisc
+};
+
 class ControlForm : public ui::WindowImplBase
 {
 public:

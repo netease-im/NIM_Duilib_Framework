@@ -36,7 +36,7 @@ public:
 	* 获取Cef控件指针
 	* @return ui::CefControlBase* Cef控件
 	*/
-	ui::CefControlBase* GetCefControl();
+	nim_comp::CefControlBase* GetCefControl();
 
 	/**
 	* 获取网页标题
@@ -115,7 +115,7 @@ private:
 	void OnLoadError(CefLoadHandler::ErrorCode errorCode, const CefString& errorText, const CefString& failedUrl);
 
 private:
-	ui::CefControlBase	*cef_control_;
+	nim_comp::CefControlBase	*cef_control_;
 
 	// 任务栏缩略图管理
 	TaskbarTabItem		*taskbar_item_;

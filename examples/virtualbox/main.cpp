@@ -6,6 +6,11 @@
 #include "main_form.h"
 #include "VirtualTileBox.h"
 
+enum ThreadId
+{
+	kThreadUI
+};
+
 ui::Control* MyCreateControlCallback(const std::wstring& sName)
 {
 	if (sName == L"VirtualTileBox")
@@ -34,7 +39,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 void MainThread::Init()
 {
-	nbase::ThreadManager::RegisterThread(kThreadMain);
+	nbase::ThreadManager::RegisterThread(kThreadUI);
 
 	// 获取资源路径，初始化全局参数
 	std::wstring theme_dir = nbase::win32::GetCurrentModuleDirectory();
