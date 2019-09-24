@@ -31,6 +31,7 @@ typedef struct tagTFontInfo
 	int iSize;
 	bool bBold;
 	bool bUnderline;
+	bool bStrikeOut;
 	bool bItalic;
 	TEXTMETRIC tm;
 } TFontInfo;

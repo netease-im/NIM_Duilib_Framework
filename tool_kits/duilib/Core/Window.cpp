@@ -82,6 +82,7 @@ Window::Window() :
 	m_defaultFontInfo.iSize = -lf.lfHeight;
 	m_defaultFontInfo.bBold = (lf.lfWeight >= FW_BOLD);
 	m_defaultFontInfo.bUnderline = (lf.lfUnderline == TRUE);
+	m_defaultFontInfo.bStrikeOut = (lf.lfStrikeOut == TRUE);
 	m_defaultFontInfo.bItalic = (lf.lfItalic == TRUE);
 	::ZeroMemory(&m_defaultFontInfo.tm, sizeof(m_defaultFontInfo.tm));
 }

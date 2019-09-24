@@ -133,10 +133,11 @@ public:
 	 * @param[in] nSize 字体大小
 	 * @param[in] bBold 是否粗体显示
 	 * @param[in] bUnderline 是否带有下划线
+	 * @param[in] bStrikeOut 是否带有删除线
 	 * @param[in] bItalic 是否斜体显示
 	 * @return 无
 	 */
-    void SetFont(const std::wstring& pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+	void SetFont(const std::wstring& pStrFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeOut, bool bItalic);
 
 	/**
 	 * @brief 获取窗口样式

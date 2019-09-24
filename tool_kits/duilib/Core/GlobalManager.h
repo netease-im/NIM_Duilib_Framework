@@ -200,11 +200,12 @@ public:
 	 * @param[in] nSize 字体大小
 	 * @param[in] bBold 是否粗体
 	 * @param[in] bUnderline 是否有下划线
+	 * @param[in] bStrikeOut 是否带有删除线
 	 * @param[in] bItalic 是否倾斜
 	 * @param[in] bDefault 是否默认
 	 * @return 返回字体的 HFONT 句柄
 	 */
-	static HFONT AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic, bool bDefault);
+	static HFONT AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeOut, bool bItalic, bool bDefault);
 
 	/**
 	 * @brief 根据索引返回一个字体信息
@@ -225,10 +226,11 @@ public:
 	 * @param[in] nSize 字体大小
 	 * @param[in] bBold 是否粗体
 	 * @param[in] bUnderline 是否有下划线
+	 * @param[in] bStrikeOut 是否带有删除线
 	 * @param[in] bItalic 是否倾斜
 	 * @return 返回字体的 HFONT 句柄
 	 */
-	static HFONT GetFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+	static HFONT GetFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeOut, bool bItalic);
 
 	/**
 	 * @brief 获取字体信息
@@ -261,12 +263,13 @@ public:
 	 * @param[in] nSize 字体大小
 	 * @param[in] bBold 是否粗体
 	 * @param[in] bUnderline 是否有下划线
+	 * @param[in] bStrikeOut 是否带有删除线
 	 * @param[in] bItalic 是否倾斜
 	 * @return 返回是否存在
 	 *     @retval true 存在
 	 *     @retval false 不存在
 	 */
-	static bool FindFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+	static bool FindFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeOut, bool bItalic);
 
 	/**
 	 * @brief 根据字体索引删除字体

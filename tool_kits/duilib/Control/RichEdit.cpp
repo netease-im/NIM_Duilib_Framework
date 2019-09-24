@@ -1287,7 +1287,7 @@ void RichEdit::SetFont(const std::wstring& strFontId)
     }
 }
 
-void RichEdit::SetFont(const std::wstring& pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+void RichEdit::SetFont(const std::wstring& pStrFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeOut, bool bItalic)
 {
     if( m_pTwh ) {
         LOGFONT lf = { 0 };
@@ -1297,6 +1297,7 @@ void RichEdit::SetFont(const std::wstring& pStrFontName, int nSize, bool bBold, 
         lf.lfHeight = -nSize;
         if( bBold ) lf.lfWeight += FW_BOLD;
         if( bUnderline ) lf.lfUnderline = TRUE;
+		if (bStrikeOut) lf.lfStrikeOut = TRUE;
         if( bItalic ) lf.lfItalic = TRUE;
         HFONT hFont = ::CreateFontIndirect(&lf);
         if( hFont == NULL ) return;
