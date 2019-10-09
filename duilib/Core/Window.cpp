@@ -1023,7 +1023,9 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		POINT pt = { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
 		m_ptLastMousePos = pt;
 
-		if (!HandleMouseEnterLeave(pt, wParam, lParam)) break;
+		// Do not move the focus to the new control when the mouse is pressed
+		if (!IsCaptured())
+			if (!HandleMouseEnterLeave(pt, wParam, lParam)) break;
 
 		if (m_pEventClick != NULL) {
 			m_pEventClick->HandleMessageTemplate(kEventMouseMove, wParam, lParam, 0, pt);
