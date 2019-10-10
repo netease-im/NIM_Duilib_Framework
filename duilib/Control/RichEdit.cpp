@@ -230,13 +230,15 @@ HRESULT InitDefaultCharFormat(RichEdit* re, CHARFORMAT2W* pcf, HFONT hfont)
     pcf->yHeight = -lf.lfHeight * LY_PER_INCH / yPixPerInch;
     pcf->yOffset = 0;
     pcf->dwEffects = 0;
-    pcf->dwMask = CFM_SIZE | CFM_OFFSET | CFM_FACE | CFM_CHARSET | CFM_COLOR | CFM_BOLD | CFM_ITALIC | CFM_UNDERLINE;
+	pcf->dwMask = CFM_SIZE | CFM_OFFSET | CFM_FACE | CFM_CHARSET | CFM_COLOR | CFM_BOLD | CFM_ITALIC | CFM_UNDERLINE | CFM_STRIKEOUT;
     if(lf.lfWeight >= FW_BOLD)
         pcf->dwEffects |= CFE_BOLD;
     if(lf.lfItalic)
         pcf->dwEffects |= CFE_ITALIC;
     if(lf.lfUnderline)
         pcf->dwEffects |= CFE_UNDERLINE;
+	if (lf.lfStrikeOut)
+		pcf->dwEffects |= CFE_STRIKEOUT;
     pcf->bCharSet = lf.lfCharSet;
     pcf->bPitchAndFamily = lf.lfPitchAndFamily;
 #ifdef _UNICODE
@@ -864,6 +866,8 @@ void CTxtWinHost::SetFont(HFONT hFont)
         cf.dwEffects |= CFE_ITALIC;
     if(lf.lfUnderline)
         cf.dwEffects |= CFE_UNDERLINE;
+	if (lf.lfStrikeOut)
+		cf.dwEffects |= CFE_STRIKEOUT;
     cf.bCharSet = lf.lfCharSet;
     cf.bPitchAndFamily = lf.lfPitchAndFamily;
 #ifdef _UNICODE
@@ -1288,7 +1292,7 @@ void RichEdit::SetFont(const std::wstring& strFontId)
     }
 }
 
-void RichEdit::SetFont(const std::wstring& pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+void RichEdit::SetFont(const std::wstring& pStrFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic)
 {
     if( m_pTwh ) {
         LOGFONT lf = { 0 };
@@ -1298,6 +1302,7 @@ void RichEdit::SetFont(const std::wstring& pStrFontName, int nSize, bool bBold, 
         lf.lfHeight = -nSize;
         if( bBold ) lf.lfWeight += FW_BOLD;
         if( bUnderline ) lf.lfUnderline = TRUE;
+		if (bStrikeout) lf.lfStrikeOut = TRUE;
         if( bItalic ) lf.lfItalic = TRUE;
         HFONT hFont = ::CreateFontIndirect(&lf);
         if( hFont == NULL ) return;
