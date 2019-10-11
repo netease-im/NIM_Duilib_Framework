@@ -295,7 +295,7 @@ void GlobalManager::RemoveAllImages()
 	m_mImageHash.clear();
 }
 
-HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic, bool bDefault)
+HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic, bool bDefault)
 {
 	std::wstring strNewFontId = strFontId;
 	if (strNewFontId.empty())
@@ -319,6 +319,7 @@ HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& 
 	lf.lfHeight = -DpiManager::GetInstance()->ScaleInt(nSize);
 	if (bBold) lf.lfWeight += FW_BOLD;
 	if (bUnderline) lf.lfUnderline = TRUE;
+	if (bStrikeout) lf.lfStrikeOut = TRUE;
 	if (bItalic) lf.lfItalic = TRUE;
 	HFONT hFont = ::CreateFontIndirect(&lf);
 	if (hFont == NULL) return NULL;
@@ -330,6 +331,7 @@ HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& 
 	pFontInfo->iSize = nSize;
 	pFontInfo->bBold = bBold;
 	pFontInfo->bUnderline = bUnderline;
+	pFontInfo->bStrikeout = bStrikeout;
 	pFontInfo->bItalic = bItalic;
 	::ZeroMemory(&pFontInfo->tm, sizeof(pFontInfo->tm));
 
@@ -364,12 +366,13 @@ HFONT GlobalManager::GetFont(const std::wstring& strFontId)
 	return nullptr;
 }
 
-HFONT GlobalManager::GetFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+HFONT GlobalManager::GetFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic)
 {
 	for (auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++) {
 		auto pFontInfo = it->second;
 		if (pFontInfo->sFontName == strFontName && pFontInfo->iSize == nSize &&
-			pFontInfo->bBold == bBold && pFontInfo->bUnderline == bUnderline && pFontInfo->bItalic == bItalic)
+			pFontInfo->bBold == bBold && pFontInfo->bUnderline == bUnderline &&
+			pFontInfo->bStrikeout == bStrikeout && pFontInfo->bItalic == bItalic)
 			return pFontInfo->hFont;
 	}
 	return NULL;
@@ -414,12 +417,13 @@ bool GlobalManager::FindFont(HFONT hFont)
 	return false;
 }
 
-bool GlobalManager::FindFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic)
+bool GlobalManager::FindFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic)
 {
 	for (auto it = m_mCustomFonts.begin(); it != m_mCustomFonts.end(); it++) {
 		auto pFontInfo = it->second;
 		if (pFontInfo->sFontName == strFontName && pFontInfo->iSize == nSize &&
-			pFontInfo->bBold == bBold && pFontInfo->bUnderline == bUnderline && pFontInfo->bItalic == bItalic)
+			pFontInfo->bBold == bBold && pFontInfo->bUnderline == bUnderline && 
+			pFontInfo->bStrikeout == bStrikeout && pFontInfo->bItalic == bItalic)
 			return true;
 	}
 	return false;
