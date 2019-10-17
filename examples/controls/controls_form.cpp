@@ -127,6 +127,25 @@ void ControlForm::InitWindow()
 		nim_comp::CMenuWnd* pMenu = new nim_comp::CMenuWnd(NULL);
 		ui::STRINGorID xml(L"settings_menu.xml");
 		pMenu->Init(xml, _T("xml"), point);
+
+		//这里增加动态添加菜单的例子
+		{
+			nim_comp::CMenuElementUI* pThird = static_cast<nim_comp::CMenuElementUI*>(pMenu->FindControl(L"third"));
+
+			nim_comp::CMenuElementUI* pItem = new nim_comp::CMenuElementUI;
+			pItem->SetText(L"动态添加菜单1");
+			pItem->SetClass(L"menu_element");
+			pItem->SetFixedWidth(200);
+			pThird->Add(pItem);
+
+			nim_comp::CMenuElementUI* pItem2 = new nim_comp::CMenuElementUI;
+			pItem2->SetText(L"动态添加菜单2");
+			pItem2->SetClass(L"menu_element");
+			pItem2->SetFixedWidth(200);
+			pItem->Add(pItem2);
+
+		}
+
 		return true;
 	});
 }
