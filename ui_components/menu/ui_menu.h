@@ -12,7 +12,7 @@ enum MenuAlignment
 	eMenuAlignment_Top = 1 << 2,
 	eMenuAlignment_Right = 1 << 3,
 	eMenuAlignment_Bottom = 1 << 4,
-	eMenuAlignment_Intelligent = 1 <<5    //待优化，智能的防止被遮蔽
+	eMenuAlignment_Intelligent = 1 <<5    //智能的防止被遮蔽
 };
 
 enum MenuCloseType
@@ -47,14 +47,21 @@ class CMenuElementUI;
 class CMenuWnd : public ui::WindowImplBase, public ContextMenuReceiver
 {
 public:
-	enum PopupPosType
-	{
-		RIGHT_BOTTOM = eMenuAlignment_Right | eMenuAlignment_Bottom,
-		RIGHT_TOP = eMenuAlignment_Right | eMenuAlignment_Top,
-		//这里待添加另外的类型
+	enum PopupPosType  //鼠标点击的point属于菜单的哪个位置    1.-----.2       1左上 2右上
+	{                                                 //      |     |
+		//这里假定用户是喜欢智能的                            3.-----.4       3左下 4右下
+		RIGHT_BOTTOM = eMenuAlignment_Right | eMenuAlignment_Bottom | eMenuAlignment_Intelligent,
+		RIGHT_TOP = eMenuAlignment_Right | eMenuAlignment_Top | eMenuAlignment_Intelligent,
+		LEFT_BOTTOM = eMenuAlignment_Left | eMenuAlignment_Bottom | eMenuAlignment_Intelligent,
+		LEFT_TOP = eMenuAlignment_Intelligent | eMenuAlignment_Top | eMenuAlignment_Intelligent,
+		//这里是normal，非智能的
+		RIGHT_BOTTOM_N = eMenuAlignment_Right | eMenuAlignment_Bottom,
+		RIGHT_TOP_N = eMenuAlignment_Right | eMenuAlignment_Top,
+		LEFT_BOTTOM_N = eMenuAlignment_Left | eMenuAlignment_Bottom,
+		LEFT_TOP_N = eMenuAlignment_Intelligent | eMenuAlignment_Top
 	};
 	CMenuWnd(HWND hParent = NULL);
-	void Init(STRINGorID xml, LPCTSTR pSkinType, POINT point, PopupPosType popupPosType = RIGHT_BOTTOM, bool no_focus = false, CMenuElementUI* pOwner = NULL);
+	void Init(STRINGorID xml, LPCTSTR pSkinType, POINT point, PopupPosType popupPosType = LEFT_TOP, bool no_focus = false, CMenuElementUI* pOwner = NULL);
 	void Show();
 
 	static ContextMenuObserver& GetMenuObserver()
@@ -104,8 +111,9 @@ public:
 
 	virtual void PaintChild(IRenderContext* pRender, const UiRect& rcPaint) override;
 
-private:
 	bool CheckSubMenuItem();
+private:
+	
 	void CreateMenuWnd();
 	CMenuWnd*	m_pSubWindow;
 };
