@@ -140,14 +140,13 @@ LRESULT CMenuWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_KEYDOWN:
 		if (wParam == VK_ESCAPE || wParam == VK_LEFT)
 			Close();
-		else if ( wParam == VK_DOWN)
+		else if (wParam == VK_DOWN)
 		{
 			if (m_pLayout)
 			{
-				int index = m_pLayout->GetCurSel() + 1;
-				if (index<m_pLayout->GetCount())
+				if (m_pLayout->GetCount())
 				{
-					m_pLayout->SelectItem(index);
+					m_pLayout->SelectItem((m_pLayout->GetCurSel() + 1) % m_pLayout->GetCount());
 				}
 			}
 		}
@@ -155,10 +154,9 @@ LRESULT CMenuWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			if (m_pLayout)
 			{
-				int index = m_pLayout->GetCurSel() - 1;
-				if (index > -1)
+				if (m_pLayout->GetCount())
 				{
-					m_pLayout->SelectItem(index);
+					m_pLayout->SelectItem((m_pLayout->GetCurSel() - 1 + m_pLayout->GetCount()) % m_pLayout->GetCount());
 				}
 			}
 		}
@@ -216,18 +214,31 @@ void CMenuWnd::ResizeMenu()
 	UiRect rcWork = oMonitor.rcWork;
 
 	CSize szAvailable = { rcWork.right - rcWork.left, rcWork.bottom - rcWork.top };
-	szAvailable = pRoot->EstimateSize(szAvailable);  
+	szAvailable = pRoot->EstimateSize(szAvailable);   //这里带上了阴影窗口
 	SetInitSize(szAvailable.cx, szAvailable.cy);
-	CSize szInit = GetInitSize(true); //去掉阴影窗口的大小
 	UiRect rcCorner = GetShadowCorner();
-	CPoint point = m_BasedPoint;
+	CSize szInit=szAvailable;   
+	szInit.cx -= rcCorner.left + rcCorner.right;
+	szInit.cy -= rcCorner.top + rcCorner.bottom; //这里去掉阴影窗口，即用户的视觉有效面积 szInit<=szAvailable
+	
+	CPoint point = m_BasedPoint;  //这里有个bug，由于坐标点与包含在窗口内，会直接出发mouseenter导致出来子菜单，偏移1个像素
 	if (m_popupPosType & eMenuAlignment_Right)
 	{
-		point.x += -szAvailable.cx + rcCorner.right;
+		point.x += -szAvailable.cx + rcCorner.right + rcCorner.left;
+		point.x -= 1;
+	}
+	else if (m_popupPosType & eMenuAlignment_Left)
+	{
+		point.x += 1;
 	}
 	if (m_popupPosType & eMenuAlignment_Bottom)
 	{
-		point.y += -szAvailable.cy + rcCorner.bottom;
+		point.y += -szAvailable.cy + rcCorner.bottom + rcCorner.top;
+		point.y += 1;
+	}
+	else if (m_popupPosType & eMenuAlignment_Top)
+	{
+		point.y += 1;
 	}
 	if (m_popupPosType&eMenuAlignment_Intelligent)
 	{
@@ -245,14 +256,14 @@ void CMenuWnd::ResizeMenu()
 		}
 		else if (point.y + szInit.cy > rcWork.bottom)
 		{
-			point.y = rcWork.bottom- szInit.cy;
+			point.y = rcWork.bottom - szInit.cy;
 		}
 	}
 	if (!no_focus_)
 	{
 		SetForegroundWindow(m_hWnd);
 	}
-	SetWindowPos(m_hWnd, HWND_TOPMOST, point.x, point.y,
+	SetWindowPos(m_hWnd, HWND_TOPMOST, point.x - rcCorner.left, point.y-rcCorner.top,
 		szAvailable.cx, szAvailable.cy,
 		SWP_SHOWWINDOW | (no_focus_ ? SWP_NOACTIVATE : 0));
 }
@@ -284,18 +295,22 @@ void CMenuWnd::ResizeSubMenu()
 				cxFixed = sz.cx;
 		}
 	}
-
+	UiRect rcCorner = GetShadowCorner();
 	RECT rcWindow;
 	GetWindowRect(m_pOwner->GetWindow()->GetHWND(), &rcWindow);
+	//去阴影
+	{
+		rcWindow.left += rcCorner.left;
+		rcWindow.right -= rcCorner.right;
+		rcWindow.top += rcCorner.top;
+		rcWindow.bottom -=  rcCorner.bottom;
+	}
 
-	rc.top = rcOwner.top;
-	rc.bottom = rc.top + cyFixed;
 	::MapWindowRect(m_pOwner->GetWindow()->GetHWND(), HWND_DESKTOP, &rc);
+	
 	rc.left = rcWindow.right;
-	rc.left -= GetShadowCorner().left + GetShadowCorner().right;
-	rc.top -= GetShadowCorner().top;    
 	rc.right = rc.left + cxFixed;
-	//rc.right += 2;
+	rc.bottom = rc.top + cyFixed;
 
 	bool bReachBottom = false;
 	bool bReachRight = false;
@@ -308,29 +323,16 @@ void CMenuWnd::ResizeSubMenu()
 	while (pReceiver != NULL) {
 		CMenuWnd* pContextMenu = dynamic_cast<CMenuWnd*>(pReceiver);
 		if (pContextMenu != NULL) {
-			GetWindowRect(pContextMenu->GetHWND(), &rcPreWindow);
+			GetWindowRect(pContextMenu->GetHWND(), &rcPreWindow);  //需要减掉阴影
 
-			bReachRight = rcPreWindow.left >= rcWindow.right;
-			bReachBottom = rcPreWindow.top >= rcWindow.bottom;
+			bReachRight = (rcPreWindow.left + rcCorner.left) >= rcWindow.right;
+			bReachBottom = (rcPreWindow.top + rcCorner.top) >= rcWindow.bottom;
 			if (pContextMenu->GetHWND() == m_pOwner->GetWindow()->GetHWND()
 				|| bReachBottom || bReachRight)
 				break;
 		}
 		pReceiver = iterator.next();
 	}
-
-	if (bReachBottom)
-	{
-		rc.bottom = rcWindow.top;
-		rc.top = rc.bottom - cyFixed;
-	}
-
-	if (bReachRight)
-	{
-		rc.right = rcWindow.left;
-		rc.left = rc.right - cxFixed;
-	}
-
 	if (bReachBottom)
 	{
 		rc.bottom = rcWindow.top;
@@ -367,7 +369,7 @@ void CMenuWnd::ResizeSubMenu()
 		rc.right = rc.left + cxFixed;
 	}
 
-	SetWindowPos(m_hWnd, HWND_TOPMOST, rc.left, rc.top,
+	SetWindowPos(m_hWnd, HWND_TOPMOST, rc.left-rcCorner.left, rc.top-rcCorner.top,
 		rc.right - rc.left, rc.bottom - rc.top,
 		SWP_SHOWWINDOW);
 }
@@ -399,7 +401,8 @@ void CMenuWnd::Show()
 	}
 	else
 	{
-		ASSERT(FALSE);
+		//兼容老版本
+		return;
 	}
 	UiRect rc;
 	rc.left = m_BasedPoint.x;
@@ -497,7 +500,8 @@ bool CMenuElementUI::ButtonUp(EventArgs& msg)
 bool CMenuElementUI::MouseEnter(EventArgs& msg)
 {
 	std::weak_ptr<nbase::WeakFlag> weakFlag = m_pWindow->GetWeakFlag();
-	if (!weakFlag.expired()) {
+	bool ret = __super::MouseEnter(msg);
+	if (ret && !weakFlag.expired()) {
 		//这里处理下如果有子菜单则显示子菜单
 		if (!CheckSubMenuItem())
 		{
@@ -505,11 +509,13 @@ bool CMenuElementUI::MouseEnter(EventArgs& msg)
 			param.hWnd = GetWindow()->GetHWND();
 			param.wParam = eMenuCloseThis;
 			CMenuWnd::GetMenuObserver().RBroadcast(param);
-			m_pOwner->SelectItem(GetIndex(), true);
+			//m_pOwner->SelectItem(GetIndex(), true);  有些老版本attachselect会触发
+			//这里得把之前选中的置为未选中
+			m_pOwner->SelectItem(-1, false);
 		}
 	}
 
-	return true;
+	return ret;
 }
 
 void CMenuElementUI::PaintChild(IRenderContext* pRender, const UiRect& rcPaint)
