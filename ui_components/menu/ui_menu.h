@@ -63,6 +63,10 @@ public:
 	CMenuWnd(HWND hParent = NULL);
 	void Init(STRINGorID xml, LPCTSTR pSkinType, POINT point, PopupPosType popupPosType = LEFT_TOP, bool no_focus = false, CMenuElementUI* pOwner = NULL);
 	void Show();
+	// 重新调整菜单的大小
+	void ResizeMenu();
+	// 重新调整子菜单的大小
+	void ResizeSubMenu();
 
 	static ContextMenuObserver& GetMenuObserver()
 	{
@@ -92,10 +96,7 @@ private:
 	virtual void InitWindow() override;
 	void CMenuWnd::OnFinalMessage(HWND hWnd) override;
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
-	// 重新调整菜单的大小
-	void ResizeMenu();
-	// 重新调整子菜单的大小
-	void ResizeSubMenu();
+
 };
 
 class ListContainerElement;
