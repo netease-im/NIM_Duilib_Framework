@@ -81,16 +81,18 @@ void CMenuWnd::Init(STRINGorID xml, LPCTSTR pSkinType, POINT point, PopupPosType
 
 void CMenuWnd::OnFinalMessage(HWND hWnd)
 {
+	Window::OnFinalMessage(hWnd);
 	RemoveObserver();
 	if (m_pOwner != NULL) {
+		m_pLayout->SelectItem(-1);
 		for (int i = 0; i < m_pLayout->GetCount(); i++) {
 			CMenuElementUI* pItem = static_cast<CMenuElementUI*>(m_pLayout->GetItemAt(i)); //这里确定是CMenuElementUI*，static_cast效率高
 			if (pItem)
 			{
 				pItem->SetOwner(dynamic_cast<IListOwner*>(m_pOwner->GetParent()));//这里的父控件可能仍然是menuitem,那么置空即可
 				pItem->SetWindow(m_pOwner->GetWindow(), m_pOwner, false);         //更改item的归属
-				pItem->SetVisible(false);
-				pItem->SetInternVisible(false);
+// 				pItem->SetVisible(false);
+ 				pItem->SetInternVisible(false);
 			}
 		}
 		m_pLayout->RemoveAll();
@@ -98,6 +100,7 @@ void CMenuWnd::OnFinalMessage(HWND hWnd)
 		//m_pOwner->m_uButtonState &= ~UISTATE_PUSHED;  这里可能需要替换，暂时注释
 		m_pOwner->Invalidate();
 	}
+	ReapObjects(GetRoot());
 	delete this;
 }
 
@@ -140,26 +143,6 @@ LRESULT CMenuWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_KEYDOWN:
 		if (wParam == VK_ESCAPE || wParam == VK_LEFT)
 			Close();
-		else if (wParam == VK_DOWN)
-		{
-			if (m_pLayout)
-			{
-				if (m_pLayout->GetCount())
-				{
-					m_pLayout->SelectItem((m_pLayout->GetCurSel() + 1) % m_pLayout->GetCount());
-				}
-			}
-		}
-		else if (wParam == VK_UP)
-		{
-			if (m_pLayout)
-			{
-				if (m_pLayout->GetCount())
-				{
-					m_pLayout->SelectItem((m_pLayout->GetCurSel() - 1 + m_pLayout->GetCount()) % m_pLayout->GetCount());
-				}
-			}
-		}
 		else if (wParam == VK_RIGHT)
 		{
 			if (m_pLayout)
@@ -262,6 +245,7 @@ void CMenuWnd::ResizeMenu()
 	if (!no_focus_)
 	{
 		SetForegroundWindow(m_hWnd);
+		SetFocus(m_pLayout);
 	}
 	SetWindowPos(m_hWnd, HWND_TOPMOST, point.x - rcCorner.left, point.y-rcCorner.top,
 		szAvailable.cx, szAvailable.cy,
@@ -372,6 +356,9 @@ void CMenuWnd::ResizeSubMenu()
 	SetWindowPos(m_hWnd, HWND_TOPMOST, rc.left-rcCorner.left, rc.top-rcCorner.top,
 		rc.right - rc.left, rc.bottom - rc.top,
 		SWP_SHOWWINDOW);
+
+	SetForegroundWindow(m_hWnd);
+	SetFocus(m_pLayout);
 }
 
 void CMenuWnd::Show()
@@ -440,7 +427,7 @@ void CMenuWnd::InitWindow()
 
 		for (int i = 0; i < m_pOwner->GetCount(); i++) {
 			CMenuElementUI* subMenuItem = dynamic_cast<CMenuElementUI*>(m_pOwner->GetItemAt(i));
-			if (subMenuItem)
+			if (subMenuItem && subMenuItem->IsVisible())
 			{
 				//此时子菜单item属于2个子菜单，注意生命周期的维护，子菜单窗口退出不能销毁控件，需要归还原控件，
 				//此时子菜单item的父控件是准的，但父控件可能不是Vlist，SetOwner的入参是Vlist，这时owner置空
@@ -542,9 +529,9 @@ bool CMenuElementUI::CheckSubMenuItem()
 	for (int i = 0; i < GetCount(); ++i)
 	{
 		CMenuElementUI* subMenuItem = dynamic_cast<CMenuElementUI*>(GetItemAt(i));
-		if (subMenuItem)
+		if (subMenuItem )
 		{
-			subMenuItem->SetVisible(true);
+			//subMenuItem->SetVisible(true);
 			subMenuItem->SetInternVisible(true);
 			hasSubMenu = true;
 		}
