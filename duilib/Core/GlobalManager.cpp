@@ -627,7 +627,7 @@ HGLOBAL GlobalManager::GetData(const std::wstring& path)
 					{
 						ZRESULT res = UnzipItem(g_hzip, ze.index, pData, ze.unc_size);
 						GlobalUnlock(hGlobal);
-						if (res != ZR_OK)
+						if (res != ZR_OK && res != ZR_MORE)
 						{
 							GlobalFree(hGlobal);
 							hGlobal = NULL;
