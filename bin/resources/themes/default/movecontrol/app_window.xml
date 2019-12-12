@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Window size="90,90" >
+    <VBox width="stretch" height="stretch" visible="true" name="root" bkcolor="white">
+		
+    </VBox>
+</Window>
