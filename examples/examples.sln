@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{B2087994-3DF6-4A57-B8C6-6F744520D7FA}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "duilib", "..\duilib\duilib.vcxproj", "{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ui_components", "..\ui_components\ui_components.vcxproj", "{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MoveControl", "MoveControl\DragDropControl.vcxproj", "{D31E3A5D-7AD3-41FF-B8CF-D02FB1D0412F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +125,12 @@ Global
 		{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}.Release|Win32.Build.0 = Release|Win32
 		{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}.Release|x64.ActiveCfg = Release|x64
 		{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}.Release|x64.Build.0 = Release|x64
+		{D31E3A5D-7AD3-41FF-B8CF-D02FB1D0412F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D31E3A5D-7AD3-41FF-B8CF-D02FB1D0412F}.Debug|Win32.Build.0 = Debug|Win32
+		{D31E3A5D-7AD3-41FF-B8CF-D02FB1D0412F}.Debug|x64.ActiveCfg = Debug|Win32
+		{D31E3A5D-7AD3-41FF-B8CF-D02FB1D0412F}.Release|Win32.ActiveCfg = Release|Win32
+		{D31E3A5D-7AD3-41FF-B8CF-D02FB1D0412F}.Release|Win32.Build.0 = Release|Win32
+		{D31E3A5D-7AD3-41FF-B8CF-D02FB1D0412F}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,6 +144,7 @@ Global
 		{A9D6DC71-C0DC-4549-AEA0-3B15B44E86A9} = {1DA0A8E2-5832-42FC-83F7-2CDCAD379C90}
 		{8BD95440-9000-4745-8011-27DD553EF06F} = {B2087994-3DF6-4A57-B8C6-6F744520D7FA}
 		{E35589C6-9509-4116-996F-1D045C2DACAE} = {B2087994-3DF6-4A57-B8C6-6F744520D7FA}
+		{D31E3A5D-7AD3-41FF-B8CF-D02FB1D0412F} = {B2087994-3DF6-4A57-B8C6-6F744520D7FA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {68CA0970-4242-4E4F-94D2-C19760FCA05D}
