@@ -170,6 +170,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="about_form.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="controls_form.h" />
     <ClInclude Include="resource.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="about_form.cpp" />
     <ClCompile Include="controls_form.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">

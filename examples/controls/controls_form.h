@@ -39,9 +39,14 @@ public:
 
 private:
 	/**
+	 * 被投递到杂事线程读取 xml 数据的任务函数
+	 */
+	void LoadRichEditData();
+
+	/**
 	 * 用于在杂事线程读取 xml 完成后更新 UI 内容的接口
 	 */
-	void OnLoadedResourceFile(const std::wstring& xml);
+	void OnResourceFileLoaded(const std::wstring& xml);
 
 	/**
 	 * 动态更新进度条接口
