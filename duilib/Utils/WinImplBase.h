@@ -66,7 +66,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -76,7 +76,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -86,7 +86,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -96,7 +96,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnNcActivate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -106,7 +106,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnNcCalcSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -116,7 +116,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnWindowPosChanging(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -126,7 +126,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnNcPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -136,7 +136,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnNcLButtonDbClick(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -146,7 +146,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnNcHitTest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -156,7 +156,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnGetMinMaxInfo(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -166,7 +166,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnMouseWheel(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -176,7 +176,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnMouseHover(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -186,7 +186,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnDpiChanged(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -195,7 +195,7 @@ public:
 	 * @brief 当接收到窗口大小改变消息时被调用
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -205,7 +205,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnChar(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -215,7 +215,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -225,7 +225,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnKeyDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -235,7 +235,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnKillFocus(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -245,7 +245,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnSetFocus(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -255,7 +255,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnLButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -265,7 +265,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnLButtonUp(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -275,7 +275,7 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @param[out] bHandled 返回 false 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnMouseMove(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -285,7 +285,6 @@ public:
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam) override;

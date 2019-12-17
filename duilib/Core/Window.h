@@ -582,7 +582,7 @@ public:
 	 * @param[in] uMsg 消息体
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @return 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @return 返回 false 则继续派发该消息，否则不再派发该消息
 	 */
 	virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
