@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E35589C6-9509-4116-996F-1D045C2DACAE}</ProjectGuid>
+    <ProjectGuid>{D31E3A5D-7AD3-41FF-B8CF-D02FB1D0412F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>VirtualBox</RootNamespace>
-    <ProjectName>virtualbox</ProjectName>
+    <RootNamespace>drag_drop_control</RootNamespace>
+    <ProjectName>move_control</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -69,20 +69,28 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(ProjectDir)..\..\tmp\$(PlatformName)\$(ProjectName)\$(Configuration)\</IntDir>
     <OutDir>..\..\bin\</OutDir>
+    <IntDir>$(ProjectDir)..\..\tmp\$(PlatformName)\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
+    <IncludePath>..\..\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>$(ProjectName)_d</TargetName>
+    <IncludePath>..\..\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(ProjectDir)..\..\tmp\$(PlatformName)\$(ProjectName)\$(Configuration)\</IntDir>
     <OutDir>..\..\bin\</OutDir>
+    <IntDir>$(ProjectDir)..\..\tmp\$(PlatformName)\$(ProjectName)\$(Configuration)\</IntDir>
+    <IncludePath>..\..\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>..\..\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -93,7 +101,6 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\..\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -108,7 +115,6 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\..\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -125,7 +131,6 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\..\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -144,7 +149,6 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>..\..\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -154,34 +158,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="item.h" />
-    <ClInclude Include="main_form.h" />
-    <ClInclude Include="provider.h" />
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="app_db.h" />
+    <ClInclude Include="app_item.h" />
+    <ClInclude Include="move_control.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="main.h" />
-    <ClInclude Include="VirtualTileBox.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="item.cpp" />
-    <ClCompile Include="main_form.cpp" />
-    <ClCompile Include="provider.cpp" />
+    <ClCompile Include="app_db.cpp" />
+    <ClCompile Include="app_item.cpp" />
+    <ClCompile Include="move_control.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="VirtualTileBox.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="VirtualBox.rc" />
+    <ResourceCompile Include="drag_drop_control.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="drag_drop_control.ico" />
     <Image Include="small.ico" />
-    <Image Include="VirtualBox.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\base\base.vcxproj">

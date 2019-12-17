@@ -1,9 +1,11 @@
 #pragma once
-#include "AppDb.h"
+#include "app_db.h"
+
 enum ThreadId
 {
 	kThreadUI
 };
+
 class LayoutsForm : public ui::WindowImplBase
 {
 public:

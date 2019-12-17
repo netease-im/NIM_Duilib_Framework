@@ -1,5 +1,6 @@
 #include "stdafx.h"
-#include "layouts_form.h"
+#include "move_control.h"
+
 using namespace ui;
 using namespace std;
 

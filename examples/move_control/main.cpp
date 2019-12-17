@@ -3,9 +3,7 @@
 
 #include "stdafx.h"
 #include "main.h"
-#include "layouts_form.h"
-
-
+#include "move_control.h"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
