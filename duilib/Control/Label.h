@@ -23,6 +23,7 @@ public:
 	virtual CSize EstimateText(CSize szAvailable, bool& bReEstimateSize) override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 	virtual void PaintText(IRenderContext* pRender) override;
+	virtual void SetPos(UiRect rc) override;
 
 	/**
 	 * @brief 设置文本样式
@@ -104,11 +105,23 @@ public:
 	 */
 	void SetLineLimit(bool bLineLimit);
 
+	/**
+	* @brief 设置鼠标悬浮到控件显示的提示文本是否省略号出现时才显示
+	* @param[in] bAutoShow true 省略号出现才显示 false 不做任何控制
+	* @return 无
+	*/
+	void SetAutoToolTip(bool bAutoShow);
+
+protected:
+	void CheckShowToolTip();
+
 protected:
 	std::wstring m_sFontId;
+	std::wstring m_sTooltipCache;
 	UINT	m_uTextStyle;
 	bool    m_bSingleLine;
 	bool    m_bLineLimit;
+	bool    m_bAutoShow;
 	int		m_hAlign;
 	int		m_vAlign;
 	UiRect	m_rcTextPadding;
@@ -123,6 +136,7 @@ LabelTemplate<InheritType>::LabelTemplate() :
 	m_uTextStyle(DT_LEFT | DT_TOP | DT_END_ELLIPSIS | DT_NOCLIP | DT_SINGLELINE),
 	m_bSingleLine(true),
 	m_bLineLimit(false),
+	m_bAutoShow(false),
 	m_hAlign(DT_LEFT),
 	m_vAlign(DT_CENTER),
 	m_rcTextPadding(),
@@ -154,6 +168,67 @@ std::wstring LabelTemplate<InheritType>::GetText() const
 }
 
 template<typename InheritType>
+void LabelTemplate<InheritType>::SetAutoToolTip(bool bAutoShow)
+{
+	m_bAutoShow = bAutoShow;
+	CheckShowToolTip();
+}
+
+template<typename InheritType /*= Control*/>
+void ui::LabelTemplate<InheritType>::SetPos(UiRect rc)
+{
+	__super::SetPos(rc);
+	CheckShowToolTip();
+}
+
+template<typename InheritType>
+void LabelTemplate<InheritType>::CheckShowToolTip()
+{
+	//check if need to show the tooltip
+	if (m_bAutoShow)
+	{
+		if (m_sTooltipCache.empty())
+		{
+			m_sTooltipCache = GetToolTipText();
+		}
+		bool bNeedShow = false;
+		if (!GetText().empty())
+		{
+			//compare the item size and rendersize
+			UiRect rc = this->m_rcItem;
+			rc.left += m_rcTextPadding.left;
+			rc.right -= m_rcTextPadding.right;
+			rc.top += m_rcTextPadding.top;
+			rc.bottom -= m_rcTextPadding.bottom;
+
+			if (m_bSingleLine)
+				m_uTextStyle |= DT_SINGLELINE;
+			else
+				m_uTextStyle &= ~DT_SINGLELINE;
+			int width = this->GetFixedWidth();
+			if (width < 0)
+			{
+				width = 0;
+			}
+			auto pRender = this->m_pWindow->GetRenderContext();
+			UiRect rcMessure = pRender->MeasureText(GetText(), m_sFontId, m_uTextStyle, width);
+			if (rc.GetWidth() < rcMessure.GetWidth() || rc.GetHeight() < rcMessure.GetHeight())
+			{
+				bNeedShow = true;
+			}
+		}
+		if (bNeedShow)
+		{
+			SetToolTipText(m_sTooltipCache);
+		}
+		else
+		{
+			SetToolTipText(L"");
+		}
+	}
+}
+
+template<typename InheritType>
 std::string LabelTemplate<InheritType>::GetUTF8Text() const
 {
 	std::string strOut;
@@ -173,6 +248,8 @@ void LabelTemplate<InheritType>::SetText(const std::wstring& strText)
 	else {
 		this->Invalidate();
 	}
+
+	CheckShowToolTip();
 }
 
 template<typename InheritType>
@@ -288,6 +365,7 @@ void LabelTemplate<InheritType>::SetAttribute(const std::wstring& strName, const
 	else if (strName == _T("singleline")) SetSingleLine(strValue == _T("true"));
 	else if (strName == _T("text")) SetText(strValue);
 	else if (strName == _T("textid")) SetTextId(strValue);
+	else if (strName == _T("autotooltip")) SetAutoToolTip(strValue == _T("true"));
 	else if (strName == _T("font")) SetFont(strValue);
 	else if (strName == _T("normaltextcolor")) SetStateTextColor(kControlStateNormal, strValue);
 	else if (strName == _T("hottextcolor"))	SetStateTextColor(kControlStateHot, strValue);
