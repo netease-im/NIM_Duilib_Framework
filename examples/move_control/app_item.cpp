@@ -6,7 +6,7 @@ AppItemUi* AppItemUi::Create(const AppItem& item)
 {
 	AppItemUi* uiItem = new AppItemUi;
 	uiItem->SetAppdata(item, false);
-	ui::GlobalManager::FillBoxWithCache(uiItem, L"movecontrol/app_item.xml");
+	ui::GlobalManager::FillBoxWithCache(uiItem, L"move_control/app_item.xml");
 	return uiItem;
 }
 
@@ -69,7 +69,7 @@ AppWindow::~AppWindow()
 
 std::wstring AppWindow::GetSkinFolder()
 {
-	return L"movecontrol";
+	return L"move_control";
 }
 
 std::wstring AppWindow::GetSkinFile()
@@ -79,7 +79,7 @@ std::wstring AppWindow::GetSkinFile()
 
 std::wstring AppWindow::GetWindowClassName() const
 {
-	return L"movecontrol";
+	return L"move_control";
 }
 
 void AppWindow::InitWindow()

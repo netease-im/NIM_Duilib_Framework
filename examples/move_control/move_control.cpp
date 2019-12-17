@@ -5,7 +5,7 @@ using namespace ui;
 using namespace std;
 
 
-LayoutsForm::LayoutsForm(const std::wstring& class_name, const std::wstring& theme_directory, const std::wstring& layout_xml)
+MoveControlForm::MoveControlForm(const std::wstring& class_name, const std::wstring& theme_directory, const std::wstring& layout_xml)
 	: class_name_(class_name)
 	, theme_directory_(theme_directory)
 	, layout_xml_(layout_xml)
@@ -13,26 +13,26 @@ LayoutsForm::LayoutsForm(const std::wstring& class_name, const std::wstring& the
 }
 
 
-LayoutsForm::~LayoutsForm()
+MoveControlForm::~MoveControlForm()
 {
 }
 
-std::wstring LayoutsForm::GetSkinFolder()
+std::wstring MoveControlForm::GetSkinFolder()
 {
 	return theme_directory_;
 }
 
-std::wstring LayoutsForm::GetSkinFile()
+std::wstring MoveControlForm::GetSkinFile()
 {
 	return layout_xml_;
 }
 
-std::wstring LayoutsForm::GetWindowClassName() const
+std::wstring MoveControlForm::GetWindowClassName() const
 {
 	return class_name_;
 }
 
-void LayoutsForm::InitWindow()
+void MoveControlForm::InitWindow()
 {
 	//添加应用。应用有可能是服务器下发的，一般本地也有保存的
 	//loadFromDb
@@ -48,7 +48,7 @@ void LayoutsForm::InitWindow()
 	for (const auto& item: applist)
 	{
 		AppItemUi* pAppUi = AppItemUi::Create(item);
-		pAppUi->AttachAllEvents(nbase::Bind(&LayoutsForm::OnProcessAppItemDrag, this, std::placeholders::_1));
+		pAppUi->AttachAllEvents(nbase::Bind(&MoveControlForm::OnProcessAppItemDrag, this, std::placeholders::_1));
 		if (item._isFrequent)
 		{
 			pAppUi->FixPos(0, frequent_app_->GetCount());
@@ -62,14 +62,14 @@ void LayoutsForm::InitWindow()
 	}
 }
 
-LRESULT LayoutsForm::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+LRESULT MoveControlForm::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
 	PostQuitMessage(0L);
 	return __super::OnClose(uMsg, wParam, lParam, bHandled);
 }
 
 
-LRESULT LayoutsForm::OnLButtonUp(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+LRESULT MoveControlForm::OnLButtonUp(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
 	if (current_item_ == nullptr)
 	{
@@ -104,16 +104,16 @@ LRESULT LayoutsForm::OnLButtonUp(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& 
 	return __super::OnLButtonUp(uMsg, wParam, lParam, bHandled);
 }
 
-void LayoutsForm::ShowCustomWindow(const std::wstring& class_name, const std::wstring& theme_directory, const std::wstring& layout_xml)
+void MoveControlForm::ShowCustomWindow(const std::wstring& class_name, const std::wstring& theme_directory, const std::wstring& layout_xml)
 {
-	LayoutsForm* window = new LayoutsForm(class_name, theme_directory, layout_xml);
+	MoveControlForm* window = new MoveControlForm(class_name, theme_directory, layout_xml);
 	window->Create(NULL, class_name.c_str(), WS_OVERLAPPEDWINDOW & ~WS_MAXIMIZEBOX, 0);
 	window->CenterWindow();
 	window->ShowWindow();
 }
 
 //得想办法抓起鼠标弹起的一刻
-bool LayoutsForm::OnProcessAppItemDrag(ui::EventArgs* param)
+bool MoveControlForm::OnProcessAppItemDrag(ui::EventArgs* param)
 {
 	switch (param->Type)
 	{
@@ -158,7 +158,7 @@ bool LayoutsForm::OnProcessAppItemDrag(ui::EventArgs* param)
 	return true;
 }
 
-void LayoutsForm::DoDrag(ui::Control* pAppItem, POINT pos)
+void MoveControlForm::DoDrag(ui::Control* pAppItem, POINT pos)
 {
 	current_item_ = dynamic_cast<AppItemUi*>(pAppItem);
 	if (nullptr==current_item_)
@@ -170,7 +170,7 @@ void LayoutsForm::DoDrag(ui::Control* pAppItem, POINT pos)
 
 }
 
-void LayoutsForm::DoBeforeDrag()
+void MoveControlForm::DoBeforeDrag()
 {
 	//抠出该项目，后面的项目全部左移
 	ASSERT(current_item_);
@@ -193,7 +193,7 @@ void LayoutsForm::DoBeforeDrag()
 	}
 }
 
-void LayoutsForm::DoDraging(POINT pos)
+void MoveControlForm::DoDraging(POINT pos)
 {
 	//这里注意，如果只是父控件内部移动的话，会简单很多
 	//设置下current_item_的setmargin，重新add回去，先保留在父控件的最后一个
@@ -210,7 +210,7 @@ void LayoutsForm::DoDraging(POINT pos)
 	ASSERT(pWindow);
 }
 
-bool LayoutsForm::DoAfterDrag(ui::Box* check)
+bool MoveControlForm::DoAfterDrag(ui::Box* check)
 {
 	//获取鼠标的位置
 	POINT pt;
