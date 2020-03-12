@@ -4,9 +4,20 @@
 namespace ui
 {
 
-TabBox::TabBox(Layout* pLayout) : Box(pLayout),	m_iCurSel(-1), m_bFadeSwith(false)
+TabBox::TabBox(Layout* pLayout) 
+: Box(pLayout)
+, m_iCurSel(-1)
+, m_iInitSel(-1)
+, m_bIsInit(false)
+, m_bFadeSwith(false)
 {
 
+}
+
+void TabBox::DoInit()
+{
+	m_bIsInit = true;
+	if (m_iInitSel != -1)  SelectItem(m_iInitSel);
 }
 
 bool TabBox::Add(Control* pControl)
@@ -223,8 +234,12 @@ bool TabBox::SelectItem(const std::wstring& pControlName)
 
 void TabBox::SetAttribute(const std::wstring& strName, const std::wstring& strValue)
 {
-	if (strName == _T("selectedid")) m_iCurSel = _ttoi(strValue.c_str());
-	else if( strName == _T("fadeswitch") ) SetFadeSwitch(strValue == _T("true"));
+	if (strName == _T("selectedid"))
+	{
+		int iSel = _ttoi(strValue.c_str());
+		m_bIsInit ? SelectItem(iSel) : m_iInitSel = iSel;
+	}
+	else if (strName == _T("fadeswitch")) SetFadeSwitch(strValue == _T("true"));
 	else Box::SetAttribute(strName, strValue);
 }
 
