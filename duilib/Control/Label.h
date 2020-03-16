@@ -189,7 +189,7 @@ void LabelTemplate<InheritType>::CheckShowToolTip()
 	{
 		if (m_sTooltipCache.empty())
 		{
-			m_sTooltipCache = GetToolTipText();
+			m_sTooltipCache = this->GetToolTipText();
 		}
 		bool bNeedShow = false;
 		if (!GetText().empty())
@@ -219,11 +219,11 @@ void LabelTemplate<InheritType>::CheckShowToolTip()
 		}
 		if (bNeedShow)
 		{
-			SetToolTipText(m_sTooltipCache);
+			this->SetToolTipText(m_sTooltipCache);
 		}
 		else
 		{
-			SetToolTipText(L"");
+			this->SetToolTipText(L"");
 		}
 	}
 }

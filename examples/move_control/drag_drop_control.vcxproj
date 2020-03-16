@@ -23,6 +23,7 @@
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>drag_drop_control</RootNamespace>
     <ProjectName>move_control</ProjectName>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

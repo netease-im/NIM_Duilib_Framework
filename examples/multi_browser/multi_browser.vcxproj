@@ -22,6 +22,7 @@
     <ProjectGuid>{FDB5539F-1060-4975-B603-B66454C8C897}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>multi_browser</RootNamespace>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
