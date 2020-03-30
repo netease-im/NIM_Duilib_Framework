@@ -118,6 +118,7 @@
 
 #include "Control/List.h"
 #include "Control/Combo.h"
+#include "Control/CheckCombo.h"
 #include "Control/ScrollBar.h"
 #include "Control/TreeView.h"
 

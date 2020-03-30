@@ -84,6 +84,27 @@ void ControlForm::InitWindow()
 		combo->Add(element);
 	}
 
+	std::string checks[6] = { "check1", "check2", "check3", "check4", "check5", "check6" };
+	ui::CheckCombo* check_combo = static_cast<ui::CheckCombo*>(FindControl(L"check_combo"));
+	for (auto i = 0; i < 6; i++)
+	{
+		CheckBox *item = new CheckBox;
+		item->SetFixedWidth(DUI_LENGTH_STRETCH);
+		item->SetFixedHeight(24);
+		item->SetUTF8Text(checks[i]);
+		item->SetUTF8DataID(checks[i]);
+
+		item->SetTextPadding({ 20, 2, 2, 0 });
+		item->SetTextStyle(DT_LEFT | DT_VCENTER);
+		std::wstring image_normal = nbase::StringPrintf(L"file='../public/checkbox/check_no.png' dest='%d,4,%d,20'", 2, 18);
+		std::wstring image_select = nbase::StringPrintf(L"file='../public/checkbox/check_yes.png' dest='%d,4,%d,20'", 2, 18);
+
+		item->SetStateImage(kControlStateNormal, image_normal);
+		item->SetSelectedStateImage(kControlStateNormal, image_select);
+		
+		check_combo->Add(item);
+	}
+
 	/* Load xml file content in global misc thread, and post update RichEdit task to UI thread */
 	nbase::ThreadManager::PostTask(kThreadGlobalMisc, nbase::Bind(&ControlForm::LoadRichEditData, this));
 

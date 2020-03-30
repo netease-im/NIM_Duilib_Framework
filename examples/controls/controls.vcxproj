@@ -206,6 +206,9 @@
       <Project>{0149ba6e-3c0a-426d-aa0a-0b9ec7742f19}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\..\bin\resources\themes\default\controls\controls.xml" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -182,6 +182,9 @@
     <ClCompile Include="Control\CircleProgress.cpp">
       <Filter>Source Files\Control</Filter>
     </ClCompile>
+    <ClCompile Include="Control\CheckCombo.cpp">
+      <Filter>Source Files\Control</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StdAfx.h">
@@ -343,5 +346,11 @@
     <ClInclude Include="Control\CircleProgress.h">
       <Filter>Header Files\Control</Filter>
     </ClInclude>
+    <ClInclude Include="Control\CheckCombo.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\bin\resources\themes\default\global.xml" />
   </ItemGroup>
 </Project>
