@@ -13,7 +13,12 @@ void ChildBox::Init()
 {
 	if (!m_strXMLFile.empty())
 	{
-		Box* pChildWindow = static_cast<Box*>(GlobalManager::CreateBoxWithCache(m_strXMLFile.c_str(), CreateControlCallback()));
+		CreateControlCallback callback = CreateControlCallback();
+		auto pBaseWindow = dynamic_cast<WindowImplBase*>(m_pWindow);
+		if (pBaseWindow != nullptr)
+			callback = std::bind(&WindowImplBase::CreateControl, pBaseWindow, std::placeholders::_1);
+
+		Box* pChildWindow = static_cast<Box*>(GlobalManager::CreateBoxWithCache(m_strXMLFile.c_str(), callback));
 		if (pChildWindow) {
 			this->Add(pChildWindow);
 		}
