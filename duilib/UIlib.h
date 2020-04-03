@@ -116,6 +116,7 @@
 #include "Box/TabBox.h"
 #include "Box/ChildBox.h"
 
+#include "Control/Grid.h"
 #include "Control/List.h"
 #include "Control/Combo.h"
 #include "Control/CheckCombo.h"

@@ -232,6 +232,8 @@ EventType StringToEnum(const std::wstring& messageType);
 #define  DUI_CTR_VIRTUALLISTBOX                  (_T("VirtualListBox"))
 #define  DUI_CTR_TILELISTBOX                     (_T("TileListBox"))
 
+#define  DUI_CTR_GRID							 (_T("Grid"))
+
 #define  DUI_CTR_TREENODE                        (_T("TreeNode"))
 #define  DUI_CTR_TREEVIEW                        (_T("TreeView"))
 

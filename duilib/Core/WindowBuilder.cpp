@@ -454,6 +454,7 @@ Control* WindowBuilder::CreateControlByClass(const std::wstring& strControlClass
 	case 4:
 		if( strControlClass == DUI_CTR_HBOX )					pControl = new HBox;
 		else if( strControlClass == DUI_CTR_VBOX )				pControl = new VBox;
+		else if (strControlClass == DUI_CTR_GRID)				pControl = new Grid;
 		break;
 	case 5:
 		if( strControlClass == DUI_CTR_COMBO )                  pControl = new Combo;
