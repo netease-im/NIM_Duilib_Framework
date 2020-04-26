@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "controls_form.h"
 #include "about_form.h"
+#include "comboex\CheckCombo.h"
+//#include "comboex\FilterCombo.h"
 
 #include <fstream>
 
@@ -28,6 +30,16 @@ std::wstring ControlForm::GetSkinFile()
 std::wstring ControlForm::GetWindowClassName() const
 {
 	return kClassName;
+}
+
+ui::Control* ControlForm::CreateControl(const std::wstring& pstrClass)
+{
+	ui::Control* control = nullptr;
+	if (pstrClass == L"CheckCombo")
+	{
+		control = new nim_comp::CheckCombo;
+	}
+	return control;
 }
 
 void ControlForm::InitWindow()
@@ -82,6 +94,27 @@ void ControlForm::InitWindow()
 		element->SetTextPadding({ 6,0,6,0 });
 		element->SetText(nbase::StringPrintf(L"Combo element %d", i));
 		combo->Add(element);
+	}
+
+	std::string checks[6] = { "check1", "check2", "check3", "check4", "check5", "check6" };
+	nim_comp::CheckCombo* check_combo = static_cast<nim_comp::CheckCombo*>(FindControl(L"check_combo"));
+	for (auto i = 0; i < 6; i++)
+	{
+		ui::CheckBox *item = new ui::CheckBox;
+		item->SetFixedWidth(DUI_LENGTH_STRETCH);
+		item->SetFixedHeight(24);
+		item->SetUTF8Text(checks[i]);
+		item->SetUTF8DataID(checks[i]);
+
+		item->SetTextPadding({ 20, 2, 2, 0 });
+		item->SetTextStyle(DT_LEFT | DT_VCENTER);
+		std::wstring image_normal = nbase::StringPrintf(L"file='../public/checkbox/check_no.png' dest='%d,4,%d,20'", 2, 18);
+		std::wstring image_select = nbase::StringPrintf(L"file='../public/checkbox/check_yes.png' dest='%d,4,%d,20'", 2, 18);
+
+		item->SetStateImage(ui::kControlStateNormal, image_normal);
+		item->SetSelectedStateImage(ui::kControlStateNormal, image_select);
+
+		check_combo->Add(item);
 	}
 
 	/* Load xml file content in global misc thread, and post update RichEdit task to UI thread */
