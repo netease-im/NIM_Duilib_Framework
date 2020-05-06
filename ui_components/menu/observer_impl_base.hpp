@@ -45,6 +45,11 @@ public:
 	{
 		if (receiver == NULL)
 			return;
+		if (std::find(receivers_.cbegin(), receivers_.cend(), receiver) != receivers_.cend())
+		{
+			assert(0);
+			return;
+		}
 
 		receivers_.push_back(receiver);
 		receiver->AddObserver(this);
