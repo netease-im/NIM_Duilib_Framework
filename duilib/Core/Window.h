@@ -844,6 +844,12 @@ public:
 	 */
 	virtual void OnInitLayout();
 
+	/**		
+	* @brief 是否将要关闭
+	* @return 无
+	*/
+	bool IsClosing(){ return m_bCloseing; };
+
 private:
 	static Control* CALLBACK __FindControlFromNameHash(Control* pThis, LPVOID pData);
 	static Control* CALLBACK __FindControlFromCount(Control* pThis, LPVOID pData);
@@ -943,6 +949,7 @@ protected:
 	Shadow m_shadow;
 
 	bool m_bFakeModal = false;
+	bool m_bCloseing = false;	//add by djj 20200428 调用Close时会延迟Post WM_CLOSE, 这个期间需要有一个标识此种'待关闭状态'
 };
 
 } // namespace ui

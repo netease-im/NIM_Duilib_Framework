@@ -231,6 +231,7 @@ void Window::Close(UINT nRet)
 	else {
 		PostMessage(WM_CLOSE, (WPARAM)nRet, 0L);
 	}
+	m_bCloseing = true;
 }
 
 void Window::ShowWindow(bool bShow /*= true*/, bool bTakeFocus /*= false*/)
