@@ -183,6 +183,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="cef_control\handler\drag\bytes_write_handler.h" />
+    <ClInclude Include="cef_control\handler\drag\osr_dragdrop_events.h" />
+    <ClInclude Include="cef_control\handler\drag\osr_dragdrop_win.h" />
+    <ClInclude Include="cef_control\handler\drag\util_win.h" />
     <ClInclude Include="cef_control\util\auto_unregister.h" />
     <ClInclude Include="public_define.h" />
     <ClInclude Include="ui_cef_control.h" />
@@ -224,6 +228,9 @@
     <ClCompile Include="cef_control\control\cef_control_ui.cpp" />
     <ClCompile Include="cef_control\control\cef_native_control.cpp" />
     <ClCompile Include="cef_control\handler\browser_handler.cpp" />
+    <ClCompile Include="cef_control\handler\drag\bytes_write_handler.cc" />
+    <ClCompile Include="cef_control\handler\drag\osr_dragdrop_win.cc" />
+    <ClCompile Include="cef_control\handler\drag\util_win.cc" />
     <ClCompile Include="cef_control\manager\cef_manager.cpp" />
     <ClCompile Include="cef_control\util\memory_dc.cpp" />
     <ClCompile Include="menu\ui_menu.cpp" />

@@ -49,6 +49,9 @@
     <Filter Include="cef_control\manager">
       <UniqueIdentifier>{f2d952a7-0fa0-4aa2-b596-1e5294c94c0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cef_control\handler\drag">
+      <UniqueIdentifier>{7747b13a-cc8c-4e86-b230-3528a4bb5752}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -135,6 +138,18 @@
     <ClInclude Include="public_define.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="cef_control\handler\drag\util_win.h">
+      <Filter>cef_control\handler\drag</Filter>
+    </ClInclude>
+    <ClInclude Include="cef_control\handler\drag\bytes_write_handler.h">
+      <Filter>cef_control\handler\drag</Filter>
+    </ClInclude>
+    <ClInclude Include="cef_control\handler\drag\osr_dragdrop_events.h">
+      <Filter>cef_control\handler\drag</Filter>
+    </ClInclude>
+    <ClInclude Include="cef_control\handler\drag\osr_dragdrop_win.h">
+      <Filter>cef_control\handler\drag</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -205,6 +220,15 @@
     </ClCompile>
     <ClCompile Include="cef_control\util\memory_dc.cpp">
       <Filter>cef_control\util</Filter>
+    </ClCompile>
+    <ClCompile Include="cef_control\handler\drag\bytes_write_handler.cc">
+      <Filter>cef_control\handler\drag</Filter>
+    </ClCompile>
+    <ClCompile Include="cef_control\handler\drag\osr_dragdrop_win.cc">
+      <Filter>cef_control\handler\drag</Filter>
+    </ClCompile>
+    <ClCompile Include="cef_control\handler\drag\util_win.cc">
+      <Filter>cef_control\handler\drag</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
