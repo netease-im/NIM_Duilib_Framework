@@ -28,15 +28,22 @@ public:
 	/**
 	 * @brief 设置阴影的九宫格属性
 	 * @param[in] rect 要设置的九宫格属性
+	 * @param[in] bNeedDpiScale 为 false 表示不需要把 rc 根据 DPI 自动调整
 	 * @return 无
 	 */
-	void SetShadowCorner(const UiRect &rect);
+	void SetShadowCorner(const UiRect &rect, bool bNeedDpiScale = true);
 
 	/**
 	 * @brief 获取阴影的九宫格属性
 	 * @return 返回阴影的九宫格属性
 	 */
 	UiRect GetShadowCorner() const;
+
+	/**
+	* @brief 重置为默认阴影效果
+	* @return 无
+	*/
+	void ResetDefaultShadow();
 
 	/**
 	 * @brief 根据初始化的阴影范围重置阴影边框

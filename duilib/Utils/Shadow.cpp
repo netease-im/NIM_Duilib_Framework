@@ -39,10 +39,11 @@ std::wstring Shadow::GetShadowImage() const
 	return m_strImage;
 }
 
-void Shadow::SetShadowCorner(const UiRect &rect)
+void Shadow::SetShadowCorner(const UiRect &rect, bool bNeedDpiScale)
 {
 	m_rcDefaultShadowCorner = m_rcCurShadowCorner = rect;
-	DpiManager::GetInstance()->ScaleRect(m_rcCurShadowCorner);
+	if (bNeedDpiScale)
+		DpiManager::GetInstance()->ScaleRect(m_rcCurShadowCorner);
 	m_rcShadowCornerBackup = m_rcCurShadowCorner;
 }
 
@@ -54,6 +55,17 @@ UiRect Shadow::GetShadowCorner() const
 	else {
 		return UiRect(0, 0, 0, 0);
 	}
+}
+
+void Shadow::ResetDefaultShadow()
+{
+	m_bUseDefaultImage = true;
+	m_strImage = L"file='../public/bk/bk_shadow.png' corner='30,30,30,30'";
+
+	m_rcCurShadowCorner = { 14, 14, 14, 14 };
+	m_rcDefaultShadowCorner = { 14, 14, 14, 14 };
+	DpiManager::GetInstance()->ScaleRect(m_rcCurShadowCorner);
+	m_rcShadowCornerBackup = m_rcCurShadowCorner;
 }
 
 void Shadow::ResetShadowBox()

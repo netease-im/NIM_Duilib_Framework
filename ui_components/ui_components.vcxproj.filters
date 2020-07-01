@@ -52,6 +52,9 @@
     <Filter Include="comboex">
       <UniqueIdentifier>{e6931a54-16d5-4058-8ddd-b2a25d5f8028}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cef_control\handler\drag">
+      <UniqueIdentifier>{7747b13a-cc8c-4e86-b230-3528a4bb5752}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -141,7 +144,18 @@
     <ClInclude Include="comboex\CheckCombo.h">
       <Filter>comboex</Filter>
     </ClInclude>
-  </ItemGroup>
+    <ClInclude Include="cef_control\handler\drag\util_win.h">
+      <Filter>cef_control\handler\drag</Filter>
+    </ClInclude>
+    <ClInclude Include="cef_control\handler\drag\bytes_write_handler.h">
+      <Filter>cef_control\handler\drag</Filter>
+    </ClInclude>
+    <ClInclude Include="cef_control\handler\drag\osr_dragdrop_events.h">
+      <Filter>cef_control\handler\drag</Filter>
+    </ClInclude>
+    <ClInclude Include="cef_control\handler\drag\osr_dragdrop_win.h">
+      <Filter>cef_control\handler\drag</Filter>
+    </ClInclude>  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
@@ -215,5 +229,13 @@
     <ClCompile Include="comboex\CheckCombo.cpp">
       <Filter>comboex</Filter>
     </ClCompile>
-  </ItemGroup>
+    <ClCompile Include="cef_control\handler\drag\bytes_write_handler.cc">
+      <Filter>cef_control\handler\drag</Filter>
+    </ClCompile>
+    <ClCompile Include="cef_control\handler\drag\osr_dragdrop_win.cc">
+      <Filter>cef_control\handler\drag</Filter>
+    </ClCompile>
+    <ClCompile Include="cef_control\handler\drag\util_win.cc">
+      <Filter>cef_control\handler\drag</Filter>
+    </ClCompile>  </ItemGroup>
 </Project>

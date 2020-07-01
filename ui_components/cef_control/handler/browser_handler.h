@@ -9,6 +9,7 @@
 #include "include/cef_browser.h"
 #include "cef_control/util/auto_unregister.h"
 #include "cef_control/app/cef_js_bridge.h"
+#include "cef_control/handler/drag/osr_dragdrop_win.h"
 
 namespace nim_comp
 {
@@ -27,7 +28,8 @@ class BrowserHandler :
 	public CefLoadHandler,
 	public CefRequestHandler,
 	public CefDownloadHandler,
-	public CefDialogHandler
+	public CefDialogHandler,
+	public client::OsrDragEvents
 {
 public:
 	BrowserHandler();
@@ -52,6 +54,8 @@ public:
 		virtual void OnPopupShow(CefRefPtr<CefBrowser> browser, bool show) = 0;
 
 		virtual void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect) = 0;
+
+		virtual void ClientToControl(POINT &pt) = 0;
 
 		virtual void UpdateWindowPos() = 0;
 
@@ -214,6 +218,20 @@ public:
 
 	virtual void OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHandle cursor, CursorType type,	const CefCursorInfo& custom_cursor_info) OVERRIDE;
 
+	bool StartDragging(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDragData> drag_data, CefRenderHandler::DragOperationsMask allowed_ops, int x, int y) OVERRIDE;
+	void UpdateDragCursor(CefRefPtr<CefBrowser> browser, CefRenderHandler::DragOperation operation) OVERRIDE;
+
+	// OsrDragEvents methods.
+	CefBrowserHost::DragOperationsMask OnDragEnter(
+		CefRefPtr<CefDragData> drag_data,
+		CefMouseEvent ev,
+		CefBrowserHost::DragOperationsMask effect) OVERRIDE;
+	CefBrowserHost::DragOperationsMask OnDragOver(CefMouseEvent ev,
+		CefBrowserHost::DragOperationsMask effect) OVERRIDE;
+	void OnDragLeave() OVERRIDE;
+	CefBrowserHost::DragOperationsMask OnDrop(CefMouseEvent ev,
+		CefBrowserHost::DragOperationsMask effect) OVERRIDE;
+
 	// CefContextMenuHandler methods
 	virtual void OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model) OVERRIDE;
 
@@ -317,6 +335,8 @@ protected:
 	bool					is_focus_oneditable_field_;
 	UnregistedCallbackList<StdClosure>	task_list_after_created_;
 
+	client::DropTargetHandle drop_target_;
+	CefRenderHandler::DragOperation current_drag_op_;
 	IMPLEMENT_REFCOUNTING(BrowserHandler);
 };
 }
