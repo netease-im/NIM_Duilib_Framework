@@ -434,6 +434,12 @@ public:
 	void SetShadowAttached(bool bShadowAttached);
 
 	/**
+	* @brief 获取是否附加阴影效果
+	* @return 是否附加阴影效果
+	*/
+	bool IsShadowAttached();
+
+	/**
 	 * @brief 获取阴影图片
 	 * @return 返回阴影图片位置
 	 */

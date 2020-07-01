@@ -653,6 +653,11 @@ void Window::SetShadowAttached(bool bShadowAttached)
 	m_shadow.SetShadowAttached(bShadowAttached);
 }
 
+bool Window::IsShadowAttached()
+{
+	return m_shadow.IsShadowAttached();
+}
+
 std::wstring Window::GetShadowImage() const
 {
 	return m_shadow.GetShadowImage();
