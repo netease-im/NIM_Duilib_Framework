@@ -151,6 +151,8 @@ private:
 		int width,
 		int height) OVERRIDE;
 
+	virtual void ClientToControl(POINT &pt) OVERRIDE;
+
 	virtual void OnPopupShow(CefRefPtr<CefBrowser> browser, bool show) OVERRIDE;
 
 	virtual void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect) OVERRIDE;

@@ -32,6 +32,13 @@ void CefControl::OnPaint(CefRefPtr<CefBrowser> browser, CefRenderHandler::PaintE
 	this->Invalidate();
 }
 
+void CefControl::ClientToControl(POINT &pt)
+{
+	auto offset = GetScrollOffset();
+	pt.x = pt.x + offset.x - m_rcItem.left;
+	pt.y = pt.y + offset.y - m_rcItem.top;
+}
+
 void CefControl::OnPopupShow(CefRefPtr<CefBrowser> browser, bool show)
 {
 	if (!show)

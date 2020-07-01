@@ -63,6 +63,11 @@ CefManager::CefManager()
 	is_enable_offset_render_ = true;
 }
 
+CefManager::~CefManager()
+{
+	ASSERT(map_drag_target_reference_.empty());
+}
+
 void CefManager::AddCefDllToPath()
 {
 #if !defined(SUPPORT_CEF)
@@ -186,6 +191,41 @@ void CefManager::PostQuitMessage(int nExitCode)
 		};
 
 		nbase::ThreadManager::PostDelayedTask(kThreadUI, cb, nbase::TimeDelta::FromMilliseconds(500));
+	}
+}
+
+client::DropTargetHandle CefManager::GetDropTarget(HWND hwnd)
+{
+	// 查找是否存在这个弱引用
+	auto it = map_drag_target_reference_.find(hwnd);
+	if (it == map_drag_target_reference_.end()) {
+		auto deleter = [this](client::DropTargetWin *src) {
+			auto it = map_drag_target_reference_.find(src->GetHWND());
+			if (it != map_drag_target_reference_.end()) {
+				RevokeDragDrop(src->GetHWND());
+
+				// 移除弱引用对象
+				map_drag_target_reference_.erase(it);
+			}
+			else {
+				ASSERT(false);
+			}
+
+			delete src;
+		};
+		
+		// 如果不存在就新增一个
+		client::DropTargetHandle handle(new client::DropTargetWin(hwnd), deleter);
+		map_drag_target_reference_[hwnd] = handle;
+
+		HRESULT register_res = RegisterDragDrop(hwnd, handle.get());
+		ASSERT(register_res == S_OK);
+
+		return handle;
+	}
+	else {
+		// 如果存在就返回弱引用对应的强引用指针
+		return it->second.lock();
 	}
 }
 

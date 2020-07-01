@@ -56,8 +56,7 @@ void BrowserHandler::CloseAllBrowser()
 	public:
 		void Execute()
 		{
-			for (auto it : browser_list_)
-			{
+			for (auto it : browser_list_) {
 				if (it != nullptr)
 					it->GetHost()->CloseBrowser(true);
 			}
@@ -157,6 +156,19 @@ void BrowserHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 		task_list_after_created_.Clear();
 	}));
 
+	// 必须在cef ui线程调用RegisterDragDrop
+	// 执行::DoDragDrop时，会在调用RegisterDragDrop的线程触发的DragOver、DragLeave、Drop、Drop回调
+	// 进而调用browser_->GetHost()->DragTargetDragEnter、DragTargetDragOver、DragTargetDragLeave、DragTargetDrop
+	// 这几个cef接口内部发现不在cef ui线程触发，则会转发到cef ui线程
+	// 导致DragSourceEndedAt接口被调用时有部分DragTarget*方法没有被调用
+	// 最终拖拽效果就会有问题，详见DragSourceEndedAt接口描述
+	// 所以在cef ui线程调用RegisterDragDrop，让后面一系列操作都在cef ui线程里同步执行，则没问题
+	//
+	// RegisterDragDrop内部会在调用这个API的线程里创建一个窗口，用过这个窗口来做消息循环模拟阻塞的过程
+	// 所以哪个线程调用RegisterDragDrop，就会在哪个线程阻塞并触发IDragTarget回调
+	// 见https://docs.microsoft.com/zh-cn/windows/win32/api/ole2/nf-ole2-registerdragdrop
+	if (hwnd_)
+		drop_target_ = CefManager::GetInstance()->GetDropTarget(hwnd_);
 }
 
 bool BrowserHandler::DoClose(CefRefPtr<CefBrowser> browser)
@@ -282,6 +294,86 @@ void BrowserHandler::OnCursorChange(CefRefPtr<CefBrowser> browser, CefCursorHand
 	SetClassLongPtr(hwnd_, GCLP_HCURSOR, static_cast<LONG>(reinterpret_cast<LONG_PTR>(cursor)));
 	SetCursor(cursor);
 }
+
+bool BrowserHandler::StartDragging(CefRefPtr<CefBrowser> browser, CefRefPtr<CefDragData> drag_data, CefRenderHandler::DragOperationsMask allowed_ops, int x, int y)
+{
+	REQUIRE_UI_THREAD();
+	if (!handle_delegate_)
+		return false;
+
+	if (!drop_target_)
+		return false;
+
+	current_drag_op_ = DRAG_OPERATION_NONE;
+	CefBrowserHost::DragOperationsMask result =
+		drop_target_->StartDragging(this, drag_data, allowed_ops, x, y);
+	current_drag_op_ = DRAG_OPERATION_NONE;
+	POINT pt = {};
+	GetCursorPos(&pt);
+	ScreenToClient(hwnd_, &pt);
+	handle_delegate_->ClientToControl(pt);
+	browser->GetHost()->DragSourceEndedAt(
+		pt.x,
+		pt.y,
+		result);
+	browser->GetHost()->DragSourceSystemDragEnded();
+
+	return true;
+}
+
+void BrowserHandler::UpdateDragCursor(CefRefPtr<CefBrowser> browser, CefRenderHandler::DragOperation operation)
+{
+	REQUIRE_UI_THREAD();
+	current_drag_op_ = operation;
+}
+
+CefBrowserHost::DragOperationsMask BrowserHandler::OnDragEnter(CefRefPtr<CefDragData> drag_data, CefMouseEvent ev, CefBrowserHost::DragOperationsMask effect)
+{
+	REQUIRE_UI_THREAD();
+	if (browser_) {
+		POINT pt = { ev.x, ev.y };
+		handle_delegate_->ClientToControl(pt);
+		ev.x = pt.x;
+		ev.y = pt.y;
+		browser_->GetHost()->DragTargetDragEnter(drag_data, ev, effect);
+		browser_->GetHost()->DragTargetDragOver(ev, effect);
+	}
+	return current_drag_op_;
+}
+
+CefBrowserHost::DragOperationsMask BrowserHandler::OnDragOver(CefMouseEvent ev, CefBrowserHost::DragOperationsMask effect)
+{
+	REQUIRE_UI_THREAD();
+	if (browser_) {
+		POINT pt = { ev.x, ev.y };
+		handle_delegate_->ClientToControl(pt);
+		ev.x = pt.x;
+		ev.y = pt.y;
+		browser_->GetHost()->DragTargetDragOver(ev, effect);
+	}
+	return current_drag_op_;
+}
+
+void BrowserHandler::OnDragLeave()
+{
+	REQUIRE_UI_THREAD();
+	if (browser_)
+		browser_->GetHost()->DragTargetDragLeave();
+}
+
+CefBrowserHost::DragOperationsMask BrowserHandler::OnDrop(CefMouseEvent ev, CefBrowserHost::DragOperationsMask effect)
+{
+	if (browser_) {
+		POINT pt = { ev.x, ev.y };
+		handle_delegate_->ClientToControl(pt);
+		ev.x = pt.x;
+		ev.y = pt.y;
+		browser_->GetHost()->DragTargetDragOver(ev, effect);
+		browser_->GetHost()->DragTargetDrop(ev);
+	}
+	return current_drag_op_;
+}
+
 #pragma endregion
 
 #pragma region CefContextMenuHandler
