@@ -415,6 +415,26 @@ void Control::SetContextMenuUsed(bool bMenuUsed)
     m_bMenuUsed = bMenuUsed;
 }
 
+std::wstring Control::GetMenuPopup() const
+{
+	return m_sMenuPopup;
+}
+
+void Control::SetMenuPopup(const std::wstring& strPopup)
+{
+	m_sMenuPopup = strPopup;
+}
+
+std::wstring Control::GetMenuAlign() const
+{
+	return m_sMenuAlign;
+}
+
+void Control::SetMenuAlign(const std::wstring& strAlign)
+{
+	m_sMenuAlign = strAlign;
+}
+
 std::wstring Control::GetDataID() const
 {
     return m_sUserData;

@@ -6,6 +6,7 @@
  */
 #pragma once
 #include "include/cef_app.h"
+#include "cef_control/handler/drag/osr_dragdrop_win.h"
 
 namespace nim_comp
 { 
@@ -36,7 +37,7 @@ public:
 	SINGLETON_DEFINE(CefManager);
 public:
 	CefManager();
-	~CefManager(){};
+	~CefManager();
 
 	/**
 	* 把cef dll文件的位置添加到程序的"path"环境变量中,这样可以把dll文件放到bin以外的目录，并且不需要手动频繁切换dll文件
@@ -79,6 +80,8 @@ public:
 	// 在Cef浏览器对象销毁后发送WM_QUIT消息
 	void PostQuitMessage(int nExitCode);
 
+	// 获取某个窗口对应的DropTarget，用于浏览器控件的拖动功能
+	client::DropTargetHandle GetDropTarget(HWND hwnd);
 private:
 	/**
 	* 设置cef配置信息
@@ -92,5 +95,7 @@ private:
 	CefMessageLoopDispatcher message_dispatcher_;
 	int browser_count_;
 	bool is_enable_offset_render_;
+
+	std::map<HWND, std::weak_ptr<client::DropTargetWin>> map_drag_target_reference_; // 各个DropTarget的弱引用，一个窗口对应一个DropTarget，这个DropTarget可以给多个BorwserHandler使用
 };
 }

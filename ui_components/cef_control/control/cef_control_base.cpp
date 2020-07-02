@@ -9,6 +9,11 @@ void CefControlBase::OnPaint(CefRefPtr<CefBrowser> browser, CefRenderHandler::Pa
 	return;
 }
 
+void CefControlBase::ClientToControl(POINT &pt)
+{
+	return;
+}
+
 void CefControlBase::OnPopupShow(CefRefPtr<CefBrowser> browser, bool show)
 {
 	return;

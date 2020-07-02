@@ -310,6 +310,32 @@ public:
 	 */
     virtual void SetContextMenuUsed(bool bMenuUsed);
 
+	/**
+	  * @brief 获取控件右键菜单的弹出位置信息
+	  * @return 位置信息
+	  */
+	virtual std::wstring GetMenuPopup() const;
+
+	/**
+	  * @brief 设置控件右键菜单的弹出位置信息
+	 * @param[in] strPopup 位置信息，参见Menu.h StringToMenuPopup()
+	  * @return 无
+	  */
+	virtual void SetMenuPopup(const std::wstring& strPopup);
+
+	/**
+	* @brief 获取控件右键菜单的对齐信息
+	* @return 对齐信息
+	*/
+	virtual std::wstring GetMenuAlign() const;
+
+	/**
+	  * @brief 设置控件右键菜单的对齐信息
+	  * @param[in] strAlign 对齐信息，参见Menu.h StringToMenuAlign()
+	  * @return 无
+	  */
+	virtual void SetMenuAlign(const std::wstring& strAlign);
+
     /// 用户数据，辅助函数，供用户使用
 	/**
 	 * @brief 获取用户绑定到控件的数据字符串
@@ -913,6 +939,8 @@ protected:
 	std::wstring m_sToolTipText;
 	std::wstring m_sToolTipTextId;
 	std::wstring m_sUserData;
+	std::wstring m_sMenuPopup;
+	std::wstring m_sMenuAlign;
 	std::wstring m_strBkColor;
 	StateColorMap m_colorMap;
 	Image m_bkImage;
