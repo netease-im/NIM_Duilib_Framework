@@ -246,10 +246,10 @@ class IteratorRangeToNumber {
   class Positive : public Base<Positive> {
    public:
     static bool CheckBounds(value_type* output, uint8_t new_digit) {
-      if (*output > static_cast<value_type>(traits::max() / traits::kBase) ||
-          (*output == static_cast<value_type>(traits::max() / traits::kBase) &&
-           new_digit > traits::max() % traits::kBase)) {
-        *output = traits::max();
+      if (*output > static_cast<value_type>((traits::max)() / traits::kBase) ||
+          (*output == static_cast<value_type>((traits::max)() / traits::kBase) &&
+           new_digit > (traits::max)() % traits::kBase)) {
+        *output = (traits::max)();
         return false;
       }
       return true;
@@ -262,10 +262,10 @@ class IteratorRangeToNumber {
   class Negative : public Base<Negative> {
    public:
     static bool CheckBounds(value_type* output, uint8_t new_digit) {
-      if (*output < traits::min() / traits::kBase ||
-          (*output == traits::min() / traits::kBase &&
-           new_digit > 0 - traits::min() % traits::kBase)) {
-        *output = traits::min();
+      if (*output < (traits::min)() / traits::kBase ||
+          (*output == (traits::min)() / traits::kBase &&
+           new_digit > 0 - (traits::min)() % traits::kBase)) {
+        *output = (traits::min)();
         return false;
       }
       return true;
@@ -281,11 +281,11 @@ class BaseIteratorRangeToNumberTraits {
  public:
   typedef ITERATOR iterator_type;
   typedef VALUE value_type;
-  static value_type min() {
-    return std::numeric_limits<value_type>::min();
+  static value_type (min)() {
+    return (std::numeric_limits<value_type>::min)();
   }
-  static value_type max() {
-    return std::numeric_limits<value_type>::max();
+  static value_type (max)() {
+    return (std::numeric_limits<value_type>::max)();
   }
   static const int kBase = BASE;
 };
@@ -295,8 +295,8 @@ class BaseHexIteratorRangeToIntTraits
     : public BaseIteratorRangeToNumberTraits<ITERATOR, int, 16> {
  public:
   // Allow parsing of 0xFFFFFFFF, which is technically an overflow
-  static unsigned int max() {
-    return std::numeric_limits<unsigned int>::max();
+  static unsigned int (max)() {
+    return (std::numeric_limits<unsigned int>::max)();
   }
 };
 
