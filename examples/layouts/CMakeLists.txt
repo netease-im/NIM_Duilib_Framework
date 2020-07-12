@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-set(TARGET_NAME basic)
+set(TARGET_NAME layouts)
 
 add_definitions(-DUNICODE -D_UNICODE)
 

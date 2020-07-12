@@ -19,10 +19,6 @@
 #include <errno.h>
 #endif  // OS_POSIX
 
-#if defined(WIN32)
-#include <Windows.h>
-#endif
-
 namespace nbase
 {
 
