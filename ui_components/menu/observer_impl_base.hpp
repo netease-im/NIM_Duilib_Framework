@@ -33,7 +33,7 @@ class ReceiverImpl;
 template <typename ReturnT, typename ParamT>
 class ObserverImpl : public ObserverImplBase<ReturnT, ParamT>
 {
-	template <typename ReturnT, typename ParamT>
+	//template <typename ReturnT, typename ParamT>
 	friend class Iterator;
 public:
 	ObserverImpl()
