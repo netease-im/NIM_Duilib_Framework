@@ -55,6 +55,9 @@
     <Filter Include="cef_control\handler\drag">
       <UniqueIdentifier>{7747b13a-cc8c-4e86-b230-3528a4bb5752}</UniqueIdentifier>
     </Filter>
+    <Filter Include="grid">
+      <UniqueIdentifier>{6df87217-a234-4ebe-9d68-3682171b1c61}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -155,7 +158,17 @@
     </ClInclude>
     <ClInclude Include="cef_control\handler\drag\osr_dragdrop_win.h">
       <Filter>cef_control\handler\drag</Filter>
-    </ClInclude>  </ItemGroup>
+    </ClInclude>
+    <ClInclude Include="grid\Grid.h">
+      <Filter>grid</Filter>
+    </ClInclude>
+    <ClInclude Include="grid\GridBase.h">
+      <Filter>grid</Filter>
+    </ClInclude>
+    <ClInclude Include="grid\GridBody.h">
+      <Filter>grid</Filter>
+    </ClInclude>
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
@@ -237,5 +250,15 @@
     </ClCompile>
     <ClCompile Include="cef_control\handler\drag\util_win.cc">
       <Filter>cef_control\handler\drag</Filter>
-    </ClCompile>  </ItemGroup>
+    </ClCompile>
+    <ClCompile Include="grid\Grid.cpp">
+      <Filter>grid</Filter>
+    </ClCompile>
+    <ClCompile Include="grid\GridBase.cpp">
+      <Filter>grid</Filter>
+    </ClCompile>
+    <ClCompile Include="grid\GridBody.cpp">
+      <Filter>grid</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
