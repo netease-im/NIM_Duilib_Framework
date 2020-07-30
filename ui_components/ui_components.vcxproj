@@ -189,6 +189,9 @@
     <ClInclude Include="cef_control\handler\drag\util_win.h" />
     <ClInclude Include="cef_control\util\auto_unregister.h" />
     <ClInclude Include="comboex\CheckCombo.h" />
+    <ClInclude Include="grid\Grid.h" />
+    <ClInclude Include="grid\GridBase.h" />
+    <ClInclude Include="grid\GridBody.h" />
     <ClInclude Include="public_define.h" />
     <ClInclude Include="ui_cef_control.h" />
     <ClInclude Include="cef_control\app\cef_js_bridge.h" />
@@ -235,6 +238,9 @@
     <ClCompile Include="cef_control\manager\cef_manager.cpp" />
     <ClCompile Include="cef_control\util\memory_dc.cpp" />
     <ClCompile Include="comboex\CheckCombo.cpp" />
+    <ClCompile Include="grid\Grid.cpp" />
+    <ClCompile Include="grid\GridBase.cpp" />
+    <ClCompile Include="grid\GridBody.cpp" />
     <ClCompile Include="menu\ui_menu.cpp" />
     <ClCompile Include="modal_wnd\async_do_modal.cpp" />
     <ClCompile Include="modal_wnd\async_modal_runner.cpp" />
