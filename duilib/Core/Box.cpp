@@ -664,7 +664,7 @@ bool Box::IsAutoDestroy() const
 	return m_bAutoDestroy;
 }
 
-void Box::SetAutoDestroy(bool bAuto)
+void Box::SetAutoDestroyChild(bool bAuto)
 {
 	m_bAutoDestroy = bAuto;
 }

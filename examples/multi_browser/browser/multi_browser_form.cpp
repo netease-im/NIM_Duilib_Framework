@@ -444,13 +444,13 @@ bool MultiBrowserForm::DetachBox(BrowserBox *browser_box)
 	// 在右侧Tab浏览器盒子列表中找到浏览器盒子并且移除盒子
 	// 在这里不能delete browser_box
 	bool auto_destroy = borwser_box_tab_->IsAutoDestroy();
-	borwser_box_tab_->SetAutoDestroy(false);
+	borwser_box_tab_->SetAutoDestroyChild(false);
 	if (!borwser_box_tab_->Remove(browser_box))
 	{
-		borwser_box_tab_->SetAutoDestroy(auto_destroy);
+		borwser_box_tab_->SetAutoDestroyChild(auto_destroy);
 		return false;
 	}
-	borwser_box_tab_->SetAutoDestroy(auto_destroy);
+	borwser_box_tab_->SetAutoDestroyChild(auto_destroy);
 
 	// 当浏览器盒子清空时，关闭浏览器窗口
 	if (GetBoxCount() == 0)

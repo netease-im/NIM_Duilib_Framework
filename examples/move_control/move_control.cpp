@@ -77,7 +77,7 @@ LRESULT MoveControlForm::OnLButtonUp(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 	}
 
 	Box* pParent = current_item_->GetParent();
-	pParent->SetAutoDestroy(true);
+	pParent->SetAutoDestroyChild(true);
 
 	if (!DoAfterDrag(frequent_app_) && !DoAfterDrag(my_app_))
 	{
@@ -178,7 +178,7 @@ void MoveControlForm::DoBeforeDrag()
 	{
 		Box* pParent = current_item_->GetParent();
 		ASSERT(pParent);
-		pParent->SetAutoDestroy(false);  //子控件不销毁
+		pParent->SetAutoDestroyChild(false);  //子控件不销毁
 		pParent->Remove(current_item_);
 
 		//从index处开始补缺口
