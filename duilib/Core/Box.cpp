@@ -664,7 +664,7 @@ bool Box::IsAutoDestroy() const
 	return m_bAutoDestroy;
 }
 
-void Box::SetAutoDestroy(bool bAuto)
+void Box::SetAutoDestroyChild(bool bAuto)
 {
 	m_bAutoDestroy = bAuto;
 }
@@ -1131,7 +1131,7 @@ void ScrollableBox::SetScrollPos(CSize szPos)
 	LoadImageCache(cy > 0);
 	Invalidate();
 	if( m_pWindow != NULL )	{
-		m_pWindow->SendNotify(this, kEventScrollChange);
+		m_pWindow->SendNotify(this, kEventScrollChange, (cy == 0) ? 0 : 1, (cx == 0) ? 0 : 1);
 	}
 }
 

@@ -526,7 +526,7 @@ LRESULT MenuWndEx::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		Init(m_hWnd);
 		SetWindowResourcePath(GetSkinFolder());
 		MenuBox *pRoot = new MenuBox();
-		pRoot->SetAutoDestroy(false);
+		pRoot->SetAutoDestroyChild(false);
 
 		for (int i = 0; i < m_pOwner->GetCount(); i++) {
 			auto pControl = m_pOwner->GetItemAt(i);

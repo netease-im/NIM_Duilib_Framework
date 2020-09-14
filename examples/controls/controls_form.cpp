@@ -2,7 +2,7 @@
 #include "controls_form.h"
 #include "about_form.h"
 #include "comboex\CheckCombo.h"
-//#include "comboex\FilterCombo.h"
+#include "comboex\FilterCombo.h"
 
 #include <fstream>
 
@@ -38,6 +38,10 @@ ui::Control* ControlForm::CreateControl(const std::wstring& pstrClass)
 	if (pstrClass == L"CheckCombo")
 	{
 		control = new nim_comp::CheckCombo;
+	}
+	else if (pstrClass == L"FilterCombo")
+	{
+		control = new nim_comp::FilterCombo;
 	}
 	return control;
 }
@@ -115,6 +119,23 @@ void ControlForm::InitWindow()
 		item->SetSelectedStateImage(ui::kControlStateNormal, image_select);
 
 		check_combo->Add(item);
+	}
+
+	nim_comp::FilterCombo* filter_combo = static_cast<nim_comp::FilterCombo*>(FindControl(L"filter_combo"));
+	char buf[16] = {};
+	for (auto i = 0; i < 100; i++)
+	{
+		nim_comp::ListElementMatch *item = new nim_comp::ListElementMatch;
+		item->SetFixedHeight(20);
+		//ui::GlobalManager::FillBoxWithCache(item, L"date_export/combo/date_item.xml");
+		//Label *label = new label;
+
+		std::string str = "item";
+		_itoa_s(i, buf, 10);
+		str += buf;
+		item->SetText(nbase::UTF8ToUTF16(str));
+		item->SetUTF8DataID(str);
+		filter_combo->Add(item);
 	}
 
 	/* Load xml file content in global misc thread, and post update RichEdit task to UI thread */

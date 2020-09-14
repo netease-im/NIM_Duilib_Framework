@@ -168,6 +168,9 @@
     <ClInclude Include="grid\GridBody.h">
       <Filter>grid</Filter>
     </ClInclude>
+    <ClInclude Include="comboex\FilterCombo.h">
+      <Filter>comboex</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -259,6 +262,9 @@
     </ClCompile>
     <ClCompile Include="grid\GridBody.cpp">
       <Filter>grid</Filter>
+    </ClCompile>
+    <ClCompile Include="comboex\FilterCombo.cpp">
+      <Filter>comboex</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

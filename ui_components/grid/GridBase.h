@@ -16,30 +16,49 @@ namespace ui
 		GIT_Double,
 		GIT_Combo,
 		GIT_Date,
+		GIT_Costom,		//自定义类型
+	};
+
+	class UILIB_API GridItemInfo
+	{
+	public:
+		std::wstring txt = L"";
+		std::wstring text_color;
+		std::wstring bk_color;
+		int row = -1; 
+		int col = -1;
+		UINT text_style = 0;
+		GridItemType type = GIT_String;
+
+		GridItemInfo(std::wstring _txt, int _row, int _col, GridItemType _type = GIT_String, UINT _text_style = 0) 
+			:txt(_txt), row(_row), col(_col), type(_type), text_style(_text_style)
+		{}
 	};
 	
-	class GridItem
+	class UILIB_API GridItem
 	{
 	public:
 		std::wstring text;
-		int row_index;
-		int col_index;
 		std::wstring text_color;
 		std::wstring bk_color;
+		int row_index;
+		int col_index;
 		UINT text_style;
-		int flag;
-		
 		GridItemType type;
+		int flag;				//状态等
+		
 		int iValue;
 		double dValue;
 		std::vector<std::wstring> combo_list;
 		std::wstring date;
 
-		GridItem(std::wstring txt = L"", int row = -1, int col = -1, GridItemType item_type = GIT_String) : text(txt), row_index(row), col_index(col)\
-			, type(item_type), iValue(0), dValue(0.0), text_style(0), flag(0){
+		GridItem(GridItemInfo* info) : text(info->txt), text_color(info->text_color), bk_color(info->bk_color), row_index(info->row), col_index(info->col)\
+			, type(info->type), text_style(info->text_style), flag(0), iValue(0), dValue(0.0){
 			
 		};
 		virtual ~GridItem(){};
+
+		virtual ui::Control *GetControl(){ return nullptr; };
 
 		//virtual bool IsValid(){ return true; }
 		bool IsSelected(){
@@ -108,12 +127,21 @@ namespace ui
 		}
 	};
 
-	class GridHeaderItem :public GridItem{
+	class UILIB_API GridHeaderItem :public GridItem{
 	public:
-		GridHeaderItem(std::wstring txt = L"", int row = -1, int col = -1, GridItemType item_type = GIT_String) : GridItem(txt, row, col){
+		GridHeaderItem(GridItemInfo* info) : GridItem(info){
 		};
-		virtual ~GridHeaderItem(){};
+		virtual ~GridHeaderItem(){
+			if (control_)
+			{
+				delete control_;
+				control_ = nullptr;
+			}
+		};
 		//virtual bool IsValid() override { return type == GIT_String && text.empty() && iValue == 0 && dValue == 0.0 && combo_list.empty() && date.empty(); }
+		virtual ui::Control *GetControl(){ return control_; }
+
+		ui::Control *control_ = nullptr;
 	};
 
 	/*class GridRowHeaderItem :public GridItem{
@@ -123,7 +151,7 @@ namespace ui
 		virtual ~GridRowHeaderItem(){};
 	};*/
 
-	class GridSelRange{
+	class UILIB_API GridSelRange{
 		friend class GridBody;
 	public:
 		GridSelRange(GridBody *pBody) : m_pBody(pBody){};
@@ -143,13 +171,15 @@ namespace ui
 		bool IsRowSelected(int row_index);
 		bool IsColSelected(int col_index);
 		bool GetSelRange(UiRect &rc);
+		std::vector<int> GetSelRows();
+		std::vector<int> GetSelCols();
 
 		bool MoveSelItem(TCHAR move_key, bool ctrl = false, bool shift = false);
 
 		void CtrlCorX(bool cut);
 		void CtrlV();
 
-
+		
 	protected:
 		GridBody *m_pBody;
 		std::map<int, void*> m_mapSelRow;
@@ -162,10 +192,11 @@ namespace ui
 	//typedef std::vector<GridItem*> GridRow;
 	typedef std::vector<int> GridLayout;
 
-	class GridRow
+	class UILIB_API GridRow
 	{
 	public:
 		std::vector<GridItem*> items;
+		int row_state = 0;
 
 		GridRow(){};
 		~GridRow(){};
@@ -188,4 +219,6 @@ namespace ui
 			return items.size();
 		}
 	};
+
+	typedef GridRow GridHeader;
 }

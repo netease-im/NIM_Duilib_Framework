@@ -5,7 +5,7 @@
 namespace ui
 {
 	Grid::Grid() : ScrollableBox(new VLayout()){
-		
+
 	}
 
 	Grid::~Grid(){
@@ -33,7 +33,7 @@ namespace ui
 		SetHeaderHeight(m_pBody->m_defaultRowHeight);
 		//SetFixedBkColor(L"splitline_level2");
 		//SetGridLineColor(L"grid_line");
-		
+
 		if (m_pVerticalScrollBar)
 			m_pVerticalScrollBar->SetAutoHideScroll(false);
 		if (m_pHorizontalScrollBar)
@@ -41,6 +41,12 @@ namespace ui
 
 		m_bIsInit = true;
 	}
+
+	int Grid::GetDefaultRowHeight(){ return m_pBody->GetDefaultRowHeight(); };
+	void Grid::SetDefaultRowHeight(int height){ return m_pBody->SetDefaultRowHeight(height); };
+
+	int Grid::GetDefaultColWidth(){ return m_pBody->GetDefaultColWidth(); };
+	void Grid::SetDefaultColWidth(int width){ return m_pBody->SetDefaultColWidth(width); };
 
 	int Grid::GetColCount() const{ return m_pBody->GetColCount(); }
 	void Grid::SetColCount(int count){ return m_pBody->SetColCount(count); }
@@ -56,6 +62,9 @@ namespace ui
 
 	int Grid::GetColumnWidth(int col_index) const{ return m_pBody->GetColumnWidth(col_index); };
 	void Grid::SetColumnWidth(int col_index, int width){ m_pBody->SetColumnWidth(col_index, width); }
+
+	int Grid::GetRowHeight(int row_index) const { return m_pBody->GetRowHeight(row_index); };
+	void Grid::SetRowHeight(int row_index, int height){ return m_pBody->SetRowHeight(row_index, height); };
 
 	int Grid::GetHeaderHeight() const{ return m_pBody->GetHeaderHeight(); }
 	void Grid::SetHeaderHeight(int height){
@@ -80,9 +89,10 @@ namespace ui
 	int Grid::GetFixedColWidth() const{ return m_pBody->GetFixedColWidth(); }
 	int Grid::GetFixedRowHeight() const{ return m_pBody->GetFixedRowHeight(); }
 	
-	GridItem* Grid::AddCol(std::wstring text, int width){ return m_pBody->AddCol(text, width); }
+	GridHeaderItem* Grid::AddCol(std::wstring text, int width){ return m_pBody->AddCol(text, width); }
 	bool Grid::AddRow(){ return m_pBody->AddRow(); }
 
+	GridHeader *Grid::GetHeader(){ return m_pBody->GetHeader(); }
 	GridItem *Grid::GetGridItem(int row_index, int col_index){ return m_pBody->GetGridItem(row_index, col_index); }
 
 	void Grid::Clear(bool include_header){ return m_pBody->Clear(include_header); }
@@ -92,6 +102,9 @@ namespace ui
 	void Grid::AttachTextChange(const EventCallback& callback){ return m_pBody->AttachTextChange(callback); }
 	bool Grid::LoadExcel(std::wstring file, int sheet_num, bool touch_header){ return m_pBody->LoadExcel(file, sheet_num, touch_header); };
 	bool Grid::AutoFixColWidth(int col_index, int min_width, int max_width){ return m_pBody->AutoFixColWidth(col_index, min_width, max_width); };
+	
+	const GridSelRange& Grid::GetSelRange() const{ return m_pBody->GetSelRange(); };
+
 
 	bool Grid::ButtonDown(EventArgs& msg)
 	{

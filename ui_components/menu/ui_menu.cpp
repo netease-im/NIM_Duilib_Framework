@@ -429,7 +429,7 @@ void CMenuWnd::InitWindow()
 	{
 		m_pLayout = dynamic_cast<ListBox*>(FindControl(L"submenu"));
 		ASSERT(m_pLayout);
-		m_pLayout->SetAutoDestroy(false);
+		m_pLayout->SetAutoDestroyChild(false);
 
 		for (int i = 0; i < m_pOwner->GetSubMenuItemCount(); i++) {
 			CMenuElementUI* subMenuItem = dynamic_cast<CMenuElementUI*>(m_pOwner->GetSubMenuItemAt(i));

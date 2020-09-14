@@ -14,14 +14,7 @@ namespace ui
 			sum += (*it);
 		return sum;
 	}
-	GridRow* GridBody::_GetHeader() const
-	{
-		GridRow *header = nullptr;
-		assert(m_vecRow.size() > 0);
-		if (m_vecRow.size() > 0)
-			header = m_vecRow[0];
-		return header;
-	}
+	
 	void GridBody::_BeginEditGridItem(GridItem *item)
 	{
 		int row_index = item->row_index;
@@ -329,11 +322,13 @@ namespace ui
 		m_pComboEdit->SetVisible_(false);
 		m_pComboEdit->AttachSelect(nbase::Bind(&GridBody::OnComboEditSelected, this, std::placeholders::_1));
 		Add(m_pComboEdit);
+
+		SetAutoDestroyChild(false);
 	};
 
 	int GridBody::GetColCount() const
 	{
-		assert(m_hLayout.size() == _GetHeader()->size());
+		assert(m_hLayout.size() == GetHeader()->size());
 		return m_hLayout.size();
 	}
 	void GridBody::SetColCount(int count)
@@ -341,7 +336,7 @@ namespace ui
 #ifdef _DEBUG
 		clock_t t1 = clock();
 #endif
-		assert(m_vecRow.size() > 0 && _GetHeader()->size() == m_hLayout.size());
+		assert(m_vecRow.size() > 0 && GetHeader()->size() == m_hLayout.size());
 		assert(m_vLayout.size() > 0);
 		if (m_vLayout.size() == 0)
 			return;
@@ -353,16 +348,20 @@ namespace ui
 			int col_index = col_count;
 			for (; col_index < count; col_index++)
 			{
-				GridItem *item = new GridHeaderItem(L"", 0, col_index);
-				_GetHeader()->push_back(item);
+				GridItemInfo itemInfo(L"", 0, col_index);
+				GridItem *item = new GridHeaderItem(&itemInfo);
+				GetHeader()->push_back(item);
 				m_hLayout.push_back(m_defaultColWidth);
 				for (size_t i = 1; i < row_count; i++)
 				{
-					m_vecRow[i]->push_back(new GridItem(L"", i, col_index));
+					itemInfo.row = i;
+					m_vecRow[i]->push_back(new GridItem(&itemInfo));
 				}
 			}
 
 			SetFixedWidth(_SumIntList(m_hLayout));
+
+			OnColumnCountChanged(-1, false);
 			Invalidate();
 		}
 		else if (count < col_count)
@@ -375,11 +374,21 @@ namespace ui
 			{
 				int row_index = col_count - 1;
 				delay_delete_items.insert(delay_delete_items.end(), m_vecRow[i]->items.begin() + count, m_vecRow[i]->items.end());
-
+				if (i == 0)
+				{
+					for (size_t j = 0; j < delay_delete_items.size(); j++)
+					{
+						GridHeaderItem *pHeaderItem = dynamic_cast<GridHeaderItem*>(delay_delete_items[j]);
+						if (pHeaderItem && pHeaderItem->control_)
+						{
+							Remove(pHeaderItem->control_);
+						}
+					}
+					assert(GetCount() == GRIDBODY_CHILD_COUNT);
+				}
 				m_vecRow[i]->items.erase(m_vecRow[i]->items.begin() + count, m_vecRow[i]->items.end());
 			}
 			
-
 			//异步回收内存
 			std::thread thread_delete([delay_delete_items](){
 				int index = 0;
@@ -399,6 +408,8 @@ namespace ui
 			m_hLayout.erase(m_hLayout.begin() + count, m_hLayout.end());
 
 			SetFixedWidth(_SumIntList(m_hLayout));
+
+			OnColumnCountChanged(-1, true);
 			Invalidate();
 		}
 
@@ -436,9 +447,8 @@ namespace ui
 				wchar_t buf[16] = {};
 				for (int col = 0; col < col_count; col++)
 				{
-					GridItem *item = new GridItem;
-					item->row_index = row_index;
-					item->col_index = col;
+					GridItemInfo itemInfo(L"", row_index, col);
+					GridItem *item = new GridItem(&itemInfo);
 					if (col == 0)
 						item->text = _itow(m_vecRow.size(), buf, 10);
 					item->CopyType(GetGridItem(0, col));
@@ -548,6 +558,30 @@ namespace ui
 			{
 				m_hLayout[col_index] = width;
 				SetFixedWidth(_SumIntList(m_hLayout));
+				OnColumnWidthChanged(col_index, width);
+				Invalidate();
+			}
+		}
+	}
+
+	int GridBody::GetRowHeight(int row_index) const
+	{
+		assert(row_index >= 0 && row_index < GetRowCount());
+		if (row_index >= 0 && row_index < GetRowCount())
+		{
+			return m_vLayout[row_index];
+		}
+	}
+	void GridBody::SetRowHeight(int row_index, int height)
+	{
+		assert(row_index >= 0 && row_index < GetRowCount());
+		if (row_index >= 0 && row_index < GetRowCount())
+		{
+			if (m_vLayout[row_index] != height)
+			{
+				m_vLayout[row_index] = height;
+				SetFixedHeight(_SumIntList(m_vLayout));
+				/*OnRowHeightChanged(row_index, height);*/
 				Invalidate();
 			}
 		}
@@ -655,20 +689,25 @@ namespace ui
 		return ret;
 	}
 
-	GridItem* GridBody::AddCol(std::wstring text, int width)
+	GridHeaderItem* GridBody::AddCol(std::wstring text, int width)
 	{
-		assert(m_vecRow.size() > 0 && _GetHeader()->size() == m_hLayout.size());
-		int col_index = _GetHeader()->size();
-		GridItem *item = new GridHeaderItem(text, 0, col_index);
-		_GetHeader()->push_back(item);
+		assert(m_vecRow.size() > 0 && GetHeader()->size() == m_hLayout.size());
+		int col_index = GetHeader()->size();
+
+		GridItemInfo itemInfo(text, 0, col_index);
+		GridHeaderItem *item = new GridHeaderItem(&itemInfo);
+		GetHeader()->push_back(item);
 		m_hLayout.push_back(width);
 		SetFixedWidth(_SumIntList(m_hLayout));
+
+		itemInfo.txt = L"";
 		for (size_t i = 1; i < m_vecRow.size(); i++)
 		{
-			m_vecRow[i]->push_back(new GridItem(L"", i, col_index));
+			itemInfo.row = i;
+			m_vecRow[i]->push_back(new GridItem(&itemInfo));
 		}
 
-		/*m_selRange.Clear();*/
+		OnColumnCountChanged(col_index, false);
 		Invalidate();
 		return item;
 	}
@@ -684,12 +723,10 @@ namespace ui
 		wchar_t buf[16] = {};
 		for (size_t i = 0; i < col_count; i++)
 		{
-			GridItem *item = new GridItem;
-
+			GridItemInfo itemInfo(L"", row_index, i);
 			if (i == 0)
-				item = new GridItem(_itow(m_vecRow.size(), buf, 10), row_index, i);
-			else
-				item = new GridItem(L"", row_index, i);
+				itemInfo.txt = _itow(m_vecRow.size(), buf, 10);
+			GridItem *item = new GridItem(&itemInfo);
 
 			pRow->push_back(item);
 			item->CopyType(GetGridItem(0, i));
@@ -709,9 +746,18 @@ namespace ui
 		return true;
 	}
 
+	GridHeader* GridBody::GetHeader() const
+	{
+		GridRow *header = nullptr;
+		assert(m_vecRow.size() > 0);
+		if (m_vecRow.size() > 0)
+			header = m_vecRow[0];
+		return header;
+	}
+
 	GridItem *GridBody::GetGridItem(int row_index, int col_index)
 	{
-		assert(_GetHeader()->size() == m_hLayout.size() && m_vecRow.size() == m_vLayout.size());
+		assert(GetHeader()->size() == m_hLayout.size() && m_vecRow.size() == m_vLayout.size());
 		GridItem *item = nullptr;
 		if (row_index >= 0 && row_index < m_vecRow.size() && col_index >= 0 && col_index < m_vecRow[row_index]->size())
 		{
@@ -769,14 +815,24 @@ namespace ui
 	{
 		bool ret = false;
 		_ClearModifyAndSel();
-		assert(m_hLayout.size() == _GetHeader()->size());
+		assert(m_hLayout.size() == GetHeader()->size());
 		col_index--;
-		if (col_index > 0 && col_index < _GetHeader()->size())
+		if (col_index > 0 && col_index < GetHeader()->size())
 		{
 			std::vector<GridItem*> delay_delete_items;
 			for (auto it = m_vecRow.begin(); it != m_vecRow.end(); it++)
 			{
 				GridRow *pRow = *it;
+				delay_delete_items.push_back(*(pRow->items.begin() + col_index));
+				if (it == m_vecRow.begin())
+				{
+					GridHeaderItem *pHeaderItem = dynamic_cast<GridHeaderItem*>(delay_delete_items[0]);
+					if (pHeaderItem && pHeaderItem->control_)
+					{
+						Remove(pHeaderItem->control_);
+					}
+					assert(GetCount() == GRIDBODY_CHILD_COUNT);
+				}
 				pRow->items.erase(pRow->items.begin() + col_index);
 			}
 			m_hLayout.erase(m_hLayout.begin() + col_index);
@@ -808,6 +864,8 @@ namespace ui
 				m_nFixedCol--;
 
 			SetFixedWidth(_SumIntList(m_hLayout));
+
+			OnColumnCountChanged(col_index, true);
 			Invalidate();
 			ret = true;
 		}
@@ -1004,6 +1062,11 @@ namespace ui
 
 		SetColumnWidth(col_index, col_width);
 		return true;
+	}
+
+	const GridSelRange& GridBody::GetSelRange() const
+	{
+		return m_selRange;
 	}
 
 	void GridBody::HandleMessage(EventArgs& event)
@@ -1368,8 +1431,8 @@ namespace ui
 			else */{
 				CSize scrollPos = m_pGrid->GetScrollPos();
 				UiRect rcNewPaint = GetPaddingPos();
-				rcNewPaint.left += GetFixedColWidth();
-				rcNewPaint.top += GetFixedRowHeight();
+				rcNewPaint.left += GetFixedColWidth();			
+				/*rcNewPaint.top += GetFixedRowHeight();*/		//可能表头存在控件
 				if (rcNewPaint.left > rcNewPaint.right) rcNewPaint.left = rcNewPaint.right;
 				if (rcNewPaint.top > rcNewPaint.bottom) rcNewPaint.top = rcNewPaint.bottom;
 				AutoClip alphaClip(pRender, rcNewPaint, m_bClip);

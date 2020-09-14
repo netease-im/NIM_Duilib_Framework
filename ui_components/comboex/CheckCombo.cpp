@@ -92,7 +92,7 @@ namespace nim_comp
 		if (uMsg == WM_CREATE) {
 			this->Window::Init(m_hWnd);
 			Box* pRoot = new Box;
-			pRoot->SetAutoDestroy(false);
+			pRoot->SetAutoDestroyChild(false);
 			pRoot->Add(m_pOwner->GetListBox());
 			this->AttachDialog(pRoot);
 			this->SetWindowResourcePath(m_pOwner->GetWindow()->GetWindowResourcePath());
@@ -147,7 +147,7 @@ namespace nim_comp
 		m_pDropList->SetBkColor(L"bk_wnd_lightcolor");
 		m_pDropList->SetBorderColor(L"splitline_level1");
 		m_pDropList->SetBorderSize(UiRect(1, 1, 1, 1));
-		m_pDropList->SetAutoDestroy(false);
+		m_pDropList->SetAutoDestroyChild(false);
 		m_pDropList->EnableScrollBar();
 		m_pDropList->ApplyAttributeList(GetDropBoxAttributeList());
 
@@ -155,7 +155,7 @@ namespace nim_comp
 		//m_pList->SetMouseEnabled(false);
 		m_pList->AttachButtonDown(std::bind(&CheckCombo::OnListButtonDown, this, std::placeholders::_1));
 		m_pList->SetMouseChildEnabled(false);
-		//m_pList->SetAutoDestroy(false);
+		//m_pList->SetAutoDestroyChild(false);
 		m_pList->EnableScrollBar();
 		Box::Add(m_pList.get());
 

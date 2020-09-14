@@ -41,10 +41,11 @@
         </TreeView>
       </HBox>
       <Control class="splitline_hor_level1"/>
-      <HBox height="85">
+      <HBox height="118">
         <VBox margin="0,0,10">
           <Combo class="list" name="combo" height="30" margin="0,12,0,0" padding="6" bkimage="file='../public/combo/normal.png' corner='5,5,30,5'"/>
           <RichEdit class="simple input" height="30" margin="0,3" padding="6,6,6" promptmode="true" prompttext="Single line text control" promptcolor="lightcolor"/>
+          <FilterCombo name="filter_combo" height="30" margin="0,3" bordersize="1" bordercolor="splitline_level1"/>
         </VBox>
         <CheckCombo name="check_combo" width="100" height="26" margin="6,10,6" bordersize="1" bordercolor="splitline_level1"/>
         <!-- Progress -->
