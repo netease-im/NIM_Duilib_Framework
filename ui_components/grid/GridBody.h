@@ -4,24 +4,38 @@
 namespace ui
 {
 	class Grid;
-	class GridBody : public Box
+	class UILIB_API GridBody : public Box
 	{
 		friend class Grid;
 		friend class GridSelRange;
 	protected:
 		GridBody(Grid *pGrid);
-		virtual ~GridBody(){};
+		virtual ~GridBody(){
+			if (m_pReEdit)
+			{
+				delete m_pReEdit;
+				m_pReEdit = nullptr;
+			}
+			if (m_pComboEdit)
+			{
+				delete m_pComboEdit;
+				m_pComboEdit = nullptr;
+			}
+		};
 
+		int GetDefaultRowHeight(){ return m_defaultRowHeight; };
 		void SetDefaultRowHeight(int height){ m_defaultRowHeight = height; };
+		
+		int GetDefaultColWidth(){ return m_defaultColWidth; };
 		void SetDefaultColWidth(int width){ m_defaultColWidth = width; };
-		int GetTotalRowHeight(){}
+		int GetTotalRowHeight(){};
 
 	protected:	//pass by grid
 		/**
 		* @brief 总列数
 		*/
 		int GetColCount() const;
-		void SetColCount(int count);
+		virtual void SetColCount(int count);
 
 		/**
 		* @brief 总行数
@@ -49,6 +63,13 @@ namespace ui
 		void SetColumnWidth(int col_index, int width);
 
 		/**
+		* @brief 行高;
+		* @param[in] row_index: 第几行,base on 0;
+		*/
+		int GetRowHeight(int row_index) const;
+		void SetRowHeight(int row_index, int height);
+
+		/**
 		* @brief 表头高度
 		*/
 		int GetHeaderHeight() const;
@@ -72,6 +93,8 @@ namespace ui
 		std::wstring GetGridLineColor() const;
 		void SetGridLineColor(std::wstring color);
 	
+		/**
+		*/
 		int GetFixedColWidth() const;
 		int GetFixedRowHeight() const;
 
@@ -96,13 +119,19 @@ namespace ui
 		* @param[in] width: 列宽度;
 		* @return 返回新加的表头单元格对象指针,null表示未成功;
 		*/
-		GridItem* AddCol(std::wstring text, int width = 80);
+		virtual GridHeaderItem* AddCol(std::wstring text, int width = 80);
 
 		/**
 		* @brief 插入行在表格最后
 		* @return 返回 true为成功，false 为失败
 		*/
-		bool AddRow();
+		virtual bool AddRow();
+
+		/*
+		* @brief 获取表头行信息;
+		* @return 表头行信息;
+		*/
+		GridHeader* GetHeader() const;
 
 		/**
 		* @brief 获取单元格对象
@@ -156,6 +185,11 @@ namespace ui
 		*/
 		bool AutoFixColWidth(int col_index, int min_width = 30, int max_width = -1);
 
+		/**
+		* @brief 获取选择信息
+		* @return 返回 GridSelRange
+		*/
+		const GridSelRange& GetSelRange() const;
 	protected:
 		virtual void HandleMessage(EventArgs& event) override;
 		virtual bool ButtonDown(EventArgs& msg) override;
@@ -175,18 +209,26 @@ namespace ui
 		*/
 		bool OnComboEditSelected(EventArgs *args);
 
+		/**
+		* @brief SetColumnWidth中调用, 更改了列宽;
+		* @param[in] col_index:	要调整的列序号, base on 0;
+		* @param[in] width:	新的列宽;
+		*/
+		virtual void OnColumnWidthChanged(int col_index, int width){};
+
+		/**
+		* @brief 增/删列;
+		* @param[in] col_index:	列序号, base on 0, -1代表多列;
+		* @param[in] bRemove:	true:删除列; false:新增列;
+		*/
+		virtual void OnColumnCountChanged(int col_index, bool bRemove){};
+
 	protected:
 		/*
 		* @brief 计算vector<int>之和;
 		* @return 和;
 		*/
 		int _SumIntList(const std::vector<int> &vec);
-
-		/*
-		* @brief 获取表头行信息;
-		* @return 表头行信息;
-		*/
-		GridRow* _GetHeader() const;
 
 		virtual void _BeginEditGridItem(GridItem *item);
 		virtual void _EndEdit();
@@ -289,6 +331,7 @@ namespace ui
 		std::wstring m_strGridFont = L"system_12";
 		UINT	m_uTextStyle =  DT_CENTER | DT_VCENTER | DT_SINGLELINE;
 		
+#define GRIDBODY_CHILD_COUNT	2
 		/* 编辑时候的RichEdit/Combo控件 */
 		RichEdit *m_pReEdit = nullptr;
 		Combo *m_pComboEdit = nullptr;

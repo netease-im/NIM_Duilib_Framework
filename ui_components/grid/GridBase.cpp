@@ -621,6 +621,28 @@ namespace ui
 		return true;
 	}
 
+	std::vector<int> GridSelRange::GetSelRows()
+	{
+		std::vector<int> vec;
+		for (auto it = m_mapSelRow.cbegin(); it != m_mapSelRow.cend(); it++)
+		{
+			vec.push_back(it->first);
+		}
+
+		return vec;
+	}
+
+	std::vector<int> GridSelRange::GetSelCols()
+	{
+		std::vector<int> vec;
+		for (auto it = m_mapSelCol.cbegin(); it != m_mapSelCol.cend(); it++)
+		{
+			vec.push_back(it->first);
+		}
+
+		return vec;
+	}
+
 	bool GridSelRange::MoveSelItem(TCHAR move_key, bool ctrl, bool shift)
 	{
 		if (shift)

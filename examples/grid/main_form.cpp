@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "main_form.h"
 #include "../../ui_components/grid/Grid.h"
+#include "control\MyGrid.h"
 
 #include <fstream>
 
@@ -39,12 +40,17 @@ Control* MainForm::CreateControl(const std::wstring& pstrClass)
 	{
 		pControl = new Grid;
 	}
+	else if (pstrClass == L"MyGrid")
+	{
+		pControl = new MyGrid;
+	}
 	return pControl;
 }
 
 void MainForm::InitWindow()
 {
 	Grid *grid = static_cast<Grid*>(FindControl(L"grid"));
+	grid->SetHeaderHeight(48);
 	std::wstring header[] = { L"代码", L"名称", L"类型", L"长度", L"顺序号",
 		L"编辑模式", L"是否显示", L"参数类型", L"参数值", L"默认值" };
 
@@ -92,7 +98,6 @@ void MainForm::InitWindow()
 	}
 
 	grid->SetRowCount(30);
-
 	/*for (size_t i = 0; i < 100; i++)
 	{
 		grid->AddRow();
@@ -198,8 +203,6 @@ void MainForm::InitWindow()
 
 		return true;
 	});
-
-	//tree_ = static_cast<TreeView*>(FindControl(L"tree"));
 }
 
 LRESULT MainForm::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)

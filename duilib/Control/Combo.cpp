@@ -150,6 +150,8 @@ Combo::Combo() :
 	m_pLayout.reset(new ListBox(new VLayout));
 	m_pLayout->GetLayout()->SetPadding(UiRect(1, 1, 1, 1));
 	m_pLayout->SetBorderSize(UiRect(1, 1, 1, 1));
+	m_pLayout->SetBkColor(L"white");
+	m_pLayout->SetBorderColor(L"gray");
 	m_pLayout->SetAutoDestroyChild(false);
 	m_pLayout->EnableScrollBar();
 	m_pLayout->ApplyAttributeList(GetDropBoxAttributeList());

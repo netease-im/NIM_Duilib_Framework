@@ -1131,7 +1131,7 @@ void ScrollableBox::SetScrollPos(CSize szPos)
 	LoadImageCache(cy > 0);
 	Invalidate();
 	if( m_pWindow != NULL )	{
-		m_pWindow->SendNotify(this, kEventScrollChange);
+		m_pWindow->SendNotify(this, kEventScrollChange, (cy == 0) ? 0 : 1, (cx == 0) ? 0 : 1);
 	}
 }
 

@@ -14,9 +14,23 @@ namespace ui
 		virtual GridBody* CreateGridBody();		//继承类需要重载这个接口 并实现自定义GridBody
 		virtual void Init() override;
 	public:
+
 		
 		
 	public: //pass to gridbody
+
+		/**
+		* @brief 默认行高
+		*/
+		int GetDefaultRowHeight();
+		void SetDefaultRowHeight(int height);
+
+		/**
+		* @brief 默认列宽
+		*/
+		int GetDefaultColWidth();
+		void SetDefaultColWidth(int width);
+
 		/**
 		* @brief 总列数
 		*/
@@ -47,6 +61,13 @@ namespace ui
 		*/
 		int GetColumnWidth(int col_index) const;
 		void SetColumnWidth(int col_index, int width);
+
+		/**
+		* @brief 行高;
+		* @param[in] row_index: 第几行,base on 0;
+		*/
+		int GetRowHeight(int row_index) const;
+		void SetRowHeight(int row_index, int height);
 
 		/**
 		* @brief 表头高度
@@ -96,13 +117,19 @@ namespace ui
 		* @param[in] width: 列宽度;
 		* @return 返回新加的表头单元格对象指针,null表示未成功;
 		*/
-		GridItem* AddCol(std::wstring text, int width = 80);
+		GridHeaderItem* AddCol(std::wstring text, int width = 80);
 
 		/**
 		* @brief 插入行在表格最后;
 		* @return 返回 true为成功，false 为失败
 		*/
 		bool AddRow();
+
+		/**
+		* @brief 获取表头信息
+		* @return 返回表头信息,null表示未找到;
+		*/
+		GridHeader *GetHeader();
 
 		/**
 		* @brief 获取单元格对象
@@ -155,6 +182,12 @@ namespace ui
 		* @return 返回 true为成功，false 为失败
 		*/
 		bool AutoFixColWidth(int col_index, int min_width = 30, int max_width = -1);
+
+		/**
+		* @brief 获取选择信息
+		* @return 返回 GridSelRange
+		*/
+		const GridSelRange& GetSelRange() const;
 	protected:
 		
 
