@@ -796,10 +796,9 @@ CSize Window::GetInitSize(bool bContainShadow) const
 	return xy;
 }
 
-void Window::SetInitSize(int cx, int cy, bool bContainShadow, bool bNeedDpiScale)
+void Window::Resize(int cx, int cy, bool bContainShadow, bool bNeedDpiScale)
 {
-	if (bNeedDpiScale)
-	{
+	if (bNeedDpiScale) {
 		DpiManager::GetInstance()->ScaleInt(cy);
 		DpiManager::GetInstance()->ScaleInt(cx);
 	}
@@ -811,8 +810,15 @@ void Window::SetInitSize(int cx, int cy, bool bContainShadow, bool bNeedDpiScale
 	}
 	m_szInitWindowSize.cx = cx;
 	m_szInitWindowSize.cy = cy;
-	if( m_pRoot == NULL && m_hWnd != NULL ) {
+	if(m_hWnd != NULL ) {
 		::SetWindowPos(m_hWnd, NULL, 0, 0, m_szInitWindowSize.cx, m_szInitWindowSize.cy, SWP_NOZORDER | SWP_NOMOVE | SWP_NOACTIVATE);
+	}
+}
+
+void Window::SetInitSize(int cx, int cy, bool bContainShadow, bool bNeedDpiScale)
+{
+	if(m_pRoot == NULL) {
+		Resize(cx, cy, bContainShadow, bNeedDpiScale);
 	}
 }
 

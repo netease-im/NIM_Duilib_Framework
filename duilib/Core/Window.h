@@ -525,6 +525,16 @@ public:
 	void SetMaxInfo(int cx, int cy, bool bContainShadow = false);
 
 	/**
+	 * @brief 重置窗口大小
+	 * @param[in] cx 宽度
+	 * @param[in] cy 高度
+	 * @param[in] bContainShadow 为 false 表示 cx cy 不包含阴影
+	 * @param[in] bNeedDpiScale 为 false 表示不根据 DPI 调整
+	 * @return 无
+	 */
+	void Resize(int cx, int cy, bool bContainShadow = false, bool bNeedDpiScale = true);
+
+	/**
 	 * @brief 设置窗口初始大小
 	 * @param[in] cx 宽度
 	 * @param[in] cy 高度
