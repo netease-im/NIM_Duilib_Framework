@@ -163,7 +163,8 @@ LRESULT WindowImplBase::OnNcHitTest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOO
 		&& pt.y >= rcClient.top + rcCaption.top && pt.y < rcClient.top + rcCaption.bottom ) {
 			Control* pControl = FindControl(pt);
 			if( pControl ) {
-				if (dynamic_cast<Button*>(pControl) || dynamic_cast<ButtonBox*>(pControl) || dynamic_cast<RichEdit*>(pControl))
+				if (dynamic_cast<Button*>(pControl) || dynamic_cast<ButtonBox*>(pControl) || 
+					dynamic_cast<RichEdit*>(pControl) || dynamic_cast<Combo*>(pControl))
 					return HTCLIENT;
 				else
 					return HTCAPTION;
