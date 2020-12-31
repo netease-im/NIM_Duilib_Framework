@@ -7,6 +7,7 @@ namespace ui
 {
 
 std::wstring GlobalManager::m_pStrResourcePath;
+std::wstring GlobalManager::m_pStrLanguagePath;
 std::vector<Window*> GlobalManager::m_aPreMessages;
 std::map<std::wstring, std::unique_ptr<WindowBuilder>> GlobalManager::m_builderMap;
 CreateControlCallback GlobalManager::m_createControlCallback;
@@ -33,6 +34,7 @@ std::unique_ptr<IRenderFactory> GlobalManager::m_renderFactory;
 static ULONG_PTR g_gdiplusToken;
 static Gdiplus::GdiplusStartupInput g_gdiplusStartupInput;
 static HZIP g_hzip = NULL;
+const std::wstring kLanguageFileName = L"gdstrings.ini";
 
 void GlobalManager::Startup(const std::wstring& strResourcePath, const CreateControlCallback& callback, bool bAdaptDpi, const std::wstring& theme, const std::wstring& language)
 {
@@ -49,16 +51,18 @@ void GlobalManager::Startup(const std::wstring& strResourcePath, const CreateCon
 	// 解析全局资源信息
 	LoadGlobalResource();
 
+	SetLanguagePath(strResourcePath + language);
+
 	// 加载多语言文件，如果使用了资源压缩包则从内存中加载语言文件
 	if (g_hzip) {
-		HGLOBAL hGlobal = GetData(strResourcePath + language + L"\\gdstrings.ini");
+		HGLOBAL hGlobal = GetData(GetLanguagePath() + L"\\" + kLanguageFileName);
 		if (hGlobal) {
 			ui::MutiLanSupport::GetInstance()->LoadStringTable(hGlobal);
 			GlobalFree(hGlobal);
 		}
 	}
 	else {
-		MutiLanSupport::GetInstance()->LoadStringTable(strResourcePath + language + L"\\gdstrings.ini");
+		MutiLanSupport::GetInstance()->LoadStringTable(GetLanguagePath() + L"\\" + kLanguageFileName);
 	}
 
 	GdiplusStartup(&g_gdiplusToken, &g_gdiplusStartupInput, NULL);
@@ -90,6 +94,11 @@ std::wstring GlobalManager::GetResourcePath()
 	return m_pStrResourcePath;
 }
 
+std::wstring GlobalManager::GetLanguagePath()
+{
+	return m_pStrLanguagePath;
+}
+
 void GlobalManager::SetCurrentPath(const std::wstring& strPath)
 {
 	::SetCurrentDirectory(strPath.c_str());
@@ -101,6 +110,11 @@ void GlobalManager::SetResourcePath(const std::wstring& strPath)
 	if (m_pStrResourcePath.empty()) return;
 	TCHAR cEnd = m_pStrResourcePath.at(m_pStrResourcePath.length() - 1);
 	if (cEnd != _T('\\') && cEnd != _T('/')) m_pStrResourcePath += _T('\\');
+}
+
+void GlobalManager::SetLanguagePath(const std::wstring& strPath)
+{
+	m_pStrLanguagePath = strPath;
 }
 
 void GlobalManager::LoadGlobalResource()
@@ -123,6 +137,22 @@ void GlobalManager::ReloadSkin(const std::wstring& resourcePath)
 	for (auto it = m_aPreMessages.begin(); it != m_aPreMessages.end(); it++) {
 		(*it)->GetRoot()->Invalidate();
 	}
+}
+
+void GlobalManager::ReloadLanguage(const std::wstring& languagePath, bool invalidateAll) 
+{
+	if (GetLanguagePath() != languagePath) {
+		SetLanguagePath(languagePath);
+
+		MutiLanSupport::GetInstance()->LoadStringTable(languagePath + L"\\" + kLanguageFileName);
+
+		if (invalidateAll) {
+			for (auto it = m_aPreMessages.begin(); it != m_aPreMessages.end(); it++) {
+				(*it)->GetRoot()->Invalidate();
+			}
+		}
+	}
+
 }
 
 ui::IRenderFactory* GlobalManager::GetRenderFactory()
