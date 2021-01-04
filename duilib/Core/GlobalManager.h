@@ -45,6 +45,12 @@ public:
 	static std::wstring GetResourcePath();
 
 	/**
+	* @brief 获取当前语言文件路径
+	* @return 返回当前语言文件路径
+	*/
+	static std::wstring GetLanguagePath();
+
+	/**
 	 * @brief 设置程序当前目录
 	 * @param[in] strPath 要设置的路径
 	 * @return 无
@@ -59,11 +65,24 @@ public:
 	static void SetResourcePath(const std::wstring& strPath);
 
 	/**
+	* @brief 设置当前语言文件路径
+	* @return 设置当前语言文件路径
+	*/
+	static void SetLanguagePath(const std::wstring& strPath);
+
+	/**
 	 * @brief 重新加载皮肤资源
 	 * @param[in] resourcePath 资源路径
 	 * @return 无
 	 */
 	static void ReloadSkin(const std::wstring& resourcePath);
+
+	/**
+	 * @brief 重新加载语言资源
+	 * @param[in] languagePath 资源路径
+	 * @return 无
+	 */
+	static void ReloadLanguage(const std::wstring& languagePath, bool invalidateAll = false);
 
 	/**
 	 * @brief 获取绘制接口类对象
@@ -449,6 +468,7 @@ private:
 	typedef std::map<std::wstring, std::weak_ptr<ImageInfo>, ImageCacheKeyCompare> MapStringToImagePtr;
 
 	static std::wstring m_pStrResourcePath; //全局的资源路径，换肤的时候修改这个变量
+	static std::wstring m_pStrLanguagePath; //全局语言文件路径
 	static std::vector<Window*> m_aPreMessages;
 	static std::map<std::wstring, std::unique_ptr<WindowBuilder>> m_builderMap;
 	static CreateControlCallback m_createControlCallback;

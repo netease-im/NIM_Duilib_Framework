@@ -19,7 +19,8 @@ public:
 	{
 		FDT_None,
 		FDT_OpenFile,
-		FDT_SaveFile
+		FDT_SaveFile,
+		FDT_SelectFolder,
 	};
 
 	CFileDialogEx(void);
@@ -38,6 +39,7 @@ public:
 
 	void AyncShowOpenFileDlg(FileDialogCallback2 file_dialog_callback1);
 	void AyncShowSaveFileDlg(FileDialogCallback2 file_dialog_callback2);
+	void AsyncShowSelectFolderDlg(FileDialogCallback2 file_dialog_callback2);
 	virtual void SyncShowModal() override;
 	std::wstring GetPathName();
 	std::wstring GetFileName();
@@ -58,6 +60,8 @@ private:
 	wchar_t * m_lpszFileName;
 	FileDialogType file_dialog_type_;
 	FileDialogCallback2 file_dialog_callback2_;
+
+	std::wstring m_strTitle;
 };
 
 }

@@ -1,10 +1,16 @@
 #include "stdafx.h"
 #include <tchar.h>
+#include <Shlobj.h>
+
 #include "file_dialog_ex.h"
 #include "async_do_modal.h"
 #include "base/thread/thread_manager.h"
 #include "base/util/string_util.h"
 #include "base/file/file_util.h"
+
+
+
+#pragma comment(lib,"Shell32.lib")
 
 namespace nim_comp {
 
@@ -15,6 +21,8 @@ CFileDialogEx::CFileDialogEx(void)
 	memset(&m_szFileName, 0, sizeof(m_szFileName));
 	memset(&m_stOFN, 0, sizeof(OPENFILENAME));
 
+	m_strTitle = L"";
+
 	m_lpszFileName = NULL;
 	file_dialog_type_ = FDT_None; 
 	m_stOFN.lStructSize = sizeof(OPENFILENAME);
@@ -23,6 +31,7 @@ CFileDialogEx::CFileDialogEx(void)
 	m_stOFN.lpstrFilter = m_szFilter;
 	m_stOFN.lpstrFile = m_szFileName;
 	m_stOFN.nMaxFile = MAX_PATH;
+	m_stOFN.lpstrTitle = m_strTitle.c_str();
 }
 
 CFileDialogEx::~CFileDialogEx(void)
@@ -113,7 +122,9 @@ void CFileDialogEx::SetParentWnd(HWND hParentWnd)
 
 void CFileDialogEx::SetTitle(LPCTSTR lpszTitle)
 {
-	m_stOFN.lpstrTitle = lpszTitle;
+	m_strTitle = lpszTitle;
+
+	m_stOFN.lpstrTitle = m_strTitle.c_str();
 }
 
 void CFileDialogEx::SetFileNameBufferSize(DWORD dwSize)
@@ -160,6 +171,13 @@ void CFileDialogEx::AyncShowSaveFileDlg(FileDialogCallback2 file_dialog_callback
 	AsyncDoModal(this);
 }
 
+void CFileDialogEx::AsyncShowSelectFolderDlg(FileDialogCallback2 file_dialog_callback2)
+{
+	file_dialog_callback2_ = file_dialog_callback2;
+	file_dialog_type_ = FDT_SelectFolder;
+	AsyncDoModal(this);
+}
+
 void CFileDialogEx::SyncShowModal()
 {
 	if (file_dialog_type_ == FDT_OpenFile)
@@ -202,6 +220,26 @@ void CFileDialogEx::SyncShowModal()
 		BOOL ret = ::GetSaveFileName(&m_stOFN);
 		StdClosure closure = nbase::Bind(file_dialog_callback2_, ret, GetPathName());
 		nbase::ThreadManager::PostTask(kThreadUI, closure);
+	}
+	else if (file_dialog_type_ == FDT_SelectFolder) 
+	{
+		BROWSEINFO bi = { 0 };
+		bi.hwndOwner = m_stOFN.hwndOwner;
+		bi.lpszTitle = m_stOFN.lpstrTitle;
+		bi.pszDisplayName = m_stOFN.lpstrFile;
+		bi.ulFlags = BIF_NEWDIALOGSTYLE | BIF_RETURNONLYFSDIRS | 
+			BIF_DONTGOBELOWDOMAIN | BIF_BROWSEFORCOMPUTER;
+		
+		LPITEMIDLIST idl = ::SHBrowseForFolder(&bi);
+		if (::SHGetPathFromIDList(idl, m_stOFN.lpstrFile)) {
+			StdClosure closure = nbase::Bind(file_dialog_callback2_, true, GetPathName());
+			nbase::ThreadManager::PostTask(kThreadUI, closure);
+		}
+		else {
+			StdClosure closure = nbase::Bind(file_dialog_callback2_, false, GetPathName());
+			nbase::ThreadManager::PostTask(kThreadUI, closure);
+		}
+
 	}
 	else
 	{
