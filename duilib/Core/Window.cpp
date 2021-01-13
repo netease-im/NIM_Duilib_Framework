@@ -78,6 +78,7 @@ Window::Window() :
 	m_defaultFontInfo.hFont = hDefaultFont;
 	m_defaultFontInfo.sFontName = lf.lfFaceName;
 	m_defaultFontInfo.iSize = -lf.lfHeight;
+	m_defaultFontInfo.iWeight = FW_NORMAL;
 	m_defaultFontInfo.bBold = (lf.lfWeight >= FW_BOLD);
 	m_defaultFontInfo.bUnderline = (lf.lfUnderline == TRUE);
 	m_defaultFontInfo.bStrikeout = (lf.lfStrikeOut == TRUE);

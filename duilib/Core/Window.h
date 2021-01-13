@@ -29,6 +29,7 @@ typedef struct tagTFontInfo
 	HFONT hFont;
 	std::wstring sFontName;
 	int iSize;
+	int iWeight;
 	bool bBold;
 	bool bUnderline;
 	bool bStrikeout;

@@ -221,6 +221,7 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 					std::wstring strFontId;
 					std::wstring strFontName;
 					int size = 12;
+					int weight = 0;
 					bool bold = false;
 					bool underline = false;
 					bool strikeout = false;
@@ -254,9 +255,12 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 						else if( strName == _T("default") ) {
 							isDefault = (strValue == _T("true"));
 						}
+						else if ( strName == _T("weight") ) {
+							weight = _tcstol(strValue.c_str(), &pstr, 10);
+						}
 					}
 					if( !strFontName.empty() ) {
-						GlobalManager::AddFont(strFontId, strFontName, size, bold, underline,strikeout, italic, isDefault);
+						GlobalManager::AddFont(strFontId, strFontName, size, bold, underline, strikeout, italic, isDefault, weight);
 					}
 				}
 				else if( strClass == _T("Class") ) {
