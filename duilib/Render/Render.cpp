@@ -527,8 +527,27 @@ void RenderContext_GdiPlus::DrawText(const UiRect& rc, const std::wstring& strTe
 	ASSERT(::GetObjectType(m_hDC) == OBJ_DC || ::GetObjectType(m_hDC) == OBJ_MEMDC);
 	if (strText.empty()) return;
 
+	Gdiplus::InstalledFontCollection installedFontCollection;
+
+	// How many font families are installed?
+	int count = installedFontCollection.GetFamilyCount();
+	if (count == 0) {
+
+		::SetBkMode(m_hDC, TRANSPARENT);
+		::SetTextColor(m_hDC, RGB(GetBValue(dwTextColor), GetGValue(dwTextColor),
+			GetRValue(dwTextColor)));
+		HFONT hOldFont = (HFONT)::SelectObject(m_hDC, GlobalManager::GetFont(strFontId));
+
+		RECT rcGdi = { rc.left,rc.top,rc.right,rc.bottom };
+		::DrawText(m_hDC, strText.c_str(), -1, &rcGdi, uStyle);
+		::SelectObject(m_hDC, hOldFont);
+
+		return;
+	}
+
 	Gdiplus::Graphics graphics(m_hDC);
 	Gdiplus::Font font(m_hDC, GlobalManager::GetFont(strFontId));
+
 	Gdiplus::RectF rcPaint((Gdiplus::REAL)rc.left, (Gdiplus::REAL)rc.top, (Gdiplus::REAL)(rc.right - rc.left), (Gdiplus::REAL)(rc.bottom - rc.top));
 	int alpha = dwTextColor >> 24;
 	uFade *= double(alpha) / 255;
@@ -622,6 +641,23 @@ void RenderContext_GdiPlus::FillPath(const IPath* path, const IBrush* brush)
 
 ui::UiRect RenderContext_GdiPlus::MeasureText(const std::wstring& strText, const std::wstring& strFontId, UINT uStyle, int width /*= DUI_NOSET_VALUE*/)
 {
+	
+	Gdiplus::InstalledFontCollection installedFontCollection;
+
+	// How many font families are installed?
+	int count = installedFontCollection.GetFamilyCount();
+	if (count == 0) {
+		::SetBkMode(m_hDC, TRANSPARENT);
+		HFONT hOldFont = (HFONT)::SelectObject(m_hDC, GlobalManager::GetFont(strFontId));
+
+		SIZE size = { 0 };
+		GetTextExtentPoint32(m_hDC, strText.c_str(), _tcslen(strText.c_str()), &size);
+		::SelectObject(m_hDC, hOldFont);
+
+		UiRect rc(int(0), int(0), int(size.cx + 1), int(size.cy + 1));
+		return rc;
+	}
+
 	Gdiplus::Graphics graphics(m_hDC);
 	Gdiplus::Font font(m_hDC, GlobalManager::GetFont(strFontId));
 	Gdiplus::RectF bounds;
