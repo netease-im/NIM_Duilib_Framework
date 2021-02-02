@@ -59,6 +59,8 @@ class UILIB_API VirtualListBox : public ListBox
 public:
 	VirtualListBox(ui::Layout* pLayout = new VirtualVLayout);
 
+	virtual std::wstring GetType() const override;
+
 	/**
 	 * @brief 设置数据代理对象
 	 * @param[in] pProvider 开发者需要重写 VirtualListInterface 的接口来作为数据代理对象

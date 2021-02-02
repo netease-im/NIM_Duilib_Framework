@@ -51,6 +51,8 @@ class UILIB_API TileBox : public Box
 {
 public:
 	TileBox();
+
+	virtual std::wstring GetType() const override;
 };
 
 }

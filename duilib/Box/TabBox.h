@@ -15,6 +15,7 @@ public:
 	virtual void DoInit() override;
 
 	/// 重写父类方法，提供个性化功能，请参考父类声明
+	virtual std::wstring GetType() const override;
 	virtual bool Add(Control* pControl) override;
 	virtual bool AddAt(Control* pControl, std::size_t iIndex) override;
 	virtual bool Remove(Control* pControl) override;

@@ -1433,7 +1433,12 @@ void RichEdit::SetText(const std::wstring& strText)
 		return;
 
     SetSel(0, -1);
+
+	std::wstring oldText = GetText();
+
     ReplaceSel(strText, FALSE);
+
+	RaiseUIAValueEvent(oldText, strText);
 
 	m_linkInfo.clear();
 }
@@ -1627,15 +1632,27 @@ void RichEdit::ScrollCaret()
 int RichEdit::InsertText(long nInsertAfterChar, LPCTSTR lpstrText, bool bCanUndo)
 {
     int nRet = SetSel(nInsertAfterChar, nInsertAfterChar);
+
+	std::wstring oldText = GetText();
+
     ReplaceSel(lpstrText, bCanUndo);
-    return nRet;
+
+	RaiseUIAValueEvent(oldText, GetText());
+    
+	return nRet;
 }
 
 int RichEdit::AppendText(const std::wstring& strText, bool bCanUndo)
 {
     int nRet = SetSel(-1, -1);
-    ReplaceSel(strText, bCanUndo);
-    return nRet;
+
+	std::wstring oldText = GetText();
+    
+	ReplaceSel(strText, bCanUndo);
+
+	RaiseUIAValueEvent(oldText, GetText());
+
+	return nRet;
 }
 
 DWORD RichEdit::GetDefaultCharFormat(CHARFORMAT2 &cf) const
@@ -1936,6 +1953,9 @@ bool RichEdit::OnTxTextChanged()
 	if (m_pWindow != NULL) {
 		m_pWindow->SendNotify(this, kEventTextChange);
 	}
+
+	RaiseUIAValueEvent(GetText(), GetText());
+
 	return true;
 }
 
@@ -2145,6 +2165,20 @@ void RichEdit::HomeLeft()
 void RichEdit::EndRight()
 {
     TxSendMessage(WM_HSCROLL, SB_RIGHT, 0L, 0);
+}
+
+std::wstring RichEdit::GetType() const
+{
+	return DUI_CTR_RICHEDIT;
+}
+
+UIAControlProvider* RichEdit::GetUIAProvider()
+{
+	if (m_pUIAProvider == nullptr)
+	{
+		m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIARichEditProvider(this));
+	}
+	return m_pUIAProvider;
 }
 
 void RichEdit::DoInit()
@@ -3103,6 +3137,18 @@ void RichEdit::ClearImageCache()
 {
 	__super::ClearImageCache();
 	m_sFocusedImage.ClearCache();
+}
+
+void RichEdit::RaiseUIAValueEvent(const std::wstring oldText, const std::wstring newText)
+{
+	if (m_pUIAProvider != nullptr && UiaClientsAreListening()) {
+		VARIANT vtOld = { 0 }, vtNew = { 0 };
+		vtOld.vt = vtNew.vt = VT_BSTR;
+		vtOld.bstrVal = SysAllocString(oldText.c_str());
+		vtNew.bstrVal = SysAllocString(newText.c_str());
+
+		UiaRaiseAutomationPropertyChangedEvent(m_pUIAProvider, UIA_ValueValuePropertyId, vtOld, vtNew);
+	}
 }
 
 //----------------下面函数用作辅助 字节数限制

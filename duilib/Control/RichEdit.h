@@ -686,6 +686,8 @@ public:
 	 */
     void EndRight();
 
+	virtual std::wstring GetType() const override;
+	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual void DoInit() override;
 	virtual void SetEnabled(bool bEnable = true) override;
 	virtual CSize EstimateSize(CSize szAvailable) override;
@@ -938,6 +940,14 @@ public:
 	 * @return 无
 	 */
 	void AttachGetNaturalSize(const FunGetNaturalSize& callback) { m_cbGetNaturalSize = callback; };
+
+	/**
+	 * @brief 通知控件值发生变化
+	 * @param[in] oldText 旧值
+	 * @param[in] newText 新值
+	 * @return 无
+	 */
+	void RaiseUIAValueEvent(const std::wstring oldText, const std::wstring newText);
 protected:
     CTxtWinHost* m_pTwh;
     bool m_bVScrollBarFixing;

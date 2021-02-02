@@ -18,6 +18,19 @@ Progress::Progress() :
 	SetFixedHeight(12);
 }
 
+std::wstring Progress::GetType() const
+{
+	return DUI_CTR_PROGRESS;
+}
+
+UIAControlProvider* Progress::GetUIAProvider()
+{
+	if (m_pUIAProvider == nullptr)
+	{
+		m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIAProgressProvider(this));
+	}
+	return m_pUIAProvider;
+}
 bool Progress::IsHorizontal()
 {
 	return m_bHorizontal;
@@ -60,7 +73,17 @@ double Progress::GetValue() const
 
 void Progress::SetValue(double nValue)
 {
+	if (m_pUIAProvider != nullptr && UiaClientsAreListening()) {
+		VARIANT vtOld = { 0 }, vtNew = { 0 };
+		vtOld.vt = vtNew.vt = VT_R8;
+		vtOld.dblVal = m_nValue;
+		vtNew.dblVal = nValue;
+
+		UiaRaiseAutomationPropertyChangedEvent(m_pUIAProvider, UIA_RangeValueValuePropertyId, vtOld, vtNew);
+	}
+
 	m_nValue = nValue;
+
 	Invalidate();
 }
 

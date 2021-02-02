@@ -16,11 +16,15 @@ public:
 	Combo& operator=(const Combo& r) = delete;
 
 	/// 重写父类方法，提供个性化功能，请参考父类声明
+	virtual std::wstring GetType() const override;
+	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual bool Add(Control* pControl) override;
 	virtual bool Remove(Control* pControl) override;
 	virtual bool RemoveAt(std::size_t iIndex) override;
 	virtual void RemoveAll() override;
 	virtual void Activate() override;
+	virtual void Deactivate() override;
+	virtual bool IsActivated() override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 	virtual void PaintText(IRenderContext* pRender) override;
 

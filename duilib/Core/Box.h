@@ -106,6 +106,8 @@ public:
 
 public:
 	/// 重写父类接口，提供个性化功能。方法具体说明请查看 Control 控件             */
+	virtual std::wstring GetType() const override;
+	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual void SetWindow(Window* pManager, Box* pParent, bool bInit = true) override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 	virtual void SetPos(UiRect rc) override;
@@ -121,7 +123,6 @@ public:
 	virtual void UnLoadImageCache() override;
 	virtual void ClearImageCache() override;
 	virtual UINT GetControlFlags() const override;
-
 
 	/// 容器自有方法
 	/**
@@ -327,6 +328,8 @@ public:
 	ScrollableBox(const ScrollableBox& r);
 	ScrollableBox& operator=(const ScrollableBox& r) = delete;
 
+	virtual std::wstring GetType() const override;
+	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual void SetAttribute(const std::wstring& pstrName, const std::wstring& pstrValue) override;
 	virtual void SetPos(UiRect rc) override;
 	virtual void HandleMessage(EventArgs& event) override;

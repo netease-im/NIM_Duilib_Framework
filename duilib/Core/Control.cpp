@@ -43,7 +43,8 @@ Control::Control() :
 	m_animationManager(),
 	m_imageMap(),
 	m_bkImage(),
-	m_loadBkImageWeakFlag()
+	m_loadBkImageWeakFlag(),
+	m_pUIAProvider(nullptr)
 {
 	m_colorMap.SetControl(this);
 	m_imageMap.SetControl(this);
@@ -105,6 +106,19 @@ Control::~Control()
 	if (m_pWindow) {
 		m_pWindow->ReapObjects(this);
 	}
+
+	if (nullptr != m_pUIAProvider) {
+		UiaDisconnectProvider(m_pUIAProvider);
+		m_pUIAProvider->ResetControl();
+		m_pUIAProvider->Release();
+
+		m_pUIAProvider = nullptr;
+	}
+}
+
+std::wstring Control::GetType() const
+{
+	return _T("Control");
 }
 
 std::wstring Control::GetBkColor() const
@@ -575,6 +589,16 @@ void Control::Activate()
 
 }
 
+void Control::Deactivate()
+{
+
+}
+
+bool Control::IsActivated()
+{
+	return true;
+}
+
 bool Control::IsActivatable() const
 {
 	if (!IsVisible()) return false;
@@ -722,6 +746,15 @@ bool Control::IsPointInWithScrollOffset(const CPoint& point) const
 	CPoint newPoint = point;
 	newPoint.Offset(scrollOffset);
 	return m_rcItem.IsPointIn(newPoint);
+}
+
+UIAControlProvider* Control::GetUIAProvider()
+{
+	if (m_pUIAProvider == nullptr)
+	{
+		m_pUIAProvider = new (std::nothrow) UIAControlProvider(this);
+	}
+	return m_pUIAProvider;
 }
 
 void Control::HandleMessageTemplate(EventType eventType, WPARAM wParam, LPARAM lParam, TCHAR tChar, CPoint mousePos, FLOAT pressure)

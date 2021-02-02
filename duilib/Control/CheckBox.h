@@ -13,6 +13,8 @@ public:
 	CheckBoxTemplate();
 
 	/// 重写父类方法，提供个性化功能，请参考父类声明
+	virtual std::wstring GetType() const override;
+	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual void Activate() override;
 	virtual Image* GetEstimateImage() override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
@@ -159,6 +161,22 @@ CheckBoxTemplate<InheritType>::CheckBoxTemplate() : m_bSelected(false), m_bPaint
 }
 
 template<typename InheritType>
+inline std::wstring CheckBoxTemplate<InheritType>::GetType() const
+{
+	return DUI_CTR_CHECKBOX;
+}
+
+template<typename InheritType>
+inline UIAControlProvider* CheckBoxTemplate<InheritType>::GetUIAProvider()
+{
+	if (this->m_pUIAProvider == nullptr)
+	{
+		this->m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIACheckBoxProvider(this));
+	}
+	return this->m_pUIAProvider;
+}
+
+template<typename InheritType>
 void CheckBoxTemplate<InheritType>::Activate()
 {
     if (!IsActivatable())
@@ -183,7 +201,16 @@ void CheckBoxTemplate<InheritType>::Selected(bool bSelected, bool bTriggerEvent)
         }
     }
 
-    Invalidate();
+	if (this->m_pUIAProvider != nullptr && UiaClientsAreListening()) {
+		VARIANT vtOld = { 0 }, vtNew = { 0 };
+		vtOld.vt = vtNew.vt = VT_I4;
+		vtOld.lVal = m_bSelected ? ToggleState_Off : ToggleState_On;
+		vtNew.lVal = m_bSelected ? ToggleState_On : ToggleState_Off;
+
+		UiaRaiseAutomationPropertyChangedEvent(this->m_pUIAProvider, UIA_ToggleToggleStatePropertyId, vtOld, vtNew);
+	}
+
+	this->Invalidate();
 }
 
 template<typename InheritType>
@@ -315,32 +342,25 @@ void CheckBoxTemplate<InheritType>::PaintText(IRenderContext* pRender)
 template<typename InheritType>
 std::wstring CheckBoxTemplate<InheritType>::GetSelectedStateImage(ControlStateType stateType)
 {
-    return m_imageMap.GetImagePath(kStateImageSelectedBk, stateType);
+	return this->m_imageMap.GetImagePath(kStateImageSelectedBk, stateType);
 }
 
 template<typename InheritType>
 void CheckBoxTemplate<InheritType>::SetSelectedStateImage(ControlStateType stateType, const std::wstring& pStrImage)
 {
-    m_imageMap.SetImage(kStateImageSelectedBk, stateType, pStrImage);
-    if (GetFixedWidth() == DUI_LENGTH_AUTO || GetFixedHeight() == DUI_LENGTH_AUTO) {
-        ArrangeAncestor();
-    }
-    else {
-        Invalidate();
-    }
+	}
 }
 
 template<typename InheritType>
 std::wstring CheckBoxTemplate<InheritType>::GetSelectedTextColor()
 {
-    return m_dwSelectedTextColor;
+	return m_dwSelectedTextColor;
 }
 
 template<typename InheritType>
 void CheckBoxTemplate<InheritType>::SetSelectedTextColor(const std::wstring& dwTextColor)
 {
-    m_dwSelectedTextColor = dwTextColor;
-    Invalidate();
+	this->Invalidate();
 }
 
 template<typename InheritType /*= Control*/>
@@ -375,32 +395,25 @@ std::wstring ui::CheckBoxTemplate<InheritType>::GetPaintSelectedStateTextColor(C
 template<typename InheritType>
 std::wstring CheckBoxTemplate<InheritType>::GetSelectStateColor(ControlStateType stateType)
 {
-    return m_selectedColorMap[stateType];
+	return m_selectedColorMap[stateType];
 }
 
 template<typename InheritType>
 void CheckBoxTemplate<InheritType>::SetSelectedStateColor(ControlStateType stateType, const std::wstring& stateColor)
 {
-    m_selectedColorMap[stateType] = stateColor;
-    Invalidate();
+	this->Invalidate();
 }
 
 template<typename InheritType>
 std::wstring CheckBoxTemplate<InheritType>::GetSelectedForeStateImage(ControlStateType stateType)
 {
-    return m_imageMap.GetImagePath(kStateImageSelectedFore, stateType);
+	return this->m_imageMap.GetImagePath(kStateImageSelectedFore, stateType);
 }
 
 template<typename InheritType>
 void CheckBoxTemplate<InheritType>::SetSelectedForeStateImage(ControlStateType stateType, const std::wstring& pStrImage)
 {
-    m_imageMap.SetImage(kStateImageSelectedFore, stateType, pStrImage);
-    if (GetFixedWidth() == DUI_LENGTH_AUTO || GetFixedHeight() == DUI_LENGTH_AUTO) {
-        ArrangeAncestor();
-    }
-    else {
-        Invalidate();
-    }
+	}
 }
 
 typedef CheckBoxTemplate<Control> CheckBox;

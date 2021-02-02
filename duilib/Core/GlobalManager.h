@@ -33,6 +33,21 @@ public:
 	static void Shutdown();
 
 	/**
+	 * @brief 开启禁用自动化测试支持
+	 * @param[in] bAdaptDpi 是否启用 DPI 适配
+	 * @return 无
+	 */
+	static void EnableAutomation(bool bEnabled = true);
+
+	/**
+	 * @brief 是否开启自动化测试支持
+	 * @return 返回是否开启
+	 *     @retval true 开启
+	 *     @retval false 禁用
+	 */
+	static bool IsAutomationEnabled();
+
+	/**
 	 * @brief 获取当前程序所在目录
 	 * @return 返回当前程序所在目录
 	 */
@@ -518,6 +533,8 @@ private:
 	static DWORD m_dwDefaultSelectedBkColor;
 
 	static DWORD m_dwUiThreadId;
+
+	static bool m_bAutomationEnabled;
 };
 
 } // namespace ui

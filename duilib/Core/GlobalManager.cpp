@@ -29,6 +29,8 @@ DWORD GlobalManager::m_dwDefaultLinkFontColor = 0xFF0000FF;
 DWORD GlobalManager::m_dwDefaultLinkHoverFontColor = 0xFFD3215F;
 DWORD GlobalManager::m_dwDefaultSelectedBkColor = 0xFFBAE4FF;
 
+bool GlobalManager::m_bAutomationEnabled = false;
+
 std::unique_ptr<IRenderFactory> GlobalManager::m_renderFactory;
 DWORD GlobalManager::m_dwUiThreadId = 0;
 
@@ -83,6 +85,16 @@ void GlobalManager::Shutdown()
 	m_renderFactory.reset();
 	RemoveAllFonts();
 	Gdiplus::GdiplusShutdown(g_gdiplusToken);
+}
+
+void GlobalManager::EnableAutomation(bool bEnabled)
+{
+	m_bAutomationEnabled = bEnabled;
+}
+
+bool GlobalManager::IsAutomationEnabled()
+{
+	return m_bAutomationEnabled;
 }
 
 std::wstring GlobalManager::GetCurrentPath()

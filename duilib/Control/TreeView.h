@@ -17,6 +17,8 @@ public:
 	TreeNode& operator=(const TreeNode& r) = delete;
 
 	/// 重写父类方法，提供个性化功能，请参考父类声明
+	virtual std::wstring GetType() const override;
+	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual bool IsVisible() const override;
 	virtual void SetInternVisible(bool bVisible) override;
 	virtual void SetWindow(Window* pManager, Box* pParent, bool bInit = true) override;
@@ -163,6 +165,7 @@ public:
 	TreeView(void);
 
 	/// 重写父类方法，提供个性化功能，请参考父类声明
+	virtual std::wstring GetType() const override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 
 	/**

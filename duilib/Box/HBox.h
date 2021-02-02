@@ -20,6 +20,8 @@ class UILIB_API HBox : public Box
 {
 public:
 	HBox();
+
+	virtual std::wstring GetType() const override;
 };
 
 }

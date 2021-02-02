@@ -166,6 +166,20 @@ Combo::Combo() :
 	m_pLayout->AttachSelect(nbase::Bind(&Combo::OnSelectItem, this, std::placeholders::_1));
 }
 
+std::wstring Combo::GetType() const
+{
+	return DUI_CTR_COMBO;
+}
+
+UIAControlProvider* Combo::GetUIAProvider()
+{
+	if (m_pUIAProvider == nullptr)
+	{
+		m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIAComboBoxProvider(this));
+	}
+	return m_pUIAProvider;
+}
+
 bool Combo::Add(Control* pControl)
 {
 	m_pLayout->Add(pControl);
@@ -212,6 +226,20 @@ void Combo::Activate()
 
 	if (m_pWindow != NULL) m_pWindow->SendNotify(this, kEventClick);
     Invalidate();
+}
+
+void Combo::Deactivate()
+{
+	if (!IsActivatable()) return;
+	if (!m_pComboWnd) return;
+
+	m_pComboWnd->Close();
+	Invalidate();
+}
+
+bool Combo::IsActivated()
+{
+	return (m_pComboWnd && !m_pComboWnd->IsClosing());
 }
 
 void Combo::SetAttribute(const std::wstring& strName, const std::wstring& strValue)
@@ -327,6 +355,25 @@ bool Combo::SelectItemInternal(int iIndex)
 
 	int iOldSel = m_iCurSel;
 	m_iCurSel = iIndex;
+	m_pLayout->SelectItem(m_iCurSel, false, false);
+
+	//add by djj below
+	if (m_pWindow != NULL) {
+		m_pWindow->SendNotify(this, kEventSelect, m_iCurSel, iOldSel);
+	}
+
+	if (m_pUIAProvider != nullptr && UiaClientsAreListening()) {
+		VARIANT vtOld = { 0 }, vtNew = { 0 };
+		vtOld.vt = vtNew.vt = VT_BSTR;
+		ListContainerElement* pControl = static_cast<ListContainerElement*>(m_pLayout->GetItemAt(m_iCurSel));
+		vtOld.bstrVal = SysAllocString(pControl ? pControl->GetText().c_str() : L"");
+		vtNew.bstrVal = SysAllocString(GetText().c_str());
+
+		UiaRaiseAutomationPropertyChangedEvent(m_pUIAProvider, UIA_ValueValuePropertyId, vtOld, vtNew);
+	}
+
+	Invalidate();	
+
 	return true;
 }
 

@@ -16,6 +16,8 @@ public:
 	void SetOwner(ScrollableBox* pOwner);
 
 	/// 重写父类方法，提供个性化功能，请参考父类声明
+	virtual std::wstring GetType() const override;
+	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual void SetEnabled(bool bEnable = true) override;
 	virtual void SetFocus() override;
 	virtual void SetVisible_(bool bVisible) override;

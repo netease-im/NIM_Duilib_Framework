@@ -63,6 +63,8 @@ public:
 /////////////////////////////////////////////////////////////////////////////////////
 //
 
+class UIAWindowProvider;
+
 class UILIB_API Window : public virtual nbase::SupportWeakCallback
 {
 public:
@@ -151,6 +153,12 @@ public:
 	 * @return 无
 	 */
 	void ShowModalFake(HWND parent_hwnd);
+
+	/**
+	 * @brief 是否是模态显示
+	 * @return 是否是模态显示
+	 */
+	bool IsFakeModal();
 
 	/**
 	 * @brief 居中窗口，支持扩展屏幕
@@ -903,6 +911,13 @@ public:
 	*/
 	bool IsClosing(){ return m_bCloseing; };
 
+	/**
+ * @brief Get ui automation provider
+ * @return nullptr or pointer
+ */
+	UIAWindowProvider* GetUIAProvider();
+
+
 private:
 	static Control* CALLBACK __FindControlFromNameHash(Control* pThis, LPVOID pData);
 	static Control* CALLBACK __FindControlFromCount(Control* pThis, LPVOID pData);
@@ -943,6 +958,8 @@ protected:
 
 	Box* m_pRoot;
 	EventMap OnEvent;
+
+	UIAWindowProvider* m_pUIAProvider;
 
 protected:
 	CSize m_szMinWindow;

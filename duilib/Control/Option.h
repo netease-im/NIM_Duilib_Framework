@@ -14,6 +14,7 @@ public:
 	~OptionTemplate();
 		
 	/// 重写父类方法，提供个性化功能，请参考父类声明
+	virtual std::wstring GetType() const override;
 	virtual void SetWindow(Window* pManager, Box* pParent, bool bInit = true) override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 	virtual void Selected(bool bSelected, bool bTriggerEvent = false) override;
@@ -47,6 +48,12 @@ template<typename InheritType>
 OptionTemplate<InheritType>::~OptionTemplate()
 {
     if (!m_sGroupName.empty() && this->m_pWindow) this->m_pWindow->RemoveOptionGroup(m_sGroupName, this);
+}
+
+template<typename InheritType>
+inline std::wstring OptionTemplate<InheritType>::GetType() const
+{
+	return DUI_CTR_OPTION;
 }
 
 template<typename InheritType>

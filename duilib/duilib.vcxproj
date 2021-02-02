@@ -310,6 +310,20 @@
   <ItemGroup>
     <ClCompile Include="Animation\AnimationManager.cpp" />
     <ClCompile Include="Animation\AnimationPlayer.cpp" />
+    <ClCompile Include="Automation\UIABoxProvider.cpp" />
+    <ClCompile Include="Automation\UIAButtonProvider.cpp" />
+    <ClCompile Include="Automation\UIACheckBoxProvider.cpp" />
+    <ClCompile Include="Automation\UIAComboBoxProvider.cpp" />
+    <ClCompile Include="Automation\UIAControlProvider.cpp" />
+    <ClCompile Include="Automation\UIALabelProvider.cpp" />
+    <ClCompile Include="Automation\UIAListBoxItemProvider.cpp" />
+    <ClCompile Include="Automation\UIAListBoxProvider.cpp" />
+    <ClCompile Include="Automation\UIAProgressProvider.cpp" />
+    <ClCompile Include="Automation\UIARichEditProvider.cpp" />
+    <ClCompile Include="Automation\UIAScrollableBoxProvider.cpp" />
+    <ClCompile Include="Automation\UIAScrollBarProvider.cpp" />
+    <ClCompile Include="Automation\UIATreeNodeProvider.cpp" />
+    <ClCompile Include="Automation\UIAWindowProvider.cpp" />
     <ClCompile Include="Box\ChildBox.cpp">
       <PreprocessToFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</PreprocessToFile>
     </ClCompile>
@@ -367,6 +381,20 @@
   <ItemGroup>
     <ClInclude Include="Animation\AnimationManager.h" />
     <ClInclude Include="Animation\AnimationPlayer.h" />
+    <ClInclude Include="Automation\UIABoxProvider.h" />
+    <ClInclude Include="Automation\UIAButtonProvider.h" />
+    <ClInclude Include="Automation\UIACheckBoxProvider.h" />
+    <ClInclude Include="Automation\UIAComboBoxProvider.h" />
+    <ClInclude Include="Automation\UIAControlProvider.h" />
+    <ClInclude Include="Automation\UIALabelProvider.h" />
+    <ClInclude Include="Automation\UIAListBoxItemProvider.h" />
+    <ClInclude Include="Automation\UIAListBoxProvider.h" />
+    <ClInclude Include="Automation\UIAProgressProvider.h" />
+    <ClInclude Include="Automation\UIARichEditProvider.h" />
+    <ClInclude Include="Automation\UIAScrollableBoxProvider.h" />
+    <ClInclude Include="Automation\UIAScrollBarProvider.h" />
+    <ClInclude Include="Automation\UIATreeNodeProvider.h" />
+    <ClInclude Include="Automation\UIAWindowProvider.h" />
     <ClInclude Include="Box\ChildBox.h" />
     <ClInclude Include="Box\HBox.h" />
     <ClInclude Include="Box\TabBox.h" />

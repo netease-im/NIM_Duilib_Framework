@@ -213,6 +213,20 @@ Box::~Box()
 	RemoveAll();
 }
 
+std::wstring Box::GetType() const
+{
+	return DUI_CTR_BOX;
+}
+
+UIAControlProvider* Box::GetUIAProvider()
+{
+	if (m_pUIAProvider == nullptr)
+	{
+		m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIABoxProvider(this));
+	}
+	return m_pUIAProvider;
+}
+
 void Box::SetWindow(Window* pManager, Box* pParent, bool bInit)
 {
 	for (auto it = m_items.begin(); it != m_items.end(); it++) {
@@ -808,6 +822,20 @@ ScrollableBox::ScrollableBox(const ScrollableBox& r):
 	m_pVerticalScrollBar->SetOwner(this);
 	m_pHorizontalScrollBar.reset(new ScrollBar(*m_pHorizontalScrollBar.get()));
 	m_pHorizontalScrollBar->SetOwner(this);
+}
+
+std::wstring ScrollableBox::GetType() const
+{
+	return std::wstring(_T("Scrollable")) + DUI_CTR_BOX;
+}
+
+UIAControlProvider* ScrollableBox::GetUIAProvider()
+{
+	if (m_pUIAProvider == nullptr)
+	{
+		m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIAScrollableBoxProvider(this));
+	}
+	return m_pUIAProvider;
 }
 
 void ScrollableBox::SetAttribute(const std::wstring& pstrName, const std::wstring& pstrValue)

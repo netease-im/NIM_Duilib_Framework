@@ -12,7 +12,9 @@ class UILIB_API LabelTemplate : public InheritType
 public:
 	LabelTemplate();
 
-    /// 重写父类方法，提供个性化功能，请参考父类声明
+	/// 重写父类方法，提供个性化功能，请参考父类声明
+	virtual std::wstring GetType() const override;
+	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual std::wstring GetText() const;
 	virtual std::string GetUTF8Text() const;
 	virtual void SetText(const std::wstring& strText);
@@ -32,25 +34,13 @@ public:
      */
 	void SetTextStyle(UINT uStyle);
 
-    /**
-     * @brief 获取文本样式
-     * @return 返回文本样式
-     */
+	 */
 	UINT GetTextStyle() const;
 
-    /**
-     * @brief 获取指定状态下的文本颜色
-     * @param[in] stateType 要获取的状态标志
-     * @return 返回指定状态下的文本颜色
-     */
+	 */
 	std::wstring GetStateTextColor(ControlStateType stateType);
 
-    /**
-     * @brief 设置指定状态下的文本颜色
-     * @param[in] stateType 要设置的状态标志
-     * @param[in] dwTextColor 要设置的状态颜色字符串，该值必须在 global.xml 中存在
-     * @return 无
-     */
+	 */
 	void SetStateTextColor(ControlStateType stateType, const std::wstring& dwTextColor);
 
     /**
@@ -162,6 +152,22 @@ LabelTemplate<InheritType>::LabelTemplate() :
     m_textColorMap[kControlStateNormal] = GlobalManager::GetDefaultTextColor();
     m_textColorMap[kControlStateDisabled] = GlobalManager::GetDefaultDisabledTextColor();
     m_textColorMap.SetControl(this);
+}
+
+template<typename InheritType>
+inline std::wstring LabelTemplate<InheritType>::GetType() const
+{
+	return DUI_CTR_LABEL;
+}
+
+template<typename InheritType>
+inline UIAControlProvider* LabelTemplate<InheritType>::GetUIAProvider()
+{
+	if (this->m_pUIAProvider == nullptr)
+	{
+		this->m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIALabelProvider(this));
+	}
+	return this->m_pUIAProvider;
 }
 
 template<typename InheritType>
