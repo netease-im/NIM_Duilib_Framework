@@ -41,7 +41,13 @@ void CComboWnd::Init(Combo* pOwner)
         CSize sz = pControl->EstimateSize(szAvailable);
         cyFixed += sz.cy;
     }
-    cyFixed += 2; // VBox 默认的Padding 调整
+
+	int padding = 2;
+	auto listBox = m_pOwner->GetListBox();
+	if (listBox)
+		padding = listBox->GetLayout()->GetPadding().top + listBox->GetLayout()->GetPadding().bottom;
+
+	cyFixed += padding; // VBox 默认的Padding 调整
     rc.bottom = rc.top + MIN(cyFixed, szDrop.cy);
 
     ::MapWindowRect(pOwner->GetWindow()->GetHWND(), HWND_DESKTOP, &rc);
@@ -78,6 +84,7 @@ void CComboWnd::OnFinalMessage(HWND hWnd)
     m_pOwner->m_pWindow = NULL;
     m_pOwner->m_uButtonState = kControlStateNormal;
     m_pOwner->Invalidate();
+	__super::OnFinalMessage(hWnd);
     delete this;
 }
 
@@ -96,6 +103,7 @@ LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		this->AttachDialog(pRoot);
 		this->SetWindowResourcePath(m_pOwner->GetWindow()->GetWindowResourcePath());
 		this->SetShadowAttached(false);
+		this->SetRenderTransparent(true);
 
         return 0;
     }
@@ -108,7 +116,7 @@ LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		if (m_hWnd != (HWND)wParam)	{ 
 			m_bClosing = true;
 			PostMessage(WM_CLOSE);
-			m_pOwner->SelectItem(m_pOwner->GetListBox()->GetCurSel());
+			m_pOwner->SelectItemInternal(m_pOwner->GetListBox()->GetCurSel());
 			((Box*)this->GetRoot())->RemoveAt(0);
 			m_pOwner->GetListBox()->PlaceHolder::SetWindow(nullptr, nullptr, false);
 		}
@@ -144,6 +152,8 @@ Combo::Combo() :
 	// the items back to the righfull owner/manager when the window closes.
 	m_pLayout.reset(new ListBox(new VLayout));
 	m_pLayout->GetLayout()->SetPadding(UiRect(1, 1, 1, 1));
+	m_pLayout->SetBkColor(L"bk_wnd_lightcolor");
+	m_pLayout->SetBorderColor(L"combobox_border");
 	m_pLayout->SetBorderSize(UiRect(1, 1, 1, 1));
 	m_pLayout->SetAutoDestroy(false);
 	m_pLayout->EnableScrollBar();
@@ -187,6 +197,13 @@ void Combo::Activate()
     m_pWindow = new CComboWnd();
     ASSERT(m_pWindow);
     m_pWindow->Init(this);
+	m_pWindow->AttachWindowClose(ToWeakCallback([this](ui::EventArgs* msg) {
+		auto callback = OnEvent.find(msg->Type);
+		if (callback != OnEvent.end()) {
+			callback->second(msg);
+		}
+		return true;
+	}));
 
     if( m_pWindow != NULL ) m_pWindow->SendNotify(this, kEventClick);
     Invalidate();
@@ -229,7 +246,7 @@ void Combo::PaintText(IRenderContext* pRender)
 				return;
 
 			DWORD dwTextColor = 0xFF000000;
-			dwTextColor = GlobalManager::GetTextColor(pElement->GetStateTextColor(kControlStateNormal));
+			dwTextColor = this->GetWindowColor(pElement->GetStateTextColor(kControlStateNormal));
 			pRender->DrawText(rcText, GetText(), dwTextColor, \
 				pElement->GetFont(), DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS);
 		}
@@ -271,15 +288,23 @@ void Combo::SetDropBoxSize(CSize szDropBox)
     m_szDropBox = szDropBox;
 }
 
-bool Combo::SelectItem(int iIndex)
+bool Combo::SelectItemInternal(int iIndex)
 {
-	if (iIndex < 0 || iIndex >= m_pLayout->GetCount() || m_iCurSel == iIndex)
+	if (iIndex < 0 || iIndex >= m_pLayout->GetCount())
 		return false;
 
 	m_iCurSel = iIndex;
-	m_pLayout->SelectItem(m_iCurSel, false, false);
-
 	return true;
+}
+
+void Combo::SelectItem(int iIndex, bool bTrigger)
+{
+    m_pLayout->SelectItem(iIndex, false, false);
+    SelectItemInternal(iIndex);
+    Invalidate();
+    if (m_pWindow != NULL && bTrigger) {
+        m_pWindow->SendNotify(this, kEventSelect, m_iCurSel, -1);
+    }
 }
 
 Control* Combo::GetItemAt(int iIndex)

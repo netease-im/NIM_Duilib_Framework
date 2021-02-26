@@ -78,9 +78,10 @@ public:
 	/**
 	 * @brief 选择一个子项
 	 * @param[in] iIndex 要选择的子项索引
+	 * @param[in] bTrigger 是否触发选择事件
 	 * @return 返回 true 表示成功，否则为 false
 	 */
-	bool SelectItem(int iIndex);
+	void SelectItem(int iIndex, bool bTrigger = false);
 
 	/**
 	 * @brief 获取指定索引下的子项控件
@@ -108,6 +109,13 @@ public:
 	 */
 	void AttachSelect(const EventCallback& callback) { m_pLayout->AttachSelect(callback); }
 
+	/**
+	 * @brief 监听下拉窗关闭事件
+	 * @param[in] callback 下拉窗关闭后触发的回调函数
+	 * @return 无
+	 */
+	void AttachWindowClose(const EventCallback& callback) { OnEvent[kEventWindowClose] += callback; };
+
 private:
 	/**
 	 * @brief 默认的子项被选择处理函数
@@ -115,6 +123,13 @@ private:
 	 * @return 始终返回 true
 	 */
 	bool OnSelectItem(EventArgs* args);
+
+	/**
+	 * @brief 选择一个子项
+	 * @param[in] iIndex 要选择的子项索引
+	 * @return 返回 true 表示成功，否则为 false
+	 */
+	bool SelectItemInternal(int iIndex);
 
 protected:
     CComboWnd *m_pWindow;
