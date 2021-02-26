@@ -59,6 +59,9 @@ bool MenuManager::ShowMenu(const std::wstring &strMenuName)
 MenuBox::MenuBox()
 {
 	m_cxyFixed.cx = m_cxyFixed.cy = DUI_LENGTH_AUTO;
+    this->SetMaxHeight(MulDiv(GetSystemMetrics(SM_CYFULLSCREEN), 100, ui::DpiManager::GetInstance()->GetScale()));
+    this->SetVerScrollUnitPixels(100);
+    EnableScrollBar(true, GetHorizontalScrollBar() != NULL);
 }
 
 MenuBox::~MenuBox()
@@ -264,9 +267,6 @@ void MenuWndEx::ResizeMenu()
 	UiRect monitor_rect = oMonitor.rcMonitor;
 	ui::CSize szInit = { rcWork.right - rcWork.left, rcWork.bottom - rcWork.top };
 	szInit = GetRoot()->EstimateSize(szInit);
-	szInit.cx -= GetShadowCorner().left + GetShadowCorner().right;
-	szInit.cy -= GetShadowCorner().top + GetShadowCorner().bottom;
-
 	//必须是Menu标签作为xml的根节点
 	MenuBox *pMenuRoot = static_cast<MenuBox*>(GetRoot());
 	ASSERT(pMenuRoot);
@@ -317,7 +317,7 @@ void MenuWndEx::ResizeMenu()
 	}
 	rc.bottom = rc.top + szInit.cy;
 
-	SetPos(rc, false, SWP_SHOWWINDOW | (CheckFlag(kNoFocus) ? SWP_NOACTIVATE : 0), HWND_TOPMOST, false);
+	SetPos(rc, false, SWP_SHOWWINDOW | (CheckFlag(kNoFocus) ? SWP_NOACTIVATE : 0), HWND_TOPMOST, true);
 	if (!CheckFlag(kNoFocus))
 		SetForegroundWindow(m_hWnd);
 }
@@ -441,6 +441,16 @@ void MenuWndEx::SetVisibleItems(const VisibleMap &data)
 		auto *pControl = FindControl(it.first);
 		if (pControl)
 			pControl->SetVisible(it.second);
+	}
+}
+
+void MenuWndEx::SetTextIdItems(const TextIdMap &data)
+{
+	for (const auto &it : data)	{
+		auto *pControl = dynamic_cast<MenuElement*>(FindControl(it.first));
+		if (pControl) {
+			pControl->SetTextId(it.second);
+		}
 	}
 }
 
@@ -692,12 +702,24 @@ BOOL MenuWndEx::OnNotify(ContextMenuParam param)
 	return TRUE;
 }
 
+void MenuWndEx::SetWidth(const int width)
+{
+	auto rootMenu = this->GetMenu();
+	if (!rootMenu) return;
+	rootMenu->SetFixedWidth(width);
+	int shadow_width = this->GetShadowCorner().left + this->GetShadowCorner().right;
+	this->GetRoot()->SetFixedWidth(width + shadow_width);
+}
+
 /////////////////////////////////////////////////////////////////////////////////////
 //
 
 MenuElement::MenuElement()
 {
 	m_cxyFixed.cy = 30;
+	// 菜单项处理WM_POINTER消息，否则WM_POINTER消息就会转换为WM_TOUCH
+	// 此时菜单如果消失的话，导致下层窗口收到WM_TOUCH消息而导致Window::m_pEventPointer为非空，导致鼠标消息无法被处理
+	SetReceivePointerMsg(true);
 }
 
 MenuElement::~MenuElement()
@@ -910,7 +932,7 @@ bool MenuElement::MouseEnter(EventArgs& msg)
 bool MenuElement::MouseLeave(EventArgs& msg)
 {
 	if (m_pSubMenuWindow) return false;
-	__super::MouseLeave(msg);
+	return __super::MouseLeave(msg);
 }
 
 bool MenuElement::ButtonUp(EventArgs& msg)

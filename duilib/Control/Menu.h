@@ -337,14 +337,20 @@ public:
 	using EnableMap = std::map<ControlName, bool>;
 	using SelectMap = std::map<ControlName, bool>;
 	using VisibleMap = std::map<ControlName, bool>;
-
-	/** @brief 批量设置子控件的状态(禁用、选择、隐藏)，用于快速初始化菜单
+	using TextIdMap = std::map<ControlName, std::wstring>;
+	/** @brief 批量设置子控件的状态(禁用、选择、隐藏、文本)，用于快速初始化菜单
 	  * @param[in] data 状态数据
 	  * @return void 无返回值
 	  */
 	void SetEnableItems(const EnableMap &data);
 	void SetSelectItems(const SelectMap &data);
 	void SetVisibleItems(const VisibleMap &data);
+	void SetTextIdItems(const TextIdMap &data);
+
+	/** @brief 设置菜单的宽度
+	  * @return void 无
+	  */
+	void SetWidth(const int width);
 
 	/** @brief 监听某个菜单项的选择事件
 	  * @param[in] strName 控件名
