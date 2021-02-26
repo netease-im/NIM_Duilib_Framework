@@ -6,7 +6,7 @@
 namespace ui
 {
 /** @class OnScreenKeyboardManager
-  * @brief Dé?a?ü?ì1üàíàà
+  * @brief 虚拟键盘管理类
   * @copyright (c) 2018, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2018/08/28
@@ -17,14 +17,14 @@ public:
 	static OnScreenKeyboardManager* GetInstance();
 
 	/**
-	  * Dé?a?ü?ìê?·??y?ú??ê?
+	  * 虚拟键盘是否正在显示
 	  * @return bool
 	  */
 	bool IsVisible();
 
 	/**
-	  * ??ê?Dé?a?ü?ì
-	  * @param[in] show ê?·???ê?
+	  * 显示虚拟键盘
+	  * @param[in] show 是否显示
 	  * @return void
 	  */
 	void ShowOSK(bool show);

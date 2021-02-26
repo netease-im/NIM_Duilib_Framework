@@ -18,62 +18,6 @@ Progress::Progress() :
 	SetFixedHeight(12);
 }
 
-void Progress::SetAttribute(const std::wstring& srName, const std::wstring& strValue)
-{
-	if (srName == _T("hor")) SetHorizontal(strValue == _T("true"));
-	else if (srName == _T("min")) SetMinValue(_ttoi(strValue.c_str()));
-	else if (srName == _T("max")) SetMaxValue(_ttoi(strValue.c_str()));
-	else if (srName == _T("value")) SetValue(_ttoi(strValue.c_str()));
-	else if (srName == _T("progressimage")) SetProgressImage(strValue);
-	else if (srName == _T("isstretchfore")) SetStretchForeImage(strValue == _T("true"));
-	else if (srName == _T("progresscolor")) {
-		LPCTSTR pValue = strValue.c_str();
-		while (*pValue > _T('\0') && *pValue <= _T(' ')) pValue = ::CharNext(pValue);
-		SetProgressColor(pValue);
-	}
-	else Label::SetAttribute(srName, strValue);
-}
-
-void Progress::PaintStatusImage(IRenderContext* pRender)
-{
-	if (m_nMax <= m_nMin) m_nMax = m_nMin + 1;
-	if (m_nValue > m_nMax) m_nValue = m_nMax;
-	if (m_nValue < m_nMin) m_nValue = m_nMin;
-
-	UiRect rc = GetProgressPos();
-	if (!m_sProgressColor.empty()) {
-		DWORD dwProgressColor = GlobalManager::GetTextColor(m_sProgressColor);
-		if (dwProgressColor != 0) {
-			UiRect rcProgressColor = m_rcItem;
-			if (m_bHorizontal) {
-				rcProgressColor.right = rcProgressColor.left + rc.right;
-			}
-			else {
-				rcProgressColor.top = rcProgressColor.top + rc.top;
-			}
-			pRender->DrawColor(rcProgressColor, dwProgressColor);
-		}
-	}
-
-	if (!m_progressImage.imageAttribute.simageString.empty()) {
-		m_sProgressImageModify.clear();
-		if (m_bStretchForeImage)
-			m_sProgressImageModify = StringHelper::Printf(_T("destscale='false' dest='%d,%d,%d,%d'"), rc.left, rc.top, rc.right, rc.bottom);
-		else
-			m_sProgressImageModify = StringHelper::Printf(_T("destscale='false' dest='%d,%d,%d,%d' source='%d,%d,%d,%d'")
-				, rc.left, rc.top, rc.right, rc.bottom
-				, rc.left, rc.top, rc.right, rc.bottom);
-
-		DrawImage(pRender, m_progressImage, m_sProgressImageModify);
-	}
-}
-
-void Progress::ClearImageCache()
-{
-	__super::ClearImageCache();
-	m_progressImage.ClearCache();
-}
-
 bool Progress::IsHorizontal()
 {
 	return m_bHorizontal;
@@ -150,11 +94,81 @@ std::wstring Progress::GetProgressColor() const
 
 void Progress::SetProgressColor(const std::wstring& strProgressColor)
 {
-	ASSERT(GlobalManager::GetTextColor(strProgressColor) != 0);
+	ASSERT(this->GetWindowColor(strProgressColor) != 0);
 	if( m_sProgressColor == strProgressColor ) return;
 
 	m_sProgressColor = strProgressColor;
 	Invalidate();
+}
+
+void Progress::SetAttribute(const std::wstring& srName, const std::wstring& strValue)
+{
+	if( srName == _T("hor") ) SetHorizontal(strValue == _T("true"));
+	else if( srName == _T("min") ) SetMinValue(_ttoi(strValue.c_str()));
+	else if( srName == _T("max") ) SetMaxValue(_ttoi(strValue.c_str()));
+	else if (srName == _T("value")) SetValue(_ttoi(strValue.c_str()));
+	else if (srName == _T("progressimage")) SetProgressImage(strValue);
+	else if (srName == _T("isstretchfore")) SetStretchForeImage(strValue == _T("true"));
+	else if( srName == _T("progresscolor") ) {
+		LPCTSTR pValue = strValue.c_str();
+		while( *pValue > _T('\0') && *pValue <= _T(' ') ) pValue = ::CharNext(pValue);
+		SetProgressColor(pValue);
+	}
+	else Label::SetAttribute(srName, strValue);
+}
+
+void Progress::PaintStatusImage(IRenderContext* pRender)
+{
+	if( m_nMax <= m_nMin ) m_nMax = m_nMin + 1;
+	if( m_nValue > m_nMax ) m_nValue = m_nMax;
+	if( m_nValue < m_nMin ) m_nValue = m_nMin;
+
+	UiRect rc = GetProgressPos();
+	if (!m_sProgressColor.empty()) {
+		DWORD dwProgressColor = this->GetWindowColor(m_sProgressColor);
+		if( dwProgressColor != 0 ) {
+			UiRect rcProgressColor = m_rcItem;
+			if( m_bHorizontal ) {
+				rcProgressColor.right = rcProgressColor.left + rc.right;
+			}
+			else {
+				rcProgressColor.top = rcProgressColor.top + rc.top;
+			}
+			pRender->DrawColor(rcProgressColor, dwProgressColor);
+		}
+	}
+
+	if (!m_progressImage.imageAttribute.simageString.empty()) {
+		m_sProgressImageModify.clear();
+		if (m_bStretchForeImage)
+			m_sProgressImageModify = StringHelper::Printf(_T("destscale='false' dest='%d,%d,%d,%d'"), rc.left, rc.top, rc.right, rc.bottom);
+		else
+			m_sProgressImageModify = StringHelper::Printf(_T("destscale='false' dest='%d,%d,%d,%d' source='%d,%d,%d,%d'")
+			, rc.left, rc.top, rc.right, rc.bottom
+			, rc.left, rc.top, rc.right, rc.bottom);
+
+		// 让corner的值不超过可绘制范围
+		auto& corner = m_progressImage.imageAttribute.rcCorner;
+		if (IsHorizontal())	{
+			if (corner.left != 0 && corner.left >= rc.right) {
+				m_sProgressImageModify += StringHelper::Printf(_T(" corner='%d,%d,%d,%d'"),
+					rc.right,
+					corner.top,
+					0,
+					corner.bottom);
+			}
+		}
+		else {
+			if (corner.top != 0 && corner.top >= rc.bottom) {
+				m_sProgressImageModify += StringHelper::Printf(_T(" corner='%d,%d,%d,%d'"),
+					corner.left,
+					corner.bottom,
+					corner.right,
+					0);
+			}
+		}
+		DrawImage(pRender, m_progressImage, m_sProgressImageModify);
+	}
 }
 
 UiRect Progress::GetProgressPos()
@@ -169,8 +183,14 @@ UiRect Progress::GetProgressPos()
 		rc.right = m_rcItem.right - m_rcItem.left;
 		rc.bottom = m_rcItem.bottom - m_rcItem.top;
 	}
-
+		
 	return rc;
+}
+
+void Progress::ClearImageCache()
+{
+	__super::ClearImageCache();
+	m_progressImage.ClearCache();
 }
 
 }

@@ -5,7 +5,7 @@
 
 namespace ui
 {
-	// DPI®∫®∫??
+	// DPI  ≈‰
 	bool GetDpiForSystemWrapper(UINT& dpi);
 	bool GetDpiForMonitorWrapper(HMONITOR hMonitor, MONITOR_DPI_TYPE dpiType, UINT *dpiX, UINT *dpiY);
 
@@ -29,4 +29,5 @@ namespace ui
 	bool GetPointerPenInfoWrapper(UINT32 pointerId, POINTER_PEN_INFO *penInfo);
 	bool EnableMouseInPointerWrapper(BOOL fEnable);
 }
+
 #endif //UI_UTILS_APIWRAPPER_H_
