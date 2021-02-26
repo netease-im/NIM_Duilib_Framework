@@ -46,12 +46,6 @@ public:
 	void ResetDefaultShadow();
 
 	/**
-	 * @brief 根据初始化的阴影范围重置阴影边框
-	 * @return 无
-	 */
-	void ResetShadowBox();
-
-	/**
 	 * @brief 设置阴影图片
 	 * @param[in] image 图片路径
 	 * @return 无
@@ -93,8 +87,7 @@ private:
 	bool m_bShadowAttached;
 	bool m_bUseDefaultImage;
 	std::wstring m_strImage;
-	UiRect m_rcCurShadowCorner;
-	UiRect m_rcDefaultShadowCorner;
+	UiRect m_rcShadowCorner;
 	UiRect m_rcShadowCornerBackup;
 
 	Box* m_pRoot;
