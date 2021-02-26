@@ -12,10 +12,6 @@ namespace ui
 #define UI_CLASSSTYLE_FRAME		(CS_VREDRAW | CS_HREDRAW)
 #define UI_CLASSSTYLE_DIALOG	(CS_VREDRAW | CS_HREDRAW | CS_DBLCLKS | CS_SAVEBITS)
 
-#ifndef WM_DPICHANGED
-#define WM_DPICHANGED       0x02E0
-#endif
-
 class UILIB_API WindowImplBase : public Window, public IUIMessageFilter
 {
 public:
@@ -46,13 +42,6 @@ public:
 	 * @return 返回窗口类样式
 	 */
 	virtual UINT GetClassStyle() const;
-
-	/**
-	 * @brief 待补充
-	 * @param[in] 待补充
-	 * @return 待补充
-	 */
-	virtual std::wstring GetResourceID() const;
 
 	/**
 	 * @brief 当要创建的控件不是标准的控件名称时会调用该函数
@@ -132,16 +121,6 @@ public:
 	virtual LRESULT OnNcPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	/**
-	 * @brief 当接收到标题栏区域双击消息时被调用
-	 * @param[in] uMsg 消息内容
-	 * @param[in] wParam 消息附加参数
-	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
-	 * @return 返回消息处理结果
-	 */
-	virtual LRESULT OnNcLButtonDbClick(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-
-	/**
 	 * @brief 当接收到 WM_NCHITTEST 消息时被调用
 	 * @param[in] uMsg 消息内容
 	 * @param[in] wParam 消息附加参数
@@ -180,16 +159,6 @@ public:
 	 * @return 返回消息处理结果
 	 */
 	virtual LRESULT OnMouseHover(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
-
-	/**
-	 * @brief 当接收到DPI改变消息时被调用（只有在 Startup 中指定启用 DPI 适配后才会触发）
-	 * @param[in] uMsg 消息内容
-	 * @param[in] wParam 消息附加参数
-	 * @param[in] lParam 消息附加参数
-	 * @param[out] bHandled 返回 true 则继续派发该消息，否则不再派发该消息
-	 * @return 返回消息处理结果
-	 */
-	virtual LRESULT OnDpiChanged(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	/**
 	 * @brief 当接收到窗口大小改变消息时被调用
