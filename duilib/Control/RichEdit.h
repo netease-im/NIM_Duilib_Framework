@@ -170,6 +170,7 @@ public:
 	 * @return 返回当前文本颜色
 	 */
 	std::wstring GetTextColor();
+	DWORD GetTextColorValue();
 
 	/**
 	 * @brief 获取限制字符数量
@@ -597,6 +598,8 @@ public:
     virtual bool OnTxTextChanged();
 	ITextHost* GetTextHost();
 	ITextServices* GetTextServices();
+	HWND GetWindowHandle();
+	HDC GetWindowDC();
 	BOOL SetOleCallback(IRichEditOleCallback* pCallback);
 	CSize GetNaturalSize(LONG width, LONG height);
 	void SetImmStatus(BOOL bOpen);

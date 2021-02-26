@@ -221,10 +221,10 @@ HRESULT InitDefaultCharFormat(RichEdit* re, CHARFORMAT2W* pcf, HFONT hfont)
         hfont = GlobalManager::GetFont(re->GetFont());
     ::GetObject(hfont, sizeof(LOGFONT), &lf);
 
-	DWORD dwColor = GlobalManager::GetTextColor(re->GetTextColor());
+	DWORD dwColor = re->GetTextColorValue();
     pcf->cbSize = sizeof(CHARFORMAT2W);
     pcf->crTextColor = RGB(GetBValue(dwColor), GetGValue(dwColor), GetRValue(dwColor));
-    LONG yPixPerInch = GetDeviceCaps(re->GetWindow()->GetPaintDC(), LOGPIXELSY);
+    LONG yPixPerInch = GetDeviceCaps(re->GetWindowDC(), LOGPIXELSY);
 	if (yPixPerInch == 0)
 		yPixPerInch = 96;
     pcf->yHeight = -lf.lfHeight * LY_PER_INCH / yPixPerInch;
@@ -301,9 +301,7 @@ CTxtWinHost::~CTxtWinHost()
 
 BOOL CTxtWinHost::Init(RichEdit *re, const CREATESTRUCT *pcs)
 {
-	PCreateTextServices TextServicesProc = nullptr;
     IUnknown *pUnk = nullptr;
-	HMODULE hmod = NULL;
     HRESULT hr;
 	std::wstring edit_dll(L"msftedit.dll");
     m_re = re;
@@ -351,6 +349,7 @@ BOOL CTxtWinHost::Init(RichEdit *re, const CREATESTRUCT *pcs)
     //if(FAILED(CreateTextServices(NULL, this, &pUnk)))
     //    goto err;
 
+	PCreateTextServices TextServicesProc = nullptr;
 	//解决32位系统下跨窗口间拖拽文字在win7及win7以下系统上会出现重复的问题（64位暂不修复） lty 20170714
 #if defined(_M_X64) || defined(__x86_64__)
 	edit_dll = L"msftedit.dll";
@@ -359,7 +358,7 @@ BOOL CTxtWinHost::Init(RichEdit *re, const CREATESTRUCT *pcs)
 	if (!(::GetFileAttributesW(edit_dll.c_str()) != INVALID_FILE_ATTRIBUTES))
 		edit_dll = L"msftedit.dll";
 #endif
-	hmod = LoadLibraryW(edit_dll.c_str()); //msftedit.dll
+	HMODULE hmod = LoadLibraryW(edit_dll.c_str()); //msftedit.dll
 	if (hmod)
 	{
 		TextServicesProc = (PCreateTextServices)GetProcAddress(hmod,"CreateTextServices");
@@ -458,7 +457,7 @@ void CTxtWinHost::TxImmReleaseContext(HIMC himc)
 
 HDC CTxtWinHost::TxGetDC()
 {
-    return m_re->GetWindow()->GetPaintDC();
+    return m_re->GetWindowDC();
 }
 
 int CTxtWinHost::TxReleaseDC(HDC hdc)
@@ -560,6 +559,9 @@ BOOL CTxtWinHost::TxSetScrollPos (INT fnBar, INT nPos, BOOL fRedraw)
 
 void CTxtWinHost::TxInvalidateRect(LPCRECT prc, BOOL fMode)
 {
+	if (!m_re->GetWindow())
+		return;
+
 	CPoint scrollOffset = m_re->GetScrollOffset();
     if( prc == NULL ) {
 		UiRect newRcClient = rcClient;
@@ -612,6 +614,9 @@ void CTxtWinHost::TxScrollWindowEx (INT dx, INT dy, LPCRECT lprcScroll,	LPCRECT 
 
 void CTxtWinHost::TxSetCapture(BOOL fCapture)
 {
+	if (!m_re->GetWindow())
+		return;
+	
     if (fCapture) m_re->GetWindow()->SetCapture();
     else m_re->GetWindow()->ReleaseCapture();
     fCaptured = fCapture;
@@ -629,12 +634,12 @@ void CTxtWinHost::TxSetCursor(HCURSOR hcur,	BOOL fText)
 
 BOOL CTxtWinHost::TxScreenToClient(LPPOINT lppt)
 {
-    return ::ScreenToClient(m_re->GetWindow()->GetHWND(), lppt);	
+    return ::ScreenToClient(m_re->GetWindowHandle(), lppt);	
 }
 
 BOOL CTxtWinHost::TxClientToScreen(LPPOINT lppt)
 {
-    return ::ClientToScreen(m_re->GetWindow()->GetHWND(), lppt);
+    return ::ClientToScreen(m_re->GetWindowHandle(), lppt);
 }
 
 HRESULT CTxtWinHost::TxActivate(LONG *plOldState)
@@ -854,7 +859,7 @@ void CTxtWinHost::SetFont(HFONT hFont)
     if( hFont == NULL ) return;
     LOGFONT lf;
     ::GetObject(hFont, sizeof(LOGFONT), &lf);
-    LONG yPixPerInch = ::GetDeviceCaps(m_re->GetWindow()->GetPaintDC(), LOGPIXELSY);
+    LONG yPixPerInch = ::GetDeviceCaps(m_re->GetWindowDC(), LOGPIXELSY);
 	if (yPixPerInch == 0)
 		yPixPerInch = 96;
     cf.yHeight = -lf.lfHeight * LY_PER_INCH / yPixPerInch;
@@ -962,8 +967,8 @@ void CTxtWinHost::SetClientRect(UiRect *prc)
 {
     rcClient = *prc;
 
-    LONG xPerInch = ::GetDeviceCaps(m_re->GetWindow()->GetPaintDC(), LOGPIXELSX); 
-    LONG yPerInch =	::GetDeviceCaps(m_re->GetWindow()->GetPaintDC(), LOGPIXELSY); 
+    LONG xPerInch = ::GetDeviceCaps(m_re->GetWindowDC(), LOGPIXELSX); 
+    LONG yPerInch =	::GetDeviceCaps(m_re->GetWindowDC(), LOGPIXELSY); 
 	if (xPerInch == 0)
 		xPerInch = 96;
 	if (yPerInch == 0)
@@ -1023,7 +1028,7 @@ BOOL CTxtWinHost::DoSetCursor(UiRect *prc, POINT *pt)
     if (PtInRect(&rc, newPt))
     {
         UiRect *prcClient = (!fInplaceActive || prc) ? &rc : NULL;
-        pserv->OnTxSetCursor(DVASPECT_CONTENT,	-1, NULL, NULL,  m_re->GetWindow()->GetPaintDC(),
+        pserv->OnTxSetCursor(DVASPECT_CONTENT,	-1, NULL, NULL,  m_re->GetWindowDC(),
             NULL, prcClient, newPt.x, newPt.y);
 
         return TRUE;
@@ -1042,7 +1047,7 @@ void CTxtWinHost::GetControlRect(LPRECT prc)
 		SIZEL szExtent = { -1, -1 };
 		GetTextServices()->TxGetNaturalSize(
 			DVASPECT_CONTENT, 
-			m_re->GetWindow()->GetPaintDC(), 
+			m_re->GetWindowDC(), 
 			NULL,
 			NULL,
 			TXTNS_FITTOCONTENT,
@@ -1334,7 +1339,7 @@ void RichEdit::SetTextColor(const std::wstring& dwTextColor)
 		return;
 	m_sCurrentColor = dwTextColor;
 
-	DWORD dwTextColor2 = GlobalManager::GetTextColor(dwTextColor);
+	DWORD dwTextColor2 = this->GetWindowColor(dwTextColor);
     if( m_pTwh ) {
         m_pTwh->SetColor(dwTextColor2);
     }
@@ -1350,6 +1355,11 @@ void RichEdit::SetTextColor(DWORD color)
 std::wstring RichEdit::GetTextColor()
 {
 	return m_sCurrentColor;
+}
+
+DWORD RichEdit::GetTextColorValue()
+{
+	return this->GetWindowColor(m_sCurrentColor);
 }
 
 int RichEdit::GetLimitText()
@@ -1884,7 +1894,7 @@ void RichEdit::OnTxNotify(DWORD iNotify, void *pv)
 				std::wstring url = GetSelText();	
 				wprintf_s(L"[Link]%s\n", url.c_str());
 
-				HWND hwnd = this->GetWindow()->GetHWND();
+				HWND hwnd = this->GetWindowHandle();
 				SendMessage(hwnd, WM_NOTIFY, EN_LINK, (LPARAM)&url);
 			}
 		}
@@ -1903,13 +1913,13 @@ void RichEdit::OnTxNotify(DWORD iNotify, void *pv)
 	case EN_DRAGDROPDONE:   
 		{
 			if (pv) {   // Fill out NMHDR portion of pv   
-				LONG nId =  GetWindowLong(this->GetWindow()->GetHWND(), GWL_ID);   
+				LONG nId =  GetWindowLong(this->GetWindowHandle(), GWL_ID);   
 				NMHDR  *phdr = (NMHDR *)pv;   
-				phdr->hwndFrom = this->GetWindow()->GetHWND();   
+				phdr->hwndFrom = this->GetWindowHandle();   
 				phdr->idFrom = nId;   
 				phdr->code = iNotify;  
 
-				SendMessage(this->GetWindow()->GetHWND(), WM_NOTIFY, (WPARAM)nId, (LPARAM)pv);
+				SendMessage(this->GetWindowHandle(), WM_NOTIFY, (WPARAM)nId, (LPARAM)pv);
 			}    
 		}
 		break;
@@ -1938,6 +1948,18 @@ ITextServices* RichEdit::GetTextServices()
 	return m_pTwh->GetTextServices2();
 }
 
+HWND RichEdit::GetWindowHandle()
+{
+	auto window = this->GetWindow();
+	return window ? window->GetHWND() : NULL;
+}
+
+HDC RichEdit::GetWindowDC()
+{
+	auto window = this->GetWindow();
+	return window ? window->GetPaintDC() : NULL;
+}
+
 BOOL RichEdit::SetOleCallback(IRichEditOleCallback* pCallback)
 {
 	if (NULL == m_pTwh)
@@ -1963,7 +1985,7 @@ CSize RichEdit::GetNaturalSize(LONG width, LONG height)
 	if (m_pTwh) {
 		m_pTwh->GetTextServices()->TxGetNaturalSize(
 			DVASPECT_CONTENT,
-			GetWindow()->GetPaintDC(),
+			GetWindowDC(),
 			NULL,
 			NULL,
 			TXTNS_FITTOCONTENT,
@@ -1978,10 +2000,12 @@ CSize RichEdit::GetNaturalSize(LONG width, LONG height)
 
 void RichEdit::SetImmStatus(BOOL bOpen)
 {
-	HWND hwnd = GetWindow()->GetHWND();
+	HWND hwnd = GetWindowHandle();
 	if (hwnd != NULL)
 	{
+		// 失去焦点时关闭输入法
 		HIMC hImc = ::ImmGetContext(hwnd);
+		::ImmAssociateContext(hwnd, bOpen ? hImc : NULL);
 		if (hImc != NULL) {
 			if (ImmGetOpenStatus(hImc)) {
 				if (!bOpen)
@@ -2182,7 +2206,7 @@ CSize RichEdit::EstimateSize(CSize szAvailable)
 		SIZEL szExtent = { -1, -1 };
 		m_pTwh->GetTextServices()->TxGetNaturalSize(
 			DVASPECT_CONTENT, 
-			GetWindow()->GetPaintDC(), 
+			GetWindowDC(), 
 			NULL,
 			NULL,
 			TXTNS_FITTOCONTENT,
@@ -2226,7 +2250,7 @@ void RichEdit::SetPos(UiRect rc)
             SIZEL szExtent = { -1, -1 };
             m_pTwh->GetTextServices()->TxGetNaturalSize(
                 DVASPECT_CONTENT, 
-                GetWindow()->GetPaintDC(), 
+                GetWindowDC(), 
                 NULL,
                 NULL,
                 TXTNS_FITTOCONTENT,
@@ -2374,11 +2398,13 @@ void RichEdit::HandleMessage(EventArgs& event)
 
 	if (event.Type == kEventInternalSetFocus) {
 		OnSetFocus(event);
+		SetImmStatus(TRUE);
 		return;
 	}
 	if (event.Type == kEventInternalKillFocus) {
 		OnKillFocus(event);
 		OnScreenKeyboardManager::GetInstance()->ShowOSK(false);
+		SetImmStatus(FALSE);
 		return;
 	}
 
@@ -2485,7 +2511,7 @@ void RichEdit::OnKeyDown(EventArgs& event)
 
 void RichEdit::OnImeStartComposition(EventArgs& event)
 {
-	HWND hWnd = GetWindow()->GetHWND();
+	HWND hWnd = GetWindowHandle();
 	if (hWnd == NULL)
 		return;
 
@@ -2554,7 +2580,7 @@ void RichEdit::Paint(IRenderContext* pRender, const UiRect& rcPaint)
             SIZEL szExtent = { -1, -1 };
             m_pTwh->GetTextServices()->TxGetNaturalSize(
                 DVASPECT_CONTENT, 
-                GetWindow()->GetPaintDC(), 
+                GetWindowDC(), 
                 NULL,
                 NULL,
                 TXTNS_FITTOCONTENT,
@@ -2562,11 +2588,11 @@ void RichEdit::Paint(IRenderContext* pRender, const UiRect& rcPaint)
                 &lWidth,
                 &lHeight);
 
-			if (lHeight <= rc.bottom - rc.top) {
-				Arrange();
-			}
-		}
-	}
+            if( lHeight <= rc.bottom - rc.top ) {
+                Arrange();
+            }
+        }
+    }
 }
 
 void RichEdit::PaintChild(IRenderContext* pRender, const UiRect& rcPaint)
@@ -2826,7 +2852,7 @@ void RichEdit::PaintCaret(IRenderContext* pRender, const UiRect& rcPaint)
 		DWORD dwClrColor = 0xff000000;
 
 		if (!m_sCaretColor.empty())
-			dwClrColor = GlobalManager::GetTextColor(m_sCaretColor);
+			dwClrColor = this->GetWindowColor(m_sCaretColor);
 
 		pRender->DrawLine(rect, m_iCaretWidth, dwClrColor);
 	}
@@ -2903,7 +2929,7 @@ void RichEdit::PaintPromptText(IRenderContext* pRender)
 	UiRect rc;
 	m_pTwh->GetControlRect(&rc);
 
-	DWORD dwClrColor = GlobalManager::GetTextColor(m_sPromptColor);
+	DWORD dwClrColor = this->GetWindowColor(m_sPromptColor);
 	UINT dwStyle = DT_NOCLIP;
 	pRender->DrawText(rc, strPrompt, dwClrColor, m_sFontId, dwStyle);
 }
@@ -2955,7 +2981,7 @@ void RichEdit::AddColorText(const std::wstring &str, const std::wstring &color)
 		ASSERT(FALSE);
 		return;
 	}
-	DWORD dwColor = GlobalManager::GetTextColor(color);
+	DWORD dwColor = this->GetWindowColor(color);
 
 	CHARFORMAT2W cf;
 	ZeroMemory(&cf, sizeof(cf));
@@ -2980,7 +3006,7 @@ void RichEdit::AddLinkColorText(const std::wstring &str, const std::wstring &col
 		ASSERT(FALSE);
 		return;
 	}
-	DWORD dwColor = GlobalManager::GetTextColor(color);
+	DWORD dwColor = this->GetWindowColor(color);
 
 	CHARFORMAT2W cf;
 	ZeroMemory(&cf, sizeof(cf));
