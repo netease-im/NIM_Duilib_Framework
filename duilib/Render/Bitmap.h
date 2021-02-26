@@ -25,6 +25,7 @@ public:
 
 	virtual void ClearAlpha(const UiRect& rcDirty, int alpha) override;
 	virtual void RestoreAlpha(const UiRect& rcDirty, const UiRect& rcShadowPadding, int alpha) override;
+	virtual void RestoreAlpha(const UiRect& rcDirty, const UiRect& rcShadowPadding) override;
 private:
 	void CleanUp();
 

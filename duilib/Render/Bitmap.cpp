@@ -62,6 +62,7 @@ bool GdiBitmap::Init(HDC hSrcDC, int width, int height, bool flipBItmap)
 	}
 	else
 	{
+		DWORD err = GetLastError();
 		ASSERT(FALSE);
 		return false;
 	}
@@ -121,6 +122,8 @@ void GdiBitmap::ClearAlpha(const UiRect& rcDirty, int alpha)
 
 void GdiBitmap::RestoreAlpha(const UiRect& rcDirty, const UiRect& rcShadowPadding, int alpha)
 {
+	// 此函数适用于GDI等API渲染位图，导致丢失alpha通道的情况，可以把alpha通道补回来
+	// 但是渲染位图时，还有GDI+、AlphaBlend等API给位图设置了半透明的alpha通道时，可能导致没法正确的修正alpha通道
 	ASSERT(m_hBitmap && m_pPiexl != NULL);
 	if (m_pPiexl == NULL)
 		return;
@@ -137,9 +140,38 @@ void GdiBitmap::RestoreAlpha(const UiRect& rcDirty, const UiRect& rcShadowPaddin
 
 			if (((j >= rcShadowPadding.left && j < m_nWidth - rcShadowPadding.right)
 				|| (i >= rcShadowPadding.top && i < m_nHeight - rcShadowPadding.bottom))) {
+
+				// ClearAlpha时，把alpha通道设置为某个值
+				// 如果此值没有变化，则证明上面没有绘制任何内容，把alpha设为0
 				if (alpha != 0 && *a == alpha)
 					*a = 0;
-				else
+				// 如果此值变为0，则证明上面被类似DrawText等GDI函数绘制过导致alpha被设为0，此时alpha设为255
+				else if (*a == 0)
+					*a = 255;
+			}
+		}
+	}
+}
+
+void GdiBitmap::RestoreAlpha(const UiRect& rcDirty, const UiRect& rcShadowPadding)
+{
+	// 无论什么情况，都把此区域的alphaa通道设置为255
+	ASSERT(m_hBitmap && m_pPiexl != NULL);
+	if (m_pPiexl == NULL)
+		return;
+
+	unsigned int * pBmpBits = (unsigned int *)m_pPiexl;
+	int nTop = MAX(rcDirty.top, 0);
+	int nBottom = MIN(rcDirty.bottom, m_nHeight);
+	int nLeft = MAX(rcDirty.left, 0);
+	int nRight = MIN(rcDirty.right, m_nWidth);
+
+	for (int i = nTop; i < nBottom; i++) {
+		for (int j = nLeft; j < nRight; j++) {
+			BYTE* a = (BYTE*)(pBmpBits + i * m_nWidth + j) + 3;
+
+			if (((j >= rcShadowPadding.left && j < m_nWidth - rcShadowPadding.right)
+				|| (i >= rcShadowPadding.top && i < m_nHeight - rcShadowPadding.bottom))) {
 					*a = 255;
 			}
 		}
