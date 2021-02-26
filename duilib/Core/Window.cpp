@@ -38,8 +38,6 @@ Window::Window() :
 	m_pEventClick(nullptr),
 	m_pEventKey(nullptr),
 	m_ptLastMousePos(-1, -1),
-	m_pEventTouch(nullptr),
-	m_ptLastTouchPos(-1, -1),
 	m_pEventPointer(nullptr),
 	m_bHandlePointer(true),
 	m_szMinWindow(),
@@ -405,7 +403,6 @@ bool Window::AttachDialog(Box* pRoot)
 	m_pNewHover = NULL;
 	m_pEventHover = NULL;
 	m_pEventClick = NULL;
-	m_pEventTouch = NULL;
 	m_pEventPointer = NULL;
 	// Remove the existing control-tree. We might have gotten inside this function as
 	// a result of an event fired or similar, so we cannot just delete the objects and
@@ -441,7 +438,6 @@ void Window::ReapObjects(Control* pControl)
 	if (pControl == m_pEventHover) m_pEventHover = NULL;
 	if (pControl == m_pNewHover) m_pNewHover = NULL;
 	if (pControl == m_pEventClick) m_pEventClick = NULL;
-	if (pControl == m_pEventTouch) m_pEventTouch = NULL;
 	if (pControl == m_pEventPointer) m_pEventPointer = NULL;
 	if (pControl == m_pFocus) m_pFocus = NULL;
 	std::wstring sName = pControl->GetName();
@@ -516,6 +512,30 @@ void Window::RemoveAllClass()
 	m_defaultAttrHash.clear();
 }
 
+void Window::AddTextColor(const std::wstring& strName, const std::wstring& strValue)
+{
+	std::wstring strColor = strValue.substr(1);
+	LPTSTR pstr = NULL;
+	DWORD dwBackColor = _tcstoul(strColor.c_str(), &pstr, 16);
+
+	m_mapTextColor[strName] = dwBackColor;
+}
+
+void Window::AddTextColor(const std::wstring& strName, DWORD argb)
+{
+	m_mapTextColor[strName] = argb;
+}
+
+DWORD Window::GetTextColor(const std::wstring& strName)
+{
+	auto it = m_mapTextColor.find(strName);
+	if (it != m_mapTextColor.end()) {
+		return it->second;
+	}
+
+	return 0;
+}
+
 bool Window::AddOptionGroup(const std::wstring& strGroupName, Control* pControl)
 {
 	auto it = m_mOptionGroup.find(strGroupName);
@@ -572,7 +592,7 @@ void Window::ClearImageCache()
 		m_pRoot->ClearImageCache();
 }
 
-POINT Window::GetMousePos() const
+POINT Window::GetLastMousePos() const
 {
 	return m_ptLastMousePos;
 }
@@ -653,11 +673,6 @@ void Window::SetShadowAttached(bool bShadowAttached)
 	m_shadow.SetShadowAttached(bShadowAttached);
 }
 
-bool Window::IsShadowAttached()
-{
-	return m_shadow.IsShadowAttached();
-}
-
 std::wstring Window::GetShadowImage() const
 {
 	return m_shadow.GetShadowImage();
@@ -673,9 +688,14 @@ UiRect Window::GetShadowCorner() const
 	return m_shadow.GetShadowCorner();
 }
 
-void Window::SetShadowCorner(const UiRect rect)
+bool Window::IsShadowAttached()
 {
-	m_shadow.SetShadowCorner(rect);
+    return m_shadow.IsShadowAttached();
+}
+
+void Window::SetShadowCorner(const UiRect rect, bool bNeedDpiScale)
+{
+	m_shadow.SetShadowCorner(rect, bNeedDpiScale);
 }
 
 UiRect Window::GetPos(bool bContainShadow) const
@@ -722,11 +742,12 @@ CSize Window::GetMinInfo(bool bContainShadow) const
 	return xy;
 }
 
-void Window::SetMinInfo(int cx, int cy, bool bContainShadow)
+void Window::SetMinInfo(int cx, int cy, bool bContainShadow, bool bNeedDpiScale)
 {
-	DpiManager::GetInstance()->ScaleInt(cx);
-	DpiManager::GetInstance()->ScaleInt(cy);
-
+	if (bNeedDpiScale) {
+		DpiManager::GetInstance()->ScaleInt(cx);
+		DpiManager::GetInstance()->ScaleInt(cy);
+	}
 	ASSERT(cx >= 0 && cy >= 0);
 
 	if (!bContainShadow) {
@@ -758,11 +779,12 @@ CSize Window::GetMaxInfo(bool bContainShadow) const
 	return xy;
 }
 
-void Window::SetMaxInfo(int cx, int cy, bool bContainShadow)
+void Window::SetMaxInfo(int cx, int cy, bool bContainShadow, bool bNeedDpiScale)
 {
-	DpiManager::GetInstance()->ScaleInt(cx);
-	DpiManager::GetInstance()->ScaleInt(cy);
-
+	if (bNeedDpiScale) {
+		DpiManager::GetInstance()->ScaleInt(cx);
+		DpiManager::GetInstance()->ScaleInt(cy);
+	}
 	ASSERT(cx >= 0 && cy >= 0);
 
 	if (!bContainShadow) {
@@ -848,6 +870,7 @@ bool Window::RemoveControlFromPointFinder(IControlFromPointFinder* pFinder)
 	}
 	return false;
 }
+
 bool Window::AddTranslateAccelerator(ITranslateAccelerator *pTranslateAccelerator)
 {
 	ASSERT(std::find(m_aTranslateAccelerator.begin(), m_aTranslateAccelerator.end(), pTranslateAccelerator) == m_aTranslateAccelerator.end());
@@ -918,9 +941,6 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		if (m_pEventClick != NULL) {
 			m_pEventClick->HandleMessageTemplate(kEventMouseButtonUp);
 		}
-		if (m_pEventTouch != NULL) {
-			m_pEventTouch->HandleMessageTemplate(kEventMouseButtonUp);
-		}
 		if (m_pEventPointer != NULL) {
 			m_pEventPointer->HandleMessageTemplate(kEventMouseButtonUp);
 		}
@@ -979,10 +999,22 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		}
 		// Create tooltip information
 		std::wstring sToolTip = pHover->GetToolTipText();
-		//if( sToolTip.empty() ) {
-		//	handled = true;
-		//	return 0;
-		//}
+		if (sToolTip.empty())
+			break;
+
+		if (m_hwndTooltip != NULL && IsWindowVisible(m_hwndTooltip)) {
+			TOOLINFO toolTip = {0};
+			toolTip.cbSize = sizeof(TOOLINFO);
+			toolTip.hwnd = m_hWnd;
+			toolTip.uId = (UINT_PTR)m_hWnd;
+			std::wstring toolTipText;
+			toolTipText.resize(MAX_PATH);
+			toolTip.lpszText = const_cast<LPTSTR>((LPCTSTR)toolTipText.c_str());
+			::SendMessage(m_hwndTooltip, TTM_GETTOOLINFO, 0, (LPARAM)&toolTip);
+			if (pHover == m_pEventHover && sToolTip == std::wstring(toolTipText.c_str()))
+				break;
+		}
+		
 		::ZeroMemory(&m_ToolTip, sizeof(TOOLINFO));
 		m_ToolTip.cbSize = sizeof(TOOLINFO);
 		m_ToolTip.uFlags = TTF_IDISHWND;
@@ -995,6 +1027,7 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 			m_hwndTooltip = ::CreateWindowEx(0, TOOLTIPS_CLASS, NULL, WS_POPUP | TTS_NOPREFIX | TTS_ALWAYSTIP, CW_USEDEFAULT,
 				CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, m_hWnd, NULL, ::GetModuleHandle(NULL), NULL);
 			::SendMessage(m_hwndTooltip, TTM_ADDTOOL, 0, (LPARAM)&m_ToolTip);
+			::SetWindowPos(m_hwndTooltip, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
 		}
 		::SendMessage(m_hwndTooltip, TTM_SETMAXTIPWIDTH, 0, pHover->GetToolTipWidth());
 		::SendMessage(m_hwndTooltip, TTM_SETTOOLINFO, 0, (LPARAM)&m_ToolTip);
@@ -1011,7 +1044,7 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 	break;
 	case WM_MOUSEMOVE:
 	{
-		if (m_pEventTouch != NULL || m_pEventPointer != NULL)
+		if (m_pEventPointer != NULL)
 			break;
 	
 		// Start tracking this entire window again...
@@ -1040,7 +1073,7 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 	break;
 	case WM_LBUTTONDOWN:
 	{
-		if (m_pEventTouch != NULL || m_pEventPointer != NULL)
+		if (m_pEventPointer != NULL)
 			break;
 
 		// We alway set focus back to our app (this helps
@@ -1061,7 +1094,7 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 	break;
 	case WM_RBUTTONDOWN:
 	{
-		if (m_pEventTouch != NULL || m_pEventPointer != NULL)
+		if (m_pEventPointer != NULL)
 			break;
 
 		::SetFocus(m_hWnd);
@@ -1079,7 +1112,7 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 	break;
 	case WM_LBUTTONDBLCLK:
 	{
-		if (m_pEventTouch != NULL || m_pEventPointer != NULL)
+		if (m_pEventPointer != NULL)
 			break;
 
 		::SetFocus(m_hWnd);
@@ -1096,6 +1129,7 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 	break;
 	case WM_LBUTTONUP:
 	{
+		ReleaseEventClick(false, wParam, lParam);
 		POINT pt = { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
 		m_ptLastMousePos = pt;
 		ReleaseCapture();
@@ -1113,7 +1147,8 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		if (m_pEventClick == NULL) break;
  
  		m_pEventClick->HandleMessageTemplate(kEventMouseRightButtonUp, wParam, lParam, 0, pt);
- 		//m_pEventClick = NULL;
+		// WM_CONTEXTMENU消息还会用到m_pEventClick
+ 		// m_pEventClick = NULL;
 	}
 	break;
 	case WM_IME_STARTCOMPOSITION:
@@ -1158,15 +1193,15 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 
 				if (pInputs[0].dwFlags & TOUCHEVENTF_DOWN)
 				{
-					if (m_pEventClick != NULL || m_pEventPointer != NULL)
+					if (m_pEventClick != NULL)
 						break;
 
 					::SetFocus(m_hWnd);
-					m_ptLastTouchPos = pt;
+					m_ptLastMousePos = pt;
 					Control *pControl = FindControl(pt);
 					if (pControl == NULL) break;
 					if (pControl->GetWindow() != this) break;
-					m_pEventTouch = pControl;
+					m_pEventPointer = pControl;
 					pControl->SetFocus();
 					SetCapture();
 
@@ -1174,27 +1209,28 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 				}
 				else if (pInputs[0].dwFlags & TOUCHEVENTF_MOVE)
 				{
-					if (m_pEventClick != NULL || m_pEventPointer != NULL)
+					if (m_pEventClick != NULL)
 						break;
 
-					if (m_ptLastTouchPos.x == pt.x && m_ptLastTouchPos.y == pt.y)
+					if (m_ptLastMousePos.x == pt.x && m_ptLastMousePos.y == pt.y)
 						break;
 
-					m_ptLastTouchPos = pt;
-					if (m_pEventTouch == NULL) break;
+					m_ptLastMousePos = pt;
+					if (m_pEventPointer == NULL) break;
 
 					if (!HandleMouseEnterLeave(pt, wParam, lParam)) break;
 
-					m_pEventTouch->HandleMessageTemplate(kEventTouchMove, 0, 0, 0, pt);
+					m_pEventPointer->HandleMessageTemplate(kEventTouchMove, 0, 0, 0, pt);
 				}
 				else if (pInputs[0].dwFlags & TOUCHEVENTF_UP)
 				{
-					m_ptLastTouchPos = pt;
+					ReleaseEventClick(true, wParam, lParam);
+					m_ptLastMousePos = pt;
 					ReleaseCapture();
-					if (m_pEventTouch == NULL) break;
+					if (m_pEventPointer == NULL) break;
 
-					m_pEventTouch->HandleMessageTemplate(kEventTouchUp, 0, lParam, 0, pt);
-					m_pEventTouch = NULL;
+					m_pEventPointer->HandleMessageTemplate(kEventTouchUp, 0, lParam, 0, pt);
+					m_pEventPointer = NULL;
 				}
 			}
 		}
@@ -1258,7 +1294,7 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		{
 		case WM_POINTERDOWN:
 		{
-			if (m_pEventClick != NULL || m_pEventTouch != NULL) {
+			if (m_pEventClick != NULL) {
 				handled = true;
 				break;
 			}
@@ -1281,10 +1317,13 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		}
 			break;
 		case WM_POINTERUPDATE:
-			if (m_pEventClick != NULL || m_pEventTouch != NULL) {
+			if (m_pEventClick != NULL) {
 				handled = true;
 				break;
 			}
+
+			if (m_ptLastMousePos.x == pt.x && m_ptLastMousePos.y == pt.y)
+				break;
 
 			m_ptLastMousePos = pt;
 			// 如果没有按下，则不设置handled，程序会转换为WM_BUTTON类消息
@@ -1302,6 +1341,7 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		case WM_POINTERUP:
 		case WM_POINTERLEAVE:
 		case WM_POINTERCAPTURECHANGED:
+			ReleaseEventClick(true, wParam, lParam);
 			m_ptLastMousePos = pt;
 			// 如果没有按下，则不设置handled，程序会转换为WM_BUTTON类消息
 			ReleaseCapture();
@@ -1330,7 +1370,6 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 	case WM_KILLFOCUS:
 	{
 		Control *pControl = m_pEventClick ? m_pEventClick : NULL;
-		pControl = m_pEventTouch ? m_pEventTouch : pControl;
 		pControl = m_pEventPointer ? m_pEventPointer : pControl;
 
 		POINT pt = { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
@@ -1340,12 +1379,12 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 
 		pControl->HandleMessageTemplate(kEventMouseButtonUp, wParam, lParam, 0, pt);
 		m_pEventClick = NULL;
-		m_pEventTouch = NULL;
 		m_pEventPointer = NULL;
 	}
 	break;
 	case WM_CONTEXTMENU:
 	{
+		ReleaseEventClick(false, wParam, lParam);
 		POINT pt = { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
 		::ScreenToClient(m_hWnd, &pt);
 		m_ptLastMousePos = pt;
@@ -1391,7 +1430,7 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 	case WM_SETCURSOR:
 	{
 		if (LOWORD(lParam) != HTCLIENT) break;
-		if (m_pEventClick != NULL || m_pEventTouch != NULL || m_pEventPointer != NULL) {
+		if (m_pEventClick != NULL || m_pEventPointer != NULL) {
 			handled = true;
 			return 0;
 		}
@@ -1461,6 +1500,22 @@ bool Window::HandleMouseEnterLeave(const POINT &pt, WPARAM wParam, LPARAM lParam
 		m_pEventHover = m_pNewHover;
 	}
 	return true;
+}
+
+void Window::ReleaseEventClick(bool bClickOrPointer, WPARAM wParam, LPARAM lParam)
+{
+	if (bClickOrPointer) {
+		if (m_pEventClick) {
+			m_pEventClick->HandleMessageTemplate(kEventMouseButtonUp, wParam, lParam, 0, m_ptLastMousePos);
+			m_pEventClick = NULL;
+		}
+	}
+	else {
+		if (m_pEventPointer) {
+			m_pEventPointer->HandleMessageTemplate(kEventPointUp, 0, lParam, 0, m_ptLastMousePos);
+			m_pEventPointer = NULL;
+		}
+	}
 }
 
 Control* Window::GetFocus() const
@@ -1541,7 +1596,7 @@ void Window::ReleaseCapture()
 
 bool Window::IsCaptureControl(const ui::Control* pControl)
 {
-	return m_pEventClick == pControl || m_pEventTouch == pControl || m_pEventPointer == pControl;
+	return m_pEventClick == pControl || m_pEventPointer == pControl;
 }
 
 bool Window::IsCaptured() const
@@ -1552,11 +1607,6 @@ bool Window::IsCaptured() const
 ui::Control* Window::GetNewHover()
 {
 	return m_pNewHover;
-}
-
-POINT Window::GetLastMousePos() const
-{
-	return m_ptLastMousePos;
 }
 
 HWND Window::GetTooltipWindow() const
@@ -1678,7 +1728,7 @@ bool Window::SendNotify(EventType eventType, WPARAM wParam, LPARAM lParam)
 	EventArgs msg;
 	msg.pSender = nullptr;
 	msg.Type = eventType;
-	msg.ptMouse = GetMousePos();
+	msg.ptMouse = GetLastMousePos();
 	msg.dwTimestamp = ::GetTickCount();
 	msg.wParam = wParam;
 	msg.lParam = lParam;
@@ -1701,7 +1751,7 @@ bool Window::SendNotify(Control* pControl, EventType msgType, WPARAM wParam, LPA
 	EventArgs msg;
 	msg.pSender = pControl;
 	msg.Type = msgType;
-	msg.ptMouse = GetMousePos();
+	msg.ptMouse = GetLastMousePos();
 	msg.dwTimestamp = ::GetTickCount();
 	msg.wParam = wParam;
 	msg.lParam = lParam;
@@ -1722,6 +1772,8 @@ ui::IRenderContext* Window::GetRenderContext() const
 
 void Window::Invalidate(const UiRect& rcItem)
 {
+	GlobalManager::AssertUIThread();
+
 	::InvalidateRect(m_hWnd, &rcItem, FALSE);
 	// Invalidating a layered window will not trigger a WM_PAINT message,
 	// thus we have to post WM_PAINT by ourselves.
@@ -1732,6 +1784,8 @@ void Window::Invalidate(const UiRect& rcItem)
 
 void Window::Paint()
 {
+	GlobalManager::AssertUIThread();
+
 	if (::IsIconic(m_hWnd) || !m_pRoot) {
 		PAINTSTRUCT ps = { 0 };
 		::BeginPaint(m_hWnd, &ps);
@@ -1810,8 +1864,6 @@ void Window::Paint()
 	int height = rcClient.bottom - rcClient.top;
 	if (m_renderContext->Resize(width, height))
 	{
-		// 使用阴影后会修补alpha通道，就不需要设置透明属性了
-		m_renderContext->SetRenderTransparent(!m_shadow.IsShadowAttached());
 		rcPaint.left = 0;
 		rcPaint.top = 0;
 		rcPaint.right = width;
@@ -1894,6 +1946,11 @@ bool Window::IsRenderTransparent() const
 bool Window::SetRenderTransparent(bool bCanvasTransparent)
 {
 	return m_renderContext->SetRenderTransparent(bCanvasTransparent);
+}
+
+bool Window::IsLayeredWindow()
+{
+	return m_bIsLayeredWindow;
 }
 
 void Window::SetRenderOffset(CPoint renderOffset)

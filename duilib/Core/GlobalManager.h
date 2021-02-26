@@ -134,6 +134,14 @@ public:
 	static void AddTextColor(const std::wstring& strName, const std::wstring& strValue);
 
 	/**
+	 * @brief 添加一个全局颜色值提供程序使用
+	 * @param[in] strName 颜色名称（如 white）
+	  * @param[in] strValue 颜色具体数值（如 #FFFFFFFF）
+	 * @return 无
+	 */
+	static void AddTextColor(const std::wstring& strName, DWORD argb);
+
+	/**
 	 * @brief 根据名称获取一个颜色的具体数值
 	 * @param[in] strName 要获取的颜色名称
 	 * @return 返回 DWORD 格式的颜色描述值
@@ -389,6 +397,8 @@ public:
 	 */
 	static Control* CreateControl(const std::wstring& strControlName);
 
+	static void AssertUIThread();
+
 	/**
 	 * @brief 判断当前是否使用了 zip 压缩包
 	 * @return 返回 true 表示使用了 zip 压缩包作为资源，false 为普通目录模式
@@ -417,7 +427,7 @@ public:
 	 * @param[in] path 要获取的文件的路径
 	 * @return 返回文件的内存地址
 	 */
-	static HGLOBAL GetData(const std::wstring& path);
+	static HGLOBAL GetZipData(const std::wstring& path);
 
 	/**
 	 * @brief 获取文件在压缩包中的位置
@@ -425,6 +435,20 @@ public:
 	 * @return 返回在压缩包中的文件位置
 	 */
 	static std::wstring GetZipFilePath(const std::wstring& path);
+
+	/**
+	 * @brief 根据资源加载方式，返回对应的资源路径
+	 * @param[in] path 要获取的资源路径
+	 * @return 可用的资源路径
+	 */
+	static std::wstring GetResPath(const std::wstring& res_path, const std::wstring& window_res_path);
+
+	/**
+	 * @brief 判断资源是否存在zip当中
+	 * @param[in] path 要判断的资源路径
+	 * @return 是否存在
+	 */
+	static bool IsZipResExist(const std::wstring& path);
 
 private:
 	/**
@@ -467,6 +491,8 @@ private:
 	static DWORD m_dwDefaultLinkFontColor;
 	static DWORD m_dwDefaultLinkHoverFontColor;
 	static DWORD m_dwDefaultSelectedBkColor;
+
+	static DWORD m_dwUiThreadId;
 };
 
 } // namespace ui

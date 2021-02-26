@@ -298,6 +298,29 @@ public:
 	void RemoveAllClass();
 
 	/**
+	 * @brief 添加一个颜色值提供窗口内使用
+	 * @param[in] strName 颜色名称（如 white）
+	 * @param[in] strValue 颜色具体数值（如 #FFFFFFFF）
+	 * @return 无
+	 */
+	void AddTextColor(const std::wstring& strName, const std::wstring& strValue);
+
+	/**
+	 * @brief 添加一个颜色值提供窗口内使用
+	 * @param[in] strName 颜色名称（如 white）
+	 * @param[in] strValue 颜色具体数值（如 #FFFFFFFF）
+	 * @return 无
+	 */
+	void AddTextColor(const std::wstring& strName, DWORD argb);
+
+	/**
+	 * @brief 根据名称获取一个颜色的具体数值
+	 * @param[in] strName 要获取的颜色名称
+	 * @return 返回 DWORD 格式的颜色描述值
+	 */
+	DWORD GetTextColor(const std::wstring& strName);
+
+	/**
 	 * @brief 添加一个选项组
 	 * @param[in] strGroupName 组名称
 	 * @param[in] pControl 控件指针
@@ -461,9 +484,10 @@ public:
 	/**
 	 * @brief 指定阴影素材的九宫格描述
 	 * @param[in] rect 九宫格描述信息
+	 * @param[in] bNeedDpiScale 为 false 表示不需要把 rc 根据 DPI 自动调整
 	 * @return 无
 	 */
-	void SetShadowCorner(const UiRect rect);
+	void SetShadowCorner(const UiRect rect, bool bNeedDpiScale = true);
 
 	/**
 	 * @brief 获取窗口位置信息
@@ -509,19 +533,21 @@ public:
 	 * @param[in] cx 宽度
 	 * @param[in] cy 高度
 	 * @param[in] bContainShadow 为 false 表示 cx cy 不包含阴影
+	 * @param[in] bNeedDpiScale 为 false 表示不需要把 rc 根据 DPI 自动调整
 	 * @return 无
 	 */
 	// 
-	void SetMinInfo(int cx, int cy, bool bContainShadow = false);
+	void SetMinInfo(int cx, int cy, bool bContainShadow = false, bool bNeedDpiScale = true);
 
 	/**
 	 * @brief 设置窗口最大范围
 	 * @param[in] cx 宽度
 	 * @param[in] cy 高度
 	 * @param[in] bContainShadow 为 false 表示 cx cy 不包含阴影
+	 * @param[in] bNeedDpiScale 为 false 表示不需要把 rc 根据 DPI 自动调整
 	 * @return 无
 	 */
-	void SetMaxInfo(int cx, int cy, bool bContainShadow = false);
+	void SetMaxInfo(int cx, int cy, bool bContainShadow = false, bool bNeedDpiScale = true);
 
 	/**
 	 * @brief 设置窗口初始大小
@@ -618,6 +644,15 @@ public:
 	 * @return 返回 true 需要发送鼠标进入或离开消息，返回 false 为不需要
 	 */
 	inline bool HandleMouseEnterLeave(const POINT &pt, WPARAM wParam, LPARAM lParam);
+
+	/**
+	 * @brief 释放指定控件的按下状态
+	 * @param[in] bClickOrPointer 单击控件还是触摸控件
+	 * @param[in] wParam 消息附加参数
+	 * @param[in] lParam 消息附加参数
+	 * @return void 无
+	 */
+	void ReleaseEventClick(bool bClickOrPointer, WPARAM wParam, LPARAM lParam);
 
 	/// 焦点相关
 	/**
@@ -842,6 +877,7 @@ public:
 	 * @return 返回上一次绘制状态
 	 */
 	bool SetRenderTransparent(bool bCanvasTransparent);
+	bool IsLayeredWindow();
 
 	/**
 	 * @brief 初始化布局
@@ -918,8 +954,6 @@ protected:
 	Control* m_pEventKey;
 	CPoint m_ptLastMousePos;
 
-	Control* m_pEventTouch;
-	CPoint m_ptLastTouchPos;
 	Control* m_pEventPointer;
 	bool m_bHandlePointer;
 
@@ -932,6 +966,7 @@ protected:
 	std::wstring m_strWindowResourcePath; //每个窗口的资源路径,等于GetSkinFolder()
 	TFontInfo m_defaultFontInfo;
 	std::map<std::wstring, std::wstring> m_defaultAttrHash;
+	std::map<std::wstring, DWORD> m_mapTextColor;
 	std::map<std::wstring, std::vector<Control*>> m_mOptionGroup;
 
 	std::vector<IUIMessageFilter*> m_aPreMessageFilters;
