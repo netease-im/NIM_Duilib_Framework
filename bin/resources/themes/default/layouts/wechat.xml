@@ -8,7 +8,7 @@
     <!-- 好友列表 -->
     <VBox width="270" bkcolor="light_gray">
       <Box padding="10,8,10,8" height="auto">
-        <RichEdit class="simple prompt input" name="nickname" width="stretch" height="35" padding="25,8,8,8" font="1" borderround="5,5" prompttext="搜索"/>
+        <RichEdit class="simple prompt input" name="nickname" width="stretch" height="35" padding="25,8,8,8" borderround="5,5" prompttext="搜索"/>
         <Control width="auto" height="auto" margin="6,9" bkimage="search_icon.png"/>
       </Box>
       <VBox>

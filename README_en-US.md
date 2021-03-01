@@ -3,7 +3,7 @@
 NIM Duilib is a UI development framework for Windows, extend some new features based on the original [Duilib](https://github.com/duilib/duilib). Integrated Google base library with threads/memory/closures. You can use this framework to develop any desktop application you want.
 
 ![GitHub](https://img.shields.io/badge/license-MIT-green.svg)
-![Build status](https://ci.appveyor.com/api/projects/status/u29yl0j7pasopm3h/branch/master?svg=true)
+[![Build status](https://ci.appveyor.com/api/projects/status/u29yl0j7pasopm3h?svg=true)](https://ci.appveyor.com/project/nmgwddj/nim-duilib-framework)
 
 [中文介绍](README.md)
 
@@ -19,7 +19,7 @@ NIM Duilib is a UI development framework for Windows, extend some new features b
 
 ## Preview
 
-![preview](docs/PREVIEW.png)
+![preview](docs/PREVIEW.gif)
 
 ## Start
 
@@ -29,27 +29,26 @@ Clone the repo into your disk.
 git clone https://github.com/netease-im/NIM_Duilib_Framework
 ```
 
-Enter the `NIM_Duilib_Framework/samples` directory，Open `samples.sln` with Visual Studio 2013 Update 5 or higher ，press `F7` to compile all projects.
+Enter the `NIM_Duilib_Framework/examples` directory，Open `examples.sln` with Visual Studio 2013 Update 5 or higher ，press `F7` to compile all projects.
 
 ## Documentation
 
+ - [Getting Started](docs/GETTING-STARTED.md)
  - [Docs](docs/SUMMARY.md)
     
 ## Structure
 
-├─`bin` Samples output directories，include skin and language files and CEF dependencies.  
+├─`base` Base libraries.  
+├─`bin` Examples output directories，include skin and language files and CEF dependencies.  
 ├─`docs` Documentation of Duilib.  
+├─`duilib` Duilib core, depend on base project.  
 ├─`libs` Static library output directories, include CEF static library.  
-├─`samples` Samples of Duilib.  
+├─`examples` Examples of Duilib.  
 ├─`third_party` Third party for CEF.  
-├─`toolkits`       
-│  ├─`base` Base libraries.  
-│  ├─`duilib` Duilib core, depend on base project.  
-│  ├─`shared` Utils, such as logs/string/path utils.  
-│  ├─`ui_components` UI components based on Duilib, such as `msgbox`,`toast`,`cef_control`  
+├─`ui_components` UI components based on Duilib, such as `msgbox`,`toast`,`cef_control`  
 
 ## Communication
 
- - Question: Read the [Documentation](docs/SUMMARY.md) and [Samples code](samples/README.md) to help you.
- - Report: File a bug in GitHub issues
+ - Question: Read the [Documentation](docs/SUMMARY.md) and [Examples code](examples/README.md) to help you.
+ - Report: File a bug in GitHub issues.
  - Suggestion: Request a new feature in Github issues.

@@ -90,9 +90,6 @@ private:
 	* @return void	无返回值
 	*/
 	virtual void Cleanup() override;
-
-private:
-	std::unique_ptr<ui::HelperThread>	misc_thread_;
 };
 ```
 

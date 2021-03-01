@@ -182,6 +182,7 @@
 | [IsFocused](#IsFocused) | 检查控件是否具有焦点 |
 | [SetFocus](#SetFocus) | 让控件获取焦点 |
 | [SetNoFocus](#SetNoFocus) | 让控件设置永远获取不到焦点 |
+| [GetControlFlags](#GetControlFlags) | 返回控件的标识，用于判断是否可以响应 TAB 切换事件 |
 | [IsMouseFocused](#IsMouseFocused) | 判断当前鼠标焦点是否在控件上 |
 | [SetMouseFocused](#SetMouseFocused) | 设置是否将鼠标焦点到控件上 |
 | [IsActivatable](#IsActivatable) | 判断控件当前是否是激活状态 |
@@ -1446,6 +1447,17 @@ void SetNoFocus()
 
  - 参&emsp;数：无  
  - 返回值：无
+
+### GetControlFlags
+
+返回控件的标识，用于判断是否可以响应 TAB 切换事件
+
+```cpp
+virtual UINT GetControlFlags() const
+```
+
+ - 参&emsp;数：无  
+ - 返回值：返回控件的标识类型，`UIFLAG_DEFAULT` 为默认状态不支持焦点切换，`UIFLAG_TABSTOP` 为支持焦点切换
 
 ### IsMouseFocused
 

@@ -19,21 +19,6 @@
 | password | false | BOOL | 是否显示密码符,如(true) |
 | number | false | BOOL | 是否只允许输入数字,如(false) |
 | align | left | STRING | 文字对齐方式,取值left、right、hcenter、top、vcenter、bottom,如(right) |
-| font | -1 | INT | 字体id,如(0) |
-| promptmode | false | BOOL | 是否显示提示文字,如(true) |
-| vscrollbar | false | BOOL | 是否使用竖向滚动条,如(true) |
-| autovscroll | false | BOOL | 是否随输入竖向滚动,如(true) |
-| hscrollbar | false | BOOL | 是否使用横向滚动条,如(true) |
-| autohscroll | false | BOOL | 是否随输入横向滚动,如(true) |
-| wanttab | true | BOOL | 是否接受tab按键消息,如(true) |
-| wantreturnmsg | true | BOOL | 是否接受return按键消息,如(true) |
-| returnmsgwantctrl | true | BOOL | 是否接受ctrl+return按键消息,如(true) |
-| rich | true | BOOL | 是否使用富格式,如(true) |
-| multiline | true | BOOL | 是否使用多行,如(true) |
-| readonly | false | BOOL | 是否只读,如(false) |
-| password | false | BOOL | 是否显示密码符,如(true) |
-| number | false | BOOL | 是否只允许输入数字,如(false) |
-| align | left | STRING | 文字对齐方式,取值left、right、hcenter、top、vcenter、bottom,如(right) |
 | text |  | STRING | 显示文本,如(测试文本) |
 | font | -1 | INT | 字体id,如(0) |
 | normaltextcolor |  | STRING | 普通状态文字颜色,不指定则使用默认颜色,如(blue) |

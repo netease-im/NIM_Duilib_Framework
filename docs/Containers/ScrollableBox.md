@@ -1,18 +1,13 @@
 # ScrollableBox（可滚动布局容器）
 
-`ScrollableBox` 继承了 `Box` 容器属性和方法，更多可用属性和方法请参考：[Box](Box.md) 容器
+`ScrollableBox` 继承了 `Box` 容器属性和方法，更多可用属性和方法请参考：[Box](Box.md) 容器。
+
+注意：此控件不能在 XML 中直接使用，仅作为可滚动布局容器的基类，此处仅记录继承该容器的其他容器所拥有的公共属性和方法。请参考使用 [ListBox](../List/ListBox.md)。
 
 ## 可用属性
 
 | 属性名称 | 默认值 | 参数类型 | 用途 |
 | :--- | :--- | :--- | :--- |
-| vscrollbar | false | BOOL | 是否使用竖向滚动条,如(true) |
-| hscrollbar | false | BOOL | 是否使用横向滚动条,如(true) |
-| scrollbarpadding | 0,0,0,0 | RECT | 滚动条的外边距,可以让滚动条不占满容器,如(2,2,2,2) |
-| vscrollunit | 30 | INT | 容器的纵向滚动条滚动步长,0代表使用默认步长 |
-| scrollbarfloat | true | BOOL | 容器的滚动条是否悬浮在子控件上面,如(true) |
-| defaultdisplayscrollbar | true | BOOL | 暂时无用,未开发 |
-| holdend | false | BOOL | 是否一直保持显示末尾位置,如(true) |
 | vscrollbar | false | BOOL | 是否使用竖向滚动条,如(true) |
 | hscrollbar | false | BOOL | 是否使用横向滚动条,如(true) |
 | vscrollbarstyle |  | STRING | 设置本容器的纵向滚动条的样式 |

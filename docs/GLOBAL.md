@@ -7,24 +7,26 @@ Global 全局样式提供了通用的样式列表，避免在多个不同的 XML
 
 ## 字体（Font）
 
-如果你想添加一个字体，则在 `global.xml` 中添加如下代码，程序启动后会根据字体位置顺序依次给字体进行编号，排在第一位的字体编号为 0，第二位的为 1，依次递增。
+如果你想添加一个字体，则在 `global.xml` 中添加如下代码，程序启动后会加载所有字体列表到缓存中，以 ID 作为区分（注意，老版本没有 ID 属性，缓存时是根据字体的顺序依次编号放入内存中，一旦指定了 ID 属性，索引将不再生效！）。
 
 ```xml
 <!-- name 代表字体名称，size 代表字体大小，bold 代表是否粗体，underline 代表是否包含下划线 -->
-<Font name="system" size="10" bold="true" underline="true"/>
+<Font id="system_12" name="system" size="10" bold="true" underline="true"/>
 ```
 
-当需要使用时，指定字体的编号即可。比如你希望一个 Button 按钮使用第 2 号字体，可以这样写：
+当需要使用时，指定字体的编号即可。比如你希望一个 Button 按钮使用 ID 为 system_12 的字体，可以这样写：
 
 ```xml
-<Button text="Hello Button" font="2"/>
+<Button text="Hello Button" font="system_12"/>
 ```
 
 ### Font 所有可用属性
 
 | 属性名称 | 默认值 | 参数类型 | 用途 |
 | :--- | :--- | :--- | :--- |
-| name | | STRING | 字体名称 |
+| id | | STRING | 字体ID（一旦使用 ID 属性，字体索引将不再生效） |
+| default | false | STRING | 是否是默认字体，如果未给控件指定字体，则使用该字体 |
+| name | | STRING | 字体在系统中的名称 |
 | size | 12 | INT | 字体大小 |
 | bold | false | BOOL | 是否粗体 |
 | underline | false | BOOL | 是否下划线 |

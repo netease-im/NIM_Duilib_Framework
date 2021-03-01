@@ -6,7 +6,7 @@
             <Button class="btn_wnd_close" name="closebtn" margin="10,6,0,0"/>
         </HBox>
 
-        <RichEdit name="content" width="300" margin="20,30,20,30" font="3" multiline="true" vscrollbar="false" autovscroll="false" enabled="false" rich="true"/>
+        <RichEdit name="content" width="300" margin="20,30,20,30" font="system_16" multiline="true" vscrollbar="false" autovscroll="false" enabled="false" rich="true"/>
 
         <HBox height="auto" margin="0,0,20,20" childmargin="10">
             <Control />

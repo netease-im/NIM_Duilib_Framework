@@ -33,7 +33,6 @@
 | [Create](#Create) | 创建窗口 |
 | [Close](#Close) | 关闭窗口 |
 | [ShowWindow](#ShowWindow) | 显示或隐藏窗口 |
-| [ShowModal](#ShowModal) | 显示模态对话框（不推荐） |
 | [ShowModalFake](#ShowModalFake) | 显示模态对话框（推荐） |
 | [CenterWindow](#CenterWindow) | 居中窗口，支持扩展屏幕 |
 | [SetIcon](#SetIcon) | 设置窗口图标 |
@@ -87,8 +86,6 @@
 | [SetMinInfo](#SetMinInfo) | 设置窗口最小范围 |
 | [SetMaxInfo](#SetMaxInfo) | 设置窗口最大范围 |
 | [SetInitSize](#SetInitSize) | 设置窗口初始大小 |
-| [AddPreMessageFilter](#AddPreMessageFilter) | 添加一个消息被派发到窗口前的消息过滤器 |
-| [RemovePreMessageFilter](#RemovePreMessageFilter) | 移除一个消息被派发到窗口前的消息过滤器 |
 | [AddMessageFilter](#AddMessageFilter) | 添加一个消息过滤器，此时消息已经派发 |
 | [RemoveMessageFilter](#RemoveMessageFilter) | 移除一个消息过滤器 |
 | [AddControlFromPointFinder](#AddControlFromPointFinder) | 查找控件时添加一个根据位置查找控件的钩子 |
@@ -96,7 +93,6 @@
 | [AddTranslateAccelerator](#AddTranslateAccelerator) | 添加一个 TranslateMessage 之前的消息过滤器 |
 | [RemoveTranslateAccelerator](#RemoveTranslateAccelerator) | 移除一个 TranslateMessage 之前的消息过滤器 |
 | [TranslateAccelerator](#TranslateAccelerator) | 执行 TranslateMessage 阶段的过滤器 |
-| [PreMessageHandler](#PreMessageHandler) | 执行派发消前的过滤器 |
 | [HandleMessage](#HandleMessage) | 窗口消息的派发函数 |
 | [DoHandlMessage](#DoHandlMessage) | 窗口消息的执行体，用于执行各类过滤器和处理各类消息 |
 | [CallWindowProc](#CallWindowProc) | 对 CallWindowProc API 的一层封装 |
@@ -113,6 +109,7 @@
 | [GetLastMousePos](#GetLastMousePos) | 获取鼠标最后的坐标 |
 | [SetHandlePointer](#SetHandlePointer) | 设置是否处理触控消息 |
 | [GetTooltipWindow](#GetTooltipWindow) | 获取提示信息所属的窗口句柄 |
+| [SetNextTabControl](#SetNextTabControl) | 切换控件焦点到下一个（或上一个）控件 |
 | [GetRoot](#GetRoot) | 获取窗口最外层的容器 |
 | [SetArrange](#SetArrange) | 设置控件是否已经布局 |
 | [AddDelayedCleanup](#AddDelayedCleanup) | 延迟销毁一个控件 |
@@ -268,17 +265,6 @@ virtual void ShowWindow(bool bShow = true, bool bTakeFocus = true)
     - `bShow` 为 true 时显示窗口，为 false 时为隐藏窗口，默认为 true
     - `bTakeFocus` 是否获得焦点（激活窗口），默认为 true
  - 返回值：无
-
-### ShowModal
-
-显示模态对话框（不推荐）
-
-```cpp
-UINT ShowModal()
-```
-
- - 参&emsp;数：无  
- - 返回值：接收到的消息
 
 ### ShowModalFake
 
@@ -923,30 +909,6 @@ void SetInitSize(int cx, int cy, bool bContainShadow = false, bool bNeedDpiScale
     - `bNeedDpiScale` 为 false 表示不根据 DPI 调整
  - 返回值：无
 
-### AddPreMessageFilter
-
-添加一个消息被派发到窗口前的消息过滤器
-
-```cpp
-bool AddPreMessageFilter(IUIMessageFilter* pFilter)
-```
-
- - 参&emsp;数：  
-    - `pFilter` 一个继承了 IUIMessageFilter 的对象实例，需要实现 MessageHandler 方法
- - 返回值：始终返回 true
-
-### RemovePreMessageFilter
-
-移除一个消息被派发到窗口前的消息过滤器
-
-```cpp
-bool RemovePreMessageFilter(IUIMessageFilter* pFilter)
-```
-
- - 参&emsp;数：  
-    - `pFilter` 一个继承了 IUIMessageFilter 的对象实例
- - 返回值：返回 true 表示移除成功，否则可能该过滤器不存在
-
 ### AddMessageFilter
 
 添加一个消息过滤器，此时消息已经派发
@@ -1030,21 +992,6 @@ bool TranslateAccelerator(LPMSG pMsg)
  - 参&emsp;数：  
     - `pMsg` 消息体
  - 返回值：返回 true 成功处理消息，否则返回 false
-
-### PreMessageHandler
-
-执行派发消前的过滤器
-
-```cpp
-bool PreMessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, LRESULT& lRes)
-```
-
- - 参&emsp;数：  
-    - `uMsg` 消息体
-    - `wParam` 消息附加参数
-    - `lParam` 消息附加参数
-    - `lRes` 处理结果
- - 返回值：返回 true 则继续派发该消息，否则不再派发该消息
 
 ### HandleMessage
 
@@ -1238,6 +1185,18 @@ HWND GetTooltipWindow()
 
  - 参&emsp;数：无  
  - 返回值：返回提示信息的窗口句柄
+
+### SetNextTabControl
+
+切换控件焦点到下一个（或上一个）控件
+
+```cpp
+bool SetNextTabControl(bool bForward = true)
+```
+
+ - 参&emsp;数：  
+    - `bForward` true 为上一个控件，否则为 false，默认为 true
+ - 返回值：始终返回 true，暂无参考意义
 
 ### GetRoot
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Window size="340,180" caption="0,0,0,600" shadowattached="false" custom_shadow="10,10,10,10">
     <Box width="340" height="auto" bkimage="file='win_bg.png' corner='15,15,15,15'">
-        <RichEdit name="content" width="300" minheight="30" margin="20,20,20,20" font="2" multiline="true" vscrollbar="false" autovscroll="false" enabled="false" rich="false" mouse="false" disabledtextcolor="light_gray"/>
+        <RichEdit name="content" width="300" minheight="30" margin="20,20,20,20" font="system_14" multiline="true" vscrollbar="false" autovscroll="false" enabled="false" rich="false" mouse="false" disabledtextcolor="light_gray"/>
         <Button name="close_btn" width="25" height="24" valign="top" halign="right" visible="false" normalimage="file='close.png' source='0,0,24,24'" hotimage="file='close.png' source='25,0,49,24'" pushedimage="file='close.png' source='50,0,74,24'" disabledimage="file='close.png' source='75,0,99,24'"/>
     </Box>
 </Window>
