@@ -33,7 +33,7 @@ class BytesWriteHandler : public CefWriteHandler {
   int64 datasize_;
   int64 offset_;
 
-  base::Lock lock_;
+  base::CefLock lock_;
 
   IMPLEMENT_REFCOUNTING(BytesWriteHandler);
   DISALLOW_COPY_AND_ASSIGN(BytesWriteHandler);

@@ -60,7 +60,7 @@ class ThreadCheckerImpl {
  private:
   void EnsureThreadIdAssigned() const;
 
-  mutable base::Lock lock_;
+  mutable base::CefLock lock_;
   // This is mutable so that CalledOnValidThread can set it.
   // It's guarded by |lock_|.
   mutable PlatformThreadRef valid_thread_id_;
