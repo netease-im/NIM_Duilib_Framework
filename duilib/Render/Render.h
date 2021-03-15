@@ -48,6 +48,7 @@ public:
 		const UiRect& rcImageDest, const UiRect& rcImageSource, UiRect rcCorners, bool bBitmapDpiScale = false, BYTE uFade = 255, bool xtiled = false, bool ytiled = false) override;
 
 	virtual void DrawColor(const UiRect& rc, DWORD dwColor, BYTE uFade = 255) override;
+    virtual void DrawColor(const UiRect& rc, const std::wstring& colorStr, BYTE uFade = 255) override;
 
 	virtual void DrawLine(const UiRect& rc, int nSize, DWORD dwPenColor) override;
 	virtual void DrawLine(const IPen* pen, int x1, int y1, int x2, int y2) override;

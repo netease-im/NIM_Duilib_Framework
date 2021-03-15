@@ -459,6 +459,16 @@ void RenderContext_GdiPlus::DrawColor(const UiRect& rc, DWORD dwColor, BYTE uFad
 	graphics.FillRectangle(&brush, rcFill);
 }
 
+void RenderContext_GdiPlus::DrawColor(const UiRect& rc, const std::wstring& colorStr, BYTE uFade /*= 255*/)
+{
+    if (colorStr.empty()) {
+        return;
+    }
+
+    DWORD dwColor = GlobalManager::GetTextColor(colorStr);
+    DrawColor(rc, dwColor, uFade);
+}
+
 void RenderContext_GdiPlus::DrawLine( const UiRect& rc, int nSize, DWORD dwPenColor)
 {
 	Gdiplus::Graphics graphics(m_hDC);
