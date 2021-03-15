@@ -295,23 +295,11 @@
     <ClInclude Include="Animation\AnimationManager.h">
       <Filter>Header Files\Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Control\ButtonImpl.h">
-      <Filter>Source Files\Control</Filter>
-    </ClInclude>
-    <ClInclude Include="Control\CheckBoxImpl.h">
-      <Filter>Source Files\Control</Filter>
-    </ClInclude>
-    <ClInclude Include="Control\OptionImpl.h">
-      <Filter>Source Files\Control</Filter>
-    </ClInclude>
     <ClInclude Include="Utils\Macros.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Utils\DpiManager.h">
       <Filter>Header Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Control\LabelImpl.h">
-      <Filter>Source Files\Control</Filter>
     </ClInclude>
     <ClInclude Include="Utils\VersionHelpers.h">
       <Filter>Header Files\Utils</Filter>

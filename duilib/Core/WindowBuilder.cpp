@@ -223,6 +223,7 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 					int size = 12;
 					bool bold = false;
 					bool underline = false;
+					bool strikeout = false;
 					bool italic = false;
 					bool isDefault = false;
 					for( int i = 0; i < nAttributes; i++ ) {
@@ -244,6 +245,9 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 						else if( strName == _T("underline") ) {
 							underline = (strValue == _T("true"));
 						}
+						else if (strName == _T("strikeout")) {
+							strikeout = (strValue == _T("true"));
+						}
 						else if( strName == _T("italic") ) {
 							italic = (strValue == _T("true"));
 						}
@@ -252,7 +256,7 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 						}
 					}
 					if( !strFontName.empty() ) {
-						GlobalManager::AddFont(strFontId, strFontName, size, bold, underline, italic, isDefault);
+						GlobalManager::AddFont(strFontId, strFontName, size, bold, underline,strikeout, italic, isDefault);
 					}
 				}
 				else if( strClass == _T("Class") ) {

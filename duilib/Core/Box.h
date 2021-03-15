@@ -236,7 +236,7 @@ public:
 	 * @param[in] bAuto true 为自动销毁，false 为不自动销毁
 	 * @return 无
 	 */
-    virtual void SetAutoDestroy(bool bAuto);
+    virtual void SetAutoDestroyChild(bool bAuto);
 
 	/**
 	 * @brief 判断窗口关闭后是否自动销毁

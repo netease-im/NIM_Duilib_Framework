@@ -135,7 +135,7 @@ virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bH
     - `uMsg` 消息内容
     - `wParam` 消息附加参数
     - `lParam` 消息附加参数
-	- `bHandled` 返回 true 则继续派发该消息，否则不再派发该消息
+	- `bHandled` 返回 false 则继续派发该消息，否则不再派发该消息
  - 返回值：返回消息处理结果
 
 ### OnClose
@@ -150,7 +150,7 @@ virtual LRESULT OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
     - `uMsg` 消息内容
     - `wParam` 消息附加参数
     - `lParam` 消息附加参数
-    - `bHandled` 返回 true 则继续派发该消息，否则不再派发该消息
+    - `bHandled` 返回 false 则继续派发该消息，否则不再派发该消息
  - 返回值：返回消息处理结果
 
 ### OnDestroy

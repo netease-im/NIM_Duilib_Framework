@@ -80,6 +80,7 @@ Window::Window() :
 	m_defaultFontInfo.iSize = -lf.lfHeight;
 	m_defaultFontInfo.bBold = (lf.lfWeight >= FW_BOLD);
 	m_defaultFontInfo.bUnderline = (lf.lfUnderline == TRUE);
+	m_defaultFontInfo.bStrikeout = (lf.lfStrikeOut == TRUE);
 	m_defaultFontInfo.bItalic = (lf.lfItalic == TRUE);
 	::ZeroMemory(&m_defaultFontInfo.tm, sizeof(m_defaultFontInfo.tm));
 }
@@ -228,6 +229,7 @@ void Window::Close(UINT nRet)
 	else {
 		PostMessage(WM_CLOSE, (WPARAM)nRet, 0L);
 	}
+	m_bCloseing = true;
 }
 
 void Window::ShowWindow(bool bShow /*= true*/, bool bTakeFocus /*= false*/)
@@ -816,10 +818,9 @@ CSize Window::GetInitSize(bool bContainShadow) const
 	return xy;
 }
 
-void Window::SetInitSize(int cx, int cy, bool bContainShadow, bool bNeedDpiScale)
+void Window::Resize(int cx, int cy, bool bContainShadow, bool bNeedDpiScale)
 {
-	if (bNeedDpiScale)
-	{
+	if (bNeedDpiScale) {
 		DpiManager::GetInstance()->ScaleInt(cy);
 		DpiManager::GetInstance()->ScaleInt(cx);
 	}
@@ -831,8 +832,15 @@ void Window::SetInitSize(int cx, int cy, bool bContainShadow, bool bNeedDpiScale
 	}
 	m_szInitWindowSize.cx = cx;
 	m_szInitWindowSize.cy = cy;
-	if( m_pRoot == NULL && m_hWnd != NULL ) {
+	if(m_hWnd != NULL ) {
 		::SetWindowPos(m_hWnd, NULL, 0, 0, m_szInitWindowSize.cx, m_szInitWindowSize.cy, SWP_NOZORDER | SWP_NOMOVE | SWP_NOACTIVATE);
+	}
+}
+
+void Window::SetInitSize(int cx, int cy, bool bContainShadow, bool bNeedDpiScale)
+{
+	if(m_pRoot == NULL) {
+		Resize(cx, cy, bContainShadow, bNeedDpiScale);
 	}
 }
 
@@ -1029,9 +1037,12 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 			::SendMessage(m_hwndTooltip, TTM_ADDTOOL, 0, (LPARAM)&m_ToolTip);
 			::SetWindowPos(m_hwndTooltip, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
 		}
-		::SendMessage(m_hwndTooltip, TTM_SETMAXTIPWIDTH, 0, pHover->GetToolTipWidth());
-		::SendMessage(m_hwndTooltip, TTM_SETTOOLINFO, 0, (LPARAM)&m_ToolTip);
-		::SendMessage(m_hwndTooltip, TTM_TRACKACTIVATE, TRUE, (LPARAM)&m_ToolTip);
+		if (!::IsWindowVisible(m_hwndTooltip)) {
+			::SendMessage(m_hwndTooltip, TTM_SETMAXTIPWIDTH, 0, pHover->GetToolTipWidth());
+			::SendMessage(m_hwndTooltip, TTM_SETTOOLINFO, 0, (LPARAM)&m_ToolTip);
+			::SendMessage(m_hwndTooltip, TTM_TRACKACTIVATE, TRUE, (LPARAM)&m_ToolTip);
+		}
+		::SendMessage(m_hwndTooltip, TTM_TRACKPOSITION, 0, (LPARAM)(DWORD)MAKELONG(pt.x, pt.y));
 	}
 	handled = true;
 	return 0;
@@ -1061,7 +1072,9 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		POINT pt = { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
 		m_ptLastMousePos = pt;
 
-		if (!HandleMouseEnterLeave(pt, wParam, lParam)) break;
+		// Do not move the focus to the new control when the mouse is pressed
+		if (!IsCaptured())
+			if (!HandleMouseEnterLeave(pt, wParam, lParam)) break;
 
 		if (m_pEventClick != NULL) {
 			m_pEventClick->HandleMessageTemplate(kEventMouseMove, wParam, lParam, 0, pt);

@@ -31,6 +31,7 @@ typedef struct tagTFontInfo
 	int iSize;
 	bool bBold;
 	bool bUnderline;
+	bool bStrikeout;
 	bool bItalic;
 	TEXTMETRIC tm;
 } TFontInfo;
@@ -550,6 +551,16 @@ public:
 	void SetMaxInfo(int cx, int cy, bool bContainShadow = false, bool bNeedDpiScale = true);
 
 	/**
+	 * @brief 重置窗口大小
+	 * @param[in] cx 宽度
+	 * @param[in] cy 高度
+	 * @param[in] bContainShadow 为 false 表示 cx cy 不包含阴影
+	 * @param[in] bNeedDpiScale 为 false 表示不根据 DPI 调整
+	 * @return 无
+	 */
+	void Resize(int cx, int cy, bool bContainShadow = false, bool bNeedDpiScale = true);
+
+	/**
 	 * @brief 设置窗口初始大小
 	 * @param[in] cx 宽度
 	 * @param[in] cy 高度
@@ -613,7 +624,7 @@ public:
 	 * @param[in] uMsg 消息体
 	 * @param[in] wParam 消息附加参数
 	 * @param[in] lParam 消息附加参数
-	 * @return 返回 true 则继续派发该消息，否则不再派发该消息
+	 * @return 返回 false 则继续派发该消息，否则不再派发该消息
 	 */
 	virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
@@ -885,6 +896,12 @@ public:
 	 */
 	virtual void OnInitLayout();
 
+	/**		
+	* @brief 是否将要关闭
+	* @return 无
+	*/
+	bool IsClosing(){ return m_bCloseing; };
+
 private:
 	static Control* CALLBACK __FindControlFromNameHash(Control* pThis, LPVOID pData);
 	static Control* CALLBACK __FindControlFromCount(Control* pThis, LPVOID pData);
@@ -983,6 +1000,7 @@ protected:
 	Shadow m_shadow;
 
 	bool m_bFakeModal = false;
+	bool m_bCloseing = false;	//add by djj 20200428 调用Close时会延迟Post WM_CLOSE, 这个期间需要有一个标识此种'待关闭状态'
 };
 
 } // namespace ui

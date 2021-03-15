@@ -824,18 +824,18 @@ void Control::HandleMessage(EventArgs& msg)
 			ASSERT(FALSE);
 		}
 	}
-	else if (msg.Type == kEventInternalSetFocus) {
+	else if (msg.Type == kEventInternalSetFocus && m_uButtonState != kControlStateDisabled) {
 		SetState(kControlStateHot);
-        m_bFocused = true;
-        Invalidate();
+		m_bFocused = true;
+		Invalidate();
 		return;
-    }
-	else if (msg.Type == kEventInternalKillFocus) {
+	}
+	else if (msg.Type == kEventInternalKillFocus && m_uButtonState != kControlStateDisabled) {
 		SetState(kControlStateNormal);
-        m_bFocused = false;
-        Invalidate();
+		m_bFocused = false;
+		Invalidate();
 		return;
-    }
+	}
 	else if (msg.Type == kEventInternalMenu && IsEnabled()) {
         if( IsContextMenuUsed() ) {
             m_pWindow->SendNotify(this, kEventMouseMenu, msg.wParam, msg.lParam);

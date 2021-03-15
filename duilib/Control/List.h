@@ -168,7 +168,7 @@ public:
 	 * @return нч
 	 */
 	void SelectNextWhenActiveRemoved(bool bSelectNextItem);
-private:
+protected:
 	bool m_bScrollSelect;
     int m_iCurSel;
 	bool m_bSelNextWhenRemoveActive;

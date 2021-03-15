@@ -23,7 +23,7 @@
     <ProjectGuid>{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>uicomponents</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -97,7 +97,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SUPPORT_CEF;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>.\;..\;..\third_party\cef_wrapper\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -118,7 +118,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SUPPORT_CEF;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>.\;..\;..\third_party\cef_wrapper\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -141,7 +141,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SUPPORT_CEF;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>.\;..\;..\third_party\cef_wrapper\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -166,7 +166,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SUPPORT_CEF;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>.\;..\;..\third_party\cef_wrapper\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
@@ -188,6 +188,11 @@
     <ClInclude Include="cef_control\handler\drag\osr_dragdrop_win.h" />
     <ClInclude Include="cef_control\handler\drag\util_win.h" />
     <ClInclude Include="cef_control\util\auto_unregister.h" />
+    <ClInclude Include="comboex\CheckCombo.h" />
+    <ClInclude Include="comboex\FilterCombo.h" />
+    <ClInclude Include="grid\Grid.h" />
+    <ClInclude Include="grid\GridBase.h" />
+    <ClInclude Include="grid\GridBody.h" />
     <ClInclude Include="public_define.h" />
     <ClInclude Include="ui_cef_control.h" />
     <ClInclude Include="cef_control\app\cef_js_bridge.h" />
@@ -233,6 +238,11 @@
     <ClCompile Include="cef_control\handler\drag\util_win.cc" />
     <ClCompile Include="cef_control\manager\cef_manager.cpp" />
     <ClCompile Include="cef_control\util\memory_dc.cpp" />
+    <ClCompile Include="comboex\CheckCombo.cpp" />
+    <ClCompile Include="comboex\FilterCombo.cpp" />
+    <ClCompile Include="grid\Grid.cpp" />
+    <ClCompile Include="grid\GridBase.cpp" />
+    <ClCompile Include="grid\GridBody.cpp" />
     <ClCompile Include="menu\ui_menu.cpp" />
     <ClCompile Include="modal_wnd\async_do_modal.cpp" />
     <ClCompile Include="modal_wnd\async_modal_runner.cpp" />

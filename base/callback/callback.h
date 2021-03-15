@@ -106,10 +106,10 @@ protected:
 	std::shared_ptr<WeakFlag> m_weakFlag;
 };
 
-//WeakCallbackFlag一般作为类成员变量使用，要继承，可使用不带Cancel()函数的SupportWeakCallback
-//这里禁止继承，主要担心误用。当使用这个类的功能，打包出多个支持weak语义的callback时，一旦错误的调用了Cancel，
-//将会取消所有callback，这种情况可能不是用户希望的。此时，应该使用多个不带Cancel函数的WeakCallbackFlag类型的成员变量，
-//每个对应一个callback，一一对应的控制每个支持weak语义的callback。
+// WeakCallbackFlag 一般作为类成员变量使用，要继承，可使用不带 Cancel() 函数的 SupportWeakCallback
+// 这里禁止继承，主要担心误用。当使用这个类的功能，打包出多个支持 Weak 语义的 Callback 时，一旦错误的调用了 Cancel，
+// 将会取消所有 Callback，这种情况可能不是用户希望的。此时，应该使用多个带有 Cancel() 函数的 WeakCallbackFlag 类型的成员变量，
+// 每个对应一个 Callback，一一对应的控制每个支持 Weak 语义的 Callback。
 class BASE_EXPORT WeakCallbackFlag final : public SupportWeakCallback
 {
 public:

@@ -13,5 +13,16 @@
       <Button width="auto" height="auto" bkimage="menu_logs.png" valign="center" mouse="false"/>
       <Label class="menu_text" text="Logs directory" margin="30,0,0,0"/>
     </MenuElement>
+    <MenuElement class="menu_element" name="fourth" width="180">
+      <Button width="auto" height="auto" bkimage="menu_tree.png" valign="center" mouse="false"/>
+      <Label class="menu_text" text="Menu tree" margin="30,0,0,0"/>
+      <MenuElement class="menu_element" name="sub_menu" width="180">
+        <Label class="menu_text" text="Statically created"/>
+      </MenuElement>
+    </MenuElement>
+    <MenuElement class="menu_element" name="about" width="180">
+      <Button width="auto" height="auto" bkimage="menu_about.png" valign="center" mouse="false"/>
+      <Label class="menu_text" text="About" margin="30,0,0,0"/>
+    </MenuElement>
   </VListBox>
 </Window>

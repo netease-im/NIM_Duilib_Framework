@@ -11,6 +11,9 @@ class UILIB_API TabBox : public Box
 public:
 	TabBox(Layout* pLayout = new Layout());
 
+	// 用于初始化xml属性
+	virtual void DoInit() override;
+
 	/// 重写父类方法，提供个性化功能，请参考父类声明
 	virtual bool Add(Control* pControl) override;
 	virtual bool AddAt(Control* pControl, std::size_t iIndex) override;
@@ -81,6 +84,8 @@ protected:
 
 protected:
 	int m_iCurSel;
+	int m_iInitSel;
+	bool m_bIsInit;
 	bool m_bFadeSwith;
 };
 

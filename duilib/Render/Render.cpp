@@ -576,6 +576,7 @@ void RenderContext_GdiPlus::DrawText(const UiRect& rc, const std::wstring& strTe
 		stringFormat.SetLineAlignment(Gdiplus::StringAlignmentNear);
 	}
 
+	graphics.SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAlias);
 	graphics.DrawString(strText.c_str(), (int)strText.length(), &font, rcPaint, &stringFormat, &tBrush);
 }
 

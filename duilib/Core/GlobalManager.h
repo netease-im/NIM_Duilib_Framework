@@ -45,6 +45,12 @@ public:
 	static std::wstring GetResourcePath();
 
 	/**
+	* @brief 获取当前语言文件路径
+	* @return 返回当前语言文件路径
+	*/
+	static std::wstring GetLanguagePath();
+
+	/**
 	 * @brief 设置程序当前目录
 	 * @param[in] strPath 要设置的路径
 	 * @return 无
@@ -59,11 +65,24 @@ public:
 	static void SetResourcePath(const std::wstring& strPath);
 
 	/**
+	* @brief 设置当前语言文件路径
+	* @return 设置当前语言文件路径
+	*/
+	static void SetLanguagePath(const std::wstring& strPath);
+
+	/**
 	 * @brief 重新加载皮肤资源
 	 * @param[in] resourcePath 资源路径
 	 * @return 无
 	 */
 	static void ReloadSkin(const std::wstring& resourcePath);
+
+	/**
+	 * @brief 重新加载语言资源
+	 * @param[in] languagePath 资源路径
+	 * @return 无
+	 */
+	static void ReloadLanguage(const std::wstring& languagePath, bool invalidateAll = false);
 
 	/**
 	 * @brief 获取绘制接口类对象
@@ -208,11 +227,12 @@ public:
 	 * @param[in] nSize 字体大小
 	 * @param[in] bBold 是否粗体
 	 * @param[in] bUnderline 是否有下划线
+	 * @param[in] bStrikeout 是否带有删除线
 	 * @param[in] bItalic 是否倾斜
 	 * @param[in] bDefault 是否默认
 	 * @return 返回字体的 HFONT 句柄
 	 */
-	static HFONT AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic, bool bDefault);
+	static HFONT AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic, bool bDefault);
 
 	/**
 	 * @brief 根据索引返回一个字体信息
@@ -233,10 +253,11 @@ public:
 	 * @param[in] nSize 字体大小
 	 * @param[in] bBold 是否粗体
 	 * @param[in] bUnderline 是否有下划线
+	 * @param[in] bStrikeout 是否带有删除线
 	 * @param[in] bItalic 是否倾斜
 	 * @return 返回字体的 HFONT 句柄
 	 */
-	static HFONT GetFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+	static HFONT GetFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic);
 
 	/**
 	 * @brief 获取字体信息
@@ -269,12 +290,13 @@ public:
 	 * @param[in] nSize 字体大小
 	 * @param[in] bBold 是否粗体
 	 * @param[in] bUnderline 是否有下划线
+	 * @param[in] bStrikeout 是否带有删除线
 	 * @param[in] bItalic 是否倾斜
 	 * @return 返回是否存在
 	 *     @retval true 存在
 	 *     @retval false 不存在
 	 */
-	static bool FindFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+	static bool FindFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic);
 
 	/**
 	 * @brief 根据字体索引删除字体
@@ -470,6 +492,7 @@ private:
 	typedef std::map<std::wstring, std::weak_ptr<ImageInfo>, ImageCacheKeyCompare> MapStringToImagePtr;
 
 	static std::wstring m_pStrResourcePath; //全局的资源路径，换肤的时候修改这个变量
+	static std::wstring m_pStrLanguagePath; //全局语言文件路径
 	static std::vector<Window*> m_aPreMessages;
 	static std::map<std::wstring, std::unique_ptr<WindowBuilder>> m_builderMap;
 	static CreateControlCallback m_createControlCallback;

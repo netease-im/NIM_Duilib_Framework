@@ -78,12 +78,13 @@ void CefManager::AddCefDllToPath()
 	GetEnvironmentVariable(L"path", path_envirom, 4096);
 	
 	std::wstring cef_path = nbase::win32::GetCurrentModuleDirectory();
-#ifdef _DEBUG
-	//cef_path += L"cef_debug"; // 现在即使在debug模式下也使用cef release版本的dll，为了屏蔽掉cef退出时的中断，如果不需要调试cef的功能不需要使用debug版本的dll
-	cef_path += L"cef";
+
+#ifdef _WIN64
+	cef_path += L"cef_x64";
 #else
 	cef_path += L"cef";
 #endif
+
 	if (!nbase::FilePathIsExist(cef_path, true))
 	{
 		MessageBox(NULL, L"请解压Cef.rar压缩包", L"提示", MB_OK);
