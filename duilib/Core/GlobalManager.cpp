@@ -3,7 +3,7 @@
 #include <shlwapi.h>
 #include "Utils/UnZip.h"
 
-namespace ui
+namespace ui 
 {
 
 std::wstring GlobalManager::m_pStrResourcePath;
@@ -30,6 +30,7 @@ DWORD GlobalManager::m_dwDefaultLinkHoverFontColor = 0xFFD3215F;
 DWORD GlobalManager::m_dwDefaultSelectedBkColor = 0xFFBAE4FF;
 
 std::unique_ptr<IRenderFactory> GlobalManager::m_renderFactory;
+DWORD GlobalManager::m_dwUiThreadId = 0;
 
 static ULONG_PTR g_gdiplusToken;
 static Gdiplus::GdiplusStartupInput g_gdiplusStartupInput;
@@ -38,24 +39,26 @@ const std::wstring kLanguageFileName = L"gdstrings.ini";
 
 void GlobalManager::Startup(const std::wstring& strResourcePath, const CreateControlCallback& callback, bool bAdaptDpi, const std::wstring& theme, const std::wstring& language)
 {
+	m_dwUiThreadId = GetCurrentThreadId();
+
 	m_renderFactory = std::make_unique<RenderFactory_GdiPlus>();
 	GlobalManager::SetResourcePath(strResourcePath + theme);
 	m_createControlCallback = callback;
 
-	// 适配DPI
+    // 閫傞厤DPI
 	if (bAdaptDpi) {
 		DpiManager::GetInstance()->SetAdaptDPI();
 		DpiManager::GetInstance()->SetScale(DpiManager::GetMainMonitorDPI());
 	}
 
-	// 解析全局资源信息
+    // 瑙ｆ瀽鍏ㄥ眬璧勬簮淇℃伅
 	LoadGlobalResource();
 
 	SetLanguagePath(strResourcePath + language);
 
-	// 加载多语言文件，如果使用了资源压缩包则从内存中加载语言文件
+    // 鍔犺浇澶氳瑷�鏂囦欢锛屽鏋滀娇鐢ㄤ簡璧勬簮鍘嬬缉鍖呭垯浠庡唴瀛樹腑鍔犺浇璇█鏂囦欢
 	if (g_hzip) {
-		HGLOBAL hGlobal = GetData(GetLanguagePath() + L"\\" + kLanguageFileName);
+		HGLOBAL hGlobal = GetZipData(GetLanguagePath() + L"\\" + kLanguageFileName);
 		if (hGlobal) {
 			ui::MutiLanSupport::GetInstance()->LoadStringTable(hGlobal);
 			GlobalFree(hGlobal);
@@ -226,11 +229,19 @@ void GlobalManager::AddTextColor(const std::wstring& strName, const std::wstring
 	m_mapTextColor[strName] = dwBackColor;
 }
 
+void GlobalManager::AddTextColor(const std::wstring& strName, DWORD argb)
+{
+	m_mapTextColor[strName] = argb;
+}
+
 DWORD GlobalManager::GetTextColor(const std::wstring& strName)
 {
-	// 必须在global.xml中提前定义到颜色值
-	ASSERT(m_mapTextColor[strName] != 0);
-	return m_mapTextColor[strName];
+	auto it = m_mapTextColor.find(strName);
+	if (it != m_mapTextColor.end()) {
+		return it->second;
+	}
+
+	return 0;
 }
 
 void GlobalManager::RemoveAllTextColors()
@@ -283,17 +294,17 @@ void GlobalManager::OnImageInfoDestroy(ImageInfo* pImageInfo)
 std::shared_ptr<ImageInfo> GlobalManager::GetImage(const std::wstring& bitmap)
 {
 	std::wstring imageFullPath = StringHelper::ReparsePath(bitmap);
-	if (IsUseZip())
-	{
-		imageFullPath = GetZipFilePath(imageFullPath);
-	}
 	std::shared_ptr<ImageInfo> sharedImage;
 	auto it = m_mImageHash.find(imageFullPath);
 	if (it == m_mImageHash.end()) {
 		std::unique_ptr<ImageInfo> data;
 		if (IsUseZip())
 		{
-			data = ImageInfo::LoadImage(GetData(imageFullPath), imageFullPath);
+			HGLOBAL hGlobal = GetZipData(imageFullPath);
+			if (hGlobal) {
+				data = ImageInfo::LoadImage(hGlobal, imageFullPath);
+				GlobalFree(hGlobal);
+			}
 		}
 		if (!data)
 		{
@@ -339,7 +350,7 @@ HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& 
 	static bool bOsOverXp = IsWindowsVistaOrGreater();
 	std::wstring fontName = strFontName;
 	if (fontName == L"system") {
-		fontName = bOsOverXp ? L"微软雅黑" : L"新宋体";
+		fontName = bOsOverXp ? L"微锟斤拷锟脚猴拷" : L"锟斤拷锟斤拷锟斤拷";
 	}
 
 	LOGFONT lf = { 0 };
@@ -609,7 +620,7 @@ bool GlobalManager::IsUseZip()
 
 bool GlobalManager::OpenResZip(LPCTSTR  resource_name, LPCTSTR  resource_type, const std::string& password)
 {
-	HRSRC   rsc = FindResource(NULL, resource_name, resource_type);
+	HRSRC rsc = FindResource(NULL, resource_name, resource_type);
 	HGLOBAL resource = LoadResource(NULL, rsc);
 	DWORD   size = SizeofResource(NULL, rsc);
 	if (resource && size > 0)
@@ -637,12 +648,15 @@ bool GlobalManager::OpenResZip(const std::wstring& path, const std::string& pass
 	return g_hzip != NULL;
 }
 
-HGLOBAL GlobalManager::GetData(const std::wstring& path)
+HGLOBAL GlobalManager::GetZipData(const std::wstring& path)
 {
 	HGLOBAL hGlobal = NULL;
 	std::wstring file_path = GetZipFilePath(path);
+
 	if (g_hzip && !file_path.empty())
 	{
+		AssertUIThread();
+
 		ZIPENTRY ze;
 		int i = 0;
 		if (FindZipItem(g_hzip, file_path.c_str(), true, &i, &ze) == ZR_OK)
@@ -678,6 +692,9 @@ HGLOBAL GlobalManager::GetData(const std::wstring& path)
 
 std::wstring GlobalManager::GetZipFilePath(const std::wstring& path)
 {
+	if (!::PathIsRelative(path.c_str()))
+		return L"";
+
 	std::wstring file_path = path;
 	StringHelper::ReplaceAll(L"\\", L"/", file_path);
 	StringHelper::ReplaceAll(L"//", L"/", file_path);
@@ -721,6 +738,47 @@ std::wstring GlobalManager::GetZipFilePath(const std::wstring& path)
 	return file_path;
 }
 
+std::wstring GlobalManager::GetResPath(const std::wstring& res_path, const std::wstring& window_res_path)
+{
+	std::wstring imageFullPath = res_path;
+	if (!::PathIsRelative(res_path.c_str()))
+		return res_path;
+
+	imageFullPath = GlobalManager::GetResourcePath() + window_res_path + res_path;
+	imageFullPath = StringHelper::ReparsePath(imageFullPath);
+
+	if (!GlobalManager::IsZipResExist(imageFullPath) && !::PathFileExists(imageFullPath.c_str())) {
+		imageFullPath = GlobalManager::GetResourcePath() + res_path;
+		imageFullPath = StringHelper::ReparsePath(imageFullPath);
+	}
+	return imageFullPath;
+}
+
+bool GlobalManager::IsZipResExist(const std::wstring& path)
+{
+	AssertUIThread();
+
+	if (g_hzip && !path.empty()) {
+		std::wstring file_path = GetZipFilePath(path);
+		if (file_path.empty())
+			return false;
+
+		static std::unordered_set<std::wstring> zip_path_cache;
+		auto it = zip_path_cache.find(path);
+		if (it != zip_path_cache.end())
+			return true;
+
+		ZIPENTRY ze;
+		int i = 0;
+		bool find = FindZipItem(g_hzip, file_path.c_str(), true, &i, &ze) == ZR_OK;
+		if (find)
+			zip_path_cache.insert(path);
+
+		return find;
+	}
+	return false;
+}
+
 bool GlobalManager::ImageCacheKeyCompare::operator()(const std::wstring& key1, const std::wstring& key2) const
 {
 	int nLen1 = (int)key1.length();
@@ -733,14 +791,21 @@ bool GlobalManager::ImageCacheKeyCompare::operator()(const std::wstring& key1, c
 	LPCWSTR pStr1End = pStr1Begin + nLen1;
 	LPCWSTR pStr2End = pStr2Begin + nLen2;
 
-	// 逆向比较
+    // 閫嗗悜姣旇緝
 	while (--pStr1End >= pStr1Begin && --pStr2End >= pStr2Begin && *pStr1End == *pStr2End);
 
-	// 两个串都已经比光了，那么肯定相等，返回false
+    // 涓や釜涓查兘宸茬粡姣斿厜浜嗭紝閭ｄ箞鑲畾鐩哥瓑锛岃繑鍥瀎alse
 	if (pStr1End < pStr1Begin) {
 		return false;
 	}
 	return *pStr1End < *pStr2End;
+}
+
+void GlobalManager::AssertUIThread()
+{
+#ifdef _DEBUG
+	ASSERT(m_dwUiThreadId == GetCurrentThreadId());
+#endif
 }
 
 } // namespace ui

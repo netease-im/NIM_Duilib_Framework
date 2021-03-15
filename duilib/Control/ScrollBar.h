@@ -10,6 +10,7 @@ class UILIB_API ScrollBar : public Control
 {
 public:
 	ScrollBar();
+	ScrollBar& operator=(const ScrollBar& r) = delete;
 
 	Box* GetOwner() const;
 	void SetOwner(ScrollableBox* pOwner);
@@ -22,6 +23,7 @@ public:
 	virtual bool HasHotState() override;
 	virtual bool MouseEnter(EventArgs& msg) override;
 	virtual bool MouseLeave(EventArgs& msg) override;
+
 	virtual void SetPos(UiRect rc) override;
 	virtual void HandleMessage(EventArgs& event) override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;

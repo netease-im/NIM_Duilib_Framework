@@ -34,11 +34,6 @@ UINT WindowImplBase::GetClassStyle() const
 	return CS_DBLCLKS;
 }
 
-std::wstring WindowImplBase::GetResourceID() const
-{
-	return _T("");
-}
-
 Control* WindowImplBase::CreateControl(const std::wstring& pstrClass)
 {
 	return NULL;
@@ -75,17 +70,24 @@ LRESULT WindowImplBase::OnNcCalcSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 LRESULT WindowImplBase::OnWindowPosChanging(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
 	bHandled = FALSE;
-	if (IsZoomed(m_hWnd))
-	{
+	if (IsZoomed(m_hWnd)) {
 		LPWINDOWPOS lpPos = (LPWINDOWPOS)lParam;
 		if (lpPos->flags & SWP_FRAMECHANGED) // 第一次最大化，而不是最大化之后所触发的WINDOWPOSCHANGE
 		{
 			POINT pt = { 0, 0 };
 			HMONITOR hMontorPrimary = MonitorFromPoint(pt, MONITOR_DEFAULTTOPRIMARY);
-			HMONITOR hMonitorTo = MonitorFromWindow(m_hWnd, MONITOR_DEFAULTTONEAREST);
+			HMONITOR hMonitorTo = MonitorFromWindow(m_hWnd, MONITOR_DEFAULTTOPRIMARY);
 
-			if (hMonitorTo != hMontorPrimary)
-			{
+			// 先把窗口最大化，再最小化，然后恢复，此时MonitorFromWindow拿到的HMONITOR不准确
+			// 判断GetWindowRect的位置如果不正确（最小化时得到的位置信息是-38000），则改用normal状态下的位置，来获取HMONITOR
+			RECT rc = { 0 };
+			GetWindowRect(m_hWnd, &rc);
+			if (rc.left < -10000 && rc.top < -10000 && rc.right < -10000 && rc.right < -10000) {
+				WINDOWPLACEMENT wp = { sizeof(WINDOWPLACEMENT) };
+				GetWindowPlacement(m_hWnd, &wp);
+				hMonitorTo = MonitorFromRect(&wp.rcNormalPosition, MONITOR_DEFAULTTOPRIMARY);
+			}
+			if (hMonitorTo != hMontorPrimary) {
 				// 解决无边框窗口在双屏下面（副屏分辨率大于主屏）时，最大化不正确的问题
 				MONITORINFO  miTo = { sizeof(miTo), 0 };
 				GetMonitorInfo(hMonitorTo, &miTo);
@@ -102,20 +104,6 @@ LRESULT WindowImplBase::OnWindowPosChanging(UINT uMsg, WPARAM wParam, LPARAM lPa
 
 LRESULT WindowImplBase::OnNcPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-	return 0;
-}
-
-LRESULT WindowImplBase::OnNcLButtonDbClick(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
-{
-	/*if (!::IsZoomed(GetHWND()))
-	{
-		SendMessage(WM_SYSCOMMAND, SC_MAXIMIZE, 0);
-	}
-	else
-	{
-		SendMessage(WM_SYSCOMMAND, SC_RESTORE, 0);
-	}*/
-
 	return 0;
 }
 
@@ -225,21 +213,6 @@ LRESULT WindowImplBase::OnMouseWheel(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 LRESULT WindowImplBase::OnMouseHover(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
 	bHandled = FALSE;
-	return 0;
-}
-
-LRESULT WindowImplBase::OnDpiChanged(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
-{
-	bHandled = FALSE;
-
-	// 重置全局 DPI 设定
-	DpiManager::GetInstance()->SetScale(LOWORD(wParam));
-
-	// 重置阴影范围
-	m_shadow.ResetShadowBox();
-
-	// TODO 对窗口大小进行进行改变，让所有控件重新根据 DPI 计算大小
-
 	return 0;
 }
 
@@ -400,7 +373,6 @@ LRESULT WindowImplBase::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_NCCALCSIZE:		lRes = OnNcCalcSize(uMsg, wParam, lParam, bHandled); break;
 	case WM_WINDOWPOSCHANGING: lRes = OnWindowPosChanging(uMsg, wParam, lParam, bHandled); break;
 	case WM_NCPAINT:		lRes = OnNcPaint(uMsg, wParam, lParam, bHandled); break;
-	case WM_NCLBUTTONDBLCLK:lRes = OnNcLButtonDbClick(uMsg, wParam, lParam, bHandled); break;
 	case WM_NCHITTEST:		lRes = OnNcHitTest(uMsg, wParam, lParam, bHandled); break;
 	case WM_GETMINMAXINFO:	lRes = OnGetMinMaxInfo(uMsg, wParam, lParam, bHandled); break;
 	case WM_MOUSEWHEEL:		lRes = OnMouseWheel(uMsg, wParam, lParam, bHandled); break;
@@ -414,7 +386,6 @@ LRESULT WindowImplBase::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_LBUTTONDOWN:	lRes = OnLButtonDown(uMsg, wParam, lParam, bHandled); break;
 	case WM_MOUSEMOVE:		lRes = OnMouseMove(uMsg, wParam, lParam, bHandled); break;
 	case WM_MOUSEHOVER:		lRes = OnMouseHover(uMsg, wParam, lParam, bHandled); break;
-	case WM_DPICHANGED:		lRes = OnDpiChanged(uMsg, wParam, lParam, bHandled); break;
 	default:				bHandled = FALSE; break;
 	}
 

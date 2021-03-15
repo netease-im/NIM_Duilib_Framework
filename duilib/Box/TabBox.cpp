@@ -246,6 +246,12 @@ void TabBox::SetAttribute(const std::wstring& strName, const std::wstring& strVa
 void TabBox::SetFadeSwitch(bool bFadeSwitch)
 {
 	m_bFadeSwith = bFadeSwitch;
+	for (auto &it : m_items) {
+		int index = GetItemIndex(it);
+		if (index != m_iCurSel) {
+			it->SetVisible(IsFadeSwitch());
+		}
+	}
 }
 
 }

@@ -72,6 +72,7 @@
 #include <vector>
 #include <list>
 #include <map>
+#include <unordered_set>
 #include <queue>
 #include <functional>
 
@@ -83,6 +84,7 @@
 #include "Utils/Delegate.h"
 #include "Utils/StringUtil.h"
 #include "Utils/MultiLangSupport.h"
+#include "Utils/FontManager.h"
 #include "Utils/TimerManager.h"
 #include "Utils/OnScreenKeyboardManager.h"
 #include "Utils/Shadow.h"
@@ -103,12 +105,14 @@
 #include "Core/Define.h"
 #include "Core/Markup.h"
 #include "Core/WindowBuilder.h"
+#include "Core/Image.h"
 #include "Core/GlobalManager.h"
 #include "Core/Window.h"
 #include "Core/Placeholder.h"
 #include "Core/Control.h"
 #include "Core/Box.h"
 #include "Utils/WinImplBase.h"
+#include "Utils/SvgUtil.h"
 
 #include "Box/VBox.h"
 #include "Box/HBox.h"

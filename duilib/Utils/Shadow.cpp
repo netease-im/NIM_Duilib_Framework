@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 
-namespace ui
+namespace ui 
 {
 
 class ShadowBox : public Box
@@ -8,6 +8,7 @@ class ShadowBox : public Box
 public:
 	virtual void Paint(IRenderContext* pRender, const UiRect& rcPaint) override
 	{
+		// 作为阴影，中间部分是空的，不需要处理重绘
 		auto rcPos = GetPaddingPos();
 		if (rcPaint.left >= rcPos.left && rcPaint.top >= rcPos.top && rcPaint.right <= rcPos.right && rcPaint.bottom <= rcPos.bottom) {
 			return;
@@ -17,15 +18,10 @@ public:
 };
 
 Shadow::Shadow() :
-	m_rcCurShadowCorner(14, 14, 14, 14),
-	m_rcDefaultShadowCorner(14, 14, 14, 14),
 	m_bShadowAttached(true),
-	m_bUseDefaultImage(true),
-	m_strImage(L"file='../public/bk/bk_shadow.png' corner='30,30,30,30'"),
 	m_pRoot(nullptr)
 {
-	DpiManager::GetInstance()->ScaleRect(m_rcCurShadowCorner);
-	m_rcShadowCornerBackup = m_rcCurShadowCorner;
+	ResetDefaultShadow();
 }
 
 void Shadow::SetShadowImage(const std::wstring &image)
@@ -41,16 +37,16 @@ std::wstring Shadow::GetShadowImage() const
 
 void Shadow::SetShadowCorner(const UiRect &rect, bool bNeedDpiScale)
 {
-	m_rcDefaultShadowCorner = m_rcCurShadowCorner = rect;
+	m_rcShadowCorner = rect;
 	if (bNeedDpiScale)
-		DpiManager::GetInstance()->ScaleRect(m_rcCurShadowCorner);
-	m_rcShadowCornerBackup = m_rcCurShadowCorner;
+		DpiManager::GetInstance()->ScaleRect(m_rcShadowCorner);
+	m_rcShadowCornerBackup = m_rcShadowCorner;
 }
 
 UiRect Shadow::GetShadowCorner() const
 {
 	if (m_bShadowAttached) {
-		return m_rcCurShadowCorner;
+		return m_rcShadowCorner;
 	}
 	else {
 		return UiRect(0, 0, 0, 0);
@@ -60,22 +56,11 @@ UiRect Shadow::GetShadowCorner() const
 void Shadow::ResetDefaultShadow()
 {
 	m_bUseDefaultImage = true;
-	m_strImage = L"file='../public/bk/bk_shadow.png' corner='30,30,30,30'";
+	m_strImage = L"file='public/bk/bk_shadow.png' corner='30,30,30,30'";
 
-	m_rcCurShadowCorner = { 14, 14, 14, 14 };
-	m_rcDefaultShadowCorner = { 14, 14, 14, 14 };
-	DpiManager::GetInstance()->ScaleRect(m_rcCurShadowCorner);
-	m_rcShadowCornerBackup = m_rcCurShadowCorner;
-}
-
-void Shadow::ResetShadowBox()
-{
-	if (m_bShadowAttached && m_pRoot) {
-		auto rcTempShadowCorner = m_rcDefaultShadowCorner;
-		DpiManager::GetInstance()->ScaleRect(rcTempShadowCorner);
-		m_rcShadowCornerBackup = m_rcCurShadowCorner = rcTempShadowCorner;
-		m_pRoot->GetLayout()->SetPadding(m_rcDefaultShadowCorner);
-	}
+	m_rcShadowCorner = { 14, 14, 14, 14 };
+	DpiManager::GetInstance()->ScaleRect(m_rcShadowCorner);
+	m_rcShadowCornerBackup = m_rcShadowCorner;
 }
 
 Box*Shadow::AttachShadow(Box* pRoot)
@@ -84,17 +69,17 @@ Box*Shadow::AttachShadow(Box* pRoot)
 		return pRoot;
 
 	m_pRoot = new ShadowBox();
-	m_pRoot->GetLayout()->SetPadding(m_rcCurShadowCorner, false);
+	m_pRoot->GetLayout()->SetPadding(m_rcShadowCorner, false);
 
 	int rootWidth = pRoot->GetFixedWidth();
 	if (rootWidth > 0) {
-		rootWidth += m_rcCurShadowCorner.left + m_rcCurShadowCorner.right;
+		rootWidth += m_rcShadowCorner.left + m_rcShadowCorner.right;
 	}
 	m_pRoot->SetFixedWidth(rootWidth, true, false);
 
 	int rootHeight = pRoot->GetFixedHeight();
 	if (rootHeight > 0) {
-		rootHeight += m_rcCurShadowCorner.top + m_rcCurShadowCorner.bottom;
+		rootHeight += m_rcShadowCorner.top + m_rcShadowCorner.bottom;
 	}
 	m_pRoot->SetFixedHeight(rootHeight, false);
 
@@ -116,8 +101,8 @@ void Shadow::MaximizedOrRestored(bool isMaximized)
 		return;
 
 	if (isMaximized && m_pRoot) {
-		m_rcCurShadowCorner = UiRect(0, 0, 0, 0);
-		m_pRoot->GetLayout()->SetPadding(m_rcCurShadowCorner, false);
+		m_rcShadowCorner = UiRect(0, 0, 0, 0);
+		m_pRoot->GetLayout()->SetPadding(m_rcShadowCorner, false);
 
 		if (m_bUseDefaultImage)
 		{
@@ -127,8 +112,8 @@ void Shadow::MaximizedOrRestored(bool isMaximized)
 		}
 	}
 	else if (!isMaximized && m_pRoot) {
-		m_rcCurShadowCorner = m_rcShadowCornerBackup;
-		m_pRoot->GetLayout()->SetPadding(m_rcCurShadowCorner, false);
+		m_rcShadowCorner = m_rcShadowCornerBackup;
+		m_pRoot->GetLayout()->SetPadding(m_rcShadowCorner, false);
 
 		if (m_bUseDefaultImage)
 		{

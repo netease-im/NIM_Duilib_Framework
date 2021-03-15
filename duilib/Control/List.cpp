@@ -270,7 +270,7 @@ bool ListBox::Add(Control* pControl)
 	return ScrollableBox::Add(pControl);
 }
 
-bool ListBox::AddAt(Control* pControl, int iIndex)
+bool ListBox::AddAt(Control* pControl, std::size_t iIndex)
 {
 	// Override the AddAt() method so we can add items specifically to
 	// the intended widgets. Headers and are assumed to be
@@ -304,7 +304,7 @@ bool ListBox::Remove(Control* pControl)
 	return RemoveAt(iIndex);
 }
 
-bool ListBox::RemoveAt(int iIndex)
+bool ListBox::RemoveAt(std::size_t iIndex)
 {
 	if (!ScrollableBox::RemoveAt(iIndex)) return false;
 
@@ -393,6 +393,7 @@ ListContainerElement::ListContainerElement() :
 	m_pOwner(nullptr)
 {
 	m_uTextStyle = DT_LEFT | DT_VCENTER | DT_END_ELLIPSIS | DT_NOCLIP | DT_SINGLELINE;
+	// 列表项不处理WM_POINTER消息，可以顺利收到右键菜单消息
 	SetReceivePointerMsg(false);
 }
 

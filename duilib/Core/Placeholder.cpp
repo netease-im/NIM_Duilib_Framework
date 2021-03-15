@@ -385,9 +385,9 @@ void PlaceHolder::Invalidate()
 	if (m_pWindow != NULL) m_pWindow->Invalidate(rcInvalidate);
 }
 
-UiRect PlaceHolder::GetPosWithScrollOffset() const
+UiRect PlaceHolder::GetPosWithScrollOffset(bool bContainShadow) const
 {
-	UiRect pos = GetPos();
+	UiRect pos = GetPos(bContainShadow);
 	CPoint offset = GetScrollOffset();
 	pos.Offset(-offset.x, -offset.y);
 	return pos;
@@ -398,19 +398,24 @@ CPoint PlaceHolder::GetScrollOffset() const
 	CPoint scrollPos;
 	Control* parent = GetParent();
 	ScrollableBox* lbParent = dynamic_cast<ScrollableBox*>(parent);
-	if (lbParent && lbParent->IsVScrollBarValid() && IsFloat()) {
+	if (lbParent && (lbParent->IsVScrollBarValid() || lbParent->IsHScrollBarValid()) && IsFloat()) {
 		return scrollPos;
 	}
-    while (parent && (!dynamic_cast<ScrollableBox*>(parent) || (!dynamic_cast<ScrollableBox*>(parent)->IsVScrollBarValid() && !dynamic_cast<ScrollableBox*>(parent)->IsHScrollBarValid())))
-	{
-		parent = parent->GetParent();
-	}
 
-	if (parent) {
-		//说明控件在Listbox内部
-		ScrollableBox* listbox = (ScrollableBox*)parent;
-		scrollPos.x = listbox->GetScrollPos().cx;
-		scrollPos.y = listbox->GetScrollPos().cy;
+	while (parent)
+	{
+		while (parent && (!dynamic_cast<ScrollableBox*>(parent) || (!dynamic_cast<ScrollableBox*>(parent)->IsVScrollBarValid() && !dynamic_cast<ScrollableBox*>(parent)->IsHScrollBarValid())))
+		{
+			parent = parent->GetParent();
+		}
+
+		if (parent) {
+			//说明控件在Listbox内部
+			ScrollableBox* listbox = (ScrollableBox*)parent;
+			scrollPos.x += listbox->GetScrollPos().cx;
+			scrollPos.y += listbox->GetScrollPos().cy;
+			parent = parent->GetParent();
+		}
 	}
 
 	return scrollPos;

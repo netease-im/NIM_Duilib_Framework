@@ -21,7 +21,6 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}</ProjectGuid>
     <RootNamespace>duilib</RootNamespace>
-    <WindowsTargetPlatformVersion>7.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -342,10 +341,12 @@
     <ClCompile Include="UIlib.cpp" />
     <ClCompile Include="Utils\ApiWrapper.cpp" />
     <ClCompile Include="Utils\DpiManager.cpp" />
+    <ClCompile Include="Utils\FontManager.cpp" />
     <ClCompile Include="Utils\MultiLangSupport.cpp" />
     <ClCompile Include="Utils\OnScreenKeyboardManager.cpp" />
     <ClCompile Include="Utils\Shadow.cpp" />
     <ClCompile Include="Utils\StringUtil.cpp" />
+    <ClCompile Include="Utils\SvgUtil.cpp" />
     <ClCompile Include="Utils\TimerManager.cpp" />
     <ClCompile Include="Core\Window.cpp" />
     <ClCompile Include="Core\Box.cpp" />
@@ -371,10 +372,10 @@
     <ClInclude Include="Box\TabBox.h" />
     <ClInclude Include="Box\TileBox.h" />
     <ClInclude Include="Box\VBox.h" />
-    <ClInclude Include="Control\CircleProgress.h" />
     <ClInclude Include="Control\Menu.h" />
     <ClInclude Include="Control\VirtualListBox.h" />
     <ClInclude Include="Core\Image.h" />
+    <ClInclude Include="Control\CircleProgress.h" />
     <ClInclude Include="Core\Placeholder.h" />
     <ClInclude Include="Render\Bitmap.h" />
     <ClInclude Include="Render\Brush.h" />
@@ -389,12 +390,14 @@
     <ClInclude Include="UIlib.h" />
     <ClInclude Include="Utils\ApiWrapper.h" />
     <ClInclude Include="Utils\DpiManager.h" />
+    <ClInclude Include="Utils\FontManager.h" />
     <ClInclude Include="Utils\Macros.h" />
     <ClInclude Include="Utils\MultiLangSupport.h" />
     <ClInclude Include="Utils\OnScreenKeyboardManager.h" />
     <ClInclude Include="Utils\Shadow.h" />
     <ClInclude Include="Utils\StringUtil.h" />
     <ClInclude Include="Utils\Delegate.h" />
+    <ClInclude Include="Utils\SvgUtil.h" />
     <ClInclude Include="Utils\TimerManager.h" />
     <ClInclude Include="Utils\UnZip.h" />
     <ClInclude Include="Utils\Utils.h" />

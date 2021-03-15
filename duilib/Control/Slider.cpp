@@ -132,6 +132,15 @@ void Slider::SetAttribute(const std::wstring& strName, const std::wstring& strVa
 	else Progress::SetAttribute(strName, strValue);
 }
 
+void Slider::PaintBkColor(IRenderContext* pRender)
+{
+	m_rcItem.Deflate(m_rcProgressBarPadding);
+	m_rcPaint.Deflate(m_rcProgressBarPadding);
+	Control::PaintBkColor(pRender);
+	m_rcPaint.Inflate(m_rcProgressBarPadding);
+	m_rcItem.Inflate(m_rcProgressBarPadding);
+}
+
 void Slider::PaintStatusImage(IRenderContext* pRender)
 {
 	m_rcItem.Deflate(m_rcProgressBarPadding);

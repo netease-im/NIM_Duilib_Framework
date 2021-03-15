@@ -578,7 +578,7 @@ public:
 	 * @param[in] bRecv 设置为 true 表示响应触控消息，false 为不响应
 	 * @return 无
 	 */
-	void SetReceivePointerMsg(bool bRecv) { m_bReceivePointerMsg = bRecv; };
+	virtual void SetReceivePointerMsg(bool bRecv) { m_bReceivePointerMsg = bRecv; };
 	
 	/**
 	 * @brief 判断控件是否响应触控消息
@@ -874,6 +874,13 @@ public:
 	void AttachResize(const EventCallback& callback) { OnEvent[kEventResize] += callback; }
 
 	/**
+	 * @brief 监听双击事件
+	 * @param[in] callback 事件处理的回调函数，请参考 EventCallback 声明
+	 * @return 无
+	 */
+	void AttachDoubleClick(const EventCallback& callback) { OnEvent[kEventMouseDoubleClick] += callback; }
+
+	/**
 	 * @brief 取消监听指定事件，见 EventType 枚举
 	 * @param[in] callback 事件处理的回调函数，请参考 EventCallback 声明
 	 * @return 无
@@ -881,6 +888,7 @@ public:
 	void DetachEvent(EventType type);
 
 protected:
+	friend StateColorMap;
 	friend WindowBuilder;
 	void AttachXmlEvent(EventType eventType, const EventCallback& callback) { OnXmlEvent[eventType] += callback; }
 	/// Gif图片
@@ -903,6 +911,12 @@ protected:
 	virtual void PaintText(IRenderContext* pRender);
 	virtual void PaintBorder(IRenderContext* pRender);
 
+	/**
+	* @brief 获取某个颜色对应的值，优先获取窗口颜色
+	* @param[in] strName 颜色名字
+	* @return DWORD ARGB颜色值
+	*/
+	DWORD GetWindowColor(const std::wstring& strName);
 private:
 	void BroadcastGifEvent(int nVirtualEvent);
 	int GetGifFrameIndex(GifStopType frame);
