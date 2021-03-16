@@ -86,6 +86,16 @@ public:
 	static void SetLanguagePath(const std::wstring& strPath);
 
 	/**
+	* 待补充
+	*/
+	static void AddPreMessage(Window* pWindow);
+
+	/**
+	* 待补充
+	*/
+	static void RemovePreMessage(Window* pWindow);
+
+	/**
 	 * @brief 重新加载皮肤资源
 	 * @param[in] resourcePath 资源路径
 	 * @return 无

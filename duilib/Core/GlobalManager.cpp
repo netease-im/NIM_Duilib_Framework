@@ -137,6 +137,19 @@ void GlobalManager::LoadGlobalResource()
 	dialog_builder.Create(L"global.xml", CreateControlCallback(), &paint_manager);
 }
 
+void GlobalManager::AddPreMessage(Window* pWindow)
+{
+	m_aPreMessages.push_back(pWindow);
+}
+
+void GlobalManager::RemovePreMessage(Window* pWindow)
+{
+	auto it = std::find(m_aPreMessages.begin(), m_aPreMessages.end(), pWindow);
+	if (it != m_aPreMessages.end()) {
+		m_aPreMessages.erase(it);
+	}
+}
+
 void GlobalManager::ReloadSkin(const std::wstring& resourcePath)
 {
 	RemoveAllFonts();
