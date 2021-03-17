@@ -9,6 +9,7 @@
  - [Option](Option.md) 单选框
  - [Label](Label.md) 文本
  - [Progress](Progress.md) 进度条
+ - [CircleProgress](CircleProgress.md) 环形进度条
  - [Slider](Slider.md) 滑动条
  - [RichEdit](RichEdit.md) 富文本
  - [ScrollBar](ScrollBar.md) 滚动条

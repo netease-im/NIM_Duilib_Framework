@@ -24,6 +24,7 @@
   * [Option（单选）](Controls/Option.md)
   * [Label（文本）](Controls/Label.md)
   * [Progress（进度条）](Controls/Progress.md)
+  * [CircleProgress（环形进度条）](Controls/CircleProgress.md)
   * [Slider（滑动条）](Controls/Slider.md)
   * [ScrollBar（滚动条）](Controls/ScrollBar.md)
   * [RichEdit（富文本编辑）](Controls/RichEdit.md)
