@@ -3,154 +3,153 @@
 
 #pragma once
 
-namespace ui
-{
+namespace ui {
 
 template<typename InheritType = Control>
 class UILIB_API CheckBoxTemplate : public ButtonTemplate<InheritType>
 {
 public:
-	CheckBoxTemplate();
+    CheckBoxTemplate();
 
-	/// 重写父类方法，提供个性化功能，请参考父类声明
-	virtual std::wstring GetType() const override;
-	virtual UIAControlProvider* GetUIAProvider() override;
-	virtual void Activate() override;
-	virtual Image* GetEstimateImage() override;
-	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
-	virtual void PaintStatusColor(IRenderContext* pRender) override;
-	virtual void PaintStatusImage(IRenderContext* pRender) override;
-	virtual void PaintText(IRenderContext* pRender) override;
-	virtual bool HasHotState();
+    /// 重写父类方法，提供个性化功能，请参考父类声明
+    virtual std::wstring GetType() const override;
+    virtual UIAControlProvider* GetUIAProvider() override;
+    virtual void Activate() override;
+    virtual Image* GetEstimateImage() override;
+    virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
+    virtual void PaintStatusColor(IRenderContext* pRender) override;
+    virtual void PaintStatusImage(IRenderContext* pRender) override;
+    virtual void PaintText(IRenderContext* pRender) override;
+    virtual bool HasHotState();
 
-	/**
-	 * @brief 选择状态下，没有设置背景色或背景图时，是否用非选择状态的对应属性来绘制
-	 * @return 返回 true 为选择状态，否则为 false
-	 */
-	bool IsPaintNormalFirst() const { return m_bPaintNormalFirst; };
+    /**
+     * @brief 选择状态下，没有设置背景色或背景图时，是否用非选择状态的对应属性来绘制
+     * @return 返回 true 为选择状态，否则为 false
+     */
+    bool IsPaintNormalFirst() const { return m_bPaintNormalFirst; };
 
-	/**
-	 * @brief 设置控件选择状态下，没有设置背景色或背景图时，用非选择状态的对应属性来绘制
-	 * @param[in] bFirst 为 true 绘制非选择状态属性，false 不绘制
-	 * @return 无
-	 */
-	void SetPaintNormalFirst(bool bFirst) { m_bPaintNormalFirst = bFirst; };
+    /**
+     * @brief 设置控件选择状态下，没有设置背景色或背景图时，用非选择状态的对应属性来绘制
+     * @param[in] bFirst 为 true 绘制非选择状态属性，false 不绘制
+     * @return 无
+     */
+    void SetPaintNormalFirst(bool bFirst) { m_bPaintNormalFirst = bFirst; };
 
-	/**
-	 * @brief 判断当前是否是选择状态
-	 * @return 返回 true 为选择状态，否则为 false
-	 */
-	bool IsSelected() const { return m_bSelected; }
+    /**
+     * @brief 判断当前是否是选择状态
+     * @return 返回 true 为选择状态，否则为 false
+     */
+    bool IsSelected() const { return m_bSelected; }
 
-	/**
-	 * @brief 设置控件是否选择状态
-	 * @param[in] bSelected 为 true 时为选择状态，false 时为取消选择状态
-	 * @param[in] bTriggerEvent 是否发送状态改变事件，true 为发送，否则为 false。默认为 false
-	 * @return 无
-	 */
-	virtual void Selected(bool bSelected, bool bTriggerEvent = false);
+    /**
+     * @brief 设置控件是否选择状态
+     * @param[in] bSelected 为 true 时为选择状态，false 时为取消选择状态
+     * @param[in] bTriggerEvent 是否发送状态改变事件，true 为发送，否则为 false。默认为 false
+     * @return 无
+     */
+    virtual void Selected(bool bSelected, bool bTriggerEvent = false);
 
-	/**
-	 * @brief 获取被选择时的图片
-	 * @param[in] stateType 要获取何种状态下的图片，参考 ControlStateType 枚举
-	 * @return 返回图片位置
-	 */
-	std::wstring GetSelectedStateImage(ControlStateType stateType);
+    /**
+     * @brief 获取被选择时的图片
+     * @param[in] stateType 要获取何种状态下的图片，参考 ControlStateType 枚举
+     * @return 返回图片位置
+     */
+    std::wstring GetSelectedStateImage(ControlStateType stateType);
 
-	/**
-	 * @brief 设置被选择时的图片
-	 * @param[in] stateType 要设置哪中状态下的图片
-	 * @param[in] strImage 图片地址
-	 * @return 无
-	 */
-	void SetSelectedStateImage(ControlStateType stateType, const std::wstring& strImage);
+    /**
+     * @brief 设置被选择时的图片
+     * @param[in] stateType 要设置哪中状态下的图片
+     * @param[in] strImage 图片地址
+     * @return 无
+     */
+    void SetSelectedStateImage(ControlStateType stateType, const std::wstring& strImage);
 
-	/**
-	 * @brief 获取被选择时的文本颜色
-	 * @return 返回被选择时的文本颜色
-	 */
-	std::wstring GetSelectedTextColor();
+    /**
+     * @brief 获取被选择时的文本颜色
+     * @return 返回被选择时的文本颜色
+     */
+    std::wstring GetSelectedTextColor();
 
-	/**
-	 * @brief 设置被选择时的文本颜色
-	 * @param[in] dwTextColor 要设置的颜色字符串，该颜色必须在 global.xml 中存在
-	 * @return 无
-	 */
-	void SetSelectedTextColor(const std::wstring& dwTextColor);
+    /**
+     * @brief 设置被选择时的文本颜色
+     * @param[in] dwTextColor 要设置的颜色字符串，该颜色必须在 global.xml 中存在
+     * @return 无
+     */
+    void SetSelectedTextColor(const std::wstring& dwTextColor);
 
-	/**
-	 * @brief 获取被选择时指定状态下的文本颜色
-	 * @param[in] stateType 要获取何种状态下的颜色
-	 * @return 返回颜色字符串，该值在 global.xml 中定义
-	 */
-	std::wstring GetSelectedStateTextColor(ControlStateType stateType);
+    /**
+     * @brief 获取被选择时指定状态下的文本颜色
+     * @param[in] stateType 要获取何种状态下的颜色
+     * @return 返回颜色字符串，该值在 global.xml 中定义
+     */
+    std::wstring GetSelectedStateTextColor(ControlStateType stateType);
 
-	/**
-	 * @brief 设置被选择时指定状态下的文本颜色
-	 * @param[in] stateType 要设置何种状态下的颜色
-	 * @param[in] stateColor 要设置的颜色
-	 * @return 无
-	 */
-	void SetSelectedStateTextColor(ControlStateType stateType, const std::wstring& dwTextColor);
+    /**
+     * @brief 设置被选择时指定状态下的文本颜色
+     * @param[in] stateType 要设置何种状态下的颜色
+     * @param[in] stateColor 要设置的颜色
+     * @return 无
+     */
+    void SetSelectedStateTextColor(ControlStateType stateType, const std::wstring& dwTextColor);
 
-	/**
-	* @brief 获取被选择时指定状态下的实际被渲染文本颜色
-	* @param[in] buttonStateType 要获取何种状态下的颜色
-	* @param[out] stateType 实际被渲染的状态
-	* @return 返回颜色字符串，该值在 global.xml 中定义
-	*/
-	std::wstring GetPaintSelectedStateTextColor(ControlStateType buttonStateType, ControlStateType& stateType);
+    /**
+     * @brief 获取被选择时指定状态下的实际被渲染文本颜色
+     * @param[in] buttonStateType 要获取何种状态下的颜色
+     * @param[out] stateType 实际被渲染的状态
+     * @return 返回颜色字符串，该值在 global.xml 中定义
+     */
+    std::wstring GetPaintSelectedStateTextColor(ControlStateType buttonStateType, ControlStateType& stateType);
 
-	/**
-	 * @brief 获取被选择时的控件颜色 
-	 * @param[in] stateType 要获取何种状态下的颜色
-	 * @return 返回颜色字符串，该值在 global.xml 中定义
-	 */
-	std::wstring GetSelectStateColor(ControlStateType stateType);
+    /**
+     * @brief 获取被选择时的控件颜色
+     * @param[in] stateType 要获取何种状态下的颜色
+     * @return 返回颜色字符串，该值在 global.xml 中定义
+     */
+    std::wstring GetSelectStateColor(ControlStateType stateType);
 
-	/**
-	 * @brief 设置被选择时的控件颜色
-	 * @param[in] stateType 要设置何种状态下的颜色
-	 * @param[in] stateColor 要设置的颜色
-	 * @return 无
-	 */
-	void SetSelectedStateColor(ControlStateType stateType, const std::wstring& stateColor);
+    /**
+     * @brief 设置被选择时的控件颜色
+     * @param[in] stateType 要设置何种状态下的颜色
+     * @param[in] stateColor 要设置的颜色
+     * @return 无
+     */
+    void SetSelectedStateColor(ControlStateType stateType, const std::wstring& stateColor);
 
-	/**
-	 * @brief 获取被选择时的前景图片
-	 * @param[in] stateType 要获取何种状态下的前景图片
-	 * @return 返回图片位置
-	 */
-	std::wstring GetSelectedForeStateImage(ControlStateType stateType);
+    /**
+     * @brief 获取被选择时的前景图片
+     * @param[in] stateType 要获取何种状态下的前景图片
+     * @return 返回图片位置
+     */
+    std::wstring GetSelectedForeStateImage(ControlStateType stateType);
 
-	/**
-	 * @brief 设置被选择时的前景图片
-	 * @param[in] stateType 要设置何种状态下的前景图片
-	 * @param[in] pStrImage 图片位置
-	 * @return 无
-	 */
-	void SetSelectedForeStateImage(ControlStateType stateType, const std::wstring& pStrImage);
+    /**
+     * @brief 设置被选择时的前景图片
+     * @param[in] stateType 要设置何种状态下的前景图片
+     * @param[in] pStrImage 图片位置
+     * @return 无
+     */
+    void SetSelectedForeStateImage(ControlStateType stateType, const std::wstring& pStrImage);
 
-	/**
-	 * @brief 监听被选择时的事件
-	 * @param[in] callback 被选择时触发的回调函数
-	 * @return 无
-	 */
-	void AttachSelect(const EventCallback& callback) { this->OnEvent[kEventSelect] += callback; }
+    /**
+     * @brief 监听被选择时的事件
+     * @param[in] callback 被选择时触发的回调函数
+     * @return 无
+     */
+    void AttachSelect(const EventCallback& callback) { this->OnEvent[kEventSelect] += callback; }
 
-	/**
-	 * @brief 监听取消选择时的事件
-	 * @param[in] callback 取消选择时触发的回调函数
-	 * @return 无
-	 */
-	void AttachUnSelect(const EventCallback& callback) { this->OnEvent[kEventUnSelect] += callback; }
+    /**
+     * @brief 监听取消选择时的事件
+     * @param[in] callback 取消选择时触发的回调函数
+     * @return 无
+     */
+    void AttachUnSelect(const EventCallback& callback) { this->OnEvent[kEventUnSelect] += callback; }
 
 protected:
-	bool			m_bSelected;
-	bool			m_bPaintNormalFirst;
-	std::wstring	m_dwSelectedTextColor;
-	StateColorMap	m_selectedTextColorMap;
-	StateColorMap	m_selectedColorMap;
+    bool			m_bSelected;
+    bool			m_bPaintNormalFirst;
+    std::wstring	m_dwSelectedTextColor;
+    StateColorMap	m_selectedTextColorMap;
+    StateColorMap	m_selectedColorMap;
 };
 
 template<typename InheritType>
@@ -163,17 +162,17 @@ CheckBoxTemplate<InheritType>::CheckBoxTemplate() : m_bSelected(false), m_bPaint
 template<typename InheritType>
 inline std::wstring CheckBoxTemplate<InheritType>::GetType() const
 {
-	return DUI_CTR_CHECKBOX;
+    return DUI_CTR_CHECKBOX;
 }
 
 template<typename InheritType>
 inline UIAControlProvider* CheckBoxTemplate<InheritType>::GetUIAProvider()
 {
-	if (this->m_pUIAProvider == nullptr)
-	{
-		this->m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIACheckBoxProvider(this));
-	}
-	return this->m_pUIAProvider;
+    if (this->m_pUIAProvider == nullptr)
+    {
+        this->m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIACheckBoxProvider(this));
+    }
+    return this->m_pUIAProvider;
 }
 
 template<typename InheritType>
@@ -201,16 +200,16 @@ void CheckBoxTemplate<InheritType>::Selected(bool bSelected, bool bTriggerEvent)
         }
     }
 
-	if (this->m_pUIAProvider != nullptr && UiaClientsAreListening()) {
-		VARIANT vtOld = { 0 }, vtNew = { 0 };
-		vtOld.vt = vtNew.vt = VT_I4;
-		vtOld.lVal = m_bSelected ? ToggleState_Off : ToggleState_On;
-		vtNew.lVal = m_bSelected ? ToggleState_On : ToggleState_Off;
+    if (this->m_pUIAProvider != nullptr && UiaClientsAreListening()) {
+        VARIANT vtOld = { 0 }, vtNew = { 0 };
+        vtOld.vt = vtNew.vt = VT_I4;
+        vtOld.lVal = m_bSelected ? ToggleState_Off : ToggleState_On;
+        vtNew.lVal = m_bSelected ? ToggleState_On : ToggleState_Off;
 
-		UiaRaiseAutomationPropertyChangedEvent(this->m_pUIAProvider, UIA_ToggleToggleStatePropertyId, vtOld, vtNew);
-	}
+        UiaRaiseAutomationPropertyChangedEvent(this->m_pUIAProvider, UIA_ToggleToggleStatePropertyId, vtOld, vtNew);
+    }
 
-	this->Invalidate();
+    this->Invalidate();
 }
 
 template<typename InheritType>
@@ -313,7 +312,7 @@ void CheckBoxTemplate<InheritType>::PaintText(IRenderContext* pRender)
     if (m_bSingleLine)
         m_uTextStyle |= DT_SINGLELINE;
     else
-        m_uTextStyle &= ~DT_SINGLELINE;
+        m_uTextStyle &= ~~DT_SINGLELINE;
 
     if (m_animationManager.GetAnimationPlayer(kAnimationHot)) {
         if ((stateType == kControlStateNormal || stateType == kControlStateHot)
@@ -342,25 +341,32 @@ void CheckBoxTemplate<InheritType>::PaintText(IRenderContext* pRender)
 template<typename InheritType>
 std::wstring CheckBoxTemplate<InheritType>::GetSelectedStateImage(ControlStateType stateType)
 {
-	return this->m_imageMap.GetImagePath(kStateImageSelectedBk, stateType);
+    return this->m_imageMap.GetImagePath(kStateImageSelectedBk, stateType);
 }
 
 template<typename InheritType>
 void CheckBoxTemplate<InheritType>::SetSelectedStateImage(ControlStateType stateType, const std::wstring& pStrImage)
 {
-	}
+    m_imageMap.SetImage(kStateImageSelectedBk, stateType, pStrImage);
+    if (GetFixedWidth() == DUI_LENGTH_AUTO || GetFixedHeight() == DUI_LENGTH_AUTO) {
+        ArrangeAncestor();
+    }
+    else {
+        Invalidate();
+    }
 }
 
 template<typename InheritType>
 std::wstring CheckBoxTemplate<InheritType>::GetSelectedTextColor()
 {
-	return m_dwSelectedTextColor;
+    return m_dwSelectedTextColor;
 }
 
 template<typename InheritType>
 void CheckBoxTemplate<InheritType>::SetSelectedTextColor(const std::wstring& dwTextColor)
 {
-	this->Invalidate();
+    m_dwSelectedTextColor = dwTextColor;
+    Invalidate();
 }
 
 template<typename InheritType /*= Control*/>
@@ -395,25 +401,32 @@ std::wstring ui::CheckBoxTemplate<InheritType>::GetPaintSelectedStateTextColor(C
 template<typename InheritType>
 std::wstring CheckBoxTemplate<InheritType>::GetSelectStateColor(ControlStateType stateType)
 {
-	return m_selectedColorMap[stateType];
+    return m_selectedColorMap[stateType];
 }
 
 template<typename InheritType>
 void CheckBoxTemplate<InheritType>::SetSelectedStateColor(ControlStateType stateType, const std::wstring& stateColor)
 {
-	this->Invalidate();
+    m_selectedColorMap[stateType] = stateColor;
+    Invalidate();
 }
 
 template<typename InheritType>
 std::wstring CheckBoxTemplate<InheritType>::GetSelectedForeStateImage(ControlStateType stateType)
 {
-	return this->m_imageMap.GetImagePath(kStateImageSelectedFore, stateType);
+    return this->m_imageMap.GetImagePath(kStateImageSelectedFore, stateType);
 }
 
 template<typename InheritType>
 void CheckBoxTemplate<InheritType>::SetSelectedForeStateImage(ControlStateType stateType, const std::wstring& pStrImage)
 {
-	}
+    m_imageMap.SetImage(kStateImageSelectedFore, stateType, pStrImage);
+    if (GetFixedWidth() == DUI_LENGTH_AUTO || GetFixedHeight() == DUI_LENGTH_AUTO) {
+        ArrangeAncestor();
+    }
+    else {
+        Invalidate();
+    }
 }
 
 typedef CheckBoxTemplate<Control> CheckBox;

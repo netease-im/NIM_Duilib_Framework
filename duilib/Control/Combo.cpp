@@ -1,4 +1,4 @@
-﻿#include "StdAfx.h"
+#include "StdAfx.h"
 
 namespace ui
 {
@@ -29,9 +29,9 @@ void CComboWnd::Init(Combo* pOwner)
     CSize szDrop = m_pOwner->GetDropBoxSize();
     UiRect rcOwner = pOwner->GetPosWithScrollOffset();
     UiRect rc = rcOwner;
-    rc.top = rc.bottom + 1;		// ������left��bottomλ����Ϊ�����������
-    rc.bottom = rc.top + szDrop.cy;	// ���㵯�����ڸ߶�
-    if( szDrop.cx > 0 ) rc.right = rc.left + szDrop.cx;	// ���㵯�����ڿ���
+    rc.top = rc.bottom + 1;		// 父窗口left、bottom位置作为弹出窗口起点
+    rc.bottom = rc.top + szDrop.cy;	// 计算弹出窗口高度
+    if( szDrop.cx > 0 ) rc.right = rc.left + szDrop.cx;	// 计算弹出窗口宽度
 
     CSize szAvailable(rc.right - rc.left, rc.bottom - rc.top);
     int cyFixed = 0;
@@ -47,7 +47,7 @@ void CComboWnd::Init(Combo* pOwner)
 	if (listBox)
 		padding = listBox->GetLayout()->GetPadding().top + listBox->GetLayout()->GetPadding().bottom;
 
-	cyFixed += padding; // VBox Ĭ�ϵ�Padding ����
+	cyFixed += padding; // VBox 默认的Padding 调整
     rc.bottom = rc.top + MIN(cyFixed, szDrop.cy);
 
     ::MapWindowRect(pOwner->GetWindow()->GetHWND(), HWND_DESKTOP, &rc);
@@ -231,15 +231,15 @@ void Combo::Activate()
 void Combo::Deactivate()
 {
 	if (!IsActivatable()) return;
-	if (!m_pComboWnd) return;
+	if (!m_pWindow) return;
 
-	m_pComboWnd->Close();
+	m_pWindow->Close();
 	Invalidate();
 }
 
 bool Combo::IsActivated()
 {
-	return (m_pComboWnd && !m_pComboWnd->IsClosing());
+	return (m_pWindow && !m_pWindow->IsClosing());
 }
 
 void Combo::SetAttribute(const std::wstring& strName, const std::wstring& strValue)
@@ -377,10 +377,11 @@ bool Combo::SelectItemInternal(int iIndex)
 	return true;
 }
 
-void Combo::SelectItem(int iIndex, bool bTrigger)
+bool Combo::SelectItem(int iIndex, bool bTrigger)
 {
     m_pLayout->SelectItem(iIndex, false, false);
-    SelectItemInternal(iIndex);
+    if (!SelectItemInternal(iIndex))
+        return false;
     Invalidate();
     if (m_pWindow != NULL && bTrigger) {
         m_pWindow->SendNotify(this, kEventSelect, m_iCurSel, -1);

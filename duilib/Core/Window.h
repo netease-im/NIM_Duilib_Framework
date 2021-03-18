@@ -20,7 +20,6 @@ class Box;
 #define UIFIND_TOP_FIRST     0x00000008
 #define UIFIND_ME_FIRST      0x80000000
 
-
 /////////////////////////////////////////////////////////////////////////////////////
 //
 
@@ -906,15 +905,15 @@ public:
 	virtual void OnInitLayout();
 
 	/**		
-	* @brief 是否将要关闭
-	* @return 无
-	*/
+	 * @brief 是否将要关闭
+	 * @return 无
+	 */
 	bool IsClosing(){ return m_bCloseing; };
 
 	/**
- * @brief Get ui automation provider
- * @return nullptr or pointer
- */
+     * @brief Get ui automation provider
+     * @return nullptr or pointer
+     */
 	UIAWindowProvider* GetUIAProvider();
 
 

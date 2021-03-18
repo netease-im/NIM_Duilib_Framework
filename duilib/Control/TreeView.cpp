@@ -29,6 +29,18 @@ UIAControlProvider* TreeNode::GetUIAProvider()
 	return m_pUIAProvider;
 }
 
+void TreeNode::SetTreeView(TreeView* pTreeView)
+{
+    m_pTreeView = pTreeView;
+}
+
+bool TreeNode::OnClickItem(EventArgs* pMsg)
+{
+    TreeNode* pItem = static_cast<TreeNode*>(pMsg->pSender);
+    pItem->SetExpand(!pItem->IsExpand(), true);
+    return true;
+}
+
 bool TreeNode::IsVisible() const
 {
 	return ListContainerElement::IsVisible()

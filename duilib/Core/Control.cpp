@@ -101,7 +101,7 @@ Control::Control(const Control& r) :
 	}
 }
 
-Control::~Control()
+Control::~~Control()
 {
 	if (m_pWindow) {
 		m_pWindow->ReapObjects(this);
@@ -111,7 +111,6 @@ Control::~Control()
 		UiaDisconnectProvider(m_pUIAProvider);
 		m_pUIAProvider->ResetControl();
 		m_pUIAProvider->Release();
-
 		m_pUIAProvider = nullptr;
 	}
 }
@@ -384,7 +383,7 @@ void Control::SetUTF8ToolTipText(const std::string& strText)
 	StringHelper::MBCSToUnicode(strText, strOut, CP_UTF8);
 	if (strOut.empty()) {
 		m_sToolTipText = _T("");
-		Invalidate();//为空则一律重刷
+		Invalidate();//~{N*?UTrR;BIVXK"~}
 		return ;
 	}
 
@@ -919,7 +918,7 @@ void Control::HandleMessage(EventArgs& msg)
 
 bool Control::HasHotState()
 {
-	// 判断本控件是否有hot状态
+	// ~{EP6O1>?X<~JG7qSP~}hot~{W4L,~}
 	return m_colorMap.HasHotColor() || m_imageMap.HasHotImage();
 }
 
@@ -1374,7 +1373,7 @@ void Control::AlphaPaint(IRenderContext* pRender, const UiRect& rcPaint)
 				SetCacheDirty(true);
 			}
 
-			// IsCacheDirty与m_bCacheDirty意义不一样
+			// IsCacheDirty~{Sk~}m_bCacheDirty~{RbRe2;R;Qy~}
 			if (m_bCacheDirty) {
 				pCacheRender->Clear();
 				UiRect rcClip = { 0, 0, size.cx, size.cy };
@@ -1610,7 +1609,7 @@ void Control::GifPlay()
 		}
 		else
 		{
-			if (lPrePause == 0 || lPause == 0) {//0表示GetCurrentInterval出错
+			if (lPrePause == 0 || lPause == 0) {//0~{1mJ>~}GetCurrentInterval~{3v4m~}
 				m_bkImage.SetPlaying(false);
 				m_gifWeakFlag.Cancel();
 				return;

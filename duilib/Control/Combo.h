@@ -98,7 +98,7 @@ public:
 	 * @param[in] bTrigger 是否触发选择事件
 	 * @return 返回 true 表示成功，否则为 false
 	 */
-	void SelectItem(int iIndex, bool bTrigger = false);
+	bool SelectItem(int iIndex, bool bTrigger = false);
 
 	/**
 	 * @brief 获取指定索引下的子项控件

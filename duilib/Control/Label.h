@@ -34,13 +34,25 @@ public:
      */
 	void SetTextStyle(UINT uStyle);
 
-	 */
+	/**
+     * @brief 获取文本样式
+     * @return 返回文本样式
+     */
 	UINT GetTextStyle() const;
 
-	 */
+	/**
+     * @brief 获取指定状态下的文本颜色
+     * @param[in] stateType 要获取的状态标志
+     * @return 返回指定状态下的文本颜色
+     */
 	std::wstring GetStateTextColor(ControlStateType stateType);
 
-	 */
+	/**
+     * @brief 设置指定状态下的文本颜色
+     * @param[in] stateType 要设置的状态标志
+     * @param[in] dwTextColor 要设置的状态颜色字符串，该值必须在 global.xml 中存在
+     * @return 无
+     */
 	void SetStateTextColor(ControlStateType stateType, const std::wstring& dwTextColor);
 
     /**
