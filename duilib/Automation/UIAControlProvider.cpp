@@ -332,7 +332,16 @@ IFACEMETHODIMP UIAControlProvider::get_BoundingRectangle(UiaRect* pRetVal)
 {
 	UIA_CHECK_ELEMENT(m_pControl);
 
-	UiRect rc = m_pControl->GetPos();
+	UiRect rc = m_pControl->GetPosWithScrollOffset();
+
+	Window* pRootWindow = m_pControl->GetWindow();
+	if (pRootWindow) {
+		UiRect rc_window = pRootWindow->GetPos();
+		UiRect rc_shadow = pRootWindow->GetShadowCorner();
+
+		rc.Offset(rc_window.left, rc_window.top);
+		rc.Offset(-rc_shadow.left, -rc_shadow.top);
+	}
 
 	pRetVal->left = rc.left;
 	pRetVal->top = rc.top;
