@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 
+#ifdef UIAUTOMATION_ENABLE
+
 namespace ui
 {
 
@@ -184,3 +186,5 @@ IFACEMETHODIMP UIAComboBoxProvider::get_ExpandCollapseState(ExpandCollapseState*
 
 
 }
+
+#endif

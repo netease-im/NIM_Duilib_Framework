@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 
+#ifdef UIAUTOMATION_ENABLE
+
 namespace ui
 {
 
@@ -142,3 +144,5 @@ IFACEMETHODIMP UIAProgressProvider::get_SmallChange(double* pRetVal)
 }
 
 }
+
+#endif

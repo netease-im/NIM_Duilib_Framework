@@ -171,6 +171,7 @@ std::wstring Combo::GetType() const
 	return DUI_CTR_COMBO;
 }
 
+#ifdef UIAUTOMATION_ENABLE
 UIAControlProvider* Combo::GetUIAProvider()
 {
 	if (m_pUIAProvider == nullptr)
@@ -179,6 +180,7 @@ UIAControlProvider* Combo::GetUIAProvider()
 	}
 	return m_pUIAProvider;
 }
+#endif
 
 bool Combo::Add(Control* pControl)
 {
@@ -362,6 +364,7 @@ bool Combo::SelectItemInternal(int iIndex)
 		m_pWindow->SendNotify(this, kEventSelect, m_iCurSel, iOldSel);
 	}
 
+#ifdef UIAUTOMATION_ENABLE
 	if (m_pUIAProvider != nullptr && UiaClientsAreListening()) {
 		VARIANT vtOld = { 0 }, vtNew = { 0 };
 		vtOld.vt = vtNew.vt = VT_BSTR;
@@ -371,6 +374,7 @@ bool Combo::SelectItemInternal(int iIndex)
 
 		UiaRaiseAutomationPropertyChangedEvent(m_pUIAProvider, UIA_ValueValuePropertyId, vtOld, vtNew);
 	}
+#endif
 
 	Invalidate();	
 

@@ -66,8 +66,10 @@ Window::Window() :
 	m_strWindowResourcePath(),
 	m_aTranslateAccelerator(),
 	m_heightPercent(0),
-	m_closeFlag(),
-	m_pUIAProvider(nullptr)
+#ifdef UIAUTOMATION_ENABLE
+	m_pUIAProvider(nullptr),
+#endif
+	m_closeFlag()
 {
 	LOGFONT lf = { 0 };
 	::GetObject(::GetStockObject(DEFAULT_GUI_FONT), sizeof(LOGFONT), &lf);
@@ -331,6 +333,7 @@ void Window::OnFinalMessage(HWND hWnd)
 	UnregisterTouchWindowWrapper(m_hWnd);
 	SendNotify(kEventWindowClose);
 
+#ifdef UIAUTOMATION_ENABLE
 	if (nullptr != m_pUIAProvider) {
 		UiaDisconnectProvider(m_pUIAProvider);
 
@@ -339,6 +342,7 @@ void Window::OnFinalMessage(HWND hWnd)
 
 		m_pUIAProvider = nullptr;
 	}
+#endif
 }
 
 LRESULT CALLBACK Window::__WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -397,6 +401,7 @@ LRESULT CALLBACK Window::__ControlProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
     }
 }
 
+#ifdef UIAUTOMATION_ENABLE
 UIAWindowProvider* Window::GetUIAProvider()
 {
 	if (m_pUIAProvider == NULL)
@@ -405,6 +410,7 @@ UIAWindowProvider* Window::GetUIAProvider()
 	}
 	return m_pUIAProvider;
 }
+#endif
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -1510,6 +1516,7 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		return ::SendMessage(hWndChild, OCM__BASE + uMsg, wParam, lParam);
 	}
 	break;
+#ifdef UIAUTOMATION_ENABLE
 	case WM_GETOBJECT:
 	{
 		if (static_cast<long>(lParam) == static_cast<long>(UiaRootObjectId) && GlobalManager::IsAutomationEnabled()) {
@@ -1520,6 +1527,7 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		}
 	}
 	break;
+#endif
 	default:
 		break;
 	}

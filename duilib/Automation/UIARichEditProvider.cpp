@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 
+#ifdef UIAUTOMATION_ENABLE
+
 namespace ui
 {
 
@@ -120,3 +122,5 @@ IFACEMETHODIMP UIARichEditProvider::get_IsReadOnly(_Out_ BOOL* retVal)
 }
 
 }
+
+#endif

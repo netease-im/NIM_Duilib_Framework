@@ -43,8 +43,10 @@ Control::Control() :
 	m_animationManager(),
 	m_imageMap(),
 	m_bkImage(),
-	m_loadBkImageWeakFlag(),
-	m_pUIAProvider(nullptr)
+#ifdef UIAUTOMATION_ENABLE
+	m_pUIAProvider(nullptr),
+#endif
+	m_loadBkImageWeakFlag()
 {
 	m_colorMap.SetControl(this);
 	m_imageMap.SetControl(this);
@@ -101,18 +103,21 @@ Control::Control(const Control& r) :
 	}
 }
 
-Control::~~Control()
+Control::~Control()
 {
 	if (m_pWindow) {
 		m_pWindow->ReapObjects(this);
 	}
 
+#ifdef UIAUTOMATION_ENABLE
 	if (nullptr != m_pUIAProvider) {
 		UiaDisconnectProvider(m_pUIAProvider);
 		m_pUIAProvider->ResetControl();
 		m_pUIAProvider->Release();
 		m_pUIAProvider = nullptr;
 	}
+#endif
+
 }
 
 std::wstring Control::GetType() const
@@ -747,6 +752,7 @@ bool Control::IsPointInWithScrollOffset(const CPoint& point) const
 	return m_rcItem.IsPointIn(newPoint);
 }
 
+#ifdef UIAUTOMATION_ENABLE
 UIAControlProvider* Control::GetUIAProvider()
 {
 	if (m_pUIAProvider == nullptr)
@@ -755,6 +761,7 @@ UIAControlProvider* Control::GetUIAProvider()
 	}
 	return m_pUIAProvider;
 }
+#endif
 
 void Control::HandleMessageTemplate(EventType eventType, WPARAM wParam, LPARAM lParam, TCHAR tChar, CPoint mousePos, FLOAT pressure)
 {

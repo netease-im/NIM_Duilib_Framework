@@ -23,6 +23,7 @@ std::wstring Progress::GetType() const
 	return DUI_CTR_PROGRESS;
 }
 
+#ifdef UIAUTOMATION_ENABLE
 UIAControlProvider* Progress::GetUIAProvider()
 {
 	if (m_pUIAProvider == nullptr)
@@ -31,6 +32,8 @@ UIAControlProvider* Progress::GetUIAProvider()
 	}
 	return m_pUIAProvider;
 }
+#endif
+
 bool Progress::IsHorizontal()
 {
 	return m_bHorizontal;
@@ -73,6 +76,7 @@ double Progress::GetValue() const
 
 void Progress::SetValue(double nValue)
 {
+#ifdef UIAUTOMATION_ENABLE
 	if (m_pUIAProvider != nullptr && UiaClientsAreListening()) {
 		VARIANT vtOld = { 0 }, vtNew = { 0 };
 		vtOld.vt = vtNew.vt = VT_R8;
@@ -81,6 +85,7 @@ void Progress::SetValue(double nValue)
 
 		UiaRaiseAutomationPropertyChangedEvent(m_pUIAProvider, UIA_RangeValueValuePropertyId, vtOld, vtNew);
 	}
+#endif
 
 	m_nValue = nValue;
 

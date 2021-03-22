@@ -13,7 +13,9 @@ public:
 
     /// 重写父类方法，提供个性化功能，请参考父类声明
     virtual std::wstring GetType() const override;
+#ifdef UIAUTOMATION_ENABLE
     virtual UIAControlProvider* GetUIAProvider() override;
+#endif
     virtual void Activate() override;
     virtual Image* GetEstimateImage() override;
     virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
@@ -165,6 +167,7 @@ inline std::wstring CheckBoxTemplate<InheritType>::GetType() const
     return DUI_CTR_CHECKBOX;
 }
 
+#ifdef UIAUTOMATION_ENABLE
 template<typename InheritType>
 inline UIAControlProvider* CheckBoxTemplate<InheritType>::GetUIAProvider()
 {
@@ -174,6 +177,7 @@ inline UIAControlProvider* CheckBoxTemplate<InheritType>::GetUIAProvider()
     }
     return this->m_pUIAProvider;
 }
+#endif
 
 template<typename InheritType>
 void CheckBoxTemplate<InheritType>::Activate()
@@ -200,6 +204,7 @@ void CheckBoxTemplate<InheritType>::Selected(bool bSelected, bool bTriggerEvent)
         }
     }
 
+#ifdef UIAUTOMATION_ENABLE
     if (this->m_pUIAProvider != nullptr && UiaClientsAreListening()) {
         VARIANT vtOld = { 0 }, vtNew = { 0 };
         vtOld.vt = vtNew.vt = VT_I4;
@@ -208,6 +213,7 @@ void CheckBoxTemplate<InheritType>::Selected(bool bSelected, bool bTriggerEvent)
 
         UiaRaiseAutomationPropertyChangedEvent(this->m_pUIAProvider, UIA_ToggleToggleStatePropertyId, vtOld, vtNew);
     }
+#endif
 
     this->Invalidate();
 }

@@ -42,7 +42,9 @@
 #define _WIN32_WINNT _WIN32_WINNT_WINXP
 #endif
 
+#ifdef UIAUTOMATION_ENABLE
 #pragma comment(lib, "uiautomationcore.lib")
+#endif
 
 #include "UIlib.h"
 #include <olectl.h>
