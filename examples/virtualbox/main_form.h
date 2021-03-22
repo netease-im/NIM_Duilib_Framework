@@ -34,7 +34,7 @@ private:
 	bool OnClicked(ui::EventArgs* args);
 
 private:
-	VirtualTileBox*	m_pTileList;
+	ui::VirtualTileBox*	m_pTileList;
 	Provider* m_DataProvider;
 
 private:

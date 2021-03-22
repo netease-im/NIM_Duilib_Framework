@@ -335,6 +335,7 @@
     <ClCompile Include="Control\CircleProgress.cpp" />
     <ClCompile Include="Control\Menu.cpp" />
     <ClCompile Include="Control\VirtualListBox.cpp" />
+    <ClCompile Include="Control\VirtualTileBox.cpp" />
     <ClCompile Include="Core\Define.cpp" />
     <ClCompile Include="Core\Image.cpp" />
     <ClCompile Include="Core\Placeholder.cpp" />
@@ -403,6 +404,7 @@
     <ClInclude Include="Box\VBox.h" />
     <ClInclude Include="Control\Menu.h" />
     <ClInclude Include="Control\VirtualListBox.h" />
+    <ClInclude Include="Control\VirtualTileBox.h" />
     <ClInclude Include="Core\Image.h" />
     <ClInclude Include="Control\CircleProgress.h" />
     <ClInclude Include="Core\Placeholder.h" />

@@ -558,8 +558,9 @@ Control* WindowBuilder::CreateControlByClass(const std::wstring& strControlClass
 		else if( strControlClass == DUI_CTR_CHECKBOXBOX )		pControl = new CheckBoxBox;
 		break;
 	case 14:
-		if (strControlClass == DUI_CTR_VIRTUALLISTBOX)			pControl = new VirtualListBox;
-		else if (strControlClass == DUI_CTR_CIRCLEPROGRESS)     pControl = new CircleProgress;
+    if (strControlClass == DUI_CTR_VIRTUALLISTBOX)			pControl = new VirtualListBox;
+    else if (strControlClass == DUI_CTR_CIRCLEPROGRESS)     pControl = new CircleProgress;
+    else if (strControlClass == DUI_CTR_VIRTUALTILEBOX)     pControl = new VirtualTileBox;
 		break;
 	case 15:
 		break;

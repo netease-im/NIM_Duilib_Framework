@@ -1,6 +1,6 @@
 #pragma once
 
-#include "VirtualTileBox.h"
+// #include "VirtualTileBox.h"
 #include <map>
 
 struct DownloadTask
@@ -9,7 +9,7 @@ struct DownloadTask
 	std::wstring sName;
 };
 
-class Provider : public VirtualTileInterface
+class Provider : public ui::VirtualTileInterface
 {
 public:
 	Provider();
