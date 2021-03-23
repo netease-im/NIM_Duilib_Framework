@@ -51,6 +51,25 @@ IFACEMETHODIMP UIAButtonProvider::GetPatternProvider(PATTERNID patternId, IUnkno
 	return S_OK;
 }
 
+IFACEMETHODIMP UIAButtonProvider::GetPropertyValue(PROPERTYID propertyId, VARIANT* pRetVal)
+{
+	pRetVal->vt = VT_EMPTY;
+	UIA_CHECK_ELEMENT(m_pControl);
+
+	switch (propertyId)
+	{
+	case UIA_ControlTypePropertyId:
+		pRetVal->vt = VT_I4;
+		pRetVal->lVal = UIA_ButtonControlTypeId;
+		break;
+	default:
+		return __super::GetPropertyValue(propertyId, pRetVal);
+		break;
+	}
+
+	return S_OK;
+}
+
 
 // IInvokeProvider methods
 IFACEMETHODIMP UIAButtonProvider::Invoke(void)

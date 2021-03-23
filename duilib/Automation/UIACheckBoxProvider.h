@@ -18,6 +18,7 @@ public:
 
     // IRawElementProviderSimple methods
     virtual IFACEMETHODIMP GetPatternProvider(_In_ PATTERNID iid, _Outptr_result_maybenull_ IUnknown** retVal);
+    virtual IFACEMETHODIMP GetPropertyValue(_In_ PROPERTYID propertyId, _Out_ VARIANT* pRetVal);
 
     // IInvokeProvider methods
     virtual IFACEMETHODIMP Toggle(void);

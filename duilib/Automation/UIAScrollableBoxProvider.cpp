@@ -41,6 +41,25 @@ IFACEMETHODIMP UIAScrollableBoxProvider::GetPatternProvider(PATTERNID iid, IUnkn
 	return S_OK;
 }
 
+IFACEMETHODIMP UIAScrollableBoxProvider::GetPropertyValue(PROPERTYID propertyId, VARIANT* pRetVal)
+{
+	pRetVal->vt = VT_EMPTY;
+	UIA_CHECK_ELEMENT(m_pControl);
+
+	switch (propertyId)
+	{
+	case UIA_ControlTypePropertyId:
+		pRetVal->vt = VT_I4;
+		pRetVal->lVal = UIA_ListControlTypeId;
+		break;
+	default:
+		return __super::GetPropertyValue(propertyId, pRetVal);
+		break;
+	}
+
+	return S_OK;
+}
+
 IFACEMETHODIMP UIAScrollableBoxProvider::Scroll(ScrollAmount horizontalAmount, ScrollAmount verticalAmount)
 {
 	UIA_CHECK_ELEMENT(m_pControl);

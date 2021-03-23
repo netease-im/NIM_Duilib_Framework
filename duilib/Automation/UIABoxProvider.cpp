@@ -40,6 +40,25 @@ IFACEMETHODIMP UIABoxProvider::GetPatternProvider(PATTERNID iid, IUnknown** retV
 	return S_OK;
 }
 
+IFACEMETHODIMP UIABoxProvider::GetPropertyValue(PROPERTYID propertyId, VARIANT* pRetVal)
+{
+	pRetVal->vt = VT_EMPTY;
+	UIA_CHECK_ELEMENT(m_pControl);
+
+	switch (propertyId)
+	{
+	case UIA_ControlTypePropertyId:
+		pRetVal->vt = VT_I4;
+		pRetVal->lVal = UIA_ListControlTypeId;
+		break;
+	default:
+		return __super::GetPropertyValue(propertyId, pRetVal);
+		break;
+	}
+
+	return S_OK;
+}
+
 // IItemContainerProvider
 // https://docs.microsoft.com/en-us/windows/win32/winauto/uiauto-implementingitemcontainer
 // https://docs.microsoft.com/en-us/windows/win32/api/uiautomationcore/nf-uiautomationcore-iitemcontainerprovider-finditembyproperty

@@ -52,6 +52,25 @@ IFACEMETHODIMP UIAProgressProvider::GetPatternProvider(PATTERNID patternId, IUnk
 	return S_OK;
 }
 
+IFACEMETHODIMP UIAProgressProvider::GetPropertyValue(PROPERTYID propertyId, VARIANT* pRetVal)
+{
+	pRetVal->vt = VT_EMPTY;
+	UIA_CHECK_ELEMENT(m_pControl);
+
+	switch (propertyId)
+	{
+	case UIA_ControlTypePropertyId:
+		pRetVal->vt = VT_I4;
+		pRetVal->lVal = UIA_ProgressBarControlTypeId;
+		break;
+	default:
+		return __super::GetPropertyValue(propertyId, pRetVal);
+		break;
+	}
+
+	return S_OK;
+}
+
 IFACEMETHODIMP UIAProgressProvider::SetValue(double val)
 {
 	UIA_CHECK_ELEMENT(m_pControl);

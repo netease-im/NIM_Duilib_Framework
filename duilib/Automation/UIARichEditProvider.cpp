@@ -65,7 +65,10 @@ IFACEMETHODIMP UIARichEditProvider::GetPropertyValue(PROPERTYID propertyId, VARI
 		pRetVal->boolVal = VARIANT_TRUE;
 		pRetVal->vt = VT_BOOL;
 		break;
-
+	case UIA_ControlTypePropertyId:
+		pRetVal->vt = VT_I4;
+		pRetVal->lVal = UIA_EditControlTypeId;
+		break;
 	default:
 		return __super::GetPropertyValue(propertyId, pRetVal);
 		break;

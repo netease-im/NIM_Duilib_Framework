@@ -49,6 +49,25 @@ IFACEMETHODIMP UIAComboBoxProvider::GetPatternProvider(PATTERNID iid, IUnknown**
 	return S_OK;
 }
 
+IFACEMETHODIMP UIAComboBoxProvider::GetPropertyValue(PROPERTYID propertyId, VARIANT* pRetVal)
+{
+	pRetVal->vt = VT_EMPTY;
+	UIA_CHECK_ELEMENT(m_pControl);
+
+	switch (propertyId)
+	{
+	case UIA_ControlTypePropertyId:
+		pRetVal->vt = VT_I4;
+		pRetVal->lVal = UIA_ComboBoxControlTypeId;
+		break;
+	default:
+		return __super::GetPropertyValue(propertyId, pRetVal);
+		break;
+	}
+
+	return S_OK;
+}
+
 //
 // IValueProvider Implementation
 //
