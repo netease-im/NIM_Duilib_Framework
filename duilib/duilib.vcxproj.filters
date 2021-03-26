@@ -239,6 +239,9 @@
     <ClCompile Include="Automation\UIAListBoxItemProvider.cpp">
       <Filter>Source Files\Automation</Filter>
     </ClCompile>
+    <ClCompile Include="Control\VirtualTileBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StdAfx.h">
@@ -450,6 +453,9 @@
     </ClInclude>
     <ClInclude Include="Automation\UIAListBoxItemProvider.h">
       <Filter>Header Files\Automation</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\VirtualTileBox.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

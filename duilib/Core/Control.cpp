@@ -105,6 +105,8 @@ Control::Control(const Control& r) :
 
 Control::~Control()
 {
+	HandleMessageTemplate(kEventLast);
+
 	if (m_pWindow) {
 		m_pWindow->ReapObjects(this);
 	}
@@ -525,6 +527,8 @@ void Control::SetVisible_(bool bVisible)
 	if (!IsVisible()) {
 		StopGifPlay();
 	}
+
+	HandleMessageTemplate(kEventVisibleChange);
 }
 
 bool Control::IsEnabled() const

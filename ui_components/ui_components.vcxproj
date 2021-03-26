@@ -193,6 +193,10 @@
     <ClInclude Include="grid\Grid.h" />
     <ClInclude Include="grid\GridBase.h" />
     <ClInclude Include="grid\GridBody.h" />
+    <ClInclude Include="popover\alert.h" />
+    <ClInclude Include="popover\notification.h" />
+    <ClInclude Include="popover\popover.h" />
+    <ClInclude Include="popover\tooltip.h" />
     <ClInclude Include="public_define.h" />
     <ClInclude Include="ui_cef_control.h" />
     <ClInclude Include="cef_control\app\cef_js_bridge.h" />
@@ -248,6 +252,10 @@
     <ClCompile Include="modal_wnd\async_modal_runner.cpp" />
     <ClCompile Include="modal_wnd\file_dialog_ex.cpp" />
     <ClCompile Include="msgbox\msgbox.cpp" />
+    <ClCompile Include="popover\alert.cpp" />
+    <ClCompile Include="popover\notification.cpp" />
+    <ClCompile Include="popover\popover.cpp" />
+    <ClCompile Include="popover\tooltip.cpp" />
     <ClCompile Include="shadow_wnd\shadow_wnd.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

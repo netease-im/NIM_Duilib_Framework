@@ -909,6 +909,20 @@ public:
 	void AttachDoubleClick(const EventCallback& callback) { OnEvent[kEventMouseDoubleClick] += callback; }
 
 	/**
+	* @brief 监听控件关闭前最后一条消息
+	* @param[in] callback 事件处理的回调函数，请参考 EventCallback 声明
+	* @return 无
+	*/
+	void AttachLastEvent(const EventCallback& callback) { OnEvent[kEventLast] += callback; }
+
+	/**
+	* @brief 监听控件显示或隐藏事件
+	* @param[in] callback 事件处理的回调函数，请参考 EventCallback 声明
+	* @return 无
+	*/
+	void AttachVisibleChange(const EventCallback& callback) { OnEvent[kEventVisibleChange] += callback; }
+
+	/**
 	 * @brief 取消监听指定事件，见 EventType 枚举
 	 * @param[in] callback 事件处理的回调函数，请参考 EventCallback 声明
 	 * @return 无

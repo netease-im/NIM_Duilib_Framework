@@ -21,7 +21,7 @@ public:
 	RichEdit();
 	RichEdit(const RichEdit& r) = delete;
 	RichEdit& operator=(const RichEdit& r) = delete;
-    ~RichEdit();
+    virtual ~RichEdit();
 
 	/**
 	 * @brief 判断是否接受 TAB 按键消息
@@ -693,6 +693,7 @@ public:
 	virtual void DoInit() override;
 	virtual void SetEnabled(bool bEnable = true) override;
 	virtual CSize EstimateSize(CSize szAvailable) override;
+	virtual CSize EstimateText(CSize szAvailable);
 	virtual void SetPos(UiRect rc) override;
 	virtual UINT GetControlFlags() const override;
 	virtual void HandleMessage(EventArgs& event) override;

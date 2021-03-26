@@ -2265,6 +2265,28 @@ CSize RichEdit::EstimateSize(CSize szAvailable)
     return size;
 }
 
+CSize RichEdit::EstimateText(CSize szAvailable)
+{
+  LONG iWidth = szAvailable.cx;
+  LONG iHeight = 0;
+
+  SIZEL szExtent = { -1, -1 };
+  m_pTwh->GetTextServices()->TxGetNaturalSize(
+	DVASPECT_CONTENT,
+	GetWindow()->GetPaintDC(),
+	NULL,
+	NULL,
+	TXTNS_FITTOCONTENT,
+	&szExtent,
+	&iWidth,
+	&iHeight);
+
+  szAvailable.cx = iWidth;
+  szAvailable.cy = iHeight;
+
+  return szAvailable;
+}
+
 void RichEdit::SetPos(UiRect rc)
 {
     Control::SetPos(rc);

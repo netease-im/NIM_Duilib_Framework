@@ -261,8 +261,9 @@ void LabelTemplate<InheritType>::CheckShowToolTip()
 template<typename InheritType>
 std::string LabelTemplate<InheritType>::GetUTF8Text() const
 {
+    std::wstring strIn = GetText();
     std::string strOut;
-    StringHelper::UnicodeToMBCS(GetText(), strOut, CP_UTF8);
+    StringHelper::UnicodeToMBCS(strIn, strOut, CP_UTF8);
     return strOut;
 }
 
@@ -422,8 +423,8 @@ void LabelTemplate<InheritType>::PaintText(IRenderContext* pRender)
     rc.top += m_rcTextPadding.top;
     rc.bottom -= m_rcTextPadding.bottom;
 
-    auto stateType = m_uButtonState;
-    DWORD dwClrColor = this->GetWindowColor(GetPaintStateTextColor(m_uButtonState, stateType));
+    auto stateType = this->m_uButtonState;
+    DWORD dwClrColor = this->GetWindowColor(GetPaintStateTextColor(this->m_uButtonState, stateType));
 
     if (m_bSingleLine)
         m_uTextStyle |= DT_SINGLELINE;

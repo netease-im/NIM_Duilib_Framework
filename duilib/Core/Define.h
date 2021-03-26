@@ -144,6 +144,8 @@ enum EventType
 
 	kEventNotify,	//仅作简单的通知，有复杂数据请通过其他方式实现
 
+	kEventVisibleChange,
+
 	kEventLast,
 };
 

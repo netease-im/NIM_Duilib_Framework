@@ -182,7 +182,7 @@ inline UIAControlProvider* CheckBoxTemplate<InheritType>::GetUIAProvider()
 template<typename InheritType>
 void CheckBoxTemplate<InheritType>::Activate()
 {
-    if (!IsActivatable())
+    if (!this->IsActivatable())
         return;
     Selected(!m_bSelected, true);
 }
@@ -193,13 +193,13 @@ void CheckBoxTemplate<InheritType>::Selected(bool bSelected, bool bTriggerEvent)
     if (m_bSelected == bSelected) return;
     m_bSelected = bSelected;
 
-    if (m_pWindow != NULL) {
+    if (this->m_pWindow != NULL) {
         if (bTriggerEvent) {
             if (m_bSelected) {
-                m_pWindow->SendNotify(this, kEventSelect);
+                this->m_pWindow->SendNotify(this, kEventSelect);
             }
             else {
-                m_pWindow->SendNotify(this, kEventUnSelect);
+                this->m_pWindow->SendNotify(this, kEventUnSelect);
             }
         }
     }
@@ -229,7 +229,7 @@ Image* CheckBoxTemplate<InheritType>::GetEstimateImage()
 {
     Image* estimateImage = __super::GetEstimateImage();
     if (!estimateImage) {
-        estimateImage = m_imageMap.GetEstimateImage(kStateImageSelectedBk);
+        estimateImage = this->m_imageMap.GetEstimateImage(kStateImageSelectedBk);
     }
 
     return estimateImage;
@@ -270,9 +270,9 @@ void CheckBoxTemplate<InheritType>::PaintStatusColor(IRenderContext* pRender)
     }
 
     if (IsPaintNormalFirst() && !m_selectedColorMap.HasColor())
-        m_colorMap.PaintStatusColor(pRender, m_rcPaint, m_uButtonState);
+        this->m_colorMap.PaintStatusColor(pRender, this->m_rcPaint, this->m_uButtonState);
     else
-        m_selectedColorMap.PaintStatusColor(pRender, m_rcPaint, m_uButtonState);
+        m_selectedColorMap.PaintStatusColor(pRender, this->m_rcPaint, this->m_uButtonState);
 }
 
 template<typename InheritType>
@@ -283,15 +283,15 @@ void CheckBoxTemplate<InheritType>::PaintStatusImage(IRenderContext* pRender)
         return;
     }
 
-    if (IsPaintNormalFirst() && !m_imageMap.HasImageType(kStateImageSelectedBk))
-        m_imageMap.PaintStatusImage(pRender, kStateImageBk, m_uButtonState);
+    if (IsPaintNormalFirst() && !this->m_imageMap.HasImageType(kStateImageSelectedBk))
+        this->m_imageMap.PaintStatusImage(pRender, kStateImageBk, this->m_uButtonState);
     else
-        m_imageMap.PaintStatusImage(pRender, kStateImageSelectedBk, m_uButtonState);
+        this->m_imageMap.PaintStatusImage(pRender, kStateImageSelectedBk, this->m_uButtonState);
 
-    if (IsPaintNormalFirst() && !m_imageMap.HasImageType(kStateImageSelectedFore))
-        m_imageMap.PaintStatusImage(pRender, kStateImageFore, m_uButtonState);
+    if (IsPaintNormalFirst() && !this->m_imageMap.HasImageType(kStateImageSelectedFore))
+        this->m_imageMap.PaintStatusImage(pRender, kStateImageFore, this->m_uButtonState);
     else
-        m_imageMap.PaintStatusImage(pRender, kStateImageSelectedFore, m_uButtonState);
+        this->m_imageMap.PaintStatusImage(pRender, kStateImageSelectedFore, this->m_uButtonState);
 }
 
 template<typename InheritType>
@@ -302,38 +302,38 @@ void CheckBoxTemplate<InheritType>::PaintText(IRenderContext* pRender)
         return;
     }
 
-    if (GetText().empty()) return;
-    UiRect rc = m_rcItem;
-    rc.left += m_rcTextPadding.left;
-    rc.right -= m_rcTextPadding.right;
-    rc.top += m_rcTextPadding.top;
-    rc.bottom -= m_rcTextPadding.bottom;
+    if (this->GetText().empty()) return;
+    UiRect rc = this->m_rcItem;
+    rc.left += this->m_rcTextPadding.left;
+    rc.right -= this->m_rcTextPadding.right;
+    rc.top += this->m_rcTextPadding.top;
+    rc.bottom -= this->m_rcTextPadding.bottom;
 
-    auto stateType = m_uButtonState;
-    std::wstring clrColor = GetPaintSelectedStateTextColor(m_uButtonState, stateType);
+    auto stateType = this->m_uButtonState;
+    std::wstring clrColor = GetPaintSelectedStateTextColor(this->m_uButtonState, stateType);
     if (clrColor.empty())
-        clrColor = m_dwSelectedTextColor.empty() ? GetPaintStateTextColor(m_uButtonState, stateType) : m_dwSelectedTextColor;
+        clrColor = m_dwSelectedTextColor.empty() ? this->GetPaintStateTextColor(this->m_uButtonState, stateType) : m_dwSelectedTextColor;
     DWORD dwClrColor = this->GetWindowColor(clrColor);
 
-    if (m_bSingleLine)
-        m_uTextStyle |= DT_SINGLELINE;
+    if (this->m_bSingleLine)
+        this->m_uTextStyle |= DT_SINGLELINE;
     else
-        m_uTextStyle &= ~~DT_SINGLELINE;
+        this->m_uTextStyle &= ~~DT_SINGLELINE;
 
-    if (m_animationManager.GetAnimationPlayer(kAnimationHot)) {
+    if (this->m_animationManager.GetAnimationPlayer(kAnimationHot)) {
         if ((stateType == kControlStateNormal || stateType == kControlStateHot)
             && !GetSelectedStateTextColor(kControlStateHot).empty()) {
             std::wstring clrColor = GetSelectedStateTextColor(kControlStateNormal);
             if (!clrColor.empty()) {
                 DWORD dwClrColor = this->GetWindowColor(clrColor);
-                pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit);
+                pRender->DrawText(rc, this->GetText(), dwClrColor, this->m_sFontId, this->m_uTextStyle, 255, this->m_bLineLimit);
             }
 
-            if (m_nHotAlpha > 0) {
+            if (this->m_nHotAlpha > 0) {
                 std::wstring clrColor = GetSelectedStateTextColor(kControlStateHot);
                 if (!clrColor.empty()) {
                     DWORD dwClrColor = this->GetWindowColor(clrColor);
-                    pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, (BYTE)m_nHotAlpha, m_bLineLimit);
+                    pRender->DrawText(rc, this->GetText(), dwClrColor, this->m_sFontId, this->m_uTextStyle, (BYTE)this->m_nHotAlpha, this->m_bLineLimit);
                 }
             }
 
@@ -341,7 +341,7 @@ void CheckBoxTemplate<InheritType>::PaintText(IRenderContext* pRender)
         }
     }
 
-    pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit);
+    pRender->DrawText(rc, this->GetText(), dwClrColor, this->m_sFontId, this->m_uTextStyle, 255, this->m_bLineLimit);
 }
 
 template<typename InheritType>
@@ -353,12 +353,12 @@ std::wstring CheckBoxTemplate<InheritType>::GetSelectedStateImage(ControlStateTy
 template<typename InheritType>
 void CheckBoxTemplate<InheritType>::SetSelectedStateImage(ControlStateType stateType, const std::wstring& pStrImage)
 {
-    m_imageMap.SetImage(kStateImageSelectedBk, stateType, pStrImage);
-    if (GetFixedWidth() == DUI_LENGTH_AUTO || GetFixedHeight() == DUI_LENGTH_AUTO) {
-        ArrangeAncestor();
+    this->m_imageMap.SetImage(kStateImageSelectedBk, stateType, pStrImage);
+    if (this->GetFixedWidth() == DUI_LENGTH_AUTO || this->GetFixedHeight() == DUI_LENGTH_AUTO) {
+        this->ArrangeAncestor();
     }
     else {
-        Invalidate();
+        this->Invalidate();
     }
 }
 
@@ -372,7 +372,7 @@ template<typename InheritType>
 void CheckBoxTemplate<InheritType>::SetSelectedTextColor(const std::wstring& dwTextColor)
 {
     m_dwSelectedTextColor = dwTextColor;
-    Invalidate();
+    this->Invalidate();
 }
 
 template<typename InheritType /*= Control*/>
@@ -385,7 +385,7 @@ template<typename InheritType /*= Control*/>
 void ui::CheckBoxTemplate<InheritType>::SetSelectedStateTextColor(ControlStateType stateType, const std::wstring& dwTextColor)
 {
     m_selectedTextColorMap[stateType] = dwTextColor;
-    Invalidate();
+    this->Invalidate();
 }
 
 template<typename InheritType /*= Control*/>
@@ -414,7 +414,7 @@ template<typename InheritType>
 void CheckBoxTemplate<InheritType>::SetSelectedStateColor(ControlStateType stateType, const std::wstring& stateColor)
 {
     m_selectedColorMap[stateType] = stateColor;
-    Invalidate();
+    this->Invalidate();
 }
 
 template<typename InheritType>
@@ -426,12 +426,12 @@ std::wstring CheckBoxTemplate<InheritType>::GetSelectedForeStateImage(ControlSta
 template<typename InheritType>
 void CheckBoxTemplate<InheritType>::SetSelectedForeStateImage(ControlStateType stateType, const std::wstring& pStrImage)
 {
-    m_imageMap.SetImage(kStateImageSelectedFore, stateType, pStrImage);
-    if (GetFixedWidth() == DUI_LENGTH_AUTO || GetFixedHeight() == DUI_LENGTH_AUTO) {
-        ArrangeAncestor();
+    this->m_imageMap.SetImage(kStateImageSelectedFore, stateType, pStrImage);
+    if (this->GetFixedWidth() == DUI_LENGTH_AUTO || this->GetFixedHeight() == DUI_LENGTH_AUTO) {
+        this->ArrangeAncestor();
     }
     else {
-        Invalidate();
+        this->Invalidate();
     }
 }
 

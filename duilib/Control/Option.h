@@ -124,17 +124,17 @@ void OptionTemplate<InheritType>::SetGroup(const std::wstring& strGroupName)
 {
     if (strGroupName.empty()) {
         if (m_sGroupName.empty()) return;
-        if (m_pWindow) m_pWindow->RemoveOptionGroup(m_sGroupName, this);
+        if (this->m_pWindow) this->m_pWindow->RemoveOptionGroup(m_sGroupName, this);
         m_sGroupName.clear();
     }
     else {
         if (m_sGroupName == strGroupName) return;
-        if (!m_sGroupName.empty() && m_pWindow) m_pWindow->RemoveOptionGroup(m_sGroupName, this);
+        if (!m_sGroupName.empty() && this->m_pWindow) this->m_pWindow->RemoveOptionGroup(m_sGroupName, this);
         m_sGroupName = strGroupName;
-        if (m_pWindow) m_pWindow->AddOptionGroup(m_sGroupName, this);
+        if (this->m_pWindow) this->m_pWindow->AddOptionGroup(m_sGroupName, this);
     }
 
-    Selected(m_bSelected, true);
+    Selected(this->m_bSelected, true);
 }
 
 typedef OptionTemplate<Control> Option;
