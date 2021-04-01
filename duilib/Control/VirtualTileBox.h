@@ -104,6 +104,12 @@ public:
   */
   void EnsureVisible(int iIndex, bool bToTop = false);
 
+  /**
+  * @brief 获取列表内最大真实控件数量
+  * @return 最大真实控件数量
+  */
+  int GetMaxItemCount() { return m_nMaxItemCount; }
+
 protected:
   /// 重写父类接口，提供个性化功能
   virtual void SetScrollPos(ui::CSize szPos) override;
