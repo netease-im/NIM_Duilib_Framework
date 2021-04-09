@@ -1281,11 +1281,12 @@ bool Control::OnApplyAttributeList(const std::wstring& strReceiver, const std::w
 
 void Control::GetImage(Image& duiImage) const
 {
-	if (duiImage.imageCache) {
-		return;
-	}
+	// should optimize later
+	// use hash or md5 is better than compare strings
 	std::wstring sImageName = duiImage.imageAttribute.sImageName;
 	std::wstring imageFullPath = GlobalManager::GetResPath(sImageName, m_pWindow->GetWindowResourcePath());
+
+	imageFullPath = StringHelper::ReparsePath(imageFullPath);
 
 	if (!duiImage.imageCache || duiImage.imageCache->sImageFullPath != imageFullPath) {
 		duiImage.imageCache = GlobalManager::GetImage(imageFullPath);
