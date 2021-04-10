@@ -1,7 +1,5 @@
 #include "StdAfx.h"
 
-#ifdef UIAUTOMATION_ENABLE
-
 #include <typeinfo>
 
 namespace ui {
@@ -398,5 +396,3 @@ IFACEMETHODIMP UIAControlProvider::get_FragmentRoot(IRawElementProviderFragmentR
 	return S_OK;
 }
 }
-
-#endif

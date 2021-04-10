@@ -62,9 +62,7 @@ public:
 /////////////////////////////////////////////////////////////////////////////////////
 //
 
-#ifdef UIAUTOMATION_ENABLE
 class UIAWindowProvider;
-#endif
 
 class UILIB_API Window : public virtual nbase::SupportWeakCallback
 {
@@ -912,13 +910,11 @@ public:
 	 */
 	bool IsClosing(){ return m_bCloseing; };
 
-#ifdef UIAUTOMATION_ENABLE
 	/**
      * @brief Get ui automation provider
      * @return nullptr or pointer
      */
 	UIAWindowProvider* GetUIAProvider();
-#endif
 
 
 private:
@@ -962,9 +958,7 @@ protected:
 	Box* m_pRoot;
 	EventMap OnEvent;
 
-#ifdef UIAUTOMATION_ENABLE
 	UIAWindowProvider* m_pUIAProvider;
-#endif
 
 protected:
 	CSize m_szMinWindow;

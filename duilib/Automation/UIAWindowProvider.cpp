@@ -1,7 +1,5 @@
 #include "StdAfx.h"
 
-#ifdef UIAUTOMATION_ENABLE
-
 namespace ui {
 
 UIAWindowProvider::UIAWindowProvider(Window* pWindow) :
@@ -468,5 +466,3 @@ IFACEMETHODIMP UIAWindowProvider::get_CanRotate(BOOL* pRetVal)
 }
 
 }
-
-#endif

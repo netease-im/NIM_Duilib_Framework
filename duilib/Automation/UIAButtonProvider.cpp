@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 
-#ifdef UIAUTOMATION_ENABLE
 namespace ui
 {
 
@@ -88,5 +87,3 @@ IFACEMETHODIMP UIAButtonProvider::Invoke(void)
 }
 
 }
-
-#endif

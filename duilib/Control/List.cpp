@@ -19,7 +19,6 @@ std::wstring ListBox::GetType() const
 	return DUI_CTR_LISTBOX;
 }
 
-#ifdef UIAUTOMATION_ENABLE
 UIAControlProvider* ListBox::GetUIAProvider()
 {
 	if (m_pUIAProvider == nullptr)
@@ -28,7 +27,6 @@ UIAControlProvider* ListBox::GetUIAProvider()
 	}
 	return m_pUIAProvider;
 }
-#endif
 
 void ListBox::SetAttribute(const std::wstring& strName, const std::wstring& strValue)
 {
@@ -418,7 +416,6 @@ std::wstring ListContainerElement::GetType() const
 	return DUI_CTR_LISTCONTAINERELEMENT;
 }
 
-#ifdef UIAUTOMATION_ENABLE
 UIAControlProvider* ListContainerElement::GetUIAProvider()
 {
 	if (m_pUIAProvider == nullptr)
@@ -427,7 +424,6 @@ UIAControlProvider* ListContainerElement::GetUIAProvider()
 	}
 	return m_pUIAProvider;
 }
-#endif
 
 void ListContainerElement::SetVisible(bool bVisible)
 {

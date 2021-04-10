@@ -42,9 +42,7 @@ public:
 
 	/// 重写父类方法，提供个性化功能，请参考父类声明
 	virtual std::wstring GetType() const override;
-#ifdef UIAUTOMATION_ENABLE
 	virtual UIAControlProvider* GetUIAProvider() override;
-#endif
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 	virtual void HandleMessage(EventArgs& event) override;	
 	virtual void HandleMessageTemplate(EventArgs& event) override;
@@ -192,9 +190,7 @@ public:
 
 	/// 重写父类方法，提供个性化功能，请参考父类声明
 	virtual std::wstring GetType() const override;
-#ifdef UIAUTOMATION_ENABLE
 	virtual UIAControlProvider* GetUIAProvider() override;
-#endif
 	virtual void SetVisible(bool bVisible = true) override;
 	virtual void Selected(bool bSelect, bool trigger) override;
 	virtual void HandleMessage(EventArgs& event) override;

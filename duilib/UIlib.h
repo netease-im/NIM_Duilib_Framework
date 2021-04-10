@@ -76,10 +76,8 @@
 #include <queue>
 #include <functional>
 
-#ifdef UIAUTOMATION_ENABLE
 #include <UIAutomation.h>
 #include <UIAutomationCoreApi.h>
-#endif
 
 #include "Utils/Macros.h"
 #include "Utils/Utils.h"
@@ -107,7 +105,6 @@
 #include "Render/Path.h"
 #include "Render/Factory.h"
 
-#ifdef UIAUTOMATION_ENABLE
 #include "Automation/UIAWindowProvider.h"
 #include "Automation/UIAControlProvider.h"
 #include "Automation/UIAScrollBarProvider.h"
@@ -122,7 +119,6 @@
 #include "Automation/UIAListBoxProvider.h"
 #include "Automation/UIAListBoxItemProvider.h"
 #include "Automation/UIATreeNodeProvider.h"
-#endif
 
 
 #include "Core/Define.h"

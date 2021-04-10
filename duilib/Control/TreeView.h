@@ -18,9 +18,7 @@ public:
 
 	/// 重写父类方法，提供个性化功能，请参考父类声明
 	virtual std::wstring GetType() const override;
-#ifdef UIAUTOMATION_ENABLE
 	virtual UIAControlProvider* GetUIAProvider() override;
-#endif
 	virtual bool IsVisible() const override;
 	virtual void SetInternVisible(bool bVisible) override;
 	virtual void SetWindow(Window* pManager, Box* pParent, bool bInit = true) override;

@@ -2172,7 +2172,6 @@ std::wstring RichEdit::GetType() const
 	return DUI_CTR_RICHEDIT;
 }
 
-#ifdef UIAUTOMATION_ENABLE
 UIAControlProvider* RichEdit::GetUIAProvider()
 {
 	if (m_pUIAProvider == nullptr)
@@ -2181,7 +2180,6 @@ UIAControlProvider* RichEdit::GetUIAProvider()
 	}
 	return m_pUIAProvider;
 }
-#endif
 
 void RichEdit::DoInit()
 {
@@ -3165,7 +3163,6 @@ void RichEdit::ClearImageCache()
 
 void RichEdit::RaiseUIAValueEvent(const std::wstring oldText, const std::wstring newText)
 {
-#ifdef UIAUTOMATION_ENABLE
 	if (m_pUIAProvider != nullptr && UiaClientsAreListening()) {
 		VARIANT vtOld = { 0 }, vtNew = { 0 };
 		vtOld.vt = vtNew.vt = VT_BSTR;
@@ -3174,7 +3171,6 @@ void RichEdit::RaiseUIAValueEvent(const std::wstring oldText, const std::wstring
 
 		UiaRaiseAutomationPropertyChangedEvent(m_pUIAProvider, UIA_ValueValuePropertyId, vtOld, vtNew);
 	}
-#endif
 }
 
 //----------------下面函数用作辅助 字节数限制

@@ -13,9 +13,7 @@ public:
 
 	/// 重写父类方法，提供个性化功能，请参考父类声明
 	virtual std::wstring GetType() const override;
-#ifdef UIAUTOMATION_ENABLE
 	virtual UIAControlProvider* GetUIAProvider() override;
-#endif
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 	virtual void PaintStatusImage(IRenderContext* pRender) override;
 	virtual void ClearImageCache() override;

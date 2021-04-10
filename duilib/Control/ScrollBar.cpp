@@ -56,7 +56,6 @@ std::wstring ScrollBar::GetType() const
 	return DUI_CTR_SCROLLBAR;
 }
 
-#ifdef UIAUTOMATION_ENABLE
 UIAControlProvider* ScrollBar::GetUIAProvider()
 {
 	if (m_pUIAProvider == nullptr)
@@ -65,7 +64,6 @@ UIAControlProvider* ScrollBar::GetUIAProvider()
 	}
 	return m_pUIAProvider;
 }
-#endif
 
 void ScrollBar::SetEnabled(bool bEnable)
 {

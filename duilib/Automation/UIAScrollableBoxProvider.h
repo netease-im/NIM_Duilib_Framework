@@ -1,4 +1,3 @@
-#ifdef UIAUTOMATION_ENABLE
 #ifndef UI_AUTOMATION_UIA_SCROLLABLEBOX_PROVIDER_H_
 #define UI_AUTOMATION_UIA_SCROLLABLEBOX_PROVIDER_H_
 
@@ -35,5 +34,4 @@ protected:
 
 }
 
-#endif
 #endif

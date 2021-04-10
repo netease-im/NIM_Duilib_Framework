@@ -17,9 +17,7 @@ public:
 	}
 };
 
-#ifdef UIAUTOMATION_ENABLE
 class UIAControlProvider;
-#endif
 
 class UILIB_API Control : public PlaceHolder
 {
@@ -568,13 +566,11 @@ public:
 	 */
 	virtual bool IsPointInWithScrollOffset(const CPoint& point) const;
 
-#ifdef UIAUTOMATION_ENABLE
 	/**
 	 * @brief Get ui automation provider 
 	 * @return nullptr or pointer
 	 */
 	virtual UIAControlProvider* GetUIAProvider();
-#endif
 
 	// 消息处理
 	/**
@@ -1006,9 +1002,7 @@ protected:
 	AnimationManager m_animationManager;
 	nbase::WeakCallbackFlag m_loadBkImageWeakFlag;
 	static const int m_nVirtualEventGifStop;
-#ifdef UIAUTOMATION_ENABLE
 	UIAControlProvider* m_pUIAProvider;
-#endif
 };
 
 } // namespace ui

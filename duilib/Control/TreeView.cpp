@@ -20,7 +20,6 @@ std::wstring TreeNode::GetType() const
 	return DUI_CTR_TREENODE;
 }
 
-#ifdef UIAUTOMATION_ENABLE
 UIAControlProvider* TreeNode::GetUIAProvider()
 {
 	if (m_pUIAProvider == nullptr)
@@ -29,7 +28,6 @@ UIAControlProvider* TreeNode::GetUIAProvider()
 	}
 	return m_pUIAProvider;
 }
-#endif
 
 void TreeNode::SetTreeView(TreeView* pTreeView)
 {

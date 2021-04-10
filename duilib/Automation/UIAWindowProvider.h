@@ -1,4 +1,3 @@
-#ifdef UIAUTOMATION_ENABLE
 #ifndef UI_AUTOMATION_UIAWINDOWPROVIDER_H_
 #define UI_AUTOMATION_UIAWINDOWPROVIDER_H_
 
@@ -78,5 +77,4 @@ private:
 }
 
 
-#endif
 #endif
