@@ -45,18 +45,18 @@ void GlobalManager::Startup(const std::wstring& strResourcePath, const CreateCon
 	GlobalManager::SetResourcePath(strResourcePath + theme);
 	m_createControlCallback = callback;
 
-    // 閫傞厤DPI
+    // 适配DPI
 	if (bAdaptDpi) {
 		DpiManager::GetInstance()->SetAdaptDPI();
 		DpiManager::GetInstance()->SetScale(DpiManager::GetMainMonitorDPI());
 	}
 
-    // 瑙ｆ瀽鍏ㄥ眬璧勬簮淇℃伅
+    // 解析全局资源信息
 	LoadGlobalResource();
 
 	SetLanguagePath(strResourcePath + language);
 
-    // 鍔犺浇澶氳瑷�鏂囦欢锛屽鏋滀娇鐢ㄤ簡璧勬簮鍘嬬缉鍖呭垯浠庡唴瀛樹腑鍔犺浇璇█鏂囦欢
+    // 加载多语言文件，如果使用了资源压缩包则从内存中加载语言文件
 	if (g_hzip) {
 		HGLOBAL hGlobal = GetZipData(GetLanguagePath() + L"\\" + kLanguageFileName);
 		if (hGlobal) {
@@ -374,7 +374,7 @@ HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& 
 	static bool bOsOverXp = IsWindowsVistaOrGreater();
 	std::wstring fontName = strFontName;
 	if (fontName == L"system") {
-		fontName = bOsOverXp ? L"微锟斤拷锟脚猴拷" : L"锟斤拷锟斤拷锟斤拷";
+    fontName = bOsOverXp ? L"微软雅黑" : L"新宋体";
 	}
 
 	LOGFONT lf = { 0 };
@@ -817,10 +817,10 @@ bool GlobalManager::ImageCacheKeyCompare::operator()(const std::wstring& key1, c
 	LPCWSTR pStr1End = pStr1Begin + nLen1;
 	LPCWSTR pStr2End = pStr2Begin + nLen2;
 
-    // 閫嗗悜姣旇緝
+    // 逆向比较
 	while (--pStr1End >= pStr1Begin && --pStr2End >= pStr2Begin && *pStr1End == *pStr2End);
 
-    // 涓や釜涓查兘宸茬粡姣斿厜浜嗭紝閭ｄ箞鑲畾鐩哥瓑锛岃繑鍥瀎alse
+    // 两个串都已经比光了，那么肯定相等，返回false
 	if (pStr1End < pStr1Begin) {
 		return false;
 	}
