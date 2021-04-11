@@ -2845,6 +2845,7 @@ void RichEdit::SetAttribute(const std::wstring& strName, const std::wstring& str
 	else if (strName == _T("wantreturnmsg")) SetNeedReturnMsg(strValue == _T("true"));
 	else if (strName == _T("returnmsgwantctrl")) SetReturnMsgWantCtrl(strValue == _T("true"));
 	else if (strName == _T("rich")) SetRich(strValue == _T("true"));
+	else if (strName == _T("maxchar")) SetLimitText(_ttoi(strValue.c_str()));
 	else Box::SetAttribute(strName, strValue);
 }
 
