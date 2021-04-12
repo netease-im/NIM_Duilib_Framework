@@ -2362,7 +2362,7 @@ UINT RichEdit::GetControlFlags() const
 void RichEdit::HandleMessage(EventArgs& event)
 {
 	if ((!IsMouseEnabled() && event.Type > kEventMouseBegin && event.Type < kEventMouseEnd) ||
-		(!IsEnabled())){
+		(!IsEnabled()&&!IsReadOnly())){
 		if (m_pParent != NULL) m_pParent->HandleMessageTemplate(event);
 		else Control::HandleMessage(event);
 		return;
@@ -2480,11 +2480,11 @@ void RichEdit::OnSetCursor(EventArgs& event)
 		::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_HAND)));
 		return;
 	}
-	if (m_pTwh && m_pTwh->DoSetCursor(NULL, &event.ptMouse)) {
+	if (m_pTwh && !IsReadOnly() && m_pTwh->DoSetCursor(NULL, &event.ptMouse)) {
 		return;
 	}
 	else {
-		::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_IBEAM)));
+		::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IsReadOnly() ? IDC_ARROW : IDC_IBEAM)));
 	}
 }
 
