@@ -3135,6 +3135,20 @@ void RichEdit::AddLinkInfo(const CHARRANGE cr, const std::wstring &linkInfo)
 	m_linkInfo.push_back(info);
 }
 
+void RichEdit::AddLinkInfoEx(const CHARRANGE cr, const std::wstring& linkInfo)
+{
+	CHARFORMAT2 cf2;
+	ZeroMemory(&cf2, sizeof(CHARFORMAT2));
+	cf2.cbSize = sizeof(CHARFORMAT2);
+	cf2.dwMask = CFM_LINK;
+	cf2.dwEffects |= CFE_LINK;
+
+	SetSel(cr.cpMin, cr.cpMax);
+	SetSelectionCharFormat(cf2);
+
+	AddLinkInfo(cr, linkInfo);
+}
+
 //根据point来hittest自定义link的数据，返回true表示在link上，info是link的自定义属性
 bool RichEdit::HittestCustomLink(CPoint pt, std::wstring& info)
 {

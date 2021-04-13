@@ -894,6 +894,15 @@ public:
 	void AddLinkInfo(const CHARRANGE cr, const std::wstring &linkInfo);
 
 	/**
+	 * @brief 添加一个范围用于 hittest 判断是否是链接信息,并将该范围内文字样式改为系统链接样式
+	 * @param[in] str 文字内容
+	 * @param[in] cr 范围的起始位置和结束位置
+	 * @param[in] linkInfo 自定义 link 属性
+	 * @return 无
+	 */
+	void AddLinkInfoEx(const CHARRANGE cr, const std::wstring& linkInfo);
+
+	/**
 	 * @brief 根据point来hittest自定义link的数据
 	 * @param[in] pt 位置信息
 	 * @param[in] info 表示 link 的自定义属性
