@@ -1333,7 +1333,8 @@ bool Control::DrawImage(IRenderContext* pRender, Image& duiImage, const std::wst
 		int iFade = nFade == DUI_NOSET_VALUE ? newImageAttribute.bFade : nFade;
 		ImageInfo* imageInfo = duiImage.imageCache.get();
 		pRender->DrawImage(m_rcPaint, duiImage.GetCurrentHBitmap(), imageInfo->IsAlpha(),
-			rcNewDest, rcNewSource, newImageAttribute.rcCorner, imageInfo->IsSvg(), iFade, newImageAttribute.bTiledX, newImageAttribute.bTiledY);
+			rcNewDest, rcNewSource, newImageAttribute.rcCorner, imageInfo->IsSvg(), iFade,
+			newImageAttribute.bTiledX, newImageAttribute.bTiledY, newImageAttribute.bFullTiledX, newImageAttribute.bFullTiledY);
 	}
 
 	return true;
