@@ -187,6 +187,7 @@ void ImageAttribute::Init()
 	bFullTiledX = true;
 	bTiledY = false;
 	bFullTiledY = true;
+	nTiledMargin = 0;
 	rcDest.left = rcDest.top = rcDest.right = rcDest.bottom = DUI_NOSET_VALUE;
 	rcSource.left = rcSource.top = rcSource.right = rcSource.bottom = DUI_NOSET_VALUE;
 	rcCorner.left = rcCorner.top = rcCorner.right = rcCorner.bottom = 0;
@@ -272,6 +273,9 @@ void ImageAttribute::ModifyAttribute(ImageAttribute& imageAttribute, const std::
 			}
 			else if (sItem == _T("fullytiled")) {
 				imageAttribute.bFullTiledY = (_tcscmp(sValue.c_str(), _T("true")) == 0);
+			}
+			else if (sItem == _T("tiledmargin")) {
+				imageAttribute.nTiledMargin = _tcstol(sValue.c_str(), &pstr, 10); ASSERT(pstr);
 			}
 			else if (sItem == _T("playcount"))
 			{

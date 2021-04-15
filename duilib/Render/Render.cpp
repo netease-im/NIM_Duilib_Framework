@@ -212,7 +212,7 @@ bool RenderContext_GdiPlus::AlphaBlend(int xDest, int yDest, int widthDest, int 
 void RenderContext_GdiPlus::DrawImage(const UiRect& rcPaint, HBITMAP hBitmap, bool bAlphaChannel,
 	const UiRect& rcImageDest, const UiRect& rcImageSource, UiRect rcCorners, bool bBitmapDpiScale, 
 	BYTE uFade /*= 255*/, bool xtiled /*= false*/, bool ytiled /*= false*/,
-	bool fullxtiled /*= true*/, bool fullytiled /*= true*/)
+	bool fullxtiled /*= true*/, bool fullytiled /*= true*/, int nTiledMargin /*=0*/)
 {
 	UiRect rcTestTemp;
 	if (!::IntersectRect(&rcTestTemp, &rcImageDest, &rcPaint)) return;
@@ -306,12 +306,12 @@ void RenderContext_GdiPlus::DrawImage(const UiRect& rcPaint, HBITMAP hBitmap, bo
 			LONG lHeight = rcImageSource.bottom - rcImageSource.top - rcCorners.top - rcCorners.bottom;
 			int iTimes = 0;
 			if(fullytiled)
-				iTimes = (rcDest.bottom - rcDest.top + lHeight - 1) / lHeight;
+				iTimes = (rcDest.bottom - rcDest.top + lHeight + nTiledMargin - 1) / (lHeight + nTiledMargin);
 			else
-				iTimes = (rcDest.bottom - rcDest.top) / lHeight;
+				iTimes = (rcDest.bottom - rcDest.top + nTiledMargin) / (lHeight + nTiledMargin);
 
 			for (int i = 0; i < iTimes; ++i) {
-				LONG lDestTop = rcPaint.top + lHeight*i;
+				LONG lDestTop = rcPaint.top + lHeight*i + i*nTiledMargin;
 				LONG lDestBottom = lDestTop + lHeight;
 				LONG lDrawHeight = lHeight;
 				if (lDestBottom > rcPaint.bottom) {
