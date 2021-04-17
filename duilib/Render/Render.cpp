@@ -615,7 +615,14 @@ void RenderContext_GdiPlus::DrawText(const UiRect& rc, const std::wstring& strTe
 		stringFormat.SetLineAlignment(Gdiplus::StringAlignmentNear);
 	}
 
+	// try to fix font issue
+#if 1
+	graphics.SetSmoothingMode(Gdiplus::SmoothingModeHighQuality);
+	graphics.SetInterpolationMode(Gdiplus::InterpolationModeHighQualityBicubic);
+	graphics.SetTextRenderingHint(Gdiplus::TextRenderingHintSystemDefault);
+#else
 	graphics.SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAlias);
+#endif
 	graphics.DrawString(strText.c_str(), (int)strText.length(), &font, rcPaint, &stringFormat, &tBrush);
 }
 
