@@ -824,13 +824,13 @@ void Control::HandleMessage(EventArgs& msg)
 			ASSERT(FALSE);
 		}
 	}
-	else if (msg.Type == kEventInternalSetFocus && m_uButtonState != kControlStateDisabled) {
+	else if (msg.Type == kEventInternalSetFocus && m_uButtonState == kControlStateNormal) {
 		SetState(kControlStateHot);
 		m_bFocused = true;
 		Invalidate();
 		return;
 	}
-	else if (msg.Type == kEventInternalKillFocus && m_uButtonState != kControlStateDisabled) {
+	else if (msg.Type == kEventInternalKillFocus && m_uButtonState == kControlStateHot) {
 		SetState(kControlStateNormal);
 		m_bFocused = false;
 		Invalidate();
