@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="370,190" caption="0,0,0,35">
+  <VBox bkcolor="bk_wnd_darkcolor" width="370" height="190">
+    <HBox width="stretch" height="35" bkcolor="bk_wnd_lightcolor">
+      <Control width="auto" height="auto" bkimage="logo_18x18.png" valign="center" margin="8"/>
+      <Label text="Controls" valign="center" margin="8"/>
+      <Control />
+      <Button class="btn_wnd_close" name="closebtn" margin="4,6,8,0"/>
+    </HBox>
+    <Box>
+      <VBox margin="0,0,0,0" valign="center" halign="center" width="auto" height="auto">
+        <Label name="tooltip" text="NetEase IM Duilib controls example."/>
+        <Label name="link" width="stretch" text="https://yunxin.163.com/" normaltextcolor="blue" align="center" cursortype="hand" margin="0,8"/>
+      </VBox>
+    </Box>
+  </VBox>
+</Window>

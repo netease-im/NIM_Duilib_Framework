@@ -595,6 +595,7 @@ void CMarkup::_ParseMetaChar(LPTSTR& pstrText, LPTSTR& pstrDest)
 bool CMarkup::_Failed(LPCTSTR pstrError, LPCTSTR pstrLocation)
 {
     // Register last error
+	ASSERT(false);
     TRACE(_T("XML Error: %s"), pstrError);
     if( pstrLocation != NULL ) TRACE(pstrLocation);
     _tcsncpy(m_szErrorMsg, pstrError, (sizeof(m_szErrorMsg) / sizeof(m_szErrorMsg[0])) - 1);

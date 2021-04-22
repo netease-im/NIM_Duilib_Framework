@@ -334,6 +334,14 @@ void Box::HandleMessageTemplate(EventArgs& msg)
 	}
 }
 
+void Box::SetReceivePointerMsg(bool bRecv)
+{
+	__super::SetReceivePointerMsg(bRecv);
+	for (auto it = m_items.begin(); it != m_items.end(); it++) {
+		(*it)->SetReceivePointerMsg(bRecv);
+	}
+}
+
 void Box::PaintChild(IRenderContext* pRender, const UiRect& rcPaint)
 {
 	UiRect rcTemp;
@@ -623,6 +631,16 @@ void Box::RemoveAll()
 	Arrange();
 }
 
+bool Box::HasItem(Control* pControl) const
+{
+	for (auto it = m_items.begin(); it != m_items.end(); it++) {
+		if (*it == pControl) {
+			return true;
+		}
+	}
+	return false;
+}
+
 void Box::SwapChild(Control* pChild1, Control* pChild2)
 {
 	ASSERT(std::find(m_items.begin(), m_items.end(), pChild1) != m_items.end());
@@ -664,7 +682,7 @@ bool Box::IsAutoDestroy() const
 	return m_bAutoDestroy;
 }
 
-void Box::SetAutoDestroy(bool bAuto)
+void Box::SetAutoDestroyChild(bool bAuto)
 {
 	m_bAutoDestroy = bAuto;
 }
@@ -694,9 +712,10 @@ Layout* Box::GetLayout() const
 	return m_pLayout.get();
 }
 
-void Box::RetSetLayout(Layout* pLayout)
+void Box::ReSetLayout(Layout* pLayout)
 {
 	m_pLayout.reset(pLayout);
+	m_pLayout->SetOwner(this);
 }
 
 UiRect Box::GetPaddingPos() const
@@ -740,6 +759,14 @@ UINT Box::GetControlFlags() const
 	return UIFLAG_DEFAULT; // Box 默认不支持 TAB 切换焦点
 }
 
+void Box::DetachBubbledEvent(EventType eventType)
+{
+    auto event = OnBubbledEvent.find(eventType);
+    if (event != OnBubbledEvent.end())
+    {
+        OnBubbledEvent.erase(eventType);
+    }
+}
 /////////////////////////////////////////////////////////////////////////////////////
 //
 //
@@ -752,6 +779,7 @@ ScrollableBox::ScrollableBox(Layout* pLayout) :
     m_nHerScrollUnitPixels(30),
 	m_bScrollProcess(false),
 	m_bScrollBarFloat(true),
+	m_bVScrollBarLeftPos(false),
 	m_bHoldEnd(false),
 	m_bDefaultDisplayScrollbar(true),
 	m_rcScrollBarPadding(),
@@ -768,6 +796,7 @@ ScrollableBox::ScrollableBox(const ScrollableBox& r):
 	m_nHerScrollUnitPixels(r.m_nHerScrollUnitPixels),
 	m_bScrollProcess(r.m_bScrollProcess),
 	m_bScrollBarFloat(r.m_bScrollBarFloat),
+	m_bVScrollBarLeftPos(r.m_bVScrollBarLeftPos),
 	m_bHoldEnd(r.m_bHoldEnd),
 	m_bDefaultDisplayScrollbar(r.m_bDefaultDisplayScrollbar),
 	m_rcScrollBarPadding(r.m_rcScrollBarPadding),
@@ -807,8 +836,9 @@ void ScrollableBox::SetAttribute(const std::wstring& pstrName, const std::wstrin
 		SetScrollBarPadding(rcScrollbarPadding);
 	}
 	else if( pstrName == _T("vscrollunit") ) SetVerScrollUnitPixels(_ttoi(pstrValue.c_str()));
-    else if (pstrName == _T("hscrollunit")) SetHorScrollUnitPixels(_ttoi(pstrValue.c_str()));
-	else if( pstrName == _T("scrollbarfloat") ) SetScrollBarFloat(pstrValue == _T("true"));
+	else if (pstrName == _T("hscrollunit")) SetHorScrollUnitPixels(_ttoi(pstrValue.c_str()));
+	else if (pstrName == _T("scrollbarfloat")) SetScrollBarFloat(pstrValue == _T("true"));
+	else if (pstrName == _T("vscrollbarleft")) SetVScrollBarLeftPos(pstrValue == _T("true"));
 	else if( pstrName == _T("defaultdisplayscrollbar") ) SetDefaultDisplayScrollbar(pstrValue == _T("true"));
 	else if( pstrName == _T("holdend") ) SetHoldEnd(pstrValue == _T("true"));
 	else Box::SetAttribute(pstrName, pstrValue);
@@ -839,6 +869,7 @@ void ScrollableBox::SetPosInternally(UiRect rc)
 	ProcessVScrollBar(rcRaw, requiredSize.cy);
 	ProcessHScrollBar(rcRaw, requiredSize.cx);
 }
+
 CSize ScrollableBox::CalcRequiredSize(const UiRect& rc)
 {
 	CSize requiredSize;
@@ -849,7 +880,10 @@ CSize ScrollableBox::CalcRequiredSize(const UiRect& rc)
 	else {
 		UiRect childSize = rc;
 		if (!m_bScrollBarFloat && m_pVerticalScrollBar && m_pVerticalScrollBar->IsValid()) {
-			childSize.right -= m_pVerticalScrollBar->GetFixedWidth();
+			if (m_bVScrollBarLeftPos)
+				childSize.left += m_pVerticalScrollBar->GetFixedWidth();
+			else
+				childSize.right -= m_pVerticalScrollBar->GetFixedWidth();
 		}
 		if (!m_bScrollBarFloat && m_pHorizontalScrollBar && m_pHorizontalScrollBar->IsValid()) {
 			childSize.bottom -= m_pHorizontalScrollBar->GetFixedHeight();
@@ -858,6 +892,7 @@ CSize ScrollableBox::CalcRequiredSize(const UiRect& rc)
 	}
 	return requiredSize;
 }
+
 void ScrollableBox::HandleMessage(EventArgs& event)
 {
 	if( !IsMouseEnabled() && event.Type > kEventMouseBegin && event.Type < kEventMouseEnd ) {
@@ -1131,22 +1166,22 @@ void ScrollableBox::SetScrollPos(CSize szPos)
 	LoadImageCache(cy > 0);
 	Invalidate();
 	if( m_pWindow != NULL )	{
-		m_pWindow->SendNotify(this, kEventScrollChange);
+		m_pWindow->SendNotify(this, kEventScrollChange, (cy == 0) ? 0 : 1, (cx == 0) ? 0 : 1);
 	}
 }
 
 void ScrollableBox::LoadImageCache(bool bFromTopLeft)
 {
 	CSize scrollPos = GetScrollPos();
+	UiRect rcImageCachePos = GetPos();
+	rcImageCachePos.Offset(scrollPos.cx, scrollPos.cy);
+	rcImageCachePos.Offset(GetRenderOffset().x, GetRenderOffset().y);
+	rcImageCachePos.Inflate(UiRect(0, 730, 0, 730));
 
-	auto forEach = [this, scrollPos](ui::Control* pControl) {
+	auto forEach = [this, scrollPos, rcImageCachePos](ui::Control* pControl) {
 		if (!pControl->IsVisible()) return;
 		if (pControl->IsFloat()) return;
 		UiRect rcTemp;
-		UiRect rcImageCachePos = GetPos();
-		rcImageCachePos.Offset(scrollPos.cx, scrollPos.cy);
-		rcImageCachePos.Offset(GetRenderOffset().x, GetRenderOffset().y);
-		rcImageCachePos.Inflate(UiRect(0, 730, 0, 730));
 		UiRect controlPos = pControl->GetPos();
 		if (!::IntersectRect(&rcTemp, &rcImageCachePos, &controlPos)) {
 			pControl->UnLoadImageCache();
@@ -1517,8 +1552,14 @@ void ScrollableBox::ProcessVScrollBar(UiRect rc, int cyRequired)
 		SetPos(m_rcItem);
 	}
 	else {
-		UiRect rcVerScrollBarPos(rcScrollBarPos.right - m_pVerticalScrollBar->GetFixedWidth(), rcScrollBarPos.top, rcScrollBarPos.right, rcScrollBarPos.bottom);
-		m_pVerticalScrollBar->SetPos(rcVerScrollBarPos);
+		if (m_bVScrollBarLeftPos) {
+			UiRect rcVerScrollBarPos(rcScrollBarPos.left, rcScrollBarPos.top, rcScrollBarPos.left + m_pVerticalScrollBar->GetFixedWidth(), rcScrollBarPos.bottom);
+			m_pVerticalScrollBar->SetPos(rcVerScrollBarPos);
+		}
+		else {
+			UiRect rcVerScrollBarPos(rcScrollBarPos.right - m_pVerticalScrollBar->GetFixedWidth(), rcScrollBarPos.top, rcScrollBarPos.right, rcScrollBarPos.bottom);
+			m_pVerticalScrollBar->SetPos(rcVerScrollBarPos);
+		}
 
 		if( m_pVerticalScrollBar->GetScrollRange() != cyScroll ) {
 			int iScrollPos = m_pVerticalScrollBar->GetScrollPos();
@@ -1673,6 +1714,16 @@ bool ScrollableBox::GetScrollBarFloat() const
 void ScrollableBox::SetScrollBarFloat(bool bScrollBarFloat)
 {
 	m_bScrollBarFloat = bScrollBarFloat;
+}
+
+bool ScrollableBox::GetVScrollBarLeftPos() const
+{
+	return m_bVScrollBarLeftPos;
+}
+
+void ScrollableBox::SetVScrollBarLeftPos(bool bLeftPos)
+{
+	m_bVScrollBarLeftPos = bLeftPos;
 }
 
 ui::UiRect ScrollableBox::GetScrollBarPadding() const

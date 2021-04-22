@@ -94,7 +94,7 @@ public:
 	 * @param[in] pControl 子项指针
 	 * @return 成功返回 true，失败返回 false
 	 */
-	bool Add(Control* pControl);
+	virtual bool Add(Control* pControl) override;
 
 	/**
 	 * @brief 在指定位置之后插入一个子项
@@ -102,27 +102,27 @@ public:
 	 * @param[in] iIndex 要插入的位置索引
 	 * @return 成功返回 true，失败返回 false
 	 */
-    bool AddAt(Control* pControl, int iIndex);
+    virtual bool AddAt(Control* pControl, std::size_t  iIndex) override;
 
 	/**
 	 * @brief 根据子项指针
 	 * @param[in] pControl 子项指针
 	 * @return 成功返回 true，失败返回 false
 	 */
-    bool Remove(Control* pControl);
+    virtual bool Remove(Control* pControl) override;
 
 	/**
 	 * @brief 根据索引移除一个子项
 	 * @param[in] iIndex 子项索引
 	 * @return 成功返回 true，失败返回 false
 	 */
-    bool RemoveAt(int iIndex);
+    virtual bool RemoveAt(std::size_t  iIndex) override;
 
 	/**
 	 * @brief 移除所有子项
 	 * @return 无
 	 */
-    void RemoveAll();
+    virtual void RemoveAll() override;
 
 	/**
 	 * @brief 排列子项
@@ -168,7 +168,7 @@ public:
 	 * @return 无
 	 */
 	void SelectNextWhenActiveRemoved(bool bSelectNextItem);
-private:
+protected:
 	bool m_bScrollSelect;
     int m_iCurSel;
 	bool m_bSelNextWhenRemoveActive;

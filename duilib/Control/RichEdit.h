@@ -133,10 +133,11 @@ public:
 	 * @param[in] nSize 字体大小
 	 * @param[in] bBold 是否粗体显示
 	 * @param[in] bUnderline 是否带有下划线
+	 * @param[in] bStrikeout 是否带有删除线
 	 * @param[in] bItalic 是否斜体显示
 	 * @return 无
 	 */
-    void SetFont(const std::wstring& pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+	void SetFont(const std::wstring& pStrFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic);
 
 	/**
 	 * @brief 获取窗口样式
@@ -170,6 +171,7 @@ public:
 	 * @return 返回当前文本颜色
 	 */
 	std::wstring GetTextColor();
+	DWORD GetTextColorValue();
 
 	/**
 	 * @brief 获取限制字符数量
@@ -597,6 +599,8 @@ public:
     virtual bool OnTxTextChanged();
 	ITextHost* GetTextHost();
 	ITextServices* GetTextServices();
+	HWND GetWindowHandle();
+	HDC GetWindowDC();
 	BOOL SetOleCallback(IRichEditOleCallback* pCallback);
 	CSize GetNaturalSize(LONG width, LONG height);
 	void SetImmStatus(BOOL bOpen);

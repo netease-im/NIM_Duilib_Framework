@@ -228,7 +228,7 @@ bool ReadFileToString(const PathString &filepath, std::string &out)
 		return false;
 
 	size_t file_size = (size_t)GetFileSize(filepath);
-	if (file_size > std::numeric_limits<size_t>::max()) //x64编译条件下，size_t的最大值转为int64_t会溢出，因此用无符号
+	if (file_size > (std::numeric_limits<size_t>::max)()) //x64编译条件下，size_t的最大值转为int64_t会溢出，因此用无符号
 		return false; // Too large
 
 	bool read_ok = true;

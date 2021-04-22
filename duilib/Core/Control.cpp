@@ -114,7 +114,7 @@ std::wstring Control::GetBkColor() const
 
 void Control::SetBkColor(const std::wstring& strColor)
 {
-	ASSERT(strColor.empty() || GlobalManager::GetTextColor(strColor) != 0);
+	ASSERT(strColor.empty() || this->GetWindowColor(strColor) != 0);
 	if( m_strBkColor == strColor ) return;
 
 	m_strBkColor = strColor;
@@ -128,7 +128,7 @@ std::wstring Control::GetStateColor(ControlStateType stateType)
 
 void Control::SetStateColor(ControlStateType stateType, const std::wstring& strColor)
 {
-	ASSERT(GlobalManager::GetTextColor(strColor) != 0);
+	ASSERT(this->GetWindowColor(strColor) != 0);
 	if( m_colorMap[stateType] == strColor ) return;
 
 	if (stateType == kControlStateHot) {
@@ -415,6 +415,26 @@ void Control::SetContextMenuUsed(bool bMenuUsed)
     m_bMenuUsed = bMenuUsed;
 }
 
+std::wstring Control::GetMenuPopup() const
+{
+	return m_sMenuPopup;
+}
+
+void Control::SetMenuPopup(const std::wstring& strPopup)
+{
+	m_sMenuPopup = strPopup;
+}
+
+std::wstring Control::GetMenuAlign() const
+{
+	return m_sMenuAlign;
+}
+
+void Control::SetMenuAlign(const std::wstring& strAlign)
+{
+	m_sMenuAlign = strAlign;
+}
+
 std::wstring Control::GetDataID() const
 {
     return m_sUserData;
@@ -663,12 +683,14 @@ CSize Control::EstimateSize(CSize szAvailable)
 			if (image->imageCache) {
 				if (GetFixedWidth() == DUI_LENGTH_AUTO) {
 					int image_width = image->imageCache->nX;
-					DpiManager::GetInstance()->ScaleInt(image_width);
+					if (!image->imageCache->IsSvg())
+						DpiManager::GetInstance()->ScaleInt(image_width);
 					imageSize.cx = image_width;
 				}
 				if (GetFixedHeight() == DUI_LENGTH_AUTO) {
 					int image_height = image->imageCache->nY;
-					DpiManager::GetInstance()->ScaleInt(image_height);
+					if (!image->imageCache->IsSvg())
+						DpiManager::GetInstance()->ScaleInt(image_height);
 					imageSize.cy = image_height;
 				}
 			}
@@ -802,18 +824,18 @@ void Control::HandleMessage(EventArgs& msg)
 			ASSERT(FALSE);
 		}
 	}
-	else if (msg.Type == kEventInternalSetFocus) {
+	else if (msg.Type == kEventInternalSetFocus && m_uButtonState == kControlStateNormal) {
 		SetState(kControlStateHot);
-        m_bFocused = true;
-        Invalidate();
+		m_bFocused = true;
+		Invalidate();
 		return;
-    }
-	else if (msg.Type == kEventInternalKillFocus) {
+	}
+	else if (msg.Type == kEventInternalKillFocus && m_uButtonState == kControlStateHot) {
 		SetState(kControlStateNormal);
-        m_bFocused = false;
-        Invalidate();
+		m_bFocused = false;
+		Invalidate();
 		return;
-    }
+	}
 	else if (msg.Type == kEventInternalMenu && IsEnabled()) {
         if( IsContextMenuUsed() ) {
             m_pWindow->SendNotify(this, kEventMouseMenu, msg.wParam, msg.lParam);
@@ -821,22 +843,24 @@ void Control::HandleMessage(EventArgs& msg)
         }
     }
 	else if( msg.Type == kEventMouseEnter ) {
-		if (msg.pSender != this && m_pWindow) {
+		if (m_pWindow) {
 			if (!IsChild(this, m_pWindow->GetNewHover())) {
 				return;
 			}
 		}
-		MouseEnter(msg);
+		if (!MouseEnter(msg))
+			return;
 	}
 	else if( msg.Type == kEventMouseLeave ) {
-		if (msg.pSender != this && m_pWindow) {
+		if (m_pWindow) {
 			if (IsChild(this, m_pWindow->GetNewHover())) {
 				return;
 			}
 		}
-		MouseLeave(msg);
+		if (!MouseLeave(msg))
+			return;
 	}
-	else if (msg.Type == kEventMouseButtonDown || msg.Type == kEventInternalDoubleClick) {
+	else if (msg.Type == kEventMouseButtonDown) {
 		ButtonDown(msg);
 		return;
 	}
@@ -850,6 +874,10 @@ void Control::HandleMessage(EventArgs& msg)
 	}
 	else if (msg.Type == kEventPointUp && m_bReceivePointerMsg) {
 		ButtonUp(msg);
+		return;
+	}
+	else if (msg.Type == kEventInternalDoubleClick) {
+		if (m_pWindow != NULL) m_pWindow->SendNotify(this, kEventMouseDoubleClick);
 		return;
 	}
 
@@ -873,9 +901,12 @@ bool Control::MouseEnter(EventArgs& msg)
 			}
 			return true;
 		}
+		else {
+			return false;
+		}
 	}
 
-	return false;
+	return true;
 }
 
 bool Control::MouseLeave(EventArgs& msg)
@@ -889,9 +920,12 @@ bool Control::MouseLeave(EventArgs& msg)
 			}
 			return true;
 		}
+		else {
+			return false;
+		}
 	}
 
-	return false;
+	return true;
 }
 
 bool Control::ButtonDown(EventArgs& msg)
@@ -1103,6 +1137,8 @@ void Control::SetAttribute(const std::wstring& strName, const std::wstring& strV
 	else if (strName == _T("tooltiptext")) SetToolTipText(strValue);
 	else if (strName == _T("tooltiptextid")) SetToolTipTextId(strValue);
 	else if (strName == _T("dataid")) SetDataID(strValue);
+	else if (strName == _T("menupopup")) SetMenuPopup(strValue);
+	else if (strName == _T("menualign")) SetMenuAlign(strValue);
 	else if (strName == _T("enabled")) SetEnabled(strValue == _T("true"));
 	else if (strName == _T("mouse")) SetMouseEnabled(strValue == _T("true"));
 	else if (strName == _T("keyboard")) SetKeyboardEnabled(strValue == _T("true"));
@@ -1210,11 +1246,7 @@ void Control::GetImage(Image& duiImage) const
 		return;
 	}
 	std::wstring sImageName = duiImage.imageAttribute.sImageName;
-	std::wstring imageFullPath = sImageName;
-	if (::PathIsRelative(sImageName.c_str())) {
-		imageFullPath = GlobalManager::GetResourcePath() + m_pWindow->GetWindowResourcePath() + sImageName;
-	}
-	imageFullPath = StringHelper::ReparsePath(imageFullPath);
+	std::wstring imageFullPath = GlobalManager::GetResPath(sImageName, m_pWindow->GetWindowResourcePath());
 
 	if (!duiImage.imageCache || duiImage.imageCache->sImageFullPath != imageFullPath) {
 		duiImage.imageCache = GlobalManager::GetImage(imageFullPath);
@@ -1263,7 +1295,7 @@ bool Control::DrawImage(IRenderContext* pRender, Image& duiImage, const std::wst
 		int iFade = nFade == DUI_NOSET_VALUE ? newImageAttribute.bFade : nFade;
 		ImageInfo* imageInfo = duiImage.imageCache.get();
 		pRender->DrawImage(m_rcPaint, duiImage.GetCurrentHBitmap(), imageInfo->IsAlpha(),
-			rcNewDest, rcNewSource, newImageAttribute.rcCorner, iFade, newImageAttribute.bTiledX, newImageAttribute.bTiledY);
+			rcNewDest, rcNewSource, newImageAttribute.rcCorner, imageInfo->IsSvg(), iFade, newImageAttribute.bTiledX, newImageAttribute.bTiledY);
 	}
 
 	return true;
@@ -1316,13 +1348,12 @@ void Control::AlphaPaint(IRenderContext* pRender, const UiRect& rcPaint)
 				AutoClip alphaClip(pCacheRender, rcClip, m_bClip);
 				AutoClip roundAlphaClip(pCacheRender, rcClip, m_cxyBorderRound.cx, m_cxyBorderRound.cy, bRoundClip);
 
-				bool bOldCanvasTrans = m_pWindow->SetRenderTransparent(true);
+				pCacheRender->SetRenderTransparent(true);
 				CPoint ptOffset(m_rcItem.left + m_renderOffset.x, m_rcItem.top + m_renderOffset.y);
 				CPoint ptOldOrg = pCacheRender->OffsetWindowOrg(ptOffset);
 				Paint(pCacheRender, m_rcItem);
-				PaintChild(pRender, rcPaint);
+				PaintChild(pCacheRender, rcPaint);
 				pCacheRender->SetWindowOrg(ptOldOrg);
-				m_pWindow->SetRenderTransparent(bOldCanvasTrans);
 				SetCacheDirty(false);
 			}
 
@@ -1348,12 +1379,11 @@ void Control::AlphaPaint(IRenderContext* pRender, const UiRect& rcPaint)
 				AutoClip alphaClip(pCacheRender, rcClip, m_bClip);
 				AutoClip roundAlphaClip(pCacheRender, rcClip, m_cxyBorderRound.cx, m_cxyBorderRound.cy, bRoundClip);
 
-				bool bOldCanvasTrans = m_pWindow->SetRenderTransparent(true);
+				pCacheRender->SetRenderTransparent(true);
 				CPoint ptOffset(m_rcItem.left + m_renderOffset.x, m_rcItem.top + m_renderOffset.y);
 				CPoint ptOldOrg = pCacheRender->OffsetWindowOrg(ptOffset);
 				Paint(pCacheRender, m_rcItem);
 				pCacheRender->SetWindowOrg(ptOldOrg);
-				m_pWindow->SetRenderTransparent(bOldCanvasTrans);
 				SetCacheDirty(false);
 			}
 
@@ -1390,7 +1420,7 @@ void Control::PaintBkColor(IRenderContext* pRender)
 		return;
 	}
 
-	DWORD dwBackColor = GlobalManager::GetTextColor(m_strBkColor);
+	DWORD dwBackColor = this->GetWindowColor(m_strBkColor);
 	if(dwBackColor != 0) {
 		if (dwBackColor >= 0xFF000000) pRender->DrawColor(m_rcPaint, dwBackColor);
 		else pRender->DrawColor(m_rcItem, dwBackColor);
@@ -1425,7 +1455,7 @@ void Control::PaintBorder(IRenderContext* pRender)
 	}
 	DWORD dwBorderColor = 0;
 	if (!m_strBorderColor.empty()) {
-		dwBorderColor = GlobalManager::GetTextColor(m_strBorderColor);
+		dwBorderColor = this->GetWindowColor(m_strBorderColor);
 	}
 
 	if (dwBorderColor != 0) {
@@ -1654,11 +1684,7 @@ void Control::InvokeLoadImageCache()
 	if (sImageName.empty()) {
 		return;
 	}
-	std::wstring imageFullPath = sImageName;
-	if (::PathIsRelative(sImageName.c_str())) {
-		imageFullPath = GlobalManager::GetResourcePath() + m_pWindow->GetWindowResourcePath() + sImageName;
-	}
-	imageFullPath = StringHelper::ReparsePath(imageFullPath);
+	std::wstring imageFullPath = GlobalManager::GetResPath(sImageName, m_pWindow->GetWindowResourcePath());
 
 	if (!m_bkImage.imageCache || m_bkImage.imageCache->sImageFullPath != imageFullPath) {
 		auto shared_image = GlobalManager::IsImageCached(imageFullPath);
@@ -1688,6 +1714,19 @@ void Control::DetachEvent(EventType type)
 	{
 		OnEvent.erase(event);
 	}
+}
+
+DWORD Control::GetWindowColor(const std::wstring& strName)
+{
+	DWORD color = 0;
+	if (m_pWindow)
+		color = m_pWindow->GetTextColor(strName);
+
+	if (color == 0)
+		color = GlobalManager::GetTextColor(strName);
+
+	ASSERT(color != 0);
+	return color;
 }
 
 } // namespace ui

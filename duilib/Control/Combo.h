@@ -31,6 +31,19 @@ public:
     std::wstring GetText() const;
 
 	/**
+	* @brief 获取文字边距
+	* @return 返回文字的边距信息
+	*/
+	UiRect GetTextPadding() const;
+
+	/**
+	* @brief 设置文字边距信息
+	* @param[in] rc 边距信息
+	* @return 无
+	*/
+	void SetTextPadding(UiRect rc);
+
+	/**
 	 * @brief 获取当前所属的 List 对象
 	 * @return 返回所属的 List 对象指针
 	 */
@@ -78,9 +91,10 @@ public:
 	/**
 	 * @brief 选择一个子项
 	 * @param[in] iIndex 要选择的子项索引
+	 * @param[in] bTrigger 是否触发选择事件
 	 * @return 返回 true 表示成功，否则为 false
 	 */
-	bool SelectItem(int iIndex);
+	void SelectItem(int iIndex, bool bTrigger = false);
 
 	/**
 	 * @brief 获取指定索引下的子项控件
@@ -106,7 +120,14 @@ public:
 	 * @param[in] callback 子项被选择后触发的回调函数
 	 * @return 无
 	 */
-	void AttachSelect(const EventCallback& callback) { m_pLayout->AttachSelect(callback); }
+	void AttachSelect(const EventCallback& callback) { OnEvent[kEventSelect] += callback;/*m_pLayout->AttachSelect(callback);*/ }	//mod by djj
+
+	/**
+	 * @brief 监听下拉窗关闭事件
+	 * @param[in] callback 下拉窗关闭后触发的回调函数
+	 * @return 无
+	 */
+	void AttachWindowClose(const EventCallback& callback) { OnEvent[kEventWindowClose] += callback; };
 
 private:
 	/**
@@ -116,14 +137,22 @@ private:
 	 */
 	bool OnSelectItem(EventArgs* args);
 
+	/**
+	 * @brief 选择一个子项
+	 * @param[in] iIndex 要选择的子项索引
+	 * @return 返回 true 表示成功，否则为 false
+	 */
+	bool SelectItemInternal(int iIndex);
+
 protected:
-    CComboWnd *m_pWindow;
+	CComboWnd *m_pWindow;
 	std::unique_ptr<ListBox> m_pLayout;
     int m_iCurSel;  
 	ControlStateType m_uButtonState;
 	CSize m_szDropBox;
 	std::wstring m_sDropBoxAttributes;
 	bool m_bPopupTop;
+	UiRect	m_rcTextPadding;	//add by djj
 };
 
 } // namespace ui

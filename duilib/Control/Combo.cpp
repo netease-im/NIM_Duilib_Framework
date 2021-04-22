@@ -1,4 +1,4 @@
-#include "StdAfx.h"
+ï»¿#include "StdAfx.h"
 
 namespace ui
 {
@@ -14,7 +14,7 @@ public:
 	void OnSeleteItem();
 
 private:
-    Combo *m_pOwner;
+    Combo *m_pOwner = nullptr;
     int m_iOldSel;
 	bool m_bClosing = false;
 };
@@ -29,9 +29,9 @@ void CComboWnd::Init(Combo* pOwner)
     CSize szDrop = m_pOwner->GetDropBoxSize();
     UiRect rcOwner = pOwner->GetPosWithScrollOffset();
     UiRect rc = rcOwner;
-    rc.top = rc.bottom + 1;		// ¸¸´°¿Úleft¡¢bottomÎ»ÖÃ×÷Îªµ¯³ö´°¿ÚÆðµã
-    rc.bottom = rc.top + szDrop.cy;	// ¼ÆËãµ¯³ö´°¿Ú¸ß¶È
-    if( szDrop.cx > 0 ) rc.right = rc.left + szDrop.cx;	// ¼ÆËãµ¯³ö´°¿Ú¿í¶È
+    rc.top = rc.bottom + 1;		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½leftï¿½ï¿½bottomÎ»ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    rc.bottom = rc.top + szDrop.cy;	// ï¿½ï¿½ï¿½ãµ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ú¸ß¶ï¿½
+    if( szDrop.cx > 0 ) rc.right = rc.left + szDrop.cx;	// ï¿½ï¿½ï¿½ãµ¯ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½
 
     CSize szAvailable(rc.right - rc.left, rc.bottom - rc.top);
     int cyFixed = 0;
@@ -41,7 +41,13 @@ void CComboWnd::Init(Combo* pOwner)
         CSize sz = pControl->EstimateSize(szAvailable);
         cyFixed += sz.cy;
     }
-    cyFixed += 2; // VBox Ä¬ÈÏµÄPadding µ÷Õû
+
+	int padding = 2;
+	auto listBox = m_pOwner->GetListBox();
+	if (listBox)
+		padding = listBox->GetLayout()->GetPadding().top + listBox->GetLayout()->GetPadding().bottom;
+
+	cyFixed += padding; // VBox Ä¬ï¿½Ïµï¿½Padding ï¿½ï¿½ï¿½ï¿½
     rc.bottom = rc.top + MIN(cyFixed, szDrop.cy);
 
     ::MapWindowRect(pOwner->GetWindow()->GetHWND(), HWND_DESKTOP, &rc);
@@ -75,9 +81,13 @@ std::wstring CComboWnd::GetWindowClassName() const
 
 void CComboWnd::OnFinalMessage(HWND hWnd)
 {
-    m_pOwner->m_pWindow = NULL;
-    m_pOwner->m_uButtonState = kControlStateNormal;
-    m_pOwner->Invalidate();
+	if (m_pOwner)
+	{
+		m_pOwner->m_pWindow = NULL;
+		m_pOwner->m_uButtonState = kControlStateNormal;
+		m_pOwner->Invalidate();
+	}
+	__super::OnFinalMessage(hWnd);
     delete this;
 }
 
@@ -91,11 +101,12 @@ LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
     if( uMsg == WM_CREATE ) {
         this->Window::Init(m_hWnd);
 		Box* pRoot = new Box;
-		pRoot->SetAutoDestroy(false);
+		pRoot->SetAutoDestroyChild(false);
 		pRoot->Add(m_pOwner->GetListBox());
 		this->AttachDialog(pRoot);
 		this->SetWindowResourcePath(m_pOwner->GetWindow()->GetWindowResourcePath());
 		this->SetShadowAttached(false);
+		this->SetRenderTransparent(true);
 
         return 0;
     }
@@ -108,7 +119,7 @@ LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		if (m_hWnd != (HWND)wParam)	{ 
 			m_bClosing = true;
 			PostMessage(WM_CLOSE);
-			m_pOwner->SelectItem(m_pOwner->GetListBox()->GetCurSel());
+			m_pOwner->SelectItemInternal(m_pOwner->GetListBox()->GetCurSel());
 			((Box*)this->GetRoot())->RemoveAt(0);
 			m_pOwner->GetListBox()->PlaceHolder::SetWindow(nullptr, nullptr, false);
 		}
@@ -132,7 +143,7 @@ LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 ////////////////////////////////////////////////////////
 
 Combo::Combo() :
-	m_pWindow(nullptr),
+    m_pWindow(nullptr),
 	m_iCurSel(-1),
 	m_szDropBox(0, 150),
 	m_uButtonState(kControlStateNormal),
@@ -144,8 +155,12 @@ Combo::Combo() :
 	// the items back to the righfull owner/manager when the window closes.
 	m_pLayout.reset(new ListBox(new VLayout));
 	m_pLayout->GetLayout()->SetPadding(UiRect(1, 1, 1, 1));
+	m_pLayout->SetBkColor(L"bk_wnd_lightcolor");
+	m_pLayout->SetBorderColor(L"combobox_border");
 	m_pLayout->SetBorderSize(UiRect(1, 1, 1, 1));
-	m_pLayout->SetAutoDestroy(false);
+	m_pLayout->SetBkColor(L"white");
+	m_pLayout->SetBorderColor(L"gray");
+	m_pLayout->SetAutoDestroyChild(false);
 	m_pLayout->EnableScrollBar();
 	m_pLayout->ApplyAttributeList(GetDropBoxAttributeList());
 	m_pLayout->AttachSelect(nbase::Bind(&Combo::OnSelectItem, this, std::placeholders::_1));
@@ -182,13 +197,20 @@ void Combo::RemoveAll()
 void Combo::Activate()
 {
     if( !IsActivatable() ) return;
-    if( m_pWindow ) return;
+	if (m_pWindow) return;
 
     m_pWindow = new CComboWnd();
     ASSERT(m_pWindow);
     m_pWindow->Init(this);
+	m_pWindow->AttachWindowClose(ToWeakCallback([this](ui::EventArgs* msg) {
+		auto callback = OnEvent.find(msg->Type);
+		if (callback != OnEvent.end()) {
+			callback->second(msg);
+		}
+		return true;
+	}));
 
-    if( m_pWindow != NULL ) m_pWindow->SendNotify(this, kEventClick);
+	if (m_pWindow != NULL) m_pWindow->SendNotify(this, kEventClick);
     Invalidate();
 }
 
@@ -205,6 +227,15 @@ void Combo::SetAttribute(const std::wstring& strName, const std::wstring& strVal
 		SetDropBoxSize(szDropBoxSize);
 	}
 	else if (strName == _T("popuptop")) SetPopupTop(strValue == _T("true"));
+	else if (strName == _T("textpadding")) {
+		UiRect rcTextPadding;
+		LPTSTR pstr = NULL;
+		rcTextPadding.left = _tcstol(strValue.c_str(), &pstr, 10);  ASSERT(pstr);
+		rcTextPadding.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);
+		rcTextPadding.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);
+		rcTextPadding.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
+		SetTextPadding(rcTextPadding);
+	}
 	else Box::SetAttribute(strName, strValue);
 }
 
@@ -215,25 +246,31 @@ void Combo::PaintText(IRenderContext* pRender)
 	if (m_iCurSel >= 0) {
 		Control* pControl = static_cast<Control*>((m_pLayout->GetItemAt(m_iCurSel)));
 		ListContainerElement* pElement = dynamic_cast<ListContainerElement*>(pControl);
-		UiRect rcTextPadding = pElement->GetTextPadding();
-		rcText.left += rcTextPadding.left;
-		rcText.right -= rcTextPadding.right;
-		rcText.top += rcTextPadding.top;
-		rcText.bottom -= rcTextPadding.bottom;
+		assert(pElement);		
+		if (!pElement)
+			return;
+		UiRect rcPadding = m_rcTextPadding;
 
-		if (pElement != NULL) {
+		if (pElement) {
 			if (GetText().empty())
 				return;
 
 			if (pElement->GetOwner() == NULL)
 				return;
 
+			if (rcPadding.left == 0 && rcPadding.top == 0 && rcPadding.right == 0 && rcPadding.bottom == 0)
+				rcPadding = pElement->GetTextPadding();
+			rcText.left += rcPadding.left;
+			rcText.right -= rcPadding.right;
+			rcText.top += rcPadding.top;
+			rcText.bottom -= rcPadding.bottom;
+
 			DWORD dwTextColor = 0xFF000000;
-			dwTextColor = GlobalManager::GetTextColor(pElement->GetStateTextColor(kControlStateNormal));
+			dwTextColor = this->GetWindowColor(pElement->GetStateTextColor(kControlStateNormal));
 			pRender->DrawText(rcText, GetText(), dwTextColor, \
 				pElement->GetFont(), DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS);
 		}
-		else {
+		else {	
 			UiRect rcOldPos = pControl->GetPos();
 			pControl->SetPos(rcText);
 			pControl->AlphaPaint(pRender, rcText);
@@ -246,7 +283,19 @@ std::wstring Combo::GetText() const
 {
     if( m_iCurSel < 0 ) return _T("");
 	ListContainerElement* pControl = static_cast<ListContainerElement*>(m_pLayout->GetItemAt(m_iCurSel));
-    return pControl->GetText();
+	return pControl ? pControl->GetText() : _T("");
+}
+
+UiRect Combo::GetTextPadding() const
+{
+	return m_rcTextPadding;
+}
+
+void Combo::SetTextPadding(UiRect rc)
+{
+	DpiManager::GetInstance()->ScaleRect(rc);
+	m_rcTextPadding = rc;
+	this->Invalidate();
 }
 
 std::wstring Combo::GetDropBoxAttributeList()
@@ -271,15 +320,24 @@ void Combo::SetDropBoxSize(CSize szDropBox)
     m_szDropBox = szDropBox;
 }
 
-bool Combo::SelectItem(int iIndex)
+bool Combo::SelectItemInternal(int iIndex)
 {
-	if (iIndex < 0 || iIndex >= m_pLayout->GetCount() || m_iCurSel == iIndex)
+	if (iIndex < 0 || iIndex >= m_pLayout->GetCount())
 		return false;
 
+	int iOldSel = m_iCurSel;
 	m_iCurSel = iIndex;
-	m_pLayout->SelectItem(m_iCurSel, false, false);
-
 	return true;
+}
+
+void Combo::SelectItem(int iIndex, bool bTrigger)
+{
+    m_pLayout->SelectItem(iIndex, false, false);
+    SelectItemInternal(iIndex);
+    Invalidate();
+    if (m_pWindow != NULL && bTrigger) {
+        m_pWindow->SendNotify(this, kEventSelect, m_iCurSel, -1);
+    }
 }
 
 Control* Combo::GetItemAt(int iIndex)
@@ -289,14 +347,16 @@ Control* Combo::GetItemAt(int iIndex)
 
 bool Combo::OnSelectItem(EventArgs* args)
 {
-	m_pWindow->OnSeleteItem();
+	if (m_pWindow)
+        m_pWindow->OnSeleteItem();
+	int iOldSel = m_iCurSel;
 	m_iCurSel = m_pLayout->GetCurSel();
 	auto pControl = m_pLayout->GetItemAt(m_iCurSel);
 	if (pControl != NULL) {
 		pControl->SetState(kControlStateNormal);
 	}
 	if (m_pWindow != NULL) {
-		m_pWindow->SendNotify(this, kEventSelect, m_iCurSel, -1);
+		m_pWindow->SendNotify(this, kEventSelect, m_iCurSel, iOldSel);
 	}
 	return true;
 }

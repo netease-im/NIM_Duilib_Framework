@@ -6,7 +6,7 @@
 // virtual ListBox class
 #pragma once
 
-namespace ui 
+namespace ui
 {
 
 /**
@@ -34,23 +34,30 @@ public:
 	 * @brief 获取子项总数
 	 * @return 返回子项总数
 	 */
-	virtual int GetElementtCount() = 0;
+	virtual int GetElementCount() = 0;
 };
 
 /**
  * @brief 虚拟列表
  */
-class UILIB_API VirtualLayout : public VLayout
+class UILIB_API VirtualVLayout : public VLayout
 {
 protected:
-    virtual ui::CSize ArrangeChild(const std::vector<ui::Control*>& items, ui::UiRect rc);
+	virtual ui::CSize ArrangeChild(const std::vector<ui::Control*>& items, ui::UiRect rc);
+};
+
+class UILIB_API VirtualHLayout : public HLayout
+{
+protected:
+	virtual ui::CSize ArrangeChild(const std::vector<ui::Control*>& items, ui::UiRect rc);
 };
 
 class UILIB_API VirtualListBox : public ListBox
 {
-    friend class VirtualLayout;
+	friend class VirtualVLayout;
+	friend class VirtualHLayout;
 public:
-    VirtualListBox(ui::Layout* pLayout = new VirtualLayout);
+	VirtualListBox(ui::Layout* pLayout = new VirtualVLayout);
 
 	/**
 	 * @brief 设置数据代理对象
@@ -72,6 +79,18 @@ public:
 	 * @return 无
 	 */
 	virtual void InitElement(int nMaxItemCount = 50);
+
+	/**
+	 * @brief 设置列表的纵横方向
+	 * @param[in] direction 方向
+	 * @return 无
+	 */
+	enum ListDirection
+	{
+		kListHorizontal = 0,
+		kListVertical = 1
+	};
+	void SetDirection(ListDirection direction);
 
 	/**
 	 * @brief 刷新列表
@@ -112,6 +131,7 @@ protected:
 	virtual void SetScrollPos(ui::CSize szPos) override;
 	virtual void HandleMessage(ui::EventArgs& event) override;
 	virtual void SetPos(UiRect rc) override;
+	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 
 	/**
 	 * @brief 重新布局子项
@@ -210,12 +230,14 @@ private:
 	bool NeedReArrange(ScrollDirection &direction);
 
 private:
-	VirtualListInterface *m_pDataProvider; 
-    int m_nElementHeight;	// 每个项的高度	
+	VirtualListInterface *m_pDataProvider;
+	int m_nElementHeight;	// 每个项的在列表方向的长度
 	int m_nMaxItemCount;	// 列表真实控件数量上限  
-    int m_nOldYScrollPos;
-    bool m_bArrangedOnce;
-    bool m_bForceArrange;	// 强制布局标记
+	int m_nOldYScrollPos;
+	bool m_bArrangedOnce;
+	bool m_bForceArrange;	// 强制布局标记
+
+	ListDirection m_eDirection = kListVertical;
 };
 
 }

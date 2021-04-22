@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="540,535" caption="0,0,0,35">
+    <!-- 聊天区域 -->
+    <VBox>
+      <HBox width="stretch" height="35" bkcolor="bk_wnd_lightcolor">
+	  <Label text="应用列表" font="system_bold_14" margin="10,10"/>
+      <Control />
+      <Button class="btn_wnd_min" name="minbtn" margin="4,6,0,0"/>
+      <Box width="21" margin="4,6,0,0">
+        <Button class="btn_wnd_max" name="maxbtn"/>
+        <Button class="btn_wnd_restore" name="restorebtn" visible="false"/>
+      </Box>
+      <Button class="btn_wnd_close" name="closebtn" margin="4,6,8,0"/>
+      </HBox>
+      <Control class="splitline_hor_level1"/>
+      <VBox  height="200" bkcolor="bk_wnd_lightcolor">
+	  <HBox bkcolor="bk_wnd_darkcolor" height="35" >
+	   <Label text="常用应用" font="system_14" margin="10,10" />
+	  </HBox>
+	    <Box name="frequent_app">
+		</Box>
+      </VBox>
+	  <Control class="splitline_hor_level1"/>
+      <VBox  bkcolor="bk_wnd_lightcolor">
+	   <HBox bkcolor="bk_wnd_darkcolor" height="35" >
+	   <Label text="我的应用" font="system_14" margin="10,10" />
+	   </HBox>
+	   <Box name="my_app">
+		</Box>
+      </VBox>
+    </VBox>
+</Window>

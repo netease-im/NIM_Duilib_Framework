@@ -21,6 +21,7 @@ Label 是一个模板类，当直接使用传统控件如 Button、CheckBox 等�
 | disabledtextcolor |  | STRING | disabled字体颜色,不指定则使用默认颜色,如(blue) |
 | linelimit | false | BOOL | 是否限制正行输出,如(true) |
 | singleline | true | BOOL | 是否单行输出文字,如(true) |
+| autotooltip | false | BOOL | 鼠标悬浮到控件显示的提示文本是否省略号出现时才显示,如(true) |
 
 ## 可用接口
 
@@ -38,6 +39,7 @@ Label 是一个模板类，当直接使用传统控件如 Button、CheckBox 等�
 | [SetSingleLine](#SetSingleLine) | 设置为单行输入模式 |
 | [IsLineLimit](#IsLineLimit) | 是否限制整行输出 |
 | [SetLineLimit](#SetLineLimit) | 限制整行输出 |
+| [SetAutoToolTip](#SetAutoToolTip) | 设置鼠标悬浮到控件显示的提示文本是否省略号出现时才显示 |
 
 ### SetTextStyle
 
@@ -177,4 +179,16 @@ void SetLineLimit(bool bLineLimit)
 
  - 参&emsp;数：  
     - `bLineLimit` 设置 true 为限制，false 为不限制
+ - 返回值：无
+
+### SetAutoToolTip
+
+设置鼠标悬浮到控件显示的提示文本是否省略号出现时才显示
+
+```cpp
+void SetAutoToolTip(bool bAutoShow)
+```
+
+ - 参&emsp;数：  
+    - `bAutoShow` true 省略号出现才显示 false 不做任何控制
  - 返回值：无

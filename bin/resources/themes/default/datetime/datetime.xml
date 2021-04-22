@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="400,300" caption="0,0,0,35" shadowattached="false">
+  <VBox bkcolor="bk_wnd_darkcolor" bordercolor="blue" bordersize="1"  padding="1,1,1,1">
+    <HBox width="stretch" height="35" bkcolor="bk_wnd_lightcolor">
+      <Label text="DateTime Control Sample" valign="center" margin="8"/>
+      <Control />
+      <Button class="btn_wnd_min" name="minbtn" margin="4,6,0,0"/>
+      <Button class="btn_wnd_close" name="closebtn" margin="4,6,8,0"/>
+    </HBox>
+    <VBox padding="10,50,10,0">
+      <Control class="splitline_hor_level1"/>
+        <HBox height="auto" childmargin="10" padding="10,10,10,10">
+            <Label text="默认日期格式" width="auto" height="auto" valign="center" />
+            <DateTime width="96" height="30" />
+        </HBox>
+      <Control class="splitline_hor_level1"/> 
+        <HBox height="auto" childmargin="10" padding="10,10,10,10">
+            <Label text="自定义日期格式" width="auto" height="auto" valign="center" />
+            <DateTime width="140" height="30" format="%Y/%m/%d %H:%M" datetimeformat="yyyy/MM/dd HH:mm" />
+        </HBox>      
+      <Control />      
+    </VBox>
+  </VBox>
+</Window>

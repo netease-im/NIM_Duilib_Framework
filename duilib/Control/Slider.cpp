@@ -97,6 +97,7 @@ void Slider::HandleMessage(EventArgs& event)
 				else if (event.ptMouse.y <= m_rcItem.top + m_szThumb.cy / 2) m_nValue = m_nMax;
 				else m_nValue = m_nMin + double((m_nMax - m_nMin) * (m_rcItem.bottom - event.ptMouse.y - m_szThumb.cy / 2)) / (m_rcItem.bottom - m_rcItem.top - m_szThumb.cy);
 			}
+			m_pWindow->SendNotify(this, kEventValueChange);
 			Invalidate();
 		}
 		return;
@@ -129,6 +130,15 @@ void Slider::SetAttribute(const std::wstring& strName, const std::wstring& strVa
 		SetProgressBarPadding(rcPadding);
 	}
 	else Progress::SetAttribute(strName, strValue);
+}
+
+void Slider::PaintBkColor(IRenderContext* pRender)
+{
+	m_rcItem.Deflate(m_rcProgressBarPadding);
+	m_rcPaint.Deflate(m_rcProgressBarPadding);
+	Control::PaintBkColor(pRender);
+	m_rcPaint.Inflate(m_rcProgressBarPadding);
+	m_rcItem.Inflate(m_rcProgressBarPadding);
 }
 
 void Slider::PaintStatusImage(IRenderContext* pRender)

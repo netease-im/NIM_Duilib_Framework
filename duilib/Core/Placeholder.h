@@ -274,7 +274,7 @@ public:
 	virtual void Arrange();
 
 	/**
-	 * @brief 让父容器排列
+	 * @brief 让父容器重排
 	 * @return 无
 	 */
 	virtual void ArrangeAncestor();
@@ -297,25 +297,23 @@ public:
 	virtual void Invalidate();
 
 	/**
-	 * @brief 待补充
-	 * @param[in] 待补充
-	 * @return 待补充
+	 * @brief 获取控件实际的位置（布局位置加外层滚动后的偏移位置）
+	 * @param[in] bContainShadow 是否考虑窗口阴影尺寸
+	 * @return UiRect 控件实际的位置
 	 */
-	UiRect GetPosWithScrollOffset() const;
+	UiRect GetPosWithScrollOffset(bool bContainShadow = true) const;
 
 	/**
-	 * @brief 待补充
-	 * @param[in] 待补充
-	 * @return 待补充
+	 * @brief 获取外层滚动偏移
+	 * @return CPoint
 	 */
 	CPoint GetScrollOffset() const;
 
 	static bool IsChild(PlaceHolder* pAncestor, PlaceHolder* pChild);
 protected:
 	/**
-	 * @brief 待补充
-	 * @param[in] 待补充
-	 * @return 待补充
+	 * @brief 让自己重排
+	 * @return void 无
 	 */
 	virtual void ArrangeSelf();
 

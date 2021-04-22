@@ -1,4 +1,4 @@
-#ifndef UI_CONTROL_LABEL_H_
+ï»¿#ifndef UI_CONTROL_LABEL_H_
 #define UI_CONTROL_LABEL_H_
 
 #pragma once
@@ -12,7 +12,7 @@ class UILIB_API LabelTemplate : public InheritType
 public:
 	LabelTemplate();
 
-	/// ÖØĞ´¸¸Àà·½·¨£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ£¬Çë²Î¿¼¸¸ÀàÉùÃ÷
+    /// é‡å†™çˆ¶ç±»æ–¹æ³•ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½ï¼Œè¯·å‚è€ƒçˆ¶ç±»å£°æ˜
 	virtual std::wstring GetText() const;
 	virtual std::string GetUTF8Text() const;
 	virtual void SetText(const std::wstring& strText);
@@ -23,92 +23,113 @@ public:
 	virtual CSize EstimateText(CSize szAvailable, bool& bReEstimateSize) override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 	virtual void PaintText(IRenderContext* pRender) override;
+	virtual void SetPos(UiRect rc) override;
 
-	/**
-	 * @brief ÉèÖÃÎÄ±¾ÑùÊ½
-	 * @param[in] uStyle ÒªÉèÖÃµÄÑùÊ½
-	 * @return ÎŞ
-	 */
+    /**
+     * @brief è®¾ç½®æ–‡æœ¬æ ·å¼
+     * @param[in] uStyle è¦è®¾ç½®çš„æ ·å¼
+     * @return æ— 
+     */
 	void SetTextStyle(UINT uStyle);
 
-	/**
-	 * @brief »ñÈ¡ÎÄ±¾ÑùÊ½
-	 * @return ·µ»ØÎÄ±¾ÑùÊ½
-	 */
+    /**
+     * @brief è·å–æ–‡æœ¬æ ·å¼
+     * @return è¿”å›æ–‡æœ¬æ ·å¼
+     */
 	UINT GetTextStyle() const;
 
-	/**
-	 * @brief »ñÈ¡Ö¸¶¨×´Ì¬ÏÂµÄÎÄ±¾ÑÕÉ«
-	 * @param[in] stateType Òª»ñÈ¡µÄ×´Ì¬±êÖ¾
-	 * @return ·µ»ØÖ¸¶¨×´Ì¬ÏÂµÄÎÄ±¾ÑÕÉ«
-	 */
+    /**
+     * @brief è·å–æŒ‡å®šçŠ¶æ€ä¸‹çš„æ–‡æœ¬é¢œè‰²
+     * @param[in] stateType è¦è·å–çš„çŠ¶æ€æ ‡å¿—
+     * @return è¿”å›æŒ‡å®šçŠ¶æ€ä¸‹çš„æ–‡æœ¬é¢œè‰²
+     */
 	std::wstring GetStateTextColor(ControlStateType stateType);
 
-	/**
-	 * @brief ÉèÖÃÖ¸¶¨×´Ì¬ÏÂµÄÎÄ±¾ÑÕÉ«
-	 * @param[in] stateType ÒªÉèÖÃµÄ×´Ì¬±êÖ¾
-	 * @param[in] dwTextColor ÒªÉèÖÃµÄ×´Ì¬ÑÕÉ«×Ö·û´®£¬¸ÃÖµ±ØĞëÔÚ global.xml ÖĞ´æÔÚ
-	 * @return ÎŞ
-	 */
+    /**
+     * @brief è®¾ç½®æŒ‡å®šçŠ¶æ€ä¸‹çš„æ–‡æœ¬é¢œè‰²
+     * @param[in] stateType è¦è®¾ç½®çš„çŠ¶æ€æ ‡å¿—
+     * @param[in] dwTextColor è¦è®¾ç½®çš„çŠ¶æ€é¢œè‰²å­—ç¬¦ä¸²ï¼Œè¯¥å€¼å¿…é¡»åœ¨ global.xml ä¸­å­˜åœ¨
+     * @return æ— 
+     */
 	void SetStateTextColor(ControlStateType stateType, const std::wstring& dwTextColor);
 
-	/**
-	 * @brief »ñÈ¡µ±Ç°×ÖÌå±àºÅ
-	 * @return ·µ»Ø×ÖÌå±àºÅ£¬¸Ã±àºÅÔÚ global.xml ÖĞ±êÊ¶
-	 */
+    /**
+     * @brief è·å–æŒ‡å®šçŠ¶æ€ä¸‹çš„å®é™…è¢«æ¸²æŸ“æ–‡æœ¬é¢œè‰²
+     * @param[in] buttonStateType è¦è·å–ä½•ç§çŠ¶æ€ä¸‹çš„é¢œè‰²
+     * @param[out] stateType å®é™…è¢«æ¸²æŸ“çš„çŠ¶æ€
+     * @return è¿”å›é¢œè‰²å­—ç¬¦ä¸²ï¼Œè¯¥å€¼åœ¨ global.xml ä¸­å®šä¹‰
+     */
+	std::wstring GetPaintStateTextColor(ControlStateType buttonStateType, ControlStateType& stateType);
+
+    /**
+     * @brief è·å–å½“å‰å­—ä½“ç¼–å·
+     * @return è¿”å›å­—ä½“ç¼–å·ï¼Œè¯¥ç¼–å·åœ¨ global.xml ä¸­æ ‡è¯†
+     */
 	std::wstring GetFont() const;
 
-	/**
-	 * @brief ÉèÖÃµ±Ç°×ÖÌå
-	 * @param[in] index ÒªÉèÖÃµÄ×ÖÌå±àºÅ£¬¸Ã±àºÅ±ØĞëÔÚ global.xml ÖĞ´æÔÚ
-	 * @return ÎŞ
-	 */
+    /**
+     * @brief è®¾ç½®å½“å‰å­—ä½“
+     * @param[in] index è¦è®¾ç½®çš„å­—ä½“ç¼–å·ï¼Œè¯¥ç¼–å·å¿…é¡»åœ¨ global.xml ä¸­å­˜åœ¨
+     * @return æ— 
+     */
 	void SetFont(const std::wstring& strFontId);
 
-	/**
-	 * @brief »ñÈ¡ÎÄ×Ö±ß¾à
-	 * @return ·µ»ØÎÄ×ÖµÄ±ß¾àĞÅÏ¢
-	 */
+    /**
+     * @brief è·å–æ–‡å­—è¾¹è·
+     * @return è¿”å›æ–‡å­—çš„è¾¹è·ä¿¡æ¯
+     */
 	UiRect GetTextPadding() const;
 
-	/**
-	 * @brief ÉèÖÃÎÄ×Ö±ß¾àĞÅÏ¢
-	 * @param[in] rc ±ß¾àĞÅÏ¢
-	 * @return ÎŞ
-	 */
+    /**
+     * @brief è®¾ç½®æ–‡å­—è¾¹è·ä¿¡æ¯
+     * @param[in] rc è¾¹è·ä¿¡æ¯
+     * @return æ— 
+     */
 	void SetTextPadding(UiRect rc);
 
-	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÊÇµ¥ĞĞÄ£Ê½
-	 * @return ·µ»Ø true ±íÊ¾µ¥ĞĞÄ£Ê½£¬·ñÔòÎª false
-	 */
+    /**
+     * @brief åˆ¤æ–­æ˜¯å¦æ˜¯å•è¡Œæ¨¡å¼
+     * @return è¿”å› true è¡¨ç¤ºå•è¡Œæ¨¡å¼ï¼Œå¦åˆ™ä¸º false
+     */
 	bool IsSingleLine();
 
-	/**
-	 * @brief ÉèÖÃÎªµ¥ĞĞÊäÈëÄ£Ê½
-	 * @param[in] bSingleLine Îª true Ê±Îªµ¥ĞĞÄ£Ê½£¬·ñÔòÎª false
-	 * @return ÎŞ
-	 */
+    /**
+     * @brief è®¾ç½®ä¸ºå•è¡Œè¾“å…¥æ¨¡å¼
+     * @param[in] bSingleLine ä¸º true æ—¶ä¸ºå•è¡Œæ¨¡å¼ï¼Œå¦åˆ™ä¸º false
+     * @return æ— 
+     */
 	void SetSingleLine(bool bSingleLine);
 
-	/**
-	 * @brief ÊÇ·ñÏŞÖÆÕûĞĞÊä³ö
-	 * @return ·µ»Ø true ÎªÏŞÖÆ£¬false Îª²»ÏŞÖÆ
-	 */
+    /**
+     * @brief æ˜¯å¦é™åˆ¶æ•´è¡Œè¾“å‡º
+     * @return è¿”å› true ä¸ºé™åˆ¶ï¼Œfalse ä¸ºä¸é™åˆ¶
+     */
 	bool IsLineLimit();
 
-	/**
-	 * @brief ÏŞÖÆÕûĞĞÊä³ö
-	 * @param[in] bLineLimit ÉèÖÃ true ÎªÏŞÖÆ£¬false Îª²»ÏŞÖÆ
-	 * @return ÎŞ
-	 */
+    /**
+     * @brief é™åˆ¶æ•´è¡Œè¾“å‡º
+     * @param[in] bLineLimit è®¾ç½® true ä¸ºé™åˆ¶ï¼Œfalse ä¸ºä¸é™åˆ¶
+     * @return æ— 
+     */
 	void SetLineLimit(bool bLineLimit);
+
+    /**
+    * @brief è®¾ç½®é¼ æ ‡æ‚¬æµ®åˆ°æ§ä»¶æ˜¾ç¤ºçš„æç¤ºæ–‡æœ¬æ˜¯å¦çœç•¥å·å‡ºç°æ—¶æ‰æ˜¾ç¤º
+    * @param[in] bAutoShow true çœç•¥å·å‡ºç°æ‰æ˜¾ç¤º false ä¸åšä»»ä½•æ§åˆ¶
+    * @return æ— 
+    */
+	void SetAutoToolTip(bool bAutoShow);
+
+protected:
+	void CheckShowToolTip();
 
 protected:
 	std::wstring m_sFontId;
+	std::wstring m_sTooltipCache;
 	UINT	m_uTextStyle;
 	bool    m_bSingleLine;
 	bool    m_bLineLimit;
+	bool    m_bAutoShow;
 	int		m_hAlign;
 	int		m_vAlign;
 	UiRect	m_rcTextPadding;
@@ -119,333 +140,403 @@ protected:
 
 template<typename InheritType>
 LabelTemplate<InheritType>::LabelTemplate() :
-	m_sFontId(),
-	m_uTextStyle(DT_LEFT | DT_TOP | DT_END_ELLIPSIS | DT_NOCLIP | DT_SINGLELINE),
-	m_bSingleLine(true),
-	m_bLineLimit(false),
-	m_hAlign(DT_LEFT),
-	m_vAlign(DT_CENTER),
-	m_rcTextPadding(),
-	m_sText(),
-	m_sTextId(),
-	m_textColorMap()
+    m_sFontId(),
+    m_uTextStyle(DT_LEFT | DT_TOP | DT_END_ELLIPSIS | DT_NOCLIP | DT_SINGLELINE),
+    m_bSingleLine(true),
+    m_bLineLimit(false),
+	m_bAutoShow(false),
+    m_hAlign(DT_LEFT),
+    m_vAlign(DT_CENTER),
+    m_rcTextPadding(),
+    m_sText(),
+    m_sTextId(),
+    m_textColorMap()
 {
-	if (dynamic_cast<Box*>(this)) {
-		this->m_cxyFixed.cx = this->m_cxyFixed.cy = DUI_LENGTH_STRETCH;
-	}
-	else {
-		this->m_cxyFixed.cx = this->m_cxyFixed.cy = DUI_LENGTH_AUTO;
-	}
+    if (dynamic_cast<Box*>(this)) {
+        this->m_cxyFixed.cx = this->m_cxyFixed.cy = DUI_LENGTH_STRETCH;
+    }
+    else {
+        this->m_cxyFixed.cx = this->m_cxyFixed.cy = DUI_LENGTH_AUTO;
+    }
 
-	m_textColorMap[kControlStateNormal] = GlobalManager::GetDefaultTextColor();
-	m_textColorMap[kControlStateDisabled] = GlobalManager::GetDefaultDisabledTextColor();
-	m_textColorMap.SetControl(this);
+    m_textColorMap[kControlStateNormal] = GlobalManager::GetDefaultTextColor();
+    m_textColorMap[kControlStateDisabled] = GlobalManager::GetDefaultDisabledTextColor();
+    m_textColorMap.SetControl(this);
 }
 
 template<typename InheritType>
 std::wstring LabelTemplate<InheritType>::GetText() const
 {
-	std::wstring strText = m_sText;
-	if (strText.empty() && !m_sTextId.empty()) {
-		strText = MutiLanSupport::GetInstance()->GetStringViaID(m_sTextId);
-	}
+    std::wstring strText = m_sText;
+    if (strText.empty() && !m_sTextId.empty()) {
+        strText = MutiLanSupport::GetInstance()->GetStringViaID(m_sTextId);
+    }
 
-	return strText;
+    return strText;
+}
+
+template<typename InheritType>
+void LabelTemplate<InheritType>::SetAutoToolTip(bool bAutoShow)
+{
+	m_bAutoShow = bAutoShow;
+	CheckShowToolTip();
+}
+
+template<typename InheritType /*= Control*/>
+void ui::LabelTemplate<InheritType>::SetPos(UiRect rc)
+{
+	__super::SetPos(rc);
+	CheckShowToolTip();
+}
+
+template<typename InheritType>
+void LabelTemplate<InheritType>::CheckShowToolTip()
+{
+	//check if need to show the tooltip
+	if (m_bAutoShow)
+	{
+		if (m_sTooltipCache.empty())
+		{
+			m_sTooltipCache = this->GetToolTipText();
+		}
+		bool bNeedShow = false;
+		if (!GetText().empty())
+		{
+			//compare the item size and rendersize
+			UiRect rc = this->m_rcItem;
+			rc.left += m_rcTextPadding.left;
+			rc.right -= m_rcTextPadding.right;
+			rc.top += m_rcTextPadding.top;
+			rc.bottom -= m_rcTextPadding.bottom;
+
+			if (m_bSingleLine)
+				m_uTextStyle |= DT_SINGLELINE;
+			else
+				m_uTextStyle &= ~DT_SINGLELINE;
+			int width = this->GetFixedWidth();
+			if (width < 0)
+			{
+				width = 0;
+			}
+			auto pRender = this->m_pWindow->GetRenderContext();
+			UiRect rcMessure = pRender->MeasureText(GetText(), m_sFontId, m_uTextStyle, width);
+			if (rc.GetWidth() < rcMessure.GetWidth() || rc.GetHeight() < rcMessure.GetHeight())
+			{
+				bNeedShow = true;
+			}
+		}
+		if (bNeedShow)
+		{
+			this->SetToolTipText(m_sTooltipCache);
+		}
+		else
+		{
+			this->SetToolTipText(L"");
+		}
+	}
 }
 
 template<typename InheritType>
 std::string LabelTemplate<InheritType>::GetUTF8Text() const
 {
-	std::string strOut;
-	StringHelper::UnicodeToMBCS(GetText(), strOut, CP_UTF8);
-	return strOut;
+    std::string strOut;
+    StringHelper::UnicodeToMBCS(GetText(), strOut, CP_UTF8);
+    return strOut;
 }
 
 template<typename InheritType>
 void LabelTemplate<InheritType>::SetText(const std::wstring& strText)
 {
-	if (m_sText == strText) return;
-	m_sText = strText;
+    if (m_sText == strText) return;
+    m_sText = strText;
 
-	if (this->GetFixedWidth() == DUI_LENGTH_AUTO || this->GetFixedHeight() == DUI_LENGTH_AUTO) {
-		this->ArrangeAncestor();
-	}
-	else {
-		this->Invalidate();
-	}
+    if (this->GetFixedWidth() == DUI_LENGTH_AUTO || this->GetFixedHeight() == DUI_LENGTH_AUTO) {
+        this->ArrangeAncestor();
+    }
+    else {
+        this->Invalidate();
+    }
+	CheckShowToolTip();
 }
 
 template<typename InheritType>
 void LabelTemplate<InheritType>::SetUTF8Text(const std::string& strText)
 {
-	std::wstring strOut;
-	StringHelper::MBCSToUnicode(strText, strOut, CP_UTF8);
-	SetText(strOut);
+    std::wstring strOut;
+    StringHelper::MBCSToUnicode(strText, strOut, CP_UTF8);
+    SetText(strOut);
 }
 
 template<typename InheritType>
 void LabelTemplate<InheritType>::SetTextId(const std::wstring& strTextId)
 {
-	if (m_sTextId == strTextId) return;
-	m_sTextId = strTextId;
+    if (m_sTextId == strTextId) return;
+    m_sTextId = strTextId;
 
-	if (this->GetFixedWidth() == DUI_LENGTH_AUTO || this->GetFixedHeight() == DUI_LENGTH_AUTO) {
-		this->ArrangeAncestor();
-	}
-	else {
-		this->Invalidate();
-	}
+    if (this->GetFixedWidth() == DUI_LENGTH_AUTO || this->GetFixedHeight() == DUI_LENGTH_AUTO) {
+        this->ArrangeAncestor();
+    }
+    else {
+        this->Invalidate();
+    }
 }
 
 template<typename InheritType>
 void LabelTemplate<InheritType>::SetUTF8TextId(const std::string& strTextId)
 {
-	std::wstring strOut;
-	StringHelper::MBCSToUnicode(strTextId, strOut, CP_UTF8);
-	SetTextId(strOut);
+    std::wstring strOut;
+    StringHelper::MBCSToUnicode(strTextId, strOut, CP_UTF8);
+    SetTextId(strOut);
 }
 
 template<typename InheritType>
 bool LabelTemplate<InheritType>::HasHotState()
 {
-	return m_textColorMap.HasHotColor() || __super::HasHotState();
+    return m_textColorMap.HasHotColor() || __super::HasHotState();
 }
 
 template<typename InheritType>
 CSize LabelTemplate<InheritType>::EstimateText(CSize szAvailable, bool& bReEstimateSize)
 {
-	if (m_bSingleLine)
-		m_uTextStyle |= DT_SINGLELINE;
-	else
-		m_uTextStyle &= ~DT_SINGLELINE;
+    if (m_bSingleLine)
+        m_uTextStyle |= DT_SINGLELINE;
+    else
+        m_uTextStyle &= ~DT_SINGLELINE;
 
-	int width = this->GetFixedWidth();
-	if (width < 0) {
-		width = 0;
-	}
-	CSize fixedSize;
-	if (!GetText().empty()) {
-		auto pRender = this->m_pWindow->GetRenderContext();
-		UiRect rect = pRender->MeasureText(GetText(), m_sFontId, m_uTextStyle, width);
-		if (this->GetFixedWidth() == DUI_LENGTH_AUTO) {
-			fixedSize.cx = rect.right - rect.left + m_rcTextPadding.left + m_rcTextPadding.right;
-		}
-		if (this->GetFixedHeight() == DUI_LENGTH_AUTO) {
-			int estimateWidth = rect.right - rect.left;
-			int estimateHeight = rect.bottom - rect.top;
+    int width = this->GetFixedWidth();
+    if (width < 0) {
+        width = 0;
+    }
+    CSize fixedSize;
+    if (!GetText().empty()) {
+        auto pRender = this->m_pWindow->GetRenderContext();
+        UiRect rect = pRender->MeasureText(GetText(), m_sFontId, m_uTextStyle, width);
+        if (this->GetFixedWidth() == DUI_LENGTH_AUTO) {
+            fixedSize.cx = rect.right - rect.left + m_rcTextPadding.left + m_rcTextPadding.right;
+        }
+        if (this->GetFixedHeight() == DUI_LENGTH_AUTO) {
+            int estimateWidth = rect.right - rect.left;
+            int estimateHeight = rect.bottom - rect.top;
 
-			if (!m_bSingleLine && this->GetFixedWidth() == DUI_LENGTH_AUTO && this->GetMaxWidth() == DUI_LENGTH_STRETCH) {
-				bReEstimateSize = true;
-				int maxWidth = szAvailable.cx - m_rcTextPadding.left - m_rcTextPadding.right;
-				if (estimateWidth > maxWidth) {
-					estimateWidth = maxWidth;
-					UiRect newRect = pRender->MeasureText(GetText(), m_sFontId, m_uTextStyle, estimateWidth);
-					estimateHeight = newRect.bottom - newRect.top;
-				}
-			}
-			fixedSize.cx = estimateWidth + m_rcTextPadding.left + m_rcTextPadding.right;
-			fixedSize.cy = estimateHeight + m_rcTextPadding.top + m_rcTextPadding.bottom;
-		}
-	}
+            if (!m_bSingleLine && this->GetFixedWidth() == DUI_LENGTH_AUTO && this->GetMaxWidth() == DUI_LENGTH_STRETCH) {
+                bReEstimateSize = true;
+                int maxWidth = szAvailable.cx - m_rcTextPadding.left - m_rcTextPadding.right;
+                if (estimateWidth > maxWidth) {
+                    estimateWidth = maxWidth;
+                    UiRect newRect = pRender->MeasureText(GetText(), m_sFontId, m_uTextStyle, estimateWidth);
+                    estimateHeight = newRect.bottom - newRect.top;
+                }
+            }
+            fixedSize.cx = estimateWidth + m_rcTextPadding.left + m_rcTextPadding.right;
+            fixedSize.cy = estimateHeight + m_rcTextPadding.top + m_rcTextPadding.bottom;
+        }
+    }
 
-	return fixedSize;
+    return fixedSize;
 }
 
 template<typename InheritType>
 void LabelTemplate<InheritType>::SetAttribute(const std::wstring& strName, const std::wstring& strValue)
 {
-	if (strName == _T("align")) {
-		if (strValue.find(_T("left")) != std::wstring::npos) {
-			m_uTextStyle &= ~(DT_CENTER | DT_RIGHT | DT_VCENTER | DT_SINGLELINE);
-			m_uTextStyle |= DT_LEFT;
-		}
-		if (strValue.find(_T("center")) != std::wstring::npos) {
-			m_uTextStyle &= ~(DT_LEFT | DT_RIGHT);
-			m_uTextStyle |= DT_CENTER;
-		}
-		if (strValue.find(_T("right")) != std::wstring::npos) {
-			m_uTextStyle &= ~(DT_LEFT | DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-			m_uTextStyle |= DT_RIGHT;
-		}
-		if (strValue.find(_T("top")) != std::wstring::npos) {
-			m_uTextStyle &= ~(DT_BOTTOM | DT_VCENTER);
-			m_uTextStyle |= (DT_TOP | DT_SINGLELINE);
-		}
-		if (strValue.find(_T("vcenter")) != std::wstring::npos) {
-			m_uTextStyle &= ~(DT_TOP | DT_BOTTOM);
-			m_uTextStyle |= (DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-		}
-		if (strValue.find(_T("bottom")) != std::wstring::npos) {
-			m_uTextStyle &= ~(DT_TOP | DT_VCENTER | DT_VCENTER);
-			m_uTextStyle |= (DT_BOTTOM | DT_SINGLELINE);
-		}
-	}
-	else if (strName == _T("endellipsis")) {
-		if (strValue == _T("true")) m_uTextStyle |= DT_END_ELLIPSIS;
-		else m_uTextStyle &= ~DT_END_ELLIPSIS;
-	}
-	else if (strName == _T("linelimit")) SetLineLimit(strValue == _T("true"));
-	else if (strName == _T("singleline")) SetSingleLine(strValue == _T("true"));
-	else if (strName == _T("text")) SetText(strValue);
-	else if (strName == _T("textid")) SetTextId(strValue);
-	else if (strName == _T("font")) SetFont(strValue);
-	else if (strName == _T("normaltextcolor")) SetStateTextColor(kControlStateNormal, strValue);
-	else if (strName == _T("hottextcolor"))	SetStateTextColor(kControlStateHot, strValue);
-	else if (strName == _T("pushedtextcolor"))	SetStateTextColor(kControlStatePushed, strValue);
-	else if (strName == _T("disabledtextcolor"))	SetStateTextColor(kControlStateDisabled, strValue);
-	else if (strName == _T("textpadding")) {
-		UiRect rcTextPadding;
-		LPTSTR pstr = NULL;
-		rcTextPadding.left = _tcstol(strValue.c_str(), &pstr, 10);  ASSERT(pstr);
-		rcTextPadding.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);
-		rcTextPadding.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);
-		rcTextPadding.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
-		SetTextPadding(rcTextPadding);
-	}
-	else __super::SetAttribute(strName, strValue);
+    if (strName == _T("align")) {
+        if (strValue.find(_T("left")) != std::wstring::npos) {
+            m_uTextStyle &= ~(DT_CENTER | DT_RIGHT | DT_VCENTER | DT_SINGLELINE);
+            m_uTextStyle |= DT_LEFT;
+        }
+        if (strValue.find(_T("center")) != std::wstring::npos) {
+            m_uTextStyle &= ~(DT_LEFT | DT_RIGHT);
+            m_uTextStyle |= DT_CENTER;
+        }
+        if (strValue.find(_T("right")) != std::wstring::npos) {
+            m_uTextStyle &= ~(DT_LEFT | DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            m_uTextStyle |= DT_RIGHT;
+        }
+        if (strValue.find(_T("top")) != std::wstring::npos) {
+            m_uTextStyle &= ~(DT_BOTTOM | DT_VCENTER);
+            m_uTextStyle |= (DT_TOP | DT_SINGLELINE);
+        }
+        if (strValue.find(_T("vcenter")) != std::wstring::npos) {
+            m_uTextStyle &= ~(DT_TOP | DT_BOTTOM);
+            m_uTextStyle |= (DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+        }
+        if (strValue.find(_T("bottom")) != std::wstring::npos) {
+            m_uTextStyle &= ~(DT_TOP | DT_VCENTER | DT_VCENTER);
+            m_uTextStyle |= (DT_BOTTOM | DT_SINGLELINE);
+        }
+    }
+    else if (strName == _T("endellipsis")) {
+        if (strValue == _T("true")) m_uTextStyle |= DT_END_ELLIPSIS;
+        else m_uTextStyle &= ~DT_END_ELLIPSIS;
+    }
+    else if (strName == _T("linelimit")) SetLineLimit(strValue == _T("true"));
+    else if (strName == _T("singleline")) SetSingleLine(strValue == _T("true"));
+    else if (strName == _T("text")) SetText(strValue);
+    else if (strName == _T("textid")) SetTextId(strValue);
+	else if (strName == _T("autotooltip")) SetAutoToolTip(strValue == _T("true"));
+    else if (strName == _T("font")) SetFont(strValue);
+    else if (strName == _T("normaltextcolor")) SetStateTextColor(kControlStateNormal, strValue);
+    else if (strName == _T("hottextcolor"))	SetStateTextColor(kControlStateHot, strValue);
+    else if (strName == _T("pushedtextcolor"))	SetStateTextColor(kControlStatePushed, strValue);
+    else if (strName == _T("disabledtextcolor"))	SetStateTextColor(kControlStateDisabled, strValue);
+    else if (strName == _T("textpadding")) {
+        UiRect rcTextPadding;
+        LPTSTR pstr = NULL;
+        rcTextPadding.left = _tcstol(strValue.c_str(), &pstr, 10);  ASSERT(pstr);
+        rcTextPadding.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);
+        rcTextPadding.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);
+        rcTextPadding.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
+        SetTextPadding(rcTextPadding);
+    }
+    else __super::SetAttribute(strName, strValue);
 }
 
 template<typename InheritType>
 void LabelTemplate<InheritType>::PaintText(IRenderContext* pRender)
 {
-	if (GetText().empty()) return;
-	UiRect rc = this->m_rcItem;
-	rc.left += m_rcTextPadding.left;
-	rc.right -= m_rcTextPadding.right;
-	rc.top += m_rcTextPadding.top;
-	rc.bottom -= m_rcTextPadding.bottom;
+    if (GetText().empty()) return;
+    UiRect rc = this->m_rcItem;
+    rc.left += m_rcTextPadding.left;
+    rc.right -= m_rcTextPadding.right;
+    rc.top += m_rcTextPadding.top;
+    rc.bottom -= m_rcTextPadding.bottom;
 
-	ControlStateType stateType = this->m_uButtonState;
-	if (stateType == kControlStatePushed && GetStateTextColor(kControlStatePushed).empty()) {
-		stateType = kControlStateHot;
-	}
-	if (stateType == kControlStateHot && GetStateTextColor(kControlStateHot).empty()) {
-		stateType = kControlStateNormal;
-	}
-	if (stateType == kControlStateDisabled && GetStateTextColor(kControlStateDisabled).empty()) {
-		stateType = kControlStateNormal;
-	}
-	std::wstring clrColor = GetStateTextColor(stateType);
-	DWORD dwClrColor = GlobalManager::GetTextColor(clrColor);
+    auto stateType = m_uButtonState;
+    DWORD dwClrColor = this->GetWindowColor(GetPaintStateTextColor(m_uButtonState, stateType));
 
-	if (m_bSingleLine)
-		m_uTextStyle |= DT_SINGLELINE;
-	else
-		m_uTextStyle &= ~DT_SINGLELINE;
+    if (m_bSingleLine)
+        m_uTextStyle |= DT_SINGLELINE;
+    else
+        m_uTextStyle &= ~DT_SINGLELINE;
 
-	if (this->m_animationManager.GetAnimationPlayer(kAnimationHot)) {
-		if ((stateType == kControlStateNormal || stateType == kControlStateHot)
-			&& !GetStateTextColor(kControlStateHot).empty()) {
-			std::wstring clrColor = GetStateTextColor(kControlStateNormal);
-			if (!clrColor.empty()) {
-				DWORD dwClrColor = GlobalManager::GetTextColor(clrColor);
-				pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit);
-			}
+    if (this->m_animationManager.GetAnimationPlayer(kAnimationHot)) {
+        if ((stateType == kControlStateNormal || stateType == kControlStateHot)
+            && !GetStateTextColor(kControlStateHot).empty()) {
+            std::wstring clrColor = GetStateTextColor(kControlStateNormal);
+            if (!clrColor.empty()) {
+                DWORD dwClrColor = this->GetWindowColor(clrColor);
+                pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit);
+            }
 
-			if (this->m_nHotAlpha > 0) {
-				std::wstring clrColor = GetStateTextColor(kControlStateHot);
-				if (!clrColor.empty()) {
-					DWORD dwClrColor = GlobalManager::GetTextColor(clrColor);
-					pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, (BYTE)this->m_nHotAlpha, m_bLineLimit);
-				}
-			}
+            if (this->m_nHotAlpha > 0) {
+                std::wstring clrColor = GetStateTextColor(kControlStateHot);
+                if (!clrColor.empty()) {
+                    DWORD dwClrColor = this->GetWindowColor(clrColor);
+                    pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, (BYTE)this->m_nHotAlpha, m_bLineLimit);
+                }
+            }
 
-			return;
-		}
-	}
+            return;
+        }
+    }
 
-	pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit);
+    pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit);
 }
 
 template<typename InheritType>
 void LabelTemplate<InheritType>::SetTextStyle(UINT uStyle)
 {
-	m_uTextStyle = uStyle;
-	this->Invalidate();
+    m_uTextStyle = uStyle;
+    this->Invalidate();
 }
 
 template<typename InheritType>
 UINT LabelTemplate<InheritType>::GetTextStyle() const
 {
-	return m_uTextStyle;
+    return m_uTextStyle;
 }
 
 template<typename InheritType>
 std::wstring LabelTemplate<InheritType>::GetStateTextColor(ControlStateType stateType)
 {
-	return m_textColorMap[stateType];
+    return m_textColorMap[stateType];
 }
 
 template<typename InheritType>
 void LabelTemplate<InheritType>::SetStateTextColor(ControlStateType stateType, const std::wstring& dwTextColor)
 {
-	if (stateType == kControlStateHot) {
-		this->m_animationManager.SetFadeHot(true);
-	}
-	m_textColorMap[stateType] = dwTextColor;
-	this->Invalidate();
+    if (stateType == kControlStateHot) {
+        this->m_animationManager.SetFadeHot(true);
+    }
+    m_textColorMap[stateType] = dwTextColor;
+    this->Invalidate();
+}
+
+template<typename InheritType /*= Control*/>
+std::wstring ui::LabelTemplate<InheritType>::GetPaintStateTextColor(ControlStateType buttonStateType, ControlStateType& stateType)
+{
+    stateType = buttonStateType;
+    if (stateType == kControlStatePushed && GetStateTextColor(kControlStatePushed).empty()) {
+        stateType = kControlStateHot;
+    }
+    if (stateType == kControlStateHot && GetStateTextColor(kControlStateHot).empty()) {
+        stateType = kControlStateNormal;
+    }
+    if (stateType == kControlStateDisabled && GetStateTextColor(kControlStateDisabled).empty()) {
+        stateType = kControlStateNormal;
+    }
+    return GetStateTextColor(stateType);
 }
 
 template<typename InheritType>
 std::wstring LabelTemplate<InheritType>::GetFont() const
 {
-	return m_sFontId;
+    return m_sFontId;
 }
 
 template<typename InheritType>
 void LabelTemplate<InheritType>::SetFont(const std::wstring& strFontId)
 {
-	m_sFontId = strFontId;
-	this->Invalidate();
+    m_sFontId = strFontId;
+    this->Invalidate();
 }
 
 template<typename InheritType>
 UiRect LabelTemplate<InheritType>::GetTextPadding() const
 {
-	return m_rcTextPadding;
+    return m_rcTextPadding;
 }
 
 template<typename InheritType>
 void LabelTemplate<InheritType>::SetTextPadding(UiRect rc)
 {
-	DpiManager::GetInstance()->ScaleRect(rc);
-	m_rcTextPadding = rc;
-	if (this->GetFixedWidth() == DUI_LENGTH_AUTO || this->GetFixedHeight() == DUI_LENGTH_AUTO) {
-		this->ArrangeAncestor();
-	}
-	else {
-		this->Invalidate();
-	}
+    DpiManager::GetInstance()->ScaleRect(rc);
+    m_rcTextPadding = rc;
+    if (this->GetFixedWidth() == DUI_LENGTH_AUTO || this->GetFixedHeight() == DUI_LENGTH_AUTO) {
+        this->ArrangeAncestor();
+    }
+    else {
+        this->Invalidate();
+    }
 }
 
 template<typename InheritType>
 bool LabelTemplate<InheritType>::IsSingleLine()
 {
-	return m_bSingleLine;
+    return m_bSingleLine;
 }
 
 template<typename InheritType>
 void LabelTemplate<InheritType>::SetSingleLine(bool bSingleLine)
 {
-	if (m_bSingleLine == bSingleLine) return;
+    if (m_bSingleLine == bSingleLine) return;
 
-	m_bSingleLine = bSingleLine;
-	this->Invalidate();
+    m_bSingleLine = bSingleLine;
+    this->Invalidate();
 }
 
 template<typename InheritType>
 bool LabelTemplate<InheritType>::IsLineLimit()
 {
-	return m_bLineLimit;
+    return m_bLineLimit;
 }
 
 template<typename InheritType>
 void LabelTemplate<InheritType>::SetLineLimit(bool bLineLimit)
 {
-	if (m_bLineLimit == bLineLimit) return;
+    if (m_bLineLimit == bLineLimit) return;
 
-	m_bLineLimit = bLineLimit;
-	this->Invalidate();
+    m_bLineLimit = bLineLimit;
+    this->Invalidate();
 }
 
 typedef LabelTemplate<Control> Label;

@@ -155,9 +155,6 @@
     <ClCompile Include="Render\Bitmap.cpp">
       <Filter>Source Files\Render</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Image.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
     <ClCompile Include="Utils\OnScreenKeyboardManager.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
@@ -176,11 +173,23 @@
     <ClCompile Include="Render\Matrix.cpp">
       <Filter>Source Files\Render</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\UnZip.cpp">
+    <ClCompile Include="Utils\FontManager.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Control\Menu.cpp">
+      <Filter>Source Files\Control</Filter>
     </ClCompile>
     <ClCompile Include="Control\CircleProgress.cpp">
       <Filter>Source Files\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\UnZip.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\SvgUtil.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Image.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -316,9 +325,6 @@
     <ClInclude Include="Render\Bitmap.h">
       <Filter>Header Files\Render</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Image.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
     <ClInclude Include="Utils\OnScreenKeyboardManager.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
@@ -337,11 +343,23 @@
     <ClInclude Include="Render\Matrix.h">
       <Filter>Header Files\Render</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\UnZip.h">
+    <ClInclude Include="Utils\FontManager.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Control\CircleProgress.h">
       <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Control\Menu.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\UnZip.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\SvgUtil.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Image.h">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

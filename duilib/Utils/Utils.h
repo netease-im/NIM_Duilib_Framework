@@ -67,6 +67,14 @@ public:
 		x += offsetPoint.x;
 		y += offsetPoint.y;
 	}
+
+	bool operator==(const CPoint& dst){
+		return x == dst.x && y == dst.y;
+	}
+
+	bool operator!=(const CPoint& dst){
+		return x != dst.x || y != dst.y;
+	}
 };
 
 /////////////////////////////////////////////////////////////////////////////////////

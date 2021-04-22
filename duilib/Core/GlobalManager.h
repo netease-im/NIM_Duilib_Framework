@@ -45,6 +45,12 @@ public:
 	static std::wstring GetResourcePath();
 
 	/**
+	* @brief 获取当前语言文件路径
+	* @return 返回当前语言文件路径
+	*/
+	static std::wstring GetLanguagePath();
+
+	/**
 	 * @brief 设置程序当前目录
 	 * @param[in] strPath 要设置的路径
 	 * @return 无
@@ -59,11 +65,24 @@ public:
 	static void SetResourcePath(const std::wstring& strPath);
 
 	/**
+	* @brief 设置当前语言文件路径
+	* @return 设置当前语言文件路径
+	*/
+	static void SetLanguagePath(const std::wstring& strPath);
+
+	/**
 	 * @brief 重新加载皮肤资源
 	 * @param[in] resourcePath 资源路径
 	 * @return 无
 	 */
 	static void ReloadSkin(const std::wstring& resourcePath);
+
+	/**
+	 * @brief 重新加载语言资源
+	 * @param[in] languagePath 资源路径
+	 * @return 无
+	 */
+	static void ReloadLanguage(const std::wstring& languagePath, bool invalidateAll = false);
 
 	/**
 	 * @brief 获取绘制接口类对象
@@ -134,6 +153,14 @@ public:
 	static void AddTextColor(const std::wstring& strName, const std::wstring& strValue);
 
 	/**
+	 * @brief 添加一个全局颜色值提供程序使用
+	 * @param[in] strName 颜色名称（如 white）
+	  * @param[in] strValue 颜色具体数值（如 #FFFFFFFF）
+	 * @return 无
+	 */
+	static void AddTextColor(const std::wstring& strName, DWORD argb);
+
+	/**
 	 * @brief 根据名称获取一个颜色的具体数值
 	 * @param[in] strName 要获取的颜色名称
 	 * @return 返回 DWORD 格式的颜色描述值
@@ -200,11 +227,12 @@ public:
 	 * @param[in] nSize 字体大小
 	 * @param[in] bBold 是否粗体
 	 * @param[in] bUnderline 是否有下划线
+	 * @param[in] bStrikeout 是否带有删除线
 	 * @param[in] bItalic 是否倾斜
 	 * @param[in] bDefault 是否默认
 	 * @return 返回字体的 HFONT 句柄
 	 */
-	static HFONT AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic, bool bDefault);
+	static HFONT AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic, bool bDefault);
 
 	/**
 	 * @brief 根据索引返回一个字体信息
@@ -225,10 +253,11 @@ public:
 	 * @param[in] nSize 字体大小
 	 * @param[in] bBold 是否粗体
 	 * @param[in] bUnderline 是否有下划线
+	 * @param[in] bStrikeout 是否带有删除线
 	 * @param[in] bItalic 是否倾斜
 	 * @return 返回字体的 HFONT 句柄
 	 */
-	static HFONT GetFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+	static HFONT GetFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic);
 
 	/**
 	 * @brief 获取字体信息
@@ -261,12 +290,13 @@ public:
 	 * @param[in] nSize 字体大小
 	 * @param[in] bBold 是否粗体
 	 * @param[in] bUnderline 是否有下划线
+	 * @param[in] bStrikeout 是否带有删除线
 	 * @param[in] bItalic 是否倾斜
 	 * @return 返回是否存在
 	 *     @retval true 存在
 	 *     @retval false 不存在
 	 */
-	static bool FindFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+	static bool FindFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic);
 
 	/**
 	 * @brief 根据字体索引删除字体
@@ -389,6 +419,8 @@ public:
 	 */
 	static Control* CreateControl(const std::wstring& strControlName);
 
+	static void AssertUIThread();
+
 	/**
 	 * @brief 判断当前是否使用了 zip 压缩包
 	 * @return 返回 true 表示使用了 zip 压缩包作为资源，false 为普通目录模式
@@ -417,7 +449,7 @@ public:
 	 * @param[in] path 要获取的文件的路径
 	 * @return 返回文件的内存地址
 	 */
-	static HGLOBAL GetData(const std::wstring& path);
+	static HGLOBAL GetZipData(const std::wstring& path);
 
 	/**
 	 * @brief 获取文件在压缩包中的位置
@@ -425,6 +457,20 @@ public:
 	 * @return 返回在压缩包中的文件位置
 	 */
 	static std::wstring GetZipFilePath(const std::wstring& path);
+
+	/**
+	 * @brief 根据资源加载方式，返回对应的资源路径
+	 * @param[in] path 要获取的资源路径
+	 * @return 可用的资源路径
+	 */
+	static std::wstring GetResPath(const std::wstring& res_path, const std::wstring& window_res_path);
+
+	/**
+	 * @brief 判断资源是否存在zip当中
+	 * @param[in] path 要判断的资源路径
+	 * @return 是否存在
+	 */
+	static bool IsZipResExist(const std::wstring& path);
 
 private:
 	/**
@@ -446,6 +492,7 @@ private:
 	typedef std::map<std::wstring, std::weak_ptr<ImageInfo>, ImageCacheKeyCompare> MapStringToImagePtr;
 
 	static std::wstring m_pStrResourcePath; //全局的资源路径，换肤的时候修改这个变量
+	static std::wstring m_pStrLanguagePath; //全局语言文件路径
 	static std::vector<Window*> m_aPreMessages;
 	static std::map<std::wstring, std::unique_ptr<WindowBuilder>> m_builderMap;
 	static CreateControlCallback m_createControlCallback;
@@ -467,6 +514,8 @@ private:
 	static DWORD m_dwDefaultLinkFontColor;
 	static DWORD m_dwDefaultLinkHoverFontColor;
 	static DWORD m_dwDefaultSelectedBkColor;
+
+	static DWORD m_dwUiThreadId;
 };
 
 } // namespace ui

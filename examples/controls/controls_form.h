@@ -21,6 +21,7 @@ public:
 	virtual std::wstring GetSkinFolder() override;
 	virtual std::wstring GetSkinFile() override;
 	virtual std::wstring GetWindowClassName() const override;
+	virtual ui::Control* CreateControl(const std::wstring& pstrClass) override;
 
 	/**
 	 * 收到 WM_CREATE 消息时该函数会被调用，通常做一些控件初始化的操作
@@ -39,9 +40,14 @@ public:
 
 private:
 	/**
+	 * 被投递到杂事线程读取 xml 数据的任务函数
+	 */
+	void LoadRichEditData();
+
+	/**
 	 * 用于在杂事线程读取 xml 完成后更新 UI 内容的接口
 	 */
-	void OnLoadedResourceFile(const std::wstring& xml);
+	void OnResourceFileLoaded(const std::wstring& xml);
 
 	/**
 	 * 动态更新进度条接口

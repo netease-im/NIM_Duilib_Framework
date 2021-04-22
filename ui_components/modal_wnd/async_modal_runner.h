@@ -31,24 +31,21 @@ public:
 		virtual void OnThreadWillExit(AsyncModalRunner *runner) = 0;
 	};
 
+	AsyncModalRunner(Delegate* delegate);
+	virtual ~AsyncModalRunner();
+
 	// Once this method is called the runner will take
 	// the ownership of the dialog
 	bool DoModal(ModalWndBase *dlg);
 	void CancelModalThenExit();
 
 private:
-	template<class _Ty>
-	friend class std::_Ref_count_obj;
-
+	template <class _Ty>
+	friend class std::shared_ptr;
 	friend class AsyncModalRunnerManager;
-	friend class std::shared_ptr<AsyncModalRunner>;
-	friend class std::_Ref_count<AsyncModalRunner>;
-
-	AsyncModalRunner(Delegate *delegate);
-	virtual ~AsyncModalRunner();
-
 	void Run();
 
+private:
 	bool is_running_;
 	bool quit_posted_;
 	Delegate *delegate_;
