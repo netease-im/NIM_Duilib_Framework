@@ -100,6 +100,13 @@ public:
 
 	void ScaleRect(UiRect &rect);
 
+	/**
+	* @brief 设置最大缩放因子,在没有完成自适应之前需要限定最大缩放因子
+	* @param[in] nScaleFactor 最大缩放因子,-1 表示不做限制
+	* @return void	无返回值
+	*/
+	void LimitScaleFactor(unsigned int nScaleFactor);
+
 private:
 	DpiManager();
 	~DpiManager() {};	
@@ -108,6 +115,7 @@ private:
 
 private:
 	int		m_nScaleFactor;
+	int   m_nLimitScaleFactor;
 	bool	m_bAdaptDPI;
 };
 }
