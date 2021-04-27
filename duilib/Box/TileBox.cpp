@@ -165,9 +165,11 @@ CSize TileLayout::GetItemSize() const
 	return m_szItem;
 }
 
-void TileLayout::SetItemSize(CSize szItem)
+void TileLayout::SetItemSize(CSize szItem, bool bNeedDpiScale)
 {
-	DpiManager::GetInstance()->ScaleSize(szItem);
+  if (bNeedDpiScale)
+	  DpiManager::GetInstance()->ScaleSize(szItem);
+
 	if( m_szItem.cx != szItem.cx || m_szItem.cy != szItem.cy ) {
 		m_szItem = szItem;
 		m_pOwner->Arrange();
