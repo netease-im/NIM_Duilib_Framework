@@ -282,12 +282,20 @@ ui::CSize PopoverHeader::EstimateSize(ui::CSize szAvailable)
       ui::UiRect editMargin = m_pRichEditTitle->GetMargin();
       editSize = m_pRichEditTitle->EstimateText({ editMaxSize.cx - editMargin.left - editMargin.right,editMaxSize.cy });
 
-      // calc width by fixed height
-      m_pRichEditTitle->SetFixedWidth(editMaxSize.cx - editMargin.left - editMargin.right, true, false);
-      m_pRichEditTitle->SetFixedHeight(editSize.cy, false);
+      if (m_bUseMaxSize) {
+        m_pRichEditTitle->SetFixedWidth(editMaxSize.cx - editMargin.left - editMargin.right, true, false);
+        m_pRichEditTitle->SetFixedHeight(editSize.cy, false);
 
-      editSize.cx = editMaxSize.cx - editMargin.left - editMargin.right;
-      editSize.cy += editMargin.top + editMargin.bottom;
+        editSize.cx = editMaxSize.cx - editMargin.left - editMargin.right;
+        editSize.cy += editMargin.top + editMargin.bottom;
+      }
+      else {
+        m_pRichEditTitle->SetFixedWidth(editSize.cx, true, false);
+        m_pRichEditTitle->SetFixedHeight(editSize.cy, false);
+
+        editSize.cx += editMargin.left + editMargin.right;
+        editSize.cy += editMargin.top + editMargin.bottom;
+      }
     }
 
     fixedSize = editSize;
@@ -389,10 +397,12 @@ ui::CSize PopoverBody::EstimateSize(ui::CSize szAvailable)
       editSize = m_pRichEditContent->EstimateText({ maxSize.cx - editMargin.left - editMargin.right,maxSize.cy });
 
       m_pRichEditContent->SetFixedHeight(editSize.cy, false);
-      m_pRichEditContent->SetFixedWidth(maxSize.cx - editMargin.left - editMargin.right, true, false);
+      m_pRichEditContent->SetFixedWidth(editSize.cx, true, false);
 
-      editSize.cx = maxSize.cx - editMargin.left - editMargin.right;
+      editSize.cx += editMargin.left + editMargin.right;
       editSize.cy += editMargin.top + editMargin.bottom;
+
+      
     }
 
     int childMargin = m_pLayout->GetChildMargin();
