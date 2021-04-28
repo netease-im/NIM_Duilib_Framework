@@ -44,6 +44,12 @@
 
 #pragma comment(lib, "uiautomationcore.lib")
 
+// Must define GDIPVER before include UIlib.h
+#ifdef GDIPVER
+#undef GDIPVER
+#endif
+#define GDIPVER 0x0110
+
 #include "UIlib.h"
 #include <olectl.h>
 
@@ -52,10 +58,6 @@
 #define MIN min
 #define CLAMP(x,a,b) (MIN(b,MAX(a,x)))
 
-#ifdef GDIPVER
-#undef GDIPVER
-#endif
-#define GDIPVER 0x0110
 #include <GdiPlus.h>
 
 //{{AFX_INSERT_LOCATION}}
