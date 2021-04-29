@@ -153,24 +153,24 @@
 	<TextColor name="popover_content_color" value="#FF878787"/>
 	<TextColor name="popover_content_color1" value="#FF393430"/>
 	<TextColor name="popover_tooltip_color" value="#FF040405"/>
-	<Class name="popover_shadow" width="auto" height="auto" maxwidth="244" minwidth="100" nofocus="true" bkimage="file='../public/bk/bk_shadow.png' corner='30,30,30,30'"/>
-	<Class name="popover_root" width="auto" height="auto" bkcolor="white" margin="8,8,8,8" padding="16,12,16,12" childmargin="8" borderround="5,5" nofocus="true" />
+	<Class name="popover_shadow" width="auto" height="auto" maxwidth="244" minwidth="100" bkimage="file='../public/bk/bk_shadow.png' corner='30,30,30,30'"/>
+	<Class name="popover_root" width="auto" height="auto" bkcolor="white" margin="8,8,8,8" padding="16,12,16,12" childmargin="8" borderround="2,2"/>
 	<Class name="popover_footer" padding="0,4,0,0" halign="right" childmargin="12"/>
 	<Class name="popover_popover" maxwidth="228"/>
 	<Class name="popover_notification" minwidth="268" maxwidth="268"/>
 	<Class name="popover_alert" maxwidth="260"/>
 	<Class name="popover_tooltip" maxwidth="300"/>
-	<Class name="popover_icon" width="16" height="16" halign="center" valign="top" margin="0,6,0,0"/>
+	<Class name="popover_icon" width="16" height="16" halign="center" valign="top" margin="0,4,0,0"/>
 	<Class name="popover_icon_info" bkimage="file='../public/popover/info.svg'"/>
 	<Class name="popover_icon_warning" bkimage="file='../public/popover/warning.svg'"/>
 	<Class name="popover_icon_error" bkimage="file='../public/popover/error.svg'"/>
 	<Class name="popover_label" multiline="true" autohscroll="false" wantreturnmsg="false" wanttab="false" rich="true" enabled="false" readonly="true"/>
 	<Class name="popover_label_title" font="system_bold_14" disabledtextcolor="popover_title_color"/>
-	<Class name="popover_btn_close" cursortype="hand" width="20" height="20" nofocus="true" margin="0,4,0,0" normalimage="file='../public/button/btn_wnd_gray_close.png' dest='4,4,16,16'" hotimage="../public/button/btn_wnd_white_close_hovered.png" pushedimage="../public/button/btn_wnd_white_close_pushed.png" fadehot="false"/>
-	<Class name="popover_label_content" width="auto" height="auto" font="system_12_400" disabledtextcolor="popover_content_color"/>
-	<Class name="popover_btn_ok" nofocus="true" cursortype="hand" borderround="3,3" font="system_12_600" normaltextcolor="white" width="52" height="24" normalcolor="popover_color_3" hotcolor="popover_color_4" pushedcolor="popover_color_5"/>
-	<Class name="popover_btn_cancel" nofocus="true" cursortype="hand" borderround="3,3" font="system_12_600" width="52" height="24" normalcolor="popover_color_0" hotcolor="popover_color_1" pushedcolor="popover_color_2"/>
-	<Class name="notification_label_title" font="system_14"/>
+	<Class name="popover_btn_close" cursortype="hand" width="16" height="16" margin="0,2,0,0" normalimage="file='../public/button/btn_close.svg' dest='2,2,14,14'" hotimage="file='../public/button/btn_close.svg' dest='2,2,14,14'" pushedimage="file='../public/button/btn_close.svg' dest='2,2,14,14'" fadehot="false"/>
+	<Class name="popover_label_content" width="auto" height="auto" font="system_12" disabledtextcolor="popover_content_color"/>
+	<Class name="popover_btn_ok" cursortype="hand" borderround="3,3" font="system_12" normaltextcolor="white" width="52" height="24" normalcolor="popover_color_3" hotcolor="popover_color_4" pushedcolor="popover_color_5"/>
+	<Class name="popover_btn_cancel" cursortype="hand" borderround="3,3" font="system_12" width="52" height="24" normalcolor="popover_color_0" hotcolor="popover_color_1" pushedcolor="popover_color_2"/>
+	<Class name="notification_label_title" font="system_12"/>
 	<Class name="alert_root" padding="16,16,16,16" childmargin="8"/>
 	<Class name="alert_footer" padding="0,8,0,0" childmargin="24" halign="right"/>
 	<Class name="alert_btn_ok" width="94" height="30"/>

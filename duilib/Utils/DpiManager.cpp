@@ -148,8 +148,11 @@ UINT DpiManager::GetScale()
 
 void DpiManager::SetScale(UINT uDPI)
 {
-	if (m_bAdaptDPI) 
-		m_nScaleFactor = min(MulDiv(uDPI, 100, 96), m_nLimitScaleFactor);
+	if (m_bAdaptDPI)
+		m_nScaleFactor = MulDiv(uDPI, 100, 96);
+
+	if (m_nLimitScaleFactor != (UINT)-1)
+		m_nScaleFactor = min(m_nScaleFactor, m_nLimitScaleFactor);
 
 	ASSERT(m_nScaleFactor >= 100);
 }
