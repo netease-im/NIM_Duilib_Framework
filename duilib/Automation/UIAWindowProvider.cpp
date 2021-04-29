@@ -71,9 +71,9 @@ IFACEMETHODIMP UIAWindowProvider::get_ProviderOptions(ProviderOptions* pRetVal)
 {
 	UIA_CHECK_ELEMENT(m_pWnd);
 
-	*pRetVal = ProviderOptions_ServerSideProvider |
+	*pRetVal = static_cast<ProviderOptions>(ProviderOptions_ServerSideProvider |
 		ProviderOptions_UseComThreading |
-		ProviderOptions_UseClientCoordinates;
+		0x100);//ProviderOptions_UseClientCoordinates;
 
 	return S_OK;
 }

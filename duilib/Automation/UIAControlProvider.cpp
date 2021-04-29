@@ -173,12 +173,12 @@ IFACEMETHODIMP UIAControlProvider::GetPropertyValue(PROPERTYID propertyId, VARIA
 		pRetVal->boolVal = m_pControl->IsVisible() ? VARIANT_FALSE : VARIANT_TRUE;
 		pRetVal->vt = VT_BOOL;
 		break;
-	case UIA_FillTypePropertyId: // uch as none, color, gradient, picture, pattern, and so on.
+	case 30162://UIA_FillTypePropertyId: // uch as none, color, gradient, picture, pattern, and so on.
 		pRetVal->vt = VT_I4;
 		pRetVal->lVal = 0;
 		break;
-	case UIA_FillColorPropertyId:
-	case UIA_OutlineColorPropertyId:
+	case 30160://UIA_FillColorPropertyId:
+	case 30161://UIA_OutlineColorPropertyId:
 		pRetVal->vt = VT_I4;
 		pRetVal->lVal = 0x000000;
 		break;
