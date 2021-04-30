@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 
+#if defined(ENABLE_UIAUTOMATION)
+
 namespace ui
 {
 
@@ -161,3 +163,5 @@ IFACEMETHODIMP UIAScrollBarProvider::get_SmallChange(double* pRetVal)
 }
 
 }
+
+#endif

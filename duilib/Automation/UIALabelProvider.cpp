@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 
+#if defined(ENABLE_UIAUTOMATION)
+
 namespace ui 
 {
 
@@ -128,3 +130,5 @@ IFACEMETHODIMP UIALabelProvider::get_IsReadOnly(_Out_ BOOL* retVal)
 }
 
 }
+
+#endif

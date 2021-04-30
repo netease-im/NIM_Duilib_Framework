@@ -42,7 +42,12 @@
 #define _WIN32_WINNT _WIN32_WINNT_WINXP
 #endif
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1928)
+#define ENABLE_UIAUTOMATION
 #pragma comment(lib, "uiautomationcore.lib")
+#endif
+
+
 
 // Must define GDIPVER before include UIlib.h
 #ifdef GDIPVER
@@ -52,13 +57,14 @@
 
 #include "UIlib.h"
 #include <olectl.h>
+#include <GdiPlus.h>
 
 #define lengthof(x) (sizeof(x)/sizeof(*x))
 #define MAX max
 #define MIN min
 #define CLAMP(x,a,b) (MIN(b,MAX(a,x)))
 
-#include <GdiPlus.h>
+
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

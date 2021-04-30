@@ -43,8 +43,10 @@ Control::Control() :
 	m_animationManager(),
 	m_imageMap(),
 	m_bkImage(),
-	m_loadBkImageWeakFlag(),
-	m_pUIAProvider(nullptr)
+	m_loadBkImageWeakFlag()
+#if defined(ENABLE_UIAUTOMATION)
+	,m_pUIAProvider(nullptr)
+#endif
 {
 	m_colorMap.SetControl(this);
 	m_imageMap.SetControl(this);
@@ -109,6 +111,7 @@ Control::~Control()
 		m_pWindow->ReapObjects(this);
 	}
 
+#if defined(ENABLE_UIAUTOMATION)
 	if (nullptr != m_pUIAProvider) {
 		// Coz UiaDisconnectProviderd require at least win8
 		// UiaDisconnectProvider(m_pUIAProvider);
@@ -116,6 +119,7 @@ Control::~Control()
 		m_pUIAProvider->Release();
 		m_pUIAProvider = nullptr;
 	}
+#endif
 }
 
 std::wstring Control::GetType() const

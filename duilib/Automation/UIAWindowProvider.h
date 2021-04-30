@@ -3,6 +3,8 @@
 
 #pragma once
 
+#if defined(ENABLE_UIAUTOMATION)
+
 namespace ui
 {
 
@@ -75,6 +77,8 @@ private:
 };
 
 }
+
+#endif
 
 
 #endif

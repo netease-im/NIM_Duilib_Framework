@@ -175,11 +175,15 @@ inline std::wstring LabelTemplate<InheritType>::GetType() const
 template<typename InheritType>
 inline UIAControlProvider* LabelTemplate<InheritType>::GetUIAProvider()
 {
+#if defined(ENABLE_UIAUTOMATION)
 	if (this->m_pUIAProvider == nullptr)
 	{
 		this->m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIALabelProvider(this));
 	}
 	return this->m_pUIAProvider;
+#else
+  return nullptr;
+#endif
 }
 
 template<typename InheritType>

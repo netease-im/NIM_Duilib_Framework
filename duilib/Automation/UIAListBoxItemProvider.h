@@ -3,6 +3,8 @@
 
 #pragma once
 
+#if defined(ENABLE_UIAUTOMATION)
+
 namespace ui
 {
 
@@ -31,5 +33,7 @@ protected:
 };
 
 }
+
+#endif
 
 #endif

@@ -331,6 +331,7 @@ void Window::OnFinalMessage(HWND hWnd)
 	UnregisterTouchWindowWrapper(m_hWnd);
 	SendNotify(kEventWindowClose);
 
+#if defined(ENABLE_UIAUTOMATION)
 	if (nullptr != m_pUIAProvider) {
 		// Coz UiaDisconnectProviderd require at least win8
 		// UiaDisconnectProvider(m_pUIAProvider);
@@ -340,6 +341,7 @@ void Window::OnFinalMessage(HWND hWnd)
 
 		m_pUIAProvider = nullptr;
 	}
+#endif
 }
 
 LRESULT CALLBACK Window::__WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -398,6 +400,7 @@ LRESULT CALLBACK Window::__ControlProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPAR
     }
 }
 
+#if defined(ENABLE_UIAUTOMATION)
 UIAWindowProvider* Window::GetUIAProvider()
 {
 	if (m_pUIAProvider == NULL)
@@ -406,6 +409,7 @@ UIAWindowProvider* Window::GetUIAProvider()
 	}
 	return m_pUIAProvider;
 }
+#endif
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
@@ -1511,6 +1515,7 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		return ::SendMessage(hWndChild, OCM__BASE + uMsg, wParam, lParam);
 	}
 	break;
+#if defined(ENABLE_UIAUTOMATION)
 	case WM_GETOBJECT:
 	{
 		if (static_cast<long>(lParam) == static_cast<long>(UiaRootObjectId) && GlobalManager::IsAutomationEnabled()) {
@@ -1521,6 +1526,7 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 		}
 	}
 	break;
+#endif
 	default:
 		break;
 	}

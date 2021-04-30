@@ -1002,6 +1002,7 @@ protected:
 	AnimationManager m_animationManager;
 	nbase::WeakCallbackFlag m_loadBkImageWeakFlag;
 	static const int m_nVirtualEventGifStop;
+
 	UIAControlProvider* m_pUIAProvider;
 };
 

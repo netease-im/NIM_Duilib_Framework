@@ -2175,11 +2175,15 @@ std::wstring RichEdit::GetType() const
 
 UIAControlProvider* RichEdit::GetUIAProvider()
 {
+#if defined(ENABLE_UIAUTOMATION)
 	if (m_pUIAProvider == nullptr)
 	{
 		m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIARichEditProvider(this));
 	}
 	return m_pUIAProvider;
+#else
+	return nullptr;
+#endif
 }
 
 void RichEdit::DoInit()
@@ -3177,8 +3181,10 @@ void RichEdit::ClearImageCache()
 	m_sFocusedImage.ClearCache();
 }
 
+
 void RichEdit::RaiseUIAValueEvent(const std::wstring oldText, const std::wstring newText)
 {
+#if defined(ENABLE_UIAUTOMATION)
 	if (m_pUIAProvider != nullptr && UiaClientsAreListening()) {
 		VARIANT vtOld = { 0 }, vtNew = { 0 };
 		vtOld.vt = vtNew.vt = VT_BSTR;
@@ -3187,7 +3193,9 @@ void RichEdit::RaiseUIAValueEvent(const std::wstring oldText, const std::wstring
 
 		UiaRaiseAutomationPropertyChangedEvent(m_pUIAProvider, UIA_ValueValuePropertyId, vtOld, vtNew);
 	}
+#endif
 }
+
 
 //----------------下面函数用作辅助 字节数限制
 bool IsAsciiChar(const wchar_t ch)

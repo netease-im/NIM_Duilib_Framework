@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 
+#if defined(ENABLE_UIAUTOMATION)
+
 namespace ui
 {
 
@@ -102,3 +104,5 @@ IFACEMETHODIMP UIAListBoxProvider::get_IsSelectionRequired(BOOL* pRetVal)
 }
 
 }
+
+#endif

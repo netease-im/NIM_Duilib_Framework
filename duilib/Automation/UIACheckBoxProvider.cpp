@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 
+#if defined(ENABLE_UIAUTOMATION)
+
 namespace ui
 {
 
@@ -109,3 +111,5 @@ IFACEMETHODIMP UIACheckBoxProvider::get_ToggleState(ToggleState* pRetVal)
 }
 
 }
+
+#endif

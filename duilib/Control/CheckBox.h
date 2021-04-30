@@ -168,11 +168,15 @@ inline std::wstring CheckBoxTemplate<InheritType>::GetType() const
 template<typename InheritType>
 inline UIAControlProvider* CheckBoxTemplate<InheritType>::GetUIAProvider()
 {
+#if defined(ENABLE_UIAUTOMATION)
     if (this->m_pUIAProvider == nullptr)
     {
         this->m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIACheckBoxProvider(this));
     }
     return this->m_pUIAProvider;
+#else
+  return nullptr;
+#endif
 }
 
 template<typename InheritType>
@@ -200,6 +204,7 @@ void CheckBoxTemplate<InheritType>::Selected(bool bSelected, bool bTriggerEvent)
         }
     }
 
+#if defined(ENABLE_UIAUTOMATION)
     if (this->m_pUIAProvider != nullptr && UiaClientsAreListening()) {
         VARIANT vtOld = { 0 }, vtNew = { 0 };
         vtOld.vt = vtNew.vt = VT_I4;
@@ -207,7 +212,9 @@ void CheckBoxTemplate<InheritType>::Selected(bool bSelected, bool bTriggerEvent)
         vtNew.lVal = m_bSelected ? ToggleState_On : ToggleState_Off;
 
         UiaRaiseAutomationPropertyChangedEvent(this->m_pUIAProvider, UIA_ToggleToggleStatePropertyId, vtOld, vtNew);
+
     }
+#endif
 
     this->Invalidate();
 }

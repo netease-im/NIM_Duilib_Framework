@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 
+#if defined(ENABLE_UIAUTOMATION)
+
 namespace ui
 {
 
@@ -124,3 +126,5 @@ IFACEMETHODIMP UIAListBoxItemProvider::get_SelectionContainer(IRawElementProvide
 
 
 }
+
+#endif

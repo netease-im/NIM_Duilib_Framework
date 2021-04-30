@@ -2,6 +2,8 @@
 
 #include <typeinfo>
 
+#if defined(ENABLE_UIAUTOMATION)
+
 namespace ui {
 
 UIAControlProvider::UIAControlProvider(Control* pControl) :m_refCount(1)
@@ -396,3 +398,5 @@ IFACEMETHODIMP UIAControlProvider::get_FragmentRoot(IRawElementProviderFragmentR
 	return S_OK;
 }
 }
+
+#endif

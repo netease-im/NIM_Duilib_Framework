@@ -21,11 +21,15 @@ std::wstring ListBox::GetType() const
 
 UIAControlProvider* ListBox::GetUIAProvider()
 {
+#if defined(ENABLE_UIAUTOMATION)
 	if (m_pUIAProvider == nullptr)
 	{
 		m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIAListBoxProvider(this));
 	}
 	return m_pUIAProvider;
+#else
+	return nullptr;
+#endif
 }
 
 void ListBox::SetAttribute(const std::wstring& strName, const std::wstring& strValue)
@@ -418,11 +422,15 @@ std::wstring ListContainerElement::GetType() const
 
 UIAControlProvider* ListContainerElement::GetUIAProvider()
 {
+#if defined(ENABLE_UIAUTOMATION)
 	if (m_pUIAProvider == nullptr)
 	{
 		m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIAListBoxItemProvider(this));
 	}
 	return m_pUIAProvider;
+#else
+	return nullptr;
+#endif
 }
 
 void ListContainerElement::SetVisible(bool bVisible)

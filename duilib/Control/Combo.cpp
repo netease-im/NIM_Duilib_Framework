@@ -173,11 +173,15 @@ std::wstring Combo::GetType() const
 
 UIAControlProvider* Combo::GetUIAProvider()
 {
+#if defined(ENABLE_UIAUTOMATION)
 	if (m_pUIAProvider == nullptr)
 	{
 		m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIAComboBoxProvider(this));
 	}
 	return m_pUIAProvider;
+#else
+	return nullptr;
+#endif
 }
 
 bool Combo::Add(Control* pControl)
@@ -362,6 +366,7 @@ bool Combo::SelectItemInternal(int iIndex)
 		m_pWindow->SendNotify(this, kEventSelect, m_iCurSel, iOldSel);
 	}
 
+#if defined(ENABLE_UIAUTOMATION)
 	if (m_pUIAProvider != nullptr && UiaClientsAreListening()) {
 		VARIANT vtOld = { 0 }, vtNew = { 0 };
 		vtOld.vt = vtNew.vt = VT_BSTR;
@@ -371,6 +376,7 @@ bool Combo::SelectItemInternal(int iIndex)
 
 		UiaRaiseAutomationPropertyChangedEvent(m_pUIAProvider, UIA_ValueValuePropertyId, vtOld, vtNew);
 	}
+#endif
 
 	Invalidate();	
 

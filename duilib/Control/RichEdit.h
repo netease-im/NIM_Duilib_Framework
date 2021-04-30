@@ -958,6 +958,7 @@ public:
 	 * @return нч
 	 */
 	void RaiseUIAValueEvent(const std::wstring oldText, const std::wstring newText);
+
 protected:
     CTxtWinHost* m_pTwh;
     bool m_bVScrollBarFixing;

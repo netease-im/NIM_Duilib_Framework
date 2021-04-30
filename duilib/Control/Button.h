@@ -73,11 +73,15 @@ inline std::wstring ButtonTemplate<InheritType>::GetType() const
 template<typename InheritType>
 inline UIAControlProvider* ButtonTemplate<InheritType>::GetUIAProvider()
 {
+#if defined(ENABLE_UIAUTOMATION)
     if (this->m_pUIAProvider == nullptr)
     {
         this->m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIAButtonProvider(this));
     }
     return this->m_pUIAProvider;
+#else
+  return nullptr;
+#endif
 }
 
 template<typename InheritType>
@@ -85,8 +89,10 @@ void ButtonTemplate<InheritType>::Activate()
 {
     if (!this->IsActivatable()) return;
     if (this->m_pWindow != NULL) this->m_pWindow->SendNotify(this, kEventClick);
+#if defined(ENABLE_UIAUTOMATION)
     if (this->m_pUIAProvider != nullptr && UiaClientsAreListening())
         UiaRaiseAutomationEvent(this->m_pUIAProvider, UIA_Invoke_InvokedEventId);
+#endif
 }
 
 typedef ButtonTemplate<Control> Button;

@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 
+#if defined(ENABLE_UIAUTOMATION)
+
 namespace ui
 {
 
@@ -145,3 +147,5 @@ IFACEMETHODIMP UIABoxProvider::FindItemByProperty(IRawElementProviderSimple* pSt
 
 
 }
+
+#endif

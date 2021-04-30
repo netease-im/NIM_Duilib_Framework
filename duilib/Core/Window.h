@@ -910,11 +910,13 @@ public:
 	 */
 	bool IsClosing(){ return m_bCloseing; };
 
+#if defined(ENABLE_UIAUTOMATION)
 	/**
      * @brief Get ui automation provider
      * @return nullptr or pointer
      */
 	UIAWindowProvider* GetUIAProvider();
+#endif
 
 
 private:

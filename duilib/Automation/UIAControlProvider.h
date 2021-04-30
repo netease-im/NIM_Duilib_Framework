@@ -3,6 +3,8 @@
 
 #pragma once
 
+#if defined(ENABLE_UIAUTOMATION)
+
 namespace ui
 {
 
@@ -117,8 +119,42 @@ protected:
 	Control* m_pControl;
 };
 
-
 }
+#else
+namespace ui
+{
+class UIAControlProvider
+{
+public:
+  UIAControlProvider() = delete;
+
+  UIAControlProvider(Control* pControl) :m_refCount(1)
+  {
+    m_pControl = pControl;
+  }
+
+  void ResetControl(Control* pControl)
+  {
+    m_pControl = pControl;
+  }
+
+  Control* GetControl() const
+  {
+    return m_pControl;
+  }
+
+protected:
+  virtual ~UIAControlProvider() {};
+
+protected:
+  // Ref counter for this COM object.
+  ULONG m_refCount;
+
+  Control* m_pControl;
+};
+}
+
+#endif
 
 
 #endif

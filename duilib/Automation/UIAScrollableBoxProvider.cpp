@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 
+#if defined(ENABLE_UIAUTOMATION)
+
 namespace ui
 {
 
@@ -213,3 +215,5 @@ IFACEMETHODIMP UIAScrollableBoxProvider::get_VerticallyScrollable(BOOL* pRetVal)
 }
 
 }
+
+#endif

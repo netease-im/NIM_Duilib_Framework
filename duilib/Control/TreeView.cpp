@@ -22,11 +22,15 @@ std::wstring TreeNode::GetType() const
 
 UIAControlProvider* TreeNode::GetUIAProvider()
 {
+#if defined(ENABLE_UIAUTOMATION)
 	if (m_pUIAProvider == nullptr)
 	{
 		m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIATreeNodeProvider(this));
 	}
 	return m_pUIAProvider;
+#else
+	return nullptr;
+#endif
 }
 
 void TreeNode::SetTreeView(TreeView* pTreeView)

@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 
+#if defined(ENABLE_UIAUTOMATION)
+
 namespace ui
 {
 
@@ -99,3 +101,5 @@ IFACEMETHODIMP UIATreeNodeProvider::get_ExpandCollapseState(ExpandCollapseState*
 
 
 }
+
+#endif

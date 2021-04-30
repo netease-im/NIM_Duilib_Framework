@@ -1,9 +1,9 @@
 #include "StdAfx.h"
 
+#if defined(ENABLE_UIAUTOMATION)
+
 namespace ui
 {
-
-
 
 UIAButtonProvider::UIAButtonProvider(Control* pControl)
 	:UIALabelProvider(pControl)
@@ -87,3 +87,5 @@ IFACEMETHODIMP UIAButtonProvider::Invoke(void)
 }
 
 }
+
+#endif
