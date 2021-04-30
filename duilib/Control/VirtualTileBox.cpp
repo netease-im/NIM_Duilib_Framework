@@ -92,6 +92,7 @@ int VirtualTileLayout::GetElementsHeight(int nCount)
   VirtualTileBox* pList = dynamic_cast<VirtualTileBox*>(m_pOwner);
   ASSERT(pList);
 
+  bool total = nCount == -1;
   if (nCount < 0)
     nCount = pList->GetElementCount();
 
@@ -107,8 +108,11 @@ int VirtualTileLayout::GetElementsHeight(int nCount)
     else {
       childMarginTotal = (nCount / m_nColumns) * m_iChildMargin;
     }
-
-    return m_szItem.cy * (rows + 1) + childMarginTotal;
+    if (total) {
+      return m_szItem.cy * (rows) + childMarginTotal;
+    } else {
+      return m_szItem.cy * (rows + 1) + childMarginTotal;
+    }
   }
   return 0;
 }
@@ -454,7 +458,7 @@ bool VirtualTileBox::IsElementDisplay(int iIndex)
   int nElementPos = CalcElementsHeight(iIndex);
   if (nElementPos >= nPos) {
     int nHeight = this->GetHeight();
-    if (nElementPos + GetRealElementHeight() <= nPos + nHeight)
+    if (nElementPos <= nPos + nHeight)
       return true;
   }
 
@@ -535,7 +539,7 @@ void VirtualTileBox::OnModelDataChanged(int nStartIndex, int nEndIndex)
   for (auto i = nStartIndex; i <= nEndIndex; i++)
   {
     int nItemIndex = ElementIndexToItemIndex(nStartIndex);
-    if (nItemIndex >= 0) {
+    if (nItemIndex >= 0 && nItemIndex < m_items.size()) {
       FillElement(m_items[nItemIndex], i);
     }
   }
