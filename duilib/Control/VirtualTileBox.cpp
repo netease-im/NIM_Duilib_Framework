@@ -108,11 +108,7 @@ int VirtualTileLayout::GetElementsHeight(int nCount)
     else {
       childMarginTotal = (nCount / m_nColumns) * m_iChildMargin;
     }
-    if (total) {
-      return m_szItem.cy * (rows) + childMarginTotal;
-    } else {
-      return m_szItem.cy * (rows + 1) + childMarginTotal;
-    }
+    return m_szItem.cy * (rows + 1) + childMarginTotal;
   }
   return 0;
 }
