@@ -186,6 +186,9 @@
     <ClInclude Include="popover\tooltip.h">
       <Filter>popover</Filter>
     </ClInclude>
+    <ClInclude Include="comboex\ShadowCombo.h">
+      <Filter>comboex</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -292,6 +295,9 @@
     </ClCompile>
     <ClCompile Include="popover\tooltip.cpp">
       <Filter>popover</Filter>
+    </ClCompile>
+    <ClCompile Include="comboex\ShadowCombo.cpp">
+      <Filter>comboex</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
