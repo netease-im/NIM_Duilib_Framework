@@ -143,4 +143,9 @@ HBox::HBox() : Box(new HLayout())
 
 }
 
+std::wstring HBox::GetType() const
+{
+	return DUI_CTR_HBOX;
+}
+
 }

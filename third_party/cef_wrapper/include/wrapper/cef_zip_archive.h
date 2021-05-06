@@ -135,7 +135,7 @@ class CefZipArchive : public base::RefCountedThreadSafe<CefZipArchive> {
 
   FileMap contents_;
 
-  mutable base::Lock lock_;
+  mutable base::CefLock lock_;
 
   DISALLOW_COPY_AND_ASSIGN(CefZipArchive);
 };

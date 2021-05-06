@@ -64,7 +64,10 @@ public:
 	UiRect rcCorner;
 	BYTE bFade;
 	bool bTiledX;
+	bool bFullTiledX;
 	bool bTiledY;
+	bool bFullTiledY;
+	int nTiledMargin;
 	int nPlayCount;//如果是GIF可以指定播放次数 -1 ：一直播放，缺省值。
 };
 

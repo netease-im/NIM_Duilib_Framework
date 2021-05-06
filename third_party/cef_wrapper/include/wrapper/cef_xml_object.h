@@ -188,7 +188,7 @@ class CefXmlObject : public base::RefCountedThreadSafe<CefXmlObject> {
   AttributeMap attributes_;
   ObjectVector children_;
 
-  base::Lock lock_;
+  base::CefLock lock_;
 
   DISALLOW_COPY_AND_ASSIGN(CefXmlObject);
 };

@@ -143,4 +143,9 @@ VBox::VBox() : Box(new VLayout())
 
 }
 
+std::wstring VBox::GetType() const
+{
+	return DUI_CTR_VBOX;
+}
+
 }

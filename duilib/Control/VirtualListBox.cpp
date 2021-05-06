@@ -58,6 +58,11 @@ m_bForceArrange(false)
 	SetDirection(kListVertical);
 }
 
+std::wstring VirtualListBox::GetType() const
+{
+    return DUI_CTR_VIRTUALLISTBOX;
+}
+
 void VirtualListBox::SetDataProvider(VirtualListInterface *pProvider)
 {
 	ASSERT(pProvider);

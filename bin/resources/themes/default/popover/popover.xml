@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="800,600" caption="0,0,0,35" sizebox="4,4,4,4">
+	<VBox bkcolor="bk_wnd_darkcolor">
+		<HBox width="stretch" height="35" bkcolor="bk_wnd_lightcolor">
+			<Label text="Controls" valign="center" margin="8"/>
+			<Control />
+			<Button class="btn_wnd_settings" name="settings" margin="4,6,0,0"/>
+			<Button class="btn_wnd_min" name="minbtn" margin="4,6,0,0"/>
+			<Box width="21" margin="4,6,0,0">
+				<Button class="btn_wnd_max" name="maxbtn"/>
+				<Button class="btn_wnd_restore" name="restorebtn" visible="false"/>
+			</Box>
+			<Button class="btn_wnd_close" name="closebtn" margin="4,6,8,0"/>
+		</HBox>
+		<VBox padding="30,30,30,30">
+            <HBox margin="20,0,20,0" childmargin="20,20">
+                <Button class="btn_global_blue_80x30" cursortype="hand" width="120" valign="center" name="btn_updatetitle" text="update title"/>
+                <Button class="btn_global_blue_80x30" cursortype="hand" width="120" valign="center" name="btn_updatecontent" text="update content"/>
+            </HBox>
+			<VBox width="400" height="300" halign="center">
+                <HBox childmargin="12,12">
+                    <Control />
+                    <Button class="btn_global_blue_80x30" cursortype="hand" name="btn_tl" text="TL"/>
+                    <Button class="btn_global_blue_80x30" cursortype="hand" name="btn_top" text="Top"/>
+                    <Button class="btn_global_blue_80x30" cursortype="hand" name="btn_tr" text="TR"/>
+                    <Control />
+                </HBox>
+                <HBox>
+                    <Button class="btn_global_blue_80x30" cursortype="hand" name="btn_lt" text="LT"/>
+                    <Control />
+                    <Button class="btn_global_blue_80x30" cursortype="hand" name="btn_rt" text="RT"/>
+                </HBox>
+                <HBox>
+                    <Button class="btn_global_blue_80x30" cursortype="hand" name="btn_left" text="Left"/>
+                    <Control />
+                    <Button class="btn_global_blue_80x30" cursortype="hand" name="btn_right" text="Right"/>
+                </HBox>
+                <HBox>
+                    <Button class="btn_global_blue_80x30" cursortype="hand" name="btn_lb" text="LB"/>
+                    <Control />
+                    <Button class="btn_global_blue_80x30" cursortype="hand" name="btn_rb" text="RB"/>
+                </HBox>
+                <HBox childmargin="12,12">
+                    <Control />
+                    <Button class="btn_global_blue_80x30" cursortype="hand" name="btn_bl" text="BL"/>
+                    <Button class="btn_global_blue_80x30" cursortype="hand" name="btn_bottom" text="Bottom"/>
+                    <Button class="btn_global_blue_80x30" cursortype="hand" name="btn_br" text="BR"/>
+                    <Control />
+                </HBox>
+            </VBox>
+            <HBox margin="20,0,20,0" childmargin="20,20"></HBox>
+		</VBox>
+		<PopoverLayer name="popover_layer" padding="30,30,30,30"></PopoverLayer>
+	</VBox>
+</Window>

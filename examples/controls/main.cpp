@@ -40,6 +40,8 @@ void MainThread::Init()
 	std::wstring app_dir = nbase::win32::GetCurrentModuleDirectory();
 	ui::GlobalManager::Startup(app_dir + L"resources\\", ui::CreateControlCallback(), false);
 
+	ui::GlobalManager::EnableAutomation();
+
 	// 创建一个默认带有阴影的居中窗口
 	ControlForm* window = new ControlForm();
 	window->Create(NULL, ControlForm::kClassName.c_str(), WS_OVERLAPPEDWINDOW & ~WS_MAXIMIZEBOX, 0);

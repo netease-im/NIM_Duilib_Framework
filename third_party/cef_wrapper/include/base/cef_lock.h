@@ -54,11 +54,11 @@ namespace base {
 // A convenient wrapper for an OS specific critical section.  The only real
 // intelligence in this class is in debug mode for the support for the
 // AssertAcquired() method.
-class Lock {
+class CefLock {
  public:
 #if defined(NDEBUG)             // Optimized wrapper implementation
-  Lock() : lock_() {}
-  ~Lock() {}
+  CefLock() : lock_() {}
+  ~CefLock() {}
   void Acquire() { lock_.Lock(); }
   void Release() { lock_.Unlock(); }
 
@@ -71,8 +71,8 @@ class Lock {
   // Null implementation if not debug.
   void AssertAcquired() const {}
 #else
-  Lock();
-  ~Lock();
+  CefLock();
+  ~CefLock();
 
   // NOTE: Although windows critical sections support recursive locks, we do not
   // allow this, and we will commonly fire a DCHECK() if a thread attempts to
@@ -115,7 +115,7 @@ class Lock {
   // Platform specific underlying lock implementation.
   cef_internal::LockImpl lock_;
 
-  DISALLOW_COPY_AND_ASSIGN(Lock);
+  DISALLOW_COPY_AND_ASSIGN(CefLock);
 };
 
 // A helper class that acquires the given Lock while the AutoLock is in scope.
@@ -123,11 +123,11 @@ class AutoLock {
  public:
   struct AlreadyAcquired {};
 
-  explicit AutoLock(Lock& lock) : lock_(lock) {
+  explicit AutoLock(CefLock& lock) : lock_(lock) {
     lock_.Acquire();
   }
 
-  AutoLock(Lock& lock, const AlreadyAcquired&) : lock_(lock) {
+  AutoLock(CefLock& lock, const AlreadyAcquired&) : lock_(lock) {
     lock_.AssertAcquired();
   }
 
@@ -137,7 +137,7 @@ class AutoLock {
   }
 
  private:
-  Lock& lock_;
+   CefLock& lock_;
   DISALLOW_COPY_AND_ASSIGN(AutoLock);
 };
 
@@ -145,7 +145,7 @@ class AutoLock {
 // constructor, and re-Acquire() it in the destructor.
 class AutoUnlock {
  public:
-  explicit AutoUnlock(Lock& lock) : lock_(lock) {
+  explicit AutoUnlock(CefLock& lock) : lock_(lock) {
     // We require our caller to have the lock.
     lock_.AssertAcquired();
     lock_.Release();
@@ -156,7 +156,7 @@ class AutoUnlock {
   }
 
  private:
-  Lock& lock_;
+  CefLock& lock_;
   DISALLOW_COPY_AND_ASSIGN(AutoUnlock);
 };
 

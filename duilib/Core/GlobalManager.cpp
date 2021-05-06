@@ -28,7 +28,7 @@ std::wstring GlobalManager::m_strDefaultFontColor = L"textdefaultcolor";
 DWORD GlobalManager::m_dwDefaultLinkFontColor = 0xFF0000FF;
 DWORD GlobalManager::m_dwDefaultLinkHoverFontColor = 0xFFD3215F;
 DWORD GlobalManager::m_dwDefaultSelectedBkColor = 0xFFBAE4FF;
-
+bool GlobalManager::m_bAutomationEnabled = false;
 std::unique_ptr<IRenderFactory> GlobalManager::m_renderFactory;
 DWORD GlobalManager::m_dwUiThreadId = 0;
 
@@ -45,18 +45,18 @@ void GlobalManager::Startup(const std::wstring& strResourcePath, const CreateCon
 	GlobalManager::SetResourcePath(strResourcePath + theme);
 	m_createControlCallback = callback;
 
-    // 閫傞厤DPI
+    // 适配DPI
 	if (bAdaptDpi) {
 		DpiManager::GetInstance()->SetAdaptDPI();
 		DpiManager::GetInstance()->SetScale(DpiManager::GetMainMonitorDPI());
 	}
 
-    // 瑙ｆ瀽鍏ㄥ眬璧勬簮淇℃伅
+    // 解析全局资源信息
 	LoadGlobalResource();
 
 	SetLanguagePath(strResourcePath + language);
 
-    // 鍔犺浇澶氳瑷�鏂囦欢锛屽鏋滀娇鐢ㄤ簡璧勬簮鍘嬬缉鍖呭垯浠庡唴瀛樹腑鍔犺浇璇█鏂囦欢
+    // 加载多语言文件，如果使用了资源压缩包则从内存中加载语言文件
 	if (g_hzip) {
 		HGLOBAL hGlobal = GetZipData(GetLanguagePath() + L"\\" + kLanguageFileName);
 		if (hGlobal) {
@@ -83,6 +83,16 @@ void GlobalManager::Shutdown()
 	m_renderFactory.reset();
 	RemoveAllFonts();
 	Gdiplus::GdiplusShutdown(g_gdiplusToken);
+}
+
+void GlobalManager::EnableAutomation(bool bEnabled)
+{
+	m_bAutomationEnabled = bEnabled;
+}
+
+bool GlobalManager::IsAutomationEnabled()
+{
+	return m_bAutomationEnabled;
 }
 
 std::wstring GlobalManager::GetCurrentPath()
@@ -125,6 +135,19 @@ void GlobalManager::LoadGlobalResource()
 	ui::WindowBuilder dialog_builder;
 	ui::Window paint_manager;
 	dialog_builder.Create(L"global.xml", CreateControlCallback(), &paint_manager);
+}
+
+void GlobalManager::AddPreMessage(Window* pWindow)
+{
+	m_aPreMessages.push_back(pWindow);
+}
+
+void GlobalManager::RemovePreMessage(Window* pWindow)
+{
+	auto it = std::find(m_aPreMessages.begin(), m_aPreMessages.end(), pWindow);
+	if (it != m_aPreMessages.end()) {
+		m_aPreMessages.erase(it);
+	}
 }
 
 void GlobalManager::ReloadSkin(const std::wstring& resourcePath)
@@ -336,7 +359,8 @@ void GlobalManager::RemoveAllImages()
 	m_mImageHash.clear();
 }
 
-HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic, bool bDefault)
+HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& strFontName, 
+	int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic, bool bDefault, int nWeight)
 {
 	std::wstring strNewFontId = strFontId;
 	if (strNewFontId.empty())
@@ -350,7 +374,7 @@ HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& 
 	static bool bOsOverXp = IsWindowsVistaOrGreater();
 	std::wstring fontName = strFontName;
 	if (fontName == L"system") {
-		fontName = bOsOverXp ? L"微锟斤拷锟脚猴拷" : L"锟斤拷锟斤拷锟斤拷";
+    fontName = bOsOverXp ? L"微软雅黑" : L"新宋体";
 	}
 
 	LOGFONT lf = { 0 };
@@ -362,6 +386,7 @@ HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& 
 	if (bUnderline) lf.lfUnderline = TRUE;
 	if (bStrikeout) lf.lfStrikeOut = TRUE;
 	if (bItalic) lf.lfItalic = TRUE;
+	if (nWeight) lf.lfWeight = nWeight;
 	HFONT hFont = ::CreateFontIndirect(&lf);
 	if (hFont == NULL) return NULL;
 
@@ -370,6 +395,7 @@ HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& 
 	pFontInfo->hFont = hFont;
 	pFontInfo->sFontName = fontName;
 	pFontInfo->iSize = nSize;
+	pFontInfo->iWeight = lf.lfWeight;
 	pFontInfo->bBold = bBold;
 	pFontInfo->bUnderline = bUnderline;
 	pFontInfo->bStrikeout = bStrikeout;
@@ -791,10 +817,10 @@ bool GlobalManager::ImageCacheKeyCompare::operator()(const std::wstring& key1, c
 	LPCWSTR pStr1End = pStr1Begin + nLen1;
 	LPCWSTR pStr2End = pStr2Begin + nLen2;
 
-    // 閫嗗悜姣旇緝
+    // 逆向比较
 	while (--pStr1End >= pStr1Begin && --pStr2End >= pStr2Begin && *pStr1End == *pStr2End);
 
-    // 涓や釜涓查兘宸茬粡姣斿厜浜嗭紝閭ｄ箞鑲畾鐩哥瓑锛岃繑鍥瀎alse
+    // 两个串都已经比光了，那么肯定相等，返回false
 	if (pStr1End < pStr1Begin) {
 		return false;
 	}

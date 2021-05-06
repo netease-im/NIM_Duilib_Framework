@@ -13,6 +13,7 @@ DpiManager* DpiManager::GetInstance()
 DpiManager::DpiManager()
 {
 	m_nScaleFactor = 100;
+	m_nLimitScaleFactor = (UINT)-1;
 	m_bAdaptDPI = false;
 }
 
@@ -150,6 +151,9 @@ void DpiManager::SetScale(UINT uDPI)
 	if (m_bAdaptDPI)
 		m_nScaleFactor = MulDiv(uDPI, 100, 96);
 
+	if (m_nLimitScaleFactor != (UINT)-1)
+		m_nScaleFactor = min(m_nScaleFactor, m_nLimitScaleFactor);
+
 	ASSERT(m_nScaleFactor >= 100);
 }
 
@@ -223,6 +227,11 @@ void DpiManager::ScaleRect(UiRect &rect)
 	rect.top = MulDiv(rect.top, m_nScaleFactor, 100);
 	rect.right = rect.left + width;
 	rect.bottom = rect.top + height;
+}
+
+void DpiManager::LimitScaleFactor(unsigned int nScaleFactor)
+{
+	m_nLimitScaleFactor = nScaleFactor;
 }
 
 }

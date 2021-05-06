@@ -5,6 +5,8 @@
 #include "main.h"
 #include "browser/multi_browser_manager.h"
 
+#include <clocale>
+
 #pragma comment(lib, "dbghelp.lib")
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,

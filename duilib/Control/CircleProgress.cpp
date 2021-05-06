@@ -17,6 +17,11 @@ CircleProgress::CircleProgress() :
 
 }
 
+std::wstring CircleProgress::GetType() const
+{
+	return DUI_CTR_CIRCLEPROGRESS;
+}
+
 void CircleProgress::SetAttribute(const std::wstring& srName, const std::wstring& strValue)
 {
 	if (srName == _T("circular")) SetCircular(strValue == _T("true"));

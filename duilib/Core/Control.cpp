@@ -44,6 +44,9 @@ Control::Control() :
 	m_imageMap(),
 	m_bkImage(),
 	m_loadBkImageWeakFlag()
+#if defined(ENABLE_UIAUTOMATION)
+	,m_pUIAProvider(nullptr)
+#endif
 {
 	m_colorMap.SetControl(this);
 	m_imageMap.SetControl(this);
@@ -102,9 +105,26 @@ Control::Control(const Control& r) :
 
 Control::~Control()
 {
+	HandleMessageTemplate(kEventLast);
+
 	if (m_pWindow) {
 		m_pWindow->ReapObjects(this);
 	}
+
+#if defined(ENABLE_UIAUTOMATION)
+	if (nullptr != m_pUIAProvider) {
+		// Coz UiaDisconnectProviderd require at least win8
+		// UiaDisconnectProvider(m_pUIAProvider);
+		m_pUIAProvider->ResetControl();
+		m_pUIAProvider->Release();
+		m_pUIAProvider = nullptr;
+	}
+#endif
+}
+
+std::wstring Control::GetType() const
+{
+	return _T("Control");
 }
 
 std::wstring Control::GetBkColor() const
@@ -370,7 +390,7 @@ void Control::SetUTF8ToolTipText(const std::string& strText)
 	StringHelper::MBCSToUnicode(strText, strOut, CP_UTF8);
 	if (strOut.empty()) {
 		m_sToolTipText = _T("");
-		Invalidate();//为空则一律重刷
+		Invalidate();//~{N*?UTrR;BIVXK"~}
 		return ;
 	}
 
@@ -507,6 +527,8 @@ void Control::SetVisible_(bool bVisible)
 	if (!IsVisible()) {
 		StopGifPlay();
 	}
+
+	HandleMessageTemplate(kEventVisibleChange);
 }
 
 bool Control::IsEnabled() const
@@ -573,6 +595,16 @@ void Control::SetNoFocus()
 void Control::Activate()
 {
 
+}
+
+void Control::Deactivate()
+{
+
+}
+
+bool Control::IsActivated()
+{
+	return true;
 }
 
 bool Control::IsActivatable() const
@@ -722,6 +754,15 @@ bool Control::IsPointInWithScrollOffset(const CPoint& point) const
 	CPoint newPoint = point;
 	newPoint.Offset(scrollOffset);
 	return m_rcItem.IsPointIn(newPoint);
+}
+
+UIAControlProvider* Control::GetUIAProvider()
+{
+	if (m_pUIAProvider == nullptr)
+	{
+		m_pUIAProvider = new (std::nothrow) UIAControlProvider(this);
+	}
+	return m_pUIAProvider;
 }
 
 void Control::HandleMessageTemplate(EventType eventType, WPARAM wParam, LPARAM lParam, TCHAR tChar, CPoint mousePos, FLOAT pressure)
@@ -886,7 +927,7 @@ void Control::HandleMessage(EventArgs& msg)
 
 bool Control::HasHotState()
 {
-	// 判断本控件是否有hot状态
+	// ~{EP6O1>?X<~JG7qSP~}hot~{W4L,~}
 	return m_colorMap.HasHotColor() || m_imageMap.HasHotImage();
 }
 
@@ -1242,11 +1283,12 @@ bool Control::OnApplyAttributeList(const std::wstring& strReceiver, const std::w
 
 void Control::GetImage(Image& duiImage) const
 {
-	if (duiImage.imageCache) {
-		return;
-	}
+	// should optimize later
+	// use hash or md5 is better than compare strings
 	std::wstring sImageName = duiImage.imageAttribute.sImageName;
 	std::wstring imageFullPath = GlobalManager::GetResPath(sImageName, m_pWindow->GetWindowResourcePath());
+
+	imageFullPath = StringHelper::ReparsePath(imageFullPath);
 
 	if (!duiImage.imageCache || duiImage.imageCache->sImageFullPath != imageFullPath) {
 		duiImage.imageCache = GlobalManager::GetImage(imageFullPath);
@@ -1295,7 +1337,9 @@ bool Control::DrawImage(IRenderContext* pRender, Image& duiImage, const std::wst
 		int iFade = nFade == DUI_NOSET_VALUE ? newImageAttribute.bFade : nFade;
 		ImageInfo* imageInfo = duiImage.imageCache.get();
 		pRender->DrawImage(m_rcPaint, duiImage.GetCurrentHBitmap(), imageInfo->IsAlpha(),
-			rcNewDest, rcNewSource, newImageAttribute.rcCorner, imageInfo->IsSvg(), iFade, newImageAttribute.bTiledX, newImageAttribute.bTiledY);
+			rcNewDest, rcNewSource, newImageAttribute.rcCorner, imageInfo->IsSvg(), iFade,
+			newImageAttribute.bTiledX, newImageAttribute.bTiledY, newImageAttribute.bFullTiledX, newImageAttribute.bFullTiledY,
+			newImageAttribute.nTiledMargin);
 	}
 
 	return true;
@@ -1341,7 +1385,7 @@ void Control::AlphaPaint(IRenderContext* pRender, const UiRect& rcPaint)
 				SetCacheDirty(true);
 			}
 
-			// IsCacheDirty与m_bCacheDirty意义不一样
+			// IsCacheDirty~{Sk~}m_bCacheDirty~{RbRe2;R;Qy~}
 			if (m_bCacheDirty) {
 				pCacheRender->Clear();
 				UiRect rcClip = { 0, 0, size.cx, size.cy };
@@ -1577,7 +1621,7 @@ void Control::GifPlay()
 		}
 		else
 		{
-			if (lPrePause == 0 || lPause == 0) {//0表示GetCurrentInterval出错
+			if (lPrePause == 0 || lPause == 0) {//0~{1mJ>~}GetCurrentInterval~{3v4m~}
 				m_bkImage.SetPlaying(false);
 				m_gifWeakFlag.Cancel();
 				return;

@@ -29,6 +29,8 @@ bool WindowsManager::RegisterWindow(const std::wstring wnd_class_name, const std
 	}
 	else
 	{
+		ui::GlobalManager::AddPreMessage(wnd);
+
 		std::map<std::wstring, WindowEx*> id_win;
 		id_win[wnd_id] = wnd;
 		windows_map_[wnd_class_name] = id_win;
@@ -41,6 +43,8 @@ void WindowsManager::UnRegisterWindow(const std::wstring &wnd_class_name, const 
 	WindowsMap::iterator it = windows_map_.find(wnd_class_name);
 	if (it != windows_map_.end())
 	{
+		ui::GlobalManager::RemovePreMessage(wnd);
+
 		std::map<std::wstring, WindowEx*>::iterator it2 = it->second.find(wnd_id);
 		if (it2 != it->second.end())
 		{

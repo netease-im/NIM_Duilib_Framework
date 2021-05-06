@@ -1433,7 +1433,12 @@ void RichEdit::SetText(const std::wstring& strText)
 		return;
 
     SetSel(0, -1);
+
+	std::wstring oldText = GetText();
+
     ReplaceSel(strText, FALSE);
+
+	RaiseUIAValueEvent(oldText, strText);
 
 	m_linkInfo.clear();
 }
@@ -1627,15 +1632,27 @@ void RichEdit::ScrollCaret()
 int RichEdit::InsertText(long nInsertAfterChar, LPCTSTR lpstrText, bool bCanUndo)
 {
     int nRet = SetSel(nInsertAfterChar, nInsertAfterChar);
+
+	std::wstring oldText = GetText();
+
     ReplaceSel(lpstrText, bCanUndo);
-    return nRet;
+
+	RaiseUIAValueEvent(oldText, GetText());
+    
+	return nRet;
 }
 
 int RichEdit::AppendText(const std::wstring& strText, bool bCanUndo)
 {
     int nRet = SetSel(-1, -1);
-    ReplaceSel(strText, bCanUndo);
-    return nRet;
+
+	std::wstring oldText = GetText();
+    
+	ReplaceSel(strText, bCanUndo);
+
+	RaiseUIAValueEvent(oldText, GetText());
+
+	return nRet;
 }
 
 DWORD RichEdit::GetDefaultCharFormat(CHARFORMAT2 &cf) const
@@ -1936,6 +1953,9 @@ bool RichEdit::OnTxTextChanged()
 	if (m_pWindow != NULL) {
 		m_pWindow->SendNotify(this, kEventTextChange);
 	}
+
+	RaiseUIAValueEvent(GetText(), GetText());
+
 	return true;
 }
 
@@ -2010,7 +2030,8 @@ void RichEdit::SetImmStatus(BOOL bOpen)
 	{
 		// 失去焦点时关闭输入法
 		HIMC hImc = ::ImmGetContext(hwnd);
-		::ImmAssociateContext(hwnd, bOpen ? hImc : NULL);
+    // 失去焦点是会把关联的输入法去掉，导致无法无法输入中文
+		//::ImmAssociateContext(hwnd, bOpen ? hImc : NULL);
 		if (hImc != NULL) {
 			if (ImmGetOpenStatus(hImc)) {
 				if (!bOpen)
@@ -2147,6 +2168,24 @@ void RichEdit::EndRight()
     TxSendMessage(WM_HSCROLL, SB_RIGHT, 0L, 0);
 }
 
+std::wstring RichEdit::GetType() const
+{
+	return DUI_CTR_RICHEDIT;
+}
+
+UIAControlProvider* RichEdit::GetUIAProvider()
+{
+#if defined(ENABLE_UIAUTOMATION)
+	if (m_pUIAProvider == nullptr)
+	{
+		m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIARichEditProvider(this));
+	}
+	return m_pUIAProvider;
+#else
+	return nullptr;
+#endif
+}
+
 void RichEdit::DoInit()
 {
 	if (m_bInited)
@@ -2229,6 +2268,28 @@ CSize RichEdit::EstimateSize(CSize szAvailable)
     return size;
 }
 
+CSize RichEdit::EstimateText(CSize szAvailable)
+{
+  LONG iWidth = szAvailable.cx;
+  LONG iHeight = 0;
+
+  SIZEL szExtent = { -1, -1 };
+  m_pTwh->GetTextServices()->TxGetNaturalSize(
+	DVASPECT_CONTENT,
+	GetWindow()->GetPaintDC(),
+	NULL,
+	NULL,
+	TXTNS_FITTOCONTENT,
+	&szExtent,
+	&iWidth,
+	&iHeight);
+
+  szAvailable.cx = iWidth;
+  szAvailable.cy = iHeight;
+
+  return szAvailable;
+}
+
 void RichEdit::SetPos(UiRect rc)
 {
     Control::SetPos(rc);
@@ -2306,7 +2367,7 @@ UINT RichEdit::GetControlFlags() const
 void RichEdit::HandleMessage(EventArgs& event)
 {
 	if ((!IsMouseEnabled() && event.Type > kEventMouseBegin && event.Type < kEventMouseEnd) ||
-		(!IsEnabled())){
+		(!IsEnabled()&&!IsReadOnly())){
 		if (m_pParent != NULL) m_pParent->HandleMessageTemplate(event);
 		else Control::HandleMessage(event);
 		return;
@@ -2424,11 +2485,11 @@ void RichEdit::OnSetCursor(EventArgs& event)
 		::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_HAND)));
 		return;
 	}
-	if (m_pTwh && m_pTwh->DoSetCursor(NULL, &event.ptMouse)) {
+	if (m_pTwh && !IsReadOnly() && m_pTwh->DoSetCursor(NULL, &event.ptMouse)) {
 		return;
 	}
 	else {
-		::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_IBEAM)));
+		::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IsReadOnly() ? IDC_ARROW : IDC_IBEAM)));
 	}
 }
 
@@ -2789,6 +2850,7 @@ void RichEdit::SetAttribute(const std::wstring& strName, const std::wstring& str
 	else if (strName == _T("wantreturnmsg")) SetNeedReturnMsg(strValue == _T("true"));
 	else if (strName == _T("returnmsgwantctrl")) SetReturnMsgWantCtrl(strValue == _T("true"));
 	else if (strName == _T("rich")) SetRich(strValue == _T("true"));
+	else if (strName == _T("maxchar")) SetLimitText(_ttoi(strValue.c_str()));
 	else Box::SetAttribute(strName, strValue);
 }
 
@@ -3078,6 +3140,20 @@ void RichEdit::AddLinkInfo(const CHARRANGE cr, const std::wstring &linkInfo)
 	m_linkInfo.push_back(info);
 }
 
+void RichEdit::AddLinkInfoEx(const CHARRANGE cr, const std::wstring& linkInfo)
+{
+	CHARFORMAT2 cf2;
+	ZeroMemory(&cf2, sizeof(CHARFORMAT2));
+	cf2.cbSize = sizeof(CHARFORMAT2);
+	cf2.dwMask = CFM_LINK;
+	cf2.dwEffects |= CFE_LINK;
+
+	SetSel(cr.cpMin, cr.cpMax);
+	SetSelectionCharFormat(cf2);
+
+	AddLinkInfo(cr, linkInfo);
+}
+
 //根据point来hittest自定义link的数据，返回true表示在link上，info是link的自定义属性
 bool RichEdit::HittestCustomLink(CPoint pt, std::wstring& info)
 {
@@ -3104,6 +3180,22 @@ void RichEdit::ClearImageCache()
 	__super::ClearImageCache();
 	m_sFocusedImage.ClearCache();
 }
+
+
+void RichEdit::RaiseUIAValueEvent(const std::wstring oldText, const std::wstring newText)
+{
+#if defined(ENABLE_UIAUTOMATION)
+	if (m_pUIAProvider != nullptr && UiaClientsAreListening()) {
+		VARIANT vtOld = { 0 }, vtNew = { 0 };
+		vtOld.vt = vtNew.vt = VT_BSTR;
+		vtOld.bstrVal = SysAllocString(oldText.c_str());
+		vtNew.bstrVal = SysAllocString(newText.c_str());
+
+		UiaRaiseAutomationPropertyChangedEvent(m_pUIAProvider, UIA_ValueValuePropertyId, vtOld, vtNew);
+	}
+#endif
+}
+
 
 //----------------下面函数用作辅助 字节数限制
 bool IsAsciiChar(const wchar_t ch)

@@ -85,7 +85,7 @@ bool VirtualTileLayout::SetAttribute(const std::wstring& strName, const std::wst
 
 int VirtualTileLayout::GetElementsHeight(int nCount)
 {
-	if (nCount < m_nColumns && nCount != -1) return m_szItem.cy + m_iChildMargin;
+	if (nCount <= m_nColumns && nCount != -1) return m_szItem.cy + m_iChildMargin;
 
 	VirtualTileBox *pList = dynamic_cast<VirtualTileBox*>(m_pOwner);
 	ASSERT(pList);
@@ -201,7 +201,6 @@ void VirtualTileBox::SetDataProvider(VirtualTileInterface *pProvider)
 		nbase::Bind(&VirtualTileBox::OnModelDataChanged, this, std::placeholders::_1, std::placeholders::_2),
 		nbase::Bind(&VirtualTileBox::OnModelCountChanged, this));
 }
-
 
 VirtualTileInterface* VirtualTileBox::GetDataProvider()
 {

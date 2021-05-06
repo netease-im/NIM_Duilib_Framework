@@ -60,7 +60,7 @@ public:
 		if (receiver == NULL)
 			return;
 
-		ReceiversVector::iterator it = receivers_.begin();
+		auto it = receivers_.begin();
 		for (; it != receivers_.end(); ++it)
 		{
 			if (*it == receiver)
@@ -73,7 +73,7 @@ public:
 
 	virtual ReturnT Broadcast(ParamT param)
 	{
-		ReceiversVector::iterator it = receivers_.begin();
+		auto it = receivers_.begin();
 		for (; it != receivers_.end(); ++it)
 		{
 			(*it)->Receive(param);
@@ -84,7 +84,7 @@ public:
 
 	virtual ReturnT RBroadcast(ParamT param)
 	{
-		ReceiversVector::reverse_iterator it = receivers_.rbegin();
+		auto it = receivers_.rbegin();
 		for (; it != receivers_.rend(); ++it)
 		{
 			(*it)->Receive(param);
@@ -95,7 +95,7 @@ public:
 
 	virtual ReturnT Notify(ParamT param)
 	{
-		ReceiversVector::iterator it = receivers_.begin();
+		auto it = receivers_.begin();
 		for (; it != receivers_.end(); ++it)
 		{
 			(*it)->Respond(param, this);
@@ -156,7 +156,7 @@ public:
 
 	virtual void RemoveObserver()
 	{
-		ObserversVector::iterator it = observers_.begin();
+		auto it = observers_.begin();
 		for (; it != observers_.end(); ++it)
 		{
 			(*it)->RemoveReceiver(this);

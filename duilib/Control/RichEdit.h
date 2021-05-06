@@ -21,7 +21,7 @@ public:
 	RichEdit();
 	RichEdit(const RichEdit& r) = delete;
 	RichEdit& operator=(const RichEdit& r) = delete;
-    ~RichEdit();
+    virtual ~RichEdit();
 
 	/**
 	 * @brief 判断是否接受 TAB 按键消息
@@ -686,9 +686,12 @@ public:
 	 */
     void EndRight();
 
+	virtual std::wstring GetType() const override;
+	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual void DoInit() override;
 	virtual void SetEnabled(bool bEnable = true) override;
 	virtual CSize EstimateSize(CSize szAvailable) override;
+	virtual CSize EstimateText(CSize szAvailable);
 	virtual void SetPos(UiRect rc) override;
 	virtual UINT GetControlFlags() const override;
 	virtual void HandleMessage(EventArgs& event) override;
@@ -891,6 +894,15 @@ public:
 	void AddLinkInfo(const CHARRANGE cr, const std::wstring &linkInfo);
 
 	/**
+	 * @brief 添加一个范围用于 hittest 判断是否是链接信息,并将该范围内文字样式改为系统链接样式
+	 * @param[in] str 文字内容
+	 * @param[in] cr 范围的起始位置和结束位置
+	 * @param[in] linkInfo 自定义 link 属性
+	 * @return 无
+	 */
+	void AddLinkInfoEx(const CHARRANGE cr, const std::wstring& linkInfo);
+
+	/**
 	 * @brief 根据point来hittest自定义link的数据
 	 * @param[in] pt 位置信息
 	 * @param[in] info 表示 link 的自定义属性
@@ -938,6 +950,15 @@ public:
 	 * @return 无
 	 */
 	void AttachGetNaturalSize(const FunGetNaturalSize& callback) { m_cbGetNaturalSize = callback; };
+
+	/**
+	 * @brief 通知控件值发生变化
+	 * @param[in] oldText 旧值
+	 * @param[in] newText 新值
+	 * @return 无
+	 */
+	void RaiseUIAValueEvent(const std::wstring oldText, const std::wstring newText);
+
 protected:
     CTxtWinHost* m_pTwh;
     bool m_bVScrollBarFixing;

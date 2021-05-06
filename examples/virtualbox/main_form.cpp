@@ -33,7 +33,7 @@ void MainForm::InitWindow()
 	m_EditColumn = dynamic_cast<ui::RichEdit*>(FindControl(L"edit_column"));
 	m_CheckBoxItemCenter = dynamic_cast<ui::CheckBox*>(FindControl(L"checkbox_item_center"));
 	m_EditTotal = dynamic_cast<ui::RichEdit*>(FindControl(L"edit_total"));
-	m_pTileList = dynamic_cast<VirtualTileBox*>(FindControl(L"list"));
+	m_pTileList = dynamic_cast<ui::VirtualTileBox*>(FindControl(L"list"));
 	m_OptionColumnFix = dynamic_cast<ui::Option*>(FindControl(L"option_column_fix"));
 	m_EditUpdate = dynamic_cast<ui::RichEdit*>(FindControl(L"edit_update"));
 	m_EditTaskName = dynamic_cast<ui::RichEdit*>(FindControl(L"edit_task_name"));

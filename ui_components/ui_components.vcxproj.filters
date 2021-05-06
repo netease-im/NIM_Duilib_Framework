@@ -58,6 +58,9 @@
     <Filter Include="grid">
       <UniqueIdentifier>{6df87217-a234-4ebe-9d68-3682171b1c61}</UniqueIdentifier>
     </Filter>
+    <Filter Include="popover">
+      <UniqueIdentifier>{9909f163-035f-4861-8cf9-6ba43ac5c02d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -171,6 +174,18 @@
     <ClInclude Include="comboex\FilterCombo.h">
       <Filter>comboex</Filter>
     </ClInclude>
+    <ClInclude Include="popover\popover.h">
+      <Filter>popover</Filter>
+    </ClInclude>
+    <ClInclude Include="popover\notification.h">
+      <Filter>popover</Filter>
+    </ClInclude>
+    <ClInclude Include="popover\alert.h">
+      <Filter>popover</Filter>
+    </ClInclude>
+    <ClInclude Include="popover\tooltip.h">
+      <Filter>popover</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -265,6 +280,18 @@
     </ClCompile>
     <ClCompile Include="comboex\FilterCombo.cpp">
       <Filter>comboex</Filter>
+    </ClCompile>
+    <ClCompile Include="popover\popover.cpp">
+      <Filter>popover</Filter>
+    </ClCompile>
+    <ClCompile Include="popover\notification.cpp">
+      <Filter>popover</Filter>
+    </ClCompile>
+    <ClCompile Include="popover\alert.cpp">
+      <Filter>popover</Filter>
+    </ClCompile>
+    <ClCompile Include="popover\tooltip.cpp">
+      <Filter>popover</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

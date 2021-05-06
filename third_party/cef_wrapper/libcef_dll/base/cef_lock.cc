@@ -13,23 +13,23 @@
 
 namespace base {
 
-Lock::Lock() : lock_() {
+CefLock::CefLock() : lock_() {
 }
 
-Lock::~Lock() {
+CefLock::~CefLock() {
   DCHECK(owning_thread_ref_.is_null());
 }
 
-void Lock::AssertAcquired() const {
+void CefLock::AssertAcquired() const {
   DCHECK(owning_thread_ref_ == PlatformThread::CurrentRef());
 }
 
-void Lock::CheckHeldAndUnmark() {
+void CefLock::CheckHeldAndUnmark() {
   DCHECK(owning_thread_ref_ == PlatformThread::CurrentRef());
   owning_thread_ref_ = PlatformThreadRef();
 }
 
-void Lock::CheckUnheldAndMark() {
+void CefLock::CheckUnheldAndMark() {
   // Hitting this DCHECK means that your code is trying to re-enter a lock that
   // is already held. The Chromium Lock implementation is not reentrant.
   // See "Why can the holder of a Lock not reacquire it?" at

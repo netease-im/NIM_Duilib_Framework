@@ -126,6 +126,8 @@ bool MsgBox::OnClicked(ui::EventArgs* msg)
 void MsgBox::SetTitle(const std::wstring &str)
 {
 	title_->SetText(str);
+
+	::SetWindowText(m_hWnd, str.c_str());
 }
 
 void MsgBox::SetContent(const std::wstring &str)

@@ -19,6 +19,8 @@ class UILIB_API VBox : public Box
 {
 public:
 	VBox();
+
+	virtual std::wstring GetType() const override;
 };
 
 }

@@ -16,11 +16,15 @@ public:
 	Combo& operator=(const Combo& r) = delete;
 
 	/// 重写父类方法，提供个性化功能，请参考父类声明
+	virtual std::wstring GetType() const override;
+	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual bool Add(Control* pControl) override;
 	virtual bool Remove(Control* pControl) override;
 	virtual bool RemoveAt(std::size_t iIndex) override;
 	virtual void RemoveAll() override;
 	virtual void Activate() override;
+	virtual void Deactivate() override;
+	virtual bool IsActivated() override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 	virtual void PaintText(IRenderContext* pRender) override;
 
@@ -94,7 +98,7 @@ public:
 	 * @param[in] bTrigger 是否触发选择事件
 	 * @return 返回 true 表示成功，否则为 false
 	 */
-	void SelectItem(int iIndex, bool bTrigger = false);
+	bool SelectItem(int iIndex, bool bTrigger = false);
 
 	/**
 	 * @brief 获取指定索引下的子项控件

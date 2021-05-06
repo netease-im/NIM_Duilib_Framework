@@ -12,7 +12,9 @@ class UILIB_API LabelTemplate : public InheritType
 public:
 	LabelTemplate();
 
-    /// 重写父类方法，提供个性化功能，请参考父类声明
+	/// 重写父类方法，提供个性化功能，请参考父类声明
+	virtual std::wstring GetType() const override;
+	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual std::wstring GetText() const;
 	virtual std::string GetUTF8Text() const;
 	virtual void SetText(const std::wstring& strText);
@@ -32,20 +34,20 @@ public:
      */
 	void SetTextStyle(UINT uStyle);
 
-    /**
+	/**
      * @brief 获取文本样式
      * @return 返回文本样式
      */
 	UINT GetTextStyle() const;
 
-    /**
+	/**
      * @brief 获取指定状态下的文本颜色
      * @param[in] stateType 要获取的状态标志
      * @return 返回指定状态下的文本颜色
      */
 	std::wstring GetStateTextColor(ControlStateType stateType);
 
-    /**
+	/**
      * @brief 设置指定状态下的文本颜色
      * @param[in] stateType 要设置的状态标志
      * @param[in] dwTextColor 要设置的状态颜色字符串，该值必须在 global.xml 中存在
@@ -165,6 +167,26 @@ LabelTemplate<InheritType>::LabelTemplate() :
 }
 
 template<typename InheritType>
+inline std::wstring LabelTemplate<InheritType>::GetType() const
+{
+	return DUI_CTR_LABEL;
+}
+
+template<typename InheritType>
+inline UIAControlProvider* LabelTemplate<InheritType>::GetUIAProvider()
+{
+#if defined(ENABLE_UIAUTOMATION)
+	if (this->m_pUIAProvider == nullptr)
+	{
+		this->m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIALabelProvider(this));
+	}
+	return this->m_pUIAProvider;
+#else
+  return nullptr;
+#endif
+}
+
+template<typename InheritType>
 std::wstring LabelTemplate<InheritType>::GetText() const
 {
     std::wstring strText = m_sText;
@@ -239,8 +261,9 @@ void LabelTemplate<InheritType>::CheckShowToolTip()
 template<typename InheritType>
 std::string LabelTemplate<InheritType>::GetUTF8Text() const
 {
+    std::wstring strIn = GetText();
     std::string strOut;
-    StringHelper::UnicodeToMBCS(GetText(), strOut, CP_UTF8);
+    StringHelper::UnicodeToMBCS(strIn, strOut, CP_UTF8);
     return strOut;
 }
 
@@ -400,8 +423,8 @@ void LabelTemplate<InheritType>::PaintText(IRenderContext* pRender)
     rc.top += m_rcTextPadding.top;
     rc.bottom -= m_rcTextPadding.bottom;
 
-    auto stateType = m_uButtonState;
-    DWORD dwClrColor = this->GetWindowColor(GetPaintStateTextColor(m_uButtonState, stateType));
+    auto stateType = this->m_uButtonState;
+    DWORD dwClrColor = this->GetWindowColor(GetPaintStateTextColor(this->m_uButtonState, stateType));
 
     if (m_bSingleLine)
         m_uTextStyle |= DT_SINGLELINE;

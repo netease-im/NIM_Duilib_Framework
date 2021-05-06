@@ -96,7 +96,7 @@ public:
 	ListBox* m_pLayout;
 private:
 	virtual void InitWindow() override;
-	void CMenuWnd::OnFinalMessage(HWND hWnd) override;
+	void OnFinalMessage(HWND hWnd) override;
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 };

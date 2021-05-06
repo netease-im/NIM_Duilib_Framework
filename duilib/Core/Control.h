@@ -17,6 +17,8 @@ public:
 	}
 };
 
+class UIAControlProvider;
+
 class UILIB_API Control : public PlaceHolder
 {
 	typedef std::map<int, CEventSource> GifEventMap;
@@ -25,6 +27,8 @@ public:
 	Control(const Control& r);
 	Control& operator=(const Control& r) = delete;
     virtual ~Control();
+
+	virtual std::wstring GetType() const;
 
     /// 图形相关
 	/**
@@ -481,11 +485,25 @@ public:
 	virtual bool IsActivatable() const;
 
 	/**
-	 * @brief 待补充
+	 * @brief 激活控件，如点击、选中、展开等操作
 	 * @param[in] 待补充
 	 * @return 待补充
 	 */
 	virtual void Activate();
+
+	/**
+	 * @brief 取消激活控件，如反选、隐藏等操作
+	 * @param[in] 待补充
+	 * @return 待补充
+	 */
+	virtual void Deactivate();
+
+	/**
+	 * @brief 是否激活，如选中、展开等
+	 * @param[in] 待补充
+	 * @return 待补充
+	 */
+	virtual bool IsActivated();
 
 	/// 控件搜索
 	/**
@@ -547,6 +565,12 @@ public:
 	 * @return 返回是否在范围内，true 在滚动条当前滚动位置范围内，false 不在滚动条当前滚动位置范围内
 	 */
 	virtual bool IsPointInWithScrollOffset(const CPoint& point) const;
+
+	/**
+	 * @brief Get ui automation provider 
+	 * @return nullptr or pointer
+	 */
+	virtual UIAControlProvider* GetUIAProvider();
 
 	// 消息处理
 	/**
@@ -881,6 +905,20 @@ public:
 	void AttachDoubleClick(const EventCallback& callback) { OnEvent[kEventMouseDoubleClick] += callback; }
 
 	/**
+	* @brief 监听控件关闭前最后一条消息
+	* @param[in] callback 事件处理的回调函数，请参考 EventCallback 声明
+	* @return 无
+	*/
+	void AttachLastEvent(const EventCallback& callback) { OnEvent[kEventLast] += callback; }
+
+	/**
+	* @brief 监听控件显示或隐藏事件
+	* @param[in] callback 事件处理的回调函数，请参考 EventCallback 声明
+	* @return 无
+	*/
+	void AttachVisibleChange(const EventCallback& callback) { OnEvent[kEventVisibleChange] += callback; }
+
+	/**
 	 * @brief 取消监听指定事件，见 EventType 枚举
 	 * @param[in] callback 事件处理的回调函数，请参考 EventCallback 声明
 	 * @return 无
@@ -964,6 +1002,8 @@ protected:
 	AnimationManager m_animationManager;
 	nbase::WeakCallbackFlag m_loadBkImageWeakFlag;
 	static const int m_nVirtualEventGifStop;
+
+	UIAControlProvider* m_pUIAProvider;
 };
 
 } // namespace ui

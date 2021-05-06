@@ -27,7 +27,7 @@ public:
 	 * @param[in] szItem 子项大小数据
 	 * @return 无
 	 */
-	void SetItemSize(CSize szItem);
+	void SetItemSize(CSize szItem, bool bNeedDpiScale = true);
 
 	/**
 	 * @brief 获取列数量
@@ -51,6 +51,8 @@ class UILIB_API TileBox : public Box
 {
 public:
 	TileBox();
+
+	virtual std::wstring GetType() const override;
 };
 
 }

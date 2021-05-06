@@ -8,6 +8,8 @@
 #include "windows_manager/window_ex.h"
 #include "shadow_wnd/shadow_wnd.h"
 #include "toast/toast.h"
+#include "popover/popover.h"
+#include "popover/notification.h"
 
 #if 0
 // CEF 控件需要使用第三方 libcef_dll_wrapper 封装层

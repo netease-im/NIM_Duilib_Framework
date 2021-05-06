@@ -70,7 +70,7 @@ class CefByteReadHandler : public CefReadHandler {
   int64 offset_;
   CefRefPtr<CefBase> source_;
 
-  base::Lock lock_;
+  base::CefLock lock_;
 
   IMPLEMENT_REFCOUNTING(CefByteReadHandler);
   DISALLOW_COPY_AND_ASSIGN(CefByteReadHandler);

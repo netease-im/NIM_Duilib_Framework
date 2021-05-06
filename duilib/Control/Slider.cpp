@@ -14,6 +14,11 @@ Slider::Slider() :
 	m_uTextStyle = DT_SINGLELINE | DT_CENTER;
 }
 
+std::wstring Slider::GetType() const
+{
+	return DUI_CTR_SLIDER;
+}
+
 UiRect Slider::GetProgressPos()
 {
 	UiRect rc;

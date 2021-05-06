@@ -15,17 +15,34 @@ TreeNode::TreeNode() :
 	
 }
 
+std::wstring TreeNode::GetType() const
+{
+	return DUI_CTR_TREENODE;
+}
+
+UIAControlProvider* TreeNode::GetUIAProvider()
+{
+#if defined(ENABLE_UIAUTOMATION)
+	if (m_pUIAProvider == nullptr)
+	{
+		m_pUIAProvider = static_cast<UIAControlProvider*>(new (std::nothrow) UIATreeNodeProvider(this));
+	}
+	return m_pUIAProvider;
+#else
+	return nullptr;
+#endif
+}
+
 void TreeNode::SetTreeView(TreeView* pTreeView)
 {
-	m_pTreeView = pTreeView;
+    m_pTreeView = pTreeView;
 }
 
 bool TreeNode::OnClickItem(EventArgs* pMsg)
 {
-	TreeNode* pItem = static_cast<TreeNode*>(pMsg->pSender);
-	pItem->SetExpand(!pItem->IsExpand(), true);
-
-	return true;
+    TreeNode* pItem = static_cast<TreeNode*>(pMsg->pSender);
+    pItem->SetExpand(!pItem->IsExpand(), true);
+    return true;
 }
 
 bool TreeNode::IsVisible() const
@@ -206,6 +223,11 @@ TreeView::TreeView() :
 {
 	m_rootNode.reset(new TreeNode());
 	m_rootNode->SetTreeView(this);
+}
+
+std::wstring TreeView::GetType() const
+{
+	return DUI_CTR_TREEVIEW;
 }
 
 void TreeView::SetAttribute(const std::wstring& strName, const std::wstring& strValue)

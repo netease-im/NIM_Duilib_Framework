@@ -12,6 +12,8 @@ public:
 	Progress();
 
 	/// 重写父类方法，提供个性化功能，请参考父类声明
+	virtual std::wstring GetType() const override;
+	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 	virtual void PaintStatusImage(IRenderContext* pRender) override;
 	virtual void ClearImageCache() override;
@@ -113,6 +115,66 @@ public:
 	 */
 	virtual UiRect GetProgressPos();
 
+	/**
+	 * @brief 播放Marquee
+	 * @return 无
+	 */
+	virtual void Play();
+
+	/**
+	 * @brief 绘制Marquee
+	 * @return 无
+	 */
+	void PaintMarquee(IRenderContext* pRender);
+
+	/**
+	 * @brief 是否是Marquee
+	 * @return 无
+	 */
+	bool IsMarquee();
+
+	/**
+	 * @brief 设置Marquee
+	 * @return 无
+	 */
+	void SetMarquee(bool bMarquee);
+
+	/**
+	 * @brief 获取Marquee宽度
+	 * @return 无
+	 */
+	int GetMarqueeWidth();
+
+	/**
+	 * @brief 设置Marquee宽度
+	 * @return 无
+	 */
+	void SetMarqueeWidth(int nMarqueeWidth);
+
+	/**
+	 * @brief 获取Marquee步长
+	 * @return 无
+	 */
+	int GetMarqueeStep();
+
+	/**
+	 * @brief 设置Marquee步长
+	 * @return 无
+	 */
+	void SetMarqueeStep(int nMarqueeStep);
+
+	/**
+	 * @brief 获取Marquee持续时间
+	 * @return 无
+	 */
+	int GetMarqueeElapsed();
+
+	/**
+	 * @brief 设置Marquee持续时间
+	 * @return 无
+	 */
+	void SetMarqueeElapsed(int nMarqueeElapsed);
+
 protected:
 	bool m_bHorizontal;
 	bool m_bStretchForeImage;
@@ -122,6 +184,14 @@ protected:
 	Image m_progressImage;
 	std::wstring m_sProgressColor;
 	std::wstring m_sProgressImageModify;
+
+	bool m_bMarquee;
+	int m_nMarqueeWidth;
+	int m_nMarqueeStep;
+	int m_nMarqueeElapsed;
+	int m_nMarqueePos;
+
+	nbase::WeakCallbackFlag m_timer;
 };
 
 } // namespace ui

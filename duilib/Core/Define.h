@@ -144,6 +144,8 @@ enum EventType
 
 	kEventNotify,	//仅作简单的通知，有复杂数据请通过其他方式实现
 
+	kEventVisibleChange,
+
 	kEventLast,
 };
 
@@ -237,6 +239,7 @@ EventType StringToEnum(const std::wstring& messageType);
 #define  DUI_CTR_VLISTBOX                        (_T("VListBox"))
 #define  DUI_CTR_VIRTUALLISTBOX                  (_T("VirtualListBox"))
 #define  DUI_CTR_TILELISTBOX                     (_T("TileListBox"))
+#define  DUI_CTR_VIRTUALTILEBOX                  (_T("VirtualTileBox"))
 
 #define  DUI_CTR_TREENODE                        (_T("TreeNode"))
 #define  DUI_CTR_TREEVIEW                        (_T("TreeView"))

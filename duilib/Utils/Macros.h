@@ -229,5 +229,10 @@ typedef struct tagPOINTER_PEN_INFO {
 #define PA_ACTIVATE                     MA_ACTIVATE
 #define PA_NOACTIVATE                   MA_NOACTIVATE
 
+#define UIA_CHECK_ELEMENT(element) if(!element) return UIA_E_ELEMENTNOTAVAILABLE
+
+#define UIA_CHECK_ELEMENT_RETURN(element)          \
+	if(!element) return UIA_E_ELEMENTNOTAVAILABLE; \
+	else return S_OK 
 }
 #endif // UI_MACROS_H_

@@ -20,6 +20,11 @@ void TabBox::DoInit()
 	if (m_iInitSel != -1)  SelectItem(m_iInitSel);
 }
 
+std::wstring TabBox::GetType() const
+{
+	return DUI_CTR_TABBOX;
+}
+
 bool TabBox::Add(Control* pControl)
 {
 	bool ret = Box::Add(pControl);

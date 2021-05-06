@@ -20,7 +20,6 @@ class Box;
 #define UIFIND_TOP_FIRST     0x00000008
 #define UIFIND_ME_FIRST      0x80000000
 
-
 /////////////////////////////////////////////////////////////////////////////////////
 //
 
@@ -29,6 +28,7 @@ typedef struct tagTFontInfo
 	HFONT hFont;
 	std::wstring sFontName;
 	int iSize;
+	int iWeight;
 	bool bBold;
 	bool bUnderline;
 	bool bStrikeout;
@@ -61,6 +61,8 @@ public:
 
 /////////////////////////////////////////////////////////////////////////////////////
 //
+
+class UIAWindowProvider;
 
 class UILIB_API Window : public virtual nbase::SupportWeakCallback
 {
@@ -150,6 +152,12 @@ public:
 	 * @return 无
 	 */
 	void ShowModalFake(HWND parent_hwnd);
+
+	/**
+	 * @brief 是否是模态显示
+	 * @return 是否是模态显示
+	 */
+	bool IsFakeModal();
 
 	/**
 	 * @brief 居中窗口，支持扩展屏幕
@@ -897,10 +905,19 @@ public:
 	virtual void OnInitLayout();
 
 	/**		
-	* @brief 是否将要关闭
-	* @return 无
-	*/
+	 * @brief 是否将要关闭
+	 * @return 无
+	 */
 	bool IsClosing(){ return m_bCloseing; };
+
+#if defined(ENABLE_UIAUTOMATION)
+	/**
+     * @brief Get ui automation provider
+     * @return nullptr or pointer
+     */
+	UIAWindowProvider* GetUIAProvider();
+#endif
+
 
 private:
 	static Control* CALLBACK __FindControlFromNameHash(Control* pThis, LPVOID pData);
@@ -942,6 +959,8 @@ protected:
 
 	Box* m_pRoot;
 	EventMap OnEvent;
+
+	UIAWindowProvider* m_pUIAProvider;
 
 protected:
 	CSize m_szMinWindow;
