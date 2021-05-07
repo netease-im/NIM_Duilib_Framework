@@ -262,9 +262,9 @@ void ShadowCombo::Activate()
 void ShadowCombo::Deactivate()
 {
   if (!IsActivatable()) return;
-  if (!m_pWindow) return;
+  if (!IsActivated()) return;
 
-  m_pWindow->Close();
+  m_pWindow->PostMessage(WM_KILLFOCUS);
   Invalidate();
 }
 
