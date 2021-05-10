@@ -42,11 +42,6 @@
 #define _WIN32_WINNT _WIN32_WINNT_WINXP
 #endif
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1928)
-#define ENABLE_UIAUTOMATION
-#pragma comment(lib, "uiautomationcore.lib")
-#endif
-
 
 
 // Must define GDIPVER before include UIlib.h
