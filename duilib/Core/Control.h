@@ -76,7 +76,7 @@ public:
 	 * @param[in] strImage 要设置的图片路径
 	 * @return 无
 	 */
-    void SetBkImage(const std::wstring& strImage);
+	void SetBkImage(const std::wstring& strImage);
 
 	/**
 	 * @brief 设置背景图片（UTF8 格式字符串）
@@ -232,6 +232,13 @@ public:
 	 * @return 无
 	 */
 	void SetBorderRound(CSize cxyRound);
+
+	/**
+	 * @brief 设置边框阴影
+	 * @param[in] 要设置的阴影属性
+	 * @return 无
+	 */
+	void SetBoxShadow(const std::wstring& strShadow);
 
     /// 鼠标相关
 	/**
@@ -942,6 +949,7 @@ protected:
 	virtual bool ButtonUp(EventArgs& msg);
 
 	/// 绘制相关保护成员函数，不允许外部直接调用
+	virtual void PaintShadow(IRenderContext* pRender);
 	virtual void PaintBkColor(IRenderContext* pRender);
 	virtual void PaintBkImage(IRenderContext* pRender);
 	virtual void PaintStatusColor(IRenderContext* pRender);
@@ -1004,6 +1012,7 @@ protected:
 	static const int m_nVirtualEventGifStop;
 
 	UIAControlProvider* m_pUIAProvider;
+	BoxShadow m_boxShadow;
 };
 
 } // namespace ui

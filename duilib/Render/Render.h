@@ -67,6 +67,8 @@ public:
 	virtual void DrawPath(const IPath* path, const IPen* pen) override;
 	virtual void FillPath(const IPath* path, const IBrush* brush) override;
 
+	void DrawBoxShadow(const UiRect& rc, const CSize& roundSize, const CPoint& cpOffset, int nBlurRadius, int nBlurSize, int nSpreadSize, DWORD dwColor, bool bExclude) override;
+
 private:
 	HDC			m_hDC;
 	int			m_saveDC;

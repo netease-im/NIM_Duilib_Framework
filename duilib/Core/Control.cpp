@@ -5,6 +5,7 @@
 namespace ui 
 {
 	const int Control::m_nVirtualEventGifStop = 1;
+
 Control::Control() :
 	OnXmlEvent(),
 	OnEvent(),
@@ -43,10 +44,11 @@ Control::Control() :
 	m_animationManager(),
 	m_imageMap(),
 	m_bkImage(),
-	m_loadBkImageWeakFlag()
+	m_loadBkImageWeakFlag(),
 #if defined(ENABLE_UIAUTOMATION)
-	,m_pUIAProvider(nullptr)
+	m_pUIAProvider(nullptr),
 #endif
+	m_boxShadow()
 {
 	m_colorMap.SetControl(this);
 	m_imageMap.SetControl(this);
@@ -73,6 +75,7 @@ Control::Control(const Control& r) :
 	m_szEstimateSize(r.m_szEstimateSize),
 	m_renderOffset(r.m_renderOffset),
 	m_cxyBorderRound(r.m_cxyBorderRound),
+	m_boxShadow(r.m_boxShadow),
 	m_rcMargin(r.m_rcMargin),
 	m_rcPaint(r.m_rcPaint),
 	m_rcBorderSize(r.m_rcBorderSize),
@@ -346,6 +349,11 @@ void Control::SetBorderRound(CSize cxyRound)
 	DpiManager::GetInstance()->ScaleSize(cxyRound);
     m_cxyBorderRound = cxyRound;
     Invalidate();
+}
+
+void Control::SetBoxShadow(const std::wstring& strShadow)
+{
+	m_boxShadow.SetBoxShadowString(strShadow);
 }
 
 CursorType Control::GetCursorType() const
@@ -1015,10 +1023,10 @@ bool Control::ButtonUp(EventArgs& msg)
 
 void Control::SetAttribute(const std::wstring& strName, const std::wstring& strValue)
 {
-	if ( strName == _T("class") ) {
+	if (strName == _T("class")) {
 		SetClass(strValue);
 	}
-	else if( strName == _T("halign") ) {
+	else if (strName == _T("halign")) {
 		if (strValue == _T("left")) {
 			SetHorAlignType(kHorAlignLeft);
 		}
@@ -1032,7 +1040,7 @@ void Control::SetAttribute(const std::wstring& strName, const std::wstring& strV
 			ASSERT(FALSE);
 		}
 	}
-	else if( strName == _T("valign") ) {
+	else if (strName == _T("valign")) {
 		if (strValue == _T("top")) {
 			SetVerAlignType(kVerAlignTop);
 		}
@@ -1046,20 +1054,20 @@ void Control::SetAttribute(const std::wstring& strName, const std::wstring& strV
 			ASSERT(FALSE);
 		}
 	}
-	else if( strName == _T("margin") ) {
-        UiRect rcMargin;
-        LPTSTR pstr = NULL;
-        rcMargin.left = _tcstol(strValue.c_str(), &pstr, 10);  ASSERT(pstr);    
-        rcMargin.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);    
-        rcMargin.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);    
-        rcMargin.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);    
-        SetMargin(rcMargin);
-    }
-    else if( strName == _T("bkcolor") || strName == _T("bkcolor1") ) {
+	else if (strName == _T("margin")) {
+		UiRect rcMargin;
+		LPTSTR pstr = NULL;
+		rcMargin.left = _tcstol(strValue.c_str(), &pstr, 10);  ASSERT(pstr);
+		rcMargin.top = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);
+		rcMargin.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);
+		rcMargin.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
+		SetMargin(rcMargin);
+	}
+	else if (strName == _T("bkcolor") || strName == _T("bkcolor1")) {
 		LPCTSTR pValue = strValue.c_str();
-        while( *pValue > _T('\0') && *pValue <= _T(' ') ) pValue = ::CharNext(pValue);
-        SetBkColor(pValue);
-    }
+		while (*pValue > _T('\0') && *pValue <= _T(' ')) pValue = ::CharNext(pValue);
+		SetBkColor(pValue);
+	}
 	else if (strName == _T("bordersize")) {
 		std::wstring nValue = strValue;
 		if (nValue.find(',') == std::wstring::npos) {
@@ -1077,13 +1085,14 @@ void Control::SetAttribute(const std::wstring& strName, const std::wstring& strV
 			SetBorderSize(rcBorder);
 		}
 	}
-    else if( strName == _T("borderround") ) {
-        CSize cxyRound;
-        LPTSTR pstr = NULL;
-        cxyRound.cx = _tcstol(strValue.c_str(), &pstr, 10);  ASSERT(pstr);    
-        cxyRound.cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);     
-        SetBorderRound(cxyRound);
-    }
+	else if (strName == _T("borderround")) {
+		CSize cxyRound;
+		LPTSTR pstr = NULL;
+		cxyRound.cx = _tcstol(strValue.c_str(), &pstr, 10);  ASSERT(pstr);
+		cxyRound.cy = _tcstol(pstr + 1, &pstr, 10);    ASSERT(pstr);
+		SetBorderRound(cxyRound);
+	}
+	else if (strName == _T("boxshadow")) SetBoxShadow(strValue);
 	else if( strName == _T("width") ) {
 		if ( strValue == _T("stretch") ) {
 			SetFixedWidth(DUI_LENGTH_STRETCH);
@@ -1207,10 +1216,9 @@ void Control::SetAttribute(const std::wstring& strName, const std::wstring& strV
 	else if (strName == _T("fadeinoutyfromtop")) m_animationManager.SetFadeInOutY(strValue == _T("true"), false);
 	else if (strName == _T("fadeinoutyfrombottom")) m_animationManager.SetFadeInOutY(strValue == _T("true"), true);
 	else if (strName == _T("receivepointer")) SetReceivePointerMsg(strValue == _T("true"));
-    else
-    {
-        ASSERT(FALSE);
-    }
+	else {
+	ASSERT(FALSE);
+	}
 }
 
 void Control::SetClass(const std::wstring& strClass)
@@ -1388,8 +1396,10 @@ void Control::AlphaPaint(IRenderContext* pRender, const UiRect& rcPaint)
 			// IsCacheDirty~{Sk~}m_bCacheDirty~{RbRe2;R;Qy~}
 			if (m_bCacheDirty) {
 				pCacheRender->Clear();
-				UiRect rcClip = { 0, 0, size.cx, size.cy };
-				AutoClip alphaClip(pCacheRender, rcClip, m_bClip);
+				int scaleOffset = m_boxShadow.HasShadow() ? (m_boxShadow.m_nBlurSize * 2 + abs(m_boxShadow.m_cpOffset.x)) : 0;
+				UiRect rcClip = { 0, 0, size.cx + scaleOffset,size.cy + scaleOffset };
+
+				AutoClip alphaClip(pCacheRender, rcClip, IsClip());
 				AutoClip roundAlphaClip(pCacheRender, rcClip, m_cxyBorderRound.cx, m_cxyBorderRound.cy, bRoundClip);
 
 				pCacheRender->SetRenderTransparent(true);
@@ -1419,8 +1429,9 @@ void Control::AlphaPaint(IRenderContext* pRender, const UiRect& rcPaint)
 
 			if (IsCacheDirty()) {
 				pCacheRender->Clear();
-				UiRect rcClip = { 0, 0, size.cx, size.cy };
-				AutoClip alphaClip(pCacheRender, rcClip, m_bClip);
+				int scaleOffset = m_boxShadow.HasShadow() ? (m_boxShadow.m_nBlurSize * 2 + abs(m_boxShadow.m_cpOffset.x)) : 0;
+				UiRect rcClip = { 0,0,size.cx + scaleOffset,size.cy + scaleOffset };
+				AutoClip alphaClip(pCacheRender, rcClip, IsClip());
 				AutoClip roundAlphaClip(pCacheRender, rcClip, m_cxyBorderRound.cx, m_cxyBorderRound.cy, bRoundClip);
 
 				pCacheRender->SetRenderTransparent(true);
@@ -1437,8 +1448,14 @@ void Control::AlphaPaint(IRenderContext* pRender, const UiRect& rcPaint)
 		}
 	}
 	else {
-		AutoClip clip(pRender, m_rcItem, m_bClip);
-		AutoClip roundClip(pRender, m_rcItem, m_cxyBorderRound.cx, m_cxyBorderRound.cy, bRoundClip);
+		int scaleOffset = m_boxShadow.HasShadow() ? (m_boxShadow.m_nBlurSize + abs(m_boxShadow.m_cpOffset.x)) : 0;
+		UiRect rcClip = { m_rcItem.left - scaleOffset,
+					m_rcItem.top - scaleOffset,
+					m_rcItem.right + scaleOffset,
+					m_rcItem.bottom + scaleOffset,
+		};
+		AutoClip clip(pRender, rcClip, IsClip());
+		AutoClip roundClip(pRender, rcClip, m_cxyBorderRound.cx, m_cxyBorderRound.cy, bRoundClip);
 		CPoint ptOldOrg = pRender->OffsetWindowOrg(m_renderOffset);
 		Paint(pRender, rcPaint);
 		PaintChild(pRender, rcPaint);
@@ -1448,14 +1465,30 @@ void Control::AlphaPaint(IRenderContext* pRender, const UiRect& rcPaint)
 
 void Control::Paint(IRenderContext* pRender, const UiRect& rcPaint)
 {
-    if( !::IntersectRect(&m_rcPaint, &rcPaint, &m_rcItem) ) return;
+	if( !::IntersectRect(&m_rcPaint, &rcPaint, &m_rcItem) ) return;
 
+	PaintShadow(pRender);
 	PaintBkColor(pRender);
 	PaintBkImage(pRender);
 	PaintStatusColor(pRender);
 	PaintStatusImage(pRender);
 	PaintText(pRender);
 	PaintBorder(pRender);
+}
+
+void Control::PaintShadow(IRenderContext* pRender)
+{
+	if (!m_boxShadow.HasShadow())
+		return;
+
+	pRender->DrawBoxShadow(m_rcPaint,
+		m_cxyBorderRound,
+		m_boxShadow.m_cpOffset,
+		m_boxShadow.m_nBlurRadius,
+		m_boxShadow.m_nBlurSize,
+		m_boxShadow.m_nSpreadSize,
+		GlobalManager::GetTextColor(m_boxShadow.m_strColor),
+		m_boxShadow.m_bExclude);
 }
 
 void Control::PaintBkColor(IRenderContext* pRender)

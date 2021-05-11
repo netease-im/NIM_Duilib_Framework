@@ -204,7 +204,7 @@ public:
 		bool xtiled = false, bool ytiled = false, bool fullxtiled = true, bool fullytiled = true, int nTiledMargin = 0) = 0;
 
 	virtual void DrawColor(const UiRect& rc, DWORD dwColor, BYTE uFade = 255) = 0;
-    virtual void DrawColor(const UiRect& rc, const std::wstring& colorStr, BYTE uFade = 255) = 0;
+	virtual void DrawColor(const UiRect& rc, const std::wstring& colorStr, BYTE uFade = 255) = 0;
 
 	virtual void DrawLine(const UiRect& rc, int nSize, DWORD dwPenColor) = 0;
 	virtual void DrawLine(const IPen* pen, int x1, int y1, int x2, int y2) = 0;
@@ -221,6 +221,8 @@ public:
 
 	virtual void DrawPath(const IPath* path, const IPen* pen) = 0;
 	virtual void FillPath(const IPath* path, const IBrush* brush) = 0;
+
+	virtual void DrawBoxShadow(const UiRect& rc, const CSize& roundSize, const CPoint& cpOffset, int nBlurRadius, int nBlurSize, int nSpreadSize, DWORD dwColor, bool bExclude) = 0;
 };
 
 class UILIB_API IRenderFactory

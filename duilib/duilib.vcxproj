@@ -654,6 +654,7 @@
     </ClCompile>
     <ClCompile Include="UIlib.cpp" />
     <ClCompile Include="Utils\ApiWrapper.cpp" />
+    <ClCompile Include="Utils\BoxShadow.cpp" />
     <ClCompile Include="Utils\DpiManager.cpp" />
     <ClCompile Include="Utils\FontManager.cpp" />
     <ClCompile Include="Utils\MultiLangSupport.cpp" />
@@ -718,6 +719,7 @@
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="UIlib.h" />
     <ClInclude Include="Utils\ApiWrapper.h" />
+    <ClInclude Include="Utils\BoxShadow.h" />
     <ClInclude Include="Utils\DpiManager.h" />
     <ClInclude Include="Utils\FontManager.h" />
     <ClInclude Include="Utils\Macros.h" />
