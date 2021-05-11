@@ -580,14 +580,15 @@ void Control::SetKeyboardEnabled(bool bEnabled)
 
 bool Control::IsFocused() const
 {
-    return m_bFocused;
+    return m_pWindow->GetFocus() == this;
 }
 
 void Control::SetFocus()
 {
 	if( m_bNoFocus )
 		return;
-    if( m_pWindow != NULL ) m_pWindow->SetFocus(this);
+
+  if( m_pWindow != NULL ) m_pWindow->SetFocus(this);
 }
 
 UINT Control::GetControlFlags() const

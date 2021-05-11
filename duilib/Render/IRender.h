@@ -29,6 +29,7 @@ private:
 
 class UILIB_API IBitmap : public nbase::SupportWeakCallback
 {
+public:
 	virtual bool Init(HDC hSrcDC, int width, int height, bool flipBItmap) = 0;
 	virtual void Clear() = 0;
 	virtual HBITMAP DetachBitmap() = 0;
