@@ -14,8 +14,16 @@ void CShadowComboWnd::Init(ShadowCombo* pOwner) {
   // Position the popup window in absolute space
   CSize szDrop = m_pOwner->GetDropBoxSize();
   UiRect rcOwner = pOwner->GetPosWithScrollOffset();
+  int iItemHeight = pOwner->GetItemAt(m_iOldSel)->GetFixedHeight();
+  int iOffset = iItemHeight * (m_iOldSel + 1);
+  int iScrollPos = pOwner->GetCustomLayout()->GetScrollPos().cy;
+  if (iScrollPos > iItemHeight) {
+    iOffset = iItemHeight;
+  }
+
   UiRect rc = rcOwner;
-  rc.top = rc.bottom + 1;		// 父窗口left、bottom位置作为弹出窗口起点
+  rc.top = rc.bottom;		// 父窗口left、bottom位置作为弹出窗口起点
+  rc.top = rc.top - iOffset;
   rc.bottom = rc.top + szDrop.cy;	// 计算弹出窗口高度
   if (szDrop.cx > 0) rc.right = rc.left + szDrop.cx;	// 计算弹出窗口宽度
 
@@ -51,8 +59,8 @@ void CShadowComboWnd::Init(ShadowCombo* pOwner) {
   if (rc.bottom > rcWork.bottom || m_pOwner->IsPopupTop()) {
     rc.left = rcOwner.left;
     rc.right = rcOwner.right;
-    rc.top = rcOwner.top - min(cyFixed, szDrop.cy);
-    rc.bottom = rcOwner.top;
+    rc.top = rcOwner.bottom - min(cyFixed, szDrop.cy);
+    rc.bottom = rcOwner.bottom;
 
     rc.left = rc.left - shadow_corner.left;
     rc.right = rc.right + shadow_corner.right;

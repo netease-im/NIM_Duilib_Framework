@@ -177,6 +177,12 @@ public:
   std::wstring GetShadowImage() const { return m_sShadowImage; }
 
   /**
+  * @brief 获取Layout
+  * @return 返回Layout
+  */
+  ui::ListBox* GetCustomLayout() const { return m_pLayout.get(); }
+
+  /**
    * @brief 监听子项被选择事件
    * @param[in] callback 子项被选择后触发的回调函数
    * @return 无
