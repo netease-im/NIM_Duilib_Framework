@@ -155,14 +155,16 @@ LRESULT WkeWebView::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL
   case WM_RBUTTONUP:
   case WM_MOUSEMOVE:
   {
-    ui::CPoint pt;
-    pt.x = GET_X_LPARAM(lParam);
-    pt.y = GET_Y_LPARAM(lParam);
-    if (pt.x == -1 || pt.y == -1) {
+    ui::CPoint pOriginPt;
+    pOriginPt.x = GET_X_LPARAM(lParam);
+    pOriginPt.y = GET_Y_LPARAM(lParam);
+    if (pOriginPt.x == -1 || pOriginPt.y == -1) {
       break;
     }
 
-    if (!GetWebViewPos(pt)) {
+    ui::CPoint pWebPt = pOriginPt;
+
+    if (!GetWebViewPos(pWebPt)) {
       break;
     }
 
@@ -192,7 +194,12 @@ LRESULT WkeWebView::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL
     if (wParam & MK_RBUTTON)
       flags |= WKE_RBUTTON;
 
-    bHandled = wkeFireMouseEvent(m_wke_web_view, uMsg, pt.x, pt.y, flags);
+    bHandled = wkeFireMouseEvent(m_wke_web_view, uMsg, pWebPt.x, pWebPt.y, flags);
+
+    ui::Control* control = m_pWindow->FindControl(pOriginPt);
+    if (bHandled && control != this && control->IsMouseEnabled()) {
+      bHandled = false;
+    }
   }
   break;
 
