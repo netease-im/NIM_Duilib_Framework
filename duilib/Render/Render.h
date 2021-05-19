@@ -57,7 +57,7 @@ public:
 	virtual void DrawBezier(const IPen* pen, int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4) override;
 	virtual void DrawRect(const UiRect& rc, int nSize, DWORD dwPenColor) override;
 	virtual void DrawRoundRect(const UiRect& rc, const CSize& roundSize, int nSize, DWORD dwPenColor) override;
-	virtual void DrawText(const UiRect& rc, const std::wstring& strText, DWORD dwTextColor, const std::wstring& strFontId, UINT uStyle, BYTE uFade = 255, bool bLineLimit = false) override;
+	virtual void DrawText(const UiRect& rc, const std::wstring& strText, DWORD dwTextColor, const std::wstring& strFontId, UINT uStyle, BYTE uFade = 255, bool bLineLimit = false, bool bFillPath = false) override;
 
 	virtual void DrawEllipse(const UiRect& rc, int nSize, DWORD dwColor) override;
 	virtual void FillEllipse(const UiRect& rc, DWORD dwColor) override;

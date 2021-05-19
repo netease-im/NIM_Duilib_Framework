@@ -122,6 +122,8 @@ public:
     */
 	void SetAutoToolTip(bool bAutoShow);
 
+  void SetDrawTextFillPath(bool bDrawTextFillPath);
+
 protected:
 	void CheckShowToolTip();
 
@@ -132,6 +134,7 @@ protected:
 	bool    m_bSingleLine;
 	bool    m_bLineLimit;
 	bool    m_bAutoShow;
+  bool    m_bDrawTextFillPath;
 	int		m_hAlign;
 	int		m_vAlign;
 	UiRect	m_rcTextPadding;
@@ -147,6 +150,7 @@ LabelTemplate<InheritType>::LabelTemplate() :
     m_bSingleLine(true),
     m_bLineLimit(false),
     m_bAutoShow(false),
+    m_bDrawTextFillPath(false),
     m_hAlign(DT_LEFT),
     m_vAlign(DT_CENTER),
     m_rcTextPadding(),
@@ -202,6 +206,11 @@ void LabelTemplate<InheritType>::SetAutoToolTip(bool bAutoShow)
 {
 	m_bAutoShow = bAutoShow;
 	CheckShowToolTip();
+}
+
+template<typename InheritType>
+void LabelTemplate<InheritType>::SetDrawTextFillPath(bool bDrawTextFillPath) {
+  m_bDrawTextFillPath = bDrawTextFillPath;
 }
 
 template<typename InheritType /*= Control*/>
@@ -409,6 +418,8 @@ void LabelTemplate<InheritType>::SetAttribute(const std::wstring& strName, const
         rcTextPadding.right = _tcstol(pstr + 1, &pstr, 10);  ASSERT(pstr);
         rcTextPadding.bottom = _tcstol(pstr + 1, &pstr, 10); ASSERT(pstr);
         SetTextPadding(rcTextPadding);
+    } else if (strName==_T("drawtextfillpath")) {
+      SetDrawTextFillPath(strValue == _T("true"));
     }
     else __super::SetAttribute(strName, strValue);
 }
@@ -437,14 +448,14 @@ void LabelTemplate<InheritType>::PaintText(IRenderContext* pRender)
             std::wstring clrColor = GetStateTextColor(kControlStateNormal);
             if (!clrColor.empty()) {
                 DWORD dwClrColor = this->GetWindowColor(clrColor);
-                pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit);
+                pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit, m_bDrawTextFillPath);
             }
 
             if (this->m_nHotAlpha > 0) {
                 std::wstring clrColor = GetStateTextColor(kControlStateHot);
                 if (!clrColor.empty()) {
                     DWORD dwClrColor = this->GetWindowColor(clrColor);
-                    pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, (BYTE)this->m_nHotAlpha, m_bLineLimit);
+                    pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, (BYTE)this->m_nHotAlpha, m_bLineLimit, m_bDrawTextFillPath);
                 }
             }
 
@@ -452,7 +463,7 @@ void LabelTemplate<InheritType>::PaintText(IRenderContext* pRender)
         }
     }
 
-    pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit);
+    pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit, m_bDrawTextFillPath);
 }
 
 template<typename InheritType>

@@ -213,7 +213,7 @@ public:
 	virtual void DrawRect(const UiRect& rc, int nSize, DWORD dwPenColor) = 0;
 	virtual void DrawRoundRect(const UiRect& rc, const CSize& roundSize, int nSize, DWORD dwPenColor) = 0;
 
-	virtual void DrawText(const UiRect& rc, const std::wstring& strText, DWORD dwTextColor, const std::wstring& strFontId, UINT uStyle, BYTE uFade = 255, bool bLineLimit = false) = 0;
+	virtual void DrawText(const UiRect& rc, const std::wstring& strText, DWORD dwTextColor, const std::wstring& strFontId, UINT uStyle, BYTE uFade = 255, bool bLineLimit = false, bool bFillPath = false) = 0;
 
 	virtual void DrawEllipse(const UiRect& rc, int nSize, DWORD dwColor) = 0;
 	virtual void FillEllipse(const UiRect& rc, DWORD dwColor) = 0;

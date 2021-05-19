@@ -534,7 +534,7 @@ void RenderContext_GdiPlus::DrawRoundRect(const UiRect& rc, const CSize& roundSi
 	graphics.DrawPath(&pen, &pPath);
 }
 
-void RenderContext_GdiPlus::DrawText(const UiRect& rc, const std::wstring& strText, DWORD dwTextColor, const std::wstring& strFontId, UINT uStyle, BYTE uFade /*= 255*/, bool bLineLimit /*= false*/)
+void RenderContext_GdiPlus::DrawText(const UiRect& rc, const std::wstring& strText, DWORD dwTextColor, const std::wstring& strFontId, UINT uStyle, BYTE uFade /*= 255*/, bool bLineLimit /*= false*/, bool bFillPath /*= false*/)
 {
 	ASSERT(::GetObjectType(m_hDC) == OBJ_DC || ::GetObjectType(m_hDC) == OBJ_MEMDC);
 	if (strText.empty()) return;
@@ -625,6 +625,16 @@ void RenderContext_GdiPlus::DrawText(const UiRect& rc, const std::wstring& strTe
 #else
 	graphics.SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAlias);
 #endif
+  if (bFillPath) {
+    graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
+    Gdiplus::GraphicsPath path;
+    Gdiplus::FontFamily font_family;
+    font.GetFamily(&font_family);
+    path.AddString(strText.c_str(), (int)strText.length(), &font_family, font.GetStyle(),
+      font.GetSize(), rcPaint, &stringFormat);
+    graphics.FillPath(&tBrush, &path);
+    return;
+  }
 	graphics.DrawString(strText.c_str(), (int)strText.length(), &font, rcPaint, &stringFormat, &tBrush);
 }
 
