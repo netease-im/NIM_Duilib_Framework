@@ -14,8 +14,9 @@ void CShadowComboWnd::Init(ShadowCombo* pOwner) {
   // Position the popup window in absolute space
   CSize szDrop = m_pOwner->GetDropBoxSize();
   UiRect rcOwner = pOwner->GetPosWithScrollOffset();
-  int iItemHeight = pOwner->GetItemAt(m_iOldSel)->GetFixedHeight();
+  int iItemHeight = m_iOldSel > -1 ? pOwner->GetItemAt(m_iOldSel)->GetFixedHeight() : 0;
   int iOffset = iItemHeight * (m_iOldSel + 1);
+  iOffset = max(iOffset, 0);
   int iScrollPos = pOwner->GetCustomLayout()->GetScrollPos().cy;
   if (iScrollPos > iItemHeight) {
     iOffset = iItemHeight;
