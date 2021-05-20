@@ -17,7 +17,8 @@ Progress::Progress() :
 	m_nMarqueeWidth(10),
 	m_nMarqueeStep(4),
 	m_nMarqueeElapsed(50), // for 1s 25fps,will use 20fps default
-	m_nMarqueePos(0)
+	m_nMarqueePos(0),
+  m_bReverse(false)
 {
 	m_uTextStyle = DT_SINGLELINE | DT_CENTER;
 	SetFixedHeight(12);
@@ -139,20 +140,21 @@ void Progress::SetProgressColor(const std::wstring& strProgressColor)
 
 void Progress::SetAttribute(const std::wstring& srName, const std::wstring& strValue)
 {
-	if (srName == _T("hor")) SetHorizontal(strValue == _T("true"));
-	else if (srName == _T("min")) SetMinValue(_ttoi(strValue.c_str()));
-	else if (srName == _T("max")) SetMaxValue(_ttoi(strValue.c_str()));
-	else if (srName == _T("value")) SetValue(_ttoi(strValue.c_str()));
-	else if (srName == _T("progressimage")) SetProgressImage(strValue);
-	else if (srName == _T("isstretchfore")) SetStretchForeImage(strValue == _T("true"));
-	else if (srName == _T("progresscolor")) {
-		LPCTSTR pValue = strValue.c_str();
-		while (*pValue > _T('\0') && *pValue <= _T(' ')) pValue = ::CharNext(pValue);
-		SetProgressColor(pValue);
-	}
-	else if (srName == _T("marquee")) SetMarquee(strValue == _T("true"));
-	else if (srName == _T("marqueewidth")) SetMarqueeWidth(_ttoi(strValue.c_str()));
-	else if (srName == _T("marqueestep")) SetMarqueeStep(_ttoi(strValue.c_str()));
+  if (srName == _T("hor")) SetHorizontal(strValue == _T("true"));
+  else if (srName == _T("min")) SetMinValue(_ttoi(strValue.c_str()));
+  else if (srName == _T("max")) SetMaxValue(_ttoi(strValue.c_str()));
+  else if (srName == _T("value")) SetValue(_ttoi(strValue.c_str()));
+  else if (srName == _T("progressimage")) SetProgressImage(strValue);
+  else if (srName == _T("isstretchfore")) SetStretchForeImage(strValue == _T("true"));
+  else if (srName == _T("progresscolor")) {
+    LPCTSTR pValue = strValue.c_str();
+    while (*pValue > _T('\0') && *pValue <= _T(' ')) pValue = ::CharNext(pValue);
+    SetProgressColor(pValue);
+  }
+  else if (srName == _T("marquee")) SetMarquee(strValue == _T("true"));
+  else if (srName == _T("marqueewidth")) SetMarqueeWidth(_ttoi(strValue.c_str()));
+  else if (srName == _T("marqueestep")) SetMarqueeStep(_ttoi(strValue.c_str()));
+  else if (srName == _T("reverse")) SetReverse(strValue == _T("true"));
 	else Label::SetAttribute(srName, strValue);
 }
 
@@ -186,10 +188,20 @@ void Progress::PaintStatusImage(IRenderContext* pRender)
 		m_sProgressImageModify.clear();
 		if (m_bStretchForeImage)
 			m_sProgressImageModify = StringHelper::Printf(_T("destscale='false' dest='%d,%d,%d,%d'"), rc.left, rc.top, rc.right, rc.bottom);
-		else
-			m_sProgressImageModify = StringHelper::Printf(_T("destscale='false' dest='%d,%d,%d,%d' source='%d,%d,%d,%d'")
-				, rc.left, rc.top, rc.right, rc.bottom
-				, rc.left, rc.top, rc.right, rc.bottom);
+		else {
+      ui::UiRect m_rcSrc = rc;
+      if (m_progressImage.imageCache) {
+        if (m_rcSrc.right > m_progressImage.imageCache->nX) {
+          m_rcSrc.right = m_progressImage.imageCache->nX;
+        }
+        if (m_rcSrc.bottom > m_progressImage.imageCache->nY) {
+          m_rcSrc.bottom = m_progressImage.imageCache->nY;
+        }
+      }
+      m_sProgressImageModify = StringHelper::Printf(_T("destscale='false' dest='%d,%d,%d,%d' source='%d,%d,%d,%d'")
+        , rc.left, rc.top, rc.right, rc.bottom
+        , m_rcSrc.left, m_rcSrc.top, m_rcSrc.right, m_rcSrc.bottom);
+    }
 
 		// 让corner的值不超过可绘制范围
 		auto& corner = m_progressImage.imageAttribute.rcCorner;
@@ -219,13 +231,24 @@ UiRect Progress::GetProgressPos()
 {
 	UiRect rc;
 	if (m_bHorizontal) {
-		rc.right = int((m_nValue - m_nMin) * (m_rcItem.right - m_rcItem.left) / (m_nMax - m_nMin));
+    if (m_bReverse) {
+      rc.right = m_rcItem.GetWidth();
+      rc.left = rc.right - static_cast<int>(std::floor(static_cast<double>((m_nValue - m_nMin) * (m_rcItem.right - m_rcItem.left)) / static_cast<double>(m_nMax - m_nMin)));
+    } else {
+      rc.right = static_cast<int>(std::ceil(static_cast<double>((m_nValue - m_nMin) * (m_rcItem.right - m_rcItem.left)) / static_cast<double>(m_nMax - m_nMin)));
+    }
+
 		rc.bottom = m_rcItem.bottom - m_rcItem.top;
 	}
 	else {
-		rc.top = int((m_nMax - m_nValue) * (m_rcItem.bottom - m_rcItem.top) / (m_nMax - m_nMin));
+    if (m_bReverse) {
+      rc.bottom = static_cast<int>(std::floor(static_cast<double>((m_nMax - m_nValue) * (m_rcItem.bottom - m_rcItem.top)) / static_cast<double>(m_nMax - m_nMin)));
+    } else {
+      rc.top = static_cast<int>(std::ceil(static_cast<double>((m_nMax - m_nValue) * (m_rcItem.bottom - m_rcItem.top)) / static_cast<double>(m_nMax - m_nMin)));
+      rc.bottom = m_rcItem.bottom - m_rcItem.top;
+    }
+
 		rc.right = m_rcItem.right - m_rcItem.left;
-		rc.bottom = m_rcItem.bottom - m_rcItem.top;
 	}
 
 	return rc;
@@ -348,6 +371,10 @@ void Progress::SetMarqueeElapsed(int nMarqueeElapsed)
 	TimerManager::GetInstance()->AddCancelableTimer(m_timer.GetWeakFlag(), playCallback, m_nMarqueeElapsed, TimerManager::REPEAT_FOREVER);
 
 	Invalidate();
+}
+
+void Progress::SetReverse(bool bReverse){
+  m_bReverse = bReverse;
 }
 
 }
