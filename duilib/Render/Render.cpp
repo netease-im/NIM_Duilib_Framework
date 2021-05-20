@@ -310,13 +310,17 @@ void RenderContext_GdiPlus::DrawImage(const UiRect& rcPaint, HBITMAP hBitmap, bo
 			else
 				iTimes = (rcDest.bottom - rcDest.top + nTiledMargin) / (lHeight + nTiledMargin);
 
+			UiRect rcDestTemp;
+			rcDestTemp.left = rcDest.left;
+			rcDestTemp.right = rcDest.left + rcSource.GetWidth();
+
 			for (int i = 0; i < iTimes; ++i) {
-				LONG lDestTop = rcPaint.top + lHeight*i + i*nTiledMargin;
+				LONG lDestTop = rcDest.top + lHeight*i + i*nTiledMargin;
 				LONG lDestBottom = lDestTop + lHeight;
 				LONG lDrawHeight = lHeight;
-				if (lDestBottom > rcPaint.bottom) {
-					lDrawHeight -= lDestBottom - rcPaint.bottom;
-					lDestBottom = rcPaint.bottom;
+				if (lDestBottom > rcDest.bottom) {
+					lDrawHeight -= lDestBottom - rcDest.bottom;
+					lDestBottom = rcDest.bottom;
 				}
 
 				rcSource.left = rcImageSource.left + rcCorners.left;
@@ -324,12 +328,10 @@ void RenderContext_GdiPlus::DrawImage(const UiRect& rcPaint, HBITMAP hBitmap, bo
 				rcSource.right = rcImageSource.right - rcCorners.right;
 				rcSource.bottom = rcSource.top + lDrawHeight;
 
-				rcDest.left = rcDest.left;
-				rcDest.top = lDestTop;
-				rcDest.right = rcDest.left + rcSource.GetWidth();
-				rcDest.bottom = lDestBottom;
+				rcDestTemp.top = lDestTop;
+				rcDestTemp.bottom = lDestBottom;
 				
-				DrawFunction(m_hDC, m_bTransparent, rcDest, hCloneDC, rcSource, bAlphaChannel, uFade);
+				DrawFunction(m_hDC, m_bTransparent, rcDestTemp, hCloneDC, rcSource, bAlphaChannel, uFade);
 			}
 		}
 	}
