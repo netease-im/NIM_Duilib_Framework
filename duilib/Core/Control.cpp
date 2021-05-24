@@ -22,6 +22,7 @@ Control::Control() :
 	m_bGifPlay(true),
 	m_bReceivePointerMsg(true),
 	m_bNeedButtonUpWhenKillFocus(false),
+	m_bAllowTabstop(true),
 	m_szEstimateSize(),
 	m_renderOffset(),
 	m_cxyBorderRound(),
@@ -72,6 +73,7 @@ Control::Control(const Control& r) :
 	m_bGifPlay(r.m_bGifPlay),
 	m_bReceivePointerMsg(r.m_bReceivePointerMsg),
 	m_bNeedButtonUpWhenKillFocus(r.m_bNeedButtonUpWhenKillFocus),
+	m_bAllowTabstop(r.m_bAllowTabstop),
 	m_szEstimateSize(r.m_szEstimateSize),
 	m_renderOffset(r.m_renderOffset),
 	m_cxyBorderRound(r.m_cxyBorderRound),
@@ -593,7 +595,7 @@ void Control::SetFocus()
 
 UINT Control::GetControlFlags() const
 {
-	return UIFLAG_TABSTOP;
+	return IsAllowTabStop() ? UIFLAG_TABSTOP : UIFLAG_DEFAULT;
 }
 
 void Control::SetNoFocus()
@@ -1217,6 +1219,7 @@ void Control::SetAttribute(const std::wstring& strName, const std::wstring& strV
 	else if (strName == _T("fadeinoutyfromtop")) m_animationManager.SetFadeInOutY(strValue == _T("true"), false);
 	else if (strName == _T("fadeinoutyfrombottom")) m_animationManager.SetFadeInOutY(strValue == _T("true"), true);
 	else if (strName == _T("receivepointer")) SetReceivePointerMsg(strValue == _T("true"));
+	else if (strName == _T("tabstop")) SetTabStop(strValue == _T("true"));
 	else {
 	ASSERT(FALSE);
 	}
@@ -1606,6 +1609,11 @@ void Control::SetHotAlpha(int nHotAlpha)
 	ASSERT(nHotAlpha >= 0 && nHotAlpha <= 255);
 	m_nHotAlpha = nHotAlpha;
 	Invalidate();
+}
+
+void Control::SetTabStop(bool enable)
+{
+	m_bAllowTabstop = enable;
 }
 
 void Control::SetRenderOffset(CPoint renderOffset)

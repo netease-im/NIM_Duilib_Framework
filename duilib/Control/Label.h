@@ -146,7 +146,7 @@ LabelTemplate<InheritType>::LabelTemplate() :
     m_uTextStyle(DT_LEFT | DT_TOP | DT_END_ELLIPSIS | DT_NOCLIP | DT_SINGLELINE),
     m_bSingleLine(true),
     m_bLineLimit(false),
-	m_bAutoShow(false),
+    m_bAutoShow(false),
     m_hAlign(DT_LEFT),
     m_vAlign(DT_CENTER),
     m_rcTextPadding(),
@@ -395,7 +395,7 @@ void LabelTemplate<InheritType>::SetAttribute(const std::wstring& strName, const
     else if (strName == _T("singleline")) SetSingleLine(strValue == _T("true"));
     else if (strName == _T("text")) SetText(strValue);
     else if (strName == _T("textid")) SetTextId(strValue);
-	else if (strName == _T("autotooltip")) SetAutoToolTip(strValue == _T("true"));
+    else if (strName == _T("autotooltip")) SetAutoToolTip(strValue == _T("true"));
     else if (strName == _T("font")) SetFont(strValue);
     else if (strName == _T("normaltextcolor")) SetStateTextColor(kControlStateNormal, strValue);
     else if (strName == _T("hottextcolor"))	SetStateTextColor(kControlStateHot, strValue);

@@ -2361,7 +2361,7 @@ void RichEdit::SetPos(UiRect rc)
 
 UINT RichEdit::GetControlFlags() const
 {
-	return IsEnabled() ? UIFLAG_TABSTOP : UIFLAG_DEFAULT;
+	return IsEnabled() && IsAllowTabStop() ? UIFLAG_TABSTOP : UIFLAG_DEFAULT;
 }
 
 void RichEdit::HandleMessage(EventArgs& event)

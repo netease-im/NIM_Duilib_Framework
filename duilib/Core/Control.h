@@ -753,6 +753,19 @@ public:
 	void SetHotAlpha(int nHotAlpha);
 
 	/**
+	 * @brief 设置是否接受TAB键切换焦点
+	 * @param[in] enable
+	 * @return 无
+	 */
+	void SetTabStop(bool enable);
+
+	/**
+	 * @brief 检查是否接受TAB键切换焦点
+	 * @return 返回控件是否接受TAB键切换焦点
+	 */
+	bool IsAllowTabStop() const { return m_bAllowTabstop; }
+
+	/**
 	 * @brief 获取焦点状态透明度
 	 * @return 返回控件焦点状态的透明度
 	 */
@@ -984,6 +997,7 @@ protected:
 	bool m_bGifPlay;
 	bool m_bReceivePointerMsg;
 	bool m_bNeedButtonUpWhenKillFocus;
+	bool m_bAllowTabstop;
 	int m_nBorderSize;
 	int m_nTooltipWidth;
 	int m_nAlpha;
