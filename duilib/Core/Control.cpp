@@ -23,6 +23,7 @@ Control::Control() :
 	m_bReceivePointerMsg(true),
 	m_bNeedButtonUpWhenKillFocus(false),
 	m_bAllowTabstop(true),
+  m_bIsLoading(false),
 	m_szEstimateSize(),
 	m_renderOffset(),
 	m_cxyBorderRound(),
@@ -35,6 +36,7 @@ Control::Control() :
 	m_nTooltipWidth(300),
 	m_nAlpha(255),
 	m_nHotAlpha(0),
+  m_fCurrrentAngele(0),
 	m_sToolTipText(),
 	m_sToolTipTextId(),
 	m_sUserData(),
@@ -45,7 +47,9 @@ Control::Control() :
 	m_animationManager(),
 	m_imageMap(),
 	m_bkImage(),
+  m_loadingImage(),
 	m_loadBkImageWeakFlag(),
+  m_loadingImageFlag(),
 #if defined(ENABLE_UIAUTOMATION)
 	m_pUIAProvider(nullptr),
 #endif
@@ -91,13 +95,16 @@ Control::Control(const Control& r) :
 	m_sToolTipTextId(r.m_sToolTipTextId),
 	m_sUserData(r.m_sUserData),
 	m_strBkColor(r.m_strBkColor),
+  m_strLoadingBkColor(r.m_strLoadingBkColor),
 	m_colorMap(r.m_colorMap),
 	m_strBorderColor(r.m_strBorderColor),
 	m_gifWeakFlag(),
 	m_animationManager(r.m_animationManager),
 	m_imageMap(r.m_imageMap),
 	m_bkImage(r.m_bkImage),
-	m_loadBkImageWeakFlag()
+  m_loadingImage(r.m_loadingImage),
+	m_loadBkImageWeakFlag(),
+  m_loadingImageFlag()
 {
 	m_colorMap.SetControl(this);
 	m_imageMap.SetControl(this);
@@ -193,6 +200,24 @@ void Control::SetUTF8BkImage(const std::string& strImage)
 	std::wstring strOut;
 	StringHelper::MBCSToUnicode(strImage, strOut, CP_UTF8);
 	SetBkImage(strOut);
+}
+
+std::wstring Control::GetLoadingImage() const {
+  return m_loadingImage.imageAttribute.simageString;
+}
+
+void Control::SetLoadingImage(const std::wstring& strImage) {
+  StopGifPlay();
+  m_loadingImage.SetImageString(strImage);
+  Invalidate();
+}
+
+void Control::SetLoadingBkColor(const std::wstring& strColor) {
+  if (m_strLoadingBkColor == strColor) {
+    return;
+  }
+  m_strLoadingBkColor = strColor;
+  Invalidate();
 }
 
 std::wstring Control::GetStateImage(ControlStateType stateType)
@@ -726,14 +751,10 @@ CSize Control::EstimateSize(CSize szAvailable)
 			if (image->imageCache) {
 				if (GetFixedWidth() == DUI_LENGTH_AUTO) {
 					int image_width = image->imageCache->nX;
-					if (!image->imageCache->IsSvg())
-						DpiManager::GetInstance()->ScaleInt(image_width);
 					imageSize.cx = image_width;
 				}
 				if (GetFixedHeight() == DUI_LENGTH_AUTO) {
 					int image_height = image->imageCache->nY;
-					if (!image->imageCache->IsSvg())
-						DpiManager::GetInstance()->ScaleInt(image_height);
 					imageSize.cy = image_height;
 				}
 			}
@@ -1220,6 +1241,8 @@ void Control::SetAttribute(const std::wstring& strName, const std::wstring& strV
 	else if (strName == _T("fadeinoutyfrombottom")) m_animationManager.SetFadeInOutY(strValue == _T("true"), true);
 	else if (strName == _T("receivepointer")) SetReceivePointerMsg(strValue == _T("true"));
 	else if (strName == _T("tabstop")) SetTabStop(strValue == _T("true"));
+  else if (strName == _T("loadingimage")) SetLoadingImage(strValue);
+  else if (strName == _T("loadingbkcolor")) SetLoadingBkColor(strValue);
 	else {
 	ASSERT(FALSE);
 	}
@@ -1478,6 +1501,7 @@ void Control::Paint(IRenderContext* pRender, const UiRect& rcPaint)
 	PaintStatusImage(pRender);
 	PaintText(pRender);
 	PaintBorder(pRender);
+  PaintLoading(pRender);
 }
 
 void Control::PaintShadow(IRenderContext* pRender)
@@ -1595,6 +1619,60 @@ void Control::PaintBorder(IRenderContext* pRender)
 				pRender->DrawRect(rcDraw, m_nBorderSize, dwBorderColor);
 		}
 	}
+}
+
+void Control::PaintLoading(IRenderContext* pRender) {
+  if (!m_bIsLoading || m_loadingImage.imageAttribute.sImageName.empty()) {
+    return;
+  }
+
+  GetImage(m_loadingImage);
+  if (!m_loadingImage.imageCache) {
+    ASSERT(FALSE);
+    return;
+  }
+
+  Gdiplus::Bitmap* image = GdiHelper::CreateBitmapFromHBITMAP(m_loadingImage.imageCache->GetHBitmap(0));
+  if (!image) {
+    ASSERT(FALSE);
+    return;
+  }
+  if (!m_strLoadingBkColor.empty()) {
+    Gdiplus::SolidBrush brush(GetWindowColor(m_strLoadingBkColor));
+    ui::UiRect rcFill = m_rcItem;
+    rcFill.left = m_rcItem.left + (m_rcItem.GetWidth() - image->GetWidth()) / 2;
+    rcFill.right = rcFill.left + image->GetWidth();
+    rcFill.top = m_rcItem.top + (m_rcItem.GetHeight() - image->GetHeight()) / 2;
+    rcFill.bottom = rcFill.top + image->GetHeight();
+
+    ui::UiRect rcDest = m_loadingImage.imageAttribute.rcDest;
+    if (!rcDest.IsRectEmpty()) {
+      rcFill.left = m_rcItem.left + rcDest.left;
+      rcFill.right = m_rcItem.left + rcDest.right;
+      rcFill.top = m_rcItem.top + rcDest.top;
+      rcFill.bottom = m_rcItem.bottom + rcDest.bottom;
+    }
+
+    pRender->DrawColor(rcFill, GetWindowColor(m_strLoadingBkColor));
+  }
+
+  Gdiplus::Bitmap tempBitmap(image->GetWidth(), image->GetHeight());
+  Gdiplus::Graphics temp_render(&tempBitmap);
+
+  Gdiplus::Matrix matrix;
+  temp_render.GetTransform(&matrix);
+  matrix.RotateAt(static_cast<float>(m_fCurrrentAngele), Gdiplus::PointF(image->GetWidth() / 2, image->GetHeight() / 2));
+  temp_render.SetTransform(&matrix);
+
+  temp_render.DrawImage(image, 0.f, 0.f);
+
+  Gdiplus::Graphics graphics(pRender->GetDC());
+  graphics.DrawImage(&tempBitmap,
+    Gdiplus::RectF(m_rcItem.left + (GetWidth() - image->GetWidth()) / 2, m_rcItem.top + (GetHeight() - image->GetHeight()) / 2, image->GetWidth(), image->GetHeight()),
+    0, 0, image->GetWidth(), image->GetHeight(),
+    Gdiplus::UnitPixel);
+
+  delete image;
 }
 
 void Control::SetAlpha(int alpha)
@@ -1813,6 +1891,52 @@ DWORD Control::GetWindowColor(const std::wstring& strName)
 
 	ASSERT(color != 0);
 	return color;
+}
+
+void Control::StartLoading(int fStartAngle) {
+  if (fStartAngle >= 0 ) {
+    m_fCurrrentAngele = fStartAngle;
+  }
+  if (m_bIsLoading) {
+    return;
+  }
+
+  m_bIsLoading = true;
+  SetEnabled(false);
+  TimerManager::GetInstance()->AddCancelableTimer(m_loadingImageFlag.GetWeakFlag(), nbase::Bind(&Control::Loading, this),
+      50, TimerManager::REPEAT_FOREVER);
+}
+
+void Control::StopLoading(GifStopType frame) {
+  if (!m_bIsLoading) {
+    return;
+  }
+
+  switch (frame) {
+  case kGifStopFirst:
+    m_fCurrrentAngele = 0;
+    break;
+  case kGifStopCurrent:
+    break;
+  case  kGifStopLast:
+    m_fCurrrentAngele = 360;
+  }
+  m_bIsLoading = false;
+  SetEnabled(true);
+
+  m_loadingImageFlag.Cancel();
+}
+
+void Control::Loading() {
+  if (!m_bIsLoading) {
+    return;
+  }
+  m_fCurrrentAngele += 10;
+  if (m_fCurrrentAngele == INT32_MIN) {
+    m_fCurrrentAngele = 0;
+  }
+
+  Invalidate();
 }
 
 } // namespace ui

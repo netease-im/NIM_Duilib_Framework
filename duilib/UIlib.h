@@ -99,6 +99,7 @@
 #include "Utils/OnScreenKeyboardManager.h"
 #include "Utils/Shadow.h"
 #include "Utils/BoxShadow.h"
+#include "Utils/GdiHepler.h"
 
 #include "Animation/AnimationPlayer.h"
 #include "Animation/AnimationManager.h"

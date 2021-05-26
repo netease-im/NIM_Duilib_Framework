@@ -657,6 +657,7 @@
     <ClCompile Include="Utils\BoxShadow.cpp" />
     <ClCompile Include="Utils\DpiManager.cpp" />
     <ClCompile Include="Utils\FontManager.cpp" />
+    <ClCompile Include="Utils\GdiHepler.cpp" />
     <ClCompile Include="Utils\MultiLangSupport.cpp" />
     <ClCompile Include="Utils\OnScreenKeyboardManager.cpp" />
     <ClCompile Include="Utils\Shadow.cpp" />
@@ -722,6 +723,7 @@
     <ClInclude Include="Utils\BoxShadow.h" />
     <ClInclude Include="Utils\DpiManager.h" />
     <ClInclude Include="Utils\FontManager.h" />
+    <ClInclude Include="Utils\GdiHepler.h" />
     <ClInclude Include="Utils\Macros.h" />
     <ClInclude Include="Utils\MultiLangSupport.h" />
     <ClInclude Include="Utils\OnScreenKeyboardManager.h" />
