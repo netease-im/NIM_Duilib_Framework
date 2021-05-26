@@ -110,7 +110,7 @@ LRESULT CShadowComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
     if (!m_pOwner->GetShadowImage().empty()) {
       pRoot->SetBkImage(m_pOwner->GetShadowImage());
     }
-    pRoot->GetLayout()->SetPadding(m_pOwner->GetShadowCorner());
+    pRoot->GetLayout()->SetPadding(m_pOwner->GetShadowCorner(), false);
     this->AttachDialog(pRoot);
     this->SetWindowResourcePath(m_pOwner->GetWindow()->GetWindowResourcePath());
     this->SetShadowAttached(false);
@@ -153,14 +153,15 @@ LRESULT CShadowComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 ShadowCombo::ShadowCombo()
     : m_pWindow(nullptr),
      m_iCurSel(-1),
-     m_szDropBox(0, 150),
      m_sDropBoxAttributes(),
      m_bPopupTop(false),
-     m_rcShadowCorner({5, 4, 5, 6}),
      m_sShadowImage(L"file = '../public/bk/bk_combo_shadow.png' corner = '5,4,5,6'"),
      m_cArrow (nullptr),
-     m_bInit(false),
-     m_iArrowOffset(10) {
+     m_bInit(false) {
+  SetDropBoxSize(ui::CSize(0, 150));
+  SetShadowCorner({ 5,4,5,6 });
+  SetArrowOffset(10);
+
   m_pLayout.reset(new ListBox(new VLayout));
   m_pLayout->SetBkColor(L"white");
   m_pLayout->SetAutoDestroyChild(false);
@@ -321,7 +322,7 @@ void ShadowCombo::SetAttribute(const std::wstring& strName, const std::wstring& 
   } else if (strName == _T("arrowdisabledimage")) {
     m_cArrow->SetStateImage(kControlStateDisabled, strValue);
   } else if (strName == _T("arrowoffset")) {
-    m_iArrowOffset = _ttoi(strValue.c_str());
+    SetArrowOffset(_ttoi(strValue.c_str()));
   }
 
   else Box::SetAttribute(strName, strValue);
@@ -478,6 +479,21 @@ bool ShadowCombo::OnSelectItem(EventArgs* args)
     m_pWindow->SendNotify(this, kEventSelect, m_iCurSel, iOldSel);
   }
   return true;
+}
+
+void ShadowCombo::SetShadowCorner(const UiRect& rect, bool bNeedDpiScale) {
+  ui::UiRect rc = rect;
+  if (bNeedDpiScale) {
+    ui::DpiManager::GetInstance()->ScaleRect(rc);
+  }
+  m_rcShadowCorner = rc;
+}
+
+void ShadowCombo::SetArrowOffset(int offset, bool bNeedDpiScale) {
+  if (bNeedDpiScale) {
+    ui::DpiManager::GetInstance()->ScaleInt(offset);
+  }
+  m_iArrowOffset = offset;
 }
 
 }

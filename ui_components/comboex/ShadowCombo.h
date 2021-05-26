@@ -156,7 +156,7 @@ public:
   * @brief 设置下拉框阴影的大小
   * @param[in] rect 设置的下拉框阴影大小
   */
-  void SetShadowCorner(const UiRect& rect) { m_rcShadowCorner = rect; }
+  void SetShadowCorner(const UiRect& rect, bool bNeedDpiScale = true);
 
   /**
   * @brief 获取下拉框阴影大小
@@ -181,6 +181,8 @@ public:
   * @return 返回Layout
   */
   ui::ListBox* GetCustomLayout() const { return m_pLayout.get(); }
+
+  void SetArrowOffset(int offset, bool bNeedDpiScale = true);
 
   /**
    * @brief 监听子项被选择事件
