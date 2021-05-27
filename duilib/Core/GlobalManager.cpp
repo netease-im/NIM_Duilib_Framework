@@ -8,7 +8,7 @@ namespace ui
 
 namespace {
 
-std::wstring GetDpiImageFullPath(const std::wstring& strImageFullPath) {
+std::wstring GetDpiImageFullPath(const std::wstring& strImageFullPath, bool bIsUseZip, HGLOBAL hGlobal) {
   int dpi = DpiManager::GetInstance()->GetScale();
   if (dpi == 100 || SvgUtil::IsSvgFile(strImageFullPath)) {
     return strImageFullPath;
@@ -33,6 +33,11 @@ std::wstring GetDpiImageFullPath(const std::wstring& strImageFullPath) {
   strPathFileName = StringHelper::Printf(L"%s%s%d%s", strFile.c_str(), L"@", dpi, strFileExtension.c_str());
 
   std::wstring strNewFilePath = strPathDir + strPathFileName;
+  if (bIsUseZip) {
+    hGlobal = ui::GlobalManager::GetZipData(strNewFilePath);
+    return hGlobal ? strNewFilePath : strImageFullPath;
+  }
+
   const DWORD file_attr = ::GetFileAttributesW(strNewFilePath.c_str());
   return file_attr != INVALID_FILE_ATTRIBUTES ? strNewFilePath : strImageFullPath;
 }
@@ -349,8 +354,9 @@ void GlobalManager::OnImageInfoDestroy(ImageInfo* pImageInfo)
 
 std::shared_ptr<ImageInfo> GlobalManager::GetImage(const std::wstring& bitmap)
 {
+  HGLOBAL hGlobal = NULL;
 	std::wstring imageFullPath = StringHelper::ReparsePath(bitmap);
-  imageFullPath = GetDpiImageFullPath(imageFullPath);
+  imageFullPath = GetDpiImageFullPath(imageFullPath, IsUseZip(), hGlobal);
 
 	std::shared_ptr<ImageInfo> sharedImage;
 	auto it = m_mImageHash.find(imageFullPath);
@@ -358,7 +364,7 @@ std::shared_ptr<ImageInfo> GlobalManager::GetImage(const std::wstring& bitmap)
 		std::unique_ptr<ImageInfo> data;
 		if (IsUseZip())
 		{
-			HGLOBAL hGlobal = GetZipData(imageFullPath);
+		   hGlobal = GetZipData(imageFullPath);
 			if (hGlobal) {
 				data = ImageInfo::LoadImage(hGlobal, imageFullPath);
 				GlobalFree(hGlobal);
