@@ -860,6 +860,11 @@ public:
   * @return 无
   */
   void Loading();
+  /**
+  * @brief 是否正在loading
+  * @return 在loading返回true, 反之返回false
+  */
+  bool IsLoading();
 
 	/// 动画管理
 	/**

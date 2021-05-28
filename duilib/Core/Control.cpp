@@ -1939,4 +1939,8 @@ void Control::Loading() {
   Invalidate();
 }
 
+bool Control::IsLoading()  {
+  return m_bIsLoading;
+}
+
 } // namespace ui
