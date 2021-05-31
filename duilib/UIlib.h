@@ -57,7 +57,7 @@
 #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #endif
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1928)
+#if defined(_MSC_VER) && (_MSC_VER >= 1920)
 #define ENABLE_UIAUTOMATION
 #pragma comment(lib, "uiautomationcore.lib")
 #endif
