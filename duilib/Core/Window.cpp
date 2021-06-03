@@ -644,9 +644,10 @@ UiRect Window::GetCaptionRect() const
 	return m_rcCaption;
 }
 
-void Window::SetCaptionRect(UiRect& rcCaption)
+void Window::SetCaptionRect(UiRect& rcCaption, bool bNeedDpiScale)
 {
-	DpiManager::GetInstance()->ScaleRect(rcCaption);
+	if(bNeedDpiScale)
+		DpiManager::GetInstance()->ScaleRect(rcCaption);
 	m_rcCaption = rcCaption;
 }
 

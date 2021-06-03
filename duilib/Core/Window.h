@@ -395,7 +395,7 @@ public:
 	 * @param[in] rcCaption 要设置的区域范围
 	 * @return 无
 	 */
-	void SetCaptionRect(UiRect& rcCaption);
+	void SetCaptionRect(UiRect& rcCaption, bool bNeedDpiScale = true);
 
 	/**
 	 * @brief 获取窗口圆角大小，对应 XML 中 roundcorner 属性
