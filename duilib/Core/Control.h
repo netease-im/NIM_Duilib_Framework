@@ -76,7 +76,7 @@ public:
 	 * @param[in] strImage 要设置的图片路径
 	 * @return 无
 	 */
-    void SetBkImage(const std::wstring& strImage);
+	void SetBkImage(const std::wstring& strImage);
 
 	/**
 	 * @brief 设置背景图片（UTF8 格式字符串）
@@ -84,6 +84,26 @@ public:
 	 * @return 无
 	 */
 	void SetUTF8BkImage(const std::string& strImage);
+
+  /**
+  * @brief 获取loading状态图片位置
+  * @return loading图片位置
+  */
+  std::wstring GetLoadingImage() const;
+
+  /**
+  * @brief 设置loading图片
+  * @param[in] strImage 要设置的图片路径
+  * @return 无
+  */
+  void SetLoadingImage(const std::wstring& strImage);
+
+  /**
+  * @brief 设置loading背景色
+  * @param[in] strColor 背景色
+  * @return 无
+  */
+  void SetLoadingBkColor(const std::wstring& strColor);
 
 	/**
 	 * @brief 获取指定状态下的图片位置
@@ -232,6 +252,13 @@ public:
 	 * @return 无
 	 */
 	void SetBorderRound(CSize cxyRound);
+
+	/**
+	 * @brief 设置边框阴影
+	 * @param[in] 要设置的阴影属性
+	 * @return 无
+	 */
+	void SetBoxShadow(const std::wstring& strShadow);
 
     /// 鼠标相关
 	/**
@@ -746,6 +773,19 @@ public:
 	void SetHotAlpha(int nHotAlpha);
 
 	/**
+	 * @brief 设置是否接受TAB键切换焦点
+	 * @param[in] enable
+	 * @return 无
+	 */
+	void SetTabStop(bool enable);
+
+	/**
+	 * @brief 检查是否接受TAB键切换焦点
+	 * @return 返回控件是否接受TAB键切换焦点
+	 */
+	bool IsAllowTabStop() const { return m_bAllowTabstop; }
+
+	/**
 	 * @brief 获取焦点状态透明度
 	 * @return 返回控件焦点状态的透明度
 	 */
@@ -800,6 +840,31 @@ public:
 	 * @return 无
 	 */
 	void AttachGifPlayStop(const EventCallback& callback){ OnGifEvent[m_nVirtualEventGifStop] += callback; };
+
+  /**
+  * @brief 开启loading状态
+  * @param[in] start_angle loading图片旋转的角度
+  * @return 无
+  */
+  void StartLoading(int fStartAngle = -1);
+
+  /**
+  * @brief 关闭loading状态
+  * @param[in] frame 播放完成停止在哪一帧，可设置第一帧、当前帧和最后一帧。请参考 GifStopType 枚举
+  * @return 无
+  */
+  void StopLoading(GifStopType frame = kGifStopFirst);
+
+  /**
+  * @brief 计算loading图片的旋转角度
+  * @return 无
+  */
+  void Loading();
+  /**
+  * @brief 是否正在loading
+  * @return 在loading返回true, 反之返回false
+  */
+  bool IsLoading();
 
 	/// 动画管理
 	/**
@@ -942,12 +1007,14 @@ protected:
 	virtual bool ButtonUp(EventArgs& msg);
 
 	/// 绘制相关保护成员函数，不允许外部直接调用
+	virtual void PaintShadow(IRenderContext* pRender);
 	virtual void PaintBkColor(IRenderContext* pRender);
 	virtual void PaintBkImage(IRenderContext* pRender);
 	virtual void PaintStatusColor(IRenderContext* pRender);
 	virtual void PaintStatusImage(IRenderContext* pRender);
 	virtual void PaintText(IRenderContext* pRender);
 	virtual void PaintBorder(IRenderContext* pRender);
+  virtual void PaintLoading(IRenderContext* pRender);
 
 	/**
 	* @brief 获取某个颜色对应的值，优先获取窗口颜色
@@ -976,10 +1043,13 @@ protected:
 	bool m_bGifPlay;
 	bool m_bReceivePointerMsg;
 	bool m_bNeedButtonUpWhenKillFocus;
+	bool m_bAllowTabstop;
+  bool m_bIsLoading;
 	int m_nBorderSize;
 	int m_nTooltipWidth;
 	int m_nAlpha;
 	int m_nHotAlpha;
+  int m_fCurrrentAngele;
 	CSize m_szEstimateSize;
 	CPoint m_renderOffset;
 	CSize m_cxyBorderRound;
@@ -994,16 +1064,20 @@ protected:
 	std::wstring m_sMenuPopup;
 	std::wstring m_sMenuAlign;
 	std::wstring m_strBkColor;
+  std::wstring m_strLoadingBkColor;
 	StateColorMap m_colorMap;
 	Image m_bkImage;
+  Image m_loadingImage;
 	StateImageMap m_imageMap;
 	std::wstring m_strBorderColor;
 	nbase::WeakCallbackFlag m_gifWeakFlag;
 	AnimationManager m_animationManager;
 	nbase::WeakCallbackFlag m_loadBkImageWeakFlag;
+  nbase::WeakCallbackFlag m_loadingImageFlag;
 	static const int m_nVirtualEventGifStop;
 
 	UIAControlProvider* m_pUIAProvider;
+	BoxShadow m_boxShadow;
 };
 
 } // namespace ui

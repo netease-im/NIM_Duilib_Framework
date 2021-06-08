@@ -57,6 +57,11 @@
 #pragma comment(linker, "/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #endif
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1928)
+#define ENABLE_UIAUTOMATION
+#pragma comment(lib, "uiautomationcore.lib")
+#endif
+
 
 #include <windows.h>
 #include <commctrl.h>
@@ -93,6 +98,8 @@
 #include "Utils/TimerManager.h"
 #include "Utils/OnScreenKeyboardManager.h"
 #include "Utils/Shadow.h"
+#include "Utils/BoxShadow.h"
+#include "Utils/GdiHepler.h"
 
 #include "Animation/AnimationPlayer.h"
 #include "Animation/AnimationManager.h"

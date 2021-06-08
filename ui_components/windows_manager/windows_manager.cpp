@@ -29,12 +29,13 @@ bool WindowsManager::RegisterWindow(const std::wstring wnd_class_name, const std
 	}
 	else
 	{
-		ui::GlobalManager::AddPreMessage(wnd);
-
 		std::map<std::wstring, WindowEx*> id_win;
 		id_win[wnd_id] = wnd;
 		windows_map_[wnd_class_name] = id_win;
 	}
+
+	ui::GlobalManager::AddPreMessage(wnd);
+
 	return true;
 }
 

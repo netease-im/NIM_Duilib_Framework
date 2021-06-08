@@ -175,6 +175,12 @@ public:
 	 */
 	void SetMarqueeElapsed(int nMarqueeElapsed);
 
+  /**
+  * @brief 设置是否反向填充进度条
+  * @return 无
+  */
+  void SetReverse(bool bReverse);
+
 protected:
 	bool m_bHorizontal;
 	bool m_bStretchForeImage;
@@ -190,6 +196,8 @@ protected:
 	int m_nMarqueeStep;
 	int m_nMarqueeElapsed;
 	int m_nMarqueePos;
+
+  bool m_bReverse;
 
 	nbase::WeakCallbackFlag m_timer;
 };

@@ -6,6 +6,44 @@
 namespace ui 
 {
 
+namespace {
+
+std::wstring GetDpiImageFullPath(const std::wstring& strImageFullPath, bool bIsUseZip, HGLOBAL hGlobal) {
+  int dpi = DpiManager::GetInstance()->GetScale();
+  if (dpi == 100 || SvgUtil::IsSvgFile(strImageFullPath)) {
+    return strImageFullPath;
+  }
+
+  std::wstring strPathDir;
+  std::wstring strPathFileName;
+  std::list<std::wstring> strPathList = StringHelper::Split(strImageFullPath, L"\\");
+  for (auto it = strPathList.begin(); it != strPathList.end(); ++it) {
+    auto itTemp = it;
+    if (++itTemp == strPathList.end()) {
+      strPathFileName = *it;
+    }
+    else {
+      strPathDir += *it + L"\\";
+    }
+  }
+
+  int iPointPos = strPathFileName.rfind('.');
+  std::wstring strFileExtension = strPathFileName.substr(iPointPos, strPathFileName.length() - iPointPos);
+  std::wstring strFile = strPathFileName.substr(0, iPointPos);
+  strPathFileName = StringHelper::Printf(L"%s%s%d%s", strFile.c_str(), L"@", dpi, strFileExtension.c_str());
+
+  std::wstring strNewFilePath = strPathDir + strPathFileName;
+  if (bIsUseZip) {
+    hGlobal = ui::GlobalManager::GetZipData(strNewFilePath);
+    return hGlobal ? strNewFilePath : strImageFullPath;
+  }
+
+  const DWORD file_attr = ::GetFileAttributesW(strNewFilePath.c_str());
+  return file_attr != INVALID_FILE_ATTRIBUTES ? strNewFilePath : strImageFullPath;
+}
+
+}
+
 std::wstring GlobalManager::m_pStrResourcePath;
 std::wstring GlobalManager::m_pStrLanguagePath;
 std::vector<Window*> GlobalManager::m_aPreMessages;
@@ -316,14 +354,17 @@ void GlobalManager::OnImageInfoDestroy(ImageInfo* pImageInfo)
 
 std::shared_ptr<ImageInfo> GlobalManager::GetImage(const std::wstring& bitmap)
 {
+  HGLOBAL hGlobal = NULL;
 	std::wstring imageFullPath = StringHelper::ReparsePath(bitmap);
+  imageFullPath = GetDpiImageFullPath(imageFullPath, IsUseZip(), hGlobal);
+
 	std::shared_ptr<ImageInfo> sharedImage;
 	auto it = m_mImageHash.find(imageFullPath);
 	if (it == m_mImageHash.end()) {
 		std::unique_ptr<ImageInfo> data;
 		if (IsUseZip())
 		{
-			HGLOBAL hGlobal = GetZipData(imageFullPath);
+		   hGlobal = GetZipData(imageFullPath);
 			if (hGlobal) {
 				data = ImageInfo::LoadImage(hGlobal, imageFullPath);
 				GlobalFree(hGlobal);
