@@ -1371,7 +1371,16 @@ bool Control::DrawImage(IRenderContext* pRender, Image& duiImage, const std::wst
 	else {
 		int iFade = nFade == DUI_NOSET_VALUE ? newImageAttribute.bFade : nFade;
 		ImageInfo* imageInfo = duiImage.imageCache.get();
-		pRender->DrawImage(m_rcPaint, duiImage.GetCurrentHBitmap(), imageInfo->IsAlpha(),
+		
+
+		CSize scrollPos{ 0,0 };
+		auto scrollableBox = dynamic_cast<ScrollableBox*>(this);
+		if (scrollableBox) {
+			scrollPos = scrollableBox->GetScrollPos();
+		}
+
+		pRender->DrawImage(m_rcPaint, scrollPos,
+			duiImage.GetCurrentHBitmap(), imageInfo->IsAlpha(),
 			rcNewDest, rcNewSource, newImageAttribute.rcCorner, imageInfo->IsSvg(), iFade,
 			newImageAttribute.bTiledX, newImageAttribute.bTiledY, newImageAttribute.bFullTiledX, newImageAttribute.bFullTiledY,
 			newImageAttribute.nTiledMargin);

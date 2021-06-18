@@ -209,7 +209,8 @@ bool RenderContext_GdiPlus::AlphaBlend(int xDest, int yDest, int widthDest, int 
 	return (TRUE == ::AlphaBlend(m_hDC, xDest, yDest, widthDest, heightDest, hdcSrc, xSrc, yScr, widthSrc, heightSrc, bf));
 }
 
-void RenderContext_GdiPlus::DrawImage(const UiRect& rcPaint, HBITMAP hBitmap, bool bAlphaChannel,
+void RenderContext_GdiPlus::DrawImage(const UiRect& rcPaint, const CSize& scrollPos,
+	HBITMAP hBitmap, bool bAlphaChannel,
 	const UiRect& rcImageDest, const UiRect& rcImageSource, UiRect rcCorners, bool bBitmapDpiScale, 
 	BYTE uFade /*= 255*/, bool xtiled /*= false*/, bool ytiled /*= false*/,
 	bool fullxtiled /*= true*/, bool fullytiled /*= true*/, int nTiledMargin /*=0*/)
@@ -303,6 +304,9 @@ void RenderContext_GdiPlus::DrawImage(const UiRect& rcPaint, HBITMAP hBitmap, bo
 			}
 		}
 		else { // ytiled
+			rcDest.left -= scrollPos.cx;
+			rcDest.top -= scrollPos.cy;
+
 			LONG lHeight = rcImageSource.bottom - rcImageSource.top - rcCorners.top - rcCorners.bottom;
 			int iTimes = 0;
 			if(fullytiled)

@@ -44,7 +44,7 @@ public:
 	virtual bool StretchBlt(int xDest, int yDest, int widthDest, int heightDest, HDC hdcSrc, int xSrc, int yScr, int widthSrc, int heightSrc, DWORD rop = SRCCOPY) override;
 	virtual bool AlphaBlend(int xDest, int yDest, int widthDest, int heightDest, HDC hdcSrc, int xSrc, int yScr, int widthSrc, int heightSrc, BYTE uFade = 255) override;
 
-	virtual void DrawImage(const UiRect& rcPaint, HBITMAP hBitmap, bool bAlphaChannel,
+	virtual void DrawImage(const UiRect& rcPaint, const CSize& scrollPos, HBITMAP hBitmap, bool bAlphaChannel,
 		const UiRect& rcImageDest, const UiRect& rcImageSource, UiRect rcCorners,
 		bool bBitmapDpiScale = false, BYTE uFade = 255,
 		bool xtiled = false, bool ytiled = false, bool fullxtiled = true, bool fullytiled = true, int nTiledMargin = 0) override;
