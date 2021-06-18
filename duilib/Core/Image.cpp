@@ -276,6 +276,7 @@ void ImageAttribute::ModifyAttribute(ImageAttribute& imageAttribute, const std::
 			}
 			else if (sItem == _T("tiledmargin")) {
 				imageAttribute.nTiledMargin = _tcstol(sValue.c_str(), &pstr, 10); ASSERT(pstr);
+				imageAttribute.nTiledMargin = DpiManager::GetInstance()->ScaleInt(imageAttribute.nTiledMargin);
 			}
 			else if (sItem == _T("playcount"))
 			{
