@@ -1432,10 +1432,9 @@ void Control::AlphaPaint(IRenderContext* pRender, const UiRect& rcPaint)
 			// IsCacheDirty~{Sk~}m_bCacheDirty~{RbRe2;R;Qy~}
 			if (m_bCacheDirty) {
 				pCacheRender->Clear();
-				int scaleOffset = m_boxShadow.HasShadow() ? (m_boxShadow.m_nBlurSize * 2 + abs(m_boxShadow.m_cpOffset.x)) : 0;
-				UiRect rcClip = { 0, 0, size.cx + scaleOffset,size.cy + scaleOffset };
-
-				AutoClip alphaClip(pCacheRender, rcClip, IsClip());
+        PaintShadow(pCacheRender);
+        UiRect rcClip = { 0, 0, size.cx, size.cy };
+        AutoClip alphaClip(pCacheRender, rcClip, m_bClip);
 				AutoClip roundAlphaClip(pCacheRender, rcClip, m_cxyBorderRound.cx, m_cxyBorderRound.cy, bRoundClip);
 
 				pCacheRender->SetRenderTransparent(true);
@@ -1465,9 +1464,9 @@ void Control::AlphaPaint(IRenderContext* pRender, const UiRect& rcPaint)
 
 			if (IsCacheDirty()) {
 				pCacheRender->Clear();
-				int scaleOffset = m_boxShadow.HasShadow() ? (m_boxShadow.m_nBlurSize * 2 + abs(m_boxShadow.m_cpOffset.x)) : 0;
-				UiRect rcClip = { 0,0,size.cx + scaleOffset,size.cy + scaleOffset };
-				AutoClip alphaClip(pCacheRender, rcClip, IsClip());
+        PaintShadow(pCacheRender);
+        UiRect rcClip = { 0, 0, size.cx, size.cy };
+        AutoClip alphaClip(pCacheRender, rcClip, m_bClip);
 				AutoClip roundAlphaClip(pCacheRender, rcClip, m_cxyBorderRound.cx, m_cxyBorderRound.cy, bRoundClip);
 
 				pCacheRender->SetRenderTransparent(true);
@@ -1484,14 +1483,9 @@ void Control::AlphaPaint(IRenderContext* pRender, const UiRect& rcPaint)
 		}
 	}
 	else {
-		int scaleOffset = m_boxShadow.HasShadow() ? (m_boxShadow.m_nBlurSize + abs(m_boxShadow.m_cpOffset.x)) : 0;
-		UiRect rcClip = { m_rcItem.left - scaleOffset,
-					m_rcItem.top - scaleOffset,
-					m_rcItem.right + scaleOffset,
-					m_rcItem.bottom + scaleOffset,
-		};
-		AutoClip clip(pRender, rcClip, IsClip());
-		AutoClip roundClip(pRender, rcClip, m_cxyBorderRound.cx, m_cxyBorderRound.cy, bRoundClip);
+    PaintShadow(pRender);
+    AutoClip clip(pRender, m_rcItem, m_bClip);
+    AutoClip roundClip(pRender, m_rcItem, m_cxyBorderRound.cx, m_cxyBorderRound.cy, bRoundClip);
 		CPoint ptOldOrg = pRender->OffsetWindowOrg(m_renderOffset);
 		Paint(pRender, rcPaint);
 		PaintChild(pRender, rcPaint);
@@ -1503,7 +1497,6 @@ void Control::Paint(IRenderContext* pRender, const UiRect& rcPaint)
 {
 	if( !::IntersectRect(&m_rcPaint, &rcPaint, &m_rcItem) ) return;
 
-	PaintShadow(pRender);
 	PaintBkColor(pRender);
 	PaintBkImage(pRender);
 	PaintStatusColor(pRender);
@@ -1518,7 +1511,7 @@ void Control::PaintShadow(IRenderContext* pRender)
 	if (!m_boxShadow.HasShadow())
 		return;
 
-	pRender->DrawBoxShadow(m_rcPaint,
+	pRender->DrawBoxShadow(m_rcItem,
 		m_cxyBorderRound,
 		m_boxShadow.m_cpOffset,
 		m_boxShadow.m_nBlurRadius,
