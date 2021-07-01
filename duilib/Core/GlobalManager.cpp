@@ -415,7 +415,7 @@ HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& 
 	static bool bOsOverXp = IsWindowsVistaOrGreater();
 	std::wstring fontName = strFontName;
 	if (fontName == L"system") {
-    fontName = bOsOverXp ? L"微软雅黑" : L"新宋体";
+    fontName = bOsOverXp ? L"Microsoft YaHei UI" : L"新宋体";
 	}
 
 	LOGFONT lf = { 0 };
