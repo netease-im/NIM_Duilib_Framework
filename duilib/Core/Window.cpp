@@ -1387,7 +1387,10 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 			ReleaseEventClick(true, wParam, lParam);
 			m_ptLastMousePos = pt;
 			// 如果没有按下，则不设置handled，程序会转换为WM_BUTTON类消息
-			ReleaseCapture();
+			 if (uMsg != WM_POINTERLEAVE) {
+                		// Refer to LBUTTONUP and MOUSELEAVE，LBUTTOUP ReleaseCapture while MOUSELEAVE DONOT ReleaseCapture
+                		ReleaseCapture();
+                        }
 			if (m_pEventPointer == NULL) break;
 
 			m_pEventPointer->HandleMessageTemplate(kEventPointUp, 0, lParam, 0, pt, pressure);
