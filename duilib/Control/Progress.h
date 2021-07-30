@@ -15,7 +15,7 @@ public:
 	virtual std::wstring GetType() const override;
 	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
-	virtual void PaintStatusImage(IRenderContext* pRender) override;
+	virtual void PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
 	virtual void ClearImageCache() override;
 
 	/**
@@ -125,7 +125,7 @@ public:
 	 * @brief 绘制Marquee
 	 * @return 无
 	 */
-	void PaintMarquee(IRenderContext* pRender);
+	void PaintMarquee(dui::common::dui_refptr<dui::render::IRenderContext> pRender);
 
 	/**
 	 * @brief 是否是Marquee

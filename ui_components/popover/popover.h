@@ -149,15 +149,15 @@ protected:
   ui::UiRect GetMarginByPlacement();
 
   virtual void CalcTrianglePoints();
-  virtual void PaintBkColor(ui::IRenderContext* pRender) override;
+  virtual void PaintBkColor(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
 protected:
   bool m_bInited;
   int m_nPlacement;
   ui::UiRect m_rcArea;
-  ui::CPoint m_ptTriangle[3];
-  std::unique_ptr<ui::IPath> m_pPath;
-  std::unique_ptr<ui::IPen> m_pPen;
-  std::unique_ptr<ui::IBrush> m_pBrush;
+  dui::render::CPoint m_ptTriangle[3];
+  dui::common::dui_refptr<dui::render::IPath> m_pPath;
+  dui::common::dui_refptr<dui::render::IPen> m_pPen;
+  dui::common::dui_refptr<dui::render::IBrush> m_pBrush;
 };
 
 /* µ¯´°Í· */

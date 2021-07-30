@@ -22,7 +22,7 @@ namespace nim_comp
 		virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 
 		virtual ui::UiRect GetOrgPos() const;
-		//virtual void PaintText(IRenderContext* pRender) override;
+		//virtual void PaintText(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
 
 		const std::vector<std::string>& GetAllDate() const{ return m_vecDate; };
 		void ClearAllDate();

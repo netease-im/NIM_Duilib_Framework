@@ -889,7 +889,7 @@ ui::Control* MenuElement::FindControl(FINDCONTROLPROC Proc, LPVOID pData, UINT u
 	return pResult;
 }
 
-void MenuElement::PaintChild(IRenderContext* pRender, const UiRect& rcPaint)
+void MenuElement::PaintChild(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint)
 {
 	UiRect rcTemp;
 	if (!::IntersectRect(&rcTemp, &rcPaint, &m_rcItem)) return;
@@ -1018,19 +1018,19 @@ void MenuElement::SetAttribute(const std::wstring& strName, const std::wstring& 
 	return __super::SetAttribute(strName, strValue);
 }
 
-void MenuElement::PaintStatusColor(IRenderContext* pRender)
+void MenuElement::PaintStatusColor(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	// 不绘制Select状态
 	Box::PaintStatusColor(pRender);
 }
 
-void MenuElement::PaintStatusImage(IRenderContext* pRender)
+void MenuElement::PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	// 不绘制Select状态
 	Box::PaintStatusImage(pRender);
 }
 
-void MenuElement::PaintText(IRenderContext* pRender)
+void MenuElement::PaintText(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	// 不绘制Select状态
 	LabelBox::PaintText(pRender);

@@ -17,7 +17,7 @@ public:
 	* @param[in] rcPaint 可绘制区域
 	* @return void	无返回值
 	*/
-	virtual void Paint(ui::IRenderContext* pRender, const ui::UiRect& rcPaint) override;
+	virtual void Paint(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const ui::UiRect& rcPaint) override;
 
 	/**
 	* 设置显示在背景的HBITMAP对象

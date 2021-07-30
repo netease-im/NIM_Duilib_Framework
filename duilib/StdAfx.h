@@ -52,7 +52,7 @@
 
 #include "UIlib.h"
 #include <olectl.h>
-#include <GdiPlus.h>
+#include <gdiplus.h>
 
 #define lengthof(x) (sizeof(x)/sizeof(*x))
 #define MAX max

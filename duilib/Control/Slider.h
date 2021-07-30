@@ -16,8 +16,8 @@ public:
 	virtual UiRect GetProgressPos() override;
 	virtual void HandleMessage(EventArgs& event) override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
-	virtual void PaintStatusImage(IRenderContext* pRender) override;
-	virtual void PaintBkColor(IRenderContext* pRender) override;
+	virtual void PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
+	virtual void PaintBkColor(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
 	virtual void ClearImageCache() override;
 
 	/**

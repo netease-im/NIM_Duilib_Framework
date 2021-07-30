@@ -509,7 +509,7 @@ void ScrollBar::SetAttribute(const std::wstring& strName, const std::wstring& st
 	else Control::SetAttribute(strName, strValue);
 }
 
-void ScrollBar::Paint(IRenderContext* pRender, const UiRect& rcPaint)
+void ScrollBar::Paint(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint)
 {
 	if (!::IntersectRect(&m_rcPaint, &rcPaint, &m_rcItem)) return;
 	PaintBk(pRender);
@@ -767,12 +767,12 @@ void ScrollBar::ScrollTimeHandle()
 	return;
 }
 
-void ScrollBar::PaintBk(IRenderContext* pRender)
+void ScrollBar::PaintBk(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	m_bkStateImage.PaintStatusImage(pRender, m_uButtonState);
 }
 
-void ScrollBar::PaintButton1(IRenderContext* pRender)
+void ScrollBar::PaintButton1(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	if (!m_bShowButton1) return;
 
@@ -810,7 +810,7 @@ void ScrollBar::PaintButton1(IRenderContext* pRender)
 	else return;
 }
 
-void ScrollBar::PaintButton2(IRenderContext* pRender)
+void ScrollBar::PaintButton2(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	if (!m_bShowButton2) return;
 
@@ -848,7 +848,7 @@ void ScrollBar::PaintButton2(IRenderContext* pRender)
 	else return;
 }
 
-void ScrollBar::PaintThumb(IRenderContext* pRender)
+void ScrollBar::PaintThumb(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	if (m_rcThumb.left == 0 && m_rcThumb.top == 0 && m_rcThumb.right == 0 && m_rcThumb.bottom == 0) return;
 
@@ -859,7 +859,7 @@ void ScrollBar::PaintThumb(IRenderContext* pRender)
 	m_thumbStateImage.PaintStatusImage(pRender, m_uThumbState, m_sImageModify);
 }
 
-void ScrollBar::PaintRail(IRenderContext* pRender)
+void ScrollBar::PaintRail(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	if (m_rcThumb.left == 0 && m_rcThumb.top == 0 && m_rcThumb.right == 0 && m_rcThumb.bottom == 0) return;
 

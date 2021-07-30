@@ -24,7 +24,7 @@ public:
 	virtual bool HasHotState();
 	virtual CSize EstimateText(CSize szAvailable, bool& bReEstimateSize) override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
-	virtual void PaintText(IRenderContext* pRender) override;
+	virtual void PaintText(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
 	virtual void SetPos(UiRect rc) override;
 
     /**
@@ -250,7 +250,7 @@ void LabelTemplate<InheritType>::CheckShowToolTip()
 				width = 0;
 			}
 			auto pRender = this->m_pWindow->GetRenderContext();
-			UiRect rcMessure = pRender->MeasureText(GetText(), m_sFontId, m_uTextStyle, width);
+			UiRect rcMessure = pRender->MeasureText(GetText(), GlobalManager::GetFont(m_sFontId), m_uTextStyle, width);
 			if (rc.GetWidth() < rcMessure.GetWidth() || rc.GetHeight() < rcMessure.GetHeight())
 			{
 				bNeedShow = true;
@@ -342,7 +342,7 @@ CSize LabelTemplate<InheritType>::EstimateText(CSize szAvailable, bool& bReEstim
     CSize fixedSize;
     if (!GetText().empty()) {
         auto pRender = this->m_pWindow->GetRenderContext();
-        UiRect rect = pRender->MeasureText(GetText(), m_sFontId, m_uTextStyle, width);
+        UiRect rect = pRender->MeasureText(GetText(), GlobalManager::GetFont(m_sFontId), m_uTextStyle, width);
         if (this->GetFixedWidth() == DUI_LENGTH_AUTO) {
             fixedSize.cx = rect.right - rect.left + m_rcTextPadding.left + m_rcTextPadding.right;
         }
@@ -355,7 +355,7 @@ CSize LabelTemplate<InheritType>::EstimateText(CSize szAvailable, bool& bReEstim
                 int maxWidth = szAvailable.cx - m_rcTextPadding.left - m_rcTextPadding.right;
                 if (estimateWidth > maxWidth) {
                     estimateWidth = maxWidth;
-                    UiRect newRect = pRender->MeasureText(GetText(), m_sFontId, m_uTextStyle, estimateWidth);
+                    UiRect newRect = pRender->MeasureText(GetText(), GlobalManager::GetFont(m_sFontId), m_uTextStyle, estimateWidth);
                     estimateHeight = newRect.bottom - newRect.top;
                 }
             }
@@ -425,7 +425,7 @@ void LabelTemplate<InheritType>::SetAttribute(const std::wstring& strName, const
 }
 
 template<typename InheritType>
-void LabelTemplate<InheritType>::PaintText(IRenderContext* pRender)
+void LabelTemplate<InheritType>::PaintText(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
     if (GetText().empty()) return;
     UiRect rc = this->m_rcItem;
@@ -448,14 +448,14 @@ void LabelTemplate<InheritType>::PaintText(IRenderContext* pRender)
             std::wstring clrColor = GetStateTextColor(kControlStateNormal);
             if (!clrColor.empty()) {
                 DWORD dwClrColor = this->GetWindowColor(clrColor);
-                pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit, m_bDrawTextFillPath);
+                pRender->DrawText(rc, GetText(), dwClrColor, GlobalManager::GetFont(m_sFontId), m_uTextStyle, 255, m_bLineLimit, m_bDrawTextFillPath);
             }
 
             if (this->m_nHotAlpha > 0) {
                 std::wstring clrColor = GetStateTextColor(kControlStateHot);
                 if (!clrColor.empty()) {
                     DWORD dwClrColor = this->GetWindowColor(clrColor);
-                    pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, (BYTE)this->m_nHotAlpha, m_bLineLimit, m_bDrawTextFillPath);
+                    pRender->DrawText(rc, GetText(), dwClrColor, GlobalManager::GetFont(m_sFontId), m_uTextStyle, (BYTE)this->m_nHotAlpha, m_bLineLimit, m_bDrawTextFillPath);
                 }
             }
 
@@ -463,7 +463,7 @@ void LabelTemplate<InheritType>::PaintText(IRenderContext* pRender)
         }
     }
 
-    pRender->DrawText(rc, GetText(), dwClrColor, m_sFontId, m_uTextStyle, 255, m_bLineLimit, m_bDrawTextFillPath);
+    pRender->DrawText(rc, GetText(), dwClrColor, GlobalManager::GetFont(m_sFontId), m_uTextStyle, 255, m_bLineLimit, m_bDrawTextFillPath);
 }
 
 template<typename InheritType>

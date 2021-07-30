@@ -119,7 +119,7 @@ void CefControl::SetInternVisible(bool bVisible)
 	}	
 }
 
-void CefControl::Paint(IRenderContext* pRender, const UiRect& rcPaint)
+void CefControl::Paint(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint)
 {
 	__super::Paint(pRender, rcPaint);
 

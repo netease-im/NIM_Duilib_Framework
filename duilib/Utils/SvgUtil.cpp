@@ -2,9 +2,9 @@
 
 #define NANOSVG_IMPLEMENTATION
 #define NANOSVG_ALL_COLOR_KEYWORDS
-#include "Render/nanosvg.h"
+#include "Decoder/nanosvg.h"
 #define NANOSVGRAST_IMPLEMENTATION
-#include "Render/nanosvgrast.h"
+#include "Decoder/nanosvgrast.h"
 
 namespace ui
 {
@@ -20,6 +20,24 @@ class RasterizerDeleter
 public:
 	inline void operator()(NSVGrasterizer * x) const { nsvgDeleteRasterizer(x); }
 };
+
+static HBITMAP CreateDIBBitmap(HDC hdc, int width, int height, bool flip, LPVOID* pBits)
+{
+	if (hdc == NULL || width <= 0 || height <= 0)
+		return NULL;
+
+	BITMAPINFO bmi = { 0 };
+	::ZeroMemory(&bmi, sizeof(BITMAPINFO));
+	bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+	bmi.bmiHeader.biWidth = width;
+	bmi.bmiHeader.biHeight = flip ? -height : height;
+	bmi.bmiHeader.biPlanes = 1;
+	bmi.bmiHeader.biBitCount = 32;
+	bmi.bmiHeader.biCompression = BI_RGB;
+	bmi.bmiHeader.biSizeImage = width * height * sizeof(DWORD);
+
+	return ::CreateDIBSection(hdc, &bmi, DIB_RGB_COLORS, pBits, NULL, 0);
+}
 
 bool SvgUtil::IsSvgFile(const std::wstring& strImageFullPath)
 {
@@ -63,6 +81,8 @@ std::unique_ptr<ui::ImageInfo> SvgUtil::LoadSvg(HGLOBAL hGlobal, const std::wstr
 	return nullptr;
 }
 
+
+
 std::unique_ptr<ui::ImageInfo> SvgUtil::LoadImageBySvg(void *data, const std::wstring& strImageFullPath)
 {
 	std::unique_ptr<NSVGimage, SvgDeleter> svg((NSVGimage*)data);
@@ -81,7 +101,7 @@ std::unique_ptr<ui::ImageInfo> SvgUtil::LoadImageBySvg(void *data, const std::ws
 
 	unsigned char* pBmpBits = NULL;
 	HDC hdc = GetDC(NULL);
-	HBITMAP hBitmap = GdiBitmap::CreateDIBBitmap(hdc, w, h, true, (LPVOID*)&pBmpBits);
+	HBITMAP hBitmap = CreateDIBBitmap(hdc, w, h, true, (LPVOID*)&pBmpBits);
 	ReleaseDC(NULL, hdc);
 
 	if (!hBitmap) {

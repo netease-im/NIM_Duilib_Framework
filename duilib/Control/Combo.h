@@ -26,7 +26,7 @@ public:
 	virtual void Deactivate() override;
 	virtual bool IsActivated() override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
-	virtual void PaintText(IRenderContext* pRender) override;
+	virtual void PaintText(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
 
 	/**
 	 * @brief 获取当前选择项文本

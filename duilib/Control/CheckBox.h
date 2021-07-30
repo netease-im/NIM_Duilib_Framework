@@ -17,9 +17,9 @@ public:
     virtual void Activate() override;
     virtual Image* GetEstimateImage() override;
     virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
-    virtual void PaintStatusColor(IRenderContext* pRender) override;
-    virtual void PaintStatusImage(IRenderContext* pRender) override;
-    virtual void PaintText(IRenderContext* pRender) override;
+    virtual void PaintStatusColor(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
+    virtual void PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
+    virtual void PaintText(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
     virtual bool HasHotState();
 
     /**
@@ -263,7 +263,7 @@ void CheckBoxTemplate<InheritType>::SetAttribute(const std::wstring& strName, co
 }
 
 template<typename InheritType>
-void CheckBoxTemplate<InheritType>::PaintStatusColor(IRenderContext* pRender)
+void CheckBoxTemplate<InheritType>::PaintStatusColor(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
     if (!IsSelected()) {
         __super::PaintStatusColor(pRender);
@@ -277,7 +277,7 @@ void CheckBoxTemplate<InheritType>::PaintStatusColor(IRenderContext* pRender)
 }
 
 template<typename InheritType>
-void CheckBoxTemplate<InheritType>::PaintStatusImage(IRenderContext* pRender)
+void CheckBoxTemplate<InheritType>::PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
     if (!IsSelected()) {
         __super::PaintStatusImage(pRender);
@@ -296,7 +296,7 @@ void CheckBoxTemplate<InheritType>::PaintStatusImage(IRenderContext* pRender)
 }
 
 template<typename InheritType>
-void CheckBoxTemplate<InheritType>::PaintText(IRenderContext* pRender)
+void CheckBoxTemplate<InheritType>::PaintText(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
     if (!IsSelected()) {
         __super::PaintText(pRender);
@@ -327,14 +327,26 @@ void CheckBoxTemplate<InheritType>::PaintText(IRenderContext* pRender)
             std::wstring clrColor = GetSelectedStateTextColor(kControlStateNormal);
             if (!clrColor.empty()) {
                 DWORD dwClrColor = this->GetWindowColor(clrColor);
-                pRender->DrawText(rc, this->GetText(), dwClrColor, this->m_sFontId, this->m_uTextStyle, 255, this->m_bLineLimit);
+                pRender->DrawText(rc, 
+                    this->GetText(), 
+                    dwClrColor, 
+                    GlobalManager::GetFont(this->m_sFontId), 
+                    this->m_uTextStyle,
+                    255, 
+                    this->m_bLineLimit);
             }
 
             if (this->m_nHotAlpha > 0) {
                 std::wstring clrColor = GetSelectedStateTextColor(kControlStateHot);
                 if (!clrColor.empty()) {
                     DWORD dwClrColor = this->GetWindowColor(clrColor);
-                    pRender->DrawText(rc, this->GetText(), dwClrColor, this->m_sFontId, this->m_uTextStyle, (BYTE)this->m_nHotAlpha, this->m_bLineLimit);
+                    pRender->DrawText(rc, 
+                        this->GetText(), 
+                        dwClrColor, 
+                        GlobalManager::GetFont(this->m_sFontId), 
+                        this->m_uTextStyle,
+                        (BYTE)this->m_nHotAlpha,
+                        this->m_bLineLimit);
                 }
             }
 
@@ -342,7 +354,13 @@ void CheckBoxTemplate<InheritType>::PaintText(IRenderContext* pRender)
         }
     }
 
-    pRender->DrawText(rc, this->GetText(), dwClrColor, this->m_sFontId, this->m_uTextStyle, 255, this->m_bLineLimit);
+    pRender->DrawText(rc, 
+        this->GetText(), 
+        dwClrColor, 
+        GlobalManager::GetFont(this->m_sFontId),
+        this->m_uTextStyle, 
+        255, 
+        this->m_bLineLimit);
 }
 
 template<typename InheritType>

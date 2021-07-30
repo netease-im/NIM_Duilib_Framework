@@ -1823,9 +1823,9 @@ HDC Window::GetPaintDC() const
 	return m_hDcPaint;
 }
 
-ui::IRenderContext* Window::GetRenderContext() const
+dui::common::dui_refptr<dui::render::IRenderContext> Window::GetRenderContext() const
 {
-	return m_renderContext.get();
+	return m_renderContext;
 }
 
 void Window::Invalidate(const UiRect& rcItem)
@@ -1934,7 +1934,7 @@ void Window::Paint()
 	}
 
 	// 绘制
-	AutoClip rectClip(m_renderContext.get(), rcPaint, true);
+	dui::render::AutoClip rectClip(m_renderContext, rcPaint, true);
 	CPoint ptOldWindOrg = m_renderContext->OffsetWindowOrg(m_renderOffset);
 	m_pRoot->Paint(m_renderContext.get(), rcPaint);
 	m_pRoot->PaintChild(m_renderContext.get(), rcPaint);

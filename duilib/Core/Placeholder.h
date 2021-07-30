@@ -335,7 +335,7 @@ protected:
 
 	bool m_bUseCache;
 	bool m_bCacheDirty;
-	std::unique_ptr<IRenderContext> m_renderContext;
+	dui::common::dui_refptr<dui::render::IRenderContext> m_renderContext;
 };
 
 } // namespace ui

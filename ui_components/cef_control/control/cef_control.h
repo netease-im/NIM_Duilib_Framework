@@ -22,7 +22,7 @@ public:
 	virtual void HandleMessage(EventArgs& event) override;
 	virtual void SetVisible(bool bVisible = true) override;
 	virtual void SetInternVisible(bool bVisible = true) override;
-	virtual void Paint(IRenderContext* pRender, const UiRect& rcPaint) override;
+	virtual void Paint(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint) override;
 	virtual void SetWindow(ui::Window* pManager, ui::Box* pParent, bool bInit) override;
 
 	virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled) override; // 处理窗体消息，转发到Cef浏览器对象

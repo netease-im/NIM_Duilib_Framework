@@ -137,7 +137,7 @@ void Slider::SetAttribute(const std::wstring& strName, const std::wstring& strVa
 	else Progress::SetAttribute(strName, strValue);
 }
 
-void Slider::PaintBkColor(IRenderContext* pRender)
+void Slider::PaintBkColor(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	m_rcItem.Deflate(m_rcProgressBarPadding);
 	m_rcPaint.Deflate(m_rcProgressBarPadding);
@@ -146,7 +146,7 @@ void Slider::PaintBkColor(IRenderContext* pRender)
 	m_rcItem.Inflate(m_rcProgressBarPadding);
 }
 
-void Slider::PaintStatusImage(IRenderContext* pRender)
+void Slider::PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	m_rcItem.Deflate(m_rcProgressBarPadding);
 	Progress::PaintStatusImage(pRender);

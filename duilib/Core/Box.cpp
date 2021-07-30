@@ -360,7 +360,7 @@ void Box::SetReceivePointerMsg(bool bRecv)
 	}
 }
 
-void Box::PaintChild(IRenderContext* pRender, const UiRect& rcPaint)
+void Box::PaintChild(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint)
 {
 	UiRect rcTemp;
 	if( !::IntersectRect(&rcTemp, &rcPaint, &m_rcItem) ) return;
@@ -1079,7 +1079,7 @@ bool ScrollableBox::MouseLeave(EventArgs& msg)
 	return bRet;
 }
 
-void ScrollableBox::PaintChild(IRenderContext* pRender, const UiRect& rcPaint)
+void ScrollableBox::PaintChild(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint)
 {
 	UiRect rcTemp;
 	if( !::IntersectRect(&rcTemp, &rcPaint, &m_rcItem) ) return;
@@ -1088,12 +1088,12 @@ void ScrollableBox::PaintChild(IRenderContext* pRender, const UiRect& rcPaint)
 		Control* pControl = *it;
 		if( !pControl->IsVisible() ) continue;
 		if (pControl->IsFloat()) {
-			pControl->AlphaPaint(pRender, rcPaint);	
+			pControl->AlphaPaint(pRender, rcPaint);
 		}
 		else {
 			CSize scrollPos = GetScrollPos();
 			UiRect rcNewPaint = GetPaddingPos();
-			AutoClip alphaClip(pRender, rcNewPaint, IsClip());
+			dui::render::AutoClip alphaClip(pRender, rcNewPaint, IsClip());
 			rcNewPaint.Offset(scrollPos.cx, scrollPos.cy);
 			rcNewPaint.Offset(GetRenderOffset().x, GetRenderOffset().y);
 

@@ -46,8 +46,8 @@ public:
   void Deactivate() override;
   bool IsActivated() override;
   void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
-  void PaintText(IRenderContext* pRender) override;
-  void PaintChild(IRenderContext* pRender, const UiRect& rcPaint) override;
+  void PaintText(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
+  void PaintChild(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint) override;
 
   /**
    * @brief 获取当前选择项文本

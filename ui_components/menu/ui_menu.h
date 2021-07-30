@@ -112,7 +112,7 @@ public:
 	virtual bool ButtonUp(EventArgs& msg) override;
 	virtual bool MouseEnter(EventArgs& msg) override;
 
-	virtual void PaintChild(IRenderContext* pRender, const UiRect& rcPaint) override;
+	virtual void PaintChild(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint) override;
 
 	bool CheckSubMenuItem();
 

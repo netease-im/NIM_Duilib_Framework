@@ -173,7 +173,7 @@ void PopoverArrow::CalcTrianglePoints()
   }
 }
 
-void PopoverArrow::PaintBkColor(ui::IRenderContext* pRender)
+void PopoverArrow::PaintBkColor(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 
   CalcTrianglePoints();

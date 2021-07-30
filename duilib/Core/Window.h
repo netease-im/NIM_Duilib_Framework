@@ -862,7 +862,7 @@ public:
 	 * @brief 获取绘制对象
 	 * @return 返回绘制对象
 	 */
-	IRenderContext* GetRenderContext() const;
+	dui::common::dui_refptr<dui::render::IRenderContext> GetRenderContext() const;
 
 	/**
 	 * @brief 发出重绘消息
@@ -974,7 +974,7 @@ protected:
 	double m_heightPercent;
 
 	HDC m_hDcPaint;
-	std::unique_ptr<IRenderContext> m_renderContext;
+	dui::common::dui_refptr<dui::render::IRenderContext> m_renderContext;
 	bool m_bIsLayeredWindow;
 	int m_nAlpha;
 	CPoint m_renderOffset;

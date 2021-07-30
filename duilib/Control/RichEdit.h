@@ -704,8 +704,8 @@ public:
 	void OnImeEndComposition(EventArgs& event);
 	void OnMouseMessage(UINT uMsg, EventArgs& event);
 
-	virtual void Paint(IRenderContext* pRender, const UiRect& rcPaint) override;
-	virtual void PaintChild(IRenderContext* pRender, const UiRect& rcPaint) override;
+	virtual void Paint(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint) override;
+	virtual void PaintChild(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint) override;
 	virtual void SetAttribute(const std::wstring& pstrName, const std::wstring& pstrValue) override;
 
 	/**
@@ -762,7 +762,7 @@ public:
 	 * @param[in] rcPaint 绘制位置
 	 * @return 无
 	 */
-	void PaintCaret(IRenderContext* pRender, const UiRect& rcPaint);
+	void PaintCaret(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint);
 
 	/**
 	 * @brief 设置是否显示提示文字
@@ -816,7 +816,7 @@ public:
 	 * @param[in] pRender 绘制引擎
 	 * @return 无
 	 */
-	void PaintPromptText(IRenderContext* pRender);
+	void PaintPromptText(dui::common::dui_refptr<dui::render::IRenderContext> pRender);
 
 	/**
 	 * @brief 获取焦点状态下的图片
@@ -836,7 +836,7 @@ public:
 	 * @param[in] pRender 绘制引擎
 	 * @return 无
 	 */
-	virtual void PaintStatusImage(IRenderContext* pRender) override;
+	virtual void PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
 
 	/**
 	 * @brief 设置失去焦点后是否取消选择项

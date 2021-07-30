@@ -391,7 +391,7 @@ bool StateImage::HasImage()
 		!m_stateImageMap[kControlStateDisabled].imageAttribute.simageString.empty();
 }
 
-bool StateImage::PaintStatusImage(IRenderContext* pRender, ControlStateType stateType, const std::wstring& sImageModify /*= L""*/)
+bool StateImage::PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender, ControlStateType stateType, const std::wstring& sImageModify /*= L""*/)
 {
 	if (m_pControl) {
 		bool bFadeHot = m_pControl->GetAnimationManager().GetAnimationPlayer(kAnimationHot) != nullptr;
@@ -511,7 +511,7 @@ bool StateImageMap::HasImageType(StateImageType stateImageType)
 	return m_stateImageMap[stateImageType].HasImage();
 }
 
-bool StateImageMap::PaintStatusImage(IRenderContext* pRender, StateImageType stateImageType, ControlStateType stateType, const std::wstring& sImageModify /*= L""*/)
+bool StateImageMap::PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender, StateImageType stateImageType, ControlStateType stateType, const std::wstring& sImageModify /*= L""*/)
 {
 	auto it = m_stateImageMap.find(stateImageType);
 	if (it != m_stateImageMap.end()) {
@@ -562,7 +562,7 @@ bool StateColorMap::HasColor()
 		!m_stateColorMap[kControlStateDisabled].empty();
 }
 
-void StateColorMap::PaintStatusColor(IRenderContext* pRender, UiRect rcPaint, ControlStateType stateType)
+void StateColorMap::PaintStatusColor(dui::common::dui_refptr<dui::render::IRenderContext> pRender, UiRect rcPaint, ControlStateType stateType)
 {
 	if (m_pControl) {
 		bool bFadeHot = m_pControl->GetAnimationManager().GetAnimationPlayer(kAnimationHot) != nullptr;

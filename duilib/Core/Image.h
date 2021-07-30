@@ -110,7 +110,7 @@ public:
 
 	bool HasHotImage();
 	bool HasImage();
-	bool PaintStatusImage(IRenderContext* pRender, ControlStateType stateType, const std::wstring& sImageModify = L"");
+	bool PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender, ControlStateType stateType, const std::wstring& sImageModify = L"");
 	Image* GetEstimateImage();
 	void ClearCache();
 
@@ -131,7 +131,7 @@ public:
 
 	bool HasHotImage();
 	bool HasImageType(StateImageType stateImageType);
-	bool PaintStatusImage(IRenderContext* pRender, StateImageType stateImageType, ControlStateType stateType, const std::wstring& sImageModify = L"");
+	bool PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender, StateImageType stateImageType, ControlStateType stateType, const std::wstring& sImageModify = L"");
 	Image* GetEstimateImage(StateImageType stateImageType);
 
 	void ClearCache();
@@ -150,7 +150,7 @@ public:
 
 	bool HasHotColor();
 	bool HasColor();
-	void PaintStatusColor(IRenderContext* pRender, UiRect rcPaint, ControlStateType stateType);
+	void PaintStatusColor(dui::common::dui_refptr<dui::render::IRenderContext> pRender, UiRect rcPaint, ControlStateType stateType);
 
 private:
 	Control* m_pControl;

@@ -262,7 +262,7 @@ HBITMAP TaskbarManager::GenerateBindControlBitmapWithForm(ui::Control *control)
 
 	// 这里不设置剪裁区域，就无法正常绘制
 	{
-		AutoClip rectClip(render.get(), rcPaint);
+		dui::render::AutoClip rectClip(render.get(), rcPaint);
 
 		bool visible = control->IsInternVisible();
 		control->SetInternVisible(true);
@@ -320,7 +320,7 @@ HBITMAP TaskbarManager::GenerateBindControlBitmap(ui::Control *control, const in
 
 	// 这里不设置剪裁区域，就无法正常绘制
 	{
-		AutoClip rectClip(render.get(), rcPaint);
+		dui::render::AutoClip rectClip(render.get(), rcPaint);
 
 		bool visible = control->IsInternVisible();
 		control->SetInternVisible(true);

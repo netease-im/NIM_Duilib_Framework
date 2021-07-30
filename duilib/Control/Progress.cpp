@@ -158,7 +158,7 @@ void Progress::SetAttribute(const std::wstring& srName, const std::wstring& strV
 	else Label::SetAttribute(srName, strValue);
 }
 
-void Progress::PaintStatusImage(IRenderContext* pRender)
+void Progress::PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	if (m_bMarquee) {
 		PaintMarquee(pRender);
@@ -280,7 +280,7 @@ void Progress::Play() {
 	Invalidate();
 }
 
-void Progress::PaintMarquee(IRenderContext* pRender) {
+void Progress::PaintMarquee(dui::common::dui_refptr<dui::render::IRenderContext> pRender) {
 	if (!m_sProgressColor.empty()) {
 		DWORD dwProgressColor = GlobalManager::GetTextColor(m_sProgressColor);
 		if (dwProgressColor != 0) {

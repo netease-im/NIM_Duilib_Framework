@@ -111,7 +111,7 @@ namespace ui
 		m_pBody->_EndEdit();
 		return true;
 	}
-	void Grid::PaintChild(IRenderContext* pRender, const UiRect& rcPaint)
+	void Grid::PaintChild(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint)
 	{
 		UiRect rcTemp;
 		if (!::IntersectRect(&rcTemp, &rcPaint, &m_rcItem)) return;

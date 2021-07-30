@@ -27,23 +27,7 @@
 // NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS 
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#if defined(UILIB_DLL)
-#if defined(UILIB_EXPORTS)
-#if defined(_MSC_VER)
-#define UILIB_API __declspec(dllexport)
-#else
-#define UILIB_API 
-#endif
-#else
-#if defined(_MSC_VER)
-#define UILIB_API __declspec(dllimport)
-#else
-#define UILIB_API 
-#endif
-#endif
-#else
-#define UILIB_API
-#endif
+#include "common/dui_api.h"
 
 #define UILIB_COMDAT __declspec(selectany)
 
@@ -58,8 +42,7 @@
 #endif
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1920)
-#define ENABLE_UIAUTOMATION
-#pragma comment(lib, "uiautomationcore.lib")
+#define ENABLE_UIAUTOMATION 1
 #endif
 
 
@@ -104,16 +87,6 @@
 #include "Animation/AnimationPlayer.h"
 #include "Animation/AnimationManager.h"
 
-#include "Render/IRender.h"
-#include "Render/Clip.h"
-#include "Render/Bitmap.h"
-#include "Render/Render.h"
-#include "Render/Pen.h"
-#include "Render/Brush.h"
-#include "Render/Matrix.h"
-#include "Render/Path.h"
-#include "Render/Factory.h"
-
 #include "Automation/UIAControlProvider.h"
 #if defined(ENABLE_UIAUTOMATION)
 #include "Automation/UIAWindowProvider.h"
@@ -135,6 +108,7 @@
 #include "Core/Define.h"
 #include "Core/Markup.h"
 #include "Core/WindowBuilder.h"
+#include "Core/Render.h"
 #include "Core/Image.h"
 #include "Core/GlobalManager.h"
 #include "Core/Window.h"

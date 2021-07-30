@@ -113,7 +113,7 @@ public:
 	virtual void SetPos(UiRect rc) override;
 	virtual void HandleMessageTemplate(EventArgs& msg) override;
 	virtual void SetReceivePointerMsg(bool bRecv) override;
-	virtual void PaintChild(IRenderContext* pRender, const UiRect& rcPaint) override;
+	virtual void PaintChild(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint) override;
 	virtual void SetVisible_(bool bVisible) override;
 	virtual void SetInternVisible(bool bVisible = true) override;
 	virtual void SetEnabled(bool bEnabled) override;
@@ -335,7 +335,7 @@ public:
 	virtual void HandleMessage(EventArgs& event) override;
 	virtual bool MouseEnter(EventArgs& msg) override;
 	virtual bool MouseLeave(EventArgs& msg) override;
-	virtual void PaintChild(IRenderContext* pRender, const UiRect& rcPaint) override;
+	virtual void PaintChild(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint) override;
 	virtual void SetMouseEnabled(bool bEnable = true) override;
 	virtual void SetWindow(Window* pManager, Box* pParent, bool bInit) override;
 	virtual Control* FindControl(FINDCONTROLPROC Proc, LPVOID pData, UINT uFlags, CPoint scrollPos = CPoint()) override;

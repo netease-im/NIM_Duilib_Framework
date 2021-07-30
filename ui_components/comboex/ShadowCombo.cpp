@@ -328,7 +328,7 @@ void ShadowCombo::SetAttribute(const std::wstring& strName, const std::wstring& 
   else Box::SetAttribute(strName, strValue);
 }
 
-void ShadowCombo::PaintText(IRenderContext* pRender)
+void ShadowCombo::PaintText(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
   UiRect rcText = m_rcItem;
   rcText.right = m_cArrow->GetPos().left;
@@ -358,7 +358,7 @@ void ShadowCombo::PaintText(IRenderContext* pRender)
       DWORD dwTextColor = 0xFF000000;
       dwTextColor = this->GetWindowColor(pElement->GetStateTextColor(kControlStateNormal));
       pRender->DrawText(rcText, GetText(), dwTextColor, \
-        pElement->GetFont(), DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS);
+          GlobalManager::GetFont(pElement->GetFont()), DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS);
     }
     else {
       UiRect rcOldPos = pControl->GetPos();
@@ -369,7 +369,7 @@ void ShadowCombo::PaintText(IRenderContext* pRender)
   }
 }
 
-void ShadowCombo::PaintChild(IRenderContext* pRender, const UiRect& rcPaint) {
+void ShadowCombo::PaintChild(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint) {
   __super::PaintChild(pRender, rcPaint);
   if (m_cArrow->GetState() != GetState()) {
     m_cArrow->SetState(GetState());

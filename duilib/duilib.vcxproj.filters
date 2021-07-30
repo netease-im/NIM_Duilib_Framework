@@ -39,17 +39,14 @@
     <Filter Include="Source Files\Animation">
       <UniqueIdentifier>{2069d257-49fd-4283-9999-19e7dda732c8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Render">
-      <UniqueIdentifier>{ab59d168-e65b-4cf4-aff6-a2a07e35d058}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Render">
-      <UniqueIdentifier>{93308611-e7ba-4331-845a-700f5b457c52}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Automation">
       <UniqueIdentifier>{7552f3c2-e541-4000-bc12-99ca026b84c7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Automation">
       <UniqueIdentifier>{1cb1a7d9-ddb1-4be4-9bc7-d5bc29a72da6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Decoder">
+      <UniqueIdentifier>{6c60ed04-be5d-4b37-97e4-7ce8c5b2a24a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -149,35 +146,8 @@
     <ClCompile Include="Utils\ApiWrapper.cpp">
       <Filter>Source Files\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Render\Render.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Clip.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\IRender.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Bitmap.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
     <ClCompile Include="Utils\OnScreenKeyboardManager.cpp">
       <Filter>Source Files\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Brush.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Factory.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Path.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Pen.cpp">
-      <Filter>Source Files\Render</Filter>
-    </ClCompile>
-    <ClCompile Include="Render\Matrix.cpp">
-      <Filter>Source Files\Render</Filter>
     </ClCompile>
     <ClCompile Include="Utils\FontManager.cpp">
       <Filter>Source Files\Utils</Filter>
@@ -247,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="Utils\GdiHepler.cpp">
       <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Render.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -370,35 +343,8 @@
     <ClInclude Include="Utils\ApiWrapper.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Render\Render.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\IRender.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Clip.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Bitmap.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
     <ClInclude Include="Utils\OnScreenKeyboardManager.h">
       <Filter>Header Files\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Brush.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Factory.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Path.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Pen.h">
-      <Filter>Header Files\Render</Filter>
-    </ClInclude>
-    <ClInclude Include="Render\Matrix.h">
-      <Filter>Header Files\Render</Filter>
     </ClInclude>
     <ClInclude Include="Utils\FontManager.h">
       <Filter>Header Files\Utils</Filter>
@@ -468,6 +414,15 @@
     </ClInclude>
     <ClInclude Include="Utils\GdiHepler.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Render.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Decoder\nanosvg.h">
+      <Filter>Header Files\Decoder</Filter>
+    </ClInclude>
+    <ClInclude Include="Decoder\nanosvgrast.h">
+      <Filter>Header Files\Decoder</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

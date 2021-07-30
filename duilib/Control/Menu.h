@@ -463,7 +463,7 @@ public:
 
 protected:
 	virtual Control* FindControl(FINDCONTROLPROC Proc, LPVOID pData, UINT uFlags, CPoint scrollPos = CPoint()) override;
-	virtual void PaintChild(IRenderContext* pRender, const UiRect& rcPaint) override;
+	virtual void PaintChild(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint) override;
 
 	virtual bool MouseEnter(EventArgs& msg) override;
 	virtual bool MouseLeave(EventArgs& msg) override;
@@ -471,9 +471,9 @@ protected:
 	virtual void HandleMessage(EventArgs& event) override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 
-	virtual void PaintStatusColor(IRenderContext* pRender) override;
-	virtual void PaintStatusImage(IRenderContext* pRender) override;
-	virtual void PaintText(IRenderContext* pRender) override;
+	virtual void PaintStatusColor(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
+	virtual void PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
+	virtual void PaintText(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
 
 	/** @brief 准备创建子菜单
 	  * @return bool 是否真的需要创建子菜单

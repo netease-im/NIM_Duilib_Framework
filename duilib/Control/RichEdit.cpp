@@ -2613,7 +2613,7 @@ void RichEdit::OnMouseMessage(UINT uMsg, EventArgs& event)
 	TxSendMessage(uMsg, event.wParam, MAKELPARAM(pt.x, pt.y), NULL);
 }
 
-void RichEdit::Paint(IRenderContext* pRender, const UiRect& rcPaint)
+void RichEdit::Paint(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint)
 {
     UiRect rcTemp;
     if( !::IntersectRect(&rcTemp, &rcPaint, &m_rcItem) ) return;
@@ -2630,7 +2630,7 @@ void RichEdit::Paint(IRenderContext* pRender, const UiRect& rcPaint)
             /*-1*/0,				// Lindex
             NULL,					// Info for drawing optimazation
             NULL,					// target device information
-            pRender->GetDC(),			        // Draw device HDC
+			pRender->GetDC(),			        // Draw device HDC
             NULL, 				   	// Target device HDC
             (RECTL*)&rc,			// Bounding client rectangle
             NULL, 		            // Clipping rectangle for metafiles
@@ -2661,7 +2661,7 @@ void RichEdit::Paint(IRenderContext* pRender, const UiRect& rcPaint)
     }
 }
 
-void RichEdit::PaintChild(IRenderContext* pRender, const UiRect& rcPaint)
+void RichEdit::PaintChild(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint)
 {
 	UiRect rcTemp;
 	if (!::IntersectRect(&rcTemp, &rcPaint, &m_rcItem)) return;
@@ -2690,7 +2690,7 @@ void RichEdit::PaintChild(IRenderContext* pRender, const UiRect& rcPaint)
             }
         }
         else {
-			AutoClip childClip(pRender, rcTemp);
+			dui::render::AutoClip childClip(pRender, rcTemp);
 			for( auto it = m_items.begin(); it != m_items.end(); it++ ) {
 				auto pControl = *it;
                 if( !pControl->IsVisible() ) continue;
@@ -2909,7 +2909,7 @@ void RichEdit::ChangeCaretVisiable()
 	Invalidate();
 }
 
-void RichEdit::PaintCaret(IRenderContext* pRender, const UiRect& rcPaint)
+void RichEdit::PaintCaret(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint)
 {
 	if (m_bReadOnly && m_bNoCaretReadonly)
 		return;
@@ -2980,7 +2980,7 @@ void RichEdit::SetUTF8PromptTextId(const std::string& strTextId)
 	SetPromptTextId(strOut);
 }
 
-void RichEdit::PaintPromptText(IRenderContext* pRender)
+void RichEdit::PaintPromptText(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	long len = GetTextLength(GTL_DEFAULT);
 	if (len != 0)
@@ -2998,7 +2998,7 @@ void RichEdit::PaintPromptText(IRenderContext* pRender)
 
 	DWORD dwClrColor = this->GetWindowColor(m_sPromptColor);
 	UINT dwStyle = DT_NOCLIP;
-	pRender->DrawText(rc, strPrompt, dwClrColor, m_sFontId, dwStyle);
+	pRender->DrawText(rc, strPrompt, dwClrColor, GlobalManager::GetFont(m_sFontId), dwStyle);
 }
 
 std::wstring RichEdit::GetFocusedImage()
@@ -3012,7 +3012,7 @@ void RichEdit::SetFocusedImage( const std::wstring& strImage )
 	Invalidate();
 }
 
-void RichEdit::PaintStatusImage(IRenderContext* pRender)
+void RichEdit::PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	if( IsReadOnly() )
 		return;

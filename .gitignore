@@ -15,6 +15,9 @@
 
 # Build results
 [Bb]in/*.exe
+[Bb]in/*.dll
+[Bb]in/*.lib
+[Bb]in/*.exp
 [Bb]in/cef_temp
 [Ll]ibs/
 [Tt]mp/

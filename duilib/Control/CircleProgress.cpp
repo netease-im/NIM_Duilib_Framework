@@ -46,7 +46,7 @@ void CircleProgress::SetAttribute(const std::wstring& srName, const std::wstring
 	else Progress::SetAttribute(srName, strValue);
 }
 
-void CircleProgress::PaintStatusImage(IRenderContext* pRender)
+void CircleProgress::PaintStatusImage(dui::common::dui_refptr<dui::render::IRenderContext> pRender)
 {
 	Progress::PaintStatusImage(pRender);
 	if (m_bCircular)

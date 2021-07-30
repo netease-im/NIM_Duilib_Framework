@@ -15,7 +15,7 @@ public:
 
 	virtual void SetColCount(int count) override;
 	virtual ui::GridHeaderItem* AddCol(std::wstring text, int width) override;
-	virtual void PaintBody(ui::IRenderContext* pRender) override;
+	virtual void PaintBody(dui::common::dui_refptr<dui::render::IRenderContext> pRender) override;
 
 	/**
 	* @brief SetColumnWidth中调用, 更改了列宽;

@@ -8,6 +8,9 @@
 
 namespace ui 
 {
+
+class RenderFactoryImpl;
+
 /**
 * @brief 全局属性管理工具类
 * 用于管理一些全局属性的工具类，包含全局样式（global.xml）和语言设置等
@@ -24,7 +27,12 @@ public:
 	 * @param[in] language 使用语言，默认为 lang\\zh_CN
 	 * @return 无
 	 */
-	static void Startup(const std::wstring& strResourcePath, const CreateControlCallback& callback, bool bAdaptDpi, const std::wstring& theme = L"themes\\default", const std::wstring& language = L"lang\\zh_CN");
+	static void Startup(const std::wstring& strResourcePath,
+		const CreateControlCallback& callback,
+		bool bAdaptDpi,
+		const std::wstring& theme = L"themes\\default",
+		const std::wstring& language = L"lang\\zh_CN",
+		RenderFactoryType renderType = RenderFactoryType::kRenderFactoryGdi);
 
 	/**
 	 * @brief 释放资源
@@ -110,16 +118,10 @@ public:
 	static void ReloadLanguage(const std::wstring& languagePath, bool invalidateAll = false);
 
 	/**
-	 * @brief 获取绘制接口类对象
-	 * @return 返回接口类对象指针
-	 */
-	static IRenderFactory* GetRenderFactory();
-
-	/**
 	 * @brief 创建全局的绘制上下文区域
 	 * @return 返回绘制区域对象
 	 */
-	static std::unique_ptr<IRenderContext> CreateRenderContext();
+	static dui::common::dui_refptr<dui::render::IRenderContext> CreateRenderContext();
 
 	/**
 	 * @brief 创建一个画笔
@@ -127,26 +129,26 @@ public:
 	 * @param[in] width 画笔宽度
 	 * @return 返回画笔对象
 	 */
-	static std::unique_ptr<IPen> CreatePen(DWORD color, int width = 1);
+	static dui::common::dui_refptr<dui::render::IPen> CreatePen(DWORD color, int width = 1);
 
 	/**
 	 * @brief 创建一个画刷
 	 * @param[in] color 画刷颜色
 	 * @return 返回画刷对象
 	 */
-	static std::unique_ptr<IBrush> CreateBrush(DWORD color);
+	static dui::common::dui_refptr<dui::render::IBrush> CreateBrush(DWORD color);
 
 	/**
 	 * @brief 创建一个矩阵
 	 * @return 返回矩阵对象
 	 */
-	static std::unique_ptr<IMatrix> CreateMatrix();
+	static dui::common::dui_refptr<dui::render::IMatrix> CreateMatrix();
 
 	/**
 	 * @brief 创建一个绘制路径
 	 * @return 返回绘制路径对象
 	 */
-	static std::unique_ptr<IPath> CreatePath();
+	static dui::common::dui_refptr<dui::render::IPath> CreatePath();
 
 	/**
 	 * @brief 添加一个全局 class 属性
@@ -507,7 +509,7 @@ private:
 	static void LoadGlobalResource();
 
 private:
-	static std::unique_ptr<IRenderFactory> m_renderFactory;
+	static std::unique_ptr<RenderFactoryImpl> m_renderFactory;
 	class ImageCacheKeyCompare
 	{
 	public:

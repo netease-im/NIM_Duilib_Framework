@@ -29,7 +29,7 @@ public:
 	virtual void SetPos(UiRect rc) override;
 	virtual void HandleMessage(EventArgs& event) override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
-	virtual void Paint(IRenderContext* pRender, const UiRect& rcPaint) override;
+	virtual void Paint(dui::common::dui_refptr<dui::render::IRenderContext> pRender, const UiRect& rcPaint) override;
 	virtual void ClearImageCache() override;
 
 	/**
@@ -227,11 +227,11 @@ private:
 	void ScrollTimeHandle();
 
 	/// 绘制相关函数
-	void PaintBk(IRenderContext* pRender);
-	void PaintButton1(IRenderContext* pRender);
-	void PaintButton2(IRenderContext* pRender);
-	void PaintThumb(IRenderContext* pRender);
-	void PaintRail(IRenderContext* pRender);
+	void PaintBk(dui::common::dui_refptr<dui::render::IRenderContext> pRender);
+	void PaintButton1(dui::common::dui_refptr<dui::render::IRenderContext> pRender);
+	void PaintButton2(dui::common::dui_refptr<dui::render::IRenderContext> pRender);
+	void PaintThumb(dui::common::dui_refptr<dui::render::IRenderContext> pRender);
+	void PaintRail(dui::common::dui_refptr<dui::render::IRenderContext> pRender);
 
 protected:
 	enum
