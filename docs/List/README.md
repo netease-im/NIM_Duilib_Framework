@@ -1,8 +1,8 @@
-# Listё╗ап╠Мё╘
+# ListО╪┬Е┬≈Х║╗О╪┴
 
-╢кд©б╪об╟Э╨╛р╩п╘ап╠МхщфВё╛╥╫╠Ц╧эюМм╛юЮпм╣д╤Ю╥щйЩ╬щё╛ртобап╬ыак©исц╣дап╠МхщфВ║ё
+Ф╜╓Г⌡╝Е╫∙Д╦▀Е▄┘Е░╚Д╦─Д╨⌡Е┬≈Х║╗Е╝╧Е≥╗О╪▄Ф√╧Д╬©Г╝║Г░├Е░▄Г╠╩Е·▀Г └Е╓ Д╩╫Ф∙╟Ф█╝О╪▄Д╩╔Д╦▀Е┬≈Д╦╬Д╨├Е▐╞Г■╗Г └Е┬≈Х║╗Е╝╧Е≥╗Ц─┌
 
- - [Combo](Combo.md) обю╜ап╠М
- - [ListBox](ListBox.md) фум╗ап╠М
- - [TreeView](TreeView.md) йВпнап╠М
- - [VirtualListBox](VirtualListBox.md) пИдБап╠М
+ - [Combo](Combo.md) Д╦▀Ф▀┴Е┬≈Х║╗
+ - [ListBox](ListBox.md) Ф≥╝И─ Е┬≈Х║╗
+ - [TreeView](TreeView.md) Ф═▒Е╫╒Е┬≈Х║╗
+ - [VirtualListBox](VirtualListBox.md) Х≥ Ф▀÷Е┬≈Х║╗

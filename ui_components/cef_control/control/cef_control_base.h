@@ -1,5 +1,5 @@
 /** @file cef_control_base.h
- * @brief ·â×°Cefä¯ÀÀÆ÷¶ÔÏóÎªduilib¿Ø¼ş»ùÀà
+ * @brief å°è£…Cefæµè§ˆå™¨å¯¹è±¡ä¸ºduilibæ§ä»¶åŸºç±»
  * @copyright (c) 2016, NetEase Inc. All rights reserved
  * @author Redrain
  * @date 2019/3/20
@@ -22,159 +22,159 @@ public:
 
 public:
 	/**
-	* @brief ¼ÓÔØÒ»¸öµØÖ·
-	* @param[in] url ÍøÕ¾µØÖ·
-	* @return ÎŞ
+	* @brief åŠ è½½ä¸€ä¸ªåœ°å€
+	* @param[in] url ç½‘ç«™åœ°å€
+	* @return æ— 
 	*/
 	void LoadURL(const CefString& url);
 
 	/**
-	* @brief ¸øÖ¸¶¨µØÖ·Ìí¼ÓÒ»¸ö×Ö·û´®×ÊÔ´
-	* @param[in] stringW ×Ö·û´®×ÊÔ´
-	* @param[in] url ÍøÖ·
-	* @return ÎŞ
+	* @brief ç»™æŒ‡å®šåœ°å€æ·»åŠ ä¸€ä¸ªå­—ç¬¦ä¸²èµ„æº
+	* @param[in] stringW å­—ç¬¦ä¸²èµ„æº
+	* @param[in] url ç½‘å€
+	* @return æ— 
 	*/
 	void LoadString(const CefString& stringW, const CefString& url);
 
 	/**
-	* @brief ºóÍË
-	* @return ÎŞ
+	* @brief åé€€
+	* @return æ— 
 	*/
 	void GoBack();
 
 	/**
-	* @brief Ç°½ø
-	* @return ÎŞ
+	* @brief å‰è¿›
+	* @return æ— 
 	*/
 	void GoForward();
 
 	/**
-	* @brief ÅĞ¶ÏÊÇ·ñ¿ÉÒÔºóÍË
-	* @return ·µ»Ø true ±íÊ¾¿ÉÒÔ£¬false ±íÊ¾²»¿ÉÒÔ
+	* @brief åˆ¤æ–­æ˜¯å¦å¯ä»¥åé€€
+	* @return è¿”å› true è¡¨ç¤ºå¯ä»¥ï¼Œfalse è¡¨ç¤ºä¸å¯ä»¥
 	*/
 	bool CanGoBack();
 
 	/**
-	* @brief ÅĞ¶ÏÊÇ·ñ¿ÉÒÔÇ°½ø
-	* @return ·µ»Ø true ±íÊ¾¿ÉÒÔ£¬false ±íÊ¾²»¿ÉÒÔ
+	* @brief åˆ¤æ–­æ˜¯å¦å¯ä»¥å‰è¿›
+	* @return è¿”å› true è¡¨ç¤ºå¯ä»¥ï¼Œfalse è¡¨ç¤ºä¸å¯ä»¥
 	*/
 	bool CanGoForward();
 
 	/**
-	* @brief Ë¢ĞÂ
-	* @return ÎŞ
+	* @brief åˆ·æ–°
+	* @return æ— 
 	*/
 	void Refresh();
 
 	/**
-	* @brief Í£Ö¹¼ÓÔØ
-	* @return ÎŞ
+	* @brief åœæ­¢åŠ è½½
+	* @return æ— 
 	*/
 	void StopLoad();
 
 	/**
-	* @brief ÊÇ·ñ¼ÓÔØÖĞ
-	* @return ·µ»Ø true ±íÊ¾¼ÓÔØÖĞ£¬·ñÔòÎª false
+	* @brief æ˜¯å¦åŠ è½½ä¸­
+	* @return è¿”å› true è¡¨ç¤ºåŠ è½½ä¸­ï¼Œå¦åˆ™ä¸º false
 	*/
 	bool IsLoading();
 
 	/**
-	* @brief ¿ªÊ¼Ò»¸öÏÂÔØÈÎÎñ
-	* @param[in] url ÒªÏÂÔØµÄÎÄ¼şµØÖ·
-	* @return ÎŞ
+	* @brief å¼€å§‹ä¸€ä¸ªä¸‹è½½ä»»åŠ¡
+	* @param[in] url è¦ä¸‹è½½çš„æ–‡ä»¶åœ°å€
+	* @return æ— 
 	*/
 	void StartDownload(const CefString& url);
 
 	/**
-	* @brief ÉèÖÃÒ³ÃæËõ·Å±ÈÀı
-	* @param[in] zoom_level ±ÈÀıÖµ
-	* @return ÎŞ
+	* @brief è®¾ç½®é¡µé¢ç¼©æ”¾æ¯”ä¾‹
+	* @param[in] zoom_level æ¯”ä¾‹å€¼
+	* @return æ— 
 	*/
 	void SetZoomLevel(float zoom_level);
 
 	/**
-	* @brief »ñÈ¡ä¯ÀÀÆ÷¶ÔÏóËùÊôµÄ´°Ìå¾ä±ú
-	* @return ´°¿Ú¾ä±ú
+	* @brief è·å–æµè§ˆå™¨å¯¹è±¡æ‰€å±çš„çª—ä½“å¥æŸ„
+	* @return çª—å£å¥æŸ„
 	*/
 	HWND GetCefHandle() const;
 
 	/**
-	* @brief »ñÈ¡Ò³Ãæ URL
-	* @return ·µ»Ø URL µØÖ·
+	* @brief è·å–é¡µé¢ URL
+	* @return è¿”å› URL åœ°å€
 	*/
 	CefString GetURL();
 
 	/**
-	* @brief »ñÈ¡ UTF8 ¸ñÊ½ URL
-	* @return ·µ»Ø URL µØÖ·
+	* @brief è·å– UTF8 æ ¼å¼ URL
+	* @return è¿”å› URL åœ°å€
 	*/
 	std::string GetUTF8URL();
 
 	/**
-	* @brief »ñÈ¡ÍøÖ· # ºÅÇ°µÄµØÖ·
-	* @param[in] url Òª»ñÈ¡µÄÍêÕûµØÖ·
-	* @return ·µ»Ø½ØÈ¡ºóµÄµØÖ·
+	* @brief è·å–ç½‘å€ # å·å‰çš„åœ°å€
+	* @param[in] url è¦è·å–çš„å®Œæ•´åœ°å€
+	* @return è¿”å›æˆªå–åçš„åœ°å€
 	*/
 	CefString GetMainURL(const CefString& url);
 
 	/**
-	* @brief ×¢²áÒ»¸ö C++ ·½·¨Ìá¹©Ç°¶Ëµ÷ÓÃ
-	* @param[in] function_name ·½·¨Ãû³Æ
-	* @param[in] function ·½·¨º¯ÊıÌå
-	* @param[in] global_function ÊÇ·ñÊÇÒ»¸öÈ«¾Ö·½·¨
-	* @return ·µ»Ø true ±íÊ¾×¢²á³É¹¦£¬false ¿ÉÄÜÒÑ¾­×¢²á
+	* @brief æ³¨å†Œä¸€ä¸ª C++ æ–¹æ³•æä¾›å‰ç«¯è°ƒç”¨
+	* @param[in] function_name æ–¹æ³•åç§°
+	* @param[in] function æ–¹æ³•å‡½æ•°ä½“
+	* @param[in] global_function æ˜¯å¦æ˜¯ä¸€ä¸ªå…¨å±€æ–¹æ³•
+	* @return è¿”å› true è¡¨ç¤ºæ³¨å†ŒæˆåŠŸï¼Œfalse å¯èƒ½å·²ç»æ³¨å†Œ
 	*/
 	bool RegisterCppFunc(const std::wstring& function_name, nim_comp::CppFunction function, bool global_function = false);
 
 	/**
-	* @brief ·´×¢²áÒ»¸ö C++ ·½·¨
-	* @param[in] function_name ·½·¨Ãû³Æ
-	* @return ÎŞ
+	* @brief åæ³¨å†Œä¸€ä¸ª C++ æ–¹æ³•
+	* @param[in] function_name æ–¹æ³•åç§°
+	* @return æ— 
 	*/
 	void UnRegisterCppFunc(const std::wstring& function_name);
 
 	/**
-	* @brief µ÷ÓÃÒ»¸öÇ°¶ËÒÑ¾­×¢²áºÃµÄ·½·¨
-	* @param[in] js_function_name Ç°¶ËÌá¹©µÄ·½·¨Ãû
-	* @param[in] params ´«µİ JSON ×Ö·û´®¸ñÊ½µÄ²ÎÊı
-	* @param[in] callback Ç°¶ËÖ´ĞĞÍê³ÉºóµÄ»Øµ÷º¯Êı
-	* @param[in] frame_name Òªµ÷ÓÃÄÄ¸öÃû³Æ frame ÏÂµÄ·½·¨£¬Ä¬ÈÏÊ¹ÓÃÖ÷ frame
-	* @return ·µ»Ø true ±íÊ¾³É¹¦µ÷ÓÃ£¬false ±íÊ¾µ÷ÓÃÊ§°Ü£¬·½·¨¿ÉÄÜ²»´æÔÚ
+	* @brief è°ƒç”¨ä¸€ä¸ªå‰ç«¯å·²ç»æ³¨å†Œå¥½çš„æ–¹æ³•
+	* @param[in] js_function_name å‰ç«¯æä¾›çš„æ–¹æ³•å
+	* @param[in] params ä¼ é€’ JSON å­—ç¬¦ä¸²æ ¼å¼çš„å‚æ•°
+	* @param[in] callback å‰ç«¯æ‰§è¡Œå®Œæˆåçš„å›è°ƒå‡½æ•°
+	* @param[in] frame_name è¦è°ƒç”¨å“ªä¸ªåç§° frame ä¸‹çš„æ–¹æ³•ï¼Œé»˜è®¤ä½¿ç”¨ä¸» frame
+	* @return è¿”å› true è¡¨ç¤ºæˆåŠŸè°ƒç”¨ï¼Œfalse è¡¨ç¤ºè°ƒç”¨å¤±è´¥ï¼Œæ–¹æ³•å¯èƒ½ä¸å­˜åœ¨
 	*/
 	bool CallJSFunction(const std::wstring& js_function_name, const std::wstring& params, nim_comp::CallJsFunctionCallback callback, const std::wstring& frame_name = L"");
 
 	/**
-	* @brief µ÷ÓÃÒ»¸öÇ°¶ËÒÑ¾­×¢²áºÃµÄ·½·¨
-	* @param[in] js_function_name Ç°¶ËÌá¹©µÄ·½·¨Ãû
-	* @param[in] params ´«µİ JSON ×Ö·û´®¸ñÊ½µÄ²ÎÊı
-	* @param[in] callback Ç°¶ËÖ´ĞĞÍê³ÉºóµÄ»Øµ÷º¯Êı
-	* @param[in] frame_id Òªµ÷ÓÃÄÄ¸ö ID frame ÏÂµÄ·½·¨£¬Ä¬ÈÏÊ¹ÓÃÖ÷ frame
-	* @return ·µ»Ø true ±íÊ¾³É¹¦µ÷ÓÃ£¬false ±íÊ¾µ÷ÓÃÊ§°Ü£¬·½·¨¿ÉÄÜ²»´æÔÚ
+	* @brief è°ƒç”¨ä¸€ä¸ªå‰ç«¯å·²ç»æ³¨å†Œå¥½çš„æ–¹æ³•
+	* @param[in] js_function_name å‰ç«¯æä¾›çš„æ–¹æ³•å
+	* @param[in] params ä¼ é€’ JSON å­—ç¬¦ä¸²æ ¼å¼çš„å‚æ•°
+	* @param[in] callback å‰ç«¯æ‰§è¡Œå®Œæˆåçš„å›è°ƒå‡½æ•°
+	* @param[in] frame_id è¦è°ƒç”¨å“ªä¸ª ID frame ä¸‹çš„æ–¹æ³•ï¼Œé»˜è®¤ä½¿ç”¨ä¸» frame
+	* @return è¿”å› true è¡¨ç¤ºæˆåŠŸè°ƒç”¨ï¼Œfalse è¡¨ç¤ºè°ƒç”¨å¤±è´¥ï¼Œæ–¹æ³•å¯èƒ½ä¸å­˜åœ¨
 	*/
 	bool CallJSFunction(const std::wstring& js_function_name, const std::wstring& params, nim_comp::CallJsFunctionCallback callback, int frame_id);
 
 	/**
-	* @brief ĞŞ¸´ä¯ÀÀÆ÷
-	* @return ÎŞ
+	* @brief ä¿®å¤æµè§ˆå™¨
+	* @return æ— 
 	*/
 	virtual void RepairBrowser();
 
 	/**
-	* @brief ´ò¿ª¿ª·¢Õß¹¤¾ß
-	* @param[in] view Ò»¸ö CefControl ¿Ø¼şÊµÀı(½öÔÚCefControlÀàÀïĞèÒª´«Èë)
-	* @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	* @brief æ‰“å¼€å¼€å‘è€…å·¥å…·
+	* @param[in] view ä¸€ä¸ª CefControl æ§ä»¶å®ä¾‹(ä»…åœ¨CefControlç±»é‡Œéœ€è¦ä¼ å…¥)
+	* @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	*/
 	virtual bool AttachDevTools(Control* view) = 0;
 
 	/**
-	* @brief ¹Ø±Õ¿ª·¢Õß¹¤¾ß
-	* @return ÎŞ
+	* @brief å…³é—­å¼€å‘è€…å·¥å…·
+	* @return æ— 
 	*/
 	virtual void DettachDevTools();
 
 	/**
-	* @brief ÅĞ¶ÏÊÇ·ñ´ò¿ª¿ª·¢Õß¹¤¾ß
-	* @return ·µ»Ø true ±íÊ¾ÒÑ¾­°ó¶¨£¬false ÎªÎ´°ó¶¨
+	* @brief åˆ¤æ–­æ˜¯å¦æ‰“å¼€å¼€å‘è€…å·¥å…·
+	* @return è¿”å› true è¡¨ç¤ºå·²ç»ç»‘å®šï¼Œfalse ä¸ºæœªç»‘å®š
 	*/
 	virtual bool IsAttachedDevTools() const { return devtool_attached_; }
 
@@ -183,143 +183,143 @@ protected:
 
 public:
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÓÒ¼ü²Ëµ¥µ¯³ö
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnBeforeMenuEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬å³é”®èœå•å¼¹å‡º
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnBeforeMenuEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachBeforeContextMenu(const OnBeforeMenuEvent& callback){ cb_before_menu_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÑ¡ÔñÁËÄÄ¸öÓÒ¼ü²Ëµ¥
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnMenuCommandEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é€‰æ‹©äº†å“ªä¸ªå³é”®èœå•
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnMenuCommandEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachMenuCommand(const OnMenuCommandEvent& callback){ cb_menu_command_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ Title ¸Ä±ä
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnTitleChangeEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢ Title æ”¹å˜
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnTitleChangeEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachTitleChange(const OnTitleChangeEvent& callback){ cb_title_change_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³ÃæÖĞ frame URL µØÖ·¸Ä±ä
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnUrlChangeEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢ä¸­ frame URL åœ°å€æ”¹å˜
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnUrlChangeEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachUrlChange(const OnUrlChangeEvent& callback){ cb_url_change_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÖ÷Ò³Ãæ URL µØÖ·¸Ä±ä
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnMainURLChengeEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ä¸»é¡µé¢ URL åœ°å€æ”¹å˜
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnMainURLChengeEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachMainURLChange(OnMainURLChengeEvent cb){ cb_main_url_change_ = cb; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ×ÊÔ´È«²¿¼ÓÔØÍê±Ï
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnBeforeResourceLoadEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢èµ„æºå…¨éƒ¨åŠ è½½å®Œæ¯•
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnBeforeResourceLoadEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachBeforeNavigate(const OnBeforeResourceLoadEvent& callback){ cb_before_resource_load_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ»¸öµ¯³ö´°¿Úµ¯³öµÄÍ¨Öª
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnLinkClickEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ä¸€ä¸ªå¼¹å‡ºçª—å£å¼¹å‡ºçš„é€šçŸ¥
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnLinkClickEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachLinkClick(const OnLinkClickEvent& callback){ cb_link_click_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ¼ÓÔØ×´Ì¬¸Ä±ä
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnLoadingStateChangeEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢åŠ è½½çŠ¶æ€æ”¹å˜
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnLoadingStateChangeEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachLoadingStateChange(const OnLoadingStateChangeEvent& callback){ cb_loadstate_change_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ¿ªÊ¼¼ÓÔØÍ¨Öª
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnLoadStartEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢å¼€å§‹åŠ è½½é€šçŸ¥
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnLoadStartEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachLoadStart(const OnLoadStartEvent& callback){ cb_load_start_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ¼ÓÔØÍê±ÏÍ¨Öª
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnLoadEndEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢åŠ è½½å®Œæ¯•é€šçŸ¥
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnLoadEndEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachLoadEnd(const OnLoadEndEvent& callback){ cb_load_end_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌı½çÃæ¼ÓÔØ´íÎóÍ¨Öª
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnLoadErrorEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ç•Œé¢åŠ è½½é”™è¯¯é€šçŸ¥
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnLoadErrorEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachLoadError(const OnLoadErrorEvent& callback){ cb_load_error_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌı¿ª·¢Õß¹¤¾ß×´Ì¬¸Ä±äÍ¨Öª
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnDevToolAttachedStateChangeEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬å¼€å‘è€…å·¥å…·çŠ¶æ€æ”¹å˜é€šçŸ¥
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnDevToolAttachedStateChangeEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachDevToolAttachedStateChange(const OnDevToolAttachedStateChangeEvent& callback){ cb_devtool_visible_change_ = callback; };
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ»¸öĞÂµÄä¯ÀÀÆ÷ÊµÀı´´½¨Íê±ÏÍ¨Öª
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnAfterCreatedEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ä¸€ä¸ªæ–°çš„æµè§ˆå™¨å®ä¾‹åˆ›å»ºå®Œæ¯•é€šçŸ¥
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnAfterCreatedEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachAfterCreated(const OnAfterCreatedEvent& callback){ cb_after_created_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ»¸öä¯ÀÀÆ÷ÊµÀı¹Ø±ÕÇ°µÄÍ¨Öª
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnBeforeCloseEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ä¸€ä¸ªæµè§ˆå™¨å®ä¾‹å…³é—­å‰çš„é€šçŸ¥
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnBeforeCloseEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachBeforeCLose(const OnBeforeCloseEvent& callback) { cb_before_close_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ»¸öä¯ÀÀÆ÷ÊµÀı¼ÓÔØÍ¨Öª
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnBeforeBrowserEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ä¸€ä¸ªæµè§ˆå™¨å®ä¾‹åŠ è½½é€šçŸ¥
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnBeforeBrowserEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachBeforeBrowser(const OnBeforeBrowserEvent& callback) { cb_before_browser_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ»¸öÎ´ÖªµÄ Protocol
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnProtocolExecutionEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ä¸€ä¸ªæœªçŸ¥çš„ Protocol
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnProtocolExecutionEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachProtocolExecution(const OnProtocolExecutionEvent& callback) { cb_protocol_execution_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ»¸öÏÂÔØÈÎÎñ¿ªÊ¼Ö®Ç°µÄÍ¨Öª
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnBeforeDownloadEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ä¸€ä¸ªä¸‹è½½ä»»åŠ¡å¼€å§‹ä¹‹å‰çš„é€šçŸ¥
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnBeforeDownloadEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachBeforeDownload(const OnBeforeDownloadEvent& callback) { cb_before_download_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÏÂÔØ¹ı³ÌÖĞÈÎÎñµÄ×´Ì¬¸Ä±äÍ¨Öª
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnDownloadUpdatedEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ä¸‹è½½è¿‡ç¨‹ä¸­ä»»åŠ¡çš„çŠ¶æ€æ”¹å˜é€šçŸ¥
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnDownloadUpdatedEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachDownloadUpdated(const OnDownloadUpdatedEvent& callback) { cb_download_updated_ = callback; }
 
 	/**
-	* @brief °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ»¸ö´Ó¶Ô»°¿òÖĞ´ò¿ªÎÄ¼şµÄÍ¨Öª
-	* @param[in] callback Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnFileDialogEvent ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ä¸€ä¸ªä»å¯¹è¯æ¡†ä¸­æ‰“å¼€æ–‡ä»¶çš„é€šçŸ¥
+	* @param[in] callback ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnFileDialogEvent å£°æ˜
+	* @return æ— 
 	*/
 	void AttachFileDialog(const OnFileDialogEvent& callback) { cb_file_dialog_ = callback; }
 
 private:
-	// ´¦ÀíBrowserHandlerµÄHandlerDelegateÎ¯ÍĞ½Ó¿Ú
-	// µ±ä¯ÀÀÆ÷äÖÈ¾Êı¾İ±ä»¯Ê±£¬»á´¥·¢´Ë½Ó¿Ú£¬´ËÊ±°ÑäÖÈ¾Êı¾İ±£´æµ½ÄÚ´ædc
-	// ²¢ÇÒÍ¨Öª´°ÌåË¢ĞÂ¿Ø¼ş£¬ÔÚ¿Ø¼şµÄPaintº¯ÊıÀï°ÑÄÚ´ædcµÄÎ»Í¼»­µ½´°ÌåÉÏ
-	// ÓÉ´ËÊµÏÖÀëÆÁäÖÈ¾Êı¾İ»­µ½´°ÌåÉÏ
+	// å¤„ç†BrowserHandlerçš„HandlerDelegateå§”æ‰˜æ¥å£
+	// å½“æµè§ˆå™¨æ¸²æŸ“æ•°æ®å˜åŒ–æ—¶ï¼Œä¼šè§¦å‘æ­¤æ¥å£ï¼Œæ­¤æ—¶æŠŠæ¸²æŸ“æ•°æ®ä¿å­˜åˆ°å†…å­˜dc
+	// å¹¶ä¸”é€šçŸ¥çª—ä½“åˆ·æ–°æ§ä»¶ï¼Œåœ¨æ§ä»¶çš„Paintå‡½æ•°é‡ŒæŠŠå†…å­˜dcçš„ä½å›¾ç”»åˆ°çª—ä½“ä¸Š
+	// ç”±æ­¤å®ç°ç¦»å±æ¸²æŸ“æ•°æ®ç”»åˆ°çª—ä½“ä¸Š
 	virtual void OnPaint(CefRefPtr<CefBrowser> browser,
 		CefRenderHandler::PaintElementType type,
 		const CefRenderHandler::RectList& dirtyRects,
@@ -358,7 +358,7 @@ private:
 		const CefString& errorText,
 		const CefString& failedUrl) OVERRIDE;
 
-	// ÔÚ·ÇUIÏß³ÌÖĞ±»µ÷ÓÃ
+	// åœ¨éUIçº¿ç¨‹ä¸­è¢«è°ƒç”¨
 	virtual bool OnBeforePopup(CefRefPtr<CefBrowser> browser,
 		CefRefPtr<CefFrame> frame,
 		const CefString& target_url,
@@ -375,12 +375,12 @@ private:
 
 	virtual void OnBeforeClose(CefRefPtr<CefBrowser> browser) OVERRIDE;
 
-	// ÔÚ·ÇUIÏß³ÌÖĞ±»µ÷ÓÃ
+	// åœ¨éUIçº¿ç¨‹ä¸­è¢«è°ƒç”¨
 	virtual bool OnBeforeBrowse(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool is_redirect) OVERRIDE;
 
 	virtual void OnProtocolExecution(CefRefPtr<CefBrowser> browser, const CefString& url, bool& allow_os_execution) OVERRIDE;
 
-	// ÔÚ·ÇUIÏß³ÌÖĞ±»µ÷ÓÃ
+	// åœ¨éUIçº¿ç¨‹ä¸­è¢«è°ƒç”¨
 	virtual CefRequestHandler::ReturnValue OnBeforeResourceLoad(
 		CefRefPtr<CefBrowser> browser,
 		CefRefPtr<CefFrame> frame,
@@ -389,7 +389,7 @@ private:
 
 	virtual void OnRenderProcessTerminated(CefRefPtr<CefBrowser> browser, CefRequestHandler::TerminationStatus status) OVERRIDE;
 
-	// ÏÂÔØÎÄ¼şÏà¹Ø
+	// ä¸‹è½½æ–‡ä»¶ç›¸å…³
 	virtual void OnBeforeDownload(CefRefPtr<CefBrowser> browser,
 		CefRefPtr<CefDownloadItem> download_item,
 		const CefString& suggested_name,
@@ -400,7 +400,7 @@ private:
 		CefRefPtr<CefDownloadItem> download_item,
 		CefRefPtr<CefDownloadItemCallback> callback) OVERRIDE;
 
-	// ´ò¿ªÎÄ¼şÏà¹Ø
+	// æ‰“å¼€æ–‡ä»¶ç›¸å…³
 	virtual bool OnFileDialog(
 		CefRefPtr<CefBrowser> browser,
 		CefDialogHandler::FileDialogMode mode,
@@ -439,6 +439,6 @@ protected:
 	OnDownloadUpdatedEvent		cb_download_updated_ = nullptr;
 	OnFileDialogEvent			cb_file_dialog_ = nullptr;
 	OnDevToolAttachedStateChangeEvent cb_devtool_visible_change_ = nullptr;
-	int							js_callback_thread_id_ = -1; // ±£´æ½ÓÊÕµ½ JS µ÷ÓÃ CPP º¯ÊıµÄ´úÂëËùÊôÏß³Ì£¬ÒÔºó´¥·¢ JS »Øµ÷Ê±°Ñ»Øµ÷×ªµ½ÄÇ¸öÏß³Ì
+	int							js_callback_thread_id_ = -1; // ä¿å­˜æ¥æ”¶åˆ° JS è°ƒç”¨ CPP å‡½æ•°çš„ä»£ç æ‰€å±çº¿ç¨‹ï¼Œä»¥åè§¦å‘ JS å›è°ƒæ—¶æŠŠå›è°ƒè½¬åˆ°é‚£ä¸ªçº¿ç¨‹
 };
 }

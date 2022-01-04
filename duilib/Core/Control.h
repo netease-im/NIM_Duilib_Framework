@@ -30,566 +30,566 @@ public:
 
 	virtual std::wstring GetType() const;
 
-    /// Í¼ĞÎÏà¹Ø
+    /// å›¾å½¢ç›¸å…³
 	/**
-	 * @brief »ñÈ¡±³¾°ÑÕÉ«
-	 * @return ·µ»Ø±³¾°ÑÕÉ«µÄ×Ö·û´®£¬¸ÃÖµÔÚ global.xml ÖĞ¶¨Òå
+	 * @brief è·å–èƒŒæ™¯é¢œè‰²
+	 * @return è¿”å›èƒŒæ™¯é¢œè‰²çš„å­—ç¬¦ä¸²ï¼Œè¯¥å€¼åœ¨ global.xml ä¸­å®šä¹‰
 	 */
 	std::wstring GetBkColor() const;
 
 	/**
-	 * @brief ÉèÖÃ±³¾°ÑÕÉ«
-	 * @param[in] strColor ÒªÉèÖÃµÄ±³¾°ÑÕÉ«Öµ£¬¸ÃÖµ±ØĞëÔÚ global.xml ÖĞ´æÔÚ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®èƒŒæ™¯é¢œè‰²
+	 * @param[in] strColor è¦è®¾ç½®çš„èƒŒæ™¯é¢œè‰²å€¼ï¼Œè¯¥å€¼å¿…é¡»åœ¨ global.xml ä¸­å­˜åœ¨
+	 * @return æ— 
 	 */
 	void SetBkColor(const std::wstring& strColor);
 
 	/**
-	 * @brief »ñÈ¡Ä³¸ö×´Ì¬ÏÂµÄ×ÖÌåÑÕÉ«
-	 * @param[in] stateType Òª»ñÈ¡ºÎÖÖ×´Ì¬ÏÂµÄÑÕÉ«Öµ£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @return Ö¸¶¨×´Ì¬ÏÂÉè¶¨µÄÑÕÉ«×Ö·û´®£¬¶ÔÓ¦ global.xml ÖĞÖ¸¶¨É«Öµ
+	 * @brief è·å–æŸä¸ªçŠ¶æ€ä¸‹çš„å­—ä½“é¢œè‰²
+	 * @param[in] stateType è¦è·å–ä½•ç§çŠ¶æ€ä¸‹çš„é¢œè‰²å€¼ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @return æŒ‡å®šçŠ¶æ€ä¸‹è®¾å®šçš„é¢œè‰²å­—ç¬¦ä¸²ï¼Œå¯¹åº” global.xml ä¸­æŒ‡å®šè‰²å€¼
 	 */
 	std::wstring GetStateColor(ControlStateType stateType);
 
 	/**
-	 * @brief ÉèÖÃÄ³¸ö×´Ì¬ÏÂµÄ×ÖÌåÑÕÉ«
-	 * @param[in] stateType ÒªÉèÖÃºÎÖÖ×´Ì¬ÏÂµÄÑÕÉ«Öµ£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @param[in] strColor ÒªÉèÖÃµÄÑÕÉ«Öµ£¬¸ÃÖµ±ØĞëÔÚ global.xml ÖĞ´æÔÚ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æŸä¸ªçŠ¶æ€ä¸‹çš„å­—ä½“é¢œè‰²
+	 * @param[in] stateType è¦è®¾ç½®ä½•ç§çŠ¶æ€ä¸‹çš„é¢œè‰²å€¼ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @param[in] strColor è¦è®¾ç½®çš„é¢œè‰²å€¼ï¼Œè¯¥å€¼å¿…é¡»åœ¨ global.xml ä¸­å­˜åœ¨
+	 * @return æ— 
 	 */
 	void SetStateColor(ControlStateType stateType, const std::wstring& strColor);
 
 	/**
-	 * @brief »ñÈ¡±³¾°Í¼Æ¬Î»ÖÃ
-	 * @return ±³¾°Í¼Æ¬Î»ÖÃ  
+	 * @brief è·å–èƒŒæ™¯å›¾ç‰‡ä½ç½®
+	 * @return èƒŒæ™¯å›¾ç‰‡ä½ç½®  
 	 */
     std::wstring GetBkImage() const;
 
 	/**
-	 * @brief »ñÈ¡ UTF8 ¸ñÊ½µÄ±³¾°Í¼Æ¬Î»ÖÃ
-	 * @return ±³¾°Í¼Æ¬Î»ÖÃ
+	 * @brief è·å– UTF8 æ ¼å¼çš„èƒŒæ™¯å›¾ç‰‡ä½ç½®
+	 * @return èƒŒæ™¯å›¾ç‰‡ä½ç½®
 	 */
 	std::string GetUTF8BkImage() const;
 
 	/**
-	 * @brief ÉèÖÃ±³¾°Í¼Æ¬
-	 * @param[in] strImage ÒªÉèÖÃµÄÍ¼Æ¬Â·¾¶
-	 * @return ÎŞ
+	 * @brief è®¾ç½®èƒŒæ™¯å›¾ç‰‡
+	 * @param[in] strImage è¦è®¾ç½®çš„å›¾ç‰‡è·¯å¾„
+	 * @return æ— 
 	 */
 	void SetBkImage(const std::wstring& strImage);
 
 	/**
-	 * @brief ÉèÖÃ±³¾°Í¼Æ¬£¨UTF8 ¸ñÊ½×Ö·û´®£©
-	 * @param[in] strImage ÒªÉèÖÃµÄÍ¼Æ¬Â·¾¶
-	 * @return ÎŞ
+	 * @brief è®¾ç½®èƒŒæ™¯å›¾ç‰‡ï¼ˆUTF8 æ ¼å¼å­—ç¬¦ä¸²ï¼‰
+	 * @param[in] strImage è¦è®¾ç½®çš„å›¾ç‰‡è·¯å¾„
+	 * @return æ— 
 	 */
 	void SetUTF8BkImage(const std::string& strImage);
 
   /**
-  * @brief »ñÈ¡loading×´Ì¬Í¼Æ¬Î»ÖÃ
-  * @return loadingÍ¼Æ¬Î»ÖÃ
+  * @brief è·å–loadingçŠ¶æ€å›¾ç‰‡ä½ç½®
+  * @return loadingå›¾ç‰‡ä½ç½®
   */
   std::wstring GetLoadingImage() const;
 
   /**
-  * @brief ÉèÖÃloadingÍ¼Æ¬
-  * @param[in] strImage ÒªÉèÖÃµÄÍ¼Æ¬Â·¾¶
-  * @return ÎŞ
+  * @brief è®¾ç½®loadingå›¾ç‰‡
+  * @param[in] strImage è¦è®¾ç½®çš„å›¾ç‰‡è·¯å¾„
+  * @return æ— 
   */
   void SetLoadingImage(const std::wstring& strImage);
 
   /**
-  * @brief ÉèÖÃloading±³¾°É«
-  * @param[in] strColor ±³¾°É«
-  * @return ÎŞ
+  * @brief è®¾ç½®loadingèƒŒæ™¯è‰²
+  * @param[in] strColor èƒŒæ™¯è‰²
+  * @return æ— 
   */
   void SetLoadingBkColor(const std::wstring& strColor);
 
 	/**
-	 * @brief »ñÈ¡Ö¸¶¨×´Ì¬ÏÂµÄÍ¼Æ¬Î»ÖÃ
-	 * @param[in] Òª»ñÈ¡ºÎÖÖ×´Ì¬ÏÂµÄÍ¼Æ¬£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @return Ö¸¶¨×´Ì¬ÏÂµÄÍ¼Æ¬Î»ÖÃ
+	 * @brief è·å–æŒ‡å®šçŠ¶æ€ä¸‹çš„å›¾ç‰‡ä½ç½®
+	 * @param[in] è¦è·å–ä½•ç§çŠ¶æ€ä¸‹çš„å›¾ç‰‡ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @return æŒ‡å®šçŠ¶æ€ä¸‹çš„å›¾ç‰‡ä½ç½®
 	 */
 	std::wstring GetStateImage(ControlStateType stateType);
 
 	/**
-	 * @brief ÉèÖÃÄ³¸ö×´Ì¬ÏÂµÄÍ¼Æ¬
-	 * @param[in] stateType ÒªÉèÖÃºÎÖÖ×´Ì¬ÏÂµÄÍ¼Æ¬£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @param[in] strImage ÒªÉèÖÃµÄÍ¼Æ¬Â·¾¶
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æŸä¸ªçŠ¶æ€ä¸‹çš„å›¾ç‰‡
+	 * @param[in] stateType è¦è®¾ç½®ä½•ç§çŠ¶æ€ä¸‹çš„å›¾ç‰‡ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @param[in] strImage è¦è®¾ç½®çš„å›¾ç‰‡è·¯å¾„
+	 * @return æ— 
 	 */
 	void SetStateImage(ControlStateType stateType, const std::wstring& strImage);
 
 	/**
-	 * @brief »ñÈ¡Ö¸¶¨×´Ì¬ÏÂµÄÇ°¾°Í¼Æ¬
-	 * @param[in] Òª»ñÈ¡ºÎÖÖ×´Ì¬ÏÂµÄÍ¼Æ¬£¬²Î¿¼ `ControlStateType` Ã¶¾Ù
-	 * @return Ö¸¶¨×´Ì¬ÏÂÇ°¾°Í¼Æ¬Î»ÖÃ
+	 * @brief è·å–æŒ‡å®šçŠ¶æ€ä¸‹çš„å‰æ™¯å›¾ç‰‡
+	 * @param[in] è¦è·å–ä½•ç§çŠ¶æ€ä¸‹çš„å›¾ç‰‡ï¼Œå‚è€ƒ `ControlStateType` æšä¸¾
+	 * @return æŒ‡å®šçŠ¶æ€ä¸‹å‰æ™¯å›¾ç‰‡ä½ç½®
 	 */
 	std::wstring GetForeStateImage(ControlStateType stateType);
 
 	/**
-	 * @brief ÉèÖÃÄ³¸ö×´Ì¬ÏÂÇ°¾°Í¼Æ¬
-	 * @param[in] stateType ÒªÉèÖÃºÎÖÖ×´Ì¬ÏÂµÄÍ¼Æ¬£¬²Î¿¼ `ControlStateType` Ã¶¾Ù
-	 * @param[in] strImage ÒªÉèÖÃµÄÇ°¾°Í¼Æ¬Â·¾¶
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æŸä¸ªçŠ¶æ€ä¸‹å‰æ™¯å›¾ç‰‡
+	 * @param[in] stateType è¦è®¾ç½®ä½•ç§çŠ¶æ€ä¸‹çš„å›¾ç‰‡ï¼Œå‚è€ƒ `ControlStateType` æšä¸¾
+	 * @param[in] strImage è¦è®¾ç½®çš„å‰æ™¯å›¾ç‰‡è·¯å¾„
+	 * @return æ— 
 	 */
 	void SetForeStateImage(ControlStateType stateType, const std::wstring& strImage);
 
 	/**
-	 * @brief »ñÈ¡¿Ø¼ş×´Ì¬
-	 * @return ¿Ø¼şµÄ×´Ì¬£¬Çë²Î¿¼ `ControlStateType` Ã¶¾Ù
+	 * @brief è·å–æ§ä»¶çŠ¶æ€
+	 * @return æ§ä»¶çš„çŠ¶æ€ï¼Œè¯·å‚è€ƒ `ControlStateType` æšä¸¾
 	 */
 	ControlStateType GetState() const;
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼ş×´Ì¬
-	 * @param[in] pStrState ÒªÉèÖÃµÄ¿Ø¼ş×´Ì¬£¬Çë²Î¿¼ `ControlStateType` Ã¶¾Ù
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶çŠ¶æ€
+	 * @param[in] pStrState è¦è®¾ç½®çš„æ§ä»¶çŠ¶æ€ï¼Œè¯·å‚è€ƒ `ControlStateType` æšä¸¾
+	 * @return æ— 
 	 */
 	void SetState(ControlStateType pStrState);
 
 	/**
-	 * @brief »ñÈ¡¿Ø¼şÍ¼Æ¬Ö¸Õë
-	 * @return ·µ»ØÍ¼Æ¬¶ÔÏóÖ¸Õë
+	 * @brief è·å–æ§ä»¶å›¾ç‰‡æŒ‡é’ˆ
+	 * @return è¿”å›å›¾ç‰‡å¯¹è±¡æŒ‡é’ˆ
 	 */
 	virtual Image* GetEstimateImage();
 
-	/// ±ß¿òÏà¹Ø
+	/// è¾¹æ¡†ç›¸å…³
 	/**
-	 * @brief »ñÈ¡±ß¿ò´óĞ¡
-	 * @return ·µ»Ø±ß¿òµÄ´óĞ¡
+	 * @brief è·å–è¾¹æ¡†å¤§å°
+	 * @return è¿”å›è¾¹æ¡†çš„å¤§å°
 	 */
 	int GetBorderSize() const;
 
 	/**
-	 * @brief ÉèÖÃ±ß¿ò´óĞ¡
-	 * @param[in] nSize ÒªÉèÖÃµÄ±ß¿ò´óĞ¡
-	 * @return ÎŞ
+	 * @brief è®¾ç½®è¾¹æ¡†å¤§å°
+	 * @param[in] nSize è¦è®¾ç½®çš„è¾¹æ¡†å¤§å°
+	 * @return æ— 
 	 */
 	void SetBorderSize(int nSize);
 
 	/**
-	 * @brief »ñÈ¡±ß¿òÑÕÉ«
-	 * @return ±ß¿òµÄÑÕÉ«×Ö·û´®£¬¶ÔÓ¦ global.xml ÖĞµÄ¾ßÌåÑÕÉ«Öµ
+	 * @brief è·å–è¾¹æ¡†é¢œè‰²
+	 * @return è¾¹æ¡†çš„é¢œè‰²å­—ç¬¦ä¸²ï¼Œå¯¹åº” global.xml ä¸­çš„å…·ä½“é¢œè‰²å€¼
 	 */
 	std::wstring GetBorderColor() const;
 
 	/**
-	 * @brief ÉèÖÃ±ß¿òÑÕÉ«
-	 * @param[in] strBorderColor ÉèÖÃ±ß¿òµÄÑÕÉ«×Ö·û´®Öµ£¬¸ÃÖµ±ØĞëÔÚ global.xml ÖĞ´æÔÚ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®è¾¹æ¡†é¢œè‰²
+	 * @param[in] strBorderColor è®¾ç½®è¾¹æ¡†çš„é¢œè‰²å­—ç¬¦ä¸²å€¼ï¼Œè¯¥å€¼å¿…é¡»åœ¨ global.xml ä¸­å­˜åœ¨
+	 * @return æ— 
 	 */
 	void SetBorderColor(const std::wstring& strBorderColor);
 
 	/**
-	 * @brief ÉèÖÃ±ß¿òµÄ´óĞ¡
-	 * @param[in] rc Ò»¸ö `UiRect` ½á¹¹µÄ±ß¿ò´óĞ¡¼¯ºÏ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®è¾¹æ¡†çš„å¤§å°
+	 * @param[in] rc ä¸€ä¸ª `UiRect` ç»“æ„çš„è¾¹æ¡†å¤§å°é›†åˆ
+	 * @return æ— 
 	 */
 	void SetBorderSize(UiRect rc);
 
 	/**
-	 * @brief »ñÈ¡×ó²à±ß¿ò´óĞ¡
-	 * @return ×ó²à±ß¿òµÄ´óĞ¡  
+	 * @brief è·å–å·¦ä¾§è¾¹æ¡†å¤§å°
+	 * @return å·¦ä¾§è¾¹æ¡†çš„å¤§å°  
 	 */
 	int GetLeftBorderSize() const;
 
 	/**
-	 * @brief ÉèÖÃ×ó²à±ß¿ò´óĞ¡
-	 * @param[in] nSize ÒªÉèÖÃµÄ×ó²à±ß¿ò´óĞ¡
-	 * @return ÎŞ
+	 * @brief è®¾ç½®å·¦ä¾§è¾¹æ¡†å¤§å°
+	 * @param[in] nSize è¦è®¾ç½®çš„å·¦ä¾§è¾¹æ¡†å¤§å°
+	 * @return æ— 
 	 */
 	void SetLeftBorderSize(int nSize);
 
 	/**
-	 * @brief »ñÈ¡¶¥²¿±ß¿ò´óĞ¡
-	 * @return ¶¥²¿±ß¿ò´óĞ¡
+	 * @brief è·å–é¡¶éƒ¨è¾¹æ¡†å¤§å°
+	 * @return é¡¶éƒ¨è¾¹æ¡†å¤§å°
 	 */
 	int GetTopBorderSize() const;
 
 	/**
-	 * @brief ÉèÖÃ¶¥²¿±ß¿ò´óĞ¡
-	 * @param[in] nSize ÒªÉèÖÃµÄÉÏ·½±ß¿ò´óĞ¡
-	 * @return ÎŞ
+	 * @brief è®¾ç½®é¡¶éƒ¨è¾¹æ¡†å¤§å°
+	 * @param[in] nSize è¦è®¾ç½®çš„ä¸Šæ–¹è¾¹æ¡†å¤§å°
+	 * @return æ— 
 	 */
 	void SetTopBorderSize(int nSize);
 
 	/**
-	 * @brief »ñÈ¡ÓÒ²à±ß¿ò´óĞ¡
-	 * @return ÓÒ²àµÄ±ß¿ò´óĞ¡
+	 * @brief è·å–å³ä¾§è¾¹æ¡†å¤§å°
+	 * @return å³ä¾§çš„è¾¹æ¡†å¤§å°
 	 */
 	int GetRightBorderSize() const;
 
 	/**
-	 * @brief ÉèÖÃÓÒ²à±ß¿ò´óĞ¡
-	 * @param[in] nSize ÒªÉèÖÃµÄÓÒ²à±ß¿ò´óĞ¡
-	 * @return ÎŞ
+	 * @brief è®¾ç½®å³ä¾§è¾¹æ¡†å¤§å°
+	 * @param[in] nSize è¦è®¾ç½®çš„å³ä¾§è¾¹æ¡†å¤§å°
+	 * @return æ— 
 	 */
 	void SetRightBorderSize(int nSize);
 
 	/**
-	 * @brief »ñÈ¡ÏÂ·½±ß¿ò´óĞ¡
-	 * @return ÏÂ·½±ß¿ò´óĞ¡
+	 * @brief è·å–ä¸‹æ–¹è¾¹æ¡†å¤§å°
+	 * @return ä¸‹æ–¹è¾¹æ¡†å¤§å°
 	 */
 	int GetBottomBorderSize() const;
 
 	/**
-	 * @brief ÉèÖÃÏÂ·½±ß¿ò´óĞ¡
-	 * @param[in] nSize ÒªÉèÖÃµÄÏÂ·½±ß¿ò´óĞ¡
-	 * @return ÎŞ
+	 * @brief è®¾ç½®ä¸‹æ–¹è¾¹æ¡†å¤§å°
+	 * @param[in] nSize è¦è®¾ç½®çš„ä¸‹æ–¹è¾¹æ¡†å¤§å°
+	 * @return æ— 
 	 */
 	void SetBottomBorderSize(int nSize);
 
 	/**
-	 * @brief »ñÈ¡±ß¿ò´óĞ¡
-	 * @return ËÄ¸ö·½ÏòµÄ±ß¿ò´óĞ¡
+	 * @brief è·å–è¾¹æ¡†å¤§å°
+	 * @return å››ä¸ªæ–¹å‘çš„è¾¹æ¡†å¤§å°
 	 */
 	CSize GetBorderRound() const;
 
 	/**
-	 * @brief ÉèÖÃ±ß¿ò´óĞ¡
-	 * @param[in] cxyRound Ò»¸ö CSize ½á¹¹±íÊ¾ÁËËÄ¸ö·½Ïò±ß¿òµÄ´óĞ¡
-	 * @return ÎŞ
+	 * @brief è®¾ç½®è¾¹æ¡†å¤§å°
+	 * @param[in] cxyRound ä¸€ä¸ª CSize ç»“æ„è¡¨ç¤ºäº†å››ä¸ªæ–¹å‘è¾¹æ¡†çš„å¤§å°
+	 * @return æ— 
 	 */
 	void SetBorderRound(CSize cxyRound);
 
 	/**
-	 * @brief ÉèÖÃ±ß¿òÒõÓ°
-	 * @param[in] ÒªÉèÖÃµÄÒõÓ°ÊôĞÔ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®è¾¹æ¡†é˜´å½±
+	 * @param[in] è¦è®¾ç½®çš„é˜´å½±å±æ€§
+	 * @return æ— 
 	 */
 	void SetBoxShadow(const std::wstring& strShadow);
 
-    /// Êó±êÏà¹Ø
+    /// é¼ æ ‡ç›¸å…³
 	/**
-	 * @brief »ñÈ¡Êó±êÖ¸ÕëÀàĞÍ
-	 * @return µ±Ç°Êó±êÀàĞÍ
+	 * @brief è·å–é¼ æ ‡æŒ‡é’ˆç±»å‹
+	 * @return å½“å‰é¼ æ ‡ç±»å‹
 	 */
 	virtual CursorType GetCursorType() const;
 
 	/**
-	 * @brief ÉèÖÃµ±Ç°Êó±êÖ¸ÕëÀàĞÍ
-	 * @param[in] flag ÒªÉèÖÃµÄÊó±êÀàĞÍ£¬²Î¿¼ CursorType Ã¶¾Ù
-	 * @return ÎŞ
+	 * @brief è®¾ç½®å½“å‰é¼ æ ‡æŒ‡é’ˆç±»å‹
+	 * @param[in] flag è¦è®¾ç½®çš„é¼ æ ‡ç±»å‹ï¼Œå‚è€ƒ CursorType æšä¸¾
+	 * @return æ— 
 	 */
 	void SetCursorType(CursorType flag);
 
 	/**
-	 * @brief »ñÈ¡¿Ø¼şÔÚÊó±êĞü¸¡×´Ì¬ÏÂµÄÌáÊ¾ÎÄ±¾
-	 * @return ·µ»Øµ±Ç°Êó±êĞü¸¡×´Ì¬ÌáÊ¾µÄÎÄ±¾
+	 * @brief è·å–æ§ä»¶åœ¨é¼ æ ‡æ‚¬æµ®çŠ¶æ€ä¸‹çš„æç¤ºæ–‡æœ¬
+	 * @return è¿”å›å½“å‰é¼ æ ‡æ‚¬æµ®çŠ¶æ€æç¤ºçš„æ–‡æœ¬
 	 */
     virtual std::wstring GetToolTipText() const;
 
 	/**
-	 * @brief »ñÈ¡¿Ø¼şÔÚÊó±êĞü¸¡×´Ì¬ÏÂµÄÌáÊ¾ÎÄ±¾£¨UTF8 ¸ñÊ½£©
-	 * @return ·µ»Øµ±Ç°Êó±êĞü¸¡×´Ì¬ÌáÊ¾µÄÎÄ±¾
+	 * @brief è·å–æ§ä»¶åœ¨é¼ æ ‡æ‚¬æµ®çŠ¶æ€ä¸‹çš„æç¤ºæ–‡æœ¬ï¼ˆUTF8 æ ¼å¼ï¼‰
+	 * @return è¿”å›å½“å‰é¼ æ ‡æ‚¬æµ®çŠ¶æ€æç¤ºçš„æ–‡æœ¬
 	 */
 	virtual std::string GetUTF8ToolTipText() const;
 
 	/**
-	 * @brief ÉèÖÃÊó±êĞü¸¡µ½¿Ø¼şÏÔÊ¾µÄÌáÊ¾ÎÄ±¾
-	 * @param[in] strText ÒªÉèÖÃµÄÎÄ±¾
-	 * @return ÎŞ
+	 * @brief è®¾ç½®é¼ æ ‡æ‚¬æµ®åˆ°æ§ä»¶æ˜¾ç¤ºçš„æç¤ºæ–‡æœ¬
+	 * @param[in] strText è¦è®¾ç½®çš„æ–‡æœ¬
+	 * @return æ— 
 	 */
 	virtual void SetToolTipText(const std::wstring& strText);
 
 	/**
-	 * @brief ÉèÖÃÊó±êĞü¸¡µ½¿Ø¼şÏÔÊ¾µÄÌáÊ¾ÎÄ±¾£¨UTF8 ¸ñÊ½£©
-	 * @param[in] strText ÒªÉèÖÃµÄÎÄ±¾
-	 * @return ÎŞ
+	 * @brief è®¾ç½®é¼ æ ‡æ‚¬æµ®åˆ°æ§ä»¶æ˜¾ç¤ºçš„æç¤ºæ–‡æœ¬ï¼ˆUTF8 æ ¼å¼ï¼‰
+	 * @param[in] strText è¦è®¾ç½®çš„æ–‡æœ¬
+	 * @return æ— 
 	 */
 	virtual void SetUTF8ToolTipText(const std::string& strText);
 
 	/**
-	 * @brief ÉèÖÃÊó±êĞü¸¡µ½¿Ø¼şÏÔÊ¾µÄÌáÊ¾ÎÄ±¾ÔÚÓïÑÔÎÄ¼şÖĞ¶ÔÓ¦µÄÎÄ×Ö
-	 * @param[in] strTextId ÔÚÓïÑÔÎÄ¼şÖĞ¶ÔÓ¦µÄÌáÊ¾ÎÄ×Ö ID
-	 * @return ÎŞ
+	 * @brief è®¾ç½®é¼ æ ‡æ‚¬æµ®åˆ°æ§ä»¶æ˜¾ç¤ºçš„æç¤ºæ–‡æœ¬åœ¨è¯­è¨€æ–‡ä»¶ä¸­å¯¹åº”çš„æ–‡å­—
+	 * @param[in] strTextId åœ¨è¯­è¨€æ–‡ä»¶ä¸­å¯¹åº”çš„æç¤ºæ–‡å­— ID
+	 * @return æ— 
 	 */
 	virtual void SetToolTipTextId(const std::wstring& strTextId);
 
 	/**
-	 * @brief ÉèÖÃÊó±êĞü¸¡µ½¿Ø¼şÏÔÊ¾µÄÌáÊ¾ÎÄ±¾ÔÚÓïÑÔÎÄ¼şÖĞ¶ÔÓ¦µÄÎÄ×Ö£¨UTF8 ¸ñÊ½£©
-	 * @param[in] strTextId ÔÚÓïÑÔÎÄ¼şÖĞ¶ÔÓ¦µÄÌáÊ¾ÎÄ×Ö ID
-	 * @return ÎŞ
+	 * @brief è®¾ç½®é¼ æ ‡æ‚¬æµ®åˆ°æ§ä»¶æ˜¾ç¤ºçš„æç¤ºæ–‡æœ¬åœ¨è¯­è¨€æ–‡ä»¶ä¸­å¯¹åº”çš„æ–‡å­—ï¼ˆUTF8 æ ¼å¼ï¼‰
+	 * @param[in] strTextId åœ¨è¯­è¨€æ–‡ä»¶ä¸­å¯¹åº”çš„æç¤ºæ–‡å­— ID
+	 * @return æ— 
 	 */
 	virtual void SetUTF8ToolTipTextId(const std::string& strTextId);
 
 	/**
-	 * @brief ÉèÖÃÊó±êĞü¸¡µ½¿Ø¼şÉÏÌáÊ¾µÄÎÄ±¾µ¥ĞĞ×î´ó¿í¶È
-	 * @param[in] nWidth ÒªÉèÖÃµÄ¿í¶ÈÖµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®é¼ æ ‡æ‚¬æµ®åˆ°æ§ä»¶ä¸Šæç¤ºçš„æ–‡æœ¬å•è¡Œæœ€å¤§å®½åº¦
+	 * @param[in] nWidth è¦è®¾ç½®çš„å®½åº¦å€¼
+	 * @return æ— 
 	 */
 	virtual void SetToolTipWidth(int nWidth);
 
 	/**
-	 * @brief »ñÈ¡Êó±êĞü¸¡µ½¿Ø¼şÉÏÌáÊ¾µÄÎÄ±¾µ¥ĞĞ×î´ó¿í¶È
-	 * @return µ±Ç°ÌáÊ¾ÎÄ±¾×î´ó¿í¶È
+	 * @brief è·å–é¼ æ ‡æ‚¬æµ®åˆ°æ§ä»¶ä¸Šæç¤ºçš„æ–‡æœ¬å•è¡Œæœ€å¤§å®½åº¦
+	 * @return å½“å‰æç¤ºæ–‡æœ¬æœ€å¤§å®½åº¦
 	 */
 	virtual int GetToolTipWidth(void) const;
 
-    /// ²Ëµ¥
+    /// èœå•
 	/**
-	 * @brief ¿Ø¼şÊÇ·ñÏìÓ¦ÓÒ¼ü²Ëµ¥ÏûÏ¢
-	 * @return ·µ»Ø½á¹û±íÊ¾ÁËÊÇ·ñÏìÓ¦ÓÒ¼ü²Ëµ¥ÏûÏ¢£¬true ÏìÓ¦ÓÒ¼ü²Ëµ¥ÏûÏ¢£¬false ²»ÏìÓ¦ÓÒ¼ü²Ëµ¥ÏûÏ¢
+	 * @brief æ§ä»¶æ˜¯å¦å“åº”å³é”®èœå•æ¶ˆæ¯
+	 * @return è¿”å›ç»“æœè¡¨ç¤ºäº†æ˜¯å¦å“åº”å³é”®èœå•æ¶ˆæ¯ï¼Œtrue å“åº”å³é”®èœå•æ¶ˆæ¯ï¼Œfalse ä¸å“åº”å³é”®èœå•æ¶ˆæ¯
 	 */
     virtual bool IsContextMenuUsed() const;
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şÏìÓ¦ÓÒ¼ü²Ëµ¥ÏûÏ¢
-	 * @param[in] bMenuUsed ÊÇ·ñÏìÓ¦ÓÒ¼ü²Ëµ¥ÏûÏ¢£¬true ÎªÊÇ£¬false Îª·ñ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶å“åº”å³é”®èœå•æ¶ˆæ¯
+	 * @param[in] bMenuUsed æ˜¯å¦å“åº”å³é”®èœå•æ¶ˆæ¯ï¼Œtrue ä¸ºæ˜¯ï¼Œfalse ä¸ºå¦
+	 * @return æ— 
 	 */
     virtual void SetContextMenuUsed(bool bMenuUsed);
 
 	/**
-	  * @brief »ñÈ¡¿Ø¼şÓÒ¼ü²Ëµ¥µÄµ¯³öÎ»ÖÃĞÅÏ¢
-	  * @return Î»ÖÃĞÅÏ¢
+	  * @brief è·å–æ§ä»¶å³é”®èœå•çš„å¼¹å‡ºä½ç½®ä¿¡æ¯
+	  * @return ä½ç½®ä¿¡æ¯
 	  */
 	virtual std::wstring GetMenuPopup() const;
 
 	/**
-	  * @brief ÉèÖÃ¿Ø¼şÓÒ¼ü²Ëµ¥µÄµ¯³öÎ»ÖÃĞÅÏ¢
-	 * @param[in] strPopup Î»ÖÃĞÅÏ¢£¬²Î¼ûMenu.h StringToMenuPopup()
-	  * @return ÎŞ
+	  * @brief è®¾ç½®æ§ä»¶å³é”®èœå•çš„å¼¹å‡ºä½ç½®ä¿¡æ¯
+	 * @param[in] strPopup ä½ç½®ä¿¡æ¯ï¼Œå‚è§Menu.h StringToMenuPopup()
+	  * @return æ— 
 	  */
 	virtual void SetMenuPopup(const std::wstring& strPopup);
 
 	/**
-	* @brief »ñÈ¡¿Ø¼şÓÒ¼ü²Ëµ¥µÄ¶ÔÆëĞÅÏ¢
-	* @return ¶ÔÆëĞÅÏ¢
+	* @brief è·å–æ§ä»¶å³é”®èœå•çš„å¯¹é½ä¿¡æ¯
+	* @return å¯¹é½ä¿¡æ¯
 	*/
 	virtual std::wstring GetMenuAlign() const;
 
 	/**
-	  * @brief ÉèÖÃ¿Ø¼şÓÒ¼ü²Ëµ¥µÄ¶ÔÆëĞÅÏ¢
-	  * @param[in] strAlign ¶ÔÆëĞÅÏ¢£¬²Î¼ûMenu.h StringToMenuAlign()
-	  * @return ÎŞ
+	  * @brief è®¾ç½®æ§ä»¶å³é”®èœå•çš„å¯¹é½ä¿¡æ¯
+	  * @param[in] strAlign å¯¹é½ä¿¡æ¯ï¼Œå‚è§Menu.h StringToMenuAlign()
+	  * @return æ— 
 	  */
 	virtual void SetMenuAlign(const std::wstring& strAlign);
 
-    /// ÓÃ»§Êı¾İ£¬¸¨Öúº¯Êı£¬¹©ÓÃ»§Ê¹ÓÃ
+    /// ç”¨æˆ·æ•°æ®ï¼Œè¾…åŠ©å‡½æ•°ï¼Œä¾›ç”¨æˆ·ä½¿ç”¨
 	/**
-	 * @brief »ñÈ¡ÓÃ»§°ó¶¨µ½¿Ø¼şµÄÊı¾İ×Ö·û´®
-	 * @return ·µ»Ø¾ßÌåÊı¾İ×Ö·û´®
+	 * @brief è·å–ç”¨æˆ·ç»‘å®šåˆ°æ§ä»¶çš„æ•°æ®å­—ç¬¦ä¸²
+	 * @return è¿”å›å…·ä½“æ•°æ®å­—ç¬¦ä¸²
 	 */
     virtual std::wstring GetDataID() const;
 
 	/**
-	 * @brief »ñÈ¡ÓÃ»§°ó¶¨µ½¿Ø¼şµÄÊı¾İ×Ö·û´®£¨UTF8 ¸ñÊ½£©
-	 * @return ·µ»Ø¾ßÌåÊı¾İ×Ö·û´®
+	 * @brief è·å–ç”¨æˆ·ç»‘å®šåˆ°æ§ä»¶çš„æ•°æ®å­—ç¬¦ä¸²ï¼ˆUTF8 æ ¼å¼ï¼‰
+	 * @return è¿”å›å…·ä½“æ•°æ®å­—ç¬¦ä¸²
 	 */
 	virtual std::string GetUTF8DataID() const;				
 
 	/**
-	 * @brief °ó¶¨Ò»¸ö×Ö·û´®Êı¾İµ½¿Ø¼ş
-	 * @param[in] strText Òª°ó¶¨µÄ×Ö·û´®Êı¾İ
-	 * @return ÎŞ
+	 * @brief ç»‘å®šä¸€ä¸ªå­—ç¬¦ä¸²æ•°æ®åˆ°æ§ä»¶
+	 * @param[in] strText è¦ç»‘å®šçš„å­—ç¬¦ä¸²æ•°æ®
+	 * @return æ— 
 	 */
     virtual void SetDataID(const std::wstring& strText);
 
 	/**
-	 * @brief °ó¶¨Ò»¸ö×Ö·û´®Êı¾İµ½¿Ø¼ş£¨UTF8 ¸ñÊ½£©
-	 * @param[in] strText Òª°ó¶¨µÄ×Ö·û´®Êı¾İ
-	 * @return ÎŞ
+	 * @brief ç»‘å®šä¸€ä¸ªå­—ç¬¦ä¸²æ•°æ®åˆ°æ§ä»¶ï¼ˆUTF8 æ ¼å¼ï¼‰
+	 * @param[in] strText è¦ç»‘å®šçš„å­—ç¬¦ä¸²æ•°æ®
+	 * @return æ— 
 	 */
 	virtual void SetUTF8DataID(const std::string& strText);	
 
 	/**
-	 * @brief »ñÈ¡ÓÃ»§°ó¶¨µÄ×Ô¶¨ÒåÊı¾İ½á¹¹
-	 * @return ÓÃ»§°ó¶¨µÄ×Ô¶¨Òå½á¹¹Êı¾İÖ¸Õë
+	 * @brief è·å–ç”¨æˆ·ç»‘å®šçš„è‡ªå®šä¹‰æ•°æ®ç»“æ„
+	 * @return ç”¨æˆ·ç»‘å®šçš„è‡ªå®šä¹‰ç»“æ„æ•°æ®æŒ‡é’ˆ
 	 */
 	virtual UserDataBase* GetUserDataBase() const;
 
 	/**
-	 * @brief °ó¶¨×Ô¶¨ÒåÊı¾İµ½¿Ø¼ş£¬ÓÃ»§¿É¼Ì³Ğ UserDataBase À´²¹³äĞèÒª°ó¶¨µÄÊı¾İ
-	 * @param[in] pUserDataBase Êı¾İÖ¸Õë
-	 * @return ÎŞ
+	 * @brief ç»‘å®šè‡ªå®šä¹‰æ•°æ®åˆ°æ§ä»¶ï¼Œç”¨æˆ·å¯ç»§æ‰¿ UserDataBase æ¥è¡¥å……éœ€è¦ç»‘å®šçš„æ•°æ®
+	 * @param[in] pUserDataBase æ•°æ®æŒ‡é’ˆ
+	 * @return æ— 
 	 */
 	virtual void SetUserDataBase(UserDataBase* pUserDataBase);
 
-    /// Ò»Ğ©ÖØÒªµÄÊôĞÔ
+    /// ä¸€äº›é‡è¦çš„å±æ€§
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şÊÇ·ñ¿É¼û
-	 * @param[in] bVisible Îª true Ê±¿Ø¼ş¿É¼û£¬Îª false Ê±¿Ø¼ş±»Òş²Ø
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶æ˜¯å¦å¯è§
+	 * @param[in] bVisible ä¸º true æ—¶æ§ä»¶å¯è§ï¼Œä¸º false æ—¶æ§ä»¶è¢«éšè—
+	 * @return æ— 
 	 */
     virtual void SetVisible(bool bVisible = true);
 
 	/**
-	 * @brief ´ı²¹³ä
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief å¾…è¡¥å……
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
-    virtual void SetInternVisible(bool bVisible = true); // ½ö¹©ÄÚ²¿µ÷ÓÃ£¬ÓĞĞ©uiÓµÓĞ´°¿Ú¾ä±ú£¬ĞèÒªÖØĞ´´Ëº¯Êı
+    virtual void SetInternVisible(bool bVisible = true); // ä»…ä¾›å†…éƒ¨è°ƒç”¨ï¼Œæœ‰äº›uiæ‹¥æœ‰çª—å£å¥æŸ„ï¼Œéœ€è¦é‡å†™æ­¤å‡½æ•°
 
 	/**
-	 * @brief ´ı²¹³ä
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief å¾…è¡¥å……
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	virtual void SetVisible_(bool bVisible);
 
 	/**
-	 * @brief ¼ì²é¿Ø¼şÊÇ·ñ¿ÉÓÃ
-	 * @return ¿Ø¼ş¿ÉÓÃ×´Ì¬£¬·µ»Ø true ¿Ø¼ş¿ÉÓÃ£¬·ñÔòÎª false
+	 * @brief æ£€æŸ¥æ§ä»¶æ˜¯å¦å¯ç”¨
+	 * @return æ§ä»¶å¯ç”¨çŠ¶æ€ï¼Œè¿”å› true æ§ä»¶å¯ç”¨ï¼Œå¦åˆ™ä¸º false
 	 */
     virtual bool IsEnabled() const;
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼ş¿ÉÓÃ×´Ì¬
-	 * @param[in] bEnable Îª true Ê±¿Ø¼ş¿ÉÓÃ£¬Îª false Ê±¿Ø¼şÎª½ûÓÃ×´Ì¬Ôò²»¿ÉÓÃ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶å¯ç”¨çŠ¶æ€
+	 * @param[in] bEnable ä¸º true æ—¶æ§ä»¶å¯ç”¨ï¼Œä¸º false æ—¶æ§ä»¶ä¸ºç¦ç”¨çŠ¶æ€åˆ™ä¸å¯ç”¨
+	 * @return æ— 
 	 */
     virtual void SetEnabled(bool bEnable = true);
 
 	/**
-	 * @brief ¼ì²é¿Ø¼şÊÇ·ñÏìÓ¦Êó±êÊÂ¼ş
-	 * @return ·µ»Ø¿Ø¼şÊÇ·ñÏìÓ¦Êó±êÊÂ¼ş£¬·µ»Ø true ÏìÓ¦Êó±êÊÂ¼ş£¬false Îª²»ÏìÓ¦
+	 * @brief æ£€æŸ¥æ§ä»¶æ˜¯å¦å“åº”é¼ æ ‡äº‹ä»¶
+	 * @return è¿”å›æ§ä»¶æ˜¯å¦å“åº”é¼ æ ‡äº‹ä»¶ï¼Œè¿”å› true å“åº”é¼ æ ‡äº‹ä»¶ï¼Œfalse ä¸ºä¸å“åº”
 	 */
     virtual bool IsMouseEnabled() const;
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şÊÇ·ñÏìÓ¦Êó±êÊÂ¼ş
-	 * @param[in] bEnable Îª true ÏìÓ¦Êó±êÊÂ¼ş£¬Îª false Ê±²»ÏìÓ¦Êó±êÊÂ¼ş
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶æ˜¯å¦å“åº”é¼ æ ‡äº‹ä»¶
+	 * @param[in] bEnable ä¸º true å“åº”é¼ æ ‡äº‹ä»¶ï¼Œä¸º false æ—¶ä¸å“åº”é¼ æ ‡äº‹ä»¶
+	 * @return æ— 
 	 */
     virtual void SetMouseEnabled(bool bEnable = true);
 
 	/**
-	 * @brief ¼ì²é¿Ø¼şÊÇ·ñÏìÓ¦¼üÅÌÊÂ¼ş
-	 * @return ·µ»Ø¿Ø¼şÊÇ·ñÏìÓ¦¼üÅÌÊÂ¼ş£¬·µ»Ø true ÏìÓ¦¼üÅÌÊÂ¼ş£¬false ²»ÏìÓ¦¼üÅÌÊÂ¼ş
+	 * @brief æ£€æŸ¥æ§ä»¶æ˜¯å¦å“åº”é”®ç›˜äº‹ä»¶
+	 * @return è¿”å›æ§ä»¶æ˜¯å¦å“åº”é”®ç›˜äº‹ä»¶ï¼Œè¿”å› true å“åº”é”®ç›˜äº‹ä»¶ï¼Œfalse ä¸å“åº”é”®ç›˜äº‹ä»¶
 	 */
     virtual bool IsKeyboardEnabled() const;
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şÊÇ·ñÏìÓ¦¼üÅÌÊÂ¼ş
-	 * @param[in] bEnable Îª true ÏìÓ¦¼üÅÌÊÂ¼ş£¬Îª false Ê±²»ÏìÓ¦¼üÅÌÊÂ¼ş
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶æ˜¯å¦å“åº”é”®ç›˜äº‹ä»¶
+	 * @param[in] bEnable ä¸º true å“åº”é”®ç›˜äº‹ä»¶ï¼Œä¸º false æ—¶ä¸å“åº”é”®ç›˜äº‹ä»¶
+	 * @return æ— 
 	 */
     virtual void SetKeyboardEnabled(bool bEnable = true);
 
 	/**
-	 * @brief ¼ì²é¿Ø¼şÊÇ·ñ¾ßÓĞ½¹µã
-	 * @return ·µ»Ø¿Ø¼şÊÇ·ñ¾ßÓĞ¼ìµã£¬Îª true Ê±ÊÇµ±Ç°¾ßÓĞ½¹µã£¬Îª false Ê±¿Ø¼şÃ»ÓĞ½¹µã
+	 * @brief æ£€æŸ¥æ§ä»¶æ˜¯å¦å…·æœ‰ç„¦ç‚¹
+	 * @return è¿”å›æ§ä»¶æ˜¯å¦å…·æœ‰æ£€ç‚¹ï¼Œä¸º true æ—¶æ˜¯å½“å‰å…·æœ‰ç„¦ç‚¹ï¼Œä¸º false æ—¶æ§ä»¶æ²¡æœ‰ç„¦ç‚¹
 	 */
     virtual bool IsFocused() const;
 
 	/**
-	 * @brief ÈÃ¿Ø¼ş»ñÈ¡½¹µã
-	 * @return ÎŞ
+	 * @brief è®©æ§ä»¶è·å–ç„¦ç‚¹
+	 * @return æ— 
 	 */
     virtual void SetFocus();
 
 	/**
-	 * @brief ·µ»Ø¿Ø¼şµÄ±êÊ¶£¬ÓÃÓÚÅĞ¶ÏÊÇ·ñ¿ÉÒÔÏìÓ¦ TAB ÇĞ»»ÊÂ¼ş
-	 * @return ·µ»Ø¿Ø¼şµÄ±êÊ¶ÀàĞÍ
+	 * @brief è¿”å›æ§ä»¶çš„æ ‡è¯†ï¼Œç”¨äºåˆ¤æ–­æ˜¯å¦å¯ä»¥å“åº” TAB åˆ‡æ¢äº‹ä»¶
+	 * @return è¿”å›æ§ä»¶çš„æ ‡è¯†ç±»å‹
 	 */
 	virtual UINT GetControlFlags() const;
 
 	/**
-	 * @brief ÈÃ¿Ø¼şÉèÖÃÓÀÔ¶»ñÈ¡²»µ½½¹µã
-	 * @return ÎŞ
+	 * @brief è®©æ§ä»¶è®¾ç½®æ°¸è¿œè·å–ä¸åˆ°ç„¦ç‚¹
+	 * @return æ— 
 	 */
-	void SetNoFocus(); // ¿Ø¼şÓÀÔ¶²»Òª½¹µã£¬ÓëKillFocus²»Ò»Ñù
+	void SetNoFocus(); // æ§ä»¶æ°¸è¿œä¸è¦ç„¦ç‚¹ï¼Œä¸KillFocusä¸ä¸€æ ·
 
 	/**
-	 * @brief ÅĞ¶Ïµ±Ç°Êó±ê½¹µãÊÇ·ñÔÚ¿Ø¼şÉÏ
-	 * @return ·µ»ØÊó±ê½¹µãÊÇ·ñÔÚ¿Ø¼şÉÏ£¬true Êó±ê½¹µãÔÚ¿Ø¼şÉÏ£¬false Êó±ê½¹µã²»ÔÚ¿Ø¼şÉÏ
+	 * @brief åˆ¤æ–­å½“å‰é¼ æ ‡ç„¦ç‚¹æ˜¯å¦åœ¨æ§ä»¶ä¸Š
+	 * @return è¿”å›é¼ æ ‡ç„¦ç‚¹æ˜¯å¦åœ¨æ§ä»¶ä¸Šï¼Œtrue é¼ æ ‡ç„¦ç‚¹åœ¨æ§ä»¶ä¸Šï¼Œfalse é¼ æ ‡ç„¦ç‚¹ä¸åœ¨æ§ä»¶ä¸Š
 	 */
 	virtual bool IsMouseFocused() const { return m_bMouseFocused;}
 
 	/**
-	 * @brief ÉèÖÃÊÇ·ñ½«Êó±ê½¹µãµ½¿Ø¼şÉÏ
-	 * @param[in] bMouseFocused Îª true Ê±ÉèÖÃÊó±ê½¹µãµ½¿Ø¼şÉÏ£¬Îª false Ê±ÈÃ¿Ø¼şÊ§È¥Êó±ê½¹µã
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ˜¯å¦å°†é¼ æ ‡ç„¦ç‚¹åˆ°æ§ä»¶ä¸Š
+	 * @param[in] bMouseFocused ä¸º true æ—¶è®¾ç½®é¼ æ ‡ç„¦ç‚¹åˆ°æ§ä»¶ä¸Šï¼Œä¸º false æ—¶è®©æ§ä»¶å¤±å»é¼ æ ‡ç„¦ç‚¹
+	 * @return æ— 
 	 */
 	virtual void SetMouseFocused(bool bMouseFocused) { m_bMouseFocused = bMouseFocused; }
 
 	/**
-	 * @brief ÅĞ¶Ï¿Ø¼şµ±Ç°ÊÇ·ñÊÇ¼¤»î×´Ì¬
-	 * @return ·µ»Ø¿Ø¼ş×´Ì¬£¬true ¿Ø¼şµ±Ç°ÊÇ¼¤»î×´Ì¬£¬¿É¼û²¢¿ÉÓÃ£¬false ¿Ø¼şµ±Ç°·Ç¼¤»î×´Ì¬£¬¿ÉÄÜ²»¿É¼û»ò±»½ûÓÃ
+	 * @brief åˆ¤æ–­æ§ä»¶å½“å‰æ˜¯å¦æ˜¯æ¿€æ´»çŠ¶æ€
+	 * @return è¿”å›æ§ä»¶çŠ¶æ€ï¼Œtrue æ§ä»¶å½“å‰æ˜¯æ¿€æ´»çŠ¶æ€ï¼Œå¯è§å¹¶å¯ç”¨ï¼Œfalse æ§ä»¶å½“å‰éæ¿€æ´»çŠ¶æ€ï¼Œå¯èƒ½ä¸å¯è§æˆ–è¢«ç¦ç”¨
 	 */
 	virtual bool IsActivatable() const;
 
 	/**
-	 * @brief ¼¤»î¿Ø¼ş£¬Èçµã»÷¡¢Ñ¡ÖĞ¡¢Õ¹¿ªµÈ²Ù×÷
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief æ¿€æ´»æ§ä»¶ï¼Œå¦‚ç‚¹å‡»ã€é€‰ä¸­ã€å±•å¼€ç­‰æ“ä½œ
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	virtual void Activate();
 
 	/**
-	 * @brief È¡Ïû¼¤»î¿Ø¼ş£¬Èç·´Ñ¡¡¢Òş²ØµÈ²Ù×÷
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief å–æ¶ˆæ¿€æ´»æ§ä»¶ï¼Œå¦‚åé€‰ã€éšè—ç­‰æ“ä½œ
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	virtual void Deactivate();
 
 	/**
-	 * @brief ÊÇ·ñ¼¤»î£¬ÈçÑ¡ÖĞ¡¢Õ¹¿ªµÈ
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief æ˜¯å¦æ¿€æ´»ï¼Œå¦‚é€‰ä¸­ã€å±•å¼€ç­‰
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	virtual bool IsActivated();
 
-	/// ¿Ø¼şËÑË÷
+	/// æ§ä»¶æœç´¢
 	/**
-	 * @brief ¸ù¾İ×ø±ê²éÕÒÖ¸¶¨¿Ø¼ş
+	 * @brief æ ¹æ®åæ ‡æŸ¥æ‰¾æŒ‡å®šæ§ä»¶
 	 * @param[in] Proc
 	 * @param[in] pData
 	 * @param[in] uFlags
 	 * @param[in] scrollPos
-	 * @return ·µ»Ø¿Ø¼şµÄÖ¸Õë
+	 * @return è¿”å›æ§ä»¶çš„æŒ‡é’ˆ
 	 */
     virtual Control* FindControl(FINDCONTROLPROC Proc, LPVOID pData, UINT uFlags, CPoint scrollPos = CPoint());
 
-	/// Î»ÖÃÏà¹Ø
+	/// ä½ç½®ç›¸å…³
 	/**
-	 * @brief »ñÈ¡¿Ø¼şÎ»ÖÃ
-	 * @param[in] bContainShadow ÊÇ·ñ°üº¬ÒõÓ°£¬Ä¬ÈÏÎª true Ôò°üº¬ÒõÓ°·¶Î§£¬·ñÔò false Îª²»°üº¬
-	 * @return ·µ»Ø¿Ø¼şµÄÎ»ÖÃĞÅÏ¢
+	 * @brief è·å–æ§ä»¶ä½ç½®
+	 * @param[in] bContainShadow æ˜¯å¦åŒ…å«é˜´å½±ï¼Œé»˜è®¤ä¸º true åˆ™åŒ…å«é˜´å½±èŒƒå›´ï¼Œå¦åˆ™ false ä¸ºä¸åŒ…å«
+	 * @return è¿”å›æ§ä»¶çš„ä½ç½®ä¿¡æ¯
 	 */
 	virtual	UiRect GetPos(bool bContainShadow = true) const override;
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şÎ»ÖÃ
-	 * @param[in] rc ¿Ø¼şÎ»ÖÃµÄÃèÊöĞÅÏ¢
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶ä½ç½®
+	 * @param[in] rc æ§ä»¶ä½ç½®çš„æè¿°ä¿¡æ¯
+	 * @return æ— 
 	 */
 	virtual void SetPos(UiRect rc) override;
 
 	/**
-	 * @brief »ñÈ¡¿Ø¼şµÄÍâ±ß¾à
-	 * @return ·µ»Ø¿Ø¼şµÄÍâ±ß¾à
+	 * @brief è·å–æ§ä»¶çš„å¤–è¾¹è·
+	 * @return è¿”å›æ§ä»¶çš„å¤–è¾¹è·
 	 */
 	virtual UiRect GetMargin() const;
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şµÄÍâ±ß¾à
-	 * @param[in] rcMargin ¿Ø¼şµÄÍâ±ß¾àĞÅÏ¢
-	 * @param[in] bNeedDpiScale ÊÇ·ñÈÃÍâ±ß¾à¸ù¾İ DPI ÊÊÅä£¬Ä¬ÈÏÎª true£¬false ²»ÊÊÅä DPI
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶çš„å¤–è¾¹è·
+	 * @param[in] rcMargin æ§ä»¶çš„å¤–è¾¹è·ä¿¡æ¯
+	 * @param[in] bNeedDpiScale æ˜¯å¦è®©å¤–è¾¹è·æ ¹æ® DPI é€‚é…ï¼Œé»˜è®¤ä¸º trueï¼Œfalse ä¸é€‚é… DPI
+	 * @return æ— 
 	 */
 	virtual void SetMargin(UiRect rcMargin, bool bNeedDpiScale = true);
 
 	/**
-	 * @brief ¼ÆËã¿Ø¼ş´óĞ¡
-	 * @param[in] szAvailable ÔİÎŞÒâÒå
-	 * @return szAvailable ¿Ø¼şÊµ¼Ê´óĞ¡£¨Èç¹ûÉèÖÃÁËÍ¼Æ¬²¢ÉèÖÃ width »ò height ÈÎÒâÒ»ÏîÎª auto£¬½«¸ù¾İÍ¼Æ¬À´¼ÆËã×îÖÕ´óĞ¡£©
+	 * @brief è®¡ç®—æ§ä»¶å¤§å°
+	 * @param[in] szAvailable æš‚æ— æ„ä¹‰
+	 * @return szAvailable æ§ä»¶å®é™…å¤§å°ï¼ˆå¦‚æœè®¾ç½®äº†å›¾ç‰‡å¹¶è®¾ç½® width æˆ– height ä»»æ„ä¸€é¡¹ä¸º autoï¼Œå°†æ ¹æ®å›¾ç‰‡æ¥è®¡ç®—æœ€ç»ˆå¤§å°ï¼‰
 	 */
 	virtual CSize EstimateSize(CSize szAvailable);
 
 	/**
-	 * @brief ´ı²¹³ä
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief å¾…è¡¥å……
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	virtual CSize EstimateText(CSize szAvailable, bool& bReEstimateSize);
 
 	/**
-	 * @brief ¼ì²éÖ¸¶¨×ø±êÊÇ·ñÔÚ¹ö¶¯Ìõµ±Ç°¹ö¶¯Î»ÖÃµÄ·¶Î§ÄÚ
-	 * @param[in] point ¾ßÌå×ø±ê
-	 * @return ·µ»ØÊÇ·ñÔÚ·¶Î§ÄÚ£¬true ÔÚ¹ö¶¯Ìõµ±Ç°¹ö¶¯Î»ÖÃ·¶Î§ÄÚ£¬false ²»ÔÚ¹ö¶¯Ìõµ±Ç°¹ö¶¯Î»ÖÃ·¶Î§ÄÚ
+	 * @brief æ£€æŸ¥æŒ‡å®šåæ ‡æ˜¯å¦åœ¨æ»šåŠ¨æ¡å½“å‰æ»šåŠ¨ä½ç½®çš„èŒƒå›´å†…
+	 * @param[in] point å…·ä½“åæ ‡
+	 * @return è¿”å›æ˜¯å¦åœ¨èŒƒå›´å†…ï¼Œtrue åœ¨æ»šåŠ¨æ¡å½“å‰æ»šåŠ¨ä½ç½®èŒƒå›´å†…ï¼Œfalse ä¸åœ¨æ»šåŠ¨æ¡å½“å‰æ»šåŠ¨ä½ç½®èŒƒå›´å†…
 	 */
 	virtual bool IsPointInWithScrollOffset(const CPoint& point) const;
 
@@ -599,394 +599,394 @@ public:
 	 */
 	virtual UIAControlProvider* GetUIAProvider();
 
-	// ÏûÏ¢´¦Àí
+	// æ¶ˆæ¯å¤„ç†
 	/**
-	 * @brief ¿Ø¼şÍ³Ò»µÄÏûÏ¢´¦ÀíÈë¿Ú£¬½«´«Í³ Windows ÏûÏ¢×ª»»Îª×Ô¶¨Òå¸ñÊ½µÄÏûÏ¢
-	 * @param[in] eventType	ÏûÏ¢ÄÚÈİ
-	 * @param[in] wParam	ÏûÏ¢¸½¼ÓÄÚÈİ
-	 * @param[in] lParam	ÏûÏ¢¸½¼ÓÄÚÈİ
-	 * @param[in] tChar		°´¼üĞÅÏ¢
-	 * @param[in] mousePos	Êó±êĞÅÏ¢
-	 * @return ÎŞ
+	 * @brief æ§ä»¶ç»Ÿä¸€çš„æ¶ˆæ¯å¤„ç†å…¥å£ï¼Œå°†ä¼ ç»Ÿ Windows æ¶ˆæ¯è½¬æ¢ä¸ºè‡ªå®šä¹‰æ ¼å¼çš„æ¶ˆæ¯
+	 * @param[in] eventType	æ¶ˆæ¯å†…å®¹
+	 * @param[in] wParam	æ¶ˆæ¯é™„åŠ å†…å®¹
+	 * @param[in] lParam	æ¶ˆæ¯é™„åŠ å†…å®¹
+	 * @param[in] tChar		æŒ‰é”®ä¿¡æ¯
+	 * @param[in] mousePos	é¼ æ ‡ä¿¡æ¯
+	 * @return æ— 
 	 */
 	void HandleMessageTemplate(EventType eventType, WPARAM wParam = 0, LPARAM lParam = 0, TCHAR tChar = 0, CPoint mousePos = CPoint(), FLOAT pressure = 0.0f);
 
 	/**
-	 * @brief ½«×ª»»ºóµÄÏûÏ¢ÅÉ·¢µ½ÏûÏ¢´¦Àíº¯Êı
-	 * @param[in] msg ÏûÏ¢ÄÚÈİ
-	 * @return ÎŞ
+	 * @brief å°†è½¬æ¢åçš„æ¶ˆæ¯æ´¾å‘åˆ°æ¶ˆæ¯å¤„ç†å‡½æ•°
+	 * @param[in] msg æ¶ˆæ¯å†…å®¹
+	 * @return æ— 
 	 */
     virtual void HandleMessageTemplate(EventArgs& msg);
 
 	/**
-	 * @brief ÅĞ¶Ï¿Ø¼şÊÇ·ñÓĞ HOT ×´Ì¬
-	 * @return ·µ»Ø true ÓĞ HOT ×´Ì¬£¬ ·ñÔòÎª false
+	 * @brief åˆ¤æ–­æ§ä»¶æ˜¯å¦æœ‰ HOT çŠ¶æ€
+	 * @return è¿”å› true æœ‰ HOT çŠ¶æ€ï¼Œ å¦åˆ™ä¸º false
 	 */
 	virtual bool HasHotState();
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şÊÇ·ñÏìÓ¦´¥¿ØÏûÏ¢
-	 * @param[in] bRecv ÉèÖÃÎª true ±íÊ¾ÏìÓ¦´¥¿ØÏûÏ¢£¬false Îª²»ÏìÓ¦
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶æ˜¯å¦å“åº”è§¦æ§æ¶ˆæ¯
+	 * @param[in] bRecv è®¾ç½®ä¸º true è¡¨ç¤ºå“åº”è§¦æ§æ¶ˆæ¯ï¼Œfalse ä¸ºä¸å“åº”
+	 * @return æ— 
 	 */
 	virtual void SetReceivePointerMsg(bool bRecv) { m_bReceivePointerMsg = bRecv; };
 	
 	/**
-	 * @brief ÅĞ¶Ï¿Ø¼şÊÇ·ñÏìÓ¦´¥¿ØÏûÏ¢
-	 * @return ·µ»Ø true ÎªÏìÓ¦£¬·ñÔòÎª false
+	 * @brief åˆ¤æ–­æ§ä»¶æ˜¯å¦å“åº”è§¦æ§æ¶ˆæ¯
+	 * @return è¿”å› true ä¸ºå“åº”ï¼Œå¦åˆ™ä¸º false
 	 */
 	bool IsReceivePointerMsg() const { return m_bReceivePointerMsg; };
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şÊ§È¥½¹µãÊ±ÊÇ·ñ·¢ËÍÊó±êµ¯ÆğÏûÏ¢
-	 * @param[in] bNeed ÉèÖÃÎª true ±íÊ¾ÏìÓ¦´¥¿ØÏûÏ¢£¬false Îª²»ÏìÓ¦
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶å¤±å»ç„¦ç‚¹æ—¶æ˜¯å¦å‘é€é¼ æ ‡å¼¹èµ·æ¶ˆæ¯
+	 * @param[in] bNeed è®¾ç½®ä¸º true è¡¨ç¤ºå“åº”è§¦æ§æ¶ˆæ¯ï¼Œfalse ä¸ºä¸å“åº”
+	 * @return æ— 
 	 */
 	void SetNeedButtonUpWhenKillFocus(bool bNeed) { m_bNeedButtonUpWhenKillFocus = bNeed; };
 
 	/**
-	 * @brief ÅĞ¶Ï¿Ø¼şÊ§È¥½¹µãÊ±ÊÇ·ñ·¢ËÍÊó±êµ¯ÆğÏûÏ¢
-	 * @return ·µ»Ø true ÎªĞèÒª£¬false Îª²»ĞèÒª
+	 * @brief åˆ¤æ–­æ§ä»¶å¤±å»ç„¦ç‚¹æ—¶æ˜¯å¦å‘é€é¼ æ ‡å¼¹èµ·æ¶ˆæ¯
+	 * @return è¿”å› true ä¸ºéœ€è¦ï¼Œfalse ä¸ºä¸éœ€è¦
 	 */
 	bool IsNeedButtonUpWhenKillFocus() const { return m_bNeedButtonUpWhenKillFocus; };
 
-	// ÊôĞÔÉèÖÃ
+	// å±æ€§è®¾ç½®
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şÖ¸¶¨ÊôĞÔ
-	 * @param[in] strName ÒªÉèÖÃµÄÊôĞÔÃû³Æ£¨Èç width£©
-	 * @param[in] strValue ÒªÉèÖÃµÄÊôĞÔÖµ£¨Èç 100£©
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶æŒ‡å®šå±æ€§
+	 * @param[in] strName è¦è®¾ç½®çš„å±æ€§åç§°ï¼ˆå¦‚ widthï¼‰
+	 * @param[in] strValue è¦è®¾ç½®çš„å±æ€§å€¼ï¼ˆå¦‚ 100ï¼‰
+	 * @return æ— 
 	 */
     virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue);
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şµÄ class È«¾ÖÊôĞÔ
-	 * @param[in] strClass ÒªÉèÖÃµÄ class Ãû³Æ£¬¸ÃÃû³Æ±ØĞëÔÚ global.xml ÖĞ´æÔÚ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶çš„ class å…¨å±€å±æ€§
+	 * @param[in] strClass è¦è®¾ç½®çš„ class åç§°ï¼Œè¯¥åç§°å¿…é¡»åœ¨ global.xml ä¸­å­˜åœ¨
+	 * @return æ— 
 	 */
 	void SetClass(const std::wstring& strClass);
 
 	/**
-	 * @brief Ó¦ÓÃÒ»Ì×ÊôĞÔÁĞ±í
-	 * @param[in] strList ÊôĞÔÁĞ±íµÄ×Ö·û´®±íÊ¾£¬Èç `width="100" height="30"`
-	 * @return ÎŞ
+	 * @brief åº”ç”¨ä¸€å¥—å±æ€§åˆ—è¡¨
+	 * @param[in] strList å±æ€§åˆ—è¡¨çš„å­—ç¬¦ä¸²è¡¨ç¤ºï¼Œå¦‚ `width="100" height="30"`
+	 * @return æ— 
 	 */
     void ApplyAttributeList(const std::wstring& strList);
 
 	/**
-	 * @brief ´ı²¹³ä
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief å¾…è¡¥å……
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	bool OnApplyAttributeList(const std::wstring& strReceiver, const std::wstring& strList, EventArgs* eventArgs);
 
-	/// »æÖÆ²Ù×÷
+	/// ç»˜åˆ¶æ“ä½œ
 	/**
-	 * @brief ¸ù¾İÍ¼Æ¬Â·¾¶»º´æÍ¼Æ¬ĞÅÏ¢
-	 * @param[in£¬out] duiImage ´«ÈëÊ±±ê×¢Í¼Æ¬µÄÂ·¾¶ĞÅÏ¢£¬Èç¹û³É¹¦Ôò»á»º´æÍ¼Æ¬²¢¼ÇÂ¼µ½¸Ã²ÎÊıµÄ³ÉÔ±ÖĞ
-	 * @return ÎŞ
+	 * @brief æ ¹æ®å›¾ç‰‡è·¯å¾„ç¼“å­˜å›¾ç‰‡ä¿¡æ¯
+	 * @param[inï¼Œout] duiImage ä¼ å…¥æ—¶æ ‡æ³¨å›¾ç‰‡çš„è·¯å¾„ä¿¡æ¯ï¼Œå¦‚æœæˆåŠŸåˆ™ä¼šç¼“å­˜å›¾ç‰‡å¹¶è®°å½•åˆ°è¯¥å‚æ•°çš„æˆå‘˜ä¸­
+	 * @return æ— 
 	 */
 	void GetImage(Image& duiImage) const;
 
 	/**
-	 * @brief »æÖÆÍ¼Æ¬
-	 * @param[in] pRender »æÖÆÉÏÏÂÎÄ
-	 * @param[in] duiImage Í¼Æ¬¶ÔÏó
-	 * @param[in] strModify Í¼Æ¬µÄ¸½¼ÓÊôĞÔ
-	 * @param[in] nFade ¿Ø¼şµÄÍ¸Ã÷¶È£¬Èç¹ûÆôÓÃ¶¯»­Ğ§¹û¸ÃÖµÔÚ»æÖÆÊ±ÊÇ²»¶Ï±ä»¯µÄ
-	 * @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	 * @brief ç»˜åˆ¶å›¾ç‰‡
+	 * @param[in] pRender ç»˜åˆ¶ä¸Šä¸‹æ–‡
+	 * @param[in] duiImage å›¾ç‰‡å¯¹è±¡
+	 * @param[in] strModify å›¾ç‰‡çš„é™„åŠ å±æ€§
+	 * @param[in] nFade æ§ä»¶çš„é€æ˜åº¦ï¼Œå¦‚æœå¯ç”¨åŠ¨ç”»æ•ˆæœè¯¥å€¼åœ¨ç»˜åˆ¶æ—¶æ˜¯ä¸æ–­å˜åŒ–çš„
+	 * @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	 */
 	bool DrawImage(IRenderContext* pRender, Image& duiImage, const std::wstring& strModify = L"", int nFade = DUI_NOSET_VALUE);
 
 	/**
-	* @brief »ñÈ¡»æÖÆÉÏÏÂÎÄ¶ÔÏó
-	* @return ·µ»Ø»æÖÆÉÏÏÂÎÄ¶ÔÏó
+	* @brief è·å–ç»˜åˆ¶ä¸Šä¸‹æ–‡å¯¹è±¡
+	* @return è¿”å›ç»˜åˆ¶ä¸Šä¸‹æ–‡å¯¹è±¡
 	*/
 	IRenderContext* GetRenderContext();
 
 	/**
-	* @brief ÇåÀí»æÖÆÉÏÏÂÎÄ¶ÔÏó
-	* @return ÎŞ
+	* @brief æ¸…ç†ç»˜åˆ¶ä¸Šä¸‹æ–‡å¯¹è±¡
+	* @return æ— 
 	*/
 	void ClearRenderContext();
 
 	/**
-	 * @brief ´ı²¹³ä
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief å¾…è¡¥å……
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	virtual void AlphaPaint(IRenderContext* pRender, const UiRect& rcPaint);
 	
 	/**
-	* @brief »æÖÆ¿Ø¼şµÄÈë¿Úº¯Êı
-	* @param[in] pRender Ö¸¶¨»æÖÆÇøÓò
-	* @param[in] rcPaint Ö¸¶¨»æÖÆ×ø±ê
-	* @return ÎŞ
+	* @brief ç»˜åˆ¶æ§ä»¶çš„å…¥å£å‡½æ•°
+	* @param[in] pRender æŒ‡å®šç»˜åˆ¶åŒºåŸŸ
+	* @param[in] rcPaint æŒ‡å®šç»˜åˆ¶åæ ‡
+	* @return æ— 
 	*/
 	virtual void Paint(IRenderContext* pRender, const UiRect& rcPaint);
 
 	/**
-	* @brief »æÖÆ¿Ø¼ş×ÓÏîÈë¿Úº¯Êı
-	* @param[in] pRender Ö¸¶¨»æÖÆÇøÓò
-	* @param[in] rcPaint Ö¸¶¨»æÖÆ×ø±ê
-	* @return ÎŞ
+	* @brief ç»˜åˆ¶æ§ä»¶å­é¡¹å…¥å£å‡½æ•°
+	* @param[in] pRender æŒ‡å®šç»˜åˆ¶åŒºåŸŸ
+	* @param[in] rcPaint æŒ‡å®šç»˜åˆ¶åæ ‡
+	* @return æ— 
 	*/
 	virtual void PaintChild(IRenderContext* pRender, const UiRect& rcPaint) {};
 
 	/**
-	* @brief ÉèÖÃÊÇ·ñ¶Ô»æÖÆ·¶Î§×ö¼ô²ÃÏŞÖÆ
-	* @param[in] clip ÉèÖÃ true ÎªĞèÒª£¬·ñÔòÎª²»ĞèÒª£¬¼û»æÖÆº¯Êı
-	* @return ÎŞ
+	* @brief è®¾ç½®æ˜¯å¦å¯¹ç»˜åˆ¶èŒƒå›´åšå‰ªè£é™åˆ¶
+	* @param[in] clip è®¾ç½® true ä¸ºéœ€è¦ï¼Œå¦åˆ™ä¸ºä¸éœ€è¦ï¼Œè§ç»˜åˆ¶å‡½æ•°
+	* @return æ— 
 	*/
 	void SetClip(bool clip) { m_bClip = clip; };
 
 	/**
-	* @brief ÅĞ¶ÏÊÇ·ñ¶Ô»æÖÆ·¶Î§×ö¼ô²ÃÏŞÖÆ
-	* @return ·µ»Ø true ÎªĞèÒª£¬false Îª²»ĞèÒª
+	* @brief åˆ¤æ–­æ˜¯å¦å¯¹ç»˜åˆ¶èŒƒå›´åšå‰ªè£é™åˆ¶
+	* @return è¿”å› true ä¸ºéœ€è¦ï¼Œfalse ä¸ºä¸éœ€è¦
 	*/
 	bool IsClip() const { return m_bClip; }
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şÍ¸Ã÷¶È
-	 * @param[in] alpha 0 ~ 255 µÄÍ¸Ã÷¶ÈÖµ£¬255 Îª²»Í¸Ã÷
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶é€æ˜åº¦
+	 * @param[in] alpha 0 ~ 255 çš„é€æ˜åº¦å€¼ï¼Œ255 ä¸ºä¸é€æ˜
+	 * @return æ— 
 	 */
 	void SetAlpha(int alpha);
 
 	/**
-	 * @brief »ñÈ¡¿Ø¼şÍ¸Ã÷¶È
-	 * @return ·µ»Ø¿Ø¼şµÄÍ¸Ã÷¶È
+	 * @brief è·å–æ§ä»¶é€æ˜åº¦
+	 * @return è¿”å›æ§ä»¶çš„é€æ˜åº¦
 	 */
 	int GetAlpha() const { return m_nAlpha;	}
 
 	/**
-	 * @brief ¼ì²é¿Ø¼şÊÇ·ñÓĞÍ¸Ã÷ÊôĞÔ
-	 * @return ·µ»Ø¿Ø¼şÊÇ·ñÍ¸Ã÷£¬true ¿Ø¼şµ±Ç°ÓĞÍ¸Ã÷ÊôĞÔ£¬false ¿Ø¼şÃ»ÓĞÍ¸Ã÷ÊôĞÔ
+	 * @brief æ£€æŸ¥æ§ä»¶æ˜¯å¦æœ‰é€æ˜å±æ€§
+	 * @return è¿”å›æ§ä»¶æ˜¯å¦é€æ˜ï¼Œtrue æ§ä»¶å½“å‰æœ‰é€æ˜å±æ€§ï¼Œfalse æ§ä»¶æ²¡æœ‰é€æ˜å±æ€§
 	 */
 	bool IsAlpha() const { return m_nAlpha != 255; }
 
 	/**
-	 * @brief ÉèÖÃ½¹µã×´Ì¬Í¸Ã÷¶È
-	 * @param[in] alpha 0 ~ 255 µÄÍ¸Ã÷¶ÈÖµ£¬255 Îª²»Í¸Ã÷
-	 * @return ÎŞ
+	 * @brief è®¾ç½®ç„¦ç‚¹çŠ¶æ€é€æ˜åº¦
+	 * @param[in] alpha 0 ~ 255 çš„é€æ˜åº¦å€¼ï¼Œ255 ä¸ºä¸é€æ˜
+	 * @return æ— 
 	 */
 	void SetHotAlpha(int nHotAlpha);
 
 	/**
-	 * @brief ÉèÖÃÊÇ·ñ½ÓÊÜTAB¼üÇĞ»»½¹µã
+	 * @brief è®¾ç½®æ˜¯å¦æ¥å—TABé”®åˆ‡æ¢ç„¦ç‚¹
 	 * @param[in] enable
-	 * @return ÎŞ
+	 * @return æ— 
 	 */
 	void SetTabStop(bool enable);
 
 	/**
-	 * @brief ¼ì²éÊÇ·ñ½ÓÊÜTAB¼üÇĞ»»½¹µã
-	 * @return ·µ»Ø¿Ø¼şÊÇ·ñ½ÓÊÜTAB¼üÇĞ»»½¹µã
+	 * @brief æ£€æŸ¥æ˜¯å¦æ¥å—TABé”®åˆ‡æ¢ç„¦ç‚¹
+	 * @return è¿”å›æ§ä»¶æ˜¯å¦æ¥å—TABé”®åˆ‡æ¢ç„¦ç‚¹
 	 */
 	bool IsAllowTabStop() const { return m_bAllowTabstop; }
 
 	/**
-	 * @brief »ñÈ¡½¹µã×´Ì¬Í¸Ã÷¶È
-	 * @return ·µ»Ø¿Ø¼ş½¹µã×´Ì¬µÄÍ¸Ã÷¶È
+	 * @brief è·å–ç„¦ç‚¹çŠ¶æ€é€æ˜åº¦
+	 * @return è¿”å›æ§ä»¶ç„¦ç‚¹çŠ¶æ€çš„é€æ˜åº¦
 	 */
 	int GetHotAlpha() const { return m_nHotAlpha; }
 
 	/**
-	 * @brief »ñÈ¡¿Ø¼ş»æÖÆÆ«ÒÆÁ¿
-	 * @return ·µ»Øµ±Ç°¿Ø¼şµÄ»æÖÆÆ«ÒÆÁ¿
+	 * @brief è·å–æ§ä»¶ç»˜åˆ¶åç§»é‡
+	 * @return è¿”å›å½“å‰æ§ä»¶çš„ç»˜åˆ¶åç§»é‡
 	 */
 	CPoint GetRenderOffset() const { return m_renderOffset;	}
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼ş»æÖÆÆ«ÒÆÁ¿
-	 * @param[in] renderOffset ¿Ø¼şÆ«ÒÆÊı¾İ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶ç»˜åˆ¶åç§»é‡
+	 * @param[in] renderOffset æ§ä»¶åç§»æ•°æ®
+	 * @return æ— 
 	 */
 	void SetRenderOffset(CPoint renderOffset);
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şÆ«ÒÆµÄ X ×ø±ê
-	 * @param[in] renderOffsetX X ×ø±êÖµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶åç§»çš„ X åæ ‡
+	 * @param[in] renderOffsetX X åæ ‡å€¼
+	 * @return æ— 
 	 */
 	void SetRenderOffsetX(int renderOffsetX);
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şÆ«ÒÆµÄ Y ×ø±ê
-	 * @param[in] renderOffsetY Y ×ø±êÖµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶åç§»çš„ Y åæ ‡
+	 * @param[in] renderOffsetY Y åæ ‡å€¼
+	 * @return æ— 
 	 */
 	void SetRenderOffsetY(int renderOffsetY);
 
-	/// GifÍ¼Æ¬
+	/// Gifå›¾ç‰‡
 	/**
-	 * @brief ²¥·Å GIF
-	 * @param[in] ²¥·ÅÍê³ÉÍ£Ö¹ÔÚÄÄÒ»Ö¡£¬¿ÉÉèÖÃµÚÒ»Ö¡¡¢µ±Ç°Ö¡ºÍ×îºóÒ»Ö¡¡£Çë²Î¿¼ GifStopType Ã¶¾Ù
-	 * @return ÎŞ
+	 * @brief æ’­æ”¾ GIF
+	 * @param[in] æ’­æ”¾å®Œæˆåœæ­¢åœ¨å“ªä¸€å¸§ï¼Œå¯è®¾ç½®ç¬¬ä¸€å¸§ã€å½“å‰å¸§å’Œæœ€åä¸€å¸§ã€‚è¯·å‚è€ƒ GifStopType æšä¸¾
+	 * @return æ— 
 	 */
 	void StartGifPlayForUI(GifStopType frame = kGifStopFirst,int playcount = -1);
 
 	/**
-	 * @brief Í£Ö¹²¥·Å GIF
-	 * @param[in] transfer ÊÇ·ñ½«Í£Ö¹ÊÂ¼şÍ¨Öª¸ø¶©ÔÄÕß£¬²Î¿¼ AttachGifPlayStop ·½·¨
-	 * @param[frame] frame ²¥·Å½áÊøÍ£Ö¹ÔÚÄÄÒ»Ö¡£¬¿ÉÉèÖÃµÚÒ»Ö¡¡¢µ±Ç°Ö¡ºÍ×îºóÒ»Ö¡¡£Çë²Î¿¼ GifStopType Ã¶¾Ù
-	 * @return ÎŞ
+	 * @brief åœæ­¢æ’­æ”¾ GIF
+	 * @param[in] transfer æ˜¯å¦å°†åœæ­¢äº‹ä»¶é€šçŸ¥ç»™è®¢é˜…è€…ï¼Œå‚è€ƒ AttachGifPlayStop æ–¹æ³•
+	 * @param[frame] frame æ’­æ”¾ç»“æŸåœæ­¢åœ¨å“ªä¸€å¸§ï¼Œå¯è®¾ç½®ç¬¬ä¸€å¸§ã€å½“å‰å¸§å’Œæœ€åä¸€å¸§ã€‚è¯·å‚è€ƒ GifStopType æšä¸¾
+	 * @return æ— 
 	 */
 	void StopGifPlayForUI(bool transfer = false, GifStopType frame = kGifStopCurrent);
 
 	/**
-	 * @brief ¼àÌı GIF ²¥·ÅÍê³ÉÍ¨Öª
-	 * @param[in] callback Òª¼àÌı GIF Í£Ö¹²¥·ÅµÄ»Øµ÷º¯Êı
-	 * @return ÎŞ
+	 * @brief ç›‘å¬ GIF æ’­æ”¾å®Œæˆé€šçŸ¥
+	 * @param[in] callback è¦ç›‘å¬ GIF åœæ­¢æ’­æ”¾çš„å›è°ƒå‡½æ•°
+	 * @return æ— 
 	 */
 	void AttachGifPlayStop(const EventCallback& callback){ OnGifEvent[m_nVirtualEventGifStop] += callback; };
 
   /**
-  * @brief ¿ªÆôloading×´Ì¬
-  * @param[in] start_angle loadingÍ¼Æ¬Ğı×ªµÄ½Ç¶È
-  * @return ÎŞ
+  * @brief å¼€å¯loadingçŠ¶æ€
+  * @param[in] start_angle loadingå›¾ç‰‡æ—‹è½¬çš„è§’åº¦
+  * @return æ— 
   */
   void StartLoading(int fStartAngle = -1);
 
   /**
-  * @brief ¹Ø±Õloading×´Ì¬
-  * @param[in] frame ²¥·ÅÍê³ÉÍ£Ö¹ÔÚÄÄÒ»Ö¡£¬¿ÉÉèÖÃµÚÒ»Ö¡¡¢µ±Ç°Ö¡ºÍ×îºóÒ»Ö¡¡£Çë²Î¿¼ GifStopType Ã¶¾Ù
-  * @return ÎŞ
+  * @brief å…³é—­loadingçŠ¶æ€
+  * @param[in] frame æ’­æ”¾å®Œæˆåœæ­¢åœ¨å“ªä¸€å¸§ï¼Œå¯è®¾ç½®ç¬¬ä¸€å¸§ã€å½“å‰å¸§å’Œæœ€åä¸€å¸§ã€‚è¯·å‚è€ƒ GifStopType æšä¸¾
+  * @return æ— 
   */
   void StopLoading(GifStopType frame = kGifStopFirst);
 
   /**
-  * @brief ¼ÆËãloadingÍ¼Æ¬µÄĞı×ª½Ç¶È
-  * @return ÎŞ
+  * @brief è®¡ç®—loadingå›¾ç‰‡çš„æ—‹è½¬è§’åº¦
+  * @return æ— 
   */
   void Loading();
   /**
-  * @brief ÊÇ·ñÕıÔÚloading
-  * @return ÔÚloading·µ»Øtrue, ·´Ö®·µ»Øfalse
+  * @brief æ˜¯å¦æ­£åœ¨loading
+  * @return åœ¨loadingè¿”å›true, åä¹‹è¿”å›false
   */
   bool IsLoading();
 
-	/// ¶¯»­¹ÜÀí
+	/// åŠ¨ç”»ç®¡ç†
 	/**
-	 * @brief »ñÈ¡¶¯»­¹ÜÀíÆ÷Ö¸Õë
-	 * @return ·µ»Ø¶¯»­¹ÜÀíÆ÷Ö¸Õë
+	 * @brief è·å–åŠ¨ç”»ç®¡ç†å™¨æŒ‡é’ˆ
+	 * @return è¿”å›åŠ¨ç”»ç®¡ç†å™¨æŒ‡é’ˆ
 	 */
 	AnimationManager& GetAnimationManager()	{ return m_animationManager; }
 
-	/// Í¼Æ¬»º´æ
+	/// å›¾ç‰‡ç¼“å­˜
 	/**
-	 * @brief »º´æÍ¼Æ¬
-	 * @return ÎŞ
+	 * @brief ç¼“å­˜å›¾ç‰‡
+	 * @return æ— 
 	 */
 	virtual void InvokeLoadImageCache();
 
 	/**
-	 * @brief È¡Ïû¼ÓÔØÍ¼Æ¬»º´æ
-	 * @return ÎŞ
+	 * @brief å–æ¶ˆåŠ è½½å›¾ç‰‡ç¼“å­˜
+	 * @return æ— 
 	 */
 	virtual void UnLoadImageCache();
 
 	/**
-	 * @brief ÇåÀíÍ¼Æ¬»º´æ
-	 * @return ÎŞ
+	 * @brief æ¸…ç†å›¾ç‰‡ç¼“å­˜
+	 * @return æ— 
 	 */
 	virtual void ClearImageCache();
 
 	/**
-	 * @brief ¼àÌı¿Ø¼şËùÓĞÊÂ¼ş
-	 * @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	 * @return ÎŞ
+	 * @brief ç›‘å¬æ§ä»¶æ‰€æœ‰äº‹ä»¶
+	 * @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	 * @return æ— 
 	 */
 	void AttachAllEvents(const EventCallback& callback)	{ OnEvent[kEventAll] += callback; }
 
 	/**
-	 * @brief ¼àÌıÊó±ê½øÈëÊÂ¼ş
-	 * @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	 * @return ÎŞ
+	 * @brief ç›‘å¬é¼ æ ‡è¿›å…¥äº‹ä»¶
+	 * @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	 * @return æ— 
 	 */
 	void AttachMouseEnter(const EventCallback& callback) { OnEvent[kEventMouseEnter] += callback; }
 
 	/**
-	 * @brief ¼àÌıÊó±êÀë¿ªÊÂ¼ş
-	 * @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	 * @return ÎŞ
+	 * @brief ç›‘å¬é¼ æ ‡ç¦»å¼€äº‹ä»¶
+	 * @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	 * @return æ— 
 	 */
 	void AttachMouseLeave(const EventCallback& callback) { OnEvent[kEventMouseLeave] += callback; }
 
 	/**
-	 * @brief ¼àÌıÊó±êĞü¸¡ÊÂ¼ş
-	 * @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	 * @return ÎŞ
+	 * @brief ç›‘å¬é¼ æ ‡æ‚¬æµ®äº‹ä»¶
+	 * @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	 * @return æ— 
 	 */
 	void AttachMouseHover(const EventCallback& callback) { OnEvent[kEventMouseHover] += callback; }
 
 	/**
-	 * @brief ¼àÌıÊó±ê°´ÏÂÊÂ¼ş
-	 * @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	 * @return ÎŞ
+	 * @brief ç›‘å¬é¼ æ ‡æŒ‰ä¸‹äº‹ä»¶
+	 * @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	 * @return æ— 
 	 */
 	void AttachButtonDown(const EventCallback& callback) { OnEvent[kEventMouseButtonDown] += callback; }
 
 	/**
-	 * @brief ¼àÌıÊó±êµ¯ÆğÊÂ¼ş
-	 * @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	 * @return ÎŞ
+	 * @brief ç›‘å¬é¼ æ ‡å¼¹èµ·äº‹ä»¶
+	 * @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	 * @return æ— 
 	 */
 	void AttachButtonUp(const EventCallback& callback) { OnEvent[kEventMouseButtonUp] += callback; }
 
 	/**
-	 * @brief ¼àÌı»ñµÃ½¹µãÊÂ¼ş
-	 * @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	 * @return ÎŞ
+	 * @brief ç›‘å¬è·å¾—ç„¦ç‚¹äº‹ä»¶
+	 * @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	 * @return æ— 
 	 */
 	void AttachSetFocus(const EventCallback& callback) { OnEvent[kEventSetFocus] += callback; }
 
 	/**
-	 * @brief ¼àÌıÊ§È¥½¹µãÊÂ¼ş
-	 * @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	 * @return ÎŞ
+	 * @brief ç›‘å¬å¤±å»ç„¦ç‚¹äº‹ä»¶
+	 * @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	 * @return æ— 
 	 */
 	void AttachKillFocus(const EventCallback& callback) { OnEvent[kEventKillFocus] += callback; }
 
 	/**
-	 * @brief ¼àÌıÓÒ¼ü²Ëµ¥ÊÂ¼ş
-	 * @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	 * @return ÎŞ
+	 * @brief ç›‘å¬å³é”®èœå•äº‹ä»¶
+	 * @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	 * @return æ— 
 	 */
 	void AttachMenu(const EventCallback& callback) { OnEvent[kEventMouseMenu] += callback; }
 
 	/**
-	 * @brief ¼àÌı¿Ø¼ş´óĞ¡¸Ä±äÊÂ¼ş
-	 * @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	 * @return ÎŞ
+	 * @brief ç›‘å¬æ§ä»¶å¤§å°æ”¹å˜äº‹ä»¶
+	 * @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	 * @return æ— 
 	 */
 	void AttachResize(const EventCallback& callback) { OnEvent[kEventResize] += callback; }
 
 	/**
-	 * @brief ¼àÌıË«»÷ÊÂ¼ş
-	 * @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	 * @return ÎŞ
+	 * @brief ç›‘å¬åŒå‡»äº‹ä»¶
+	 * @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	 * @return æ— 
 	 */
 	void AttachDoubleClick(const EventCallback& callback) { OnEvent[kEventMouseDoubleClick] += callback; }
 
 	/**
-	* @brief ¼àÌı¿Ø¼ş¹Ø±ÕÇ°×îºóÒ»ÌõÏûÏ¢
-	* @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç›‘å¬æ§ä»¶å…³é—­å‰æœ€åä¸€æ¡æ¶ˆæ¯
+	* @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	* @return æ— 
 	*/
 	void AttachLastEvent(const EventCallback& callback) { OnEvent[kEventLast] += callback; }
 
 	/**
-	* @brief ¼àÌı¿Ø¼şÏÔÊ¾»òÒş²ØÊÂ¼ş
-	* @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	* @return ÎŞ
+	* @brief ç›‘å¬æ§ä»¶æ˜¾ç¤ºæˆ–éšè—äº‹ä»¶
+	* @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	* @return æ— 
 	*/
 	void AttachVisibleChange(const EventCallback& callback) { OnEvent[kEventVisibleChange] += callback; }
 
 	/**
-	 * @brief È¡Ïû¼àÌıÖ¸¶¨ÊÂ¼ş£¬¼û EventType Ã¶¾Ù
-	 * @param[in] callback ÊÂ¼ş´¦ÀíµÄ»Øµ÷º¯Êı£¬Çë²Î¿¼ EventCallback ÉùÃ÷
-	 * @return ÎŞ
+	 * @brief å–æ¶ˆç›‘å¬æŒ‡å®šäº‹ä»¶ï¼Œè§ EventType æšä¸¾
+	 * @param[in] callback äº‹ä»¶å¤„ç†çš„å›è°ƒå‡½æ•°ï¼Œè¯·å‚è€ƒ EventCallback å£°æ˜
+	 * @return æ— 
 	 */
 	void DetachEvent(EventType type);
 
@@ -994,19 +994,19 @@ protected:
 	friend StateColorMap;
 	friend WindowBuilder;
 	void AttachXmlEvent(EventType eventType, const EventCallback& callback) { OnXmlEvent[eventType] += callback; }
-	/// GifÍ¼Æ¬
+	/// Gifå›¾ç‰‡
 	void GifPlay();
 	void StopGifPlay(GifStopType frame = kGifStopCurrent);
 
 	
-	/// ÏûÏ¢´¦ÀíµÄ±£»¤³ÉÔ±º¯Êı£¬²»ÔÊĞíÍâ²¿Ö±½Óµ÷ÓÃ
+	/// æ¶ˆæ¯å¤„ç†çš„ä¿æŠ¤æˆå‘˜å‡½æ•°ï¼Œä¸å…è®¸å¤–éƒ¨ç›´æ¥è°ƒç”¨
 	virtual void HandleMessage(EventArgs& msg);
 	virtual bool MouseEnter(EventArgs& msg);
 	virtual bool MouseLeave(EventArgs& msg);
 	virtual bool ButtonDown(EventArgs& msg);
 	virtual bool ButtonUp(EventArgs& msg);
 
-	/// »æÖÆÏà¹Ø±£»¤³ÉÔ±º¯Êı£¬²»ÔÊĞíÍâ²¿Ö±½Óµ÷ÓÃ
+	/// ç»˜åˆ¶ç›¸å…³ä¿æŠ¤æˆå‘˜å‡½æ•°ï¼Œä¸å…è®¸å¤–éƒ¨ç›´æ¥è°ƒç”¨
 	virtual void PaintShadow(IRenderContext* pRender);
 	virtual void PaintBkColor(IRenderContext* pRender);
 	virtual void PaintBkImage(IRenderContext* pRender);
@@ -1017,9 +1017,9 @@ protected:
   virtual void PaintLoading(IRenderContext* pRender);
 
 	/**
-	* @brief »ñÈ¡Ä³¸öÑÕÉ«¶ÔÓ¦µÄÖµ£¬ÓÅÏÈ»ñÈ¡´°¿ÚÑÕÉ«
-	* @param[in] strName ÑÕÉ«Ãû×Ö
-	* @return DWORD ARGBÑÕÉ«Öµ
+	* @brief è·å–æŸä¸ªé¢œè‰²å¯¹åº”çš„å€¼ï¼Œä¼˜å…ˆè·å–çª—å£é¢œè‰²
+	* @param[in] strName é¢œè‰²åå­—
+	* @return DWORD ARGBé¢œè‰²å€¼
 	*/
 	DWORD GetWindowColor(const std::wstring& strName);
 private:
@@ -1037,8 +1037,8 @@ protected:
 	bool m_bKeyboardEnabled;
 	bool m_bFocused;
 	bool m_bMouseFocused;
-	bool m_bSetPos;		// ·ÀÖ¹SetPosÑ­»·µ÷ÓÃ
-	bool m_bNoFocus;	//¿Ø¼ş²»ĞèÒª½¹µã
+	bool m_bSetPos;		// é˜²æ­¢SetPoså¾ªç¯è°ƒç”¨
+	bool m_bNoFocus;	//æ§ä»¶ä¸éœ€è¦ç„¦ç‚¹
 	bool m_bClip;
 	bool m_bGifPlay;
 	bool m_bReceivePointerMsg;
@@ -1056,7 +1056,7 @@ protected:
 	UiRect m_rcMargin;
 	UiRect m_rcPaint;
 	UiRect m_rcBorderSize;
-	CursorType m_cursorType;	//Ó°Ïì¿Ø¼şµÄÊó±êĞÎ×´
+	CursorType m_cursorType;	//å½±å“æ§ä»¶çš„é¼ æ ‡å½¢çŠ¶
 	ControlStateType m_uButtonState;
 	std::wstring m_sToolTipText;
 	std::wstring m_sToolTipTextId;

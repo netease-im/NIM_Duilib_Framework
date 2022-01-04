@@ -9,7 +9,7 @@ namespace ui
 {
 
 /** @class FontManager
-  * @brief ×Ô¶¨Òå×ÖÌå¹ÜÀíÀà
+  * @brief è‡ªå®šä¹‰å­—ä½“ç®¡ç†ç±»
   * @copyright (c) 2021, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2021/2/26
@@ -19,20 +19,20 @@ class UILIB_API FontManager
 public:
 	static FontManager* GetInstance();
 
-	/** @brief Ìí¼ÓÒ»¸ö×ÖÌåÎÄ¼ş
-	  * @param[in] strFontFile ×ÖÌåÎÄ¼şÃû
-	  * @param[in] strFontName ×ÖÌåÃû
-	  * @return ÎŞ·µ»ØÖµ
+	/** @brief æ·»åŠ ä¸€ä¸ªå­—ä½“æ–‡ä»¶
+	  * @param[in] strFontFile å­—ä½“æ–‡ä»¶å
+	  * @param[in] strFontName å­—ä½“å
+	  * @return æ— è¿”å›å€¼
 	  */
 	void AddFontResource(const std::wstring& strFontFile, const std::wstring& strFontName);
 
-	/** @brief »ñÈ¡ËùÓĞÌí¼ÓµÄ×ÖÌåµÄÃû×Ö
-	  * @return ×ÖÌåÃû×ÖµÄ¼¯ºÏ
+	/** @brief è·å–æ‰€æœ‰æ·»åŠ çš„å­—ä½“çš„åå­—
+	  * @return å­—ä½“åå­—çš„é›†åˆ
 	  */
 	const std::vector<std::wstring>& GetFontNames();
 
-	/** @brief ÇåÀíËùÓĞÌí¼ÓµÄ×ÖÌå
-	  * @return ÎŞ·µ»ØÖµ
+	/** @brief æ¸…ç†æ‰€æœ‰æ·»åŠ çš„å­—ä½“
+	  * @return æ— è¿”å›å€¼
 	  */
 	void Clear();
 

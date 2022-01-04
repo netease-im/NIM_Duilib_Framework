@@ -1,565 +1,565 @@
 # WindowImplBase
 
-| ·½·¨Ãû³Æ | ÓÃÍ¾ |
+| æ–¹æ³•åç§° | ç”¨é€” |
 | :--- | :--- |
-| [InitWindow](#InitWindow) | µ±½ÓÊÕµ½´°¿Ú´´½¨ÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnFinalMessage](#OnFinalMessage) | µ±½ÓÊÕµ½´°¿ÚÏú»ÙÏûÏ¢Ê±±»µ÷ÓÃ |
-| [GetStyle](#GetStyle) | »ñÈ¡´°¿ÚÑùÊ½ |
-| [GetClassStyle](#GetClassStyle) | »ñÈ¡´°¿ÚÀàÑùÊ½ |
-| [GetResourceType](#GetResourceType) | ´ý²¹³ä |
-| [GetResourceID](#GetResourceID) | ´ý²¹³ä |
-| [CreateControl](#CreateControl) | µ±Òª´´½¨µÄ¿Ø¼þ²»ÊÇ±ê×¼µÄ¿Ø¼þÃû³ÆÊ±»áµ÷ÓÃ¸Ãº¯Êý |
-| [MessageHandler](#MessageHandler) | ½ÓÊÕËùÓÐÏûÏ¢ |
-| [OnClose](#OnClose) | µ±ÊÕµ½´°¿Ú¹Ø±ÕÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnDestroy](#OnDestroy) | µ±ÊÕµ½´°¿Ú±»Ïú»ÙÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnNcActivate](#OnNcActivate) | µ±ÊÕµ½»î¶¯»ò·Ç»î¶¯×´Ì¬ÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnNcCalcSize](#OnNcCalcSize) | µ±ÊÕµ½Òª¼ÆËã¿Í»§ÇøÓò´óÐ¡ÏûÏ¢Ê±£¨WM_NCCALCSIZE£©±»µ÷ÓÃ |
-| [OnWindowPosChanging](#OnWindowPosChanging) | ´°¿ÚÎ»ÖÃ»ò Z ´ÎÐò·¢Éú¸Ä±äÊ±±»µ÷ÓÃ |
-| [OnNcPaint](#OnNcPaint) | µ±½ÓÊÕµ½»æÖÆ±êÌâÀ¸ÇøÓòÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnNcLButtonDbClick](#OnNcLButtonDbClick) | µ±½ÓÊÕµ½±êÌâÀ¸ÇøÓòË«»÷ÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnNcHitTest](#OnNcHitTest) | µ±½ÓÊÕµ½ WM_NCHITTEST ÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnGetMinMaxInfo](#OnGetMinMaxInfo) | µ±½ÓÊÕµ½ WM_GETMINMAXINFO ÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnMouseWheel](#OnMouseWheel) | µ±½ÓÊÕµ½Êó±êÐü¸¡ÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnMouseHover](#OnMouseHover) | µ±½ÓÊÕµ½´°¿Ú´óÐ¡¸Ä±äÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnSize](#OnSize) | µ±½ÓÊÕµ½´°¿Ú´óÐ¡¸Ä±äÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnChar](#OnChar) | µ±½ÓÊÕµ½×Ö·û°´¼üÏûÏ¢Ê±£¨WM_CHAR£©±»µ÷ÓÃ |
-| [OnSysCommand](#OnSysCommand) | ½ÓÊÕ´°¿Ú¿ØÖÆÃüÁîÏûÏ¢Ê±£¨WM_SYSCOMMAND£©±»µ÷ÓÃ |
-| [OnKeyDown](#OnKeyDown) | ½ÓÊÕ¼üÅÌ°´¼ü°´ÏÂÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnKillFocus](#OnKillFocus) | ½ÓÊÕÊ§È¥½¹µãÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnSetFocus](#OnSetFocus) | ½ÓÊÕ»ñÈ¡½¹µãÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnLButtonDown](#OnLButtonDown) | ½ÓÊÕµ½Êó±ê×ó¼ü°´ÏÂÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnLButtonUp](#OnLButtonUp) | ½ÓÊÕµ½Êó±ê×ó¼üµ¯ÆðÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnMouseMove](#OnMouseMove) | ½ÓÊÕµ½Êó±êÒÆ¶¯ÏûÏ¢Ê±±»µ÷ÓÃ |
-| [OnDpiChanged](#OnDpiChanged) | µ±½ÓÊÕµ½DPI¸Ä±äÏûÏ¢Ê±±»µ÷ÓÃ£¨Ö»ÓÐÔÚ Startup ÖÐÖ¸¶¨ÆôÓÃ DPI ÊÊÅäºó²Å»á´¥·¢£© |
-| [HandleMessage](#HandleMessage) | ´°¿ÚÏûÏ¢µÄÅÉ·¢º¯Êý |
-| [ActiveWindow](#ActiveWindow) | ¼¤»î´°¿Ú |
-| [SetTaskbarTitle](#SetTaskbarTitle) | ÉèÖÃ´°¿Ú±êÌâ |
-| [ToTopMost](#ToTopMost) | ÖÃ¶¥´°¿Ú |
-| [GetSkinFolder](#GetSkinFolder) | ´´½¨´°¿ÚÊ±±»µ÷ÓÃ£¬ÓÉ×ÓÀàÊµÏÖÓÃÒÔ»ñÈ¡´°¿ÚÆ¤·ôÄ¿Â¼ |
-| [GetSkinFile](#GetSkinFile) | ´´½¨´°¿ÚÊ±±»µ÷ÓÃ£¬ÓÉ×ÓÀàÊµÏÖÓÃÒÔ»ñÈ¡´°¿ÚÆ¤·ô XML ÃèÊöÎÄ¼þ |
-| [GetWindowClassName](#GetWindowClassName) | ´´½¨´°¿ÚÊ±±»µ÷ÓÃ£¬ÓÉ×ÓÀàÊµÏÖÓÃÒÔ»ñÈ¡´°¿ÚÎ¨Ò»µÄÀàÃû³Æ |
-| [OnCreate](#OnCreate) | ÊÕµ½´°¿Ú´´½¨ÏûÏ¢Ê±±»µ÷ÓÃ£¬ÇëÊ¹ÓÃ InitWindow ½Ó¿ÚÀ´ÊµÏÖ×Ô¶¨ÒåÐèÇó |
-| [OnButtonClick](#OnButtonClick) | ´°¿Ú¹¦ÄÜ°´Å¥±»µã»÷Ê±µ÷ÓÃ |
+| [InitWindow](#InitWindow) | å½“æŽ¥æ”¶åˆ°çª—å£åˆ›å»ºæ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnFinalMessage](#OnFinalMessage) | å½“æŽ¥æ”¶åˆ°çª—å£é”€æ¯æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [GetStyle](#GetStyle) | èŽ·å–çª—å£æ ·å¼ |
+| [GetClassStyle](#GetClassStyle) | èŽ·å–çª—å£ç±»æ ·å¼ |
+| [GetResourceType](#GetResourceType) | å¾…è¡¥å…… |
+| [GetResourceID](#GetResourceID) | å¾…è¡¥å…… |
+| [CreateControl](#CreateControl) | å½“è¦åˆ›å»ºçš„æŽ§ä»¶ä¸æ˜¯æ ‡å‡†çš„æŽ§ä»¶åç§°æ—¶ä¼šè°ƒç”¨è¯¥å‡½æ•° |
+| [MessageHandler](#MessageHandler) | æŽ¥æ”¶æ‰€æœ‰æ¶ˆæ¯ |
+| [OnClose](#OnClose) | å½“æ”¶åˆ°çª—å£å…³é—­æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnDestroy](#OnDestroy) | å½“æ”¶åˆ°çª—å£è¢«é”€æ¯æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnNcActivate](#OnNcActivate) | å½“æ”¶åˆ°æ´»åŠ¨æˆ–éžæ´»åŠ¨çŠ¶æ€æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnNcCalcSize](#OnNcCalcSize) | å½“æ”¶åˆ°è¦è®¡ç®—å®¢æˆ·åŒºåŸŸå¤§å°æ¶ˆæ¯æ—¶ï¼ˆWM_NCCALCSIZEï¼‰è¢«è°ƒç”¨ |
+| [OnWindowPosChanging](#OnWindowPosChanging) | çª—å£ä½ç½®æˆ– Z æ¬¡åºå‘ç”Ÿæ”¹å˜æ—¶è¢«è°ƒç”¨ |
+| [OnNcPaint](#OnNcPaint) | å½“æŽ¥æ”¶åˆ°ç»˜åˆ¶æ ‡é¢˜æ åŒºåŸŸæ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnNcLButtonDbClick](#OnNcLButtonDbClick) | å½“æŽ¥æ”¶åˆ°æ ‡é¢˜æ åŒºåŸŸåŒå‡»æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnNcHitTest](#OnNcHitTest) | å½“æŽ¥æ”¶åˆ° WM_NCHITTEST æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnGetMinMaxInfo](#OnGetMinMaxInfo) | å½“æŽ¥æ”¶åˆ° WM_GETMINMAXINFO æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnMouseWheel](#OnMouseWheel) | å½“æŽ¥æ”¶åˆ°é¼ æ ‡æ‚¬æµ®æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnMouseHover](#OnMouseHover) | å½“æŽ¥æ”¶åˆ°çª—å£å¤§å°æ”¹å˜æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnSize](#OnSize) | å½“æŽ¥æ”¶åˆ°çª—å£å¤§å°æ”¹å˜æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnChar](#OnChar) | å½“æŽ¥æ”¶åˆ°å­—ç¬¦æŒ‰é”®æ¶ˆæ¯æ—¶ï¼ˆWM_CHARï¼‰è¢«è°ƒç”¨ |
+| [OnSysCommand](#OnSysCommand) | æŽ¥æ”¶çª—å£æŽ§åˆ¶å‘½ä»¤æ¶ˆæ¯æ—¶ï¼ˆWM_SYSCOMMANDï¼‰è¢«è°ƒç”¨ |
+| [OnKeyDown](#OnKeyDown) | æŽ¥æ”¶é”®ç›˜æŒ‰é”®æŒ‰ä¸‹æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnKillFocus](#OnKillFocus) | æŽ¥æ”¶å¤±åŽ»ç„¦ç‚¹æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnSetFocus](#OnSetFocus) | æŽ¥æ”¶èŽ·å–ç„¦ç‚¹æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnLButtonDown](#OnLButtonDown) | æŽ¥æ”¶åˆ°é¼ æ ‡å·¦é”®æŒ‰ä¸‹æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnLButtonUp](#OnLButtonUp) | æŽ¥æ”¶åˆ°é¼ æ ‡å·¦é”®å¼¹èµ·æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnMouseMove](#OnMouseMove) | æŽ¥æ”¶åˆ°é¼ æ ‡ç§»åŠ¨æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ |
+| [OnDpiChanged](#OnDpiChanged) | å½“æŽ¥æ”¶åˆ°DPIæ”¹å˜æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ï¼ˆåªæœ‰åœ¨ Startup ä¸­æŒ‡å®šå¯ç”¨ DPI é€‚é…åŽæ‰ä¼šè§¦å‘ï¼‰ |
+| [HandleMessage](#HandleMessage) | çª—å£æ¶ˆæ¯çš„æ´¾å‘å‡½æ•° |
+| [ActiveWindow](#ActiveWindow) | æ¿€æ´»çª—å£ |
+| [SetTaskbarTitle](#SetTaskbarTitle) | è®¾ç½®çª—å£æ ‡é¢˜ |
+| [ToTopMost](#ToTopMost) | ç½®é¡¶çª—å£ |
+| [GetSkinFolder](#GetSkinFolder) | åˆ›å»ºçª—å£æ—¶è¢«è°ƒç”¨ï¼Œç”±å­ç±»å®žçŽ°ç”¨ä»¥èŽ·å–çª—å£çš®è‚¤ç›®å½• |
+| [GetSkinFile](#GetSkinFile) | åˆ›å»ºçª—å£æ—¶è¢«è°ƒç”¨ï¼Œç”±å­ç±»å®žçŽ°ç”¨ä»¥èŽ·å–çª—å£çš®è‚¤ XML æè¿°æ–‡ä»¶ |
+| [GetWindowClassName](#GetWindowClassName) | åˆ›å»ºçª—å£æ—¶è¢«è°ƒç”¨ï¼Œç”±å­ç±»å®žçŽ°ç”¨ä»¥èŽ·å–çª—å£å”¯ä¸€çš„ç±»åç§° |
+| [OnCreate](#OnCreate) | æ”¶åˆ°çª—å£åˆ›å»ºæ¶ˆæ¯æ—¶è¢«è°ƒç”¨ï¼Œè¯·ä½¿ç”¨ InitWindow æŽ¥å£æ¥å®žçŽ°è‡ªå®šä¹‰éœ€æ±‚ |
+| [OnButtonClick](#OnButtonClick) | çª—å£åŠŸèƒ½æŒ‰é’®è¢«ç‚¹å‡»æ—¶è°ƒç”¨ |
 
 
 ### InitWindow
 
-µ±½ÓÊÕµ½´°¿Ú´´½¨ÏûÏ¢Ê±±»µ÷ÓÃ
+å½“æŽ¥æ”¶åˆ°çª—å£åˆ›å»ºæ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual void InitWindow()
 ```
 
- - ²Î&emsp;Êý£ºÎÞ  
- - ·µ»ØÖµ£ºÎÞ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›žå€¼ï¼šæ— 
 
 ### OnFinalMessage
 
-µ±½ÓÊÕµ½´°¿ÚÏú»ÙÏûÏ¢Ê±±»µ÷ÓÃ
+å½“æŽ¥æ”¶åˆ°çª—å£é”€æ¯æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual void OnFinalMessage( HWND hWnd )
 ```
 
- - ²Î&emsp;Êý£º  
-    - `hWnd` ÒªÏú»ÙµÄ´°¿Ú¾ä±ú
- - ·µ»ØÖµ£ºÎÞ
+ - å‚&emsp;æ•°ï¼š  
+    - `hWnd` è¦é”€æ¯çš„çª—å£å¥æŸ„
+ - è¿”å›žå€¼ï¼šæ— 
 
 ### GetStyle
 
-»ñÈ¡´°¿ÚÑùÊ½
+èŽ·å–çª—å£æ ·å¼
 
 ```cpp
 virtual LONG GetStyle()
 ```
 
- - ²Î&emsp;Êý£ºÎÞ  
- - ·µ»ØÖµ£º·µ»Ø´°¿ÚÑùÊ½
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›žå€¼ï¼šè¿”å›žçª—å£æ ·å¼
 
 ### GetClassStyle
 
-»ñÈ¡´°¿ÚÀàÑùÊ½
+èŽ·å–çª—å£ç±»æ ·å¼
 
 ```cpp
 virtual UINT GetClassStyle()
 ```
 
- - ²Î&emsp;Êý£ºÎÞ  
- - ·µ»ØÖµ£º·µ»Ø´°¿ÚÀàÑùÊ½
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›žå€¼ï¼šè¿”å›žçª—å£ç±»æ ·å¼
 
 ### GetResourceType
 
-´ý²¹³ä
+å¾…è¡¥å……
 
 ```cpp
 virtual UILIB_RESOURCETYPE GetResourceType()
 ```
 
- - ²Î&emsp;Êý£º  
-    - `´ý²¹³ä
- - ·µ»ØÖµ£º´ý²¹³ä
+ - å‚&emsp;æ•°ï¼š  
+    - `å¾…è¡¥å……
+ - è¿”å›žå€¼ï¼šå¾…è¡¥å……
 
 ### GetResourceID
 
-´ý²¹³ä
+å¾…è¡¥å……
 
 ```cpp
 virtual std::wstring GetResourceID()
 ```
 
- - ²Î&emsp;Êý£º  
-    - `´ý²¹³ä
- - ·µ»ØÖµ£º´ý²¹³ä
+ - å‚&emsp;æ•°ï¼š  
+    - `å¾…è¡¥å……
+ - è¿”å›žå€¼ï¼šå¾…è¡¥å……
 
 ### CreateControl
 
-µ±Òª´´½¨µÄ¿Ø¼þ²»ÊÇ±ê×¼µÄ¿Ø¼þÃû³ÆÊ±»áµ÷ÓÃ¸Ãº¯Êý
+å½“è¦åˆ›å»ºçš„æŽ§ä»¶ä¸æ˜¯æ ‡å‡†çš„æŽ§ä»¶åç§°æ—¶ä¼šè°ƒç”¨è¯¥å‡½æ•°
 
 ```cpp
 virtual Control* CreateControl(const std::wstring& pstrClass)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `pstrClass` ¿Ø¼þÃû³Æ
- - ·µ»ØÖµ£º·µ»ØÒ»¸ö×Ô¶¨Òå¿Ø¼þÖ¸Õë£¬Ò»°ãÇé¿öÏÂ¸ù¾Ý pstrClass ²ÎÊý´´½¨×Ô¶¨ÒåµÄ¿Ø¼þ
+ - å‚&emsp;æ•°ï¼š  
+    - `pstrClass` æŽ§ä»¶åç§°
+ - è¿”å›žå€¼ï¼šè¿”å›žä¸€ä¸ªè‡ªå®šä¹‰æŽ§ä»¶æŒ‡é’ˆï¼Œä¸€èˆ¬æƒ…å†µä¸‹æ ¹æ® pstrClass å‚æ•°åˆ›å»ºè‡ªå®šä¹‰çš„æŽ§ä»¶
 
 ### MessageHandler
 
-½ÓÊÕËùÓÐÏûÏ¢
+æŽ¥æ”¶æ‰€æœ‰æ¶ˆæ¯
 
 ```cpp
 virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-	- `bHandled` ·µ»Ø false Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+	- `bHandled` è¿”å›ž false åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnClose
 
-µ±ÊÕµ½´°¿Ú¹Ø±ÕÏûÏ¢Ê±±»µ÷ÓÃ
+å½“æ”¶åˆ°çª—å£å…³é—­æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø false Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž false åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnDestroy
 
-µ±ÊÕµ½´°¿Ú±»Ïú»ÙÏûÏ¢Ê±±»µ÷ÓÃ
+å½“æ”¶åˆ°çª—å£è¢«é”€æ¯æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnNcActivate
 
-µ±ÊÕµ½»î¶¯»ò·Ç»î¶¯×´Ì¬ÏûÏ¢Ê±±»µ÷ÓÃ
+å½“æ”¶åˆ°æ´»åŠ¨æˆ–éžæ´»åŠ¨çŠ¶æ€æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnNcActivate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnNcCalcSize
 
-µ±ÊÕµ½Òª¼ÆËã¿Í»§ÇøÓò´óÐ¡ÏûÏ¢Ê±£¨WM_NCCALCSIZE£©±»µ÷ÓÃ
+å½“æ”¶åˆ°è¦è®¡ç®—å®¢æˆ·åŒºåŸŸå¤§å°æ¶ˆæ¯æ—¶ï¼ˆWM_NCCALCSIZEï¼‰è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnNcCalcSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnWindowPosChanging
 
-´°¿ÚÎ»ÖÃ»ò Z ´ÎÐò·¢Éú¸Ä±äÊ±±»µ÷ÓÃ
+çª—å£ä½ç½®æˆ– Z æ¬¡åºå‘ç”Ÿæ”¹å˜æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnWindowPosChanging(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnNcPaint
 
-µ±½ÓÊÕµ½»æÖÆ±êÌâÀ¸ÇøÓòÏûÏ¢Ê±±»µ÷ÓÃ
+å½“æŽ¥æ”¶åˆ°ç»˜åˆ¶æ ‡é¢˜æ åŒºåŸŸæ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnNcPaint(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnNcLButtonDbClick
 
-µ±½ÓÊÕµ½±êÌâÀ¸ÇøÓòË«»÷ÏûÏ¢Ê±±»µ÷ÓÃ
+å½“æŽ¥æ”¶åˆ°æ ‡é¢˜æ åŒºåŸŸåŒå‡»æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnNcLButtonDbClick(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnNcHitTest
 
-µ±½ÓÊÕµ½ WM_NCHITTEST ÏûÏ¢Ê±±»µ÷ÓÃ
+å½“æŽ¥æ”¶åˆ° WM_NCHITTEST æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnNcHitTest(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnGetMinMaxInfo
 
-µ±½ÓÊÕµ½ WM_GETMINMAXINFO ÏûÏ¢Ê±±»µ÷ÓÃ
+å½“æŽ¥æ”¶åˆ° WM_GETMINMAXINFO æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnGetMinMaxInfo(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnMouseWheel
 
-µ±½ÓÊÕµ½Êó±êÐü¸¡ÏûÏ¢Ê±±»µ÷ÓÃ
+å½“æŽ¥æ”¶åˆ°é¼ æ ‡æ‚¬æµ®æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnMouseWheel(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnMouseHover
 
-µ±½ÓÊÕµ½´°¿Ú´óÐ¡¸Ä±äÏûÏ¢Ê±±»µ÷ÓÃ
+å½“æŽ¥æ”¶åˆ°çª—å£å¤§å°æ”¹å˜æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnMouseHover(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnSize
 
-µ±½ÓÊÕµ½´°¿Ú´óÐ¡¸Ä±äÏûÏ¢Ê±±»µ÷ÓÃ
+å½“æŽ¥æ”¶åˆ°çª—å£å¤§å°æ”¹å˜æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnSize(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnChar
 
-µ±½ÓÊÕµ½×Ö·û°´¼üÏûÏ¢Ê±£¨WM_CHAR£©±»µ÷ÓÃ
+å½“æŽ¥æ”¶åˆ°å­—ç¬¦æŒ‰é”®æ¶ˆæ¯æ—¶ï¼ˆWM_CHARï¼‰è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnChar(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnSysCommand
 
-½ÓÊÕ´°¿Ú¿ØÖÆÃüÁîÏûÏ¢Ê±£¨WM_SYSCOMMAND£©±»µ÷ÓÃ
+æŽ¥æ”¶çª—å£æŽ§åˆ¶å‘½ä»¤æ¶ˆæ¯æ—¶ï¼ˆWM_SYSCOMMANDï¼‰è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnSysCommand(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnKeyDown
 
-½ÓÊÕ¼üÅÌ°´¼ü°´ÏÂÏûÏ¢Ê±±»µ÷ÓÃ
+æŽ¥æ”¶é”®ç›˜æŒ‰é”®æŒ‰ä¸‹æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnKeyDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnKillFocus
 
-½ÓÊÕÊ§È¥½¹µãÏûÏ¢Ê±±»µ÷ÓÃ
+æŽ¥æ”¶å¤±åŽ»ç„¦ç‚¹æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnKillFocus(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnSetFocus
 
-½ÓÊÕ»ñÈ¡½¹µãÏûÏ¢Ê±±»µ÷ÓÃ
+æŽ¥æ”¶èŽ·å–ç„¦ç‚¹æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnSetFocus(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnLButtonDown
 
-½ÓÊÕµ½Êó±ê×ó¼ü°´ÏÂÏûÏ¢Ê±±»µ÷ÓÃ
+æŽ¥æ”¶åˆ°é¼ æ ‡å·¦é”®æŒ‰ä¸‹æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnLButtonDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnLButtonUp
 
-½ÓÊÕµ½Êó±ê×ó¼üµ¯ÆðÏûÏ¢Ê±±»µ÷ÓÃ
+æŽ¥æ”¶åˆ°é¼ æ ‡å·¦é”®å¼¹èµ·æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnLButtonUp(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnMouseMove
 
-½ÓÊÕµ½Êó±êÒÆ¶¯ÏûÏ¢Ê±±»µ÷ÓÃ
+æŽ¥æ”¶åˆ°é¼ æ ‡ç§»åŠ¨æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
 
 ```cpp
 virtual LRESULT OnMouseMove(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
  
 ### OnDpiChanged
 
-µ±½ÓÊÕµ½DPI¸Ä±äÏûÏ¢Ê±±»µ÷ÓÃ£¨Ö»ÓÐÔÚ Startup ÖÐÖ¸¶¨ÆôÓÃ DPI ÊÊÅäºó²Å»á´¥·¢£©
+å½“æŽ¥æ”¶åˆ°DPIæ”¹å˜æ¶ˆæ¯æ—¶è¢«è°ƒç”¨ï¼ˆåªæœ‰åœ¨ Startup ä¸­æŒ‡å®šå¯ç”¨ DPI é€‚é…åŽæ‰ä¼šè§¦å‘ï¼‰
 
 ```cpp
 virtual LRESULT OnDpiChanged(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### HandleMessage
 
-´°¿ÚÏûÏ¢µÄÅÉ·¢º¯Êý
+çª—å£æ¶ˆæ¯çš„æ´¾å‘å‡½æ•°
 
 ```cpp
 virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ÄÚÈÝ
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ·µ»Ø true Ôò¼ÌÐøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯å†…å®¹
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` è¿”å›ž true åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### ActiveWindow
 
-¼¤»î´°¿Ú
+æ¿€æ´»çª—å£
 
 ```cpp
 virtual void ActiveWindow()
 ```
 
- - ²Î&emsp;Êý£ºÎÞ  
- - ·µ»ØÖµ£ºvoid ÎÞ·µ»ØÖµ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›žå€¼ï¼švoid æ— è¿”å›žå€¼
 
 ### SetTaskbarTitle
 
-ÉèÖÃ´°¿Ú±êÌâ
+è®¾ç½®çª—å£æ ‡é¢˜
 
 ```cpp
 virtual void SetTaskbarTitle(const std::wstring &title)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `title` ´°¿Ú±êÌâ
- - ·µ»ØÖµ£ºvoid ÎÞ·µ»ØÖµ
+ - å‚&emsp;æ•°ï¼š  
+    - `title` çª—å£æ ‡é¢˜
+ - è¿”å›žå€¼ï¼švoid æ— è¿”å›žå€¼
 
 ### ToTopMost
 
-ÖÃ¶¥´°¿Ú
+ç½®é¡¶çª—å£
 
 ```cpp
 void ToTopMost(bool forever)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `forever` ÊÇ·ñÒ»Ö±ÖÃ¶¥
- - ·µ»ØÖµ£ºvoid ÎÞ·µ»ØÖµ
+ - å‚&emsp;æ•°ï¼š  
+    - `forever` æ˜¯å¦ä¸€ç›´ç½®é¡¶
+ - è¿”å›žå€¼ï¼švoid æ— è¿”å›žå€¼
 
 ### GetSkinFolder
 
-´´½¨´°¿ÚÊ±±»µ÷ÓÃ£¬ÓÉ×ÓÀàÊµÏÖÓÃÒÔ»ñÈ¡´°¿ÚÆ¤·ôÄ¿Â¼
+åˆ›å»ºçª—å£æ—¶è¢«è°ƒç”¨ï¼Œç”±å­ç±»å®žçŽ°ç”¨ä»¥èŽ·å–çª—å£çš®è‚¤ç›®å½•
 
 ```cpp
 virtual std::wstring GetSkinFolder()
 ```
 
- - ²Î&emsp;Êý£ºÎÞ  
- - ·µ»ØÖµ£º×ÓÀàÐèÊµÏÖ²¢·µ»Ø´°¿ÚÆ¤·ôÄ¿Â¼
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›žå€¼ï¼šå­ç±»éœ€å®žçŽ°å¹¶è¿”å›žçª—å£çš®è‚¤ç›®å½•
 
 ### GetSkinFile
 
-´´½¨´°¿ÚÊ±±»µ÷ÓÃ£¬ÓÉ×ÓÀàÊµÏÖÓÃÒÔ»ñÈ¡´°¿ÚÆ¤·ô XML ÃèÊöÎÄ¼þ
+åˆ›å»ºçª—å£æ—¶è¢«è°ƒç”¨ï¼Œç”±å­ç±»å®žçŽ°ç”¨ä»¥èŽ·å–çª—å£çš®è‚¤ XML æè¿°æ–‡ä»¶
 
 ```cpp
 virtual std::wstring GetSkinFile()
 ```
 
- - ²Î&emsp;Êý£ºÎÞ  
- - ·µ»ØÖµ£º×ÓÀàÐèÊµÏÖ²¢·µ»Ø´°¿ÚÆ¤·ô XML ÃèÊöÎÄ¼þ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›žå€¼ï¼šå­ç±»éœ€å®žçŽ°å¹¶è¿”å›žçª—å£çš®è‚¤ XML æè¿°æ–‡ä»¶
 
 ### GetWindowClassName
 
-´´½¨´°¿ÚÊ±±»µ÷ÓÃ£¬ÓÉ×ÓÀàÊµÏÖÓÃÒÔ»ñÈ¡´°¿ÚÎ¨Ò»µÄÀàÃû³Æ
+åˆ›å»ºçª—å£æ—¶è¢«è°ƒç”¨ï¼Œç”±å­ç±»å®žçŽ°ç”¨ä»¥èŽ·å–çª—å£å”¯ä¸€çš„ç±»åç§°
 
 ```cpp
 virtual std::wstring GetWindowClassName(void)
 ```
 
- - ²Î&emsp;Êý£ºÎÞ  
- - ·µ»ØÖµ£º×ÓÀàÐèÊµÏÖ²¢·µ»Ø´°¿ÚÎ¨Ò»µÄÀàÃû³Æ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›žå€¼ï¼šå­ç±»éœ€å®žçŽ°å¹¶è¿”å›žçª—å£å”¯ä¸€çš„ç±»åç§°
 
 ### OnCreate
 
-ÊÕµ½´°¿Ú´´½¨ÏûÏ¢Ê±±»µ÷ÓÃ£¬ÇëÊ¹ÓÃ InitWindow ½Ó¿ÚÀ´ÊµÏÖ×Ô¶¨ÒåÐèÇó
+æ”¶åˆ°çª—å£åˆ›å»ºæ¶ˆæ¯æ—¶è¢«è°ƒç”¨ï¼Œè¯·ä½¿ç”¨ InitWindow æŽ¥å£æ¥å®žçŽ°è‡ªå®šä¹‰éœ€æ±‚
 
 ```cpp
 LRESULT OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `uMsg` ÏûÏ¢ID
-    - `wParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `lParam` ÏûÏ¢¸½¼Ó²ÎÊý
-    - `bHandled` ÏûÏ¢ÊÇ·ñÒÑ¾­±»´¦Àí
- - ·µ»ØÖµ£º·µ»ØÏûÏ¢´¦Àí½á¹û
+ - å‚&emsp;æ•°ï¼š  
+    - `uMsg` æ¶ˆæ¯ID
+    - `wParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `lParam` æ¶ˆæ¯é™„åŠ å‚æ•°
+    - `bHandled` æ¶ˆæ¯æ˜¯å¦å·²ç»è¢«å¤„ç†
+ - è¿”å›žå€¼ï¼šè¿”å›žæ¶ˆæ¯å¤„ç†ç»“æžœ
 
 ### OnButtonClick
 
-´°¿Ú¹¦ÄÜ°´Å¥±»µã»÷Ê±µ÷ÓÃ
+çª—å£åŠŸèƒ½æŒ‰é’®è¢«ç‚¹å‡»æ—¶è°ƒç”¨
 
 ```cpp
 bool OnButtonClick(EventArgs* param)
 ```
 
- - ²Î&emsp;Êý£º  
-    - `param` Ð¯´øµÄ²ÎÊý
- - ·µ»ØÖµ£ºÊ¼ÖÕ·µ»Ø true
+ - å‚&emsp;æ•°ï¼š  
+    - `param` æºå¸¦çš„å‚æ•°
+ - è¿”å›žå€¼ï¼šå§‹ç»ˆè¿”å›ž true
 

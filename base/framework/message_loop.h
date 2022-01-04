@@ -1,4 +1,4 @@
-﻿// This file trys to implement a cross flatform message loop,
+// This file trys to implement a cross flatform message loop,
 // the mechanism of which is from the Google Chrome project.
 
 #ifndef BASE_FRAMEWORK_MESSAGE_LOOP_H_

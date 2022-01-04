@@ -1,4 +1,4 @@
-﻿#include "taskbar_manager.h"
+#include "taskbar_manager.h"
 #include "dwm_util.h"
 #include <shobjidl.h>
 

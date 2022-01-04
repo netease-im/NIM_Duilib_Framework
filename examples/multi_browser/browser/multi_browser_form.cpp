@@ -10,14 +10,14 @@ using namespace nim_comp;
 
 namespace
 {
-	// ×¢²áÕâ¸öÏûÏ¢£¬ÊÕµ½Õâ¸öÏûÏ¢ºó±íÊ¾´°¿Ú¶ÔÓ¦µÄÈÎÎñÀ¸°´Å¥±»ÏµÍ³´´½¨£¬ÕâÊ±ºò³õÊ¼»¯ITaskbarList4½Ó¿Ú
+	// æ³¨å†Œè¿™ä¸ªæ¶ˆæ¯ï¼Œæ”¶åˆ°è¿™ä¸ªæ¶ˆæ¯åè¡¨ç¤ºçª—å£å¯¹åº”çš„ä»»åŠ¡æ æŒ‰é’®è¢«ç³»ç»Ÿåˆ›å»ºï¼Œè¿™æ—¶å€™åˆå§‹åŒ–ITaskbarList4æ¥å£
 	UINT WM_TASKBARBUTTONCREATED = ::RegisterWindowMessage(TEXT("TaskbarButtonCreated"));
 
-	// ´°¿ÚÊÕµ½WM_CLOSEÏûÏ¢µÄÔ­Òò
+	// çª—å£æ”¶åˆ°WM_CLOSEæ¶ˆæ¯çš„åŸå› 
 	enum CloseReason
 	{
-		kDefaultClose = 0,		// ÔÚÈÎÎñÀ¸ÓÒ»÷¹Ø±Õ´°¿Ú£¬°´Alt+F4µÈ³£¹æÔ­Òò
-		kBrowserBoxClose = 1	// ¹Ø±ÕÁË×îºóÒ»¸öä¯ÀÀÆ÷ºĞ×Óµ¼ÖÂ´°¿Ú¹Ø±Õ
+		kDefaultClose = 0,		// åœ¨ä»»åŠ¡æ å³å‡»å…³é—­çª—å£ï¼ŒæŒ‰Alt+F4ç­‰å¸¸è§„åŸå› 
+		kBrowserBoxClose = 1	// å…³é—­äº†æœ€åä¸€ä¸ªæµè§ˆå™¨ç›’å­å¯¼è‡´çª—å£å…³é—­
 	};
 }
 
@@ -98,7 +98,7 @@ LRESULT MultiBrowserForm::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	}
 	else if (uMsg == WM_KEYDOWN)
 	{
-		// ´¦ÀíCtrl+Tab¿ì½İ¼ü
+		// å¤„ç†Ctrl+Tabå¿«æ·é”®
 		if (wParam == VK_TAB && ::GetKeyState(VK_CONTROL) < 0)
 		{
 			int next = tab_list_->GetCurSel();
@@ -106,7 +106,7 @@ LRESULT MultiBrowserForm::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			tab_list_->SelectItem(next);
 			return 0;
 		}
-		// ´¦ÀíESC¿ì½İ¼ü
+		// å¤„ç†ESCå¿«æ·é”®
 		else if (wParam == VK_ESCAPE)
 		{
 			BOOL bHandled = FALSE;
@@ -122,7 +122,7 @@ LRESULT MultiBrowserForm::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		taskbar_manager_.Init(this);
 
-		// ÒòÎª´°¿Ú¸Õ´´½¨Ê±£¬ä¯ÀÀÆ÷ºĞ×ÓÒÑ¾­´´½¨µ«ÊÇÄÇÊ±»¹Ã»ÓĞÊÕµ½WM_TASKBARBUTTONCREATEDÏûÏ¢£¬µ¼ÖÂRegisterTabº¯ÊıÃ»ÓĞ±»µ÷ÓÃ£¬ËùÒÔÊÕµ½ÏûÏ¢ºóÖØĞÂ±éÀúÒ»ÏÂÃ»ÓĞ±»×¢²áµÄTab
+		// å› ä¸ºçª—å£åˆšåˆ›å»ºæ—¶ï¼Œæµè§ˆå™¨ç›’å­å·²ç»åˆ›å»ºä½†æ˜¯é‚£æ—¶è¿˜æ²¡æœ‰æ”¶åˆ°WM_TASKBARBUTTONCREATEDæ¶ˆæ¯ï¼Œå¯¼è‡´RegisterTabå‡½æ•°æ²¡æœ‰è¢«è°ƒç”¨ï¼Œæ‰€ä»¥æ”¶åˆ°æ¶ˆæ¯åé‡æ–°éå†ä¸€ä¸‹æ²¡æœ‰è¢«æ³¨å†Œçš„Tab
 		for (int i = 0; i < borwser_box_tab_->GetCount(); i++)
 		{
 			Control *box_item = borwser_box_tab_->GetItemAt(i);
@@ -151,23 +151,23 @@ LRESULT MultiBrowserForm::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL&
 {
 	CloseReason closeReason = (CloseReason)wParam;
 
-	// Èç¹ûÊÇÒòÎªËùÓĞä¯ÀÀÆ÷ºĞ×Ó¶¼¹Ø±ÕÁËµ¼ÖÂ´°¿Ú¹Ø±Õ£¬ÔòÕı³£·µ»Ø
+	// å¦‚æœæ˜¯å› ä¸ºæ‰€æœ‰æµè§ˆå™¨ç›’å­éƒ½å…³é—­äº†å¯¼è‡´çª—å£å…³é—­ï¼Œåˆ™æ­£å¸¸è¿”å›
 	if (kBrowserBoxClose == closeReason)
 	{
 		return __super::OnClose(uMsg, wParam, lParam, bHandled);
 	}
-	// Èç¹ûÊÇÆäËûÔ­Òò´¥·¢ÁËWM_CLOSE
+	// å¦‚æœæ˜¯å…¶ä»–åŸå› è§¦å‘äº†WM_CLOSE
 	else
 	{
 		int browser_count = GetBoxCount();
 		if (browser_count > 0 && NULL != active_browser_box_)
 		{
-			// Èç¹ûÖ»ÓĞÒ»¸öä¯ÀÀÆ÷ºĞ×Ó£¬¾ÍÖ±½Ó¹Ø±Õ
+			// å¦‚æœåªæœ‰ä¸€ä¸ªæµè§ˆå™¨ç›’å­ï¼Œå°±ç›´æ¥å…³é—­
 			if (1 == browser_count)
 			{
 				CloseBox(active_browser_box_->GetId());
 			}
-			// Èç¹û°üº¬¶à¸öä¯ÀÀÆ÷ºĞ×Ó£¬¾ÍÑ¯ÎÊÓÃ»§
+			// å¦‚æœåŒ…å«å¤šä¸ªæµè§ˆå™¨ç›’å­ï¼Œå°±è¯¢é—®ç”¨æˆ·
 			else
 			{
 				MsgboxCallback cb = ToWeakCallback([this](MsgBoxRet ret)
@@ -198,7 +198,7 @@ LRESULT MultiBrowserForm::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL&
 
 void MultiBrowserForm::OnFinalMessage(HWND hWnd)
 {
-	// Ê¹ÓÃtab_list_À´ÅĞ¶Ïä¯ÀÀÆ÷ºĞ×Ó×ÜÊı£¬browser_box_tab_»ñÈ¡µÄ×ÜÊı²»×¼È·
+	// ä½¿ç”¨tab_list_æ¥åˆ¤æ–­æµè§ˆå™¨ç›’å­æ€»æ•°ï¼Œbrowser_box_tab_è·å–çš„æ€»æ•°ä¸å‡†ç¡®
 	int browser_box_count = GetBoxCount();
 	for (int i = 0; i < browser_box_count; i++)
 	{
@@ -283,14 +283,14 @@ bool MultiBrowserForm::OnReturn(ui::EventArgs* arg)
 	if (name == L"edit_url")
 	{
 #if 0
- 		// ÔÚµ±Ç°Ò³ÃæÌø×ª
+ 		// åœ¨å½“å‰é¡µé¢è·³è½¬
  		auto cef_control = active_browser_box_->GetCefControl();
  		if (cef_control)
  			cef_control->LoadURL(edit_url_->GetText());
 #endif
 		nbase::TimeDelta time_delta = nbase::TimeDelta::FromMicroseconds(nbase::Time::Now().ToInternalValue());
 		std::string timeStamp = nbase::StringPrintf("%I64u", time_delta.ToMilliseconds());
-		// ĞÂ½¨±êÇ©Ò³
+		// æ–°å»ºæ ‡ç­¾é¡µ
 		MultiBrowserManager::GetInstance()->CreateBorwserBox(this, timeStamp, edit_url_->GetText());
 	}
 
@@ -332,8 +332,8 @@ BrowserBox* MultiBrowserForm::CreateBox(const std::string &browser_id, std::wstr
 	if (GetBoxCount() <= 1)
 		active_browser_box_ = browser_box;
 
-	// ÇĞ»»µ½ĞÂµÄä¯ÀÀÆ÷ºĞ×Ó
-	// Èç¹ûtab_item´¦ÓÚÒş²Ø×´Ì¬£¬ÔòÎŞ·¨Ë³Àû´¥·¢Ñ¡ÔñÊÂ¼ş£¬ËùÒÔÕâÀïÖ±½ÓÇĞ»»µ½Ä¿±êä¯ÀÀÆ÷ºĞ×Ó
+	// åˆ‡æ¢åˆ°æ–°çš„æµè§ˆå™¨ç›’å­
+	// å¦‚æœtab_itemå¤„äºéšè—çŠ¶æ€ï¼Œåˆ™æ— æ³•é¡ºåˆ©è§¦å‘é€‰æ‹©äº‹ä»¶ï¼Œæ‰€ä»¥è¿™é‡Œç›´æ¥åˆ‡æ¢åˆ°ç›®æ ‡æµè§ˆå™¨ç›’å­
 	tab_item->Selected(true, false);
 	ChangeToBox(id);
 
@@ -347,14 +347,14 @@ void MultiBrowserForm::CloseBox(const std::string &browser_id)
 
 	std::wstring id = nbase::UTF8ToUTF16(browser_id);
 
-	// ´Ó×ó²à»á»°ÁĞ±íÏîÒÆ³ı¶ÔÓ¦item
+	// ä»å·¦ä¾§ä¼šè¯åˆ—è¡¨é¡¹ç§»é™¤å¯¹åº”item
 	BrowserTabItem *tab_item = FindTabItem(id);
 	if (NULL != tab_item)
 	{
 		tab_list_->Remove(tab_item);
 	}
 
-	// ÔÚä¯ÀÀÆ÷ÁĞ±íÖĞÕÒµ½ä¯ÀÀÆ÷ºĞ×Ó²¢ÇÒÒÆ³ıºĞ×Ó
+	// åœ¨æµè§ˆå™¨åˆ—è¡¨ä¸­æ‰¾åˆ°æµè§ˆå™¨ç›’å­å¹¶ä¸”ç§»é™¤ç›’å­
 	BrowserBox *browser_box = FindBox(id);
 	ASSERT(NULL != browser_box);
 	if (NULL != browser_box)
@@ -363,16 +363,16 @@ void MultiBrowserForm::CloseBox(const std::string &browser_id)
 		if (taskbar_item)
 			taskbar_manager_.UnregisterTab(*taskbar_item);
 		browser_box->UninitBrowserBox();
-		// Èç¹ûä¯ÀÀÆ÷ºĞ×ÓµÄÊıÁ¿´óÓÚ1¾ÍÁ¢ÂíÒÆ³ıºĞ×Ó£¬·ñÔò²»ÒÆ³ı
-		// Èç¹û×îºóÒ»¸öä¯ÀÀÆ÷ºĞ×ÓÔÚÕâÀïÁ¢ÂíÒÆ³ı£¬ÔÚ´°¿Ú¹Ø±ÕÊ±½çÃæ»áÒòÎªÃ»ÓĞ¿Ø¼ş¶ø±ä³ÉºÚÉ«
-		// ´°¿Ú¹Ø±ÕÊ±£¬»á×Ô¶¯µÄÒÆ³ıÕâ¸öä¯ÀÀÆ÷ºĞ×Ó
+		// å¦‚æœæµè§ˆå™¨ç›’å­çš„æ•°é‡å¤§äº1å°±ç«‹é©¬ç§»é™¤ç›’å­ï¼Œå¦åˆ™ä¸ç§»é™¤
+		// å¦‚æœæœ€åä¸€ä¸ªæµè§ˆå™¨ç›’å­åœ¨è¿™é‡Œç«‹é©¬ç§»é™¤ï¼Œåœ¨çª—å£å…³é—­æ—¶ç•Œé¢ä¼šå› ä¸ºæ²¡æœ‰æ§ä»¶è€Œå˜æˆé»‘è‰²
+		// çª—å£å…³é—­æ—¶ï¼Œä¼šè‡ªåŠ¨çš„ç§»é™¤è¿™ä¸ªæµè§ˆå™¨ç›’å­
 		if (borwser_box_tab_->GetCount() > 1)
 			borwser_box_tab_->Remove(browser_box);
 		else
 			active_browser_box_ = NULL;
 	}
 
-	// µ±ä¯ÀÀÆ÷ºĞ×ÓÇå¿ÕÊ±£¬¹Ø±Õä¯ÀÀÆ÷´°¿Ú
+	// å½“æµè§ˆå™¨ç›’å­æ¸…ç©ºæ—¶ï¼Œå…³é—­æµè§ˆå™¨çª—å£
 	if (GetBoxCount() == 0)
 	{
 		this->Close(kBrowserBoxClose);
@@ -406,8 +406,8 @@ bool MultiBrowserForm::AttachBox(BrowserBox *browser_box)
 	Button *btn_item_close = (Button*)tab_item->FindSubControl(L"tab_item_close");
 	btn_item_close->AttachClick(nbase::Bind(&MultiBrowserForm::OnTabItemClose, this, std::placeholders::_1, browser_box->GetId()));
 
-	// µ±ÁíÒ»¸ö´°Ìå´´½¨µÄbrowser_boxä¯ÀÀÆ÷ºĞ×Ó¿Ø¼şÌí¼Óµ½ÁíÒ»¸ö´°ÌåÄÚµÄÈİÆ÷¿Ø¼şÊ±
-	// Addº¯Êı»áÖØĞÂµÄĞŞ¸Äbrowser_boxÄÚËùÓĞ×Ó¿Ø¼şµÄm_pWindowÎªĞÂµÄ´°ÌåÖ¸Õë
+	// å½“å¦ä¸€ä¸ªçª—ä½“åˆ›å»ºçš„browser_boxæµè§ˆå™¨ç›’å­æ§ä»¶æ·»åŠ åˆ°å¦ä¸€ä¸ªçª—ä½“å†…çš„å®¹å™¨æ§ä»¶æ—¶
+	// Addå‡½æ•°ä¼šé‡æ–°çš„ä¿®æ”¹browser_boxå†…æ‰€æœ‰å­æ§ä»¶çš„m_pWindowä¸ºæ–°çš„çª—ä½“æŒ‡é’ˆ
 	borwser_box_tab_->Add(browser_box);
 	auto taskbar_item = browser_box->GetTaskbarItem();
 	if (taskbar_item)
@@ -416,8 +416,8 @@ bool MultiBrowserForm::AttachBox(BrowserBox *browser_box)
 	if (GetBoxCount() <= 1)
 		active_browser_box_ = browser_box;
 
-	// ÇĞ»»µ½ĞÂµÄä¯ÀÀÆ÷ºĞ×Ó
-	// Èç¹ûtab_item´¦ÓÚÒş²Ø×´Ì¬£¬ÔòÎŞ·¨Ë³Àû´¥·¢Ñ¡ÔñÊÂ¼ş£¬ËùÒÔÕâÀïÖ±½ÓÇĞ»»µ½Ä¿±êä¯ÀÀÆ÷ºĞ×Ó
+	// åˆ‡æ¢åˆ°æ–°çš„æµè§ˆå™¨ç›’å­
+	// å¦‚æœtab_itemå¤„äºéšè—çŠ¶æ€ï¼Œåˆ™æ— æ³•é¡ºåˆ©è§¦å‘é€‰æ‹©äº‹ä»¶ï¼Œæ‰€ä»¥è¿™é‡Œç›´æ¥åˆ‡æ¢åˆ°ç›®æ ‡æµè§ˆå™¨ç›’å­
 	tab_item->Selected(true, false);
 	ChangeToBox(id);
 
@@ -431,7 +431,7 @@ bool MultiBrowserForm::DetachBox(BrowserBox *browser_box)
 
 	std::wstring id = nbase::UTF8ToUTF16(browser_box->GetId());
 
-	// ´Ó¶¥²¿±êÇ©Ò³ÒÆ³ı¶ÔÓ¦item
+	// ä»é¡¶éƒ¨æ ‡ç­¾é¡µç§»é™¤å¯¹åº”item
 	BrowserTabItem *tab_item = FindTabItem(id);
 	if (NULL == tab_item)
 		return false;
@@ -441,8 +441,8 @@ bool MultiBrowserForm::DetachBox(BrowserBox *browser_box)
 	auto taskbar_item = browser_box->GetTaskbarItem();
 	if (taskbar_item)
 		taskbar_manager_.UnregisterTab(*taskbar_item);
-	// ÔÚÓÒ²àTabä¯ÀÀÆ÷ºĞ×ÓÁĞ±íÖĞÕÒµ½ä¯ÀÀÆ÷ºĞ×Ó²¢ÇÒÒÆ³ıºĞ×Ó
-	// ÔÚÕâÀï²»ÄÜdelete browser_box
+	// åœ¨å³ä¾§Tabæµè§ˆå™¨ç›’å­åˆ—è¡¨ä¸­æ‰¾åˆ°æµè§ˆå™¨ç›’å­å¹¶ä¸”ç§»é™¤ç›’å­
+	// åœ¨è¿™é‡Œä¸èƒ½delete browser_box
 	bool auto_destroy = borwser_box_tab_->IsAutoDestroy();
 	borwser_box_tab_->SetAutoDestroyChild(false);
 	if (!borwser_box_tab_->Remove(browser_box))
@@ -452,7 +452,7 @@ bool MultiBrowserForm::DetachBox(BrowserBox *browser_box)
 	}
 	borwser_box_tab_->SetAutoDestroyChild(auto_destroy);
 
-	// µ±ä¯ÀÀÆ÷ºĞ×ÓÇå¿ÕÊ±£¬¹Ø±Õä¯ÀÀÆ÷´°¿Ú
+	// å½“æµè§ˆå™¨ç›’å­æ¸…ç©ºæ—¶ï¼Œå…³é—­æµè§ˆå™¨çª—å£
 	if (GetBoxCount() == 0)
 	{
 		this->Close(kBrowserBoxClose);
@@ -473,13 +473,13 @@ void MultiBrowserForm::SetActiveBox(const std::string &browser_id)
 
 	ActiveWindow();
 
-	// ´Ó´°¿Ú×ó²à»á»°ÁĞ±íÕÒµ½Òª¼¤»îµÄä¯ÀÀÆ÷ºĞ×ÓÏî
+	// ä»çª—å£å·¦ä¾§ä¼šè¯åˆ—è¡¨æ‰¾åˆ°è¦æ¿€æ´»çš„æµè§ˆå™¨ç›’å­é¡¹
 	std::wstring id = nbase::UTF8ToUTF16(browser_id);
 	BrowserTabItem *tab_item = FindTabItem(id);
 	if (NULL == tab_item)
 		return;
 
-	// Èç¹ûtab_item´¦ÓÚÒş²Ø×´Ì¬£¬ÔòÎŞ·¨Ë³Àû´¥·¢Ñ¡ÔñÊÂ¼ş£¬ËùÒÔÕâÀïÖ±½ÓÇĞ»»µ½Ä¿±êä¯ÀÀÆ÷ºĞ×Ó
+	// å¦‚æœtab_itemå¤„äºéšè—çŠ¶æ€ï¼Œåˆ™æ— æ³•é¡ºåˆ©è§¦å‘é€‰æ‹©äº‹ä»¶ï¼Œæ‰€ä»¥è¿™é‡Œç›´æ¥åˆ‡æ¢åˆ°ç›®æ ‡æµè§ˆå™¨ç›’å­
 	tab_item->Selected(true, false);
 	ChangeToBox(id);
 }
@@ -498,18 +498,18 @@ bool MultiBrowserForm::IsActiveBox(const std::wstring &browser_id)
 
 int MultiBrowserForm::GetBoxCount() const
 {
-	return tab_list_->GetCount() - 1; // ¼õÈ¥ÓÒ±ßÄÇ¸ö¼ÓºÅµÄÊıÁ¿
+	return tab_list_->GetCount() - 1; // å‡å»å³è¾¹é‚£ä¸ªåŠ å·çš„æ•°é‡
 }
 
 void MultiBrowserForm::OnBeforeDragBoxCallback(const std::wstring &browser_id)
 {
-	// Èç¹ûµ±Ç°±»ÍÏ×§µÄä¯ÀÀÆ÷ºĞ×ÓËùÊôµÄä¯ÀÀÆ÷´°¿ÚÖ»ÓĞÒ»¸öä¯ÀÀÆ÷ºĞ×Ó£¬ÔòÔÚÍÏ×§Ê±Òş²Øä¯ÀÀÆ÷´°¿Ú
+	// å¦‚æœå½“å‰è¢«æ‹–æ‹½çš„æµè§ˆå™¨ç›’å­æ‰€å±çš„æµè§ˆå™¨çª—å£åªæœ‰ä¸€ä¸ªæµè§ˆå™¨ç›’å­ï¼Œåˆ™åœ¨æ‹–æ‹½æ—¶éšè—æµè§ˆå™¨çª—å£
 	int box_count = this->GetBoxCount();
 	if (1 == box_count)
 	{
 		this->ShowWindow(false);
 	}
-	// ·ñÔòÒş²Ø±»ÍÏ×§µÄä¯ÀÀÆ÷ºĞ×ÓºÍ±êÇ©
+	// å¦åˆ™éšè—è¢«æ‹–æ‹½çš„æµè§ˆå™¨ç›’å­å’Œæ ‡ç­¾
 	else
 	{
 		BrowserBox *browser_box = FindBox(browser_id);
@@ -520,7 +520,7 @@ void MultiBrowserForm::OnBeforeDragBoxCallback(const std::wstring &browser_id)
 		if (NULL != tab_item)
 			tab_item->SetVisible(false);
 
-		// ÕÒµ½ĞÂµÄ±»ÏÔÊ¾µÄä¯ÀÀÆ÷ºĞ×Ó
+		// æ‰¾åˆ°æ–°çš„è¢«æ˜¾ç¤ºçš„æµè§ˆå™¨ç›’å­
 		int index = tab_item->GetIndex();
 		if (index > 0)
 			index--;
@@ -544,7 +544,7 @@ void MultiBrowserForm::OnAfterDragBoxCallback(bool drop_succeed)
 	if (drop_succeed)
 	{
 		int box_count = this->GetBoxCount();
-		// Èç¹ûµ±Ç°±»ÍÏ×§µÄä¯ÀÀÆ÷ºĞ×ÓËùÊôµÄä¯ÀÀÆ÷´°¿ÚÖ»ÓĞÒ»¸öä¯ÀÀÆ÷ºĞ×Ó£¬²¢ÇÒÍÏ×§µ½ĞÂµÄä¯ÀÀÆ÷´°¿ÚÀï£¬Õâ¸öä¯ÀÀÆ÷´°¿Ú¾Í»á¹Ø±Õ
+		// å¦‚æœå½“å‰è¢«æ‹–æ‹½çš„æµè§ˆå™¨ç›’å­æ‰€å±çš„æµè§ˆå™¨çª—å£åªæœ‰ä¸€ä¸ªæµè§ˆå™¨ç›’å­ï¼Œå¹¶ä¸”æ‹–æ‹½åˆ°æ–°çš„æµè§ˆå™¨çª—å£é‡Œï¼Œè¿™ä¸ªæµè§ˆå™¨çª—å£å°±ä¼šå…³é—­
 		if (1 == box_count)
 		{
 
@@ -557,14 +557,14 @@ void MultiBrowserForm::OnAfterDragBoxCallback(bool drop_succeed)
 	else
 	{
 		int box_count = this->GetBoxCount();
-		// Èç¹ûµ±Ç°±»ÍÏ×§µÄä¯ÀÀÆ÷ºĞ×ÓËùÊôµÄä¯ÀÀÆ÷´°¿ÚÖ»ÓĞÒ»¸öä¯ÀÀÆ÷ºĞ×Ó£¬²¢ÇÒÃ»ÓĞÍÏ×§µ½ĞÂµÄä¯ÀÀÆ÷´°¿ÚÀï
-		// ¾ÍÏÔÊ¾ä¯ÀÀÆ÷´°¿Ú
+		// å¦‚æœå½“å‰è¢«æ‹–æ‹½çš„æµè§ˆå™¨ç›’å­æ‰€å±çš„æµè§ˆå™¨çª—å£åªæœ‰ä¸€ä¸ªæµè§ˆå™¨ç›’å­ï¼Œå¹¶ä¸”æ²¡æœ‰æ‹–æ‹½åˆ°æ–°çš„æµè§ˆå™¨çª—å£é‡Œ
+		// å°±æ˜¾ç¤ºæµè§ˆå™¨çª—å£
 		if (1 == box_count)
 		{
 			this->ShowWindow(true);
 		}
-		// Èç¹ûµ±Ç°±»ÍÏ×§µÄä¯ÀÀÆ÷ºĞ×ÓËùÊôµÄä¯ÀÀÆ÷´°¿ÚÓĞ¶à¸öä¯ÀÀÆ÷ºĞ×Ó£¬²¢ÇÒÃ»ÓĞÍÏ×§µ½ĞÂµÄä¯ÀÀÆ÷´°¿ÚÀï
-		// ¾ÍÏÔÊ¾Ö®Ç°±»Òş²ØµÄä¯ÀÀÆ÷ºĞ×ÓºÍ±êÇ©
+		// å¦‚æœå½“å‰è¢«æ‹–æ‹½çš„æµè§ˆå™¨ç›’å­æ‰€å±çš„æµè§ˆå™¨çª—å£æœ‰å¤šä¸ªæµè§ˆå™¨ç›’å­ï¼Œå¹¶ä¸”æ²¡æœ‰æ‹–æ‹½åˆ°æ–°çš„æµè§ˆå™¨çª—å£é‡Œ
+		// å°±æ˜¾ç¤ºä¹‹å‰è¢«éšè—çš„æµè§ˆå™¨ç›’å­å’Œæ ‡ç­¾
 		else
 		{
 			BrowserBox *browser_box = FindBox(draging_browser_id_);
@@ -592,7 +592,7 @@ bool MultiBrowserForm::OnTabItemSelected(ui::EventArgs* param)
 
 		if (name == L"tab_list")
 		{
-			// Èç¹ûµ¥»÷ÁË¶¥²¿µÄ±êÇ©£¬ÔòÕÒµ½ÏÂ·½TabÀï¶ÔÓ¦µÄä¯ÀÀÆ÷ºĞ×Ó²¢Ñ¡ÖĞ
+			// å¦‚æœå•å‡»äº†é¡¶éƒ¨çš„æ ‡ç­¾ï¼Œåˆ™æ‰¾åˆ°ä¸‹æ–¹Tabé‡Œå¯¹åº”çš„æµè§ˆå™¨ç›’å­å¹¶é€‰ä¸­
 			Control *select_item = tab_list_->GetItemAt(tab_list_->GetCurSel());
 			ASSERT(NULL != select_item);
 			if (NULL == select_item)
@@ -685,7 +685,7 @@ bool MultiBrowserForm::ChangeToBox(const std::wstring &browser_id)
 	box_item->SetFocus();
 	active_browser_box_ = box_item;
 	edit_url_->SetText(active_browser_box_->GetCefControl()->GetURL());
-	// ¸ù¾İµ±Ç°¼¤»îµÄä¯ÀÀÆ÷ºĞ×Ó£¬¸üĞÂÈÎÎñÀ¸µÄÍ¼±êºÍ±êÌâ
+	// æ ¹æ®å½“å‰æ¿€æ´»çš„æµè§ˆå™¨ç›’å­ï¼Œæ›´æ–°ä»»åŠ¡æ çš„å›¾æ ‡å’Œæ ‡é¢˜
 
 	return true;
 }

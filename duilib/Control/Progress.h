@@ -11,7 +11,7 @@ class UILIB_API Progress : public LabelTemplate<Control>
 public:
 	Progress();
 
-	/// ÖØĞ´¸¸Àà·½·¨£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ£¬Çë²Î¿¼¸¸ÀàÉùÃ÷
+	/// é‡å†™çˆ¶ç±»æ–¹æ³•ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½ï¼Œè¯·å‚è€ƒçˆ¶ç±»å£°æ˜
 	virtual std::wstring GetType() const override;
 	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
@@ -19,165 +19,165 @@ public:
 	virtual void ClearImageCache() override;
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÊÇË®Æ½½ø¶ÈÌõ
-	 * @return ·µ»Ø true ÊÇË®Æ½½ø¶ÈÌõ£¬false Îª´¹Ö±¹ö¶¯Ìõ
+	 * @brief åˆ¤æ–­æ˜¯å¦æ˜¯æ°´å¹³è¿›åº¦æ¡
+	 * @return è¿”å› true æ˜¯æ°´å¹³è¿›åº¦æ¡ï¼Œfalse ä¸ºå‚ç›´æ»šåŠ¨æ¡
 	 */
 	bool IsHorizontal();
 
 	/**
-	 * @brief ÉèÖÃË®Æ½»ò´¹Ö±¹ö¶¯Ìõ
-	 * @param[in] bHorizontal Îª true Ê±ÉèÖÃÎªË®Æ½¹ö¶¯Ìõ£¬false Ê±ÉèÖÃÎª´¹Ö±¹ö¶¯Ìõ£¬Ä¬ÈÏÎª true
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ°´å¹³æˆ–å‚ç›´æ»šåŠ¨æ¡
+	 * @param[in] bHorizontal ä¸º true æ—¶è®¾ç½®ä¸ºæ°´å¹³æ»šåŠ¨æ¡ï¼Œfalse æ—¶è®¾ç½®ä¸ºå‚ç›´æ»šåŠ¨æ¡ï¼Œé»˜è®¤ä¸º true
+	 * @return æ— 
 	 */
 	void SetHorizontal(bool bHorizontal = true);
 
 	/**
-	 * @brief »ñÈ¡½ø¶ÈÌõ×îĞ¡Öµ
-	 * @return ·µ»Ø½ø¶ÈÌõ×îĞ¡Öµ
+	 * @brief è·å–è¿›åº¦æ¡æœ€å°å€¼
+	 * @return è¿”å›è¿›åº¦æ¡æœ€å°å€¼
 	 */
 	int GetMinValue() const;
 
 	/**
-	 * @brief ÉèÖÃ½ø¶ÈÌõ×îĞ¡Öµ
-	 * @param[in] nMin ×îĞ¡ÖµÊıÖµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®è¿›åº¦æ¡æœ€å°å€¼
+	 * @param[in] nMin æœ€å°å€¼æ•°å€¼
+	 * @return æ— 
 	 */
 	void SetMinValue(int nMin);
 
 	/**
-	 * @brief »ñÈ¡½ø¶ÈÌõ×î´óÖµ
-	 * @return ·µ»Ø½ø¶ÈÌõ×î´óÖµ
+	 * @brief è·å–è¿›åº¦æ¡æœ€å¤§å€¼
+	 * @return è¿”å›è¿›åº¦æ¡æœ€å¤§å€¼
 	 */
 	int GetMaxValue() const;
 
 	/**
-	 * @brief ÉèÖÃ½ø¶ÈÌõ×î´óÖµ
-	 * @param[in] nMax ÒªÉèÖÃµÄ×î´óÖµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®è¿›åº¦æ¡æœ€å¤§å€¼
+	 * @param[in] nMax è¦è®¾ç½®çš„æœ€å¤§å€¼
+	 * @return æ— 
 	 */
 	void SetMaxValue(int nMax);
 
 	/**
-	 * @brief »ñÈ¡µ±Ç°½ø¶È°Ù·Ö±È
-	 * @return ·µ»Øµ±Ç°½ø¶È°Ù·Ö±È
+	 * @brief è·å–å½“å‰è¿›åº¦ç™¾åˆ†æ¯”
+	 * @return è¿”å›å½“å‰è¿›åº¦ç™¾åˆ†æ¯”
 	 */
 	double GetValue() const;
 
 	/**
-	 * @brief ÉèÖÃµ±Ç°½ø¶È°Ù·Ö±È
-	 * @param[in] nValue ÒªÉèÖÃµÄ°Ù·Ö±ÈÊıÖµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®å½“å‰è¿›åº¦ç™¾åˆ†æ¯”
+	 * @param[in] nValue è¦è®¾ç½®çš„ç™¾åˆ†æ¯”æ•°å€¼
+	 * @return æ— 
 	 */
 	void SetValue(double nValue);
 
 	/**
-	 * @brief ½ø¶ÈÌõÇ°¾°Í¼Æ¬ÊÇ·ñËõ·ÅÏÔÊ¾
-	 * @return ·µ»Ø true ÎªËõ·ÅÏÔÊ¾£¬false Îª²»Ëõ·ÅÏÔÊ¾
+	 * @brief è¿›åº¦æ¡å‰æ™¯å›¾ç‰‡æ˜¯å¦ç¼©æ”¾æ˜¾ç¤º
+	 * @return è¿”å› true ä¸ºç¼©æ”¾æ˜¾ç¤ºï¼Œfalse ä¸ºä¸ç¼©æ”¾æ˜¾ç¤º
 	 */
 	bool IsStretchForeImage();
 
 	/**
-	 * @brief ÉèÖÃ½ø¶ÈÌõÇ°¾°Í¼Æ¬ÊÇ·ñËõ·ÅÏÔÊ¾
-	 * @param[in] bStretchForeImage true ÎªËõ·ÅÏÔÊ¾£¬false Îª²»Ëõ·ÅÏÔÊ¾
-	 * @return ÎŞ
+	 * @brief è®¾ç½®è¿›åº¦æ¡å‰æ™¯å›¾ç‰‡æ˜¯å¦ç¼©æ”¾æ˜¾ç¤º
+	 * @param[in] bStretchForeImage true ä¸ºç¼©æ”¾æ˜¾ç¤ºï¼Œfalse ä¸ºä¸ç¼©æ”¾æ˜¾ç¤º
+	 * @return æ— 
 	 */
 	void SetStretchForeImage(bool bStretchForeImage = true);
 
 	/**
-	 * @brief »ñÈ¡¹ö¶¯Ìõ±³¾°Í¼Æ¬
-	 * @return ·µ»Ø±³¾°Í¼Æ¬Î»ÖÃ
+	 * @brief è·å–æ»šåŠ¨æ¡èƒŒæ™¯å›¾ç‰‡
+	 * @return è¿”å›èƒŒæ™¯å›¾ç‰‡ä½ç½®
 	 */
 	std::wstring GetProgressImage() const;
 
 	/**
-	 * @brief ÉèÖÃ½ø¶ÈÌõ±³¾°Í¼Æ¬
-	 * @param[in] strImage Í¼Æ¬µØÖ·
-	 * @return ÎŞ
+	 * @brief è®¾ç½®è¿›åº¦æ¡èƒŒæ™¯å›¾ç‰‡
+	 * @param[in] strImage å›¾ç‰‡åœ°å€
+	 * @return æ— 
 	 */
 	void SetProgressImage(const std::wstring& strImage);
 
 	/**
-	 * @brief »ñÈ¡½ø¶ÈÌõ±³¾°ÑÕÉ«
-	 * @return ·µ»Ø±³¾°ÑÕÉ«µÄ×Ö·û´®Öµ£¬¶ÔÓ¦ global.xml ÖĞµÄÖ¸¶¨É«Öµ
+	 * @brief è·å–è¿›åº¦æ¡èƒŒæ™¯é¢œè‰²
+	 * @return è¿”å›èƒŒæ™¯é¢œè‰²çš„å­—ç¬¦ä¸²å€¼ï¼Œå¯¹åº” global.xml ä¸­çš„æŒ‡å®šè‰²å€¼
 	 */
 	std::wstring GetProgressColor() const;
 
 	/**
-	 * @brief ÉèÖÃ½ø¶ÈÌõ±³¾°ÑÕÉ«
-	 * @param[in] ÒªÉèÖÃµÄ±³¾°ÑÕÉ«×Ö·û´®£¬¸Ã×Ö·û´®±ØĞëÔÚ global.xml ÖĞ´æÔÚ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®è¿›åº¦æ¡èƒŒæ™¯é¢œè‰²
+	 * @param[in] è¦è®¾ç½®çš„èƒŒæ™¯é¢œè‰²å­—ç¬¦ä¸²ï¼Œè¯¥å­—ç¬¦ä¸²å¿…é¡»åœ¨ global.xml ä¸­å­˜åœ¨
+	 * @return æ— 
 	 */
 	void SetProgressColor(const std::wstring& strProgressColor);
 
 	/**
-	 * @brief »ñÈ¡½ø¶ÈÌõÎ»ÖÃ
-	 * @return ·µ»Ø½ø¶ÈÌõµ±Ç°Î»ÖÃ
+	 * @brief è·å–è¿›åº¦æ¡ä½ç½®
+	 * @return è¿”å›è¿›åº¦æ¡å½“å‰ä½ç½®
 	 */
 	virtual UiRect GetProgressPos();
 
 	/**
-	 * @brief ²¥·ÅMarquee
-	 * @return ÎŞ
+	 * @brief æ’­æ”¾Marquee
+	 * @return æ— 
 	 */
 	virtual void Play();
 
 	/**
-	 * @brief »æÖÆMarquee
-	 * @return ÎŞ
+	 * @brief ç»˜åˆ¶Marquee
+	 * @return æ— 
 	 */
 	void PaintMarquee(IRenderContext* pRender);
 
 	/**
-	 * @brief ÊÇ·ñÊÇMarquee
-	 * @return ÎŞ
+	 * @brief æ˜¯å¦æ˜¯Marquee
+	 * @return æ— 
 	 */
 	bool IsMarquee();
 
 	/**
-	 * @brief ÉèÖÃMarquee
-	 * @return ÎŞ
+	 * @brief è®¾ç½®Marquee
+	 * @return æ— 
 	 */
 	void SetMarquee(bool bMarquee);
 
 	/**
-	 * @brief »ñÈ¡Marquee¿í¶È
-	 * @return ÎŞ
+	 * @brief è·å–Marqueeå®½åº¦
+	 * @return æ— 
 	 */
 	int GetMarqueeWidth();
 
 	/**
-	 * @brief ÉèÖÃMarquee¿í¶È
-	 * @return ÎŞ
+	 * @brief è®¾ç½®Marqueeå®½åº¦
+	 * @return æ— 
 	 */
 	void SetMarqueeWidth(int nMarqueeWidth);
 
 	/**
-	 * @brief »ñÈ¡Marquee²½³¤
-	 * @return ÎŞ
+	 * @brief è·å–Marqueeæ­¥é•¿
+	 * @return æ— 
 	 */
 	int GetMarqueeStep();
 
 	/**
-	 * @brief ÉèÖÃMarquee²½³¤
-	 * @return ÎŞ
+	 * @brief è®¾ç½®Marqueeæ­¥é•¿
+	 * @return æ— 
 	 */
 	void SetMarqueeStep(int nMarqueeStep);
 
 	/**
-	 * @brief »ñÈ¡Marquee³ÖĞøÊ±¼ä
-	 * @return ÎŞ
+	 * @brief è·å–MarqueeæŒç»­æ—¶é—´
+	 * @return æ— 
 	 */
 	int GetMarqueeElapsed();
 
 	/**
-	 * @brief ÉèÖÃMarquee³ÖĞøÊ±¼ä
-	 * @return ÎŞ
+	 * @brief è®¾ç½®MarqueeæŒç»­æ—¶é—´
+	 * @return æ— 
 	 */
 	void SetMarqueeElapsed(int nMarqueeElapsed);
 
   /**
-  * @brief ÉèÖÃÊÇ·ñ·´ÏòÌî³ä½ø¶ÈÌõ
-  * @return ÎŞ
+  * @brief è®¾ç½®æ˜¯å¦åå‘å¡«å……è¿›åº¦æ¡
+  * @return æ— 
   */
   void SetReverse(bool bReverse);
 

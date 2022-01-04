@@ -5,38 +5,38 @@
 
 namespace ui {
 
-// ¿Ø¼şÒõÓ°ÊôĞÔÀà
-// ´ıÓÅ»¯£º
-// 1.ÊµÏÖÕæÕı¸ßË¹Ä£ºı
-//   ²Î¿¼×ÊÁÏ£º
+// æ§ä»¶é˜´å½±å±æ€§ç±»
+// å¾…ä¼˜åŒ–ï¼š
+// 1.å®ç°çœŸæ­£é«˜æ–¯æ¨¡ç³Š
+//   å‚è€ƒèµ„æ–™ï¼š
 //           https://www.cnblogs.com/mfbzr/p/14154156.html
 //           https://stackoverflow.com/questions/42314939/diagonal-shadow-with-gdi
 //           https://blog.csdn.net/aoshilang2249/article/details/45153375
-//   Ëã·¨:
+//   ç®—æ³•:
 //           http://blog.ivank.net/fastest-gaussian-blur.html
 //           https://software.intel.com/content/www/us/en/develop/articles/iir-gaussian-blur-filter-implementation-using-intel-advanced-vector-extensions.html
 //           https://software.intel.com/content/dam/develop/public/us/en/downloads/gaussian_blur_0311.cpp
-// 2.ÒõÓ°Ó¦ÌáÇ°»æÖÆºÃ²¢½øĞĞ»º´æ£¬¶ø²»ÊÇÊµÊ±»æÖÆ
+// 2.é˜´å½±åº”æå‰ç»˜åˆ¶å¥½å¹¶è¿›è¡Œç¼“å­˜ï¼Œè€Œä¸æ˜¯å®æ—¶ç»˜åˆ¶
 class UILIB_API BoxShadow {
 public:
 	BoxShadow();
 	~BoxShadow();
 
 	/**
-	 * @brief ÉèÖÃÒõÓ°ÊôĞÔ
-	 * @param[in] strBoxShadow ÒªÉèÖÃµÄÊôĞÔ,Èç "color='black' offset='1,1' blursize='2'"
-	 * @return ÎŞ
+	 * @brief è®¾ç½®é˜´å½±å±æ€§
+	 * @param[in] strBoxShadow è¦è®¾ç½®çš„å±æ€§,å¦‚ "color='black' offset='1,1' blursize='2'"
+	 * @return æ— 
 	 */
 	void SetBoxShadowString(const std::wstring& strBoxShadow);
 
 	/**
-	 * @brief ÊÇ·ñÓĞÒõÓ°
-	 * @return ÊÇ»ò·ñ
+	 * @brief æ˜¯å¦æœ‰é˜´å½±
+	 * @return æ˜¯æˆ–å¦
 	 */
 	bool HasShadow() const;
 
-	// ÒõÓ°ÊôĞÔ
-	// ÔİÊ±½ö½öÖ§³Ö color offset blurSize
+	// é˜´å½±å±æ€§
+	// æš‚æ—¶ä»…ä»…æ”¯æŒ color offset blurSize
 	// https://codersblock.com/blog/creating-glow-effects-with-css/
 
 	std::wstring m_strColor;

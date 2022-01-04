@@ -1,4 +1,4 @@
-﻿// Network utility function
+// Network utility function
 
 #ifndef BASE_NETWORK_NETWORK_UTIL_H_
 #define BASE_NETWORK_NETWORK_UTIL_H_

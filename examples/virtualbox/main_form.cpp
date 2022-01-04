@@ -42,7 +42,7 @@ void MainForm::InitWindow()
 
 	m_pRoot->AttachBubbledEvent(ui::kEventClick, nbase::Bind(&MainForm::OnClicked, this, std::placeholders::_1));
 
-	// ÉèÖÃÌá¹©Õß
+	// è®¾ç½®æä¾›è€…
 	m_DataProvider = new Provider;
 	m_pTileList->SetDataProvider(m_DataProvider);
 

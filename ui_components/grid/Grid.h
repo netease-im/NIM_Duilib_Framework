@@ -11,7 +11,7 @@ namespace ui
 	public:
 		Grid();
 		virtual ~Grid();
-		virtual GridBody* CreateGridBody();		//¼Ì³ĞÀàĞèÒªÖØÔØÕâ¸ö½Ó¿Ú ²¢ÊµÏÖ×Ô¶¨ÒåGridBody
+		virtual GridBody* CreateGridBody();		//ç»§æ‰¿ç±»éœ€è¦é‡è½½è¿™ä¸ªæ¥å£ å¹¶å®ç°è‡ªå®šä¹‰GridBody
 		virtual void Init() override;
 	public:
 
@@ -20,57 +20,57 @@ namespace ui
 	public: //pass to gridbody
 
 		/**
-		* @brief Ä¬ÈÏĞĞ¸ß
+		* @brief é»˜è®¤è¡Œé«˜
 		*/
 		int GetDefaultRowHeight();
 		void SetDefaultRowHeight(int height);
 
 		/**
-		* @brief Ä¬ÈÏÁĞ¿í
+		* @brief é»˜è®¤åˆ—å®½
 		*/
 		int GetDefaultColWidth();
 		void SetDefaultColWidth(int width);
 
 		/**
-		* @brief ×ÜÁĞÊı
+		* @brief æ€»åˆ—æ•°
 		*/
 		int GetColCount() const;
 		void SetColCount(int count);
 
 		/**
-		* @brief ×ÜĞĞÊı
+		* @brief æ€»è¡Œæ•°
 		*/
 		int GetRowCount() const;
 		void SetRowCount(int count);
 
 		/**
-		* @brief ¹Ì¶¨ÁĞÊı
+		* @brief å›ºå®šåˆ—æ•°
 		*/
 		int GetFixedColCount() const;
 		void SetFixedColCount(int fixed);
 
 		/**
-		* @brief ¹Ì¶¨ĞĞÊı
+		* @brief å›ºå®šè¡Œæ•°
 		*/
 		int GetFixedRowCount() const;
 		void SetFixedRowCount(int fixed);
 
 		/**
-		* @brief ÁĞ¿í
-		* @param[in] col_index: µÚ¼¸ÁĞ,base on 0
+		* @brief åˆ—å®½
+		* @param[in] col_index: ç¬¬å‡ åˆ—,base on 0
 		*/
 		int GetColumnWidth(int col_index) const;
 		void SetColumnWidth(int col_index, int width);
 
 		/**
-		* @brief ĞĞ¸ß;
-		* @param[in] row_index: µÚ¼¸ĞĞ,base on 0;
+		* @brief è¡Œé«˜;
+		* @param[in] row_index: ç¬¬å‡ è¡Œ,base on 0;
 		*/
 		int GetRowHeight(int row_index) const;
 		void SetRowHeight(int row_index, int height);
 
 		/**
-		* @brief ±íÍ·¸ß¶È
+		* @brief è¡¨å¤´é«˜åº¦
 		*/
 		int GetHeaderHeight() const;
 		void SetHeaderHeight(int height);
@@ -79,113 +79,113 @@ namespace ui
 		int GetFixedRowHeight() const;
 
 		/**
-		* @brief ¹Ì¶¨ĞĞÁĞµÄ±³¾°É«
+		* @brief å›ºå®šè¡Œåˆ—çš„èƒŒæ™¯è‰²
 		*/
 		std::wstring GetFixedBkColor() const;
 		void SetFixedBkColor(std::wstring color);
 
 		/**
-		* @brief Ñ¡ÖĞµ¥Ôª¸ñµÄÇ°¾°É«
+		* @brief é€‰ä¸­å•å…ƒæ ¼çš„å‰æ™¯è‰²
 		*/
 		std::wstring GetSelForeColor() const;
 		void SetSelForeColor(std::wstring color);
 
 		/**
-		* @brief Íø¸ñÏßÑÕÉ«
+		* @brief ç½‘æ ¼çº¿é¢œè‰²
 		*/
 		std::wstring GetGridLineColor() const;
 		void SetGridLineColor(std::wstring color);
 
 		/**
-		* @brief ÉèÖÃ/»ñÈ¡µ¥Ôª¸ñÎÄ±¾ÄÚÈİ;
-		* @param[in] row_index: µÚ¼¸ĞĞ,base on 0;
-		* @param[in] col_index: µÚ¼¸ÁĞ,base on 0;
+		* @brief è®¾ç½®/è·å–å•å…ƒæ ¼æ–‡æœ¬å†…å®¹;
+		* @param[in] row_index: ç¬¬å‡ è¡Œ,base on 0;
+		* @param[in] col_index: ç¬¬å‡ åˆ—,base on 0;
 		*/
 		std::wstring GetGridItemText(int row_index, int col_index);
 		bool SetGridItemText(std::wstring text, int row_index, int col_index);
 
 		/**
-		* @brief ÅĞ¶Ïµ¥Ôª¸ñÊÇ·ñfixed;
-		* @param[in] row_index: µÚ¼¸ĞĞ,base on 0;
-		* @param[in] col_index: µÚ¼¸ÁĞ,base on 0;
+		* @brief åˆ¤æ–­å•å…ƒæ ¼æ˜¯å¦fixed;
+		* @param[in] row_index: ç¬¬å‡ è¡Œ,base on 0;
+		* @param[in] col_index: ç¬¬å‡ åˆ—,base on 0;
 		*/
 		bool IsGridItemFixed(int row_index, int col_index);
 
 		/**
-		* @brief ²åÈëÁĞÔÚ±í¸ñ×îºó;
-		* @param[in] text: ±íÍ·ÎÄ±¾;
-		* @param[in] width: ÁĞ¿í¶È;
-		* @return ·µ»ØĞÂ¼ÓµÄ±íÍ·µ¥Ôª¸ñ¶ÔÏóÖ¸Õë,null±íÊ¾Î´³É¹¦;
+		* @brief æ’å…¥åˆ—åœ¨è¡¨æ ¼æœ€å;
+		* @param[in] text: è¡¨å¤´æ–‡æœ¬;
+		* @param[in] width: åˆ—å®½åº¦;
+		* @return è¿”å›æ–°åŠ çš„è¡¨å¤´å•å…ƒæ ¼å¯¹è±¡æŒ‡é’ˆ,nullè¡¨ç¤ºæœªæˆåŠŸ;
 		*/
 		GridHeaderItem* AddCol(std::wstring text, int width = 80);
 
 		/**
-		* @brief ²åÈëĞĞÔÚ±í¸ñ×îºó;
-		* @return ·µ»Ø trueÎª³É¹¦£¬false ÎªÊ§°Ü
+		* @brief æ’å…¥è¡Œåœ¨è¡¨æ ¼æœ€å;
+		* @return è¿”å› trueä¸ºæˆåŠŸï¼Œfalse ä¸ºå¤±è´¥
 		*/
 		bool AddRow();
 
 		/**
-		* @brief »ñÈ¡±íÍ·ĞÅÏ¢
-		* @return ·µ»Ø±íÍ·ĞÅÏ¢,null±íÊ¾Î´ÕÒµ½;
+		* @brief è·å–è¡¨å¤´ä¿¡æ¯
+		* @return è¿”å›è¡¨å¤´ä¿¡æ¯,nullè¡¨ç¤ºæœªæ‰¾åˆ°;
 		*/
 		GridHeader *GetHeader();
 
 		/**
-		* @brief »ñÈ¡µ¥Ôª¸ñ¶ÔÏó
-		* @param[in] row_index: µÚ¼¸ĞĞ,base on 0;
-		* @param[in] col_index: µÚ¼¸ÁĞ,base on 0;
-		* @return ·µ»Øµ¥Ôª¸ñ¶ÔÏóÖ¸Õë,null±íÊ¾Î´ÕÒµ½;
+		* @brief è·å–å•å…ƒæ ¼å¯¹è±¡
+		* @param[in] row_index: ç¬¬å‡ è¡Œ,base on 0;
+		* @param[in] col_index: ç¬¬å‡ åˆ—,base on 0;
+		* @return è¿”å›å•å…ƒæ ¼å¯¹è±¡æŒ‡é’ˆ,nullè¡¨ç¤ºæœªæ‰¾åˆ°;
 		*/
 		GridItem *GetGridItem(int row_index, int col_index);
 
 		/**
-		* @brief ÒÆ³ıÒ»ĞĞ
-		* @param[in] row_index: µÚ¼¸ĞĞ,base on 0;
-		* @return ·µ»Ø trueÎª³É¹¦£¬false ÎªÊ§°Ü
+		* @brief ç§»é™¤ä¸€è¡Œ
+		* @param[in] row_index: ç¬¬å‡ è¡Œ,base on 0;
+		* @return è¿”å› trueä¸ºæˆåŠŸï¼Œfalse ä¸ºå¤±è´¥
 		*/
 		bool RemoveRow(int row_index);
 
 		/**
-		* @brief ÒÆ³ıÒ»ÁĞ
-		* @param[in] col_index: µÚ¼¸ÁĞ,base on 0;
-		* @return ·µ»Ø trueÎª³É¹¦£¬false ÎªÊ§°Ü
+		* @brief ç§»é™¤ä¸€åˆ—
+		* @param[in] col_index: ç¬¬å‡ åˆ—,base on 0;
+		* @return è¿”å› trueä¸ºæˆåŠŸï¼Œfalse ä¸ºå¤±è´¥
 		*/
 		bool RemoveCol(int col_index);
 
 		/**
-		* @brief Çå³ıÕû±í
-		* @param[in] include_header: true±íÊ¾Çå³ıheader, false±íÊ¾±£Áôheader;
+		* @brief æ¸…é™¤æ•´è¡¨
+		* @param[in] include_header: trueè¡¨ç¤ºæ¸…é™¤header, falseè¡¨ç¤ºä¿ç•™header;
 		*/
 		void Clear(bool include_header);
 
 		/**
-		* @brief ±í¸ñÄÚÈİ±ä¸üºóµÄ»Øµ÷×¢²á
+		* @brief è¡¨æ ¼å†…å®¹å˜æ›´åçš„å›è°ƒæ³¨å†Œ
 		* @param[in] callback
 		*/
 		void AttachTextChange(const EventCallback& callback);
 
 		/**
-		* @brief µ¼Èëexcel
-		* @param[in] file:	excelÂ·¾¢;
-		* @param[in] sheet_num:	µ¼ÈëµÄexcelµÄµÚ¼¸Ò³, base on 0;
-		* @param[in] touch_header: true±íÊ¾excelµÄµÚÒ»ĞĞ×öÎªGridµÄHeaderÄÚÈİ
-		* @return ·µ»Ø trueÎª³É¹¦£¬false ÎªÊ§°Ü
+		* @brief å¯¼å…¥excel
+		* @param[in] file:	excelè·¯åŠ²;
+		* @param[in] sheet_num:	å¯¼å…¥çš„excelçš„ç¬¬å‡ é¡µ, base on 0;
+		* @param[in] touch_header: trueè¡¨ç¤ºexcelçš„ç¬¬ä¸€è¡Œåšä¸ºGridçš„Headerå†…å®¹
+		* @return è¿”å› trueä¸ºæˆåŠŸï¼Œfalse ä¸ºå¤±è´¥
 		*/
 		bool LoadExcel(std::wstring file, int sheet_num, bool touch_header);
 
 		/**
-		* @brief ÁĞ¸ù¾İÄÚÈİ×Ô¶¯µ÷Õû¿í¶È
-		* @param[in] col_index:	Òªµ÷ÕûµÄÁĞĞòºÅ, base on 0;
-		* @param[in] min_width:	×îĞ¡¿í¶È;
-		* @param[in] max_width: ×î´ó¿í¶È, -1´ú±íÃ»ÓĞÏŞÖÆ
-		* @return ·µ»Ø trueÎª³É¹¦£¬false ÎªÊ§°Ü
+		* @brief åˆ—æ ¹æ®å†…å®¹è‡ªåŠ¨è°ƒæ•´å®½åº¦
+		* @param[in] col_index:	è¦è°ƒæ•´çš„åˆ—åºå·, base on 0;
+		* @param[in] min_width:	æœ€å°å®½åº¦;
+		* @param[in] max_width: æœ€å¤§å®½åº¦, -1ä»£è¡¨æ²¡æœ‰é™åˆ¶
+		* @return è¿”å› trueä¸ºæˆåŠŸï¼Œfalse ä¸ºå¤±è´¥
 		*/
 		bool AutoFixColWidth(int col_index, int min_width = 30, int max_width = -1);
 
 		/**
-		* @brief »ñÈ¡Ñ¡ÔñĞÅÏ¢
-		* @return ·µ»Ø GridSelRange
+		* @brief è·å–é€‰æ‹©ä¿¡æ¯
+		* @return è¿”å› GridSelRange
 		*/
 		const GridSelRange& GetSelRange() const;
 	protected:
@@ -197,13 +197,13 @@ namespace ui
 	protected:
 		GridBody *m_pBody = nullptr;
 
-		/* ÊÇ·ñÏÔÊ¾Íø¸ñ */
+		/* æ˜¯å¦æ˜¾ç¤ºç½‘æ ¼ */
 		bool m_bPaintGridLine = true;
 
-		/* ÊÇ·ñ¿É±à¼­±í¸ñ */
+		/* æ˜¯å¦å¯ç¼–è¾‘è¡¨æ ¼ */
 		bool m_bEditable = true;
 	private:
-		/* ·ÀÖ¹virtual void Init()ÖØ¸´µ÷ÓÃ */
+		/* é˜²æ­¢virtual void Init()é‡å¤è°ƒç”¨ */
 		bool m_bIsInit = false;		
 	};
 

@@ -411,7 +411,7 @@ ListContainerElement::ListContainerElement() :
 	m_pOwner(nullptr)
 {
 	m_uTextStyle = DT_LEFT | DT_VCENTER | DT_END_ELLIPSIS | DT_NOCLIP | DT_SINGLELINE;
-	// ÁĞ±íÏî²»´¦ÀíWM_POINTERÏûÏ¢£¬¿ÉÒÔË³ÀûÊÕµ½ÓÒ¼ü²Ëµ¥ÏûÏ¢
+	// åˆ—è¡¨é¡¹ä¸å¤„ç†WM_POINTERæ¶ˆæ¯ï¼Œå¯ä»¥é¡ºåˆ©æ”¶åˆ°å³é”®èœå•æ¶ˆæ¯
 	SetReceivePointerMsg(false);
 }
 

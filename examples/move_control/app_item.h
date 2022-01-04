@@ -5,7 +5,7 @@
 #define EACH_LINE  6
 
 #include <string>
-//appµÄ¾ßÌåĞÅÏ¢£¬ÕâÀï¼Ù¶¨ÓĞid£¬name£¬_icon,_isFrequent×ÔĞĞÍØÕ¹
+//appçš„å…·ä½“ä¿¡æ¯ï¼Œè¿™é‡Œå‡å®šæœ‰idï¼Œnameï¼Œ_icon,_isFrequentè‡ªè¡Œæ‹“å±•
 struct AppItem
 {
 	std::string _id;
@@ -15,26 +15,26 @@ struct AppItem
 };
 
 
-//App UIÀà
+//App UIç±»
 class AppItemUi : public ui::VBox
 {
 public:
 	static AppItemUi* Create(const AppItem& item);
 	virtual void DoInit();
 	void SetAppdata(const AppItem& item,bool refresh);
-	void FixPos(int step,int index=-1);   //Ç°½ø/ºóÍË¶àÉÙ²½  Ä¿Ç°Ó¦¸ÃÓĞ-1 0 1    
+	void FixPos(int step,int index=-1);   //å‰è¿›/åé€€å¤šå°‘æ­¥  ç›®å‰åº”è¯¥æœ‰-1 0 1    
 	inline int getIndex() const { return index_; }
 	inline const AppItem& getAppData() const { return app_data_; }
 private:
 	AppItem app_data_;
-	int index_ = 0;    //µÚ¼¸¸ö
+	int index_ = 0;    //ç¬¬å‡ ä¸ª
 	ui::Control* app_icon_ = nullptr;
 	ui::Label* app_name_ = nullptr;
 };
 
 
-//AppWindow ÍÏ¶¯ÏÔÊ¾´°¿ÚÀà
-//×îºÃ°ëÍ¸Ã÷
+//AppWindow æ‹–åŠ¨æ˜¾ç¤ºçª—å£ç±»
+//æœ€å¥½åŠé€æ˜
 class AppWindow : public ui::WindowImplBase
 {
 public:
@@ -47,30 +47,30 @@ public:
 		ret->SetBeforeCreate(Item, pt);
 		ret->Create(hParent, L"", WS_POPUP, WS_EX_TOOLWINDOW);
 		pThis_ = ret;
-		//ĞèÒª¸Ä±äÏÂpos,ÑÓºóµ½initWindows
+		//éœ€è¦æ”¹å˜ä¸‹pos,å»¶ååˆ°initWindows
 		return ret;
 	}
 
 	/**
-	* Ò»ÏÂÈı¸ö½Ó¿ÚÊÇ±ØĞëÒª¸²Ğ´µÄ½Ó¿Ú£¬¸¸Àà»áµ÷ÓÃÕâÈı¸ö½Ó¿ÚÀ´¹¹½¨´°¿Ú
-	* GetSkinFolder		½Ó¿ÚÉèÖÃÄãÒª»æÖÆµÄ´°¿ÚÆ¤·ô×ÊÔ´Â·¾¶
-	* GetSkinFile			½Ó¿ÚÉèÖÃÄãÒª»æÖÆµÄ´°¿ÚµÄ xml ÃèÊöÎÄ¼ş
-	* GetWindowClassName	½Ó¿ÚÉèÖÃ´°¿ÚÎ¨Ò»µÄÀàÃû³Æ
+	* ä¸€ä¸‹ä¸‰ä¸ªæ¥å£æ˜¯å¿…é¡»è¦è¦†å†™çš„æ¥å£ï¼Œçˆ¶ç±»ä¼šè°ƒç”¨è¿™ä¸‰ä¸ªæ¥å£æ¥æ„å»ºçª—å£
+	* GetSkinFolder		æ¥å£è®¾ç½®ä½ è¦ç»˜åˆ¶çš„çª—å£çš®è‚¤èµ„æºè·¯å¾„
+	* GetSkinFile			æ¥å£è®¾ç½®ä½ è¦ç»˜åˆ¶çš„çª—å£çš„ xml æè¿°æ–‡ä»¶
+	* GetWindowClassName	æ¥å£è®¾ç½®çª—å£å”¯ä¸€çš„ç±»åç§°
 	*/
 	virtual std::wstring GetSkinFolder() override;
 	virtual std::wstring GetSkinFile() override;
 	virtual std::wstring GetWindowClassName() const override;
 
 	/**
-	* ÊÕµ½ WM_CREATE ÏûÏ¢Ê±¸Ãº¯Êı»á±»µ÷ÓÃ£¬Í¨³£×öÒ»Ğ©¿Ø¼ş³õÊ¼»¯µÄ²Ù×÷
+	* æ”¶åˆ° WM_CREATE æ¶ˆæ¯æ—¶è¯¥å‡½æ•°ä¼šè¢«è°ƒç”¨ï¼Œé€šå¸¸åšä¸€äº›æ§ä»¶åˆå§‹åŒ–çš„æ“ä½œ
 	*/
 	virtual void InitWindow() override;
 	/**
-	* ÊÕµ½ WM_CLOSE ÏûÏ¢Ê±¸Ãº¯Êı»á±»µ÷ÓÃ
+	* æ”¶åˆ° WM_CLOSE æ¶ˆæ¯æ—¶è¯¥å‡½æ•°ä¼šè¢«è°ƒç”¨
 	*/
 	virtual LRESULT OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
-	//ÆäËûµÄ¹¦ÄÜº¯Êı
+	//å…¶ä»–çš„åŠŸèƒ½å‡½æ•°
 	void SetBeforeCreate(const AppItem& Item, POINT pt){ item_ = Item; pt_ = pt; }
 	void AdjustPos();
 	void InstallHook();

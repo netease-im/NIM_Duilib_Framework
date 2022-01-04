@@ -13,74 +13,74 @@ public:
 	Shadow();
 
 	/**
-	 * @brief ÉèÖÃÊÇ·ñ¸½¼ÓÒõÓ°Ğ§¹û
-	 * @param[in] bShadowAttached ÉèÖÃ true ÎªÊÇ£¬false Îª·ñ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ˜¯å¦é™„åŠ é˜´å½±æ•ˆæœ
+	 * @param[in] bShadowAttached è®¾ç½® true ä¸ºæ˜¯ï¼Œfalse ä¸ºå¦
+	 * @return æ— 
 	 */
 	void SetShadowAttached(bool bShadowAttached) { m_bShadowAttached = bShadowAttached; }
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÒÑ¾­¸½¼ÓÁËÒõÓ°
-	 * @return ·µ»Ø true ±íÊ¾ÒÑ¾­¸½¼Ó£¬·ñÔòÎª false
+	 * @brief åˆ¤æ–­æ˜¯å¦å·²ç»é™„åŠ äº†é˜´å½±
+	 * @return è¿”å› true è¡¨ç¤ºå·²ç»é™„åŠ ï¼Œå¦åˆ™ä¸º false
 	 */
 	bool IsShadowAttached() const { return m_bShadowAttached; }
 
 	/**
-	 * @brief ÉèÖÃÒõÓ°µÄ¾Å¹¬¸ñÊôĞÔ
-	 * @param[in] rect ÒªÉèÖÃµÄ¾Å¹¬¸ñÊôĞÔ
-	 * @param[in] bNeedDpiScale Îª false ±íÊ¾²»ĞèÒª°Ñ rc ¸ù¾İ DPI ×Ô¶¯µ÷Õû
-	 * @return ÎŞ
+	 * @brief è®¾ç½®é˜´å½±çš„ä¹å®«æ ¼å±æ€§
+	 * @param[in] rect è¦è®¾ç½®çš„ä¹å®«æ ¼å±æ€§
+	 * @param[in] bNeedDpiScale ä¸º false è¡¨ç¤ºä¸éœ€è¦æŠŠ rc æ ¹æ® DPI è‡ªåŠ¨è°ƒæ•´
+	 * @return æ— 
 	 */
 	void SetShadowCorner(const UiRect &rect, bool bNeedDpiScale = true);
 
 	/**
-	 * @brief »ñÈ¡ÒõÓ°µÄ¾Å¹¬¸ñÊôĞÔ
-	 * @return ·µ»ØÒõÓ°µÄ¾Å¹¬¸ñÊôĞÔ
+	 * @brief è·å–é˜´å½±çš„ä¹å®«æ ¼å±æ€§
+	 * @return è¿”å›é˜´å½±çš„ä¹å®«æ ¼å±æ€§
 	 */
 	UiRect GetShadowCorner() const;
 
 	/**
-	* @brief ÖØÖÃÎªÄ¬ÈÏÒõÓ°Ğ§¹û
-	* @return ÎŞ
+	* @brief é‡ç½®ä¸ºé»˜è®¤é˜´å½±æ•ˆæœ
+	* @return æ— 
 	*/
 	void ResetDefaultShadow();
 
 	/**
-	 * @brief ÉèÖÃÒõÓ°Í¼Æ¬
-	 * @param[in] image Í¼Æ¬Â·¾¶
-	 * @return ÎŞ
+	 * @brief è®¾ç½®é˜´å½±å›¾ç‰‡
+	 * @param[in] image å›¾ç‰‡è·¯å¾„
+	 * @return æ— 
 	 */
 	void SetShadowImage(const std::wstring &image);
 
 	/**
-	 * @brief »ñÈ¡ÒõÓ°Í¼Æ¬Î»ÖÃ
-	 * @return ·µ»ØÒõÓ°Í¼Æ¬Î»ÖÃ
+	 * @brief è·å–é˜´å½±å›¾ç‰‡ä½ç½®
+	 * @return è¿”å›é˜´å½±å›¾ç‰‡ä½ç½®
 	 */
 	std::wstring GetShadowImage() const;
 
 	/**
-	 * @brief ½«ÒõÓ°¸½¼Óµ½´°¿Ú
-	 * @param[in] pRoot ´°¿ÚµÄ¶¥²ãÈİÆ÷
-	 * @return ·µ»Ø¸½¼ÓÒõÓ°ºóµÄÈİÆ÷Ö¸Õë
+	 * @brief å°†é˜´å½±é™„åŠ åˆ°çª—å£
+	 * @param[in] pRoot çª—å£çš„é¡¶å±‚å®¹å™¨
+	 * @return è¿”å›é™„åŠ é˜´å½±åçš„å®¹å™¨æŒ‡é’ˆ
 	 */
 	Box* AttachShadow(Box* pRoot);
 
 	/**
-	 * @brief ÉèÖÃ´°¿Ú×î´ó»¯»¹ÊÇ»¹Ô­×´Ì¬
-	 * @param[in] isMaximized ÉèÖÃÎª true ±íÊ¾×î´ó»¯£¬false Îª»¹Ô­³õÊ¼×´Ì¬
-	 * @return ÎŞ
+	 * @brief è®¾ç½®çª—å£æœ€å¤§åŒ–è¿˜æ˜¯è¿˜åŸçŠ¶æ€
+	 * @param[in] isMaximized è®¾ç½®ä¸º true è¡¨ç¤ºæœ€å¤§åŒ–ï¼Œfalse ä¸ºè¿˜åŸåˆå§‹çŠ¶æ€
+	 * @return æ— 
 	 */
 	void MaximizedOrRestored(bool isMaximized);
 
 	/**
-	 * @brief »ñÈ¡¸½¼ÓÒõÓ°ºóµÄÈİÆ÷Ö¸Õë
-	 * @return ·µ»ØÈİÆ÷Ö¸Õë
+	 * @brief è·å–é™„åŠ é˜´å½±åçš„å®¹å™¨æŒ‡é’ˆ
+	 * @return è¿”å›å®¹å™¨æŒ‡é’ˆ
 	 */
 	Control* GetRoot();
 
 	/**
-	 * @brief ÇåÀíÍ¼Æ¬»º´æ
-	 * @return ÎŞ
+	 * @brief æ¸…ç†å›¾ç‰‡ç¼“å­˜
+	 * @return æ— 
 	 */
 	void ClearImageCache();
 private:

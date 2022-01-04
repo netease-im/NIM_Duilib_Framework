@@ -32,7 +32,7 @@ public:
 /////////////////////////////////////////////////////////////////////////////////////
 //
 
-/// ÁĞ±íÈİÆ÷£¬ÓÃÓÚÕ¹Ê¾Ò»×éÊı¾İÊ¹ÓÃ
+/// åˆ—è¡¨å®¹å™¨ï¼Œç”¨äºå±•ç¤ºä¸€ç»„æ•°æ®ä½¿ç”¨
 class UILIB_API ListBox : public ScrollableBox, public IListOwner
 {
 public:
@@ -40,7 +40,7 @@ public:
 	ListBox(const ListBox& r) = delete;
 	ListBox& operator=(const ListBox& r) = delete;
 
-	/// ÖØĞ´¸¸Àà·½·¨£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ£¬Çë²Î¿¼¸¸ÀàÉùÃ÷
+	/// é‡å†™çˆ¶ç±»æ–¹æ³•ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½ï¼Œè¯·å‚è€ƒçˆ¶ç±»å£°æ˜
 	virtual std::wstring GetType() const override;
 	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
@@ -53,121 +53,121 @@ public:
 	virtual bool ButtonDown(EventArgs& msg) override;
 
 	/**
-	 * @brief ¹ö¶¯µ½Ö¸¶¨×ÓÏîÎ»ÖÃ
-	 * @param[in] strItemName ×ÓÏîÃû³Æ
-	 * @return ³É¹¦·µ»Ø true£¬·ñÔòÎª false£¬¿ÉÄÜ¿Ø¼ş²»´æÔÚ
+	 * @brief æ»šåŠ¨åˆ°æŒ‡å®šå­é¡¹ä½ç½®
+	 * @param[in] strItemName å­é¡¹åç§°
+	 * @return æˆåŠŸè¿”å› trueï¼Œå¦åˆ™ä¸º falseï¼Œå¯èƒ½æ§ä»¶ä¸å­˜åœ¨
 	 */
 	virtual bool ScrollItemToTop(const std::wstring& strItemName);
 
 	/**
-	 * @brief »ñÈ¡µ±Ç°Î»ÖÃµÚÒ»¸ö×ÓÏî
-	 * @return ·µ»ØµÚÒ»¸ö×ÓÏîÖ¸Õë
+	 * @brief è·å–å½“å‰ä½ç½®ç¬¬ä¸€ä¸ªå­é¡¹
+	 * @return è¿”å›ç¬¬ä¸€ä¸ªå­é¡¹æŒ‡é’ˆ
 	 */
 	virtual Control* GetTopItem();
 	
 	/**
-	 * @brief ÉèÖÃ×ÓÏîµÄÎ»ÖÃË÷Òı
-	 * @param[in] pControl ×ÓÏîÖ¸Õë
-	 * @param[in] iIndex Ë÷ÒıºÅ
-	 * @return ³É¹¦·µ»Ø true£¬·ñÔò·µ»Ø false
+	 * @brief è®¾ç½®å­é¡¹çš„ä½ç½®ç´¢å¼•
+	 * @param[in] pControl å­é¡¹æŒ‡é’ˆ
+	 * @param[in] iIndex ç´¢å¼•å·
+	 * @return æˆåŠŸè¿”å› trueï¼Œå¦åˆ™è¿”å› false
 	 */
 	bool SetItemIndex(Control* pControl, std::size_t iIndex);
 
 	/**
-	 * @brief Ñ¡ÖĞÉÏÒ»Ïî
-	 * @return ÎŞ
+	 * @brief é€‰ä¸­ä¸Šä¸€é¡¹
+	 * @return æ— 
 	 */
 	void Previous();
 
 	/**
-	 * @brief Ñ¡ÖĞÏÂÒ»Ïî
-	 * @return ÎŞ
+	 * @brief é€‰ä¸­ä¸‹ä¸€é¡¹
+	 * @return æ— 
 	 */
 	void Next();
 
 	/**
-	 * @brief ´¥·¢Ñ¡ÖĞÏîµÄË«»÷ÊÂ¼ş
-	 * @return ÎŞ
+	 * @brief è§¦å‘é€‰ä¸­é¡¹çš„åŒå‡»äº‹ä»¶
+	 * @return æ— 
 	 */
 	void ActiveItem();
 
 	/**
-	 * @brief ×·¼ÓÒ»¸ö×ÓÏîµ½Ä©Î²
-	 * @param[in] pControl ×ÓÏîÖ¸Õë
-	 * @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	 * @brief è¿½åŠ ä¸€ä¸ªå­é¡¹åˆ°æœ«å°¾
+	 * @param[in] pControl å­é¡¹æŒ‡é’ˆ
+	 * @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	 */
 	virtual bool Add(Control* pControl) override;
 
 	/**
-	 * @brief ÔÚÖ¸¶¨Î»ÖÃÖ®ºó²åÈëÒ»¸ö×ÓÏî
-	 * @param[in] pControl ×ÓÏîÖ¸Õë
-	 * @param[in] iIndex Òª²åÈëµÄÎ»ÖÃË÷Òı
-	 * @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	 * @brief åœ¨æŒ‡å®šä½ç½®ä¹‹åæ’å…¥ä¸€ä¸ªå­é¡¹
+	 * @param[in] pControl å­é¡¹æŒ‡é’ˆ
+	 * @param[in] iIndex è¦æ’å…¥çš„ä½ç½®ç´¢å¼•
+	 * @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	 */
     virtual bool AddAt(Control* pControl, std::size_t  iIndex) override;
 
 	/**
-	 * @brief ¸ù¾İ×ÓÏîÖ¸Õë
-	 * @param[in] pControl ×ÓÏîÖ¸Õë
-	 * @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	 * @brief æ ¹æ®å­é¡¹æŒ‡é’ˆ
+	 * @param[in] pControl å­é¡¹æŒ‡é’ˆ
+	 * @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	 */
     virtual bool Remove(Control* pControl) override;
 
 	/**
-	 * @brief ¸ù¾İË÷ÒıÒÆ³ıÒ»¸ö×ÓÏî
-	 * @param[in] iIndex ×ÓÏîË÷Òı
-	 * @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	 * @brief æ ¹æ®ç´¢å¼•ç§»é™¤ä¸€ä¸ªå­é¡¹
+	 * @param[in] iIndex å­é¡¹ç´¢å¼•
+	 * @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	 */
     virtual bool RemoveAt(std::size_t  iIndex) override;
 
 	/**
-	 * @brief ÒÆ³ıËùÓĞ×ÓÏî
-	 * @return ÎŞ
+	 * @brief ç§»é™¤æ‰€æœ‰å­é¡¹
+	 * @return æ— 
 	 */
     virtual void RemoveAll() override;
 
 	/**
-	 * @brief ÅÅÁĞ×ÓÏî
-	 * @param[in] pfnCompare ×Ô¶¨ÒåÅÅĞòº¯Êı
-	 * @param[in] dwData ÓÃÓÚ×ÓÏî¶Ô±ÈÊ±µÄÊı¾İ
-	 * @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	 * @brief æ’åˆ—å­é¡¹
+	 * @param[in] pfnCompare è‡ªå®šä¹‰æ’åºå‡½æ•°
+	 * @param[in] dwData ç”¨äºå­é¡¹å¯¹æ¯”æ—¶çš„æ•°æ®
+	 * @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	 */
 	bool SortItems(PULVCompareFunc pfnCompare, UINT_PTR dwData);
 
 	/**
-	 * @brief Ä¬ÈÏµÄ×ÓÏî¶Ô±È·½·¨
-	 * @param[in] pvlocale ±£´æ List Ö¸Õë
-	 * @param[in] item1 ×ÓÏî1
-	 * @param[in] item2 ×ÓÏî2
-	 * @return ·µ»Ø¶Ô±È½á¹û
+	 * @brief é»˜è®¤çš„å­é¡¹å¯¹æ¯”æ–¹æ³•
+	 * @param[in] pvlocale ä¿å­˜ List æŒ‡é’ˆ
+	 * @param[in] item1 å­é¡¹1
+	 * @param[in] item2 å­é¡¹2
+	 * @return è¿”å›å¯¹æ¯”ç»“æœ
 	 */
 	static int __cdecl ItemComareFunc(void *pvlocale, const void *item1, const void *item2);
 	int __cdecl ItemComareFunc(const void *item1, const void *item2);
 
 	/**
-	 * @brief »ñÈ¡ÊÇ·ñËæ¹ö¶¯¸Ä±äÑ¡ÖĞÏîÉèÖÃ
-	 * @return ·µ»Ø true ±íÊ¾¸úËæ¹ö¶¯Ìõ¸Ä±äÑ¡ÔñÏî£¬·ñÔòÎª false
+	 * @brief è·å–æ˜¯å¦éšæ»šåŠ¨æ”¹å˜é€‰ä¸­é¡¹è®¾ç½®
+	 * @return è¿”å› true è¡¨ç¤ºè·Ÿéšæ»šåŠ¨æ¡æ”¹å˜é€‰æ‹©é¡¹ï¼Œå¦åˆ™ä¸º false
 	 */
 	bool GetScrollSelect();
 
 	/**
-	 * @brief ÉèÖÃÊÇ·ñËæ¹ö¶¯¸Ä±äÑ¡ÖĞÏîÉèÖÃ
-	 * @param[in] bScrollSelect Îª true ÊÇÎª¸úËæ¹ö¶¯Ìõ¸Ä±äÑ¡ÖĞÏî£¬false Îª²»¸úËæ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ˜¯å¦éšæ»šåŠ¨æ”¹å˜é€‰ä¸­é¡¹è®¾ç½®
+	 * @param[in] bScrollSelect ä¸º true æ˜¯ä¸ºè·Ÿéšæ»šåŠ¨æ¡æ”¹å˜é€‰ä¸­é¡¹ï¼Œfalse ä¸ºä¸è·Ÿéš
+	 * @return æ— 
 	 */
 	void SetScrollSelect(bool bScrollSelect);
 
 	/**
-	 * @brief ¼àÌıÑ¡Ôñ×ÓÏîµÄÊÂ¼ş
-	 * @param[in] callback Ñ¡Ôñ×ÓÏîÊ±µÄ»Øµ÷º¯Êı
-	 * @return ÎŞ
+	 * @brief ç›‘å¬é€‰æ‹©å­é¡¹çš„äº‹ä»¶
+	 * @param[in] callback é€‰æ‹©å­é¡¹æ—¶çš„å›è°ƒå‡½æ•°
+	 * @return æ— 
 	 */
 	void AttachSelect(const EventCallback& callback) { OnEvent[kEventSelect] += callback; }
 
 	/**
-	 * @brief ÔÚÒÆ³ıÒ»¸ö×ÓÏîºó×Ô¶¯Ñ¡ÔñÏÂÒ»Ïî
-	 * @param[in] bSelectNextItem Îª true Ê±×Ô¶¯Ñ¡ÔñÏÂÒ»Ïî£¬false Îª²»×Ô¶¯Ñ¡Ôñ
-	 * @return ÎŞ
+	 * @brief åœ¨ç§»é™¤ä¸€ä¸ªå­é¡¹åè‡ªåŠ¨é€‰æ‹©ä¸‹ä¸€é¡¹
+	 * @param[in] bSelectNextItem ä¸º true æ—¶è‡ªåŠ¨é€‰æ‹©ä¸‹ä¸€é¡¹ï¼Œfalse ä¸ºä¸è‡ªåŠ¨é€‰æ‹©
+	 * @return æ— 
 	 */
 	void SelectNextWhenActiveRemoved(bool bSelectNextItem);
 protected:
@@ -182,13 +182,13 @@ protected:
 //
 
 
-/// ÁĞ±íÏî£¬ÓÃÓÚÔÚÁĞ±íÖĞÕ¹Ê¾Êı¾İµÄ×ÓÏî
+/// åˆ—è¡¨é¡¹ï¼Œç”¨äºåœ¨åˆ—è¡¨ä¸­å±•ç¤ºæ•°æ®çš„å­é¡¹
 class UILIB_API ListContainerElement : public OptionTemplate<Box>
 {
 public:
 	ListContainerElement();
 
-	/// ÖØĞ´¸¸Àà·½·¨£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ£¬Çë²Î¿¼¸¸ÀàÉùÃ÷
+	/// é‡å†™çˆ¶ç±»æ–¹æ³•ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½ï¼Œè¯·å‚è€ƒçˆ¶ç±»å£°æ˜
 	virtual std::wstring GetType() const override;
 	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual void SetVisible(bool bVisible = true) override;
@@ -196,48 +196,48 @@ public:
 	virtual void HandleMessage(EventArgs& event) override;
 
 	/**
-	 * @brief »ñÈ¡¸¸ÈİÆ÷
-	 * @return ·µ»Ø¸¸ÈİÆ÷Ö¸Õë
+	 * @brief è·å–çˆ¶å®¹å™¨
+	 * @return è¿”å›çˆ¶å®¹å™¨æŒ‡é’ˆ
 	 */
 	IListOwner* GetOwner();
 
 	/**
-	 * @brief ÉèÖÃ¸¸ÈİÆ÷
-	 * @param[in] pOwner ¸¸ÈİÆ÷Ö¸Õë
-	 * @return ÎŞ
+	 * @brief è®¾ç½®çˆ¶å®¹å™¨
+	 * @param[in] pOwner çˆ¶å®¹å™¨æŒ‡é’ˆ
+	 * @return æ— 
 	 */
 	void SetOwner(IListOwner* pOwner);
 
 	/**
-	 * @brief »ñÈ¡µ±Ç°Ë÷Òı
-	 * @return ·µ»Øµ±Ç°Ë÷Òı
+	 * @brief è·å–å½“å‰ç´¢å¼•
+	 * @return è¿”å›å½“å‰ç´¢å¼•
 	 */
 	int GetIndex() const;
 
 	/**
-	 * @brief ÉèÖÃË÷Òı
-	 * @param[in] iIndex Ë÷ÒıÖµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®ç´¢å¼•
+	 * @param[in] iIndex ç´¢å¼•å€¼
+	 * @return æ— 
 	 */
 	void SetIndex(int iIndex);
 
 	/**
-	 * @brief ´¥·¢Ë«»÷ÊÂ¼ş
-	 * @return ÎŞ
+	 * @brief è§¦å‘åŒå‡»äº‹ä»¶
+	 * @return æ— 
 	 */
 	void InvokeDoubleClickEvent();
 
 	/**
-	 * @brief ¼àÌı¿Ø¼şË«»÷ÊÂ¼ş
-	 * @param[in] callback ÊÕµ½Ë«»÷ÏûÏ¢Ê±µÄ»Øµ÷º¯Êı
-	 * @return ÎŞ
+	 * @brief ç›‘å¬æ§ä»¶åŒå‡»äº‹ä»¶
+	 * @param[in] callback æ”¶åˆ°åŒå‡»æ¶ˆæ¯æ—¶çš„å›è°ƒå‡½æ•°
+	 * @return æ— 
 	 */
 	void AttachDoubleClick(const EventCallback& callback) { OnEvent[kEventMouseDoubleClick] += callback; }
 
 	/**
-	 * @brief ¼àÌı»Ø³µÊÂ¼ş
-	 * @param[in] callback ÊÕµ½»Ø³µÊ±µÄ»Øµ÷º¯Êı
-	 * @return ÎŞ
+	 * @brief ç›‘å¬å›è½¦äº‹ä»¶
+	 * @param[in] callback æ”¶åˆ°å›è½¦æ—¶çš„å›è°ƒå‡½æ•°
+	 * @return æ— 
 	 */
 	void AttachReturn(const EventCallback& callback) { OnEvent[kEventReturn] += callback; }
 

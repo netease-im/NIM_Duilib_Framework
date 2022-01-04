@@ -9,500 +9,500 @@
 namespace ui 
 {
 /**
-* @brief È«¾ÖÊôĞÔ¹ÜÀí¹¤¾ßÀà
-* ÓÃÓÚ¹ÜÀíÒ»Ğ©È«¾ÖÊôĞÔµÄ¹¤¾ßÀà£¬°üº¬È«¾ÖÑùÊ½£¨global.xml£©ºÍÓïÑÔÉèÖÃµÈ
+* @brief å…¨å±€å±æ€§ç®¡ç†å·¥å…·ç±»
+* ç”¨äºç®¡ç†ä¸€äº›å…¨å±€å±æ€§çš„å·¥å…·ç±»ï¼ŒåŒ…å«å…¨å±€æ ·å¼ï¼ˆglobal.xmlï¼‰å’Œè¯­è¨€è®¾ç½®ç­‰
 */
 class UILIB_API GlobalManager
 {
 public:
 	/**
-	 * @brief ³õÊ¼»¯È«¾ÖÉèÖÃº¯Êı
-	 * @param[in] strResourcePath ×ÊÔ´Â·¾¶Î»ÖÃ
-	 * @param[in] callback ´´½¨×Ô¶¨Òå¿Ø¼şÊ±µÄÈ«¾Ö»Øµ÷º¯Êı
-	 * @param[in] bAdaptDpi ÊÇ·ñÆôÓÃ DPI ÊÊÅä
-	 * @param[in] theme Ö÷ÌâÄ¿Â¼Ãû£¬Ä¬ÈÏÎª themes\\default
-	 * @param[in] language Ê¹ÓÃÓïÑÔ£¬Ä¬ÈÏÎª lang\\zh_CN
-	 * @return ÎŞ
+	 * @brief åˆå§‹åŒ–å…¨å±€è®¾ç½®å‡½æ•°
+	 * @param[in] strResourcePath èµ„æºè·¯å¾„ä½ç½®
+	 * @param[in] callback åˆ›å»ºè‡ªå®šä¹‰æ§ä»¶æ—¶çš„å…¨å±€å›è°ƒå‡½æ•°
+	 * @param[in] bAdaptDpi æ˜¯å¦å¯ç”¨ DPI é€‚é…
+	 * @param[in] theme ä¸»é¢˜ç›®å½•åï¼Œé»˜è®¤ä¸º themes\\default
+	 * @param[in] language ä½¿ç”¨è¯­è¨€ï¼Œé»˜è®¤ä¸º lang\\zh_CN
+	 * @return æ— 
 	 */
 	static void Startup(const std::wstring& strResourcePath, const CreateControlCallback& callback, bool bAdaptDpi, const std::wstring& theme = L"themes\\default", const std::wstring& language = L"lang\\zh_CN");
 
 	/**
-	 * @brief ÊÍ·Å×ÊÔ´
-	 * @return ÎŞ
+	 * @brief é‡Šæ”¾èµ„æº
+	 * @return æ— 
 	 */
 	static void Shutdown();
 
 	/**
-	 * @brief ¿ªÆô½ûÓÃ×Ô¶¯»¯²âÊÔÖ§³Ö
-	 * @param[in] bAdaptDpi ÊÇ·ñÆôÓÃ DPI ÊÊÅä
-	 * @return ÎŞ
+	 * @brief å¼€å¯ç¦ç”¨è‡ªåŠ¨åŒ–æµ‹è¯•æ”¯æŒ
+	 * @param[in] bAdaptDpi æ˜¯å¦å¯ç”¨ DPI é€‚é…
+	 * @return æ— 
 	 */
 	static void EnableAutomation(bool bEnabled = true);
 
 	/**
-	 * @brief ÊÇ·ñ¿ªÆô×Ô¶¯»¯²âÊÔÖ§³Ö
-	 * @return ·µ»ØÊÇ·ñ¿ªÆô
-	 *     @retval true ¿ªÆô
-	 *     @retval false ½ûÓÃ
+	 * @brief æ˜¯å¦å¼€å¯è‡ªåŠ¨åŒ–æµ‹è¯•æ”¯æŒ
+	 * @return è¿”å›æ˜¯å¦å¼€å¯
+	 *     @retval true å¼€å¯
+	 *     @retval false ç¦ç”¨
 	 */
 	static bool IsAutomationEnabled();
 
 	/**
-	 * @brief »ñÈ¡µ±Ç°³ÌĞòËùÔÚÄ¿Â¼
-	 * @return ·µ»Øµ±Ç°³ÌĞòËùÔÚÄ¿Â¼
+	 * @brief è·å–å½“å‰ç¨‹åºæ‰€åœ¨ç›®å½•
+	 * @return è¿”å›å½“å‰ç¨‹åºæ‰€åœ¨ç›®å½•
 	 */
 	static std::wstring GetCurrentPath();
 
 	/**
-	 * @brief »ñÈ¡µ±Ç°×ÊÔ´ËùÔÚÄ¿Â¼
-	 * @return ·µ»Øµ±Ç°×ÊÔ´ËùÔÚÄ¿Â¼
+	 * @brief è·å–å½“å‰èµ„æºæ‰€åœ¨ç›®å½•
+	 * @return è¿”å›å½“å‰èµ„æºæ‰€åœ¨ç›®å½•
 	 */
 	static std::wstring GetResourcePath();
 
 	/**
-	* @brief »ñÈ¡µ±Ç°ÓïÑÔÎÄ¼şÂ·¾¶
-	* @return ·µ»Øµ±Ç°ÓïÑÔÎÄ¼şÂ·¾¶
+	* @brief è·å–å½“å‰è¯­è¨€æ–‡ä»¶è·¯å¾„
+	* @return è¿”å›å½“å‰è¯­è¨€æ–‡ä»¶è·¯å¾„
 	*/
 	static std::wstring GetLanguagePath();
 
 	/**
-	 * @brief ÉèÖÃ³ÌĞòµ±Ç°Ä¿Â¼
-	 * @param[in] strPath ÒªÉèÖÃµÄÂ·¾¶
-	 * @return ÎŞ
+	 * @brief è®¾ç½®ç¨‹åºå½“å‰ç›®å½•
+	 * @param[in] strPath è¦è®¾ç½®çš„è·¯å¾„
+	 * @return æ— 
 	 */
 	static void SetCurrentPath(const std::wstring& strPath);
 
 	/**
-	 * @brief ÉèÖÃÆ¤·ô×ÊÔ´ËùÔÚÄ¿Â¼
-	 * @param[in] strPath ÒªÉèÖÃµÄÂ·¾¶
-	 * @return ÎŞ
+	 * @brief è®¾ç½®çš®è‚¤èµ„æºæ‰€åœ¨ç›®å½•
+	 * @param[in] strPath è¦è®¾ç½®çš„è·¯å¾„
+	 * @return æ— 
 	 */
 	static void SetResourcePath(const std::wstring& strPath);
 
 	/**
-	* @brief ÉèÖÃµ±Ç°ÓïÑÔÎÄ¼şÂ·¾¶
-	* @return ÉèÖÃµ±Ç°ÓïÑÔÎÄ¼şÂ·¾¶
+	* @brief è®¾ç½®å½“å‰è¯­è¨€æ–‡ä»¶è·¯å¾„
+	* @return è®¾ç½®å½“å‰è¯­è¨€æ–‡ä»¶è·¯å¾„
 	*/
 	static void SetLanguagePath(const std::wstring& strPath);
 
 	/**
-	* ´ı²¹³ä
+	* å¾…è¡¥å……
 	*/
 	static void AddPreMessage(Window* pWindow);
 
 	/**
-	* ´ı²¹³ä
+	* å¾…è¡¥å……
 	*/
 	static void RemovePreMessage(Window* pWindow);
 
 	/**
-	 * @brief ÖØĞÂ¼ÓÔØÆ¤·ô×ÊÔ´
-	 * @param[in] resourcePath ×ÊÔ´Â·¾¶
-	 * @return ÎŞ
+	 * @brief é‡æ–°åŠ è½½çš®è‚¤èµ„æº
+	 * @param[in] resourcePath èµ„æºè·¯å¾„
+	 * @return æ— 
 	 */
 	static void ReloadSkin(const std::wstring& resourcePath);
 
 	/**
-	 * @brief ÖØĞÂ¼ÓÔØÓïÑÔ×ÊÔ´
-	 * @param[in] languagePath ×ÊÔ´Â·¾¶
-	 * @return ÎŞ
+	 * @brief é‡æ–°åŠ è½½è¯­è¨€èµ„æº
+	 * @param[in] languagePath èµ„æºè·¯å¾„
+	 * @return æ— 
 	 */
 	static void ReloadLanguage(const std::wstring& languagePath, bool invalidateAll = false);
 
 	/**
-	 * @brief »ñÈ¡»æÖÆ½Ó¿ÚÀà¶ÔÏó
-	 * @return ·µ»Ø½Ó¿ÚÀà¶ÔÏóÖ¸Õë
+	 * @brief è·å–ç»˜åˆ¶æ¥å£ç±»å¯¹è±¡
+	 * @return è¿”å›æ¥å£ç±»å¯¹è±¡æŒ‡é’ˆ
 	 */
 	static IRenderFactory* GetRenderFactory();
 
 	/**
-	 * @brief ´´½¨È«¾ÖµÄ»æÖÆÉÏÏÂÎÄÇøÓò
-	 * @return ·µ»Ø»æÖÆÇøÓò¶ÔÏó
+	 * @brief åˆ›å»ºå…¨å±€çš„ç»˜åˆ¶ä¸Šä¸‹æ–‡åŒºåŸŸ
+	 * @return è¿”å›ç»˜åˆ¶åŒºåŸŸå¯¹è±¡
 	 */
 	static std::unique_ptr<IRenderContext> CreateRenderContext();
 
 	/**
-	 * @brief ´´½¨Ò»¸ö»­±Ê
-	 * @param[in] color »­±ÊÑÕÉ«
-	 * @param[in] width »­±Ê¿í¶È
-	 * @return ·µ»Ø»­±Ê¶ÔÏó
+	 * @brief åˆ›å»ºä¸€ä¸ªç”»ç¬”
+	 * @param[in] color ç”»ç¬”é¢œè‰²
+	 * @param[in] width ç”»ç¬”å®½åº¦
+	 * @return è¿”å›ç”»ç¬”å¯¹è±¡
 	 */
 	static std::unique_ptr<IPen> CreatePen(DWORD color, int width = 1);
 
 	/**
-	 * @brief ´´½¨Ò»¸ö»­Ë¢
-	 * @param[in] color »­Ë¢ÑÕÉ«
-	 * @return ·µ»Ø»­Ë¢¶ÔÏó
+	 * @brief åˆ›å»ºä¸€ä¸ªç”»åˆ·
+	 * @param[in] color ç”»åˆ·é¢œè‰²
+	 * @return è¿”å›ç”»åˆ·å¯¹è±¡
 	 */
 	static std::unique_ptr<IBrush> CreateBrush(DWORD color);
 
 	/**
-	 * @brief ´´½¨Ò»¸ö¾ØÕó
-	 * @return ·µ»Ø¾ØÕó¶ÔÏó
+	 * @brief åˆ›å»ºä¸€ä¸ªçŸ©é˜µ
+	 * @return è¿”å›çŸ©é˜µå¯¹è±¡
 	 */
 	static std::unique_ptr<IMatrix> CreateMatrix();
 
 	/**
-	 * @brief ´´½¨Ò»¸ö»æÖÆÂ·¾¶
-	 * @return ·µ»Ø»æÖÆÂ·¾¶¶ÔÏó
+	 * @brief åˆ›å»ºä¸€ä¸ªç»˜åˆ¶è·¯å¾„
+	 * @return è¿”å›ç»˜åˆ¶è·¯å¾„å¯¹è±¡
 	 */
 	static std::unique_ptr<IPath> CreatePath();
 
 	/**
-	 * @brief Ìí¼ÓÒ»¸öÈ«¾Ö class ÊôĞÔ
-	 * @param[in] strClassName È«¾Ö class Ãû³Æ
-	 * @param[in] strControlAttrList ÊôĞÔÁĞ±í£¬ĞèÒª×ö XML ×ªÒå
-	 * @return ÎŞ
+	 * @brief æ·»åŠ ä¸€ä¸ªå…¨å±€ class å±æ€§
+	 * @param[in] strClassName å…¨å±€ class åç§°
+	 * @param[in] strControlAttrList å±æ€§åˆ—è¡¨ï¼Œéœ€è¦åš XML è½¬ä¹‰
+	 * @return æ— 
 	 */
 	static void AddClass(const std::wstring& strClassName, const std::wstring& strControlAttrList);
 
 	/**
-	 * @brief »ñÈ¡Ò»¸öÈ«¾Ö class ÊôĞÔµÄÖµ
-	 * @param[in] strClassName È«¾Ö class Ãû³Æ
-	 * @return ·µ»Ø×Ö·û´®ĞÎÊ½µÄ class ÊôĞÔÖµ
+	 * @brief è·å–ä¸€ä¸ªå…¨å±€ class å±æ€§çš„å€¼
+	 * @param[in] strClassName å…¨å±€ class åç§°
+	 * @return è¿”å›å­—ç¬¦ä¸²å½¢å¼çš„ class å±æ€§å€¼
 	 */
 	static std::wstring GetClassAttributes(const std::wstring& strClassName);
 
 	/**
-	 * @brief ´ÓÈ«¾ÖÊôĞÔÖĞÉ¾³ıËùÓĞ class ÊôĞÔ
-	 * @return ·µ»Ø»æÖÆÇøÓò¶ÔÏó
+	 * @brief ä»å…¨å±€å±æ€§ä¸­åˆ é™¤æ‰€æœ‰ class å±æ€§
+	 * @return è¿”å›ç»˜åˆ¶åŒºåŸŸå¯¹è±¡
 	 */
 	static void RemoveAllClasss();
 
 	/**
-	 * @brief Ìí¼ÓÒ»¸öÈ«¾ÖÑÕÉ«ÖµÌá¹©³ÌĞòÊ¹ÓÃ
-	 * @param[in] strName ÑÕÉ«Ãû³Æ£¨Èç white£©
-	 * @param[in] strValue ÑÕÉ«¾ßÌåÊıÖµ£¨Èç #FFFFFFFF£©
-	 * @return ÎŞ
+	 * @brief æ·»åŠ ä¸€ä¸ªå…¨å±€é¢œè‰²å€¼æä¾›ç¨‹åºä½¿ç”¨
+	 * @param[in] strName é¢œè‰²åç§°ï¼ˆå¦‚ whiteï¼‰
+	 * @param[in] strValue é¢œè‰²å…·ä½“æ•°å€¼ï¼ˆå¦‚ #FFFFFFFFï¼‰
+	 * @return æ— 
 	 */
 	static void AddTextColor(const std::wstring& strName, const std::wstring& strValue);
 
 	/**
-	 * @brief Ìí¼ÓÒ»¸öÈ«¾ÖÑÕÉ«ÖµÌá¹©³ÌĞòÊ¹ÓÃ
-	 * @param[in] strName ÑÕÉ«Ãû³Æ£¨Èç white£©
-	  * @param[in] strValue ÑÕÉ«¾ßÌåÊıÖµ£¨Èç #FFFFFFFF£©
-	 * @return ÎŞ
+	 * @brief æ·»åŠ ä¸€ä¸ªå…¨å±€é¢œè‰²å€¼æä¾›ç¨‹åºä½¿ç”¨
+	 * @param[in] strName é¢œè‰²åç§°ï¼ˆå¦‚ whiteï¼‰
+	  * @param[in] strValue é¢œè‰²å…·ä½“æ•°å€¼ï¼ˆå¦‚ #FFFFFFFFï¼‰
+	 * @return æ— 
 	 */
 	static void AddTextColor(const std::wstring& strName, DWORD argb);
 
 	/**
-	 * @brief ¸ù¾İÃû³Æ»ñÈ¡Ò»¸öÑÕÉ«µÄ¾ßÌåÊıÖµ
-	 * @param[in] strName Òª»ñÈ¡µÄÑÕÉ«Ãû³Æ
-	 * @return ·µ»Ø DWORD ¸ñÊ½µÄÑÕÉ«ÃèÊöÖµ
+	 * @brief æ ¹æ®åç§°è·å–ä¸€ä¸ªé¢œè‰²çš„å…·ä½“æ•°å€¼
+	 * @param[in] strName è¦è·å–çš„é¢œè‰²åç§°
+	 * @return è¿”å› DWORD æ ¼å¼çš„é¢œè‰²æè¿°å€¼
 	 */
 	static DWORD GetTextColor(const std::wstring& strName);
 
 	/**
-	 * @brief É¾³ıËùÓĞÈ«¾ÖÑÕÉ«ÊôĞÔ
-	 * @return ÎŞ
+	 * @brief åˆ é™¤æ‰€æœ‰å…¨å±€é¢œè‰²å±æ€§
+	 * @return æ— 
 	 */
 	static void RemoveAllTextColors();
 
 	/**
-	 * @brief ¼ì²éÖ¸¶¨Í¼Æ¬ÊÇ·ñÒÑ¾­±»»º´æ
-	 * @param[in] bitmap Í¼Æ¬Â·¾¶
-	 * @return Èç¹ûÒÑ¾­±»»º´æ£¬Ôò·µ»Ø ImageInfo µÄÖÇÄÜÖ¸Õë¶ÔÏó
+	 * @brief æ£€æŸ¥æŒ‡å®šå›¾ç‰‡æ˜¯å¦å·²ç»è¢«ç¼“å­˜
+	 * @param[in] bitmap å›¾ç‰‡è·¯å¾„
+	 * @return å¦‚æœå·²ç»è¢«ç¼“å­˜ï¼Œåˆ™è¿”å› ImageInfo çš„æ™ºèƒ½æŒ‡é’ˆå¯¹è±¡
 	 */
 	static std::shared_ptr<ImageInfo> IsImageCached(const std::wstring& bitmap);
 
 	/**
-	 * @brief Ìí¼ÓÒ»¸öÍ¼Æ¬µ½»º´æÖĞ
+	 * @brief æ·»åŠ ä¸€ä¸ªå›¾ç‰‡åˆ°ç¼“å­˜ä¸­
 	 * @param[in] shared_image
-	 * @return ·µ»Ø±»»º´æµÄ ImageInfo ÖÇÄÜÖ¸Õë¶ÔÏó
+	 * @return è¿”å›è¢«ç¼“å­˜çš„ ImageInfo æ™ºèƒ½æŒ‡é’ˆå¯¹è±¡
 	 */
 	static std::shared_ptr<ImageInfo> AddImageCached(const std::shared_ptr<ImageInfo>& shared_image);
 
 	/**
-	 * @brief ´Ó»º´æÖĞÒ»´¦Ò»¸öÍ¼Æ¬
-	 * @param[in] imageFullPath Í¼Æ¬Â·¾¶
-	 * @return ÎŞ
+	 * @brief ä»ç¼“å­˜ä¸­ä¸€å¤„ä¸€ä¸ªå›¾ç‰‡
+	 * @param[in] imageFullPath å›¾ç‰‡è·¯å¾„
+	 * @return æ— 
 	 */
 	static void RemoveFromImageCache(const std::wstring& imageFullPath);
 
 	/**
-	 * @brief Í¼Æ¬±»Ïú»ÙµÄ»Øµ÷
-	 * @param[in] pImageInfo Í¼Æ¬¶ÔÓ¦µÄ ImageInfo ¶ÔÏó
-	 * @return ÎŞ
+	 * @brief å›¾ç‰‡è¢«é”€æ¯çš„å›è°ƒ
+	 * @param[in] pImageInfo å›¾ç‰‡å¯¹åº”çš„ ImageInfo å¯¹è±¡
+	 * @return æ— 
 	 */
 	static void OnImageInfoDestroy(ImageInfo *pImageInfo);
 
 	/**
-	 * @brief »ñÈ¡Í¼Æ¬ ImageInfo ¶ÔÏó
-	 * @param[in] bitmap Í¼Æ¬Â·¾¶
-	 * @return ·µ»ØÍ¼Æ¬ ImageInfo ¶ÔÏóµÄÖÇÄÜÖ¸Õë
+	 * @brief è·å–å›¾ç‰‡ ImageInfo å¯¹è±¡
+	 * @param[in] bitmap å›¾ç‰‡è·¯å¾„
+	 * @return è¿”å›å›¾ç‰‡ ImageInfo å¯¹è±¡çš„æ™ºèƒ½æŒ‡é’ˆ
 	 */
 	static std::shared_ptr<ImageInfo> GetImage(const std::wstring& bitmap);
 
 	/**
-	 * @brief ´Ó»º´æÖĞÉ¾³ıËùÓĞÍ¼Æ¬
-	 * @return ÎŞ
+	 * @brief ä»ç¼“å­˜ä¸­åˆ é™¤æ‰€æœ‰å›¾ç‰‡
+	 * @return æ— 
 	 */
 	static void RemoveAllImages();
 
 	/**
-	 * @brief »ñÈ¡Ä¬ÈÏ×ÖÌåÃû³Æ
-	 * @return ×ÖÌåÃû³Æ
+	 * @brief è·å–é»˜è®¤å­—ä½“åç§°
+	 * @return å­—ä½“åç§°
 	 */
 	static std::wstring GetDefaultFontName();
 
 	/**
-	 * @brief Ìí¼ÓÒ»¸ö×ÖÌå
-	 * @param[in] strFontId Ö¸¶¨×ÖÌåµÄID±ê¼Ç
-	 * @param[in] strFontName ×ÖÌåÃû³Æ
-	 * @param[in] nSize ×ÖÌå´óĞ¡
-	 * @param[in] bBold ÊÇ·ñ´ÖÌå
-	 * @param[in] bUnderline ÊÇ·ñÓĞÏÂ»®Ïß
-	 * @param[in] bStrikeout ÊÇ·ñ´øÓĞÉ¾³ıÏß
-	 * @param[in] bItalic ÊÇ·ñÇãĞ±
-	 * @param[in] bDefault ÊÇ·ñÄ¬ÈÏ
-	 * @param[in] nWeight ×ÖÌå´ÖÏ¸£¬×ÔÖØ£¬Ä¬ÈÏÎª FW_NORMAL(400)
-	 * @return ·µ»Ø×ÖÌåµÄ HFONT ¾ä±ú
+	 * @brief æ·»åŠ ä¸€ä¸ªå­—ä½“
+	 * @param[in] strFontId æŒ‡å®šå­—ä½“çš„IDæ ‡è®°
+	 * @param[in] strFontName å­—ä½“åç§°
+	 * @param[in] nSize å­—ä½“å¤§å°
+	 * @param[in] bBold æ˜¯å¦ç²—ä½“
+	 * @param[in] bUnderline æ˜¯å¦æœ‰ä¸‹åˆ’çº¿
+	 * @param[in] bStrikeout æ˜¯å¦å¸¦æœ‰åˆ é™¤çº¿
+	 * @param[in] bItalic æ˜¯å¦å€¾æ–œ
+	 * @param[in] bDefault æ˜¯å¦é»˜è®¤
+	 * @param[in] nWeight å­—ä½“ç²—ç»†ï¼Œè‡ªé‡ï¼Œé»˜è®¤ä¸º FW_NORMAL(400)
+	 * @return è¿”å›å­—ä½“çš„ HFONT å¥æŸ„
 	 */
 	static HFONT AddFont(const std::wstring& strFontId, const std::wstring& strFontName, 
 		int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic, bool bDefault, int nWeight = 0);
 
 	/**
-	 * @brief ¸ù¾İË÷Òı·µ»ØÒ»¸ö×ÖÌåĞÅÏ¢
-	 * @param[in] strFontId ×ÖÌåID
-	 * @return ·µ»Ø×ÖÌåµÄ TFontInfo ĞÅÏ¢
+	 * @brief æ ¹æ®ç´¢å¼•è¿”å›ä¸€ä¸ªå­—ä½“ä¿¡æ¯
+	 * @param[in] strFontId å­—ä½“ID
+	 * @return è¿”å›å­—ä½“çš„ TFontInfo ä¿¡æ¯
 	 */
 	static TFontInfo* GetTFontInfo(const std::wstring& strFontId);
 
 	/**
-	 * @brief ¸ù¾İ×ÖÌåID·µ»ØÒ»¸ö×ÖÌå¶ÔÏó
-	 * @param[in] strFontId ×ÖÌåID
-	 * @return ·µ»Ø×ÖÌåµÄ HFONT ¾ä±ú
+	 * @brief æ ¹æ®å­—ä½“IDè¿”å›ä¸€ä¸ªå­—ä½“å¯¹è±¡
+	 * @param[in] strFontId å­—ä½“ID
+	 * @return è¿”å›å­—ä½“çš„ HFONT å¥æŸ„
 	 */
 	static HFONT GetFont(const std::wstring& strFontId);
 	/**
-	 * @brief ¸ù¾İ×ÖÌåÊôĞÔ»ñÈ¡×ÖÌå¶ÔÏó
-	 * @param[in] strFontName ×ÖÌåÃû³Æ
-	 * @param[in] nSize ×ÖÌå´óĞ¡
-	 * @param[in] bBold ÊÇ·ñ´ÖÌå
-	 * @param[in] bUnderline ÊÇ·ñÓĞÏÂ»®Ïß
-	 * @param[in] bStrikeout ÊÇ·ñ´øÓĞÉ¾³ıÏß
-	 * @param[in] bItalic ÊÇ·ñÇãĞ±
-	 * @return ·µ»Ø×ÖÌåµÄ HFONT ¾ä±ú
+	 * @brief æ ¹æ®å­—ä½“å±æ€§è·å–å­—ä½“å¯¹è±¡
+	 * @param[in] strFontName å­—ä½“åç§°
+	 * @param[in] nSize å­—ä½“å¤§å°
+	 * @param[in] bBold æ˜¯å¦ç²—ä½“
+	 * @param[in] bUnderline æ˜¯å¦æœ‰ä¸‹åˆ’çº¿
+	 * @param[in] bStrikeout æ˜¯å¦å¸¦æœ‰åˆ é™¤çº¿
+	 * @param[in] bItalic æ˜¯å¦å€¾æ–œ
+	 * @return è¿”å›å­—ä½“çš„ HFONT å¥æŸ„
 	 */
 	static HFONT GetFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic);
 
 	/**
-	 * @brief »ñÈ¡×ÖÌåĞÅÏ¢
-	 * @param[in] strFontId ×ÖÌåID
-	 * @param[in] hDcPaint Éè±¸¾ä±ú
-	 * @return ·µ»Ø×ÖÌåµÄ TFontInfo ĞÅÏ¢
+	 * @brief è·å–å­—ä½“ä¿¡æ¯
+	 * @param[in] strFontId å­—ä½“ID
+	 * @param[in] hDcPaint è®¾å¤‡å¥æŸ„
+	 * @return è¿”å›å­—ä½“çš„ TFontInfo ä¿¡æ¯
 	 */
 	static TFontInfo* GetFontInfo(const std::wstring& strFontId, HDC hDcPaint);
 
 	/**
-	 * @brief »ñÈ¡×ÖÌåĞÅÏ¢
-	 * @param[in] hFont ×ÖÌå¶ÔÏó¾ä±ú
-	 * @param[in] hDcPaint Éè±¸¾ä±ú
-	 * @return ·µ»Ø×ÖÌåµÄ TFontInfo ĞÅÏ¢
+	 * @brief è·å–å­—ä½“ä¿¡æ¯
+	 * @param[in] hFont å­—ä½“å¯¹è±¡å¥æŸ„
+	 * @param[in] hDcPaint è®¾å¤‡å¥æŸ„
+	 * @return è¿”å›å­—ä½“çš„ TFontInfo ä¿¡æ¯
 	 */
 	static TFontInfo* GetFontInfo(HFONT hFont, HDC hDcPaint);
 
 	/**
-	 * @brief ¸ù¾İ×ÖÌå¶ÔÏó²éÕÒÖ¸¶¨×ÖÌåÊÇ·ñ´æÔÚ
-	 * @param[in] hFont ×ÖÌå¶ÔÏó¾ä±ú
-	 * @return ·µ»ØÊÇ·ñ´æÔÚ
-	 *     @retval true ´æÔÚ
-	 *     @retval false ²»´æÔÚ
+	 * @brief æ ¹æ®å­—ä½“å¯¹è±¡æŸ¥æ‰¾æŒ‡å®šå­—ä½“æ˜¯å¦å­˜åœ¨
+	 * @param[in] hFont å­—ä½“å¯¹è±¡å¥æŸ„
+	 * @return è¿”å›æ˜¯å¦å­˜åœ¨
+	 *     @retval true å­˜åœ¨
+	 *     @retval false ä¸å­˜åœ¨
 	 */
 	static bool FindFont(HFONT hFont);
 
 	/**
-	 * @brief ¸ù¾İ×ÖÌåĞÅÏ¢²éÕÒ×ÖÌåÊÇ·ñ´æÔÚ
-	 * @param[in] strFontName ×ÖÌåÃû³Æ
-	 * @param[in] nSize ×ÖÌå´óĞ¡
-	 * @param[in] bBold ÊÇ·ñ´ÖÌå
-	 * @param[in] bUnderline ÊÇ·ñÓĞÏÂ»®Ïß
-	 * @param[in] bStrikeout ÊÇ·ñ´øÓĞÉ¾³ıÏß
-	 * @param[in] bItalic ÊÇ·ñÇãĞ±
-	 * @return ·µ»ØÊÇ·ñ´æÔÚ
-	 *     @retval true ´æÔÚ
-	 *     @retval false ²»´æÔÚ
+	 * @brief æ ¹æ®å­—ä½“ä¿¡æ¯æŸ¥æ‰¾å­—ä½“æ˜¯å¦å­˜åœ¨
+	 * @param[in] strFontName å­—ä½“åç§°
+	 * @param[in] nSize å­—ä½“å¤§å°
+	 * @param[in] bBold æ˜¯å¦ç²—ä½“
+	 * @param[in] bUnderline æ˜¯å¦æœ‰ä¸‹åˆ’çº¿
+	 * @param[in] bStrikeout æ˜¯å¦å¸¦æœ‰åˆ é™¤çº¿
+	 * @param[in] bItalic æ˜¯å¦å€¾æ–œ
+	 * @return è¿”å›æ˜¯å¦å­˜åœ¨
+	 *     @retval true å­˜åœ¨
+	 *     @retval false ä¸å­˜åœ¨
 	 */
 	static bool FindFont(const std::wstring& strFontName, int nSize, bool bBold, bool bUnderline, bool bStrikeout, bool bItalic);
 
 	/**
-	 * @brief ¸ù¾İ×ÖÌåË÷ÒıÉ¾³ı×ÖÌå
-	 * @param[in] strFontId ×ÖÌåID
-	 * @return ·µ»ØÊÇ·ñÉ¾³ı³É¹¦
-	 *     @retval true É¾³ı³É¹¦
-	 *     @retval false ×ÖÌå²»´æÔÚ»òÉ¾³ıÊ§°Ü
+	 * @brief æ ¹æ®å­—ä½“ç´¢å¼•åˆ é™¤å­—ä½“
+	 * @param[in] strFontId å­—ä½“ID
+	 * @return è¿”å›æ˜¯å¦åˆ é™¤æˆåŠŸ
+	 *     @retval true åˆ é™¤æˆåŠŸ
+	 *     @retval false å­—ä½“ä¸å­˜åœ¨æˆ–åˆ é™¤å¤±è´¥
 	 */
 	static bool RemoveFontAt(const std::wstring& strFontId);
 
 	/**
-	 * @brief É¾³ıËùÓĞ×ÖÌå
-	 * @return ÎŞ
+	 * @brief åˆ é™¤æ‰€æœ‰å­—ä½“
+	 * @return æ— 
 	 */
 	static void RemoveAllFonts();
 
 	/**
-	 * @brief »ñÈ¡Ä¬ÈÏ½ûÓÃ×´Ì¬ÏÂ×ÖÌåÑÕÉ«
-	 * @return Ä¬ÈÏ½ûÓÃ×´Ì¬ÑÕÉ«µÄ×Ö·û´®±íÊ¾£¬¶ÔÓ¦ global.xml ÖĞÖ¸¶¨ÑÕÉ«Öµ
+	 * @brief è·å–é»˜è®¤ç¦ç”¨çŠ¶æ€ä¸‹å­—ä½“é¢œè‰²
+	 * @return é»˜è®¤ç¦ç”¨çŠ¶æ€é¢œè‰²çš„å­—ç¬¦ä¸²è¡¨ç¤ºï¼Œå¯¹åº” global.xml ä¸­æŒ‡å®šé¢œè‰²å€¼
 	 */
 	static std::wstring GetDefaultDisabledTextColor();
 
 	/**
-	 * @brief ÉèÖÃÄ¬ÈÏ½ûÓÃ×´Ì¬ÏÂµÄ×ÖÌåÑÕÉ«
-	 * @param[in] dwColor ×ÖÌåÑÕÉ«×Ö·û´®Öµ£¨Èç white£©
-	 * @return ÎŞ
+	 * @brief è®¾ç½®é»˜è®¤ç¦ç”¨çŠ¶æ€ä¸‹çš„å­—ä½“é¢œè‰²
+	 * @param[in] dwColor å­—ä½“é¢œè‰²å­—ç¬¦ä¸²å€¼ï¼ˆå¦‚ whiteï¼‰
+	 * @return æ— 
 	 */
 	static void SetDefaultDisabledTextColor(const std::wstring& strColor);
 
 	/**
-	 * @brief »ñÈ¡Ä¬ÈÏ×ÖÌåÑÕÉ«
-	 * @return Ä¬ÈÏ×ÖÌåÑÕÉ«×Ö·û´®±íÊ¾£¬¶ÔÓ¦ global.xml ÖĞÖ¸¶¨ÑÕÉ«Öµ
+	 * @brief è·å–é»˜è®¤å­—ä½“é¢œè‰²
+	 * @return é»˜è®¤å­—ä½“é¢œè‰²å­—ç¬¦ä¸²è¡¨ç¤ºï¼Œå¯¹åº” global.xml ä¸­æŒ‡å®šé¢œè‰²å€¼
 	 */
 	static std::wstring GetDefaultTextColor();
 
 	/**
-	 * @brief ÉèÖÃÄ¬ÈÏ×ÖÌåÑÕÉ«
-	 * @param[in] ×ÖÌåÑÕÉ«µÄ×Ö·û´®Öµ£¬¶ÔÓ¦ global.xml ÖĞÖ¸¶¨ÑÕÉ«Öµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®é»˜è®¤å­—ä½“é¢œè‰²
+	 * @param[in] å­—ä½“é¢œè‰²çš„å­—ç¬¦ä¸²å€¼ï¼Œå¯¹åº” global.xml ä¸­æŒ‡å®šé¢œè‰²å€¼
+	 * @return æ— 
 	 */
 	static void SetDefaultTextColor(const std::wstring& strColor);
 
 	/**
-	 * @brief »ñÈ¡Ä¬ÈÏÁ´½Ó×ÖÌåÑÕÉ«
-	 * @return Á´½Ó×ÖÌåÑÕÉ« DWORD ¸ñÊ½µÄÉ«Öµ
+	 * @brief è·å–é»˜è®¤é“¾æ¥å­—ä½“é¢œè‰²
+	 * @return é“¾æ¥å­—ä½“é¢œè‰² DWORD æ ¼å¼çš„è‰²å€¼
 	 */
 	static DWORD GetDefaultLinkFontColor();
 
 	/**
-	 * @brief ÉèÖÃÄ¬ÈÏÁ´½Ó×ÖÌåÑÕÉ«
-	 * @param[in] dwColor Ä¬ÈÏÁ´½Ó×ÖÌåÑÕÉ«
-	 * @return ÎŞ
+	 * @brief è®¾ç½®é»˜è®¤é“¾æ¥å­—ä½“é¢œè‰²
+	 * @param[in] dwColor é»˜è®¤é“¾æ¥å­—ä½“é¢œè‰²
+	 * @return æ— 
 	 */
 	static void SetDefaultLinkFontColor(DWORD dwColor);
 
 	/**
-	 * @brief »ñÈ¡½¹µãÁ´½ÓµÄÄ¬ÈÏ×ÖÌåÑÕÉ«
-	 * @return ·µ»Ø½¹µãÁ´½ÓµÄÄ¬ÈÏ×ÖÌåÑÕÉ«
+	 * @brief è·å–ç„¦ç‚¹é“¾æ¥çš„é»˜è®¤å­—ä½“é¢œè‰²
+	 * @return è¿”å›ç„¦ç‚¹é“¾æ¥çš„é»˜è®¤å­—ä½“é¢œè‰²
 	 */
 	static DWORD GetDefaultLinkHoverFontColor();
 
 	/**
-	 * @brief ÉèÖÃ½¹µãÁ´½ÓµÄÄ¬ÈÏ×ÖÌåÑÕÉ«
-	 * @param[in] dwColor ½¹µãÁ´½ÓµÄÄ¬ÈÏ×ÖÌåÑÕÉ«
-	 * @return ÎŞ
+	 * @brief è®¾ç½®ç„¦ç‚¹é“¾æ¥çš„é»˜è®¤å­—ä½“é¢œè‰²
+	 * @param[in] dwColor ç„¦ç‚¹é“¾æ¥çš„é»˜è®¤å­—ä½“é¢œè‰²
+	 * @return æ— 
 	 */
 	static void SetDefaultLinkHoverFontColor(DWORD dwColor);
 
 	/**
-	 * @brief »ñÈ¡Ä¬ÈÏÑ¡Ôñ×´Ì¬×ÖÌåÑÕÉ«
-	 * @return ·µ»ØÄ¬ÈÏÑ¡Ôñ×´Ì¬µÄ×ÖÌåÑÕÉ«
+	 * @brief è·å–é»˜è®¤é€‰æ‹©çŠ¶æ€å­—ä½“é¢œè‰²
+	 * @return è¿”å›é»˜è®¤é€‰æ‹©çŠ¶æ€çš„å­—ä½“é¢œè‰²
 	 */
 	static DWORD GetDefaultSelectedBkColor();
 
 	/**
-	 * @brief ÉèÖÃÄ¬ÈÏÑ¡Ôñ×´Ì¬µÄ×ÖÌåÑÕÉ«
-	 * @param[in] dwColor ×ÖÌåÑÕÉ«Öµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®é»˜è®¤é€‰æ‹©çŠ¶æ€çš„å­—ä½“é¢œè‰²
+	 * @param[in] dwColor å­—ä½“é¢œè‰²å€¼
+	 * @return æ— 
 	 */
 	static void SetDefaultSelectedBkColor(DWORD dwColor);
 
 	/**
-	 * @brief ¸ù¾İ XML ´´½¨Ò»¸ö Box
-	 * @param[in] strXmlPath XML ÎÄ¼şÂ·¾¶
-	 * @param[in] callback ×Ô¶¨Òå¿Ø¼şµÄ»Øµ÷´¦Àíº¯Êı
-	 * @return Ö¸¶¨²¼¾ÖÄ£¿éµÄ¶ÔÏóÖ¸Õë
+	 * @brief æ ¹æ® XML åˆ›å»ºä¸€ä¸ª Box
+	 * @param[in] strXmlPath XML æ–‡ä»¶è·¯å¾„
+	 * @param[in] callback è‡ªå®šä¹‰æ§ä»¶çš„å›è°ƒå¤„ç†å‡½æ•°
+	 * @return æŒ‡å®šå¸ƒå±€æ¨¡å—çš„å¯¹è±¡æŒ‡é’ˆ
 	 */
 	static Box* CreateBox(const std::wstring& strXmlPath, CreateControlCallback callback = CreateControlCallback());
 
 	/**
-	 * @brief ¸ù¾İ XML ÔÚ»º´æÖĞ²éÕÒÖ¸¶¨ Box£¬Èç¹ûÃ»ÓĞÔò´´½¨
-	 * @param[in] strXmlPath XML ÎÄ¼şÂ·¾¶
-	 * @param[in] callback ×Ô¶¨Òå¿Ø¼şµÄ»Øµ÷´¦Àíº¯Êı
-	 * @return Ö¸¶¨²¼¾ÖÄ£¿éµÄ¶ÔÏóÖ¸Õë
+	 * @brief æ ¹æ® XML åœ¨ç¼“å­˜ä¸­æŸ¥æ‰¾æŒ‡å®š Boxï¼Œå¦‚æœæ²¡æœ‰åˆ™åˆ›å»º
+	 * @param[in] strXmlPath XML æ–‡ä»¶è·¯å¾„
+	 * @param[in] callback è‡ªå®šä¹‰æ§ä»¶çš„å›è°ƒå¤„ç†å‡½æ•°
+	 * @return æŒ‡å®šå¸ƒå±€æ¨¡å—çš„å¯¹è±¡æŒ‡é’ˆ
 	 */
 	static Box* CreateBoxWithCache(const std::wstring& strXmlPath, CreateControlCallback callback = CreateControlCallback());
 
 	/**
-	 * @brief Ê¹ÓÃ XML Ìî³äÖ¸¶¨ Box
-	 * @param[in] pUserDefinedBox ÒªÌî³äµÄ box Ö¸Õë
-	 * @param[in] strXmlPath XML ÎÄ¼şÂ·¾¶
-	 * @param[in] callback ×Ô¶¨Òå¿Ø¼şµÄ»Øµ÷´¦Àíº¯Êı
-	 * @return ÎŞ
+	 * @brief ä½¿ç”¨ XML å¡«å……æŒ‡å®š Box
+	 * @param[in] pUserDefinedBox è¦å¡«å……çš„ box æŒ‡é’ˆ
+	 * @param[in] strXmlPath XML æ–‡ä»¶è·¯å¾„
+	 * @param[in] callback è‡ªå®šä¹‰æ§ä»¶çš„å›è°ƒå¤„ç†å‡½æ•°
+	 * @return æ— 
 	 */
 	static void FillBox(Box* pUserDefinedBox, const std::wstring& strXmlPath, CreateControlCallback callback = CreateControlCallback());
 
 	/**
-	 * @brief Ê¹ÓÃ¹¹½¨¹ıµÄ»º´æÌî³äÖ¸¶¨ Box£¬Èç¹ûÃ»ÓĞÔòÖØĞÂ¹¹½¨
-	 * @param[in] pUserDefinedBox ÒªÌî³äµÄ box Ö¸Õë
-	 * @param[in] strXmlPath XML ÎÄ¼şÂ·¾¶
-	 * @param[in] callback ×Ô¶¨Òå¿Ø¼şµÄ»Øµ÷´¦Àíº¯Êı
-	 * @return ÎŞ
+	 * @brief ä½¿ç”¨æ„å»ºè¿‡çš„ç¼“å­˜å¡«å……æŒ‡å®š Boxï¼Œå¦‚æœæ²¡æœ‰åˆ™é‡æ–°æ„å»º
+	 * @param[in] pUserDefinedBox è¦å¡«å……çš„ box æŒ‡é’ˆ
+	 * @param[in] strXmlPath XML æ–‡ä»¶è·¯å¾„
+	 * @param[in] callback è‡ªå®šä¹‰æ§ä»¶çš„å›è°ƒå¤„ç†å‡½æ•°
+	 * @return æ— 
 	 */
 	static void FillBoxWithCache(Box* pUserDefinedBox, const std::wstring& strXmlPath, CreateControlCallback callback = CreateControlCallback());
 
 	/**
-	 * @brief ×Ô¶¨Òå¿Ø¼ş´´½¨ºóµÄÈ«¾Ö»Øµ÷º¯Êı
-	 * @param[in] strControlName ×Ô¶¨Òå¿Ø¼şÃû³Æ
-	 * @return ·µ»ØÒ»¸ö×Ô¶¨Òå¿Ø¼şµÄ¶ÔÏóÖ¸Õë
+	 * @brief è‡ªå®šä¹‰æ§ä»¶åˆ›å»ºåçš„å…¨å±€å›è°ƒå‡½æ•°
+	 * @param[in] strControlName è‡ªå®šä¹‰æ§ä»¶åç§°
+	 * @return è¿”å›ä¸€ä¸ªè‡ªå®šä¹‰æ§ä»¶çš„å¯¹è±¡æŒ‡é’ˆ
 	 */
 	static Control* CreateControl(const std::wstring& strControlName);
 
 	static void AssertUIThread();
 
 	/**
-	 * @brief ÅĞ¶Ïµ±Ç°ÊÇ·ñÊ¹ÓÃÁË zip Ñ¹Ëõ°ü
-	 * @return ·µ»Ø true ±íÊ¾Ê¹ÓÃÁË zip Ñ¹Ëõ°ü×÷Îª×ÊÔ´£¬false ÎªÆÕÍ¨Ä¿Â¼Ä£Ê½
+	 * @brief åˆ¤æ–­å½“å‰æ˜¯å¦ä½¿ç”¨äº† zip å‹ç¼©åŒ…
+	 * @return è¿”å› true è¡¨ç¤ºä½¿ç”¨äº† zip å‹ç¼©åŒ…ä½œä¸ºèµ„æºï¼Œfalse ä¸ºæ™®é€šç›®å½•æ¨¡å¼
 	 */
 	static bool IsUseZip();
 
 	/**
-	 * @brief ´ò¿ªÒ»¸öÄÚ´æÑ¹Ëõ°ü×ÊÔ´
-	 * @param[in] resource_name ×ÊÔ´Ãû³Æ£¬ÓÉ MAKEINTRESOURCE ºêÉú³É
-	 * @param[in] resource_type ×ÊÔ´ÀàĞÍ£¬×Ô¶¨Òåµ¼ÈëµÄ×ÊÔ´ÀàĞÍÃû³Æ
-	 * @param[in] password Ñ¹Ëõ°üÃÜÂë
-	 * @return ·µ»Ø true ´ò¿ª³É¹¦£¬·µ»Ø false Îª´ò¿ªÊ§°Ü
+	 * @brief æ‰“å¼€ä¸€ä¸ªå†…å­˜å‹ç¼©åŒ…èµ„æº
+	 * @param[in] resource_name èµ„æºåç§°ï¼Œç”± MAKEINTRESOURCE å®ç”Ÿæˆ
+	 * @param[in] resource_type èµ„æºç±»å‹ï¼Œè‡ªå®šä¹‰å¯¼å…¥çš„èµ„æºç±»å‹åç§°
+	 * @param[in] password å‹ç¼©åŒ…å¯†ç 
+	 * @return è¿”å› true æ‰“å¼€æˆåŠŸï¼Œè¿”å› false ä¸ºæ‰“å¼€å¤±è´¥
 	 */
 	static bool OpenResZip(LPCTSTR  resource_name, LPCTSTR  resource_type, const std::string& password);
 
 	/**
-	 * @brief ´ò¿ªÒ»¸ö±¾µØÎÄ¼şÑ¹Ëõ°ü×ÊÔ´
-	 * @param[in] path Ñ¹Ëõ°üÎÄ¼şÂ·¾¶
-	 * @param[in] password Ñ¹Ëõ°üÃÜÂë
-	 * @return ·µ»Ø true ´ò¿ª³É¹¦£¬·µ»Ø false Îª´ò¿ªÊ§°Ü
+	 * @brief æ‰“å¼€ä¸€ä¸ªæœ¬åœ°æ–‡ä»¶å‹ç¼©åŒ…èµ„æº
+	 * @param[in] path å‹ç¼©åŒ…æ–‡ä»¶è·¯å¾„
+	 * @param[in] password å‹ç¼©åŒ…å¯†ç 
+	 * @return è¿”å› true æ‰“å¼€æˆåŠŸï¼Œè¿”å› false ä¸ºæ‰“å¼€å¤±è´¥
 	 */
 	static bool OpenResZip(const std::wstring& path, const std::string& password);
 
 	/**
-	 * @brief »ñÈ¡Ñ¹Ëõ°üÖĞµÄÄÚÈİµ½ÄÚ´æ
-	 * @param[in] path Òª»ñÈ¡µÄÎÄ¼şµÄÂ·¾¶
-	 * @return ·µ»ØÎÄ¼şµÄÄÚ´æµØÖ·
+	 * @brief è·å–å‹ç¼©åŒ…ä¸­çš„å†…å®¹åˆ°å†…å­˜
+	 * @param[in] path è¦è·å–çš„æ–‡ä»¶çš„è·¯å¾„
+	 * @return è¿”å›æ–‡ä»¶çš„å†…å­˜åœ°å€
 	 */
 	static HGLOBAL GetZipData(const std::wstring& path);
 
 	/**
-	 * @brief »ñÈ¡ÎÄ¼şÔÚÑ¹Ëõ°üÖĞµÄÎ»ÖÃ
-	 * @param[in] path Òª»ñÈ¡µÄÎÄ¼şÂ·¾¶
-	 * @return ·µ»ØÔÚÑ¹Ëõ°üÖĞµÄÎÄ¼şÎ»ÖÃ
+	 * @brief è·å–æ–‡ä»¶åœ¨å‹ç¼©åŒ…ä¸­çš„ä½ç½®
+	 * @param[in] path è¦è·å–çš„æ–‡ä»¶è·¯å¾„
+	 * @return è¿”å›åœ¨å‹ç¼©åŒ…ä¸­çš„æ–‡ä»¶ä½ç½®
 	 */
 	static std::wstring GetZipFilePath(const std::wstring& path);
 
 	/**
-	 * @brief ¸ù¾İ×ÊÔ´¼ÓÔØ·½Ê½£¬·µ»Ø¶ÔÓ¦µÄ×ÊÔ´Â·¾¶
-	 * @param[in] path Òª»ñÈ¡µÄ×ÊÔ´Â·¾¶
-	 * @return ¿ÉÓÃµÄ×ÊÔ´Â·¾¶
+	 * @brief æ ¹æ®èµ„æºåŠ è½½æ–¹å¼ï¼Œè¿”å›å¯¹åº”çš„èµ„æºè·¯å¾„
+	 * @param[in] path è¦è·å–çš„èµ„æºè·¯å¾„
+	 * @return å¯ç”¨çš„èµ„æºè·¯å¾„
 	 */
 	static std::wstring GetResPath(const std::wstring& res_path, const std::wstring& window_res_path);
 
 	/**
-	 * @brief ÅĞ¶Ï×ÊÔ´ÊÇ·ñ´æÔÚzipµ±ÖĞ
-	 * @param[in] path ÒªÅĞ¶ÏµÄ×ÊÔ´Â·¾¶
-	 * @return ÊÇ·ñ´æÔÚ
+	 * @brief åˆ¤æ–­èµ„æºæ˜¯å¦å­˜åœ¨zipå½“ä¸­
+	 * @param[in] path è¦åˆ¤æ–­çš„èµ„æºè·¯å¾„
+	 * @return æ˜¯å¦å­˜åœ¨
 	 */
 	static bool IsZipResExist(const std::wstring& path);
 
 private:
 	/**
-	 * @brief ¼ÓÔØÈ«¾Ö×ÊÔ´
-	 * @return ÎŞ
+	 * @brief åŠ è½½å…¨å±€èµ„æº
+	 * @return æ— 
 	 */
 	static void LoadGlobalResource();
 
@@ -511,15 +511,15 @@ private:
 	class ImageCacheKeyCompare
 	{
 	public:
-		// Õâ¸ö±È½Ïº¯Êı²»ÊÇ±È½Ï×ÖµäĞòµÄ£¬¶øÊÇ°´ÕÕÒÔÏÂ·¨Ôò£º
-		// Ê×ÏÈ±È½Ï£¬³¤¶ÈĞ¡µÄ¸üĞ¡
-		// ÔÙÄæÏò±È½Ï£¬¿ÉÒÔÈÏÎªÊÇÄæÏò×ÖµäĞò
+		// è¿™ä¸ªæ¯”è¾ƒå‡½æ•°ä¸æ˜¯æ¯”è¾ƒå­—å…¸åºçš„ï¼Œè€Œæ˜¯æŒ‰ç…§ä»¥ä¸‹æ³•åˆ™ï¼š
+		// é¦–å…ˆæ¯”è¾ƒï¼Œé•¿åº¦å°çš„æ›´å°
+		// å†é€†å‘æ¯”è¾ƒï¼Œå¯ä»¥è®¤ä¸ºæ˜¯é€†å‘å­—å…¸åº
 		bool operator()(const std::wstring& key1, const std::wstring& key2) const;
 	};
 	typedef std::map<std::wstring, std::weak_ptr<ImageInfo>, ImageCacheKeyCompare> MapStringToImagePtr;
 
-	static std::wstring m_pStrResourcePath; //È«¾ÖµÄ×ÊÔ´Â·¾¶£¬»»·ôµÄÊ±ºòĞŞ¸ÄÕâ¸ö±äÁ¿
-	static std::wstring m_pStrLanguagePath; //È«¾ÖÓïÑÔÎÄ¼şÂ·¾¶
+	static std::wstring m_pStrResourcePath; //å…¨å±€çš„èµ„æºè·¯å¾„ï¼Œæ¢è‚¤çš„æ—¶å€™ä¿®æ”¹è¿™ä¸ªå˜é‡
+	static std::wstring m_pStrLanguagePath; //å…¨å±€è¯­è¨€æ–‡ä»¶è·¯å¾„
 	static std::vector<Window*> m_aPreMessages;
 	static std::map<std::wstring, std::unique_ptr<WindowBuilder>> m_builderMap;
 	static CreateControlCallback m_createControlCallback;

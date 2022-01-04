@@ -1,7 +1,7 @@
 #pragma once
 
 /** @class CustomLayout
-  * @brief 用于会话窗口中容纳SessionBox的自定义TabBox，为了在任务栏显示缩略图和预览图，重写了对子控件的布局逻辑
+  * @brief 鐢ㄤ簬浼氳瘽绐楀彛涓绾砈essionBox鐨勮嚜瀹氫箟TabBox锛屼负浜嗗湪浠诲姟鏍忔樉绀虹缉鐣ュ浘鍜岄瑙堝浘锛岄噸鍐欎簡瀵瑰瓙鎺т欢鐨勫竷灞�閫昏緫
   * @copyright (c) 2016, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2019/3/20

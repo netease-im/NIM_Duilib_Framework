@@ -11,7 +11,7 @@ class UILIB_API Slider : public Progress
 public:
 	Slider();
 
-	/// ÖØĞ´¸¸Àà·½·¨£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ£¬Çë²Î¿¼¸¸ÀàÉùÃ÷
+	/// é‡å†™çˆ¶ç±»æ–¹æ³•ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½ï¼Œè¯·å‚è€ƒçˆ¶ç±»å£°æ˜
 	virtual std::wstring GetType() const override;
 	virtual UiRect GetProgressPos() override;
 	virtual void HandleMessage(EventArgs& event) override;
@@ -21,63 +21,63 @@ public:
 	virtual void ClearImageCache() override;
 
 	/**
-	 * @brief »ñÈ¡²½½ø²½³¤
-	 * @return ·µ»Ø²½½ø²½³¤
+	 * @brief è·å–æ­¥è¿›æ­¥é•¿
+	 * @return è¿”å›æ­¥è¿›æ­¥é•¿
 	 */
 	int GetChangeStep();
 
 	/**
-	 * @brief ÉèÖÃ²½½ø²½³¤
-	 * @param[in] step ÒªÉèÖÃµÄ²½³¤
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ­¥è¿›æ­¥é•¿
+	 * @param[in] step è¦è®¾ç½®çš„æ­¥é•¿
+	 * @return æ— 
 	 */
 	void SetChangeStep(int step);
 
 	/**
-	 * @brief ÉèÖÃ¶à¶¯»¬¿éµÄ´óĞ¡
-	 * @param[in] szXY ÒªÉèÖÃµÄ´óĞ¡
-	 * @return ÎŞ
+	 * @brief è®¾ç½®å¤šåŠ¨æ»‘å—çš„å¤§å°
+	 * @param[in] szXY è¦è®¾ç½®çš„å¤§å°
+	 * @return æ— 
 	 */
 	void SetThumbSize(CSize szXY);
 
 	/**
-	 * @brief »ñÈ¡»¬¿éµÄ¾ØĞÎĞÅÏ¢
-	 * @return ·µ»Ø»¬¿éµÄ¾ØĞÎĞÅÏ¢
+	 * @brief è·å–æ»‘å—çš„çŸ©å½¢ä¿¡æ¯
+	 * @return è¿”å›æ»‘å—çš„çŸ©å½¢ä¿¡æ¯
 	 */
 	UiRect GetThumbRect() const;
 
 	/**
-	 * @brief »ñÈ¡Ö¸¶¨×´Ì¬ÏÂ»¬¿éµÄÍ¼Æ¬
-	 * @param[in] stateType Òª»ñÈ¡µÄ×´Ì¬±êÊ¶£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @return ·µ»ØÍ¼Æ¬Â·¾¶
+	 * @brief è·å–æŒ‡å®šçŠ¶æ€ä¸‹æ»‘å—çš„å›¾ç‰‡
+	 * @param[in] stateType è¦è·å–çš„çŠ¶æ€æ ‡è¯†ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @return è¿”å›å›¾ç‰‡è·¯å¾„
 	 */
 	std::wstring GetThumbStateImage(ControlStateType stateType);
 
 	/**
-	 * @brief ÉèÖÃÖ¸¶¨×´Ì¬ÏÂ»¬¿éµÄÍ¼Æ¬
-	 * @param[in] stateType ÒªÉèÖÃµÄ×´Ì¬±êÊ¶£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @param[in] pStrImage ÒªÉèÖÃµÄÍ¼Æ¬Î»ÖÃ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æŒ‡å®šçŠ¶æ€ä¸‹æ»‘å—çš„å›¾ç‰‡
+	 * @param[in] stateType è¦è®¾ç½®çš„çŠ¶æ€æ ‡è¯†ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @param[in] pStrImage è¦è®¾ç½®çš„å›¾ç‰‡ä½ç½®
+	 * @return æ— 
 	 */
 	void SetThumbStateImage(ControlStateType stateType, const std::wstring& pStrImage);
 
 	/**
-	 * @brief »ñÈ¡½ø¶ÈÌõÄÚ±ß¾à
-	 * @return ·µ»ØÄÚ±ß¾àĞÅÏ¢
+	 * @brief è·å–è¿›åº¦æ¡å†…è¾¹è·
+	 * @return è¿”å›å†…è¾¹è·ä¿¡æ¯
 	 */
 	UiRect GetProgressBarPadding() const;
 
 	/**
-	 * @brief ÉèÖÃ½ø¶ÈÌõÄÚ±ß¾à
-	 * @param[in] rc ÒªÉèÖÃµÄ±ß¾àĞÅÏ¢
-	 * @return ÎŞ
+	 * @brief è®¾ç½®è¿›åº¦æ¡å†…è¾¹è·
+	 * @param[in] rc è¦è®¾ç½®çš„è¾¹è·ä¿¡æ¯
+	 * @return æ— 
 	 */
 	void SetProgressBarPadding(UiRect rc);
 
 	/**
-	 * @brief ¼àÌı½ø¶ÈÌõ½ø¶È¸Ä±äÊÂ¼ş
-	 * @param[in] callback ½ø¶ÈÌõ½ø¶È¸Ä±äºóµ÷ÓÃµÄ»Øµ÷º¯Êı
-	 * @return ÎŞ
+	 * @brief ç›‘å¬è¿›åº¦æ¡è¿›åº¦æ”¹å˜äº‹ä»¶
+	 * @param[in] callback è¿›åº¦æ¡è¿›åº¦æ”¹å˜åè°ƒç”¨çš„å›è°ƒå‡½æ•°
+	 * @return æ— 
 	 */
 	void AttachValueChange(const EventCallback& callback) {	OnEvent[kEventValueChange] += callback;	}
 

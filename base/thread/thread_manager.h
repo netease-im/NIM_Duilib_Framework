@@ -1,4 +1,4 @@
-﻿// a thread manager for iter-thread communicatios, etc.
+// a thread manager for iter-thread communicatios, etc.
 
 #ifndef BASE_THREAD_THREAD_MANAGER_H_
 #define BASE_THREAD_THREAD_MANAGER_H_

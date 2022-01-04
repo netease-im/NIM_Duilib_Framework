@@ -18,16 +18,16 @@ public:
 	virtual void PaintBody(ui::IRenderContext* pRender) override;
 
 	/**
-	* @brief SetColumnWidthÖĞµ÷ÓÃ, ¸ü¸ÄÁËÁĞ¿í;
-	* @param[in] col_index:	Òªµ÷ÕûµÄÁĞĞòºÅ, base on 0;
-	* @param[in] width:	ĞÂµÄÁĞ¿í;
+	* @brief SetColumnWidthä¸­è°ƒç”¨, æ›´æ”¹äº†åˆ—å®½;
+	* @param[in] col_index:	è¦è°ƒæ•´çš„åˆ—åºå·, base on 0;
+	* @param[in] width:	æ–°çš„åˆ—å®½;
 	*/
 	virtual void OnColumnWidthChanged(int col_index, int width) override;
 
 	/**
-	* @brief Ôö/É¾ÁĞ;
-	* @param[in] col_index:	ÁĞĞòºÅ, base on 0, -1´ú±í¶àÁĞ;
-	* @param[in] bRemove:	true:É¾³ıÁĞ; false:ĞÂÔöÁĞ;
+	* @brief å¢/åˆ åˆ—;
+	* @param[in] col_index:	åˆ—åºå·, base on 0, -1ä»£è¡¨å¤šåˆ—;
+	* @param[in] bRemove:	true:åˆ é™¤åˆ—; false:æ–°å¢åˆ—;
 	*/
 	virtual void OnColumnCountChanged(int col_index, bool bRemove) override;
 

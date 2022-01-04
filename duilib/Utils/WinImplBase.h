@@ -1,4 +1,4 @@
-﻿#ifndef UI_UTILS_WINIMPLBASE_H_
+#ifndef UI_UTILS_WINIMPLBASE_H_
 #define UI_UTILS_WINIMPLBASE_H_
 
 #pragma once

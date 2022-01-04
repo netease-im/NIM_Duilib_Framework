@@ -4,7 +4,7 @@
 namespace nim_comp
 {
 /** @class WindowEx
- * @brief ËùÓĞ´°ÌåµÄ»ùÀà
+ * @brief æ‰€æœ‰çª—ä½“çš„åŸºç±»
  * @copyright (c) 2015, NetEase Inc. All rights reserved
  * @date 2015/9/16
  */
@@ -15,73 +15,73 @@ public:
 	virtual ~WindowEx();
 
 	/**
-	 * ´´½¨´°¿Ú
-	 * @param[in] hwndParent ¸¸´°¿Ú¾ä±ú
-	 * @param[in] pstrName ´°¿ÚÃû³Æ
-	 * @param[in] dwStyle ´°¿ÚÑùÊ½
-	 * @param[in] dwExStyle ´°¿ÚÀ©Õ¹ÑùÊ½
-	 * @param[in] isLayeredWindow ÊÇ·ñ´´½¨·Ö²ã´°¿Ú
-	 * @param[in] rc ´°¿ÚÎ»ÖÃ
-	 * @return HWND ´°¿Ú¾ä±ú
+	 * åˆ›å»ºçª—å£
+	 * @param[in] hwndParent çˆ¶çª—å£å¥æŸ„
+	 * @param[in] pstrName çª—å£åç§°
+	 * @param[in] dwStyle çª—å£æ ·å¼
+	 * @param[in] dwExStyle çª—å£æ‰©å±•æ ·å¼
+	 * @param[in] isLayeredWindow æ˜¯å¦åˆ›å»ºåˆ†å±‚çª—å£
+	 * @param[in] rc çª—å£ä½ç½®
+	 * @return HWND çª—å£å¥æŸ„
 	 */
 	virtual HWND Create(HWND hwndParent, LPCTSTR pstrName, DWORD dwStyle, DWORD dwExStyle,
 		bool isLayeredWindow = true, const ui::UiRect& rc = ui::UiRect(0, 0, 0, 0)) override;
 
 	/**
-	 * ´¦Àí´°¿Ú±»Ïú»ÙµÄÏûÏ¢
-	 * @param[in] uMsg ÏûÏ¢
-	 * @param[in] wParam ²ÎÊı
-	 * @param[in] lParam ²ÎÊı
-	 * @param[out] bHandled ÏûÏ¢ÊÇ·ñ±»´¦Àí
-	 * @return LRESULT ´¦Àí½á¹û
+	 * å¤„ç†çª—å£è¢«é”€æ¯çš„æ¶ˆæ¯
+	 * @param[in] uMsg æ¶ˆæ¯
+	 * @param[in] wParam å‚æ•°
+	 * @param[in] lParam å‚æ•°
+	 * @param[out] bHandled æ¶ˆæ¯æ˜¯å¦è¢«å¤„ç†
+	 * @return LRESULT å¤„ç†ç»“æœ
 	 */
 	virtual LRESULT OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	/**
-	 * ´¦ÀíESC¼üµ¥»÷µÄÏûÏ¢
-	 * @param[out] bHandled ÏûÏ¢ÊÇ·ñ±»´¦Àí
-	 * @return void ÎŞ·µ»ØÖµ
+	 * å¤„ç†ESCé”®å•å‡»çš„æ¶ˆæ¯
+	 * @param[out] bHandled æ¶ˆæ¯æ˜¯å¦è¢«å¤„ç†
+	 * @return void æ— è¿”å›å€¼
 	 */
 	virtual void OnEsc(BOOL &bHandled);
 
 	/**
-	 * »ñÈ¡´°¿ÚÀàÃûµÄ½Ó¿Ú
-	 * @return wstring ´°¿ÚÀàÃû
+	 * è·å–çª—å£ç±»åçš„æ¥å£
+	 * @return wstring çª—å£ç±»å
 	 */
 	virtual std::wstring GetWindowClassName(void) const = 0;
 
 	/**
-	 * »ñÈ¡´°¿ÚidµÄ½Ó¿Ú
-	 * @return wstring ´°¿Úid
+	 * è·å–çª—å£idçš„æ¥å£
+	 * @return wstring çª—å£id
 	 */
 	virtual std::wstring GetWindowId(void) const = 0;
 
 	/**
-	 * ´¦Àí´°¿ÚÏûÏ¢
-	 * @param[in] uMsg ÏûÏ¢
-	 * @param[in] wParam ²ÎÊı
-	 * @param[in] lParam ²ÎÊı
-	 * @return LRESULT ´¦Àí½á¹û
+	 * å¤„ç†çª—å£æ¶ˆæ¯
+	 * @param[in] uMsg æ¶ˆæ¯
+	 * @param[in] wParam å‚æ•°
+	 * @param[in] lParam å‚æ•°
+	 * @return LRESULT å¤„ç†ç»“æœ
 	 */
 	virtual LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 
 private:
 	/**
-	 * ´ÓWindowManagerÖĞ×¢²á×Ô¼º
-	 * @return bool true ×¢²á³É¹¦£¬false ×¢²áÊ§°Ü
+	 * ä»WindowManagerä¸­æ³¨å†Œè‡ªå·±
+	 * @return bool true æ³¨å†ŒæˆåŠŸï¼Œfalse æ³¨å†Œå¤±è´¥
 	 */
 	bool RegisterWnd();
 
 	/**
-	 * ´ÓWindowManagerÖĞ·´×¢²á×Ô¼º
-	 * @return void ÎŞ·µ»ØÖµ
+	 * ä»WindowManagerä¸­åæ³¨å†Œè‡ªå·±
+	 * @return void æ— è¿”å›å€¼
 	 */
 	void UnRegisterWnd();
 };
 
 /**
-* »ñÈ¡µ¯³ö´°¿Ú¿ÉÒÔÏÔÊ¾ÔÚÓÒÏÂ½ÇÎ»ÖÃµÄ×ø±ê
-* @return POINT ´°¿Ú×ø±ê
+* è·å–å¼¹å‡ºçª—å£å¯ä»¥æ˜¾ç¤ºåœ¨å³ä¸‹è§’ä½ç½®çš„åæ ‡
+* @return POINT çª—å£åæ ‡
 */
 POINT GetPopupWindowPos(WindowEx* window);
 

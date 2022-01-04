@@ -9,8 +9,8 @@ namespace nim_comp
 
 bool CefJSHandler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, const CefV8ValueList& arguments, CefRefPtr<CefV8Value>& retval, CefString& exception)
 {
-	// µ±WebÖĞµ÷ÓÃÁË"NimCefWebFunction"º¯Êıºó£¬»á´¥·¢µ½ÕâÀï£¬È»ºó°Ñ²ÎÊı±£´æ£¬×ª·¢µ½Broswer½ø³Ì
-	// Broswer½ø³ÌµÄBrowserHandlerÀàÔÚOnProcessMessageReceived½Ó¿ÚÖĞ´¦ÀíkJsCallbackMessageÏûÏ¢£¬¾Í¿ÉÒÔÊÕµ½Õâ¸öÏûÏ¢
+	// å½“Webä¸­è°ƒç”¨äº†"NimCefWebFunction"å‡½æ•°åï¼Œä¼šè§¦å‘åˆ°è¿™é‡Œï¼Œç„¶åæŠŠå‚æ•°ä¿å­˜ï¼Œè½¬å‘åˆ°Broswerè¿›ç¨‹
+	// Broswerè¿›ç¨‹çš„BrowserHandlerç±»åœ¨OnProcessMessageReceivedæ¥å£ä¸­å¤„ç†kJsCallbackMessageæ¶ˆæ¯ï¼Œå°±å¯ä»¥æ”¶åˆ°è¿™ä¸ªæ¶ˆæ¯
 
 	if (arguments.size() < 2)
 	{
@@ -27,8 +27,8 @@ bool CefJSHandler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, 
 
 	if (name == "call")
 	{
-		// ÔÊĞíÃ»ÓĞ²ÎÊıÁĞ±íµÄµ÷ÓÃ£¬µÚ¶ş¸ö²ÎÊıÎª»Øµ÷
-		// Èç¹û´«µİÁË²ÎÊıÁĞ±í£¬ÄÇÃ´»Øµ÷ÊÇµÚÈı¸ö²ÎÊı
+		// å…è®¸æ²¡æœ‰å‚æ•°åˆ—è¡¨çš„è°ƒç”¨ï¼Œç¬¬äºŒä¸ªå‚æ•°ä¸ºå›è°ƒ
+		// å¦‚æœä¼ é€’äº†å‚æ•°åˆ—è¡¨ï¼Œé‚£ä¹ˆå›è°ƒæ˜¯ç¬¬ä¸‰ä¸ªå‚æ•°
 		CefString function_name = arguments[0]->GetStringValue();
 		CefString params = "{}";
 		CefRefPtr<CefV8Value> callback;
@@ -47,7 +47,7 @@ bool CefJSHandler::Execute(const CefString& name, CefRefPtr<CefV8Value> object, 
 			return false;
 		}
 
-		// Ö´ĞĞ C++ ·½·¨
+		// æ‰§è¡Œ C++ æ–¹æ³•
 		if (!js_bridge_->CallCppFunction(function_name, params, callback))
 		{
 			exception = nbase::StringPrintf("Failed to call function %s.", function_name).c_str();

@@ -45,14 +45,14 @@ void BrowserBox::InitBrowserBox(const std::wstring &url)
 	cef_control_->AttachLoadEnd(nbase::Bind(&BrowserBox::OnLoadEnd, this, std::placeholders::_1));
 	cef_control_->AttachLoadError(nbase::Bind(&BrowserBox::OnLoadError, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
 
-	// ¼ÓÔØÄ¬ÈÏÍøÒ³
+	// åŠ è½½é»˜è®¤ç½‘é¡µ
 	std::wstring html_path = url;
 	if (html_path.empty())
 		html_path = nbase::win32::GetCurrentModuleDirectory() + L"resources\\themes\\default\\cef\\cef.html";
 
 	cef_control_->LoadURL(html_path);
 
-	// ³õÊ¼»¯ÈÎÎñÀ¸ËõÂÔÍ¼
+	// åˆå§‹åŒ–ä»»åŠ¡æ ç¼©ç•¥å›¾
 	if ((GetWindowExStyle(m_pWindow->GetHWND()) & WS_EX_LAYERED) != 0)
 	{
 		taskbar_item_ = new TaskbarTabItem(this);
@@ -60,7 +60,7 @@ void BrowserBox::InitBrowserBox(const std::wstring &url)
 			taskbar_item_->Init(url, browser_id_);
 	}
 
-	// Box»ñÈ¡½¹µãÊ±°Ñ½¹µã×ªÒÆ¸øCef¿Ø¼ş
+	// Boxè·å–ç„¦ç‚¹æ—¶æŠŠç„¦ç‚¹è½¬ç§»ç»™Cefæ§ä»¶
 	this->AttachSetFocus([this](ui::EventArgs* param)->bool
 	{
 		cef_control_->SetFocus();
@@ -156,7 +156,7 @@ bool BrowserBox::OnLinkClick(const std::wstring& url)
 
 CefRequestHandler::ReturnValue BrowserBox::OnBeforeNavigate(CefRefPtr<CefRequest> request, bool is_redirect)
 {
-	// ·µ»ØRV_CANCEL½Ø¶Ïµ¼º½
+	// è¿”å›RV_CANCELæˆªæ–­å¯¼èˆª
 	return RV_CONTINUE;
 }
 
@@ -172,9 +172,9 @@ void BrowserBox::OnLoadStart()
 
 void BrowserBox::OnLoadEnd(int httpStatusCode)
 {
-	// ×¢²áÒ»¸ö·½·¨Ìá¹©Ç°¶Ëµ÷ÓÃ
+	// æ³¨å†Œä¸€ä¸ªæ–¹æ³•æä¾›å‰ç«¯è°ƒç”¨
 	cef_control_->RegisterCppFunc(L"ShowMessageBox", ToWeakCallback([](const std::string& params, nim_comp::ReportResultFunction callback) {
-		MessageBoxA(NULL, params.c_str(), "½ÓÊÕµ½ JavaScript ·¢À´µÄÏûÏ¢", MB_OK);
+		MessageBoxA(NULL, params.c_str(), "æ¥æ”¶åˆ° JavaScript å‘æ¥çš„æ¶ˆæ¯", MB_OK);
 		callback(false, R"({ "message": "Success." })");
 	}));
 }

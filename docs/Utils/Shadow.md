@@ -1,154 +1,154 @@
-# Shadow£¨ÒõÓ°£©
+# Shadowï¼ˆé˜´å½±ï¼‰
 
-| ·½·¨Ãû³Æ | ÓÃÍ¾ |
+| æ–¹æ³•åç§° | ç”¨é€” |
 | :--- | :--- |
-| [SetShadowAttached](#SetShadowAttached) | ÉèÖÃÊÇ·ñ¸½¼ÓÒõÓ°Ğ§¹û |
-| [IsShadowAttached](#IsShadowAttached) | ÅĞ¶ÏÊÇ·ñÒÑ¾­¸½¼ÓÁËÒõÓ° |
-| [SetShadowCorner](#SetShadowCorner) | ÉèÖÃÒõÓ°µÄ¾Å¹¬¸ñÊôĞÔ |
-| [GetShadowCorner](#GetShadowCorner) | »ñÈ¡ÒõÓ°µÄ¾Å¹¬¸ñÊôĞÔ |
-| [ResetShadowBox](#ResetShadowBox) | ¸ù¾İ³õÊ¼»¯µÄÒõÓ°·¶Î§ÖØÖÃÒõÓ°±ß¿ò |
-| [SetShadowImage](#SetShadowImage) | ÉèÖÃÒõÓ°Í¼Æ¬ |
-| [GetShadowImage](#GetShadowImage) | »ñÈ¡ÒõÓ°Í¼Æ¬Î»ÖÃ |
-| [AttachShadow](#AttachShadow) | ½«ÒõÓ°¸½¼Óµ½´°¿Ú |
-| [MaximizedOrRestored](#MaximizedOrRestored) | ÉèÖÃ´°¿Ú×î´ó»¯»¹ÊÇ»¹Ô­×´Ì¬ |
-| [GetRoot](#GetRoot) | »ñÈ¡¸½¼ÓÒõÓ°ºóµÄÈİÆ÷Ö¸Õë |
-| [ClearImageCache](#ClearImageCache) | ÇåÀíÍ¼Æ¬»º´æ |
-| [SetPadding](#SetPadding) | ÉèÖÃÒõÓ°ÄÚ±ß¾à |
+| [SetShadowAttached](#SetShadowAttached) | è®¾ç½®æ˜¯å¦é™„åŠ é˜´å½±æ•ˆæœ |
+| [IsShadowAttached](#IsShadowAttached) | åˆ¤æ–­æ˜¯å¦å·²ç»é™„åŠ äº†é˜´å½± |
+| [SetShadowCorner](#SetShadowCorner) | è®¾ç½®é˜´å½±çš„ä¹å®«æ ¼å±æ€§ |
+| [GetShadowCorner](#GetShadowCorner) | è·å–é˜´å½±çš„ä¹å®«æ ¼å±æ€§ |
+| [ResetShadowBox](#ResetShadowBox) | æ ¹æ®åˆå§‹åŒ–çš„é˜´å½±èŒƒå›´é‡ç½®é˜´å½±è¾¹æ¡† |
+| [SetShadowImage](#SetShadowImage) | è®¾ç½®é˜´å½±å›¾ç‰‡ |
+| [GetShadowImage](#GetShadowImage) | è·å–é˜´å½±å›¾ç‰‡ä½ç½® |
+| [AttachShadow](#AttachShadow) | å°†é˜´å½±é™„åŠ åˆ°çª—å£ |
+| [MaximizedOrRestored](#MaximizedOrRestored) | è®¾ç½®çª—å£æœ€å¤§åŒ–è¿˜æ˜¯è¿˜åŸçŠ¶æ€ |
+| [GetRoot](#GetRoot) | è·å–é™„åŠ é˜´å½±åçš„å®¹å™¨æŒ‡é’ˆ |
+| [ClearImageCache](#ClearImageCache) | æ¸…ç†å›¾ç‰‡ç¼“å­˜ |
+| [SetPadding](#SetPadding) | è®¾ç½®é˜´å½±å†…è¾¹è· |
 
 ### SetShadowAttached
 
-ÉèÖÃÊÇ·ñ¸½¼ÓÒõÓ°Ğ§¹û
+è®¾ç½®æ˜¯å¦é™„åŠ é˜´å½±æ•ˆæœ
 
 ```cpp
 void SetShadowAttached(bool bShadowAttached)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `bShadowAttached` ÉèÖÃ true ÎªÊÇ£¬false Îª·ñ
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `bShadowAttached` è®¾ç½® true ä¸ºæ˜¯ï¼Œfalse ä¸ºå¦
+ - è¿”å›å€¼ï¼šæ— 
 
 ### IsShadowAttached
 
-ÅĞ¶ÏÊÇ·ñÒÑ¾­¸½¼ÓÁËÒõÓ°
+åˆ¤æ–­æ˜¯å¦å·²ç»é™„åŠ äº†é˜´å½±
 
 ```cpp
 bool IsShadowAttached()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£º·µ»Ø true ±íÊ¾ÒÑ¾­¸½¼Ó£¬·ñÔòÎª false
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šè¿”å› true è¡¨ç¤ºå·²ç»é™„åŠ ï¼Œå¦åˆ™ä¸º false
 
 ### SetShadowCorner
 
-ÉèÖÃÓ¦ÓÃµÄ¾Å¹¬¸ñÊôĞÔ
+è®¾ç½®åº”ç”¨çš„ä¹å®«æ ¼å±æ€§
 
 ```cpp
 void SetShadowCorner(const UiRect &rect)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `rect` ÒªÉèÖÃµÄ¾Å¹¬¸ñÊôĞÔ
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `rect` è¦è®¾ç½®çš„ä¹å®«æ ¼å±æ€§
+ - è¿”å›å€¼ï¼šæ— 
 
 ### GetShadowCorner
 
-»ñÈ¡ÒõÓ°µÄ¾Å¹¬¸ñÊôĞÔ
+è·å–é˜´å½±çš„ä¹å®«æ ¼å±æ€§
 
 ```cpp
 UiRect GetShadowCorner()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£º·µ»ØÒõÓ°µÄ¾Å¹¬¸ñÊôĞÔ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šè¿”å›é˜´å½±çš„ä¹å®«æ ¼å±æ€§
 
 ### ResetShadowBox
 
-¸ù¾İ³õÊ¼»¯µÄÒõÓ°·¶Î§ÖØÖÃÒõÓ°±ß¿ò
+æ ¹æ®åˆå§‹åŒ–çš„é˜´å½±èŒƒå›´é‡ç½®é˜´å½±è¾¹æ¡†
 
 ```cpp
 void ResetShadowBox()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šæ— 
 
 ### SetShadowImage
 
-ÉèÖÃÒõÓ°Í¼Æ¬
+è®¾ç½®é˜´å½±å›¾ç‰‡
 
 ```cpp
 void SetShadowImage(const std::wstring &image)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `image` Í¼Æ¬Â·¾¶
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `image` å›¾ç‰‡è·¯å¾„
+ - è¿”å›å€¼ï¼šæ— 
 
 ### GetShadowImage
 
-»ñÈ¡ÒõÓ°Í¼Æ¬Î»ÖÃ
+è·å–é˜´å½±å›¾ç‰‡ä½ç½®
 
 ```cpp
 std::wstring GetShadowImage()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£º·µ»ØÒõÓ°Í¼Æ¬Î»ÖÃ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šè¿”å›é˜´å½±å›¾ç‰‡ä½ç½®
 
 ### AttachShadow
 
-½«ÒõÓ°¸½¼Óµ½´°¿Ú
+å°†é˜´å½±é™„åŠ åˆ°çª—å£
 
 ```cpp
 Box* AttachShadow(Box* pRoot)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `pRoot` ´°¿ÚµÄ¶¥²ãÈİÆ÷
- - ·µ»ØÖµ£º·µ»Ø¸½¼ÓÒõÓ°ºóµÄÈİÆ÷Ö¸Õë
+ - å‚&emsp;æ•°ï¼š  
+    - `pRoot` çª—å£çš„é¡¶å±‚å®¹å™¨
+ - è¿”å›å€¼ï¼šè¿”å›é™„åŠ é˜´å½±åçš„å®¹å™¨æŒ‡é’ˆ
 
 ### MaximizedOrRestored
 
-ÉèÖÃ´°¿Ú×î´ó»¯»¹ÊÇ»¹Ô­×´Ì¬
+è®¾ç½®çª—å£æœ€å¤§åŒ–è¿˜æ˜¯è¿˜åŸçŠ¶æ€
 
 ```cpp
 void MaximizedOrRestored(bool isMaximized)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `isMaximized` ÉèÖÃÎª true ±íÊ¾×î´ó»¯£¬false Îª»¹Ô­³õÊ¼×´Ì¬
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `isMaximized` è®¾ç½®ä¸º true è¡¨ç¤ºæœ€å¤§åŒ–ï¼Œfalse ä¸ºè¿˜åŸåˆå§‹çŠ¶æ€
+ - è¿”å›å€¼ï¼šæ— 
 
 ### GetRoot
 
-»ñÈ¡¸½¼ÓÒõÓ°ºóµÄÈİÆ÷Ö¸Õë
+è·å–é™„åŠ é˜´å½±åçš„å®¹å™¨æŒ‡é’ˆ
 
 ```cpp
 Control* GetRoot()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£º·µ»ØÈİÆ÷Ö¸Õë
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šè¿”å›å®¹å™¨æŒ‡é’ˆ
 
 ### ClearImageCache
 
-ÇåÀíÍ¼Æ¬»º´æ
+æ¸…ç†å›¾ç‰‡ç¼“å­˜
 
 ```cpp
 void ClearImageCache()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šæ— 
 
 ### SetPadding
 
-ÉèÖÃÒõÓ°ÄÚ±ß¾à
+è®¾ç½®é˜´å½±å†…è¾¹è·
 
 ```cpp
 void SetPadding()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šæ— 
 

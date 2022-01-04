@@ -14,20 +14,20 @@ Item::~Item()
 
 void Item::InitSubControls(const std::wstring& img, const std::wstring& title, int nDataIndex)
 {
-	// ²éÕÒ Item ÏÂµÄ¿Ø¼ş
+	// æŸ¥æ‰¾ Item ä¸‹çš„æ§ä»¶
 	if (control_img_ == nullptr)
 	{
 		control_img_ = dynamic_cast<ui::Control*>(FindSubControl(L"control_img"));
 		label_title_ = dynamic_cast<ui::Label*>(FindSubControl(L"label_title"));
 		progress_ = dynamic_cast<ui::Progress*>(FindSubControl(L"progress"));
 		btn_del_ = dynamic_cast<ui::Button*>(FindSubControl(L"btn_del"));
-		// Ä£Äâ½ø¶ÈÌõ½ø¶È
+		// æ¨¡æ‹Ÿè¿›åº¦æ¡è¿›åº¦
 		nbase::TimeDelta time_delta = nbase::TimeDelta::FromMicroseconds(nbase::Time::Now().ToInternalValue());
 		t_time = time_delta.ToMilliseconds();
 		progress_->SetValue((double)(time_delta.ToMilliseconds() % 100));
-		// ÉèÖÃÍ¼±êºÍÈÎÎñÃû³Æ
+		// è®¾ç½®å›¾æ ‡å’Œä»»åŠ¡åç§°
 		control_img_->SetBkImage(img);
-		// °ó¶¨É¾³ıÈÎÎñ´¦Àíº¯Êı
+		// ç»‘å®šåˆ é™¤ä»»åŠ¡å¤„ç†å‡½æ•°
 		btn_del_->AttachClick(nbase::Bind(&Item::OnRemove, this, std::placeholders::_1));
 	}
 
@@ -40,7 +40,7 @@ void Item::InitSubControls(const std::wstring& img, const std::wstring& title, i
 
 bool Item::OnRemove(ui::EventArgs* args)
 {
-	// É¾³ıÊ±£¬Ö»ĞèÉ¾³ıÊı¾İ¾Í¿ÉÒÔÁË£¬²»ÒªÉ¾³ı½çÃæÉÏµÄÔªËØ
+	// åˆ é™¤æ—¶ï¼Œåªéœ€åˆ é™¤æ•°æ®å°±å¯ä»¥äº†ï¼Œä¸è¦åˆ é™¤ç•Œé¢ä¸Šçš„å…ƒç´ 
 	VirtualTileBox* pTileBox = dynamic_cast<VirtualTileBox*>(m_pOwner);
 	Provider* pProvider = dynamic_cast<Provider*>(pTileBox->GetDataProvider());
 	pProvider->RemoveTask(m_nDataIndex);

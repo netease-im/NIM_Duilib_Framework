@@ -1,4 +1,4 @@
-﻿#ifndef NIM_WIN_GUI_MSG_BOX_ASYNC_DO_MODAL_H_
+#ifndef NIM_WIN_GUI_MSG_BOX_ASYNC_DO_MODAL_H_
 #define NIM_WIN_GUI_MSG_BOX_ASYNC_DO_MODAL_H_
 
 #include "modal_wnd_base.h"

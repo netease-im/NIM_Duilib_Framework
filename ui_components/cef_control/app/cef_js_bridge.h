@@ -25,116 +25,116 @@ public:
 // in render process
 public:
 	/**
-	 * Ö´ĞĞÒÑ¾­×¢²áºÃµÄ C++ ·½·¨
-	 * param[in] function_name	Òªµ÷ÓÃµÄº¯ÊıÃû³Æ
-	 * param[in] params			µ÷ÓÃ¸Ãº¯Êı´«µİµÄ json ¸ñÊ½²ÎÊı
-	 * param[in] callback		Ö´ĞĞÍê³ÉºóµÄ½á¹û»Øµ÷º¯Êı
-	 * return ·µ»Ø true ±íÊ¾·¢ÆğÖ´ĞĞÇëÇó³É¹¦£¨²¢²»´ú±íÒ»¶¨Ö´ĞĞ³É¹¦£¬¾ßÌå¿´»Øµ÷£©£¬·µ»Ø false ¿ÉÄÜÊÇ×¢²áµÄ»Øµ÷º¯Êı ID ÒÑ¾­´æÔÚ
+	 * æ‰§è¡Œå·²ç»æ³¨å†Œå¥½çš„ C++ æ–¹æ³•
+	 * param[in] function_name	è¦è°ƒç”¨çš„å‡½æ•°åç§°
+	 * param[in] params			è°ƒç”¨è¯¥å‡½æ•°ä¼ é€’çš„ json æ ¼å¼å‚æ•°
+	 * param[in] callback		æ‰§è¡Œå®Œæˆåçš„ç»“æœå›è°ƒå‡½æ•°
+	 * return è¿”å› true è¡¨ç¤ºå‘èµ·æ‰§è¡Œè¯·æ±‚æˆåŠŸï¼ˆå¹¶ä¸ä»£è¡¨ä¸€å®šæ‰§è¡ŒæˆåŠŸï¼Œå…·ä½“çœ‹å›è°ƒï¼‰ï¼Œè¿”å› false å¯èƒ½æ˜¯æ³¨å†Œçš„å›è°ƒå‡½æ•° ID å·²ç»å­˜åœ¨
 	 */
 	bool CallCppFunction(const CefString& function_name, const CefString& params, CefRefPtr<CefV8Value> callback);
 
 	/**
-	 * Í¨¹ıÅĞ¶ÏÉÏÏÂÎÄ»·¾³ÒÆ³ıÖ¸¶¨»Øµ÷º¯Êı£¨Ò³ÃæË¢ĞÂ»á´¥·¢¸Ã·½·¨£©
-	 * param[in] frame		µ±Ç°ÔËĞĞ¿ò¼Ü
+	 * é€šè¿‡åˆ¤æ–­ä¸Šä¸‹æ–‡ç¯å¢ƒç§»é™¤æŒ‡å®šå›è°ƒå‡½æ•°ï¼ˆé¡µé¢åˆ·æ–°ä¼šè§¦å‘è¯¥æ–¹æ³•ï¼‰
+	 * param[in] frame		å½“å‰è¿è¡Œæ¡†æ¶
 	 */
 	void RemoveCallbackFuncWithFrame(CefRefPtr<CefFrame> frame);
 
 	/**
-	 * ¸ù¾İ ID Ö´ĞĞÖ¸¶¨»Øµ÷º¯Êı
-	 * param[in] js_callback_id	»Øµ÷º¯ÊıµÄ ID
-	 * param[in] has_error		ÊÇ·ñÓĞ´íÎó£¬¶ÔÓ¦»Øµ÷º¯ÊıµÚÒ»¸ö²ÎÊı
-	 * param[in] json_string	Èç¹ûÃ»ÓĞ´íÎóÔò·µ»ØÖ¸¶¨µÄ json string ¸ñÊ½µÄÊı¾İ£¬¶ÔÓ¦»Øµ÷º¯ÊıµÚ¶ş¸ö²ÎÊı
-	 * return ·µ»Ø true ±íÊ¾³É¹¦Ö´ĞĞÁË»Øµ÷º¯Êı£¬·µ»Ø false ÓĞ¿ÉÄÜ»Øµ÷º¯Êı²»´æÔÚ»òÕß»Øµ÷º¯ÊıËùĞèµÄÖ´ĞĞÉÏÏÂÎÄ»·¾³ÒÑ¾­²»´æÔÚ
+	 * æ ¹æ® ID æ‰§è¡ŒæŒ‡å®šå›è°ƒå‡½æ•°
+	 * param[in] js_callback_id	å›è°ƒå‡½æ•°çš„ ID
+	 * param[in] has_error		æ˜¯å¦æœ‰é”™è¯¯ï¼Œå¯¹åº”å›è°ƒå‡½æ•°ç¬¬ä¸€ä¸ªå‚æ•°
+	 * param[in] json_string	å¦‚æœæ²¡æœ‰é”™è¯¯åˆ™è¿”å›æŒ‡å®šçš„ json string æ ¼å¼çš„æ•°æ®ï¼Œå¯¹åº”å›è°ƒå‡½æ•°ç¬¬äºŒä¸ªå‚æ•°
+	 * return è¿”å› true è¡¨ç¤ºæˆåŠŸæ‰§è¡Œäº†å›è°ƒå‡½æ•°ï¼Œè¿”å› false æœ‰å¯èƒ½å›è°ƒå‡½æ•°ä¸å­˜åœ¨æˆ–è€…å›è°ƒå‡½æ•°æ‰€éœ€çš„æ‰§è¡Œä¸Šä¸‹æ–‡ç¯å¢ƒå·²ç»ä¸å­˜åœ¨
 	 */
 	bool ExecuteJSCallbackFunc(int js_callback_id, bool has_error, const CefString& json_result);
 
 	/**
-	 * ×¢²áÒ»¸ö³Ö¾ÃµÄ JS º¯ÊıÌá¹© C++ µ÷ÓÃ
-	 * param[in] function_name	º¯ÊıÃû³Æ£¬×Ö·û´®ĞÎÊ½Ìá¹© C++ Ö±½Óµ÷ÓÃ£¬Ãû³Æ²»ÄÜÖØ¸´
-	 * param[in] context		º¯ÊıµÄÖ´ĞĞÉÏÏÂÎÄ»·¾³
-	 * param[in] function		º¯ÊıÌå
-	 * param[in] replace		ÈôÒÑ¾­´æÔÚ¸ÃÃû³ÆµÄº¯ÊıÊÇ·ñÌæ»»£¬Ä¬ÈÏ·ñ
-	 * return replace Îª true µÄÇé¿öÏÂ£¬·µ»Ø true ÊÇÌæ»»³É¹¦£¬·µ»Ø false Îª²»¿ÉÔ¤¼ûĞĞÎª¡£replace Îª false µÄÇé¿öÏÂ·µ»Ø true ±íÊ¾×¢²á³É¹¦£¬·µ»Ø false ÊÇÍ¬Ãûº¯ÊıÒÑ¾­×¢²á¹ıÁË¡£
+	 * æ³¨å†Œä¸€ä¸ªæŒä¹…çš„ JS å‡½æ•°æä¾› C++ è°ƒç”¨
+	 * param[in] function_name	å‡½æ•°åç§°ï¼Œå­—ç¬¦ä¸²å½¢å¼æä¾› C++ ç›´æ¥è°ƒç”¨ï¼Œåç§°ä¸èƒ½é‡å¤
+	 * param[in] context		å‡½æ•°çš„æ‰§è¡Œä¸Šä¸‹æ–‡ç¯å¢ƒ
+	 * param[in] function		å‡½æ•°ä½“
+	 * param[in] replace		è‹¥å·²ç»å­˜åœ¨è¯¥åç§°çš„å‡½æ•°æ˜¯å¦æ›¿æ¢ï¼Œé»˜è®¤å¦
+	 * return replace ä¸º true çš„æƒ…å†µä¸‹ï¼Œè¿”å› true æ˜¯æ›¿æ¢æˆåŠŸï¼Œè¿”å› false ä¸ºä¸å¯é¢„è§è¡Œä¸ºã€‚replace ä¸º false çš„æƒ…å†µä¸‹è¿”å› true è¡¨ç¤ºæ³¨å†ŒæˆåŠŸï¼Œè¿”å› false æ˜¯åŒåå‡½æ•°å·²ç»æ³¨å†Œè¿‡äº†ã€‚
 	 */
 	bool RegisterJSFunc(const CefString& function_name, CefRefPtr<CefV8Value> function, bool replace = false);
 
 	/**
-	 * ·´×¢²áÒ»¸ö³Ö¾ÃµÄ JS º¯Êı
-	 * param[in] function_name	º¯ÊıÃû³Æ
-	 * param[in] frame			ÒªÈ¡Ïû×¢²áÄÄ¸ö¿ò¼ÜÏÂµÄÏà¹Øº¯Êı
+	 * åæ³¨å†Œä¸€ä¸ªæŒä¹…çš„ JS å‡½æ•°
+	 * param[in] function_name	å‡½æ•°åç§°
+	 * param[in] frame			è¦å–æ¶ˆæ³¨å†Œå“ªä¸ªæ¡†æ¶ä¸‹çš„ç›¸å…³å‡½æ•°
 	 */
 	void UnRegisterJSFunc(const CefString& function_name, CefRefPtr<CefFrame> frame);
 
 	/**
-	* ¸ù¾İÖ´ĞĞÉÏÏÂÎÄ·´×¢²áÒ»¸ö»ò¶à¸ö³Ö¾ÃµÄ JS º¯Êı
-	* param[in] frame			µ±Ç°ÔËĞĞËùÊô¿ò¼Ü
+	* æ ¹æ®æ‰§è¡Œä¸Šä¸‹æ–‡åæ³¨å†Œä¸€ä¸ªæˆ–å¤šä¸ªæŒä¹…çš„ JS å‡½æ•°
+	* param[in] frame			å½“å‰è¿è¡Œæ‰€å±æ¡†æ¶
 	*/
 	void UnRegisterJSFuncWithFrame(CefRefPtr<CefFrame> frame);
 
 	/**
-	 * ¸ù¾İÃû³ÆÖ´ĞĞÄ³¸ö¾ßÌåµÄ JS º¯Êı
-	 * param[in] function_name	º¯ÊıÃû³Æ
-	 * param[in] json_params	Òª´«µİµÄ json ¸ñÊ½µÄ²ÎÊı
-	 * param[in] frame			Ö´ĞĞÄÄ¸ö¿ò¼ÜÏÂµÄ JS º¯Êı
-	 * param[in] cpp_callback_id	Ö´ĞĞÍê³ÉºóÒª»Øµ÷µÄ C++ »Øµ÷º¯Êı ID
-	 * return ·µ»Ø true ±íÊ¾³É¹¦Ö´ĞĞÄ³¸ö JS º¯Êı£¬·µ»Ø false ÓĞ¿ÉÄÜÒªÖ´ĞĞµÄº¯Êı²»´æÔÚ»òÕß¸Ãº¯ÊıµÄÔËĞĞÉÏÏÂÎÄÒÑ¾­ÎŞĞ§
+	 * æ ¹æ®åç§°æ‰§è¡ŒæŸä¸ªå…·ä½“çš„ JS å‡½æ•°
+	 * param[in] function_name	å‡½æ•°åç§°
+	 * param[in] json_params	è¦ä¼ é€’çš„ json æ ¼å¼çš„å‚æ•°
+	 * param[in] frame			æ‰§è¡Œå“ªä¸ªæ¡†æ¶ä¸‹çš„ JS å‡½æ•°
+	 * param[in] cpp_callback_id	æ‰§è¡Œå®Œæˆåè¦å›è°ƒçš„ C++ å›è°ƒå‡½æ•° ID
+	 * return è¿”å› true è¡¨ç¤ºæˆåŠŸæ‰§è¡ŒæŸä¸ª JS å‡½æ•°ï¼Œè¿”å› false æœ‰å¯èƒ½è¦æ‰§è¡Œçš„å‡½æ•°ä¸å­˜åœ¨æˆ–è€…è¯¥å‡½æ•°çš„è¿è¡Œä¸Šä¸‹æ–‡å·²ç»æ— æ•ˆ
 	 */
 	bool ExecuteJSFunc(const CefString& function_name, const CefString& json_params, CefRefPtr<CefFrame> frame, int cpp_callback_id);
 
 // in browser process
 public:
 	/**
-	 * Ö´ĞĞÒÑ¾­×¢²áºÃµÄ JS ·½·¨
-	 * param[in] js_function_name Òªµ÷ÓÃµÄ JS º¯ÊıÃû³Æ
-	 * param[in] params			µ÷ÓÃ JS ·½·¨´«µİµÄ json ¸ñÊ½²ÎÊı
-	 * param[in] frame			µ÷ÓÃÄÄ¸ö¿ò¼ÜÏÂµÄ JS ´úÂë
-	 * param[in] callback		µ÷ÓÃ JS ·½·¨ºó·µ»ØÊı¾İµÄ»Øµ÷º¯Êı
-	 * return ·µ»Ø ture ±êÊ¶·¢ÆğÖ´ĞĞ JS º¯ÊıÃüÁî³É¹¦£¬·µ»Ø false ÊÇÏàÍ¬µÄ callback id ÒÑ¾­´æÔÚ
+	 * æ‰§è¡Œå·²ç»æ³¨å†Œå¥½çš„ JS æ–¹æ³•
+	 * param[in] js_function_name è¦è°ƒç”¨çš„ JS å‡½æ•°åç§°
+	 * param[in] params			è°ƒç”¨ JS æ–¹æ³•ä¼ é€’çš„ json æ ¼å¼å‚æ•°
+	 * param[in] frame			è°ƒç”¨å“ªä¸ªæ¡†æ¶ä¸‹çš„ JS ä»£ç 
+	 * param[in] callback		è°ƒç”¨ JS æ–¹æ³•åè¿”å›æ•°æ®çš„å›è°ƒå‡½æ•°
+	 * return è¿”å› ture æ ‡è¯†å‘èµ·æ‰§è¡Œ JS å‡½æ•°å‘½ä»¤æˆåŠŸï¼Œè¿”å› false æ˜¯ç›¸åŒçš„ callback id å·²ç»å­˜åœ¨
 	 */
 	bool CallJSFunction(const CefString& js_function_name, const CefString& params, CefRefPtr<CefFrame> frame, CallJsFunctionCallback callback);
 
 	/**
-	 * ¸ù¾İ ID Ö´ĞĞÖ¸¶¨»Øµ÷º¯Êı
-	 * param[in] cpp_callback_id callback º¯ÊıµÄ id
-	 * param[in] json_string	·µ»ØµÄ json ¸ñÊ½Êı¾İ
-	 * return ·µ»Ø true Ö´ĞĞ³É¹¦£¬false ÎªÖ´ĞĞÊ§°Ü£¬¿ÉÄÜ»Øµ÷²»´æÔÚ
+	 * æ ¹æ® ID æ‰§è¡ŒæŒ‡å®šå›è°ƒå‡½æ•°
+	 * param[in] cpp_callback_id callback å‡½æ•°çš„ id
+	 * param[in] json_string	è¿”å›çš„ json æ ¼å¼æ•°æ®
+	 * return è¿”å› true æ‰§è¡ŒæˆåŠŸï¼Œfalse ä¸ºæ‰§è¡Œå¤±è´¥ï¼Œå¯èƒ½å›è°ƒä¸å­˜åœ¨
 	 */
 	bool ExecuteCppCallbackFunc(int cpp_callback_id, const CefString& json_string);
 
 	/**
-	 * ×¢²áÒ»¸ö³Ö¾ÃµÄ C++ º¯ÊıÌá¹© JS ¶Ëµ÷ÓÃ
-	 * param[in] function_name	ÒªÌá¹© JS µ÷ÓÃµÄº¯ÊıÃû×Ö
-	 * param[in] function		º¯ÊıÌå
-	 * param[in] replace		ÊÇ·ñÌæ»»ÏàÍ¬Ãû³ÆµÄº¯ÊıÌå£¬Ä¬ÈÏ²»Ìæ»»
-	 * return replace Îª true µÄÇé¿öÏÂ£¬·µ»Ø true ±íÊ¾×¢²á»òÕßÌæ»»³É¹¦£¬false ÊÇ²»¿ÉÔ¤ÖªĞĞÎª¡£replace Îª false µÄÇé¿öÏÂ·µ»Ø true ±íÊ¾×¢²á³É¹¦£¬·µ»Ø false ±íÊ¾º¯ÊıÃûÒÑ¾­×¢²á
+	 * æ³¨å†Œä¸€ä¸ªæŒä¹…çš„ C++ å‡½æ•°æä¾› JS ç«¯è°ƒç”¨
+	 * param[in] function_name	è¦æä¾› JS è°ƒç”¨çš„å‡½æ•°åå­—
+	 * param[in] function		å‡½æ•°ä½“
+	 * param[in] replace		æ˜¯å¦æ›¿æ¢ç›¸åŒåç§°çš„å‡½æ•°ä½“ï¼Œé»˜è®¤ä¸æ›¿æ¢
+	 * return replace ä¸º true çš„æƒ…å†µä¸‹ï¼Œè¿”å› true è¡¨ç¤ºæ³¨å†Œæˆ–è€…æ›¿æ¢æˆåŠŸï¼Œfalse æ˜¯ä¸å¯é¢„çŸ¥è¡Œä¸ºã€‚replace ä¸º false çš„æƒ…å†µä¸‹è¿”å› true è¡¨ç¤ºæ³¨å†ŒæˆåŠŸï¼Œè¿”å› false è¡¨ç¤ºå‡½æ•°åå·²ç»æ³¨å†Œ
 	 */
 	bool RegisterCppFunc(const CefString& function_name, CppFunction function, CefRefPtr<CefBrowser> browser, bool  replace = false);
 
 	/**
-	 * ·´×¢²áÒ»¸ö³Ö¾ÃµÄ C++ º¯Êı
-	 * param[in] function_name	Òª·´×¢²áµÄº¯ÊıÃû³Æ
+	 * åæ³¨å†Œä¸€ä¸ªæŒä¹…çš„ C++ å‡½æ•°
+	 * param[in] function_name	è¦åæ³¨å†Œçš„å‡½æ•°åç§°
 	 */
 	void UnRegisterCppFunc(const CefString& function_name, CefRefPtr<CefBrowser> browser);
 
 	/**
-	 * Ö´ĞĞÒ»¸öÒÑ¾­×¢²áºÃµÄ C++ ·½·¨£¨½ÓÊÜµ½ JS ¶ËÖ´ĞĞÇëÇóÊ±±»µ÷ÓÃ£©
-	 * param[in] function_name	ÒªÖ´ĞĞµÄº¯ÊıÃû³Æ
-	 * param[in] params			Ğ¯´øµÄ²ÎÊı
-	 * param[in] js_callback_id	»Øµ÷ JS ¶ËËùĞèµÄ»Øµ÷º¯Êı ID
-	 * param[in] browser		browser ÊµÀı¾ä±ú
-	 * return ·µ»Ø true ±íÊ¾Ö´ĞĞ³É¹¦£¬·µ»Ø false ±íÊ¾Ö´ĞĞÊ§°Ü£¬º¯ÊıÃû¿ÉÄÜ²»´æÔÚ
+	 * æ‰§è¡Œä¸€ä¸ªå·²ç»æ³¨å†Œå¥½çš„ C++ æ–¹æ³•ï¼ˆæ¥å—åˆ° JS ç«¯æ‰§è¡Œè¯·æ±‚æ—¶è¢«è°ƒç”¨ï¼‰
+	 * param[in] function_name	è¦æ‰§è¡Œçš„å‡½æ•°åç§°
+	 * param[in] params			æºå¸¦çš„å‚æ•°
+	 * param[in] js_callback_id	å›è°ƒ JS ç«¯æ‰€éœ€çš„å›è°ƒå‡½æ•° ID
+	 * param[in] browser		browser å®ä¾‹å¥æŸ„
+	 * return è¿”å› true è¡¨ç¤ºæ‰§è¡ŒæˆåŠŸï¼Œè¿”å› false è¡¨ç¤ºæ‰§è¡Œå¤±è´¥ï¼Œå‡½æ•°åå¯èƒ½ä¸å­˜åœ¨
 	 */
 	bool ExecuteCppFunc(const CefString& function_name, const CefString& params, int js_callback_id, CefRefPtr<CefBrowser> browser);
 
 private:
-	uint32						js_callback_id_ = 0;			// JS ¶Ë»Øµ÷º¯ÊıµÄË÷Òı¼ÆÊı
-	uint32						cpp_callback_id_ = 0;			// C++ ¶Ë»Øµ÷º¯ÊıµÄË÷Òı¼ÆÊı
+	uint32						js_callback_id_ = 0;			// JS ç«¯å›è°ƒå‡½æ•°çš„ç´¢å¼•è®¡æ•°
+	uint32						cpp_callback_id_ = 0;			// C++ ç«¯å›è°ƒå‡½æ•°çš„ç´¢å¼•è®¡æ•°
 
-	RenderCallbackMap			render_callback_;				// JS ¶Ë»Øµ÷º¯ÊıµÄ¶ÔÓ¦ÁĞ±í
-	BrowserCallbackMap			browser_callback_;				// C++ ¶Ë»Øµ÷º¯ÊıµÄ¶ÔÓ¦ÁĞ±í
+	RenderCallbackMap			render_callback_;				// JS ç«¯å›è°ƒå‡½æ•°çš„å¯¹åº”åˆ—è¡¨
+	BrowserCallbackMap			browser_callback_;				// C++ ç«¯å›è°ƒå‡½æ•°çš„å¯¹åº”åˆ—è¡¨
 
-	RenderRegisteredFunction	render_registered_function_;	// ±£´æ JS ¶ËÒÑ¾­×¢²áºÃµÄ³Ö¾Ãº¯ÊıÁĞ±í
-	BrowserRegisteredFunction	browser_registered_function_;	// ±£´æ C++ ¶ËÒÑ¾­×¢²áºÃµÄ³Ö¾Ãº¯ÊıÁĞ±í
+	RenderRegisteredFunction	render_registered_function_;	// ä¿å­˜ JS ç«¯å·²ç»æ³¨å†Œå¥½çš„æŒä¹…å‡½æ•°åˆ—è¡¨
+	BrowserRegisteredFunction	browser_registered_function_;	// ä¿å­˜ C++ ç«¯å·²ç»æ³¨å†Œå¥½çš„æŒä¹…å‡½æ•°åˆ—è¡¨
 };
 
 }

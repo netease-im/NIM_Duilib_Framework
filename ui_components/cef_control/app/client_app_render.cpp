@@ -23,11 +23,11 @@ void ClientApp::OnRenderThreadCreated(CefRefPtr<CefListValue> extra_info)
 void ClientApp::OnWebKitInitialized() 
 {
 	/**
-	 * JavaScript À©Õ¹´úÂë£¬ÕâÀï¶¨ÒåÒ»¸ö NimCefWebFunction ¶ÔÏóÌá¹© call ·½·¨À´ÈÃ Web ¶Ë´¥·¢ native µÄ CefV8Handler ´¦Àí´úÂë
-	 * param[in] functionName	Òªµ÷ÓÃµÄ C++ ·½·¨Ãû³Æ
-	 * param[in] params			µ÷ÓÃ¸Ã·½·¨´«µÝµÄ²ÎÊý£¬ÔÚÇ°¶ËÖ¸¶¨µÄÊÇÒ»¸ö Object£¬µ«×ªµ½ Native µÄÊ±ºò×ªÎªÁË×Ö·û´®
-	 * param[in] callback		Ö´ÐÐ¸Ã·½·¨ºóµÄ»Øµ÷º¯Êý
-	 * Ç°¶Ëµ÷ÓÃÊ¾Àý
+	 * JavaScript æ‰©å±•ä»£ç ï¼Œè¿™é‡Œå®šä¹‰ä¸€ä¸ª NimCefWebFunction å¯¹è±¡æä¾› call æ–¹æ³•æ¥è®© Web ç«¯è§¦å‘ native çš„ CefV8Handler å¤„ç†ä»£ç 
+	 * param[in] functionName	è¦è°ƒç”¨çš„ C++ æ–¹æ³•åç§°
+	 * param[in] params			è°ƒç”¨è¯¥æ–¹æ³•ä¼ é€’çš„å‚æ•°ï¼Œåœ¨å‰ç«¯æŒ‡å®šçš„æ˜¯ä¸€ä¸ª Objectï¼Œä½†è½¬åˆ° Native çš„æ—¶å€™è½¬ä¸ºäº†å­—ç¬¦ä¸²
+	 * param[in] callback		æ‰§è¡Œè¯¥æ–¹æ³•åŽçš„å›žè°ƒå‡½æ•°
+	 * å‰ç«¯è°ƒç”¨ç¤ºä¾‹
 	 * NimCefWebHelper.call('showMessage', { message: 'Hello C++' }, (arguments) => {
 	 *    console.log(arguments)
 	 * })
@@ -127,7 +127,7 @@ bool ClientApp::OnProcessMessageReceived(
 	CefRefPtr<CefProcessMessage> message) 
 {
 	ASSERT(source_process == PID_BROWSER);
-	// ÊÕµ½ browser µÄÏûÏ¢»Ø¸´
+	// æ”¶åˆ° browser çš„æ¶ˆæ¯å›žå¤
 	const CefString& message_name = message->GetName();
 	if (message_name == kExecuteJsCallbackMessage)
 	{
@@ -135,7 +135,7 @@ bool ClientApp::OnProcessMessageReceived(
 		bool		has_error	= message->GetArgumentList()->GetBool(1);
 		CefString	json_string = message->GetArgumentList()->GetString(2);
 
-		// ½«ÊÕµ½µÄ²ÎÊýÍ¨¹ý¹ÜÀíÆ÷´«µÝ¸øµ÷ÓÃÊ±´«µÝµÄ»Øµ÷º¯Êý
+		// å°†æ”¶åˆ°çš„å‚æ•°é€šè¿‡ç®¡ç†å™¨ä¼ é€’ç»™è°ƒç”¨æ—¶ä¼ é€’çš„å›žè°ƒå‡½æ•°
 		render_js_bridge_->ExecuteJSCallbackFunc(callback_id, has_error, json_string);
 	}
 	else if (message_name == kCallJsFunctionMessage)
@@ -145,8 +145,8 @@ bool ClientApp::OnProcessMessageReceived(
 		int cpp_callback_id = message->GetArgumentList()->GetInt(2);
 		int64 frame_id = message->GetArgumentList()->GetInt(3);
 
-		// Í¨¹ý C++ Ö´ÐÐÒ»¸öÒÑ¾­×¢²á¹ýµÄ JS ·½·¨
-		// frame_id Ð¡ÓÚ 0 Ôò¿ÉÄÜÊÇ browser ½ø³ÌµÄ browser ÊÇÎÞÐ§µÄ£¬ËùÒÔÕâÀïÎªÁË±ÜÃâ³öÏÖ´íÎó¾Í»ñÈ¡Ò»¸ö¶¥²ã frame Ö´ÐÐ´úÂë
+		// é€šè¿‡ C++ æ‰§è¡Œä¸€ä¸ªå·²ç»æ³¨å†Œè¿‡çš„ JS æ–¹æ³•
+		// frame_id å°äºŽ 0 åˆ™å¯èƒ½æ˜¯ browser è¿›ç¨‹çš„ browser æ˜¯æ— æ•ˆçš„ï¼Œæ‰€ä»¥è¿™é‡Œä¸ºäº†é¿å…å‡ºçŽ°é”™è¯¯å°±èŽ·å–ä¸€ä¸ªé¡¶å±‚ frame æ‰§è¡Œä»£ç 
 		render_js_bridge_->ExecuteJSFunc(function_name, json_string, frame_id < 0 ? browser->GetMainFrame() : browser->GetFrame(frame_id), cpp_callback_id);
 	}
 

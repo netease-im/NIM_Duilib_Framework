@@ -32,63 +32,63 @@ namespace ui
 
 	protected:	//pass by grid
 		/**
-		* @brief ×ÜÁĞÊı
+		* @brief æ€»åˆ—æ•°
 		*/
 		int GetColCount() const;
 		virtual void SetColCount(int count);
 
 		/**
-		* @brief ×ÜĞĞÊı
+		* @brief æ€»è¡Œæ•°
 		*/
 		int GetRowCount() const;
 		void SetRowCount(int count);
 
 		/**
-		* @brief ¹Ì¶¨ÁĞÊı
+		* @brief å›ºå®šåˆ—æ•°
 		*/
 		int GetFixedColCount() const;
 		void SetFixedColCount(int fixed);
 
 		/**
-		* @brief ¹Ì¶¨ĞĞÊı
+		* @brief å›ºå®šè¡Œæ•°
 		*/
 		int GetFixedRowCount() const;
 		void SetFixedRowCount(int fixed);
 
 		/**
-		* @brief ÁĞ¿í;
-		* @param[in] col_index: µÚ¼¸ÁĞ,base on 0;
+		* @brief åˆ—å®½;
+		* @param[in] col_index: ç¬¬å‡ åˆ—,base on 0;
 		*/
 		int GetColumnWidth(int col_index) const;
 		void SetColumnWidth(int col_index, int width);
 
 		/**
-		* @brief ĞĞ¸ß;
-		* @param[in] row_index: µÚ¼¸ĞĞ,base on 0;
+		* @brief è¡Œé«˜;
+		* @param[in] row_index: ç¬¬å‡ è¡Œ,base on 0;
 		*/
 		int GetRowHeight(int row_index) const;
 		void SetRowHeight(int row_index, int height);
 
 		/**
-		* @brief ±íÍ·¸ß¶È
+		* @brief è¡¨å¤´é«˜åº¦
 		*/
 		int GetHeaderHeight() const;
 		void SetHeaderHeight(int height);
 
 		/**
-		* @brief ¹Ì¶¨ĞĞÁĞµÄ±³¾°É«
+		* @brief å›ºå®šè¡Œåˆ—çš„èƒŒæ™¯è‰²
 		*/
 		std::wstring GetFixedBkColor() const;
 		void SetFixedBkColor(std::wstring color);
 
 		/**
-		* @brief Ñ¡ÖĞµ¥Ôª¸ñµÄÇ°¾°É«
+		* @brief é€‰ä¸­å•å…ƒæ ¼çš„å‰æ™¯è‰²
 		*/
 		std::wstring GetSelForeColor() const;
 		void SetSelForeColor(std::wstring color);
 
 		/**
-		* @brief Íø¸ñÏßÑÕÉ«
+		* @brief ç½‘æ ¼çº¿é¢œè‰²
 		*/
 		std::wstring GetGridLineColor() const;
 		void SetGridLineColor(std::wstring color);
@@ -99,95 +99,95 @@ namespace ui
 		int GetFixedRowHeight() const;
 
 		/**
-		* @brief ÉèÖÃ/»ñÈ¡µ¥Ôª¸ñÎÄ±¾ÄÚÈİ;
-		* @param[in] row_index: µÚ¼¸ĞĞ,base on 0;
-		* @param[in] col_index: µÚ¼¸ÁĞ,base on 0;
+		* @brief è®¾ç½®/è·å–å•å…ƒæ ¼æ–‡æœ¬å†…å®¹;
+		* @param[in] row_index: ç¬¬å‡ è¡Œ,base on 0;
+		* @param[in] col_index: ç¬¬å‡ åˆ—,base on 0;
 		*/
 		std::wstring GetGridItemText(int row_index, int col_index);
 		bool SetGridItemText(std::wstring text, int row_index, int col_index);
 
 		/**
-		* @brief ÅĞ¶Ïµ¥Ôª¸ñÊÇ·ñfixed;
-		* @param[in] row_index: µÚ¼¸ĞĞ,base on 0;
-		* @param[in] col_index: µÚ¼¸ÁĞ,base on 0;
+		* @brief åˆ¤æ–­å•å…ƒæ ¼æ˜¯å¦fixed;
+		* @param[in] row_index: ç¬¬å‡ è¡Œ,base on 0;
+		* @param[in] col_index: ç¬¬å‡ åˆ—,base on 0;
 		*/
 		bool IsGridItemFixed(int row_index, int col_index);
 
 		/**
-		* @brief ²åÈëÁĞÔÚ±í¸ñ×îºó;
-		* @param[in] text: ±íÍ·ÎÄ±¾;
-		* @param[in] width: ÁĞ¿í¶È;
-		* @return ·µ»ØĞÂ¼ÓµÄ±íÍ·µ¥Ôª¸ñ¶ÔÏóÖ¸Õë,null±íÊ¾Î´³É¹¦;
+		* @brief æ’å…¥åˆ—åœ¨è¡¨æ ¼æœ€å;
+		* @param[in] text: è¡¨å¤´æ–‡æœ¬;
+		* @param[in] width: åˆ—å®½åº¦;
+		* @return è¿”å›æ–°åŠ çš„è¡¨å¤´å•å…ƒæ ¼å¯¹è±¡æŒ‡é’ˆ,nullè¡¨ç¤ºæœªæˆåŠŸ;
 		*/
 		virtual GridHeaderItem* AddCol(std::wstring text, int width = 80);
 
 		/**
-		* @brief ²åÈëĞĞÔÚ±í¸ñ×îºó
-		* @return ·µ»Ø trueÎª³É¹¦£¬false ÎªÊ§°Ü
+		* @brief æ’å…¥è¡Œåœ¨è¡¨æ ¼æœ€å
+		* @return è¿”å› trueä¸ºæˆåŠŸï¼Œfalse ä¸ºå¤±è´¥
 		*/
 		virtual bool AddRow();
 
 		/*
-		* @brief »ñÈ¡±íÍ·ĞĞĞÅÏ¢;
-		* @return ±íÍ·ĞĞĞÅÏ¢;
+		* @brief è·å–è¡¨å¤´è¡Œä¿¡æ¯;
+		* @return è¡¨å¤´è¡Œä¿¡æ¯;
 		*/
 		GridHeader* GetHeader() const;
 
 		/**
-		* @brief »ñÈ¡µ¥Ôª¸ñ¶ÔÏó
-		* @param[in] row_index: µÚ¼¸ĞĞ,base on 0;
-		* @param[in] col_index: µÚ¼¸ÁĞ,base on 0;
-		* @return ·µ»Øµ¥Ôª¸ñ¶ÔÏóÖ¸Õë,null±íÊ¾Î´ÕÒµ½;
+		* @brief è·å–å•å…ƒæ ¼å¯¹è±¡
+		* @param[in] row_index: ç¬¬å‡ è¡Œ,base on 0;
+		* @param[in] col_index: ç¬¬å‡ åˆ—,base on 0;
+		* @return è¿”å›å•å…ƒæ ¼å¯¹è±¡æŒ‡é’ˆ,nullè¡¨ç¤ºæœªæ‰¾åˆ°;
 		*/
 		GridItem *GetGridItem(int row_index, int col_index);
 
 		/**
-		* @brief ÒÆ³ıÒ»ĞĞ
-		* @param[in] row_index: µÚ¼¸ĞĞ,base on 0;
-		* @return ·µ»Ø trueÎª³É¹¦£¬false ÎªÊ§°Ü
+		* @brief ç§»é™¤ä¸€è¡Œ
+		* @param[in] row_index: ç¬¬å‡ è¡Œ,base on 0;
+		* @return è¿”å› trueä¸ºæˆåŠŸï¼Œfalse ä¸ºå¤±è´¥
 		*/
 		bool RemoveRow(int row_index);
 
 		/**
-		* @brief ÒÆ³ıÒ»ÁĞ
-		* @param[in] col_index: µÚ¼¸ÁĞ,base on 0;
-		* @return ·µ»Ø trueÎª³É¹¦£¬false ÎªÊ§°Ü
+		* @brief ç§»é™¤ä¸€åˆ—
+		* @param[in] col_index: ç¬¬å‡ åˆ—,base on 0;
+		* @return è¿”å› trueä¸ºæˆåŠŸï¼Œfalse ä¸ºå¤±è´¥
 		*/
 		bool RemoveCol(int col_index);
 
 		/**
-		* @brief Çå³ıÕû±í
-		* @param[in] include_header: true±íÊ¾Çå³ıheader, false±íÊ¾±£Áôheader;
+		* @brief æ¸…é™¤æ•´è¡¨
+		* @param[in] include_header: trueè¡¨ç¤ºæ¸…é™¤header, falseè¡¨ç¤ºä¿ç•™header;
 		*/
 		void Clear(bool include_header);
 
 		/**
-		* @brief ±í¸ñÄÚÈİ±ä¸üºóµÄ»Øµ÷×¢²á
+		* @brief è¡¨æ ¼å†…å®¹å˜æ›´åçš„å›è°ƒæ³¨å†Œ
 		* @param[in] callback
 		*/
 		void AttachTextChange(const EventCallback& callback)	{ this->OnEvent[kEventTextChange] += callback; }
 
 		/**
-		* @brief µ¼Èëexcel
-		* @param[in] file:	excelÂ·¾¢;
-		* @param[in] sheet_num:	µ¼ÈëµÄexcelµÄµÚ¼¸Ò³, base on 0;
-		* @param[in] touch_header: true±íÊ¾excelµÄµÚÒ»ĞĞ×öÎªGridµÄHeaderÄÚÈİ
-		* @return ·µ»Ø trueÎª³É¹¦£¬false ÎªÊ§°Ü
+		* @brief å¯¼å…¥excel
+		* @param[in] file:	excelè·¯åŠ²;
+		* @param[in] sheet_num:	å¯¼å…¥çš„excelçš„ç¬¬å‡ é¡µ, base on 0;
+		* @param[in] touch_header: trueè¡¨ç¤ºexcelçš„ç¬¬ä¸€è¡Œåšä¸ºGridçš„Headerå†…å®¹
+		* @return è¿”å› trueä¸ºæˆåŠŸï¼Œfalse ä¸ºå¤±è´¥
 		*/
 		bool LoadExcel(std::wstring file, int sheet_num, bool touch_header);
 
 		/**
-		* @brief ÁĞ¸ù¾İÄÚÈİ×Ô¶¯µ÷Õû¿í¶È
-		* @param[in] col_index:	Òªµ÷ÕûµÄÁĞĞòºÅ, base on 0;
-		* @param[in] min_width:	×îĞ¡¿í¶È;
-		* @param[in] max_width: ×î´ó¿í¶È, -1´ú±íÃ»ÓĞÏŞÖÆ;
-		* @return ·µ»Ø trueÎª³É¹¦£¬false ÎªÊ§°Ü;
+		* @brief åˆ—æ ¹æ®å†…å®¹è‡ªåŠ¨è°ƒæ•´å®½åº¦
+		* @param[in] col_index:	è¦è°ƒæ•´çš„åˆ—åºå·, base on 0;
+		* @param[in] min_width:	æœ€å°å®½åº¦;
+		* @param[in] max_width: æœ€å¤§å®½åº¦, -1ä»£è¡¨æ²¡æœ‰é™åˆ¶;
+		* @return è¿”å› trueä¸ºæˆåŠŸï¼Œfalse ä¸ºå¤±è´¥;
 		*/
 		bool AutoFixColWidth(int col_index, int min_width = 30, int max_width = -1);
 
 		/**
-		* @brief »ñÈ¡Ñ¡ÔñĞÅÏ¢
-		* @return ·µ»Ø GridSelRange
+		* @brief è·å–é€‰æ‹©ä¿¡æ¯
+		* @return è¿”å› GridSelRange
 		*/
 		const GridSelRange& GetSelRange() const;
 	protected:
@@ -204,29 +204,29 @@ namespace ui
 		virtual void PaintBorder(IRenderContext* pRender) override;
 	protected:
 		/**
-		* @brief ±à¼­µÄµ¥Ôª¸ñÎªComboÀàĞÍÊ±, Ñ¡ÖĞÁËComboItemµ÷ÓÃ;
-		* @return ²»¹Ø¼ü;
+		* @brief ç¼–è¾‘çš„å•å…ƒæ ¼ä¸ºComboç±»å‹æ—¶, é€‰ä¸­äº†ComboItemè°ƒç”¨;
+		* @return ä¸å…³é”®;
 		*/
 		bool OnComboEditSelected(EventArgs *args);
 
 		/**
-		* @brief SetColumnWidthÖĞµ÷ÓÃ, ¸ü¸ÄÁËÁĞ¿í;
-		* @param[in] col_index:	Òªµ÷ÕûµÄÁĞĞòºÅ, base on 0;
-		* @param[in] width:	ĞÂµÄÁĞ¿í;
+		* @brief SetColumnWidthä¸­è°ƒç”¨, æ›´æ”¹äº†åˆ—å®½;
+		* @param[in] col_index:	è¦è°ƒæ•´çš„åˆ—åºå·, base on 0;
+		* @param[in] width:	æ–°çš„åˆ—å®½;
 		*/
 		virtual void OnColumnWidthChanged(int col_index, int width){};
 
 		/**
-		* @brief Ôö/É¾ÁĞ;
-		* @param[in] col_index:	ÁĞĞòºÅ, base on 0, -1´ú±í¶àÁĞ;
-		* @param[in] bRemove:	true:É¾³ıÁĞ; false:ĞÂÔöÁĞ;
+		* @brief å¢/åˆ åˆ—;
+		* @param[in] col_index:	åˆ—åºå·, base on 0, -1ä»£è¡¨å¤šåˆ—;
+		* @param[in] bRemove:	true:åˆ é™¤åˆ—; false:æ–°å¢åˆ—;
 		*/
 		virtual void OnColumnCountChanged(int col_index, bool bRemove){};
 
 	protected:
 		/*
-		* @brief ¼ÆËãvector<int>Ö®ºÍ;
-		* @return ºÍ;
+		* @brief è®¡ç®—vector<int>ä¹‹å’Œ;
+		* @return å’Œ;
 		*/
 		int _SumIntList(const std::vector<int> &vec);
 
@@ -234,50 +234,50 @@ namespace ui
 		virtual void _EndEdit();
 
 		/*
-		* @brief »ñÈ¡Êó±êÎ»ÖÃÏÂµÄGridItem
-		* @param[in] pt: ´°ÌåÊó±êÎ»ÖÃ;
-		* @param[out] position:	»ñµÃµÄGridItem×ø±ê, base on 0
-		* @param[in] fixed:	ÊÇ·ñ°üº¬fixedÇøÓò;
-		* @return trueÎª³É¹¦, ×ø±ê´Óposition»ñÈ¡, falseÎªÊ§°Ü;
+		* @brief è·å–é¼ æ ‡ä½ç½®ä¸‹çš„GridItem
+		* @param[in] pt: çª—ä½“é¼ æ ‡ä½ç½®;
+		* @param[out] position:	è·å¾—çš„GridItemåæ ‡, base on 0
+		* @param[in] fixed:	æ˜¯å¦åŒ…å«fixedåŒºåŸŸ;
+		* @return trueä¸ºæˆåŠŸ, åæ ‡ä»positionè·å–, falseä¸ºå¤±è´¥;
 		*/
 		bool _GetGridItemByMouse(CPoint pt, CPoint& position, bool fixed = false);
 
 		/*
-		* @brief »ñÈ¡row_indexµÄGridItemµÄtopÎ»ÖÃ;
+		* @brief è·å–row_indexçš„GridItemçš„topä½ç½®;
 		* @param[in] row_index:	base on 0;
-		* @return: row_indexµÄGridItemµÄtopÎ»ÖÃ, Ã»ÓĞÈ¥³ı¹ö¶¯Î»ÒÆ
+		* @return: row_indexçš„GridItemçš„topä½ç½®, æ²¡æœ‰å»é™¤æ»šåŠ¨ä½ç§»
 		*/
 		int _GetGridItemTop(int row_index);
 
 		/*
-		* @brief »ñÈ¡col_indexµÄGridItemµÄleftÎ»ÖÃ;
+		* @brief è·å–col_indexçš„GridItemçš„leftä½ç½®;
 		* @param[in] col_index:	base on 0;
-		* @return: col_indexµÄGridItemµÄleftÎ»ÖÃ, Ã»ÓĞÈ¥³ı¹ö¶¯Î»ÒÆ
+		* @return: col_indexçš„GridItemçš„leftä½ç½®, æ²¡æœ‰å»é™¤æ»šåŠ¨ä½ç§»
 		*/
 		int _GetGridItemLeft(int col_index);
 
 		/*
-		* @brief »ñÈ¡GridItemÇøÓòÎ»ÖÃ;
-		* @param[in] row_index: µÚ¼¸ĞĞ,base on 0;
-		* @param[in] col_index: µÚ¼¸ÁĞ,base on 0;
-		* @return ·µ»ØÇøÓòÎ»ÖÃ, ÒÔGrid¿Ø¼ş[left,top]Îª0µã, Ã»ÓĞÈ¥³ı¹ö¶¯Î»ÒÆ;
+		* @brief è·å–GridItemåŒºåŸŸä½ç½®;
+		* @param[in] row_index: ç¬¬å‡ è¡Œ,base on 0;
+		* @param[in] col_index: ç¬¬å‡ åˆ—,base on 0;
+		* @return è¿”å›åŒºåŸŸä½ç½®, ä»¥Gridæ§ä»¶[left,top]ä¸º0ç‚¹, æ²¡æœ‰å»é™¤æ»šåŠ¨ä½ç§»;
 		*/
 		UiRect _GetGridItemPos(int row_index, int col_index);
 
 		/*
-		* @brief Çå³ı±à¼­¼°Ñ¡ÖĞ×´Ì¬;
+		* @brief æ¸…é™¤ç¼–è¾‘åŠé€‰ä¸­çŠ¶æ€;
 		*/
 		void _ClearModifyAndSel();
 
-		/* (Ôİ²»ÓÃ)
-		* @brief »ñÈ¡·ÇfixedÇøÓòµÄÏÔÊ¾GridItem×ø±êÇøÓò;
-		* ¸³Öµµ½m_rcPaintRange;
-		* return true±íÊ¾»ñÈ¡³É¹¦, false±íÊ¾»ñÈ¡Ê§°Ü,²»ÓÃ¼ÌĞø»æÖÆÁË
+		/* (æš‚ä¸ç”¨)
+		* @brief è·å–éfixedåŒºåŸŸçš„æ˜¾ç¤ºGridItemåæ ‡åŒºåŸŸ;
+		* èµ‹å€¼åˆ°m_rcPaintRange;
+		* return trueè¡¨ç¤ºè·å–æˆåŠŸ, falseè¡¨ç¤ºè·å–å¤±è´¥,ä¸ç”¨ç»§ç»­ç»˜åˆ¶äº†
 		*/
 		bool _GetPaintRangeRect();
 
 
-	protected:	//¸øGridSelRangeµ÷ÓÃµÄº¯Êı
+	protected:	//ç»™GridSelRangeè°ƒç”¨çš„å‡½æ•°
 		void _SelItem(int row_index, int col_index, bool selected);
 		void _SelRow(int row_index, bool selected);
 		void _SelCol(int col_index, bool selected);
@@ -287,42 +287,42 @@ namespace ui
 	protected:
 		Grid *m_pGrid = nullptr;
 
-		/* ±£´æÁĞ¿í */
+		/* ä¿å­˜åˆ—å®½ */
 		GridLayout m_hLayout;
 
-		/* ±£´æĞĞ¸ß */
+		/* ä¿å­˜è¡Œé«˜ */
 		GridLayout m_vLayout;
 
-		/* ËùÓĞĞĞĞÅÏ¢, µÚÒ»ĞĞÎªHeader */
+		/* æ‰€æœ‰è¡Œä¿¡æ¯, ç¬¬ä¸€è¡Œä¸ºHeader */
 		std::vector<GridRow*> m_vecRow;
 
-		/* ¹Ì¶¨ĞĞ/ÁĞÊı */
+		/* å›ºå®šè¡Œ/åˆ—æ•° */
 		unsigned int m_nFixedCol = 0;
 		unsigned int m_nFixedRow = 0;
 
-		/* ±£´æÑ¡ÖĞĞÅÏ¢ */
+		/* ä¿å­˜é€‰ä¸­ä¿¡æ¯ */
 		GridSelRange m_selRange;
 
-		/* ÍÏ¶¯±íÍ·Ïà¹Ø */
-		int m_nDragColIndex = -1;					//±»ÍÏ¶¯µÄcol_index
-		CPoint m_ptDragColumnStart;					//Êó±ê°´ÏÂÊ±mousepoint, ÒÔGridÎªzeroµã
-		CPoint m_ptDragColumnMoving;				//ÍÏ¶¯ÁĞ¿í×´Ì¬ÏÂÊó±êÒÆ¶¯µÄÎ»ÖÃ, ÒÔGridÎªzeroµã
-		int m_nDrawDragColumnMovingOffX = 0;		// = m_nDragColIndexµÄÓÒ±ß½ç -  m_ptDragColumnMoving.x; ÎªÁË±£Ö¤ÍÏ¶¯ÏßµÄÎ»ÖÃ×¼È·ĞÔ
+		/* æ‹–åŠ¨è¡¨å¤´ç›¸å…³ */
+		int m_nDragColIndex = -1;					//è¢«æ‹–åŠ¨çš„col_index
+		CPoint m_ptDragColumnStart;					//é¼ æ ‡æŒ‰ä¸‹æ—¶mousepoint, ä»¥Gridä¸ºzeroç‚¹
+		CPoint m_ptDragColumnMoving;				//æ‹–åŠ¨åˆ—å®½çŠ¶æ€ä¸‹é¼ æ ‡ç§»åŠ¨çš„ä½ç½®, ä»¥Gridä¸ºzeroç‚¹
+		int m_nDrawDragColumnMovingOffX = 0;		// = m_nDragColIndexçš„å³è¾¹ç•Œ -  m_ptDragColumnMoving.x; ä¸ºäº†ä¿è¯æ‹–åŠ¨çº¿çš„ä½ç½®å‡†ç¡®æ€§
 
-		/* ÍÏ¶¯Ñ¡ÖĞÏà¹Ø */
+		/* æ‹–åŠ¨é€‰ä¸­ç›¸å…³ */
 		bool m_bDragSel = false;
 		bool m_bDrageSelChanged = false;
-		CPoint m_ptDragSelStart;					//±£´æÑ¡ÖĞÍÏ¶¯ÆğÊ¼row_indexºÍcol_index
-		CPoint m_ptDragSelMoving;					//ÍÏ¶¯Ñ¡ÖĞ×´Ì¬ÏÂrow_indexºÍcol_indexµÄÎ»ÖÃ
+		CPoint m_ptDragSelStart;					//ä¿å­˜é€‰ä¸­æ‹–åŠ¨èµ·å§‹row_indexå’Œcol_index
+		CPoint m_ptDragSelMoving;					//æ‹–åŠ¨é€‰ä¸­çŠ¶æ€ä¸‹row_indexå’Œcol_indexçš„ä½ç½®
 
-		/*	(Ôİ²»ÓÃ)
-		*  ·ÇfixedÇøÓòµÄÏÔÊ¾GridItem×ø±êÇøÓò;
-		*  top,bottom´ú±írow_index, left, right´ú±ícol_index;
-		*  PaintBkColor»ñÈ¡¸ÃÖµ, ÆäËûPaint...º¯ÊıÊ¹ÓÃ¸ÃÖµ
+		/*	(æš‚ä¸ç”¨)
+		*  éfixedåŒºåŸŸçš„æ˜¾ç¤ºGridItemåæ ‡åŒºåŸŸ;
+		*  top,bottomä»£è¡¨row_index, left, rightä»£è¡¨col_index;
+		*  PaintBkColorè·å–è¯¥å€¼, å…¶ä»–Paint...å‡½æ•°ä½¿ç”¨è¯¥å€¼
 		*/
 		UiRect m_rcPaintRange;
 
-		/* Ò»Ğ©ÊôĞÔ */
+		/* ä¸€äº›å±æ€§ */
 		int m_defaultRowHeight = 24;
 		int m_defaultColWidth = 80;
 		std::wstring m_strFixedBkColor = L"splitline_level2";
@@ -332,7 +332,7 @@ namespace ui
 		UINT	m_uTextStyle =  DT_CENTER | DT_VCENTER | DT_SINGLELINE;
 		
 #define GRIDBODY_CHILD_COUNT	2
-		/* ±à¼­Ê±ºòµÄRichEdit/Combo¿Ø¼ş */
+		/* ç¼–è¾‘æ—¶å€™çš„RichEdit/Comboæ§ä»¶ */
 		RichEdit *m_pReEdit = nullptr;
 		Combo *m_pComboEdit = nullptr;
 

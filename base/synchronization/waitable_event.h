@@ -1,4 +1,4 @@
-﻿// The base class of a cross flatform waitable event
+// The base class of a cross flatform waitable event
 // NOTE: support Windows only currently
 
 #ifndef BASE_SYNCHRONIZATION_WAITABLE_EVENT_H_

@@ -3,11 +3,11 @@
 #define yxDESH
 #include <string>
 //support CBC ECB mode,you can  padding  PKCS5 or NOPKCS by yuzj 2010 5 10
-#define NOPKCS 0 //Ä¬ÈÏ
+#define NOPKCS 0 //é»˜è®¤
 #define PKCS5 1
 
 
-#define ECB_MODE 0 //Ä¬ÈÏ
+#define ECB_MODE 0 //é»˜è®¤
 #define CBC_MODE 1
 
 class yxDES
@@ -17,164 +17,164 @@ public:
 	static std::string Decrypt(const std::string &src, const char* key, int iMode = ECB_MODE,int iPKCS = PKCS5);
 
 private:
-	//Àà¹¹Ôìº¯Êı
+	//ç±»æ„é€ å‡½æ•°
 	yxDES(int length=8192); 
 
-	//ÀàÎö¹¹º¯Êı
+	//ç±»ææ„å‡½æ•°
 	~yxDES(); 
 
-	//¹¦ÄÜ:ÉèÖÃ¼Ó½âÃÜºÍÌî³äÄ£Ê½£¬Èç¹ûÓÃ»§²»µ÷ÓÃÄ¬ÈÏÄ£Ê½¶¼ÊÇ0
-	//²ÎÊı:ÕûĞÍ
-	//½á¹û:º¯Êı½«½á¹û´æÓÚint m_iModeºÍint m_iPkcs
+	//åŠŸèƒ½:è®¾ç½®åŠ è§£å¯†å’Œå¡«å……æ¨¡å¼ï¼Œå¦‚æœç”¨æˆ·ä¸è°ƒç”¨é»˜è®¤æ¨¡å¼éƒ½æ˜¯0
+	//å‚æ•°:æ•´å‹
+	//ç»“æœ:å‡½æ•°å°†ç»“æœå­˜äºint m_iModeå’Œint m_iPkcs
 	void SetModeAndPKCS(int iMode = 0,int iPKCS = 0);
 
-	//¹¦ÄÜ:ÉèÖÃIV,Ä¬ÈÏÎª{0,0,0,0,0,0,0,0}
-	//²ÎÊı:8Î»×Ö·û´®
-	//½á¹û:º¯Êı½«½á¹û´æÓÚchar szvi[8]ºÍchar szviRev[8]
+	//åŠŸèƒ½:è®¾ç½®IV,é»˜è®¤ä¸º{0,0,0,0,0,0,0,0}
+	//å‚æ•°:8ä½å­—ç¬¦ä¸²
+	//ç»“æœ:å‡½æ•°å°†ç»“æœå­˜äºchar szvi[8]å’Œchar szviRev[8]
 	void SetIV(char* srcBytes);
 
-	//¹¦ÄÜ:²úÉú16¸ö28Î»µÄkey
-	//²ÎÊı:Ô´8Î»µÄ×Ö·û´®(key),´æ·ÅkeyµÄĞòºÅ0-1
-	//½á¹û:º¯Êı½«µ÷ÓÃprivate CreateSubKey½«½á¹û´æÓÚchar SubKeys[keyN][16][48]
+	//åŠŸèƒ½:äº§ç”Ÿ16ä¸ª28ä½çš„key
+	//å‚æ•°:æº8ä½çš„å­—ç¬¦ä¸²(key),å­˜æ”¾keyçš„åºå·0-1
+	//ç»“æœ:å‡½æ•°å°†è°ƒç”¨private CreateSubKeyå°†ç»“æœå­˜äºchar SubKeys[keyN][16][48]
 	void InitializeKey(const char* srcBytes,unsigned int keyN);
 
-	//¹¦ÄÜ:¼ÓÃÜ8Î»×Ö·û´®
-	//²ÎÊı:8Î»×Ö·û´®,Ê¹ÓÃKeyµÄĞòºÅ0-1
-	//½á¹û:º¯Êı½«¼ÓÃÜºó½á¹û´æ·ÅÓÚprivate szCiphertext[16]
-	//      ÓÃ»§Í¨¹ıÊôĞÔCiphertextµÃµ½
+	//åŠŸèƒ½:åŠ å¯†8ä½å­—ç¬¦ä¸²
+	//å‚æ•°:8ä½å­—ç¬¦ä¸²,ä½¿ç”¨Keyçš„åºå·0-1
+	//ç»“æœ:å‡½æ•°å°†åŠ å¯†åç»“æœå­˜æ”¾äºprivate szCiphertext[16]
+	//      ç”¨æˆ·é€šè¿‡å±æ€§Ciphertextå¾—åˆ°
 	void EncryptData(char* _srcBytes,unsigned int keyN);
 
-	//¹¦ÄÜ:½âÃÜ16Î»Ê®Áù½øÖÆ×Ö·û´®
-	//²ÎÊı:16Î»Ê®Áù½øÖÆ×Ö·û´®,Ê¹ÓÃKeyµÄĞòºÅ0-1
-	//½á¹û:º¯Êı½«½âÃÜºò½á¹û´æ·ÅÓÚprivate szPlaintext[8]
-	//      ÓÃ»§Í¨¹ıÊôĞÔPlaintextµÃµ½
+	//åŠŸèƒ½:è§£å¯†16ä½åå…­è¿›åˆ¶å­—ç¬¦ä¸²
+	//å‚æ•°:16ä½åå…­è¿›åˆ¶å­—ç¬¦ä¸²,ä½¿ç”¨Keyçš„åºå·0-1
+	//ç»“æœ:å‡½æ•°å°†è§£å¯†å€™ç»“æœå­˜æ”¾äºprivate szPlaintext[8]
+	//      ç”¨æˆ·é€šè¿‡å±æ€§Plaintextå¾—åˆ°
 	void DecryptData(char* _srcBytes,unsigned int keyN);
 
-	//¹¦ÄÜ:¼ÓÃÜÈÎÒâ³¤¶È×Ö·û´®
-	//²ÎÊı:ÈÎÒâ³¤¶È×Ö·û´®,³¤¶È,Ê¹ÓÃKeyµÄĞòºÅ0-1
-	//½á¹û:º¯Êı½«¼ÓÃÜºó½á¹û´æ·ÅÓÚprivate szFCiphertextAnyLength[8192]
-	//      ÓÃ»§Í¨¹ıÊôĞÔCiphertextAnyLengthµÃµ½
+	//åŠŸèƒ½:åŠ å¯†ä»»æ„é•¿åº¦å­—ç¬¦ä¸²
+	//å‚æ•°:ä»»æ„é•¿åº¦å­—ç¬¦ä¸²,é•¿åº¦,ä½¿ç”¨Keyçš„åºå·0-1
+	//ç»“æœ:å‡½æ•°å°†åŠ å¯†åç»“æœå­˜æ”¾äºprivate szFCiphertextAnyLength[8192]
+	//      ç”¨æˆ·é€šè¿‡å±æ€§CiphertextAnyLengthå¾—åˆ°
 	void EncryptAnyLength(char* _srcBytes,unsigned int _bytesLength,unsigned int keyN);
 
-	//¹¦ÄÜ:½âÃÜÈÎÒâ³¤¶ÈÊ®Áù½øÖÆ×Ö·û´®
-	//²ÎÊı:ÈÎÒâ³¤¶È×Ö·û´®,³¤¶È,Ê¹ÓÃKeyµÄĞòºÅ0-1
-	//½á¹û:º¯Êı½«¼ÓÃÜºó½á¹û´æ·ÅÓÚprivate szFPlaintextAnyLength[8192]
-	//      ÓÃ»§Í¨¹ıÊôĞÔPlaintextAnyLengthµÃµ½
+	//åŠŸèƒ½:è§£å¯†ä»»æ„é•¿åº¦åå…­è¿›åˆ¶å­—ç¬¦ä¸²
+	//å‚æ•°:ä»»æ„é•¿åº¦å­—ç¬¦ä¸²,é•¿åº¦,ä½¿ç”¨Keyçš„åºå·0-1
+	//ç»“æœ:å‡½æ•°å°†åŠ å¯†åç»“æœå­˜æ”¾äºprivate szFPlaintextAnyLength[8192]
+	//      ç”¨æˆ·é€šè¿‡å±æ€§PlaintextAnyLengthå¾—åˆ°
 	void DecryptAnyLength(char* _srcBytes,unsigned int _bytesLength, unsigned int keyN);
 
-	//¹¦ÄÜ:Bytesµ½BitsµÄ×ª»»,
-	//²ÎÊı:´ı±ä»»×Ö·û´®,´¦Àíºó½á¹û´æ·Å»º³åÇøÖ¸Õë,Bits»º³åÇø´óĞ¡
+	//åŠŸèƒ½:Bytesåˆ°Bitsçš„è½¬æ¢,
+	//å‚æ•°:å¾…å˜æ¢å­—ç¬¦ä¸²,å¤„ç†åç»“æœå­˜æ”¾ç¼“å†²åŒºæŒ‡é’ˆ,Bitsç¼“å†²åŒºå¤§å°
 	void Bytes2Bits(const char *srcBytes, char* dstBits, unsigned int sizeBits);
 
-	//¹¦ÄÜ:Bitsµ½BytesµÄ×ª»»,
-	//²ÎÊı:´ı±ä»»×Ö·û´®,´¦Àíºó½á¹û´æ·Å»º³åÇøÖ¸Õë,Bits»º³åÇø´óĞ¡
+	//åŠŸèƒ½:Bitsåˆ°Bytesçš„è½¬æ¢,
+	//å‚æ•°:å¾…å˜æ¢å­—ç¬¦ä¸²,å¤„ç†åç»“æœå­˜æ”¾ç¼“å†²åŒºæŒ‡é’ˆ,Bitsç¼“å†²åŒºå¤§å°
 	void Bits2Bytes(char *dstBytes, char* srcBits, unsigned int sizeBits);
 
-	//¹¦ÄÜ:Intµ½BitsµÄ×ª»»,
-	//²ÎÊı:´ı±ä»»×Ö·û´®,´¦Àíºó½á¹û´æ·Å»º³åÇøÖ¸Õë
+	//åŠŸèƒ½:Intåˆ°Bitsçš„è½¬æ¢,
+	//å‚æ•°:å¾…å˜æ¢å­—ç¬¦ä¸²,å¤„ç†åç»“æœå­˜æ”¾ç¼“å†²åŒºæŒ‡é’ˆ
 	void Int2Bits(unsigned int srcByte, char* dstBits);
 
-	//¹¦ÄÜ:Bitsµ½HexµÄ×ª»»
-	//²ÎÊı:´ı±ä»»×Ö·û´®,´¦Àíºó½á¹û´æ·Å»º³åÇøÖ¸Õë,Bits»º³åÇø´óĞ¡
+	//åŠŸèƒ½:Bitsåˆ°Hexçš„è½¬æ¢
+	//å‚æ•°:å¾…å˜æ¢å­—ç¬¦ä¸²,å¤„ç†åç»“æœå­˜æ”¾ç¼“å†²åŒºæŒ‡é’ˆ,Bitsç¼“å†²åŒºå¤§å°
 	void Bits2Hex(char *dstHex, char* srcBits, unsigned int sizeBits);
 
-	//¹¦ÄÜ:Bitsµ½HexµÄ×ª»»
-	//²ÎÊı:´ı±ä»»×Ö·û´®,´¦Àíºó½á¹û´æ·Å»º³åÇøÖ¸Õë,Bits»º³åÇø´óĞ¡
+	//åŠŸèƒ½:Bitsåˆ°Hexçš„è½¬æ¢
+	//å‚æ•°:å¾…å˜æ¢å­—ç¬¦ä¸²,å¤„ç†åç»“æœå­˜æ”¾ç¼“å†²åŒºæŒ‡é’ˆ,Bitsç¼“å†²åŒºå¤§å°
 	void Hex2Bits(char *srcHex, char* dstBits, unsigned int sizeBits);
 
-	//szCiphertextInBinaryµÄgetº¯Êı
+	//szCiphertextInBinaryçš„getå‡½æ•°
 	char* GetCiphertextInBinary();
 
-	//szCiphertextInHexµÄgetº¯Êı
+	//szCiphertextInHexçš„getå‡½æ•°
 	char* GetCiphertextInHex();
 
-	//CiphertextµÄgetº¯Êı
+	//Ciphertextçš„getå‡½æ•°
 	char* GetCiphertextInBytes();
 
-	//PlaintextµÄgetº¯Êı
+	//Plaintextçš„getå‡½æ•°
 	char* GetPlaintext();
 
-	//CiphertextAnyLengthµÄgetº¯Êı
+	//CiphertextAnyLengthçš„getå‡½æ•°
 	char* GetCiphertextAnyLength();
 
-	//PlaintextAnyLengthµÄgetº¯Êı
+	//PlaintextAnyLengthçš„getå‡½æ•°
 	char* GetPlaintextAnyLength();
 
-	//×Ö·û´®×ª16½øÖÆÃÜÎÄÎÄ±¾
+	//å­—ç¬¦ä¸²è½¬16è¿›åˆ¶å¯†æ–‡æ–‡æœ¬
 	void ConvertCiphertext2Hex(char *szPlainInBytes);
 
-	//16½øÖÆÃÜÎÄ×ª×Ö·û´®
+	//16è¿›åˆ¶å¯†æ–‡è½¬å­—ç¬¦ä¸²
 	int ConvertHex2Ciphertext(const char *szCipherInBytes);
 
-	//CiphertextDataº¯Êı
+	//CiphertextDataå‡½æ•°
 	char* GetCiphertextData();
 
-	//hexCiphertextAnyLengthº¯Êı
+	//hexCiphertextAnyLengthå‡½æ•°
 	char* GetHexCipherAnyLengthData();
 
 
 
 private:
 	int  m_iLength;
-	char szSubKeys[2][16][48];//´¢´æ2¸ö16×é48Î»ÃÜÔ¿,µÚ2¸öÓÃÓÚ3DES
-	char szCiphertextRaw[64]; //´¢´æ¶ş½øÖÆÃÜÎÄ(64¸öBits) int 0,1
-	char szPlaintextRaw[64]; //´¢´æ¶ş½øÖÆÃÜÎÄ(64¸öBits) int 0,1
-	char szCiphertextInBytes[8];//´¢´æ8Î»ÃÜÎÄ
-	char szPlaintextInBytes[8];//´¢´æ8Î»Ã÷ÎÄ×Ö·û´®
+	char szSubKeys[2][16][48];//å‚¨å­˜2ä¸ª16ç»„48ä½å¯†é’¥,ç¬¬2ä¸ªç”¨äº3DES
+	char szCiphertextRaw[64]; //å‚¨å­˜äºŒè¿›åˆ¶å¯†æ–‡(64ä¸ªBits) int 0,1
+	char szPlaintextRaw[64]; //å‚¨å­˜äºŒè¿›åˆ¶å¯†æ–‡(64ä¸ªBits) int 0,1
+	char szCiphertextInBytes[8];//å‚¨å­˜8ä½å¯†æ–‡
+	char szPlaintextInBytes[8];//å‚¨å­˜8ä½æ˜æ–‡å­—ç¬¦ä¸²
 
-	char szCiphertextInBinary[65]; //´¢´æ¶ş½øÖÆÃÜÎÄ(64¸öBits) char '0','1',×îºóÒ»Î»´æ'\0'
-	char szCiphertextInHex[17]; //´¢´æÊ®Áù½øÖÆÃÜÎÄ,×îºóÒ»Î»´æ'\0'
-	char szPlaintext[9];//´¢´æ8Î»Ã÷ÎÄ×Ö·û´®,×îºóÒ»Î»´æ'\0'
+	char szCiphertextInBinary[65]; //å‚¨å­˜äºŒè¿›åˆ¶å¯†æ–‡(64ä¸ªBits) char '0','1',æœ€åä¸€ä½å­˜'\0'
+	char szCiphertextInHex[17]; //å‚¨å­˜åå…­è¿›åˆ¶å¯†æ–‡,æœ€åä¸€ä½å­˜'\0'
+	char szPlaintext[9];//å‚¨å­˜8ä½æ˜æ–‡å­—ç¬¦ä¸²,æœ€åä¸€ä½å­˜'\0'
 
-	char* szFCiphertextAnyLength;//ÈÎÒâ³¤¶ÈÃÜÎÄ
-	char* szFPlaintextAnyLength;//ÈÎÒâ³¤¶ÈÃ÷ÎÄ×Ö·û´®
+	char* szFCiphertextAnyLength;//ä»»æ„é•¿åº¦å¯†æ–‡
+	char* szFPlaintextAnyLength;//ä»»æ„é•¿åº¦æ˜æ–‡å­—ç¬¦ä¸²
 
 	char* szCiphertextData;
 	char* hexCiphertextAnyLength;
 
-	char sziv[8];//¼ÓÃÜIV
-	char szivRev[8];//½âÃÜIV	
+	char sziv[8];//åŠ å¯†IV
+	char szivRev[8];//è§£å¯†IV	
 
-	int m_iMode;//¼Ó½âÃÜÄ£Ê½
-	int m_iPkcs;//Ìî³äÄ£Ê½
+	int m_iMode;//åŠ è§£å¯†æ¨¡å¼
+	int m_iPkcs;//å¡«å……æ¨¡å¼
 
-	int data_base_length_;//ÓÃÓÚ±à½âÂëĞèÒªµÄ×Ö·û»º´æ³¤¶È
+	int data_base_length_;//ç”¨äºç¼–è§£ç éœ€è¦çš„å­—ç¬¦ç¼“å­˜é•¿åº¦
 
 
 
-	//¹¦ÄÜ:Éú³É×ÓÃÜÔ¿
-	//²ÎÊı:¾­¹ıPC1±ä»»µÄ56Î»¶ş½øÖÆ×Ö·û´®,Éú³ÉµÄszSubKeys±àºÅ0-1
-	//½á¹û:½«±£´æÓÚchar szSubKeys[16][48]
+	//åŠŸèƒ½:ç”Ÿæˆå­å¯†é’¥
+	//å‚æ•°:ç»è¿‡PC1å˜æ¢çš„56ä½äºŒè¿›åˆ¶å­—ç¬¦ä¸²,ç”Ÿæˆçš„szSubKeysç¼–å·0-1
+	//ç»“æœ:å°†ä¿å­˜äºchar szSubKeys[16][48]
 	void CreateSubKey(char* sz_56key,unsigned int keyN);
 
-	//¹¦ÄÜ:DESÖĞµÄFº¯Êı,
-	//²ÎÊı:×ó32Î»,ÓÒ32Î»,keyĞòºÅ(0-15),Ê¹ÓÃµÄszSubKeys±àºÅ0-1
-	//½á¹û:¾ùÔÚ±ä»»×óÓÒ32Î»
+	//åŠŸèƒ½:DESä¸­çš„Få‡½æ•°,
+	//å‚æ•°:å·¦32ä½,å³32ä½,keyåºå·(0-15),ä½¿ç”¨çš„szSubKeysç¼–å·0-1
+	//ç»“æœ:å‡åœ¨å˜æ¢å·¦å³32ä½
 	void FunctionF(char* sz_Li,char* sz_Ri,unsigned int iKey,unsigned int keyN);
 
-	//¹¦ÄÜ:IP±ä»»
-	//²ÎÊı:´ı´¦Àí×Ö·û´®,´¦Àíºó½á¹û´æ·ÅÖ¸Õë
-	//½á¹û:º¯Êı¸Ä±äµÚ¶ş¸ö²ÎÊıµÄÄÚÈİ
+	//åŠŸèƒ½:IPå˜æ¢
+	//å‚æ•°:å¾…å¤„ç†å­—ç¬¦ä¸²,å¤„ç†åç»“æœå­˜æ”¾æŒ‡é’ˆ
+	//ç»“æœ:å‡½æ•°æ”¹å˜ç¬¬äºŒä¸ªå‚æ•°çš„å†…å®¹
 	void InitialPermuteData(char* _src,char* _dst);
 
-	//¹¦ÄÜ:½«ÓÒ32Î»½øĞĞÀ©Õ¹Î»48Î»,
-	//²ÎÊı:Ô­32Î»×Ö·û´®,À©Õ¹ºó½á¹û´æ·ÅÖ¸Õë
-	//½á¹û:º¯Êı¸Ä±äµÚ¶ş¸ö²ÎÊıµÄÄÚÈİ
+	//åŠŸèƒ½:å°†å³32ä½è¿›è¡Œæ‰©å±•ä½48ä½,
+	//å‚æ•°:åŸ32ä½å­—ç¬¦ä¸²,æ‰©å±•åç»“æœå­˜æ”¾æŒ‡é’ˆ
+	//ç»“æœ:å‡½æ•°æ”¹å˜ç¬¬äºŒä¸ªå‚æ•°çš„å†…å®¹
 	void ExpansionR(char* _src,char* _dst);
 
-	//¹¦ÄÜ:Òì»òº¯Êı,
-	//²ÎÊı:´ıÒì»òµÄ²Ù×÷×Ö·û´®1,×Ö·û´®2,²Ù×÷Êı³¤¶È,´¦Àíºó½á¹û´æ·ÅÖ¸Õë
-	//½á¹û: º¯Êı¸Ä±äµÚËÄ¸ö²ÎÊıµÄÄÚÈİ
+	//åŠŸèƒ½:å¼‚æˆ–å‡½æ•°,
+	//å‚æ•°:å¾…å¼‚æˆ–çš„æ“ä½œå­—ç¬¦ä¸²1,å­—ç¬¦ä¸²2,æ“ä½œæ•°é•¿åº¦,å¤„ç†åç»“æœå­˜æ”¾æŒ‡é’ˆ
+	//ç»“æœ: å‡½æ•°æ”¹å˜ç¬¬å››ä¸ªå‚æ•°çš„å†…å®¹
 	void XOR(char* szParam1,char* szParam2, unsigned int uiParamLength, char* szReturnValueBuffer);
 
-	//¹¦ÄÜ:S-BOX , Êı¾İÑ¹Ëõ,
-	//²ÎÊı:48Î»¶ş½øÖÆ×Ö·û´®,
-	//½á¹û:·µ»Ø½á¹û:32Î»×Ö·û´®
+	//åŠŸèƒ½:S-BOX , æ•°æ®å‹ç¼©,
+	//å‚æ•°:48ä½äºŒè¿›åˆ¶å­—ç¬¦ä¸²,
+	//ç»“æœ:è¿”å›ç»“æœ:32ä½å­—ç¬¦ä¸²
 	void CompressFuncS(char* _src48, char* _dst32);
 
-	//¹¦ÄÜ:IPÄæ±ä»»,
-	//²ÎÊı:´ı±ä»»×Ö·û´®,´¦Àíºó½á¹û´æ·ÅÖ¸Õë
-	//½á¹û:º¯Êı¸Ä±äµÚ¶ş¸ö²ÎÊıµÄÄÚÈİ
+	//åŠŸèƒ½:IPé€†å˜æ¢,
+	//å‚æ•°:å¾…å˜æ¢å­—ç¬¦ä¸²,å¤„ç†åç»“æœå­˜æ”¾æŒ‡é’ˆ
+	//ç»“æœ:å‡½æ•°æ”¹å˜ç¬¬äºŒä¸ªå‚æ•°çš„å†…å®¹
 	void PermutationP(char* _src,char* _dst);
 
 };

@@ -1,4 +1,4 @@
-﻿// The basic configuration of Windows SDK and CRT
+// The basic configuration of Windows SDK and CRT
 
 #ifndef BUILD_WINSDK_CONFIG_H_
 #define BUILD_WINSDK_CONFIG_H_

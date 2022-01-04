@@ -3,7 +3,7 @@
 #include "resource.h"
 
 /** @class MainThread
-* @brief Ö÷Ïß³Ì£¨UIÏß³Ì£©Àà£¬¼Ì³Ğ nbase::FrameworkThread
+* @brief ä¸»çº¿ç¨‹ï¼ˆUIçº¿ç¨‹ï¼‰ç±»ï¼Œç»§æ‰¿ nbase::FrameworkThread
 * @copyright (c) 2015, NetEase Inc. All rights reserved
 * @author towik
 * @date 2015/1/1
@@ -16,14 +16,14 @@ public:
 
 private:
 	/**
-	* Ğéº¯Êı£¬³õÊ¼»¯Ö÷Ïß³Ì
-	* @return void	ÎŞ·µ»ØÖµ
+	* è™šå‡½æ•°ï¼Œåˆå§‹åŒ–ä¸»çº¿ç¨‹
+	* @return void	æ— è¿”å›å€¼
 	*/
 	virtual void Init() override;
 
 	/**
-	* Ğéº¯Êı£¬Ö÷Ïß³ÌÍË³öÊ±£¬×öÒ»Ğ©ÇåÀí¹¤×÷
-	* @return void	ÎŞ·µ»ØÖµ
+	* è™šå‡½æ•°ï¼Œä¸»çº¿ç¨‹é€€å‡ºæ—¶ï¼Œåšä¸€äº›æ¸…ç†å·¥ä½œ
+	* @return void	æ— è¿”å›å€¼
 	*/
 	virtual void Cleanup() override;
 };

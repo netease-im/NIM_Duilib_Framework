@@ -34,7 +34,7 @@ public:
   ShadowCombo& operator=(const ShadowCombo& r) = delete;
   ~ShadowCombo() override;
 
-  // ÖØĞ´¸¸Àà·½·¨£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ£¬Çë²Î¿¼¸¸ÀàÉùÃ÷
+  // é‡å†™çˆ¶ç±»æ–¹æ³•ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½ï¼Œè¯·å‚è€ƒçˆ¶ç±»å£°æ˜
   void DoInit() override;
   std::wstring GetType() const override;
   UIAControlProvider* GetUIAProvider() override;
@@ -50,166 +50,166 @@ public:
   void PaintChild(IRenderContext* pRender, const UiRect& rcPaint) override;
 
   /**
-   * @brief »ñÈ¡µ±Ç°Ñ¡ÔñÏîÎÄ±¾
-   * @return ·µ»Øµ±Ç°Ñ¡ÔñÏîÎÄ±¾
+   * @brief è·å–å½“å‰é€‰æ‹©é¡¹æ–‡æœ¬
+   * @return è¿”å›å½“å‰é€‰æ‹©é¡¹æ–‡æœ¬
    */
   std::wstring GetText() const;
 
   /**
-  * @brief »ñÈ¡ÎÄ×Ö±ß¾à
-  * @return ·µ»ØÎÄ×ÖµÄ±ß¾àĞÅÏ¢
+  * @brief è·å–æ–‡å­—è¾¹è·
+  * @return è¿”å›æ–‡å­—çš„è¾¹è·ä¿¡æ¯
   */
   UiRect GetTextPadding() const;
 
   /**
-  * @brief ÉèÖÃÎÄ×Ö±ß¾àĞÅÏ¢
-  * @param[in] rc ±ß¾àĞÅÏ¢
-  * @return ÎŞ
+  * @brief è®¾ç½®æ–‡å­—è¾¹è·ä¿¡æ¯
+  * @param[in] rc è¾¹è·ä¿¡æ¯
+  * @return æ— 
   */
   void SetTextPadding(UiRect rc);
 
   /**
-   * @brief »ñÈ¡µ±Ç°ËùÊôµÄ List ¶ÔÏó
-   * @return ·µ»ØËùÊôµÄ List ¶ÔÏóÖ¸Õë
+   * @brief è·å–å½“å‰æ‰€å±çš„ List å¯¹è±¡
+   * @return è¿”å›æ‰€å±çš„ List å¯¹è±¡æŒ‡é’ˆ
    */
   ListBox* GetListBox() { return m_pLayout.get(); }
 
   /**
-   * @brief »ñÈ¡ÏÂÀ­¿òÊôĞÔĞÅÏ¢
-   * @return ·µ»Ø×Ö·û´®ĞÎÊ½µÄÊôĞÔĞÅÏ¢
+   * @brief è·å–ä¸‹æ‹‰æ¡†å±æ€§ä¿¡æ¯
+   * @return è¿”å›å­—ç¬¦ä¸²å½¢å¼çš„å±æ€§ä¿¡æ¯
    */
   std::wstring GetDropBoxAttributeList();
 
   /**
-   * @brief ÉèÖÃÏÂÀ­¿òµÄÊôĞÔĞÅÏ¢
-   * @param[in] pstrList ×ªÒåºóµÄ XML ¸ñÊ½ÊôĞÔÁĞ±í
-   * @return ÎŞ
+   * @brief è®¾ç½®ä¸‹æ‹‰æ¡†çš„å±æ€§ä¿¡æ¯
+   * @param[in] pstrList è½¬ä¹‰åçš„ XML æ ¼å¼å±æ€§åˆ—è¡¨
+   * @return æ— 
    */
   void SetDropBoxAttributeList(const std::wstring& pstrList);
 
   /**
-   * @brief »ñÈ¡ÏÂÀ­¿òÈİÆ÷´óĞ¡
-   * @return ·µ»ØÈİÆ÷´óĞ¡
+   * @brief è·å–ä¸‹æ‹‰æ¡†å®¹å™¨å¤§å°
+   * @return è¿”å›å®¹å™¨å¤§å°
    */
   CSize GetDropBoxSize() const;
 
   /**
-   * @brief ÉèÖÃÏÂÀ­¿òÈİÆ÷´óĞ¡
-   * @param[in] szDropBox ÒªÉèÖÃµÄ´óĞ¡ĞÅÏ¢
-   * @return ÎŞ
+   * @brief è®¾ç½®ä¸‹æ‹‰æ¡†å®¹å™¨å¤§å°
+   * @param[in] szDropBox è¦è®¾ç½®çš„å¤§å°ä¿¡æ¯
+   * @return æ— 
    */
   void SetDropBoxSize(CSize szDropBox);
 
   /**
-   * @brief ÉèÖÃ Combobox ÊÇ·ñÏòÉÏµ¯³ö
-   * @param[in] top Îª true ÔòÏòÉÏµ¯³ö£¬false ÎªÄ¬ÈÏÏòÏÂµ¯³ö
-   * @return ÎŞ
+   * @brief è®¾ç½® Combobox æ˜¯å¦å‘ä¸Šå¼¹å‡º
+   * @param[in] top ä¸º true åˆ™å‘ä¸Šå¼¹å‡ºï¼Œfalse ä¸ºé»˜è®¤å‘ä¸‹å¼¹å‡º
+   * @return æ— 
    */
   void SetPopupTop(bool top) { m_bPopupTop = top; };
 
   /**
-   * @brief ÅĞ¶Ï Combobox µ¯³öÄ£Ê½ÊÇ·ñÊÇÏòÉÏµ¯³ö
-   * @return ·µ»Ø true ±íÊ¾ÏòÉÏµ¯³ö£¬·ñÔòÎª false
+   * @brief åˆ¤æ–­ Combobox å¼¹å‡ºæ¨¡å¼æ˜¯å¦æ˜¯å‘ä¸Šå¼¹å‡º
+   * @return è¿”å› true è¡¨ç¤ºå‘ä¸Šå¼¹å‡ºï¼Œå¦åˆ™ä¸º false
    */
   bool IsPopupTop() const { return m_bPopupTop; };
 
   /**
-   * @brief Ñ¡ÔñÒ»¸ö×ÓÏî
-   * @param[in] iIndex ÒªÑ¡ÔñµÄ×ÓÏîË÷Òı
-   * @param[in] bTrigger ÊÇ·ñ´¥·¢Ñ¡ÔñÊÂ¼ş
-   * @return ·µ»Ø true ±íÊ¾³É¹¦£¬·ñÔòÎª false
+   * @brief é€‰æ‹©ä¸€ä¸ªå­é¡¹
+   * @param[in] iIndex è¦é€‰æ‹©çš„å­é¡¹ç´¢å¼•
+   * @param[in] bTrigger æ˜¯å¦è§¦å‘é€‰æ‹©äº‹ä»¶
+   * @return è¿”å› true è¡¨ç¤ºæˆåŠŸï¼Œå¦åˆ™ä¸º false
    */
   bool SelectItem(int iIndex, bool bTrigger = false);
 
   /**
-   * @brief »ñÈ¡Ö¸¶¨Ë÷ÒıÏÂµÄ×ÓÏî¿Ø¼ş
-   * @param[in] iIndex Òª»ñÈ¡µÄ×ÓÏîË÷Òı
-   * @return ·µ»Ø¿Ø¼şÖ¸Õë
+   * @brief è·å–æŒ‡å®šç´¢å¼•ä¸‹çš„å­é¡¹æ§ä»¶
+   * @param[in] iIndex è¦è·å–çš„å­é¡¹ç´¢å¼•
+   * @return è¿”å›æ§ä»¶æŒ‡é’ˆ
    */
   Control* GetItemAt(int iIndex);
 
   /**
-   * @brief »ñÈ¡µ±Ç°Ñ¡ÔñÏîË÷Òı
-   * @return ·µ»Øµ±Ç°Ñ¡ÔñÏîË÷Òı
+   * @brief è·å–å½“å‰é€‰æ‹©é¡¹ç´¢å¼•
+   * @return è¿”å›å½“å‰é€‰æ‹©é¡¹ç´¢å¼•
    */
   int GetCurSel() const { return m_iCurSel; }
 
   /**
-   * @brief »ñÈ¡ËùÓĞ×ÓÏîÊıÁ¿
-   * @return ·µ»ØËùÓĞ×ÓÏîÊıÁ¿
+   * @brief è·å–æ‰€æœ‰å­é¡¹æ•°é‡
+   * @return è¿”å›æ‰€æœ‰å­é¡¹æ•°é‡
    */
   virtual int GetCount() const { return m_pLayout->GetCount(); }
 
   /**
-  * @brief ÉèÖÃÏÂÀ­¿òµÄ´°¿Ú
-  * @param[in] combo_wnd ÉèÖÃµÄÏÂÀ­¿ò´°¿Ú
+  * @brief è®¾ç½®ä¸‹æ‹‰æ¡†çš„çª—å£
+  * @param[in] combo_wnd è®¾ç½®çš„ä¸‹æ‹‰æ¡†çª—å£
    */
   void SetCShadowComboWnd(CShadowComboWnd* comboWnd) { m_pWindow = comboWnd; }
 
   /**
-  * @brief »ñÈ¡ÏÂÀ­¿òµÄ´°¿Ú
-  * @return ÏÂÀ­¿ò´æÔÚÊ±·µ»ØÏÂÀ­¿ò´°¿Ú£¬²»´æÔÚÊ±·µ»Ønullptr
+  * @brief è·å–ä¸‹æ‹‰æ¡†çš„çª—å£
+  * @return ä¸‹æ‹‰æ¡†å­˜åœ¨æ—¶è¿”å›ä¸‹æ‹‰æ¡†çª—å£ï¼Œä¸å­˜åœ¨æ—¶è¿”å›nullptr
   */
   CShadowComboWnd* GetShadowComboWnd() { return m_pWindow; }
 
   /**
-  * @brief ÉèÖÃÏÂÀ­¿òÒõÓ°µÄ´óĞ¡
-  * @param[in] rect ÉèÖÃµÄÏÂÀ­¿òÒõÓ°´óĞ¡
+  * @brief è®¾ç½®ä¸‹æ‹‰æ¡†é˜´å½±çš„å¤§å°
+  * @param[in] rect è®¾ç½®çš„ä¸‹æ‹‰æ¡†é˜´å½±å¤§å°
   */
   void SetShadowCorner(const UiRect& rect, bool bNeedDpiScale = true);
 
   /**
-  * @brief »ñÈ¡ÏÂÀ­¿òÒõÓ°´óĞ¡
-  * @return ·µ»ØÏÂÀ­¿òÒõÓ°µÄ´óĞ¡
+  * @brief è·å–ä¸‹æ‹‰æ¡†é˜´å½±å¤§å°
+  * @return è¿”å›ä¸‹æ‹‰æ¡†é˜´å½±çš„å¤§å°
   */
   UiRect GetShadowCorner() const { return m_rcShadowCorner; }
 
   /**
-  * @brief ÉèÖÃÏÂÀ­¿òÒõÓ°Í¼Æ¬
-  * @param[in] rect ÉèÖÃµÄÏÂÀ­¿òÒõÓ°Í¼Æ¬
+  * @brief è®¾ç½®ä¸‹æ‹‰æ¡†é˜´å½±å›¾ç‰‡
+  * @param[in] rect è®¾ç½®çš„ä¸‹æ‹‰æ¡†é˜´å½±å›¾ç‰‡
   */
   void SetShadowImage(const std::wstring& ShadowImage) { m_sShadowImage = ShadowImage; }
 
   /**
-  * @brief »ñÈ¡ÏÂÀ­¿òÒõÓ°Í¼Æ¬
-  * @return ·µ»ØÏÂÀ­¿òÒõÓ°Í¼Æ¬
+  * @brief è·å–ä¸‹æ‹‰æ¡†é˜´å½±å›¾ç‰‡
+  * @return è¿”å›ä¸‹æ‹‰æ¡†é˜´å½±å›¾ç‰‡
   */
   std::wstring GetShadowImage() const { return m_sShadowImage; }
 
   /**
-  * @brief »ñÈ¡Layout
-  * @return ·µ»ØLayout
+  * @brief è·å–Layout
+  * @return è¿”å›Layout
   */
   ui::ListBox* GetCustomLayout() const { return m_pLayout.get(); }
 
   void SetArrowOffset(int offset, bool bNeedDpiScale = true);
 
   /**
-   * @brief ¼àÌı×ÓÏî±»Ñ¡ÔñÊÂ¼ş
-   * @param[in] callback ×ÓÏî±»Ñ¡Ôñºó´¥·¢µÄ»Øµ÷º¯Êı
-   * @return ÎŞ
+   * @brief ç›‘å¬å­é¡¹è¢«é€‰æ‹©äº‹ä»¶
+   * @param[in] callback å­é¡¹è¢«é€‰æ‹©åè§¦å‘çš„å›è°ƒå‡½æ•°
+   * @return æ— 
    */
   void AttachSelect(const EventCallback& callback) { OnEvent[kEventSelect] += callback;/*m_pLayout->AttachSelect(callback);*/ }	//mod by djj
 
   /**
-   * @brief ¼àÌıÏÂÀ­´°¹Ø±ÕÊÂ¼ş
-   * @param[in] callback ÏÂÀ­´°¹Ø±Õºó´¥·¢µÄ»Øµ÷º¯Êı
-   * @return ÎŞ
+   * @brief ç›‘å¬ä¸‹æ‹‰çª—å…³é—­äº‹ä»¶
+   * @param[in] callback ä¸‹æ‹‰çª—å…³é—­åè§¦å‘çš„å›è°ƒå‡½æ•°
+   * @return æ— 
    */
   void AttachWindowClose(const EventCallback& callback) { OnEvent[kEventWindowClose] += callback; };
 
 private:
   /**
-   * @brief Ä¬ÈÏµÄ×ÓÏî±»Ñ¡Ôñ´¦Àíº¯Êı
-   * @param[in] args ²ÎÊıÁĞ±í
-   * @return Ê¼ÖÕ·µ»Ø true
+   * @brief é»˜è®¤çš„å­é¡¹è¢«é€‰æ‹©å¤„ç†å‡½æ•°
+   * @param[in] args å‚æ•°åˆ—è¡¨
+   * @return å§‹ç»ˆè¿”å› true
    */
   bool OnSelectItem(EventArgs* args);
 
   /**
-   * @brief Ñ¡ÔñÒ»¸ö×ÓÏî
-   * @param[in] iIndex ÒªÑ¡ÔñµÄ×ÓÏîË÷Òı
-   * @return ·µ»Ø true ±íÊ¾³É¹¦£¬·ñÔòÎª false
+   * @brief é€‰æ‹©ä¸€ä¸ªå­é¡¹
+   * @param[in] iIndex è¦é€‰æ‹©çš„å­é¡¹ç´¢å¼•
+   * @return è¿”å› true è¡¨ç¤ºæˆåŠŸï¼Œå¦åˆ™ä¸º false
    */
   bool SelectItemInternal(int iIndex);
 

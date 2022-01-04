@@ -59,8 +59,8 @@ void TreeNode::SetInternVisible(bool bVisible)
 	for (auto it = m_items.begin(); it != m_items.end(); it++)
 	{
 		auto pControl = *it;
-		// ¿ØÖÆ×Ó¿Ø¼þÏÔÊ¾×´Ì¬
-		// InternVisible×´Ì¬Ó¦ÓÉ×Ó¿Ø¼þ×Ô¼º¿ØÖÆ
+		// æŽ§åˆ¶å­æŽ§ä»¶æ˜¾ç¤ºçŠ¶æ€
+		// InternVisibleçŠ¶æ€åº”ç”±å­æŽ§ä»¶è‡ªå·±æŽ§åˆ¶
 		pControl->SetInternVisible(Control::IsVisible());
 	}
 }

@@ -6,11 +6,11 @@
 #include <algorithm>
 
 /*
- * Õâ¸öÀàÖ÷Òª½â¾öÒ»¸öÎÊÌâ£º
- * µ±MessagePumpÔÚ±éÀúObserverListµÄÊ±ºò£¬
- * ÔÊĞí´ÓÒ»¸öObserverÄÚ²¿µ÷ÓÃRemoveObserverÀ´ÒÆ³ı×Ô¼º»òÕß±ğµÄObserver¶ø²»»áµ¼ÖÂ½ÓÏÂÀ´µÄ±éÀú±ÀÀ££¨iterator±»erase£©
+ * è¿™ä¸ªç±»ä¸»è¦è§£å†³ä¸€ä¸ªé—®é¢˜ï¼š
+ * å½“MessagePumpåœ¨éå†ObserverListçš„æ—¶å€™ï¼Œ
+ * å…è®¸ä»ä¸€ä¸ªObserverå†…éƒ¨è°ƒç”¨RemoveObserveræ¥ç§»é™¤è‡ªå·±æˆ–è€…åˆ«çš„Observerè€Œä¸ä¼šå¯¼è‡´æ¥ä¸‹æ¥çš„éå†å´©æºƒï¼ˆiteratorè¢«eraseï¼‰
  *
- * Google ChromeµÄ×ö·¨ÊÇÖØÔØiterator£¬ÕâÀï²ÉÓÃlazy erase¼¼Êõ¡£ÏÂÃæÊÇÊ¾Àı´úÂë£º
+ * Google Chromeçš„åšæ³•æ˜¯é‡è½½iteratorï¼Œè¿™é‡Œé‡‡ç”¨lazy eraseæŠ€æœ¯ã€‚ä¸‹é¢æ˜¯ç¤ºä¾‹ä»£ç ï¼š
  *
  * ObserverList<Observer> observers;
  * ...

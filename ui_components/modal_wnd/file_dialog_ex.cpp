@@ -58,7 +58,7 @@ void CFileDialogEx::SetFlags(DWORD dwFlags)
 	m_stOFN.Flags = dwFlags;
 }
 
-// Ê¾Àı_T("Text Files(*.txt)\0*.txt\0ÍøÒ³ÎÄ¼ş\0*.htm;*.html\0All Files(*.*)\0*.*\0\0")
+// ç¤ºä¾‹_T("Text Files(*.txt)\0*.txt\0ç½‘é¡µæ–‡ä»¶\0*.htm;*.html\0All Files(*.*)\0*.*\0\0")
 void CFileDialogEx::SetFilter(LPCTSTR lpszFilter)
 {
 	LPTSTR lpsz = (LPTSTR)lpszFilter;
@@ -83,9 +83,9 @@ void CFileDialogEx::SetFilter(LPCTSTR lpszFilter)
 	}
 }
 
-//param:¹ıÂË×Ö·û´®¶Ô,key-ÃèÊö×Ö·û´® value-¹ıÂË×Ö·û´®
-//²ÎÊı¿ÉÒÔÖ¸¶¨¶à×é¹ıÂËÀàĞÍ
-//example:filers[L"Í¼ÏñÎÄ¼ş(*.jpg)"] = L"*.jpg";
+//param:è¿‡æ»¤å­—ç¬¦ä¸²å¯¹,key-æè¿°å­—ç¬¦ä¸² value-è¿‡æ»¤å­—ç¬¦ä¸²
+//å‚æ•°å¯ä»¥æŒ‡å®šå¤šç»„è¿‡æ»¤ç±»å‹
+//example:filers[L"å›¾åƒæ–‡ä»¶(*.jpg)"] = L"*.jpg";
 void CFileDialogEx::SetFilter(std::map<LPCTSTR,LPCTSTR>& filters)
 {
 	std::map<LPCTSTR,LPCTSTR>::iterator it = filters.begin();

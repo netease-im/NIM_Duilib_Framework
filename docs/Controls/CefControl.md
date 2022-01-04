@@ -1,451 +1,451 @@
-# CefControl£¨Cef ¿Ø¼ş£©
+# CefControlï¼ˆCef æ§ä»¶ï¼‰
 
-`CefControl` ºÍ `CefNativeControl` ¼Ì³ĞÁË `Control` ¿Ø¼şÊôĞÔºÍ·½·¨£¬¸ü¶à¿ÉÓÃÊôĞÔºÍ·½·¨Çë²Î¿¼£º[Control](Control.md) ¿Ø¼ş
+`CefControl` å’Œ `CefNativeControl` ç»§æ‰¿äº† `Control` æ§ä»¶å±æ€§å’Œæ–¹æ³•ï¼Œæ›´å¤šå¯ç”¨å±æ€§å’Œæ–¹æ³•è¯·å‚è€ƒï¼š[Control](Control.md) æ§ä»¶
 
- - CefControl ÊÇÀëÆÁäÖÈ¾Ä£Ê½µÄ CEF ¿Ø¼ş
- - CefNativeControl ÊÇÕæ´°¿ÚÄ£Ê½µÄ CEF ¿Ø¼ş£¨¾ßÓĞ´°¿Ú¾ä±ú£©
+ - CefControl æ˜¯ç¦»å±æ¸²æŸ“æ¨¡å¼çš„ CEF æ§ä»¶
+ - CefNativeControl æ˜¯çœŸçª—å£æ¨¡å¼çš„ CEF æ§ä»¶ï¼ˆå…·æœ‰çª—å£å¥æŸ„ï¼‰
 
-CEF ¿Ø¼şÊ¹ÓÃÁË×îºóÖ§³Ö XP µÄ 2623 °æ±¾£¬¿Ø¼şÒÀÀµ CEF ÒÑ¾­±àÒëºÃµÄ¶ş½øÖÆÎÄ¼ş£¨¼û bin Ä¿Â¼ÖĞ cef ºÍ cef_x64£©ºÍ CEF µÄ C++ ·â×°²ã `third_party\\cef_wrapper`£¬
-Èç¹ûÊ¹ÓÃµ½ÁË `CefControl` »ò `CefNativeControl`£¬ĞèÒª½«¶ÔÓ¦°æ±¾µÄ cef Ä¿Â¼¸´ÖÆµ½¿ÉÖ´ĞĞÎÄ¼şÏàÍ¬Ä¿Â¼²¢½« `third_party\\cef_wrapper` Ä¿Â¼ÉèÖÃÎª¹«¹²Í·Ä¿Â¼£¬¸ü¶àÇë²Î¿¼ samples Ä¿Â¼ÏÂµÄ cef Ê¾ÀıºÍ multi_browser Ê¾Àı¡£
+CEF æ§ä»¶ä½¿ç”¨äº†æœ€åæ”¯æŒ XP çš„ 2623 ç‰ˆæœ¬ï¼Œæ§ä»¶ä¾èµ– CEF å·²ç»ç¼–è¯‘å¥½çš„äºŒè¿›åˆ¶æ–‡ä»¶ï¼ˆè§ bin ç›®å½•ä¸­ cef å’Œ cef_x64ï¼‰å’Œ CEF çš„ C++ å°è£…å±‚ `third_party\\cef_wrapper`ï¼Œ
+å¦‚æœä½¿ç”¨åˆ°äº† `CefControl` æˆ– `CefNativeControl`ï¼Œéœ€è¦å°†å¯¹åº”ç‰ˆæœ¬çš„ cef ç›®å½•å¤åˆ¶åˆ°å¯æ‰§è¡Œæ–‡ä»¶ç›¸åŒç›®å½•å¹¶å°† `third_party\\cef_wrapper` ç›®å½•è®¾ç½®ä¸ºå…¬å…±å¤´ç›®å½•ï¼Œæ›´å¤šè¯·å‚è€ƒ samples ç›®å½•ä¸‹çš„ cef ç¤ºä¾‹å’Œ multi_browser ç¤ºä¾‹ã€‚
 
-| ·½·¨Ãû³Æ | ÓÃÍ¾ |
+| æ–¹æ³•åç§° | ç”¨é€” |
 | :--- | :--- |
-| [LoadURL](#LoadURL) | ¼ÓÔØÒ»¸öµØÖ· |
-| [LoadString](#LoadString) | ¸øÖ¸¶¨µØÖ·Ìí¼ÓÒ»¸ö×Ö·û´®×ÊÔ´ |
-| [GoBack](#GoBack) | ºóÍË |
-| [GoForward](#GoForward) | Ç°½ø |
-| [CanGoBack](#CanGoBack) | ÅĞ¶ÏÊÇ·ñ¿ÉÒÔºóÍË |
-| [CanGoForward](#CanGoForward) | ÅĞ¶ÏÊÇ·ñ¿ÉÒÔÇ°½ø |
-| [Refresh](#Refresh) | Ë¢ĞÂ |
-| [StopLoad](#StopLoad) | Í£Ö¹¼ÓÔØ |
-| [IsLoading](#IsLoading) | ÊÇ·ñ¼ÓÔØÖĞ |
-| [StartDownload](#StartDownload) | ¿ªÊ¼Ò»¸öÏÂÔØÈÎÎñ |
-| [SetZoomLevel](#SetZoomLevel) | ÉèÖÃÒ³ÃæËõ·Å±ÈÀı |
-| [GetURL](#GetURL) | »ñÈ¡Ò³Ãæ URL |
-| [GetUTF8URL](#GetUTF8URL) | »ñÈ¡ UTF8 ¸ñÊ½ URL |
-| [GetMainURL](#GetMainURL) | »ñÈ¡ÍøÖ· # ºÅÇ°µÄµØÖ· |
-| [RegisterCppFunc](#RegisterCppFunc) | ×¢²áÒ»¸ö C++ ·½·¨Ìá¹©Ç°¶Ëµ÷ÓÃ |
-| [UnRegisterCppFunc](#UnRegisterCppFunc) | ·´×¢²áÒ»¸ö C++ ·½·¨ |
-| [CallJSFunction](#CallJSFunction) | µ÷ÓÃÒ»¸öÇ°¶ËÒÑ¾­×¢²áºÃµÄ·½·¨ |
-| [CallJSFunction](#CallJSFunction) | µ÷ÓÃÒ»¸öÇ°¶ËÒÑ¾­×¢²áºÃµÄ·½·¨ |
-| [AttachDevTools](#AttachDevTools) | °ó¶¨¿ª·¢Õß¹¤¾ßµ½Ò»¸ö CefControl ¿Ø¼şÉÏ |
-| [DettachDevTools](#DettachDevTools) | ½â°ó¿ª·¢Õß¹¤¾ß |
-| [IsAttachedDevTools](#IsAttachedDevTools) | ÅĞ¶ÏÊÇ·ñÒÑ¾­°ó¶¨¿ª·¢Õß¹¤¾ßµ½Ò»¸ö CefControl |
-| [RepairBrowser](#RepairBrowser) | ĞŞ¸´ä¯ÀÀÆ÷ |
-| [AttachBeforeContextMenu](#AttachBeforeContextMenu) | °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÓÒ¼ü²Ëµ¥µ¯³ö |
-| [AttachMenuCommand](#AttachMenuCommand) | °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÑ¡ÔñÁËÄÄ¸öÓÒ¼ü²Ëµ¥ |
-| [AttachTitleChange](#AttachTitleChange) | °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ Title ¸Ä±ä |
-| [AttachUrlChange](#AttachUrlChange) | °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³ÃæÖĞ frame URL µØÖ·¸Ä±ä |
-| [AttachMainURLChange](#AttachMainURLChange) | °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÖ÷Ò³Ãæ URL µØÖ·¸Ä±ä |
-| [AttachBeforeNavigate](#AttachBeforeNavigate) | °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ×ÊÔ´È«²¿¼ÓÔØÍê±Ï |
-| [AttachLinkClick](#AttachLinkClick) | °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ»¸öµ¯³ö´°¿Úµ¯³öµÄÍ¨Öª |
-| [AttachLoadingStateChange](#AttachLoadingStateChange) | °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ¼ÓÔØ×´Ì¬¸Ä±ä |
-| [AttachLoadStart](#AttachLoadStart) | °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ¿ªÊ¼¼ÓÔØÍ¨Öª |
-| [AttachLoadEnd](#AttachLoadEnd) | °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ¼ÓÔØÍê±ÏÍ¨Öª |
-| [AttachLoadError](#AttachLoadError) | °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌı½çÃæ¼ÓÔØ´íÎóÍ¨Öª |
-| [AttachDevToolAttachedStateChange](#AttachDevToolAttachedStateChange) | °ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌı¿ª·¢Õß¹¤¾ß×´Ì¬¸Ä±äÍ¨Öª |
+| [LoadURL](#LoadURL) | åŠ è½½ä¸€ä¸ªåœ°å€ |
+| [LoadString](#LoadString) | ç»™æŒ‡å®šåœ°å€æ·»åŠ ä¸€ä¸ªå­—ç¬¦ä¸²èµ„æº |
+| [GoBack](#GoBack) | åé€€ |
+| [GoForward](#GoForward) | å‰è¿› |
+| [CanGoBack](#CanGoBack) | åˆ¤æ–­æ˜¯å¦å¯ä»¥åé€€ |
+| [CanGoForward](#CanGoForward) | åˆ¤æ–­æ˜¯å¦å¯ä»¥å‰è¿› |
+| [Refresh](#Refresh) | åˆ·æ–° |
+| [StopLoad](#StopLoad) | åœæ­¢åŠ è½½ |
+| [IsLoading](#IsLoading) | æ˜¯å¦åŠ è½½ä¸­ |
+| [StartDownload](#StartDownload) | å¼€å§‹ä¸€ä¸ªä¸‹è½½ä»»åŠ¡ |
+| [SetZoomLevel](#SetZoomLevel) | è®¾ç½®é¡µé¢ç¼©æ”¾æ¯”ä¾‹ |
+| [GetURL](#GetURL) | è·å–é¡µé¢ URL |
+| [GetUTF8URL](#GetUTF8URL) | è·å– UTF8 æ ¼å¼ URL |
+| [GetMainURL](#GetMainURL) | è·å–ç½‘å€ # å·å‰çš„åœ°å€ |
+| [RegisterCppFunc](#RegisterCppFunc) | æ³¨å†Œä¸€ä¸ª C++ æ–¹æ³•æä¾›å‰ç«¯è°ƒç”¨ |
+| [UnRegisterCppFunc](#UnRegisterCppFunc) | åæ³¨å†Œä¸€ä¸ª C++ æ–¹æ³• |
+| [CallJSFunction](#CallJSFunction) | è°ƒç”¨ä¸€ä¸ªå‰ç«¯å·²ç»æ³¨å†Œå¥½çš„æ–¹æ³• |
+| [CallJSFunction](#CallJSFunction) | è°ƒç”¨ä¸€ä¸ªå‰ç«¯å·²ç»æ³¨å†Œå¥½çš„æ–¹æ³• |
+| [AttachDevTools](#AttachDevTools) | ç»‘å®šå¼€å‘è€…å·¥å…·åˆ°ä¸€ä¸ª CefControl æ§ä»¶ä¸Š |
+| [DettachDevTools](#DettachDevTools) | è§£ç»‘å¼€å‘è€…å·¥å…· |
+| [IsAttachedDevTools](#IsAttachedDevTools) | åˆ¤æ–­æ˜¯å¦å·²ç»ç»‘å®šå¼€å‘è€…å·¥å…·åˆ°ä¸€ä¸ª CefControl |
+| [RepairBrowser](#RepairBrowser) | ä¿®å¤æµè§ˆå™¨ |
+| [AttachBeforeContextMenu](#AttachBeforeContextMenu) | ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬å³é”®èœå•å¼¹å‡º |
+| [AttachMenuCommand](#AttachMenuCommand) | ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é€‰æ‹©äº†å“ªä¸ªå³é”®èœå• |
+| [AttachTitleChange](#AttachTitleChange) | ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢ Title æ”¹å˜ |
+| [AttachUrlChange](#AttachUrlChange) | ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢ä¸­ frame URL åœ°å€æ”¹å˜ |
+| [AttachMainURLChange](#AttachMainURLChange) | ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ä¸»é¡µé¢ URL åœ°å€æ”¹å˜ |
+| [AttachBeforeNavigate](#AttachBeforeNavigate) | ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢èµ„æºå…¨éƒ¨åŠ è½½å®Œæ¯• |
+| [AttachLinkClick](#AttachLinkClick) | ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ä¸€ä¸ªå¼¹å‡ºçª—å£å¼¹å‡ºçš„é€šçŸ¥ |
+| [AttachLoadingStateChange](#AttachLoadingStateChange) | ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢åŠ è½½çŠ¶æ€æ”¹å˜ |
+| [AttachLoadStart](#AttachLoadStart) | ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢å¼€å§‹åŠ è½½é€šçŸ¥ |
+| [AttachLoadEnd](#AttachLoadEnd) | ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢åŠ è½½å®Œæ¯•é€šçŸ¥ |
+| [AttachLoadError](#AttachLoadError) | ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ç•Œé¢åŠ è½½é”™è¯¯é€šçŸ¥ |
+| [AttachDevToolAttachedStateChange](#AttachDevToolAttachedStateChange) | ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬å¼€å‘è€…å·¥å…·çŠ¶æ€æ”¹å˜é€šçŸ¥ |
 
 ### LoadURL
 
-¼ÓÔØÒ»¸öµØÖ·
+åŠ è½½ä¸€ä¸ªåœ°å€
 
 ```cpp
 void LoadURL(const CefString& url)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `url` ÍøÕ¾µØÖ·
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `url` ç½‘ç«™åœ°å€
+ - è¿”å›å€¼ï¼šæ— 
 
 ### LoadString
 
-¸øÖ¸¶¨µØÖ·Ìí¼ÓÒ»¸ö×Ö·û´®×ÊÔ´
+ç»™æŒ‡å®šåœ°å€æ·»åŠ ä¸€ä¸ªå­—ç¬¦ä¸²èµ„æº
 
 ```cpp
 void LoadString(const CefString& stringW, const CefString& url)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `stringW` ×Ö·û´®×ÊÔ´
-    - `url` ÍøÖ·
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `stringW` å­—ç¬¦ä¸²èµ„æº
+    - `url` ç½‘å€
+ - è¿”å›å€¼ï¼šæ— 
 
 ### GoBack
 
-ºóÍË
+åé€€
 
 ```cpp
 void GoBack()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šæ— 
 
 ### GoForward
 
-Ç°½ø
+å‰è¿›
 
 ```cpp
 void GoForward()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šæ— 
 
 ### CanGoBack
 
-ÅĞ¶ÏÊÇ·ñ¿ÉÒÔºóÍË
+åˆ¤æ–­æ˜¯å¦å¯ä»¥åé€€
 
 ```cpp
 bool CanGoBack()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£º·µ»Ø true ±íÊ¾¿ÉÒÔ£¬false ±íÊ¾²»¿ÉÒÔ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šè¿”å› true è¡¨ç¤ºå¯ä»¥ï¼Œfalse è¡¨ç¤ºä¸å¯ä»¥
 
 ### CanGoForward
 
-ÅĞ¶ÏÊÇ·ñ¿ÉÒÔÇ°½ø
+åˆ¤æ–­æ˜¯å¦å¯ä»¥å‰è¿›
 
 ```cpp
 bool CanGoForward()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£º·µ»Ø true ±íÊ¾¿ÉÒÔ£¬false ±íÊ¾²»¿ÉÒÔ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šè¿”å› true è¡¨ç¤ºå¯ä»¥ï¼Œfalse è¡¨ç¤ºä¸å¯ä»¥
 
 ### Refresh
 
-Ë¢ĞÂ
+åˆ·æ–°
 
 ```cpp
 void Refresh()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šæ— 
 
 ### StopLoad
 
-Í£Ö¹¼ÓÔØ
+åœæ­¢åŠ è½½
 
 ```cpp
 void StopLoad()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šæ— 
 
 ### IsLoading
 
-ÊÇ·ñ¼ÓÔØÖĞ
+æ˜¯å¦åŠ è½½ä¸­
 
 ```cpp
 bool IsLoading()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£º·µ»Ø true ±íÊ¾¼ÓÔØÖĞ£¬·ñÔòÎª false
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šè¿”å› true è¡¨ç¤ºåŠ è½½ä¸­ï¼Œå¦åˆ™ä¸º false
 
 ### StartDownload
 
-¿ªÊ¼Ò»¸öÏÂÔØÈÎÎñ
+å¼€å§‹ä¸€ä¸ªä¸‹è½½ä»»åŠ¡
 
 ```cpp
 void StartDownload(const CefString& url)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `url` ÒªÏÂÔØµÄÎÄ¼şµØÖ·
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `url` è¦ä¸‹è½½çš„æ–‡ä»¶åœ°å€
+ - è¿”å›å€¼ï¼šæ— 
 
 ### SetZoomLevel
 
-ÉèÖÃÒ³ÃæËõ·Å±ÈÀı
+è®¾ç½®é¡µé¢ç¼©æ”¾æ¯”ä¾‹
 
 ```cpp
 void SetZoomLevel(float zoom_level)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `zoom_level` ±ÈÀıÖµ
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `zoom_level` æ¯”ä¾‹å€¼
+ - è¿”å›å€¼ï¼šæ— 
 
 ### GetURL
 
-»ñÈ¡Ò³Ãæ URL
+è·å–é¡µé¢ URL
 
 ```cpp
 CefString GetURL()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£º·µ»Ø URL µØÖ·
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šè¿”å› URL åœ°å€
 
 ### GetUTF8URL
 
-»ñÈ¡ UTF8 ¸ñÊ½ URL
+è·å– UTF8 æ ¼å¼ URL
 
 ```cpp
 std::string GetUTF8URL()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£º·µ»Ø URL µØÖ·
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šè¿”å› URL åœ°å€
 
 ### GetMainURL
 
-»ñÈ¡ÍøÖ· # ºÅÇ°µÄµØÖ·
+è·å–ç½‘å€ # å·å‰çš„åœ°å€
 
 ```cpp
 CefString GetMainURL(const CefString& url)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `url` Òª»ñÈ¡µÄÍêÕûµØÖ·
- - ·µ»ØÖµ£º·µ»Ø½ØÈ¡ºóµÄµØÖ·
+ - å‚&emsp;æ•°ï¼š  
+    - `url` è¦è·å–çš„å®Œæ•´åœ°å€
+ - è¿”å›å€¼ï¼šè¿”å›æˆªå–åçš„åœ°å€
 
 ### RegisterCppFunc
 
-×¢²áÒ»¸ö C++ ·½·¨Ìá¹©Ç°¶Ëµ÷ÓÃ
+æ³¨å†Œä¸€ä¸ª C++ æ–¹æ³•æä¾›å‰ç«¯è°ƒç”¨
 
 ```cpp
 bool RegisterCppFunc(const std::wstring& function_name, nim_cef::CppFunction function, bool global_function = false)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `function_name` ·½·¨Ãû³Æ
-    - `function` ·½·¨º¯ÊıÌå
-    - `global_function` ÊÇ·ñÊÇÒ»¸öÈ«¾Ö·½·¨
- - ·µ»ØÖµ£º·µ»Ø true ±íÊ¾×¢²á³É¹¦£¬false ¿ÉÄÜÒÑ¾­×¢²á
+ - å‚&emsp;æ•°ï¼š  
+    - `function_name` æ–¹æ³•åç§°
+    - `function` æ–¹æ³•å‡½æ•°ä½“
+    - `global_function` æ˜¯å¦æ˜¯ä¸€ä¸ªå…¨å±€æ–¹æ³•
+ - è¿”å›å€¼ï¼šè¿”å› true è¡¨ç¤ºæ³¨å†ŒæˆåŠŸï¼Œfalse å¯èƒ½å·²ç»æ³¨å†Œ
 
 ### UnRegisterCppFunc
 
-·´×¢²áÒ»¸ö C++ ·½·¨
+åæ³¨å†Œä¸€ä¸ª C++ æ–¹æ³•
 
 ```cpp
 void UnRegisterCppFunc(const std::wstring& function_name)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `function_name` ·½·¨Ãû³Æ
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `function_name` æ–¹æ³•åç§°
+ - è¿”å›å€¼ï¼šæ— 
 
 ### CallJSFunction
 
-µ÷ÓÃÒ»¸öÇ°¶ËÒÑ¾­×¢²áºÃµÄ·½·¨
+è°ƒç”¨ä¸€ä¸ªå‰ç«¯å·²ç»æ³¨å†Œå¥½çš„æ–¹æ³•
 
 ```cpp
 bool CallJSFunction(const std::wstring& js_function_name, const std::wstring& params, nim_cef::CallJsFunctionCallback callback, const std::wstring& frame_name = L"")
 ```
 
- - ²Î&emsp;Êı£º  
-    - `js_function_name` Ç°¶ËÌá¹©µÄ·½·¨Ãû
-    - `params` ´«µİ JSON ×Ö·û´®¸ñÊ½µÄ²ÎÊı
-    - `callback` Ç°¶ËÖ´ĞĞÍê³ÉºóµÄ»Øµ÷º¯Êı
-    - `frame_name` Òªµ÷ÓÃÄÄ¸öÃû³Æ frame ÏÂµÄ·½·¨£¬Ä¬ÈÏÊ¹ÓÃÖ÷ frame
- - ·µ»ØÖµ£º·µ»Ø true ±íÊ¾³É¹¦µ÷ÓÃ£¬false ±íÊ¾µ÷ÓÃÊ§°Ü£¬·½·¨¿ÉÄÜ²»´æÔÚ
+ - å‚&emsp;æ•°ï¼š  
+    - `js_function_name` å‰ç«¯æä¾›çš„æ–¹æ³•å
+    - `params` ä¼ é€’ JSON å­—ç¬¦ä¸²æ ¼å¼çš„å‚æ•°
+    - `callback` å‰ç«¯æ‰§è¡Œå®Œæˆåçš„å›è°ƒå‡½æ•°
+    - `frame_name` è¦è°ƒç”¨å“ªä¸ªåç§° frame ä¸‹çš„æ–¹æ³•ï¼Œé»˜è®¤ä½¿ç”¨ä¸» frame
+ - è¿”å›å€¼ï¼šè¿”å› true è¡¨ç¤ºæˆåŠŸè°ƒç”¨ï¼Œfalse è¡¨ç¤ºè°ƒç”¨å¤±è´¥ï¼Œæ–¹æ³•å¯èƒ½ä¸å­˜åœ¨
 
 ### CallJSFunction
 
-µ÷ÓÃÒ»¸öÇ°¶ËÒÑ¾­×¢²áºÃµÄ·½·¨
+è°ƒç”¨ä¸€ä¸ªå‰ç«¯å·²ç»æ³¨å†Œå¥½çš„æ–¹æ³•
 
 ```cpp
 bool CallJSFunction(const std::wstring& js_function_name, const std::wstring& params, nim_cef::CallJsFunctionCallback callback, int frame_id)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `js_function_name` Ç°¶ËÌá¹©µÄ·½·¨Ãû
-    - `params` ´«µİ JSON ×Ö·û´®¸ñÊ½µÄ²ÎÊı
-    - `callback` Ç°¶ËÖ´ĞĞÍê³ÉºóµÄ»Øµ÷º¯Êı
-    - `frame_id` Òªµ÷ÓÃÄÄ¸ö ID frame ÏÂµÄ·½·¨£¬Ä¬ÈÏÊ¹ÓÃÖ÷ frame
- - ·µ»ØÖµ£º·µ»Ø true ±íÊ¾³É¹¦µ÷ÓÃ£¬false ±íÊ¾µ÷ÓÃÊ§°Ü£¬·½·¨¿ÉÄÜ²»´æÔÚ
+ - å‚&emsp;æ•°ï¼š  
+    - `js_function_name` å‰ç«¯æä¾›çš„æ–¹æ³•å
+    - `params` ä¼ é€’ JSON å­—ç¬¦ä¸²æ ¼å¼çš„å‚æ•°
+    - `callback` å‰ç«¯æ‰§è¡Œå®Œæˆåçš„å›è°ƒå‡½æ•°
+    - `frame_id` è¦è°ƒç”¨å“ªä¸ª ID frame ä¸‹çš„æ–¹æ³•ï¼Œé»˜è®¤ä½¿ç”¨ä¸» frame
+ - è¿”å›å€¼ï¼šè¿”å› true è¡¨ç¤ºæˆåŠŸè°ƒç”¨ï¼Œfalse è¡¨ç¤ºè°ƒç”¨å¤±è´¥ï¼Œæ–¹æ³•å¯èƒ½ä¸å­˜åœ¨
 
 ### AttachDevTools
 
-°ó¶¨¿ª·¢Õß¹¤¾ßµ½Ò»¸ö CefControl ¿Ø¼şÉÏ
+ç»‘å®šå¼€å‘è€…å·¥å…·åˆ°ä¸€ä¸ª CefControl æ§ä»¶ä¸Š
 
 ```cpp
 virtual bool AttachDevTools(CefControl* view)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `view` Ò»¸ö CefControl ¿Ø¼şÊµÀı
- - ·µ»ØÖµ£º³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+ - å‚&emsp;æ•°ï¼š  
+    - `view` ä¸€ä¸ª CefControl æ§ä»¶å®ä¾‹
+ - è¿”å›å€¼ï¼šæˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 
 ### DettachDevTools
 
-½â°ó¿ª·¢Õß¹¤¾ß
+è§£ç»‘å¼€å‘è€…å·¥å…·
 
 ```cpp
 virtual void DettachDevTools()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šæ— 
 
 ### IsAttachedDevTools
 
-ÅĞ¶ÏÊÇ·ñÒÑ¾­°ó¶¨¿ª·¢Õß¹¤¾ßµ½Ò»¸ö CefControl
+åˆ¤æ–­æ˜¯å¦å·²ç»ç»‘å®šå¼€å‘è€…å·¥å…·åˆ°ä¸€ä¸ª CefControl
 
 ```cpp
 virtual bool IsAttachedDevTools()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£º·µ»Ø true ±íÊ¾ÒÑ¾­°ó¶¨£¬false ÎªÎ´°ó¶¨
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šè¿”å› true è¡¨ç¤ºå·²ç»ç»‘å®šï¼Œfalse ä¸ºæœªç»‘å®š
 
 ### RepairBrowser
 
-ĞŞ¸´ä¯ÀÀÆ÷
+ä¿®å¤æµè§ˆå™¨
 
 ```cpp
 virtual void RepairBrowser()
 ```
 
- - ²Î&emsp;Êı£ºÎŞ  
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼šæ—   
+ - è¿”å›å€¼ï¼šæ— 
 
 ### AttachBeforeContextMenu
 
-°ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÓÒ¼ü²Ëµ¥µ¯³ö
+ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬å³é”®èœå•å¼¹å‡º
 
 ```cpp
 void AttachBeforeContextMenu(const OnBeforeMenuEvent& callback)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `callback` Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnBeforeMenuEvent ÉùÃ÷
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `callback` ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnBeforeMenuEvent å£°æ˜
+ - è¿”å›å€¼ï¼šæ— 
 
 ### AttachMenuCommand
 
-°ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÑ¡ÔñÁËÄÄ¸öÓÒ¼ü²Ëµ¥
+ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é€‰æ‹©äº†å“ªä¸ªå³é”®èœå•
 
 ```cpp
 void AttachMenuCommand(const OnMenuCommandEvent& callback)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `callback` Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnMenuCommandEvent ÉùÃ÷
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `callback` ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnMenuCommandEvent å£°æ˜
+ - è¿”å›å€¼ï¼šæ— 
 
 ### AttachTitleChange
 
-°ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ Title ¸Ä±ä
+ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢ Title æ”¹å˜
 
 ```cpp
 void AttachTitleChange(const OnTitleChangeEvent& callback)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `callback` Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnTitleChangeEvent ÉùÃ÷
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `callback` ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnTitleChangeEvent å£°æ˜
+ - è¿”å›å€¼ï¼šæ— 
 
 ### AttachUrlChange
 
-°ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³ÃæÖĞ frame URL µØÖ·¸Ä±ä
+ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢ä¸­ frame URL åœ°å€æ”¹å˜
 
 ```cpp
 void AttachUrlChange(const OnUrlChangeEvent& callback)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `callback` Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnUrlChangeEvent ÉùÃ÷
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `callback` ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnUrlChangeEvent å£°æ˜
+ - è¿”å›å€¼ï¼šæ— 
 
 ### AttachMainURLChange
 
-°ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÖ÷Ò³Ãæ URL µØÖ·¸Ä±ä
+ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ä¸»é¡µé¢ URL åœ°å€æ”¹å˜
 
 ```cpp
 void AttachMainURLChange(OnMainURLChengeEvent cb)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `callback` Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnMainURLChengeEvent ÉùÃ÷
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `callback` ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnMainURLChengeEvent å£°æ˜
+ - è¿”å›å€¼ï¼šæ— 
 
 ### AttachBeforeNavigate
 
-°ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ×ÊÔ´È«²¿¼ÓÔØÍê±Ï
+ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢èµ„æºå…¨éƒ¨åŠ è½½å®Œæ¯•
 
 ```cpp
 void AttachBeforeNavigate(const OnBeforeResourceLoadEvent& callback)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `callback` Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnBeforeResourceLoadEvent ÉùÃ÷
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `callback` ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnBeforeResourceLoadEvent å£°æ˜
+ - è¿”å›å€¼ï¼šæ— 
 
 ### AttachLinkClick
 
-°ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ»¸öµ¯³ö´°¿Úµ¯³öµÄÍ¨Öª
+ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ä¸€ä¸ªå¼¹å‡ºçª—å£å¼¹å‡ºçš„é€šçŸ¥
 
 ```cpp
 void AttachLinkClick(const OnLinkClickEvent& callback)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `callback` Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnLinkClickEvent ÉùÃ÷
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `callback` ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnLinkClickEvent å£°æ˜
+ - è¿”å›å€¼ï¼šæ— 
 
 ### AttachLoadingStateChange
 
-°ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ¼ÓÔØ×´Ì¬¸Ä±ä
+ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢åŠ è½½çŠ¶æ€æ”¹å˜
 
 ```cpp
 void AttachLoadingStateChange(const OnLoadingStateChangeEvent& callback)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `callback` Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnLoadingStateChangeEvent ÉùÃ÷
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `callback` ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnLoadingStateChangeEvent å£°æ˜
+ - è¿”å›å€¼ï¼šæ— 
 
 ### AttachLoadStart
 
-°ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ¿ªÊ¼¼ÓÔØÍ¨Öª
+ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢å¼€å§‹åŠ è½½é€šçŸ¥
 
 ```cpp
 void AttachLoadStart(const OnLoadStartEvent& callback)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `callback` Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnLoadStartEvent ÉùÃ÷
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `callback` ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnLoadStartEvent å£°æ˜
+ - è¿”å›å€¼ï¼šæ— 
 
 ### AttachLoadEnd
 
-°ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌıÒ³Ãæ¼ÓÔØÍê±ÏÍ¨Öª
+ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬é¡µé¢åŠ è½½å®Œæ¯•é€šçŸ¥
 
 ```cpp
 void AttachLoadEnd(const OnLoadEndEvent& callback)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `callback` Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnLoadEndEvent ÉùÃ÷
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `callback` ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnLoadEndEvent å£°æ˜
+ - è¿”å›å€¼ï¼šæ— 
 
 ### AttachLoadError
 
-°ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌı½çÃæ¼ÓÔØ´íÎóÍ¨Öª
+ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬ç•Œé¢åŠ è½½é”™è¯¯é€šçŸ¥
 
 ```cpp
 void AttachLoadError(const OnLoadErrorEvent& callback)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `callback` Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnLoadErrorEvent ÉùÃ÷
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `callback` ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnLoadErrorEvent å£°æ˜
+ - è¿”å›å€¼ï¼šæ— 
 
 ### AttachDevToolAttachedStateChange
 
-°ó¶¨Ò»¸ö»Øµ÷º¯ÊıÓÃÓÚ¼àÌı¿ª·¢Õß¹¤¾ß×´Ì¬¸Ä±äÍ¨Öª
+ç»‘å®šä¸€ä¸ªå›è°ƒå‡½æ•°ç”¨äºç›‘å¬å¼€å‘è€…å·¥å…·çŠ¶æ€æ”¹å˜é€šçŸ¥
 
 ```cpp
 void AttachDevToolAttachedStateChange(const OnDevToolAttachedStateChangeEvent& callback)
 ```
 
- - ²Î&emsp;Êı£º  
-    - `callback` Ò»¸ö»Øµ÷º¯Êı£¬²Î¿¼ OnDevToolAttachedStateChangeEvent ÉùÃ÷
- - ·µ»ØÖµ£ºÎŞ
+ - å‚&emsp;æ•°ï¼š  
+    - `callback` ä¸€ä¸ªå›è°ƒå‡½æ•°ï¼Œå‚è€ƒ OnDevToolAttachedStateChangeEvent å£°æ˜
+ - è¿”å›å€¼ï¼šæ— 

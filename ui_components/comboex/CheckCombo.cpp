@@ -30,9 +30,9 @@ namespace nim_comp
 		CSize szDrop = m_pOwner->GetDropBoxSize();
 		UiRect rcOwner = m_pOwner->GetOrgPos();
 		UiRect rc = rcOwner;
-		rc.top = rc.bottom + 1;		// ¸¸´°¿Úleft¡¢bottomÎ»ÖÃ×÷Îªµ¯³ö´°¿ÚÆðµã
-		rc.bottom = rc.top + szDrop.cy;	// ¼ÆËãµ¯³ö´°¿Ú¸ß¶È
-		if (szDrop.cx > 0) rc.right = rc.left + szDrop.cx;	// ¼ÆËãµ¯³ö´°¿Ú¿í¶È
+		rc.top = rc.bottom + 1;		// çˆ¶çª—å£leftã€bottomä½ç½®ä½œä¸ºå¼¹å‡ºçª—å£èµ·ç‚¹
+		rc.bottom = rc.top + szDrop.cy;	// è®¡ç®—å¼¹å‡ºçª—å£é«˜åº¦
+		if (szDrop.cx > 0) rc.right = rc.left + szDrop.cx;	// è®¡ç®—å¼¹å‡ºçª—å£å®½åº¦
 
 		CSize szAvailable(rc.right - rc.left, rc.bottom - rc.top);
 		int cyFixed = 0;
@@ -42,7 +42,7 @@ namespace nim_comp
 			CSize sz = pControl->EstimateSize(szAvailable);
 			cyFixed += sz.cy;
 		}
-		cyFixed += 2; // VBox Ä¬ÈÏµÄPadding µ÷Õû
+		cyFixed += 2; // VBox é»˜è®¤çš„Padding è°ƒæ•´
 		rc.bottom = rc.top + min(cyFixed, szDrop.cy);
 
 		::MapWindowRect(pOwner->GetWindow()->GetHWND(), HWND_DESKTOP, &rc);

@@ -72,14 +72,14 @@ LRESULT WindowImplBase::OnWindowPosChanging(UINT uMsg, WPARAM wParam, LPARAM lPa
 	bHandled = FALSE;
 	if (IsZoomed(m_hWnd)) {
 		LPWINDOWPOS lpPos = (LPWINDOWPOS)lParam;
-		if (lpPos->flags & SWP_FRAMECHANGED) // ��һ����󻯣����������֮����������WINDOWPOSCHANGE
+		if (lpPos->flags & SWP_FRAMECHANGED) // 第一次最大化，而不是最大化之后所触发的WINDOWPOSCHANGE
 		{
 			POINT pt = { 0, 0 };
 			HMONITOR hMontorPrimary = MonitorFromPoint(pt, MONITOR_DEFAULTTOPRIMARY);
 			HMONITOR hMonitorTo = MonitorFromWindow(m_hWnd, MONITOR_DEFAULTTOPRIMARY);
 
-			// �ȰѴ�����󻯣�����С����Ȼ��ָ�����ʱMonitorFromWindow�õ���HMONITOR��׼ȷ
-			// �ж�GetWindowRect��λ���������ȷ����С��ʱ�õ���λ����Ϣ��-38000���������normal״̬�µ�λ�ã�����ȡHMONITOR
+			// 先把窗口最大化，再最小化，然后恢复，此时MonitorFromWindow拿到的HMONITOR不准确
+			// 判断GetWindowRect的位置如果不正确（最小化时得到的位置信息是-38000），则改用normal状态下的位置，来获取HMONITOR
 			RECT rc = { 0 };
 			GetWindowRect(m_hWnd, &rc);
 			if (rc.left < -10000 && rc.top < -10000 && rc.right < -10000 && rc.right < -10000) {
@@ -88,7 +88,7 @@ LRESULT WindowImplBase::OnWindowPosChanging(UINT uMsg, WPARAM wParam, LPARAM lPa
 				hMonitorTo = MonitorFromRect(&wp.rcNormalPosition, MONITOR_DEFAULTTOPRIMARY);
 			}
 			if (hMonitorTo != hMontorPrimary) {
-				// ����ޱ߿򴰿���˫�����棨�����ֱ��ʴ���������ʱ����󻯲���ȷ������
+				// 解决无边框窗口在双屏下面（副屏分辨率大于主屏）时，最大化不正确的问题
 				MONITORINFO  miTo = { sizeof(miTo), 0 };
 				GetMonitorInfo(hMonitorTo, &miTo);
 
@@ -180,7 +180,7 @@ LRESULT WindowImplBase::OnGetMinMaxInfo(UINT uMsg, WPARAM wParam, LPARAM lParam,
 		lpMMI->ptMaxSize.y = rcMaximize.GetHeight();
 	} 
 	else {
-		// �������ʱ����ȷ��ԭ������
+		// 计算最大化时，正确的原点坐标
 		lpMMI->ptMaxPosition.x	= rcWork.left;
 		lpMMI->ptMaxPosition.y	= rcWork.top;
 		lpMMI->ptMaxSize.x = rcWork.GetWidth();

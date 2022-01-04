@@ -343,7 +343,7 @@ void PlaceHolder::ArrangeAncestor()
 		{
 			parent->ArrangeSelf();
 		}
-		else	//ËµÃ÷root¾ßÓÐAutoAdjustSizeÊôÐÔ
+		else	//è¯´æ˜Žrootå…·æœ‰AutoAdjustSizeå±žæ€§
 		{
 			m_pWindow->GetRoot()->ArrangeSelf();
 		}
@@ -410,7 +410,7 @@ CPoint PlaceHolder::GetScrollOffset() const
 		}
 
 		if (parent) {
-			//ËµÃ÷¿Ø¼þÔÚListboxÄÚ²¿
+			//è¯´æ˜ŽæŽ§ä»¶åœ¨Listboxå†…éƒ¨
 			ScrollableBox* listbox = (ScrollableBox*)parent;
 			scrollPos.x += listbox->GetScrollPos().cx;
 			scrollPos.y += listbox->GetScrollPos().cy;

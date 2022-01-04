@@ -18,16 +18,16 @@ public:
 	virtual ui::Control* CreateElement() override;
 
 	/**
-	* @brief 填充指定子项
-	* @param[in] control 子项控件指针
-	* @param[in] index 索引
-	* @return 返回创建后的子项指针
+	* @brief 濉厖鎸囧畾瀛愰」
+	* @param[in] control 瀛愰」鎺т欢鎸囬拡
+	* @param[in] index 绱㈠紩
+	* @return 杩斿洖鍒涘缓鍚庣殑瀛愰」鎸囬拡
 	*/
 	virtual void FillElement(ui::Control *control, int index) override;
 
 	/**
-	* @brief 获取子项总数
-	* @return 返回子项总数
+	* @brief 鑾峰彇瀛愰」鎬绘暟
+	* @return 杩斿洖瀛愰」鎬绘暟
 	*/
 	virtual int GetElementtCount() override;
 

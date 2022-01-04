@@ -1,5 +1,5 @@
 /** @file cef_control.h
- * @brief ·â×°Cefä¯ÀÀÆ÷¶ÔÏóÎªduilib¿Ø¼ş
+ * @brief å°è£…Cefæµè§ˆå™¨å¯¹è±¡ä¸ºduilibæ§ä»¶
  * @copyright (c) 2016, NetEase Inc. All rights reserved
  * @author Redrain
  * @date 2016/7/19
@@ -16,7 +16,7 @@ public:
 	CefControl(void);
 	~CefControl(void);	
 
-	/// ÖØĞ´¸¸Àà½Ó¿Ú£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ
+	/// é‡å†™çˆ¶ç±»æ¥å£ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½
 	virtual void Init() override;
 	virtual void SetPos(UiRect rc) override;
 	virtual void HandleMessage(EventArgs& event) override;
@@ -25,12 +25,12 @@ public:
 	virtual void Paint(IRenderContext* pRender, const UiRect& rcPaint) override;
 	virtual void SetWindow(ui::Window* pManager, ui::Box* pParent, bool bInit) override;
 
-	virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled) override; // ´¦Àí´°ÌåÏûÏ¢£¬×ª·¢µ½Cefä¯ÀÀÆ÷¶ÔÏó
+	virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled) override; // å¤„ç†çª—ä½“æ¶ˆæ¯ï¼Œè½¬å‘åˆ°Cefæµè§ˆå™¨å¯¹è±¡
 
 	/**
-	* @brief ´ò¿ª¿ª·¢Õß¹¤¾ß
-	* @param[in] view Ò»¸ö CefControl ¿Ø¼şÊµÀı(½öÔÚCefControlÀàÀïĞèÒª´«Èë)
-	* @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	* @brief æ‰“å¼€å¼€å‘è€…å·¥å…·
+	* @param[in] view ä¸€ä¸ª CefControl æ§ä»¶å®ä¾‹(ä»…åœ¨CefControlç±»é‡Œéœ€è¦ä¼ å…¥)
+	* @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	*/
 	virtual bool AttachDevTools(Control* view) override;
 
@@ -39,111 +39,111 @@ protected:
 
 protected:
 	/**
-	 * @brief ×ª·¢Êó±ê°´ÏÂÏûÏ¢µ½ BrowserHost
-	 * @param[in] uMsg ÏûÏ¢
-	 * @param[in] wParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[in] lParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[out] bHandled ÊÇ·ñ¼ÌĞø´«µİÏûÏ¢
-	 * @return ·µ»ØÏûÏ¢´¦Àí½á¹û
+	 * @brief è½¬å‘é¼ æ ‡æŒ‰ä¸‹æ¶ˆæ¯åˆ° BrowserHost
+	 * @param[in] uMsg æ¶ˆæ¯
+	 * @param[in] wParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[in] lParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[out] bHandled æ˜¯å¦ç»§ç»­ä¼ é€’æ¶ˆæ¯
+	 * @return è¿”å›æ¶ˆæ¯å¤„ç†ç»“æœ
 	 */
 	LRESULT SendButtonDownEvent(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	/**
-	 * @brief ×ª·¢Êó±êË«»÷ÏûÏ¢µ½ BrowserHost
-	 * @param[in] uMsg ÏûÏ¢
-	 * @param[in] wParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[in] lParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[out] bHandled ÊÇ·ñ¼ÌĞø´«µİÏûÏ¢
-	 * @return ·µ»ØÏûÏ¢´¦Àí½á¹û
+	 * @brief è½¬å‘é¼ æ ‡åŒå‡»æ¶ˆæ¯åˆ° BrowserHost
+	 * @param[in] uMsg æ¶ˆæ¯
+	 * @param[in] wParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[in] lParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[out] bHandled æ˜¯å¦ç»§ç»­ä¼ é€’æ¶ˆæ¯
+	 * @return è¿”å›æ¶ˆæ¯å¤„ç†ç»“æœ
 	 */
 	LRESULT SendButtonDoubleDownEvent(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	/**
-	 * @brief ×ª·¢Êó±êµ¯ÆğÏûÏ¢µ½ BrowserHost
-	 * @param[in] uMsg ÏûÏ¢
-	 * @param[in] wParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[in] lParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[out] bHandled ÊÇ·ñ¼ÌĞø´«µİÏûÏ¢
-	 * @return ·µ»ØÏûÏ¢´¦Àí½á¹û
+	 * @brief è½¬å‘é¼ æ ‡å¼¹èµ·æ¶ˆæ¯åˆ° BrowserHost
+	 * @param[in] uMsg æ¶ˆæ¯
+	 * @param[in] wParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[in] lParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[out] bHandled æ˜¯å¦ç»§ç»­ä¼ é€’æ¶ˆæ¯
+	 * @return è¿”å›æ¶ˆæ¯å¤„ç†ç»“æœ
 	 */
 	LRESULT SendButtonUpEvent(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	/**
-	 * @brief ×ª·¢Êó±êÒÆ¶¯ÏûÏ¢µ½ BrowserHost
-	 * @param[in] uMsg ÏûÏ¢
-	 * @param[in] wParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[in] lParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[out] bHandled ÊÇ·ñ¼ÌĞø´«µİÏûÏ¢
-	 * @return ·µ»ØÏûÏ¢´¦Àí½á¹û
+	 * @brief è½¬å‘é¼ æ ‡ç§»åŠ¨æ¶ˆæ¯åˆ° BrowserHost
+	 * @param[in] uMsg æ¶ˆæ¯
+	 * @param[in] wParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[in] lParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[out] bHandled æ˜¯å¦ç»§ç»­ä¼ é€’æ¶ˆæ¯
+	 * @return è¿”å›æ¶ˆæ¯å¤„ç†ç»“æœ
 	 */
 	LRESULT SendMouseMoveEvent(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	/**
-	 * @brief ×ª·¢Êó±ê¹ö¶¯ÏûÏ¢µ½ BrowserHost
-	 * @param[in] uMsg ÏûÏ¢
-	 * @param[in] wParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[in] lParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[out] bHandled ÊÇ·ñ¼ÌĞø´«µİÏûÏ¢
-	 * @return ·µ»ØÏûÏ¢´¦Àí½á¹û
+	 * @brief è½¬å‘é¼ æ ‡æ»šåŠ¨æ¶ˆæ¯åˆ° BrowserHost
+	 * @param[in] uMsg æ¶ˆæ¯
+	 * @param[in] wParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[in] lParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[out] bHandled æ˜¯å¦ç»§ç»­ä¼ é€’æ¶ˆæ¯
+	 * @return è¿”å›æ¶ˆæ¯å¤„ç†ç»“æœ
 	 */
 	LRESULT SendMouseWheelEvent(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	/**
-	 * @brief ×ª·¢Êó±êÀë¿ªÏûÏ¢µ½ BrowserHost
-	 * @param[in] uMsg ÏûÏ¢
-	 * @param[in] wParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[in] lParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[out] bHandled ÊÇ·ñ¼ÌĞø´«µİÏûÏ¢
-	 * @return ·µ»ØÏûÏ¢´¦Àí½á¹û
+	 * @brief è½¬å‘é¼ æ ‡ç¦»å¼€æ¶ˆæ¯åˆ° BrowserHost
+	 * @param[in] uMsg æ¶ˆæ¯
+	 * @param[in] wParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[in] lParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[out] bHandled æ˜¯å¦ç»§ç»­ä¼ é€’æ¶ˆæ¯
+	 * @return è¿”å›æ¶ˆæ¯å¤„ç†ç»“æœ
 	 */
 	LRESULT SendMouseLeaveEvent(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	/**
-	 * @brief ×ª·¢¼üÅÌÏà¹ØÏûÏ¢µ½ BrowserHost
-	 * @param[in] uMsg ÏûÏ¢
-	 * @param[in] wParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[in] lParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[out] bHandled ÊÇ·ñ¼ÌĞø´«µİÏûÏ¢
-	 * @return ·µ»ØÏûÏ¢´¦Àí½á¹û
+	 * @brief è½¬å‘é”®ç›˜ç›¸å…³æ¶ˆæ¯åˆ° BrowserHost
+	 * @param[in] uMsg æ¶ˆæ¯
+	 * @param[in] wParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[in] lParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[out] bHandled æ˜¯å¦ç»§ç»­ä¼ é€’æ¶ˆæ¯
+	 * @return è¿”å›æ¶ˆæ¯å¤„ç†ç»“æœ
 	 */
 	LRESULT SendKeyEvent(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	/**
-	 * @brief ×ª·¢²¶»ñ½¹µãÏûÏ¢µ½ BrowserHost
-	 * @param[in] uMsg ÏûÏ¢
-	 * @param[in] wParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[in] lParam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[out] bHandled ÊÇ·ñ¼ÌĞø´«µİÏûÏ¢
-	 * @return ·µ»ØÏûÏ¢´¦Àí½á¹û
+	 * @brief è½¬å‘æ•è·ç„¦ç‚¹æ¶ˆæ¯åˆ° BrowserHost
+	 * @param[in] uMsg æ¶ˆæ¯
+	 * @param[in] wParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[in] lParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[out] bHandled æ˜¯å¦ç»§ç»­ä¼ é€’æ¶ˆæ¯
+	 * @return è¿”å›æ¶ˆæ¯å¤„ç†ç»“æœ
 	 */
 	LRESULT SendCaptureLostEvent(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÓĞ°´¼ü°´ÏÂ
-	 * @param[in] wparam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @return ·µ»Ø true ±íÊ¾ÓĞ°´¼ü°´ÏÂ£¬false ±íÊ¾Ã»ÓĞ°´¼ü°´ÏÂ
+	 * @brief åˆ¤æ–­æ˜¯å¦æœ‰æŒ‰é”®æŒ‰ä¸‹
+	 * @param[in] wparam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @return è¿”å› true è¡¨ç¤ºæœ‰æŒ‰é”®æŒ‰ä¸‹ï¼Œfalse è¡¨ç¤ºæ²¡æœ‰æŒ‰é”®æŒ‰ä¸‹
 	 */
 	static bool IsKeyDown(WPARAM wparam);
 
 	/**
-	 * @brief ×ª»»ÆÕÍ¨¼üÅÌÏûÏ¢µ½ CEF ¿ÉÊ¶±ğµÄ¼üÅÌÏûÏ¢
-	 * @param[in] wparam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @param[in] lparam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @return ·µ»Ø×ª»»ºóµÄ½á¹û
+	 * @brief è½¬æ¢æ™®é€šé”®ç›˜æ¶ˆæ¯åˆ° CEF å¯è¯†åˆ«çš„é”®ç›˜æ¶ˆæ¯
+	 * @param[in] wparam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @param[in] lparam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @return è¿”å›è½¬æ¢åçš„ç»“æœ
 	 */
 	static int GetCefKeyboardModifiers(WPARAM wparam, LPARAM lparam);
 
 	/**
-	 * @brief ×ª»»ÆÕÍ¨Êó±êÏûÏ¢µ½ CEF ¿ÉÊ¶±ğµÄÊó±êÏûÏ¢
-	 * @param[in] wparam ÏûÏ¢¸½¼Ó²ÎÊı
-	 * @return ·µ»Ø×ª»»ºóµÄ½á¹û
+	 * @brief è½¬æ¢æ™®é€šé¼ æ ‡æ¶ˆæ¯åˆ° CEF å¯è¯†åˆ«çš„é¼ æ ‡æ¶ˆæ¯
+	 * @param[in] wparam æ¶ˆæ¯é™„åŠ å‚æ•°
+	 * @return è¿”å›è½¬æ¢åçš„ç»“æœ
 	 */
 	static int GetCefMouseModifiers(WPARAM wparam);
 
 private:
-	// µ±ä¯ÀÀÆ÷äÖÈ¾Êı¾İ±ä»¯Ê±£¬»á´¥·¢´Ë½Ó¿Ú£¬´ËÊ±°ÑäÖÈ¾Êı¾İ±£´æµ½ÄÚ´ædc
-	// ²¢ÇÒÍ¨Öª´°ÌåË¢ĞÂ¿Ø¼ş£¬ÔÚ¿Ø¼şµÄPaintº¯ÊıÀï°ÑÄÚ´ædcµÄÎ»Í¼»­µ½´°ÌåÉÏ
-	// ÓÉ´ËÊµÏÖÀëÆÁäÖÈ¾Êı¾İ»­µ½´°ÌåÉÏ
+	// å½“æµè§ˆå™¨æ¸²æŸ“æ•°æ®å˜åŒ–æ—¶ï¼Œä¼šè§¦å‘æ­¤æ¥å£ï¼Œæ­¤æ—¶æŠŠæ¸²æŸ“æ•°æ®ä¿å­˜åˆ°å†…å­˜dc
+	// å¹¶ä¸”é€šçŸ¥çª—ä½“åˆ·æ–°æ§ä»¶ï¼Œåœ¨æ§ä»¶çš„Paintå‡½æ•°é‡ŒæŠŠå†…å­˜dcçš„ä½å›¾ç”»åˆ°çª—ä½“ä¸Š
+	// ç”±æ­¤å®ç°ç¦»å±æ¸²æŸ“æ•°æ®ç”»åˆ°çª—ä½“ä¸Š
 	virtual void OnPaint(CefRefPtr<CefBrowser> browser,
 		CefRenderHandler::PaintElementType type,
 		const CefRenderHandler::RectList& dirtyRects,
@@ -158,9 +158,9 @@ private:
 	virtual void OnPopupSize(CefRefPtr<CefBrowser> browser, const CefRect& rect) OVERRIDE;
 
 private:
-	MemoryDC			dc_cef_;		// ÄÚ´ædc,°ÑcefÀëÆÁäÖÈ¾µÄÊı¾İ±£´æµ½dcÖĞ
-	MemoryDC			dc_cef_popup_;	// ÄÚ´ædc,°ÑcefµÄpopup´°¿ÚµÄÀëÆÁäÖÈ¾Êı¾İ±£´æµ½dcÖĞ
-	CefRect				rect_popup_;	// µ±ÍøÒ³µÄ×éºÏ¿òÒ»ÀàµÄ¿Ø¼şµ¯³öÊ±£¬¼ÇÂ¼µ¯³öµÄÎ»ÖÃ
+	MemoryDC			dc_cef_;		// å†…å­˜dc,æŠŠcefç¦»å±æ¸²æŸ“çš„æ•°æ®ä¿å­˜åˆ°dcä¸­
+	MemoryDC			dc_cef_popup_;	// å†…å­˜dc,æŠŠcefçš„popupçª—å£çš„ç¦»å±æ¸²æŸ“æ•°æ®ä¿å­˜åˆ°dcä¸­
+	CefRect				rect_popup_;	// å½“ç½‘é¡µçš„ç»„åˆæ¡†ä¸€ç±»çš„æ§ä»¶å¼¹å‡ºæ—¶ï¼Œè®°å½•å¼¹å‡ºçš„ä½ç½®
 };
 
 }

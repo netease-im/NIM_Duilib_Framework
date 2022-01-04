@@ -1,5 +1,5 @@
 /** @file browser_box.h
-* @brief ±êÇ©Ò³ºĞ×Ó
+* @brief æ ‡ç­¾é¡µç›’å­
 * @copyright (c) 2016, NetEase Inc. All rights reserved
 * @author Redrain
 * @date 2019/3/20
@@ -14,91 +14,91 @@ public:
 	friend class MultiBrowserForm;
 
 	/**
-	* ¹¹Ôìº¯Êı
-	* @param[in] id	ä¯ÀÀÆ÷ºĞ×ÓµÄÎ¨Ò»±êÊ¶£¬ÓÃÓÚÇø·Ö²»Í¬µÄ±êÇ©Ò³
+	* æ„é€ å‡½æ•°
+	* @param[in] id	æµè§ˆå™¨ç›’å­çš„å”¯ä¸€æ ‡è¯†ï¼Œç”¨äºåŒºåˆ†ä¸åŒçš„æ ‡ç­¾é¡µ
 	*/
 	BrowserBox(std::string id);
 	~BrowserBox() { };
 
 	/**
-	* »ñÈ¡id
-	* @return string ±êÊ¶id
+	* è·å–id
+	* @return string æ ‡è¯†id
 	*/
 	std::string GetId() const { return browser_id_; }
 
 	/**
-	* »ñÈ¡±¾ä¯ÀÀÆ÷ºĞ×ÓËùÊôµÄä¯ÀÀÆ÷´°¿ÚÖ¸Õë
-	* @return MultiBrowserForm* ä¯ÀÀÆ÷´°¿Ú
+	* è·å–æœ¬æµè§ˆå™¨ç›’å­æ‰€å±çš„æµè§ˆå™¨çª—å£æŒ‡é’ˆ
+	* @return MultiBrowserForm* æµè§ˆå™¨çª—å£
 	*/
 	MultiBrowserForm* GetBrowserForm() const;
 
 	/**
-	* »ñÈ¡Cef¿Ø¼şÖ¸Õë
-	* @return ui::CefControlBase* Cef¿Ø¼ş
+	* è·å–Cefæ§ä»¶æŒ‡é’ˆ
+	* @return ui::CefControlBase* Cefæ§ä»¶
 	*/
 	nim_comp::CefControlBase* GetCefControl();
 
 	/**
-	* »ñÈ¡ÍøÒ³±êÌâ
-	* @return std::wstring& ÍøÒ³±êÌâ
+	* è·å–ç½‘é¡µæ ‡é¢˜
+	* @return std::wstring& ç½‘é¡µæ ‡é¢˜
 	*/
 	std::wstring& GetTitle();
 
 	/**
-	* ³õÊ¼»¯ä¯ÀÀÆ÷ºĞ×Ó
-	* @param[in] url ³õÊ¼»¯URL
-	* @return void	ÎŞ·µ»ØÖµ
+	* åˆå§‹åŒ–æµè§ˆå™¨ç›’å­
+	* @param[in] url åˆå§‹åŒ–URL
+	* @return void	æ— è¿”å›å€¼
 	*/
 	virtual void InitBrowserBox(const std::wstring &url);
 
 	/**
-	* ·´³õÊ¼»¯ä¯ÀÀÆ÷ºĞ×Ó
-	* @return void	ÎŞ·µ»ØÖµ
+	* ååˆå§‹åŒ–æµè§ˆå™¨ç›’å­
+	* @return void	æ— è¿”å›å€¼
 	*/
 	virtual void UninitBrowserBox();
 
 	/**
-	* ¸ù¾İ¿Ø¼şÀàÃû´´½¨×Ô¶¨Òå¿Ø¼ş
-	* @param[in] pstrClass ¿Ø¼şÀàÃû
-	* @return Control* ´´½¨µÄ¿Ø¼şµÄÖ¸Õë
+	* æ ¹æ®æ§ä»¶ç±»ååˆ›å»ºè‡ªå®šä¹‰æ§ä»¶
+	* @param[in] pstrClass æ§ä»¶ç±»å
+	* @return Control* åˆ›å»ºçš„æ§ä»¶çš„æŒ‡é’ˆ
 	*/
 	ui::Control* CreateControl(const std::wstring& pstrClass);
 
 	//////////////////////////////////////////////////////////////////////////
-	//´°¿ÚºÏ²¢¹¦ÄÜÏà¹ØµÄ²Ù×÷
+	//çª—å£åˆå¹¶åŠŸèƒ½ç›¸å…³çš„æ“ä½œ
 public:
 	/**
-	* »ñÈ¡Óë±¾ä¯ÀÀÆ÷ºĞ×Ó°ó¶¨µÄTabÖ¸Õë
-	* @return TaskbarItem*	TabÖ¸Õë
+	* è·å–ä¸æœ¬æµè§ˆå™¨ç›’å­ç»‘å®šçš„TabæŒ‡é’ˆ
+	* @return TaskbarItem*	TabæŒ‡é’ˆ
 	*/
 	TaskbarTabItem* GetTaskbarItem();
 
 	/**
-	* ¸²¸Ç¸¸ÀàĞéº¯Êı£¬ÓÃÓÚÖ¸¶¨±¾¿Ø¼şËùÊô´°Ìå¼°¸¸¿Ø¼şĞÅÏ¢
-	* @param[in] pManager ËùÊô´°¿ÚÖ¸Õë
-	* @param[in] pParent ¸¸¿Ø¼şÖ¸Õë
-	* @param[in] bInit ÊÇ·ñÒª³õÊ¼»¯±¾¿Ø¼ş
-	* @return void	ÎŞ·µ»ØÖµ
+	* è¦†ç›–çˆ¶ç±»è™šå‡½æ•°ï¼Œç”¨äºæŒ‡å®šæœ¬æ§ä»¶æ‰€å±çª—ä½“åŠçˆ¶æ§ä»¶ä¿¡æ¯
+	* @param[in] pManager æ‰€å±çª—å£æŒ‡é’ˆ
+	* @param[in] pParent çˆ¶æ§ä»¶æŒ‡é’ˆ
+	* @param[in] bInit æ˜¯å¦è¦åˆå§‹åŒ–æœ¬æ§ä»¶
+	* @return void	æ— è¿”å›å€¼
 	*/
 	virtual void SetWindow(ui::Window* pManager, ui::Box* pParent, bool bInit) override;
 
 	/**
-	* ¸²¸Ç»ùÀàĞéº¯Êı£¬ÎªÁËÔÚÈÎÎñÀ¸ÏÔÊ¾ËõÂÔÍ¼ºÍÔ¤ÀÀÍ¼£¬ÖØĞ´ÁËÉèÖÃ×Ó¿Ø¼şSetInternVisibleÊôĞÔµÄÂß¼­
-	* @param[in] bVisible ÊÇ·ñÏÔÊ¾
-	* @return void	ÎŞ·µ»ØÖµ
+	* è¦†ç›–åŸºç±»è™šå‡½æ•°ï¼Œä¸ºäº†åœ¨ä»»åŠ¡æ æ˜¾ç¤ºç¼©ç•¥å›¾å’Œé¢„è§ˆå›¾ï¼Œé‡å†™äº†è®¾ç½®å­æ§ä»¶SetInternVisibleå±æ€§çš„é€»è¾‘
+	* @param[in] bVisible æ˜¯å¦æ˜¾ç¤º
+	* @return void	æ— è¿”å›å€¼
 	*/
 	virtual void SetInternVisible(bool bVisible = true) override;
 
 	/**
-	* ¸²¸Ç»ùÀàĞéº¯Êı£¬ÎªÁËÔÚÖØ»æÈÎÎñÀ¸ÏÔÊ¾µÄËõÂÔÍ¼
-	* @return void	ÎŞ·µ»ØÖµ
+	* è¦†ç›–åŸºç±»è™šå‡½æ•°ï¼Œä¸ºäº†åœ¨é‡ç»˜ä»»åŠ¡æ æ˜¾ç¤ºçš„ç¼©ç•¥å›¾
+	* @return void	æ— è¿”å›å€¼
 	*/
 	virtual void Invalidate() override;
 
 	/**
-	* ¸²¸Ç»ùÀàĞéº¯Êı£¬ÎªÁËÔÚÖØ»æÈÎÎñÀ¸ÏÔÊ¾µÄËõÂÔÍ¼
-	* @param[in] rc ÒªÉèÖÃµÄ¿Ø¼şµÄÎ»ÖÃ
-	* @return void	ÎŞ·µ»ØÖµ
+	* è¦†ç›–åŸºç±»è™šå‡½æ•°ï¼Œä¸ºäº†åœ¨é‡ç»˜ä»»åŠ¡æ æ˜¾ç¤ºçš„ç¼©ç•¥å›¾
+	* @param[in] rc è¦è®¾ç½®çš„æ§ä»¶çš„ä½ç½®
+	* @return void	æ— è¿”å›å€¼
 	*/
 	virtual void SetPos(ui::UiRect rc) override;
 
@@ -117,7 +117,7 @@ private:
 private:
 	nim_comp::CefControlBase	*cef_control_;
 
-	// ÈÎÎñÀ¸ËõÂÔÍ¼¹ÜÀí
+	// ä»»åŠ¡æ ç¼©ç•¥å›¾ç®¡ç†
 	TaskbarTabItem		*taskbar_item_;
 	MultiBrowserForm	*browser_form_;
 	std::string			browser_id_;

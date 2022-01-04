@@ -599,7 +599,7 @@ void yxDES::DecryptAnyLength(char* _srcBytes,unsigned int _bytesLength, unsigned
 	}
 }
 
-//字符串转16进制密文文本
+//瀛楃涓茶浆16杩涘埗瀵嗘枃鏂囨湰
 void yxDES::ConvertCiphertext2Hex(char *szPlainInBytes)
 {
 	if (!szPlainInBytes)
@@ -615,7 +615,7 @@ void yxDES::ConvertCiphertext2Hex(char *szPlainInBytes)
 	delete[] bitsCiphertextAnyLength;
 }
 
-//16进制密文转字符串
+//16杩涘埗瀵嗘枃杞瓧绗︿覆
 int yxDES::ConvertHex2Ciphertext(const char *szCipherInBytes)
 {
 	char* bitsTmpCiphertextAnyLength = new char[data_base_length_*4];
@@ -639,30 +639,30 @@ int yxDES::ConvertHex2Ciphertext(const char *szCipherInBytes)
 	return iLen >>3;
 }
 
-//CiphertextData函数
+//CiphertextData鍑芥暟
 char* yxDES::GetCiphertextData()
 {
 	return szCiphertextData;
 }
 
-//hexCiphertextAnyLength函数
+//hexCiphertextAnyLength鍑芥暟
 char* yxDES::GetHexCipherAnyLengthData()
 {
 	return hexCiphertextAnyLength;
 }
 
-//功能:设置加解密和填充模式，如果用户不调用默认模式都是0
-//参数:整型
-//结果:函数将结果存于int m_iMode和int m_iPkcs
+//鍔熻兘:璁剧疆鍔犺В瀵嗗拰濉厖妯″紡锛屽鏋滅敤鎴蜂笉璋冪敤榛樿妯″紡閮芥槸0
+//鍙傛暟:鏁村瀷
+//缁撴灉:鍑芥暟灏嗙粨鏋滃瓨浜巌nt m_iMode鍜宨nt m_iPkcs
 void yxDES::SetModeAndPKCS(int iMode/* = 0*/,int iPKCS/* = 0*/)
 {
 	m_iMode = iMode;
 	m_iPkcs = iPKCS;
 }
 
-//功能:设置
-//参数:8位字符串
-//结果:函数将结果存于char szvi[8]和char szviRev[8]
+//鍔熻兘:璁剧疆
+//鍙傛暟:8浣嶅瓧绗︿覆
+//缁撴灉:鍑芥暟灏嗙粨鏋滃瓨浜巆har szvi[8]鍜宑har szviRev[8]
 void yxDES::SetIV(char* srcBytes)
 {
 	memset(sziv,0x0,8);

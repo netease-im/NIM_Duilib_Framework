@@ -51,8 +51,8 @@ void MainForm::InitWindow()
 {
 	Grid *grid = static_cast<Grid*>(FindControl(L"grid"));
 	grid->SetHeaderHeight(48);
-	std::wstring header[] = { L"´úÂë", L"Ãû³Æ", L"ÀàĞÍ", L"³¤¶È", L"Ë³ĞòºÅ",
-		L"±à¼­Ä£Ê½", L"ÊÇ·ñÏÔÊ¾", L"²ÎÊıÀàĞÍ", L"²ÎÊıÖµ", L"Ä¬ÈÏÖµ" };
+	std::wstring header[] = { L"ä»£ç ", L"åç§°", L"ç±»å‹", L"é•¿åº¦", L"é¡ºåºå·",
+		L"ç¼–è¾‘æ¨¡å¼", L"æ˜¯å¦æ˜¾ç¤º", L"å‚æ•°ç±»å‹", L"å‚æ•°å€¼", L"é»˜è®¤å€¼" };
 
 	std::vector <std::wstring> vecTypeString;
 	vecTypeString.push_back(L"String");

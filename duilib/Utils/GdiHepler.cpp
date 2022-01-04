@@ -23,7 +23,7 @@ Gdiplus::Bitmap* CreateBitmapFromHBITMAP(HBITMAP hBitmap) {
   // while a top-down DIB is specified by setting the height to a negative number. 
   bmpInfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
   bmpInfo.bmiHeader.biWidth = bmp.bmWidth;
-  bmpInfo.bmiHeader.biHeight = bmp.bmHeight;  // ÕıÊı£¬ËµÃ÷Êı¾İ´ÓÏÂµ½ÉÏ£¬ÈçÎ´¸ºÊı£¬Ôò´ÓÉÏµ½ÏÂ
+  bmpInfo.bmiHeader.biHeight = bmp.bmHeight;  // æ­£æ•°ï¼Œè¯´æ˜æ•°æ®ä»ä¸‹åˆ°ä¸Šï¼Œå¦‚æœªè´Ÿæ•°ï¼Œåˆ™ä»ä¸Šåˆ°ä¸‹
   bmpInfo.bmiHeader.biPlanes = bmp.bmPlanes;
   bmpInfo.bmiHeader.biBitCount = bmp.bmBitsPixel;
   bmpInfo.bmiHeader.biCompression = BI_RGB;
@@ -53,7 +53,7 @@ Gdiplus::Bitmap* CreateBitmapFromHBITMAP(HBITMAP hBitmap) {
   // Copy pixel data from HBITMAP by bottom-up. 
   for (int y = 0; y < nHeight; y++)
   {
-    // ´ÓÏÂµ½ÉÏ¸´ÖÆÊı¾İ£¬ÒòÎªÇ°ÃæÉèÖÃ¸ß¶ÈÊ±ÊÇÕıÊı¡£
+    // ä»ä¸‹åˆ°ä¸Šå¤åˆ¶æ•°æ®ï¼Œå› ä¸ºå‰é¢è®¾ç½®é«˜åº¦æ—¶æ˜¯æ­£æ•°ã€‚
     memcpy_s(
       (pixelsDest + y * nLinesize),
       nLinesize,

@@ -1,4 +1,4 @@
-﻿// a implementation of scoped handle which ensures the safe use of stardard handles
+// a implementation of scoped handle which ensures the safe use of stardard handles
 
 #ifndef BASE_MEMORY_SCOPED_STD_HANDLE_H_
 #define BASE_MEMORY_SCOPED_STD_HANDLE_H_

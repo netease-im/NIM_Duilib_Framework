@@ -15,11 +15,11 @@ class PopoverLayer;
 
 
 /**
-* @brief µ¯³ö¿òÎ»ÖÃºÍ·½Ïò£¬Ä¬ÈÏÖ¸Ïò¿Ø¼şÖĞĞÄµã»ò×ø±êµã£»
-*        kPlaceInner ºÍ kPlaceOuter ±íÊ¾ÔÚ¿Ø¼şÄÚ»¹ÊÇ¿Ø¼şÍâ£¬
-*        Ò»°ãpopoverºÍtooltipÊÇ¿Ø¼şÍâ£¬alertºÍnotificationÊÇ¿Ø¼şÄÚ£»
-*        kPlaceLeftTopµÈ±íÊ¾µ¯´°·½Ïò
-*        Left±íÊ¾ÔÚÃªµã×ó²à£¬Top±íÊ¾¼ıÍ·ÔÚµ¯´°Æ«ÉÏÇÒÖ¸ÏòÃªµã¡£
+* @brief å¼¹å‡ºæ¡†ä½ç½®å’Œæ–¹å‘ï¼Œé»˜è®¤æŒ‡å‘æ§ä»¶ä¸­å¿ƒç‚¹æˆ–åæ ‡ç‚¹ï¼›
+*        kPlaceInner å’Œ kPlaceOuter è¡¨ç¤ºåœ¨æ§ä»¶å†…è¿˜æ˜¯æ§ä»¶å¤–ï¼Œ
+*        ä¸€èˆ¬popoverå’Œtooltipæ˜¯æ§ä»¶å¤–ï¼Œalertå’Œnotificationæ˜¯æ§ä»¶å†…ï¼›
+*        kPlaceLeftTopç­‰è¡¨ç¤ºå¼¹çª—æ–¹å‘
+*        Leftè¡¨ç¤ºåœ¨é”šç‚¹å·¦ä¾§ï¼ŒTopè¡¨ç¤ºç®­å¤´åœ¨å¼¹çª—åä¸Šä¸”æŒ‡å‘é”šç‚¹ã€‚
 */
 enum PopoverPlacement {
   kPlaceInner = 1,
@@ -39,73 +39,73 @@ enum PopoverPlacement {
   kPlaceCenter = 1 << 14
 };
 
-/* µ¯´°´¥·¢·½Ê½ */
+/* å¼¹çª—è§¦å‘æ–¹å¼ */
 enum PopoverTriggerType {
-  /* ÓÃ»§×Ô¼º¿ØÖÆ */
+  /* ç”¨æˆ·è‡ªå·±æ§åˆ¶ */
   kTriggerNone = 0,
-  /* Ãªµã»ñÈ¡½¹µã */
+  /* é”šç‚¹è·å–ç„¦ç‚¹ */
   kTriggerSetFocus = 1,
-  /* ÃªµãÊ§È¥½¹µã */
+  /* é”šç‚¹å¤±å»ç„¦ç‚¹ */
   kTriggerKillFocus = 1 << 1,
-  /* µã»÷ÊÂ¼ş */
+  /* ç‚¹å‡»äº‹ä»¶ */
   kTriggerClick = 1 << 2,
-  /* ¶¨Ê± */
+  /* å®šæ—¶ */
   kTriggerTimeout = 1 << 3,
-  /* µã»÷¹Ø±Õ¡¢È¡Ïû¡¢È·ÈÏµÈ°´Å¥ */
+  /* ç‚¹å‡»å…³é—­ã€å–æ¶ˆã€ç¡®è®¤ç­‰æŒ‰é’® */
   kTriggerConfirm = 1 << 4,
-  /* Êó±ê½øÈë */
+  /* é¼ æ ‡è¿›å…¥ */
   kTriggerEnter = 1 << 5,
-  /* Êó±êÍ£Áô */
+  /* é¼ æ ‡åœç•™ */
   kTriggerHover = 1 << 6,
-  /* Êó±êÀë¿ª */
+  /* é¼ æ ‡ç¦»å¼€ */
   kTriggerLeave = 1 << 7,
-  /* Êó±êµã»÷·Çµ¯´°ÇøÓò */
+  /* é¼ æ ‡ç‚¹å‡»éå¼¹çª—åŒºåŸŸ */
   kTriggerClickLayer = 1 << 8,
-  /* Á¢¼´Õ¹Ê¾ */
+  /* ç«‹å³å±•ç¤º */
   kTriggerImmediately = 1 << 9,
-  /* ÃªµãvisibleÊôĞÔ·¢Éú±ä»¯Ê± */
+  /* é”šç‚¹visibleå±æ€§å‘ç”Ÿå˜åŒ–æ—¶ */
   kTriggerVisible = 1 << 10
 };
 
-/* µ¯´°Í¼±ê */
+/* å¼¹çª—å›¾æ ‡ */
 enum PopoverIconType {
-  /* ²»ÏÔÊ¾Í¼±ê */
+  /* ä¸æ˜¾ç¤ºå›¾æ ‡ */
   kIconNone,
-  /* ĞÅÏ¢ */
+  /* ä¿¡æ¯ */
   kIconInfo,
-  /* ¾¯¸æ */
+  /* è­¦å‘Š */
   kIconWarning,
-  /* ´íÎó */
+  /* é”™è¯¯ */
   kIconError
 };
 
-/* Ä¬ÈÏ°´Å¥ */
+/* é»˜è®¤æŒ‰é’® */
 enum PopoverButtonType {
   kButtonNone = 0,
-  /* µ¯´°Í·ÖĞµÄ¹Ø±Õ°´Å¥ */
+  /* å¼¹çª—å¤´ä¸­çš„å…³é—­æŒ‰é’® */
   kButtonClose = 1,
-  /* µ¯´°Î²µÄÈ·ÈÏ°´Å¥ */
+  /* å¼¹çª—å°¾çš„ç¡®è®¤æŒ‰é’® */
   kButtonOk = 1 << 1,
-  /* µ¯´°Î²µÄÈ¡Ïû°´Å¥ */
+  /* å¼¹çª—å°¾çš„å–æ¶ˆæŒ‰é’® */
   kButtonCancel = 1 << 2
 };
 
-/* Ä¬ÈÏµ¯´°½á¹ûÀàĞÍ */
+/* é»˜è®¤å¼¹çª—ç»“æœç±»å‹ */
 enum PopoverResultType {
-  /* ÎŞ²Ù×÷£¬×Ô¶¯¹Ø±Õµ¯´° */
+  /* æ— æ“ä½œï¼Œè‡ªåŠ¨å…³é—­å¼¹çª— */
   kResultNone,
-  /* È·ÈÏ */
+  /* ç¡®è®¤ */
   kResultOk,
-  /* È¡Ïû */
+  /* å–æ¶ˆ */
   kResultCancel
 };
 
-/* µ¯´°¹Ø±ÕÊ±»Øµ÷º¯Êı²ÎÊıÀàĞÍ */
+/* å¼¹çª—å…³é—­æ—¶å›è°ƒå‡½æ•°å‚æ•°ç±»å‹ */
 struct PopoverResult {
   PopoverResultType type;
 };
 
-/* µ¯´°¹Ø±ÕÊ±»Øµ÷º¯Êı */
+/* å¼¹çª—å…³é—­æ—¶å›è°ƒå‡½æ•° */
 typedef std::function<bool(const PopoverResult&)> PopoverCallback;
 
 class PopoverCallbackSource : public std::vector<PopoverCallback>
@@ -126,7 +126,7 @@ public:
   }
 };
 
-/* µ¯´°¼ıÍ· */
+/* å¼¹çª—ç®­å¤´ */
 class PopoverArrow :public ui::Control
 {
 public:
@@ -160,7 +160,7 @@ protected:
   std::unique_ptr<ui::IBrush> m_pBrush;
 };
 
-/* µ¯´°Í· */
+/* å¼¹çª—å¤´ */
 class PopoverHeader :public ui::HBox
 {
 public:
@@ -169,15 +169,15 @@ public:
     PopoverIconType nIconType = kIconNone);
   virtual ~PopoverHeader();
 
-  // ÖØÔØ¸¸Àà
+  // é‡è½½çˆ¶ç±»
   virtual std::wstring GetType() const override;
   virtual ui::CSize EstimateSize(ui::CSize szAvailable) override;
   virtual void DoInit() override;
 
-  // ¸üĞÂÄÚÈİ
+  // æ›´æ–°å†…å®¹
   virtual void UpdateTitle(const std::wstring& strTitle);
 
-  // ¼àÌı¹Ø±Õ°´Å¥µã»÷ÊÂ¼ş
+  // ç›‘å¬å…³é—­æŒ‰é’®ç‚¹å‡»äº‹ä»¶
   void AttachCloseClicked(const ui::EventCallback& callback) { OnClose += callback; }
 
 protected:
@@ -196,7 +196,7 @@ protected:
   ui::Button* m_pButtonClose;
 };
 
-/* µ¯´°Ìå */
+/* å¼¹çª—ä½“ */
 class PopoverBody :public ui::HBox
 {
 public:
@@ -214,7 +214,7 @@ protected:
   ui::RichEdit* m_pRichEditContent;
 };
 
-/* µ¯´°Î² */
+/* å¼¹çª—å°¾ */
 class PopoverFooter :public ui::HBox
 {
 public:
@@ -258,14 +258,14 @@ public:
   }
 };
 
-/* µ¯´° */
+/* å¼¹çª— */
 class Popover :public ui::VBox
 {
 public:
   /*
-  * @brief µ¯´°»ùÀà¹¹Ôìº¯Êı
-  * @param[in] pAnchor Ãªµã¿Ø¼ş,Îª¿Õ±íÊ¾µ¯´°²ã¾ÓÖĞÏÔÊ¾;
-  *                    ²»Îª¿ÕÊ±½«¸ù¾İnShowType×Ô¶¯ÉèÖÃ´¥·¢Æ÷£¬²¢ÔÚÃªµã¿Ø¼ş±»Ïú»ÙÊ±×Ô¶¯¹Ø±Õµ¯´°
+  * @brief å¼¹çª—åŸºç±»æ„é€ å‡½æ•°
+  * @param[in] pAnchor é”šç‚¹æ§ä»¶,ä¸ºç©ºè¡¨ç¤ºå¼¹çª—å±‚å±…ä¸­æ˜¾ç¤º;
+  *                    ä¸ä¸ºç©ºæ—¶å°†æ ¹æ®nShowTypeè‡ªåŠ¨è®¾ç½®è§¦å‘å™¨ï¼Œå¹¶åœ¨é”šç‚¹æ§ä»¶è¢«é”€æ¯æ—¶è‡ªåŠ¨å…³é—­å¼¹çª—
   */
   Popover(ui::Control* pAnchor,
     int nPlacement,
@@ -281,7 +281,7 @@ public:
 
   virtual ~Popover();
 
-  // ÖØÔØ¸¸Àà
+  // é‡è½½çˆ¶ç±»
   virtual std::wstring GetType() const override;
   virtual ui::CSize EstimateSize(ui::CSize szAvailable) override;
   virtual void DoInit() override;
@@ -293,11 +293,11 @@ public:
   PopoverFooter* GetFooter() const { return m_pPopoverFooter; }
   PopoverRoot* GetRoot() const { return m_pPopoverRoot; }
 
-  // ÉèÖÃTagÓÃÒÔ±êÊ¶Í¬ÀàĞÍµ¯´°
+  // è®¾ç½®Tagç”¨ä»¥æ ‡è¯†åŒç±»å‹å¼¹çª—
   void SetTag(const std::wstring& strTag) { m_strTag = strTag; }
   const std::wstring GetTag() const { return m_strTag; }
 
-  // ¸üĞÂµ¯´°ÄÚÈİ
+  // æ›´æ–°å¼¹çª—å†…å®¹
   virtual void Update(PopoverHeader* header, PopoverBody* body, PopoverFooter* footer);
   virtual void UpdateContent(const std::wstring& content);
   virtual void UpdateNotification(const std::wstring& strTitle,
@@ -306,10 +306,10 @@ public:
   virtual void UpdateShowType(int nType, int nTimeouts = 0);
   virtual void UpdateDisappearType(int nType, int nTimeouts = 0);
 
-  // ¼àÌı½á¹û»Øµ÷
+  // ç›‘å¬ç»“æœå›è°ƒ
   void BindResultCallback(const PopoverCallback& callback) { m_cbResult += callback; }
 
-  // ¼àÌı¹Ø±Õ»Øµ÷
+  // ç›‘å¬å…³é—­å›è°ƒ
   void BindCloseCallback(const PopoverCallback& callback) { m_cbClose += callback; }
 
 protected:
@@ -318,24 +318,24 @@ protected:
   virtual ui::UiRect ReCalcByAnchorPos(ui::UiRect rc);
 
 protected:
-  // ³õÊ¼»¯ÔªËØ
+  // åˆå§‹åŒ–å…ƒç´ 
   virtual void InitializeElements();
 
-  // ³õÊ¼»¯Î»ÖÃ£¬²¢°ó¶¨ÃªµãÊÂ¼ş
+  // åˆå§‹åŒ–ä½ç½®ï¼Œå¹¶ç»‘å®šé”šç‚¹äº‹ä»¶
   virtual void InitializePosition();
 
-  // ³õÊ¼»¯Õ¹Ê¾ºÍ¹Ø±Õ´¥·¢Æ÷
+  // åˆå§‹åŒ–å±•ç¤ºå’Œå…³é—­è§¦å‘å™¨
   bool HasTrigger(int nType, PopoverTriggerType nTrigger) { return nType & nTrigger; }
   virtual void InitializeShowTriggers(int nOldType, int nNewType, int nTimeouts = 0);
   virtual void InitializeDisappearTriggers(int nOldType, int nNewType, int nTimeouts = 0);
   virtual void OnShowTriggerTimeout(int index);
   virtual void OnDisappearTriggerTimeout(int index);
 
-  // ´¥·¢¹Ø±Õµ¯´°
+  // è§¦å‘å…³é—­å¼¹çª—
   virtual void TriggerResult(const PopoverResult& result, bool bForceClose = false);
   virtual void TriggerClose();
 
-  // ÃªµãÊÂ¼ş
+  // é”šç‚¹äº‹ä»¶
   virtual bool OnAnchorResize(ui::EventArgs* args);
   virtual bool OnAnchorSetFocus(ui::EventArgs* args);
   virtual bool OnAnchorKillFocus(ui::EventArgs* args);
@@ -346,7 +346,7 @@ protected:
   virtual bool OnAnchorLastEvent(ui::EventArgs* args);
   virtual bool OnAnchorVisibleChange(ui::EventArgs* args);
 
-  // ¶¨Ê±Æ÷
+  // å®šæ—¶å™¨
 
 protected:
   std::wstring m_strTag;
@@ -376,9 +376,9 @@ protected:
 };
 
 /*
-* µ¯´°ÈİÆ÷²ã
-* Popover ºÍ Alert ÀàĞÍÆÕÍ¨Box¼´¿É
-* Notification ÀàĞÍĞèÒªÓĞ´¹Ö±²¼¾Ö»òÆäËûÌØÊâ²¼¾Ö
+* å¼¹çª—å®¹å™¨å±‚
+* Popover å’Œ Alert ç±»å‹æ™®é€šBoxå³å¯
+* Notification ç±»å‹éœ€è¦æœ‰å‚ç›´å¸ƒå±€æˆ–å…¶ä»–ç‰¹æ®Šå¸ƒå±€
 */
 class PopoverHolderLayer :public ui::Box
 {
@@ -476,9 +476,9 @@ private:
 };
 
 /**
-* µ¯´°²ã
-* ĞèÒªÈ·±£µ¯´°²ãÄÜ¹»½ÓÊÕµ½Êó±ê¼üÅÌÊÂ¼ş
-* Ê¹ÓÃÊ±ĞèÒª½«µ¯´°²ã¹ÒÔØµ½root½Úµã£¬ÇÒ±£Ö¤²ã¼¶Îª×îÉÏ²ã
+* å¼¹çª—å±‚
+* éœ€è¦ç¡®ä¿å¼¹çª—å±‚èƒ½å¤Ÿæ¥æ”¶åˆ°é¼ æ ‡é”®ç›˜äº‹ä»¶
+* ä½¿ç”¨æ—¶éœ€è¦å°†å¼¹çª—å±‚æŒ‚è½½åˆ°rootèŠ‚ç‚¹ï¼Œä¸”ä¿è¯å±‚çº§ä¸ºæœ€ä¸Šå±‚
 */
 class PopoverLayer :public ui::IUIMessageFilter, public ui::Box {
 public:
@@ -486,40 +486,40 @@ public:
   ~PopoverLayer();
 
   /*
-  * Î»ÓÚµ¯´°²ã×î¶¥²ã
+  * ä½äºå¼¹çª—å±‚æœ€é¡¶å±‚
   */
   void ShowAlert(Popover* popover);
 
   /*
-  * Î»ÓÚµ¯´°²ãÖĞ¼ä²ã
+  * ä½äºå¼¹çª—å±‚ä¸­é—´å±‚
   */
   void ShowPopover(Popover* popover);
 
   /*
-  * Î»ÓÚµ¯´°²ãÖĞ¼ä²ã
+  * ä½äºå¼¹çª—å±‚ä¸­é—´å±‚
   */
   void ShowTooltip(Popover* popover);
 
   /*
-  * Î»ÓÚµ¯´°²ã×îµ×²ã
+  * ä½äºå¼¹çª—å±‚æœ€åº•å±‚
   */
   void ShowNotification(Popover* popover);
 
   /**
-  * @brief ÓÃÄ¬ÈÏÑùÊ½´´½¨µ¯³öÆøÅİ£¬Ä¬ÈÏÒõÓ°°×µ×ºÚ×Ö, ÇÒ´øÓĞ¼ıÍ·
-  * @param[in] pAnchor Ãªµã¿Ø¼ş,Îª¿Õ±íÊ¾µ¯´°²ã¾ÓÖĞÏÔÊ¾
-  * @param[in] strTitle ±êÌâ£¬²»ĞèÒªÔòÎª¿Õ
-  * @param[in] strOk È·ÈÏ°´Å¥ÎÄ×Ö£¬Ä¬ÈÏÊ¹ÓÃ STRING_OK
-  * @param[in] strCancel È¡Ïû°´Å¥ÎÄ×Ö£¬Ä¬ÈÏÊ¹ÓÃ STRING_CANCEL
-  * @param[in] strContent ÄÚÈİ£¬²»ĞèÒªÔòÎª¿Õ
-  * @param[in] nPlacement µ¯³ö·½Ïò£¬Ä¬ÈÏÎªÃªµã¿Ø¼şÍâºÍÃªµã¿Ø¼şÉÏ
-  * @param[in] nButtons °´Å¥ÀàĞÍ×éºÏ£¬kButtonOk | kButtonCancel ±íÊ¾ÏÔÊ¾È·ÈÏºÍÈ¡Ïû°´Å¥
-  * @param[in] nShowType ×Ô¶¯ÏÔÊ¾µÄ´¥·¢·½Ê½£¬kTriggerNone±íÊ¾²»×Ô¶¯´¥·¢
-  * @param[in] nDisappearType ×Ô¶¯¹Ø±ÕµÄ´¥·¢·½Ê½£¬kTriggerNone±íÊ¾²»×Ô¶¯´¥·¢
-  * @param[in] bRemoveOnClose ¹Ø±ÕºóÊÇ·ñÉ¾³ı
-  * @param[in] pCustomHeader ×Ô¶¨ÒåPopoverHeader
-  * @param[in] pCustomBody ×Ô¶¨ÒåPopoverBody
-  * @param[in] pCustomFooter ×Ô¶¨ÒåPopoverFooter
+  * @brief ç”¨é»˜è®¤æ ·å¼åˆ›å»ºå¼¹å‡ºæ°”æ³¡ï¼Œé»˜è®¤é˜´å½±ç™½åº•é»‘å­—, ä¸”å¸¦æœ‰ç®­å¤´
+  * @param[in] pAnchor é”šç‚¹æ§ä»¶,ä¸ºç©ºè¡¨ç¤ºå¼¹çª—å±‚å±…ä¸­æ˜¾ç¤º
+  * @param[in] strTitle æ ‡é¢˜ï¼Œä¸éœ€è¦åˆ™ä¸ºç©º
+  * @param[in] strOk ç¡®è®¤æŒ‰é’®æ–‡å­—ï¼Œé»˜è®¤ä½¿ç”¨ STRING_OK
+  * @param[in] strCancel å–æ¶ˆæŒ‰é’®æ–‡å­—ï¼Œé»˜è®¤ä½¿ç”¨ STRING_CANCEL
+  * @param[in] strContent å†…å®¹ï¼Œä¸éœ€è¦åˆ™ä¸ºç©º
+  * @param[in] nPlacement å¼¹å‡ºæ–¹å‘ï¼Œé»˜è®¤ä¸ºé”šç‚¹æ§ä»¶å¤–å’Œé”šç‚¹æ§ä»¶ä¸Š
+  * @param[in] nButtons æŒ‰é’®ç±»å‹ç»„åˆï¼ŒkButtonOk | kButtonCancel è¡¨ç¤ºæ˜¾ç¤ºç¡®è®¤å’Œå–æ¶ˆæŒ‰é’®
+  * @param[in] nShowType è‡ªåŠ¨æ˜¾ç¤ºçš„è§¦å‘æ–¹å¼ï¼ŒkTriggerNoneè¡¨ç¤ºä¸è‡ªåŠ¨è§¦å‘
+  * @param[in] nDisappearType è‡ªåŠ¨å…³é—­çš„è§¦å‘æ–¹å¼ï¼ŒkTriggerNoneè¡¨ç¤ºä¸è‡ªåŠ¨è§¦å‘
+  * @param[in] bRemoveOnClose å…³é—­åæ˜¯å¦åˆ é™¤
+  * @param[in] pCustomHeader è‡ªå®šä¹‰PopoverHeader
+  * @param[in] pCustomBody è‡ªå®šä¹‰PopoverBody
+  * @param[in] pCustomFooter è‡ªå®šä¹‰PopoverFooter
   */
   static Popover* CreatePopover(ui::Control* pAnchor,
     const std::wstring& strTitle,
@@ -540,20 +540,20 @@ public:
     PopoverArrow* pCustomArrow = nullptr);
 
   /**
-  * @brief ÓÃÄ¬ÈÏÑùÊ½´´½¨µ¯³öÆøÅİ£¬Ä¬ÈÏÒõÓ°°×µ×ºÚ×Ö, ÇÒ´øÓĞ¼ıÍ·
-  * @param[in] pAnchor Ãªµã¿Ø¼ş,Îª¿Õ±íÊ¾µ¯´°²ã¾ÓÖĞÏÔÊ¾
-  * @param[in] strTitle ±êÌâ£¬²»ĞèÒªÔòÎª¿Õ
-  * @param[in] strOk È·ÈÏ°´Å¥ÎÄ×Ö£¬Ä¬ÈÏÊ¹ÓÃ STRING_OK
-  * @param[in] strCancel È¡Ïû°´Å¥ÎÄ×Ö£¬Ä¬ÈÏÊ¹ÓÃ STRING_CANCEL
-  * @param[in] strContent ÄÚÈİ£¬²»ĞèÒªÔòÎª¿Õ
-  * @param[in] nPlacement µ¯³ö·½Ïò£¬Ä¬ÈÏÎªÃªµã¿Ø¼şÍâºÍÃªµã¿Ø¼şÉÏ
-  * @param[in] nButtons °´Å¥ÀàĞÍ×éºÏ£¬kButtonOk | kButtonClose ±íÊ¾ÏÔÊ¾È·ÈÏºÍ¹Ø±Õ°´Å¥
-  * @param[in] nShowType ×Ô¶¯ÏÔÊ¾µÄ´¥·¢·½Ê½£¬kTriggerNone±íÊ¾²»×Ô¶¯´¥·¢
-  * @param[in] nDisappearType ×Ô¶¯¹Ø±ÕµÄ´¥·¢·½Ê½£¬kTriggerNone±íÊ¾²»×Ô¶¯´¥·¢
-  * @param[in] bRemoveOnClose ¹Ø±ÕºóÊÇ·ñÉ¾³ı
-  * @param[in] pCustomHeader ×Ô¶¨ÒåPopoverHeader
-  * @param[in] pCustomBody ×Ô¶¨ÒåPopoverBody
-  * @param[in] pCustomFooter ×Ô¶¨ÒåPopoverFooter
+  * @brief ç”¨é»˜è®¤æ ·å¼åˆ›å»ºå¼¹å‡ºæ°”æ³¡ï¼Œé»˜è®¤é˜´å½±ç™½åº•é»‘å­—, ä¸”å¸¦æœ‰ç®­å¤´
+  * @param[in] pAnchor é”šç‚¹æ§ä»¶,ä¸ºç©ºè¡¨ç¤ºå¼¹çª—å±‚å±…ä¸­æ˜¾ç¤º
+  * @param[in] strTitle æ ‡é¢˜ï¼Œä¸éœ€è¦åˆ™ä¸ºç©º
+  * @param[in] strOk ç¡®è®¤æŒ‰é’®æ–‡å­—ï¼Œé»˜è®¤ä½¿ç”¨ STRING_OK
+  * @param[in] strCancel å–æ¶ˆæŒ‰é’®æ–‡å­—ï¼Œé»˜è®¤ä½¿ç”¨ STRING_CANCEL
+  * @param[in] strContent å†…å®¹ï¼Œä¸éœ€è¦åˆ™ä¸ºç©º
+  * @param[in] nPlacement å¼¹å‡ºæ–¹å‘ï¼Œé»˜è®¤ä¸ºé”šç‚¹æ§ä»¶å¤–å’Œé”šç‚¹æ§ä»¶ä¸Š
+  * @param[in] nButtons æŒ‰é’®ç±»å‹ç»„åˆï¼ŒkButtonOk | kButtonClose è¡¨ç¤ºæ˜¾ç¤ºç¡®è®¤å’Œå…³é—­æŒ‰é’®
+  * @param[in] nShowType è‡ªåŠ¨æ˜¾ç¤ºçš„è§¦å‘æ–¹å¼ï¼ŒkTriggerNoneè¡¨ç¤ºä¸è‡ªåŠ¨è§¦å‘
+  * @param[in] nDisappearType è‡ªåŠ¨å…³é—­çš„è§¦å‘æ–¹å¼ï¼ŒkTriggerNoneè¡¨ç¤ºä¸è‡ªåŠ¨è§¦å‘
+  * @param[in] bRemoveOnClose å…³é—­åæ˜¯å¦åˆ é™¤
+  * @param[in] pCustomHeader è‡ªå®šä¹‰PopoverHeader
+  * @param[in] pCustomBody è‡ªå®šä¹‰PopoverBody
+  * @param[in] pCustomFooter è‡ªå®šä¹‰PopoverFooter
   */
   static Popover* CreateAlert(ui::Control* pAnchor,
     const std::wstring& strTitle,
@@ -570,16 +570,16 @@ public:
     PopoverFooter* pCustomFooter = nullptr);
 
   /**
-  * @brief ÓÃÄ¬ÈÏÑùÊ½´´½¨µ¯³öÆøÅİ£¬Ä¬ÈÏÒõÓ°°×µ×ºÚ×Ö, ÇÒ´øÓĞ¼ıÍ·
-  * @param[in] pAnchor Ãªµã¿Ø¼ş,Îª¿Õ±íÊ¾µ¯´°²ã¾ÓÖĞÏÔÊ¾
-  * @param[in] strContent ±êÌâ£¬²»ĞèÒªÔòÎª¿Õ
-  * @param[in] nPlacement µ¯³ö·½Ïò£¬Ä¬ÈÏÎªÃªµã¿Ø¼şÍâºÍÃªµã¿Ø¼şÉÏ
-  * @param[in] nButtons °´Å¥ÀàĞÍ×éºÏ£¬½öÖ§³Ö kButtonClose ºÍ kButtonNone
-  * @param[in] nShowType ×Ô¶¯ÏÔÊ¾µÄ´¥·¢·½Ê½£¬kTriggerNone±íÊ¾²»×Ô¶¯´¥·¢
-  * @param[in] nDisappearType ×Ô¶¯¹Ø±ÕµÄ´¥·¢·½Ê½£¬kTriggerNone±íÊ¾²»×Ô¶¯´¥·¢
-  * @param[in] bRemoveOnClose ¹Ø±ÕºóÊÇ·ñÉ¾³ı
-  * @param[in] pCustomHeader ×Ô¶¨ÒåPopoverHeader
-  * @param[in] pCustomBody ×Ô¶¨ÒåPopoverBody
+  * @brief ç”¨é»˜è®¤æ ·å¼åˆ›å»ºå¼¹å‡ºæ°”æ³¡ï¼Œé»˜è®¤é˜´å½±ç™½åº•é»‘å­—, ä¸”å¸¦æœ‰ç®­å¤´
+  * @param[in] pAnchor é”šç‚¹æ§ä»¶,ä¸ºç©ºè¡¨ç¤ºå¼¹çª—å±‚å±…ä¸­æ˜¾ç¤º
+  * @param[in] strContent æ ‡é¢˜ï¼Œä¸éœ€è¦åˆ™ä¸ºç©º
+  * @param[in] nPlacement å¼¹å‡ºæ–¹å‘ï¼Œé»˜è®¤ä¸ºé”šç‚¹æ§ä»¶å¤–å’Œé”šç‚¹æ§ä»¶ä¸Š
+  * @param[in] nButtons æŒ‰é’®ç±»å‹ç»„åˆï¼Œä»…æ”¯æŒ kButtonClose å’Œ kButtonNone
+  * @param[in] nShowType è‡ªåŠ¨æ˜¾ç¤ºçš„è§¦å‘æ–¹å¼ï¼ŒkTriggerNoneè¡¨ç¤ºä¸è‡ªåŠ¨è§¦å‘
+  * @param[in] nDisappearType è‡ªåŠ¨å…³é—­çš„è§¦å‘æ–¹å¼ï¼ŒkTriggerNoneè¡¨ç¤ºä¸è‡ªåŠ¨è§¦å‘
+  * @param[in] bRemoveOnClose å…³é—­åæ˜¯å¦åˆ é™¤
+  * @param[in] pCustomHeader è‡ªå®šä¹‰PopoverHeader
+  * @param[in] pCustomBody è‡ªå®šä¹‰PopoverBody
   */
   static Popover* CreateNotification(ui::Control* pAnchor,
     const std::wstring& strTitle,
@@ -596,11 +596,11 @@ public:
     PopoverBody* pCustomBody = nullptr);
 
   /**
-  * @brief ÓÃÄ¬ÈÏÑùÊ½´´½¨µ¯³öÆøÅİ£¬Ä¬ÈÏÒõÓ°°×µ×ºÚ×Ö, ÇÒ´øÓĞ¼ıÍ·
-  * @param[in] pAnchor Ãªµã¿Ø¼ş,Îª¿Õ±íÊ¾µ¯´°²ã¾ÓÖĞÏÔÊ¾
-  * @param[in] strContent ÄÚÈİ£¬²»ĞèÒªÔòÎª¿Õ
-  * @param[in] nPlacement µ¯³ö·½Ïò£¬Ä¬ÈÏÎªÃªµã¿Ø¼şÍâºÍÃªµã¿Ø¼şÉÏ
-  * @param[in] pCustomBody ×Ô¶¨ÒåPopoverBody
+  * @brief ç”¨é»˜è®¤æ ·å¼åˆ›å»ºå¼¹å‡ºæ°”æ³¡ï¼Œé»˜è®¤é˜´å½±ç™½åº•é»‘å­—, ä¸”å¸¦æœ‰ç®­å¤´
+  * @param[in] pAnchor é”šç‚¹æ§ä»¶,ä¸ºç©ºè¡¨ç¤ºå¼¹çª—å±‚å±…ä¸­æ˜¾ç¤º
+  * @param[in] strContent å†…å®¹ï¼Œä¸éœ€è¦åˆ™ä¸ºç©º
+  * @param[in] nPlacement å¼¹å‡ºæ–¹å‘ï¼Œé»˜è®¤ä¸ºé”šç‚¹æ§ä»¶å¤–å’Œé”šç‚¹æ§ä»¶ä¸Š
+  * @param[in] pCustomBody è‡ªå®šä¹‰PopoverBody
   */
   static Popover* CreateToolltip(ui::Control* pAnchor,
     const std::wstring& strContent,
@@ -610,14 +610,14 @@ public:
     PopoverBody* pCustomBody = nullptr);
 
 public:
-  // ÖØÔØ
+  // é‡è½½
   bool Remove(Control* pControl) override;
 
-  // Çå³ıËùÓĞµ¯´°£¬±£Áôµ¯´°Holder
+  // æ¸…é™¤æ‰€æœ‰å¼¹çª—ï¼Œä¿ç•™å¼¹çª—Holder
   void ClearAll();
 
 private:
-  // ÖØÔØ
+  // é‡è½½
   std::wstring GetType() const;
   void DoInit() override;
   LRESULT MessageHandler(UINT uMsg,
@@ -626,19 +626,19 @@ private:
     BOOL& bHandled) override;
 
   /**
-  * ÉèÖÃÊÇ·ñÏÔÊ¾°ëÍ¸Ã÷ÕÚÕÖ
+  * è®¾ç½®æ˜¯å¦æ˜¾ç¤ºåŠé€æ˜é®ç½©
   */
   void SetShowMask(bool show);
 
   /**
-  * ÊÇ·ñÏÔÊ¾°ëÍ¸Ã÷ÕÚÕÖ
+  * æ˜¯å¦æ˜¾ç¤ºåŠé€æ˜é®ç½©
   */
   void IsShowMask() const { m_bShowMask; }
 
   /*
-  * @brief ´°ÌåÊó±ê×ó¼üµ¥»÷ÊÂ¼ş£¬»á¹Ø±ÕËùÓĞnDisappearType
-                   ÎªkTriggerClickLayerµÄµ¯´°
-  * @param[in] pt Êó±êµã»÷×ø±ê
+  * @brief çª—ä½“é¼ æ ‡å·¦é”®å•å‡»äº‹ä»¶ï¼Œä¼šå…³é—­æ‰€æœ‰nDisappearType
+                   ä¸ºkTriggerClickLayerçš„å¼¹çª—
+  * @param[in] pt é¼ æ ‡ç‚¹å‡»åæ ‡
   */
   void OnMouseEventButtonDown(POINT pt);
 

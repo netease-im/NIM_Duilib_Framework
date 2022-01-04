@@ -35,7 +35,7 @@ void Provider::FillElement(ui::Control *control, int index)
 
 int Provider::GetElementtCount()
 {
-	// 加锁
+	// 鍔犻攣
 	nbase::NAutoLock auto_lock(&lock_);
 	return m_vTasks.size();
 }
@@ -45,19 +45,19 @@ void Provider::SetTotal(int nTotal)
 	if (nTotal == m_nTotal) return;
 	if (nTotal <= 0) return;
 
-	// 加锁
+	// 鍔犻攣
 	lock_.Lock();
 	m_vTasks.clear();
 	for (auto i=1; i <= nTotal; i++)
 	{
 		DownloadTask task;
 		task.nId = i;
-		task.sName = L"任务名称";
+		task.sName = L"浠诲姟鍚嶇О";
 		m_vTasks.emplace_back(task);
 	}
 	lock_.Unlock();
 
-	// 通知TileBox数据总数变动
+	// 閫氱煡TileBox鏁版嵁鎬绘暟鍙樺姩
 	EmitCountChanged();
 }
 
@@ -70,7 +70,7 @@ void Provider::RemoveTask(int nIndex)
 
 	lock_.Unlock();
 
-	// 通知TileBox数据总数变动
+	// 閫氱煡TileBox鏁版嵁鎬绘暟鍙樺姩
 	EmitCountChanged();
 }
 
@@ -81,6 +81,6 @@ void Provider::ChangeTaskName(int nIndex, const std::wstring& sName)
 		m_vTasks[nIndex].sName = sName;
 	}
 
-	// 发送数据变动通知
+	// 鍙戦�佹暟鎹彉鍔ㄩ�氱煡
 	EmitDataChanged(nIndex, nIndex);
 }

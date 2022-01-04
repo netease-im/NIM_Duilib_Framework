@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2013, NetEase Inc. All rights reserved.
+// Copyright (c) 2013, NetEase Inc. All rights reserved.
 //
 // wrt(guangguang)
 // 2013/8/29

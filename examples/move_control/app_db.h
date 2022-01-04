@@ -2,8 +2,8 @@
 
 #include "app_item.h"
 
-//与app相关的Db操作
-//这个类最好是单实例类
+//涓巃pp鐩稿叧鐨凞b鎿嶄綔
+//杩欎釜绫绘渶濂芥槸鍗曞疄渚嬬被
 class CAppDb
 {
 public:

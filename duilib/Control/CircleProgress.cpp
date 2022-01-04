@@ -51,22 +51,22 @@ void CircleProgress::PaintStatusImage(IRenderContext* pRender)
 	Progress::PaintStatusImage(pRender);
 	if (m_bCircular)
 	{
-		//Ä¿Ç°IRenderContext»¹ÓÐºÜ¶àGDI+½Ó¿ÚÎ´ÊµÏÖ£¬ÔÝÊ±Ö±½ÓÓÃgdi+»­Í¼ÁË
-		//ÒÔºó¿ÉÄÜ»áµ÷Õû£ºÐèÊµÏÖ1¡¢DrawArc  2¡¢PenÔö¼Óbrush(½¥±ä)Èë²Î 3¡¢¿ÉÒÔ×ÔÓÉÉèÖÃGraphicsÊôÐÔ
-		int direction = m_bClockwise ? 1 : -1;   //Ðý×ª·½Ïò
-		int bordersize = 1;          //»¡¶È¿í¶ÈÄ¿Ç°Ê¹ÓÃ1ÏñËØ
+		//ç›®å‰IRenderContextè¿˜æœ‰å¾ˆå¤šGDI+æŽ¥å£æœªå®žçŽ°ï¼Œæš‚æ—¶ç›´æŽ¥ç”¨gdi+ç”»å›¾äº†
+		//ä»¥åŽå¯èƒ½ä¼šè°ƒæ•´ï¼šéœ€å®žçŽ°1ã€DrawArc  2ã€Penå¢žåŠ brush(æ¸å˜)å…¥å‚ 3ã€å¯ä»¥è‡ªç”±è®¾ç½®Graphicså±žæ€§
+		int direction = m_bClockwise ? 1 : -1;   //æ—‹è½¬æ–¹å‘
+		int bordersize = 1;          //å¼§åº¦å®½åº¦ç›®å‰ä½¿ç”¨1åƒç´ 
 
 		Gdiplus::Graphics graphics(pRender->GetDC());
 		graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
 		Gdiplus::Pen bgPen(m_dwBackgroundColor, m_nCircleWidth);
-		// Ô²ÐÎÖÐÐÄ
+		// åœ†å½¢ä¸­å¿ƒ
 		CPoint center;
 		center.x = m_rcItem.left + (m_rcItem.right - m_rcItem.left) / 2;
 		center.y = m_rcItem.top + (m_rcItem.bottom - m_rcItem.top) / 2;
 
-		// ¿Ø¼þ¾ØÐÎÄÚµÄ×î´óÕý·½ÐÎµÄ±ß½ç
+		// æŽ§ä»¶çŸ©å½¢å†…çš„æœ€å¤§æ­£æ–¹å½¢çš„è¾¹ç•Œ
 		int side = min(m_rcItem.right - m_rcItem.left, m_rcItem.bottom - m_rcItem.top);
-		//UiRect rcBorder;  ÈÔÈ»´æÔÚUiRect µ½ RectFµÄ×ª»»£¬ËùÒÔÖ±½ÓÓÃgdiµÄRectFÁË
+		//UiRect rcBorder;  ä»ç„¶å­˜åœ¨UiRect åˆ° RectFçš„è½¬æ¢ï¼Œæ‰€ä»¥ç›´æŽ¥ç”¨gdiçš„RectFäº†
 		Gdiplus::RectF rcBorder;
 		rcBorder.X = center.x - side / 2;
 		rcBorder.Y = center.y - side / 2;
@@ -85,9 +85,9 @@ void CircleProgress::PaintStatusImage(IRenderContext* pRender)
 
 		if (m_dwGradientColor == 0)
 		{
-			//²»Ê¹ÓÃ½¥±äÉ«£¬Ö±½ÓÓÃÇ°¾°É«ÆÌÂú
+			//ä¸ä½¿ç”¨æ¸å˜è‰²ï¼Œç›´æŽ¥ç”¨å‰æ™¯è‰²é“ºæ»¡
 			Gdiplus::Pen fgPen(m_dwForegroundColor, m_nCircleWidth);
-			graphics.DrawArc(&bgPen, outer, 270, 360);   //270´Ó×îÉÏÃæ¿ªÊ¼µÝÔö£¬ÉèÎª0µÄ»°£¬ÊÇ×îÓÒ±ß¿ªÊ¼
+			graphics.DrawArc(&bgPen, outer, 270, 360);   //270ä»Žæœ€ä¸Šé¢å¼€å§‹é€’å¢žï¼Œè®¾ä¸º0çš„è¯ï¼Œæ˜¯æœ€å³è¾¹å¼€å§‹
 			graphics.DrawArc(&fgPen, outer, 270, direction * 360 * (m_nValue - m_nMin) / (m_nMax - m_nMin));
 		}
 		else
@@ -103,7 +103,7 @@ void CircleProgress::PaintStatusImage(IRenderContext* pRender)
 
 		}
 
-		//»­Ðý×ªÖ¸Ê¾Æ÷Í¼±ê£¬ÐèÒªÓÃµ½¾ØÕó
+		//ç”»æ—‹è½¬æŒ‡ç¤ºå™¨å›¾æ ‡ï¼Œéœ€è¦ç”¨åˆ°çŸ©é˜µ
 		if (m_pIndicator)
 		{
 			Gdiplus::Matrix matrix;
@@ -143,7 +143,7 @@ void CircleProgress::SetClockwiseRotation(bool bClockwise /*= true*/)
 		m_bClockwise = bClockwise;
 		if (m_pIndicator)
 		{
-			//ÒÑ¾­Ðý×ªÁËÍ¼Æ¬£¬Ðý×ªµ½Ïà·´µÄ·½Ïò
+			//å·²ç»æ—‹è½¬äº†å›¾ç‰‡ï¼Œæ—‹è½¬åˆ°ç›¸åçš„æ–¹å‘
 			m_pIndicator->RotateFlip(Gdiplus::Rotate180FlipNone);
 		}
 
@@ -193,7 +193,7 @@ void CircleProgress::SetIndicator(const std::wstring& sIndicatorImage)
 		Gdiplus::Status state = m_pIndicator->GetLastStatus();
 		if (Gdiplus::Ok == state)
 		{
-			// ¼Ù¶¨Í¼Æ¬Ö¸ÏòÉÏ
+			// å‡å®šå›¾ç‰‡æŒ‡å‘ä¸Š
 			m_pIndicator->RotateFlip(m_bClockwise ? Gdiplus::Rotate90FlipNone : Gdiplus::Rotate270FlipNone);
 			Invalidate();
 		}

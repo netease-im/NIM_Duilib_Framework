@@ -1,4 +1,4 @@
-﻿#include "multi_browser_form.h"
+#include "multi_browser_form.h"
 #include "browser_box.h"
 #include "multi_browser_manager.h"
 #include "OleIdl.h"

@@ -18,13 +18,13 @@ BrowserHandler::BrowserHandler()
 void BrowserHandler::SetViewRect(RECT rc)
 {
 	if (!CefCurrentlyOn(TID_UI)) {
-		// °Ñ²Ù×÷Ìø×ªµ½CefÏß³ÌÖ´ĞĞ
+		// æŠŠæ“ä½œè·³è½¬åˆ°Cefçº¿ç¨‹æ‰§è¡Œ
 		CefPostTask(TID_UI, base::Bind(&BrowserHandler::SetViewRect, this, rc));
 		return;
 	}
 
 	rect_cef_control_ = rc;
-	// µ÷ÓÃWasResized½Ó¿Ú£¬µ÷ÓÃºó£¬BrowserHandler»áµ÷ÓÃGetViewRect½Ó¿ÚÀ´»ñÈ¡ä¯ÀÀÆ÷¶ÔÏóĞÂµÄÎ»ÖÃ
+	// è°ƒç”¨WasResizedæ¥å£ï¼Œè°ƒç”¨åï¼ŒBrowserHandlerä¼šè°ƒç”¨GetViewRectæ¥å£æ¥è·å–æµè§ˆå™¨å¯¹è±¡æ–°çš„ä½ç½®
 	if (browser_.get() && browser_->GetHost().get())
 		browser_->GetHost()->WasResized();
 }
@@ -69,7 +69,7 @@ void BrowserHandler::CloseAllBrowser()
 
 bool BrowserHandler::OnProcessMessageReceived(CefRefPtr<CefBrowser> browser, CefProcessId source_process, CefRefPtr<CefProcessMessage> message)
 {
-	// ´¦Àírender½ø³Ì·¢À´µÄÏûÏ¢
+	// å¤„ç†renderè¿›ç¨‹å‘æ¥çš„æ¶ˆæ¯
 	std::string message_name = message->GetName();
 	if (message_name == kFocusedNodeChangedMessage)
 	{
@@ -113,12 +113,12 @@ bool BrowserHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 	CefBrowserSettings& settings,
 	bool* no_javascript_access)
 {
-	// ÈÃĞÂµÄÁ´½ÓÔÚÔ­ä¯ÀÀÆ÷¶ÔÏóÖĞ´ò¿ª
+	// è®©æ–°çš„é“¾æ¥åœ¨åŸæµè§ˆå™¨å¯¹è±¡ä¸­æ‰“å¼€
 	if (browser_.get() && !target_url.empty())
 	{
 		if (handle_delegate_)
 		{
-			// ·µ»ØtrueÔò¼ÌĞøÔÚ¿Ø¼şÄÚ´ò¿ªĞÂÁ´½Ó£¬falseÔò½ûÖ¹·ÃÎÊ
+			// è¿”å›trueåˆ™ç»§ç»­åœ¨æ§ä»¶å†…æ‰“å¼€æ–°é“¾æ¥ï¼Œfalseåˆ™ç¦æ­¢è®¿é—®
 			bool bRet = handle_delegate_->OnBeforePopup(browser, frame, target_url, target_frame_name, target_disposition, user_gesture, popupFeatures, windowInfo, client, settings, no_javascript_access);
 			if (bRet)
 				browser_->GetMainFrame()->LoadURL(target_url);
@@ -127,7 +127,7 @@ bool BrowserHandler::OnBeforePopup(CefRefPtr<CefBrowser> browser,
 			browser_->GetMainFrame()->LoadURL(target_url);
 	}
 
-	// ½ûÖ¹µ¯³öpopup´°¿Ú
+	// ç¦æ­¢å¼¹å‡ºpopupçª—å£
 	return true;
 }
 
@@ -146,7 +146,7 @@ void BrowserHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 			handle_delegate_->OnAfterCreated(browser);
 		}
 
-		// ÓĞ´°Ä£Ê½ÏÂ£¬ä¯ÀÀÆ÷´´½¨Íê±Ïºó£¬ÈÃÉÏ²ã¸üĞÂÒ»ÏÂ×Ô¼ºµÄÎ»ÖÃ£»ÒòÎªÔÚÒì²½×´Ì¬ÏÂ£¬ÉÏ²ã¸üĞÂÎ»ÖÃÊ±¿ÉÄÜCef´°¿Ú»¹Ã»ÓĞ´´½¨³öÀ´
+		// æœ‰çª—æ¨¡å¼ä¸‹ï¼Œæµè§ˆå™¨åˆ›å»ºå®Œæ¯•åï¼Œè®©ä¸Šå±‚æ›´æ–°ä¸€ä¸‹è‡ªå·±çš„ä½ç½®ï¼›å› ä¸ºåœ¨å¼‚æ­¥çŠ¶æ€ä¸‹ï¼Œä¸Šå±‚æ›´æ–°ä½ç½®æ—¶å¯èƒ½Cefçª—å£è¿˜æ²¡æœ‰åˆ›å»ºå‡ºæ¥
 		if (!CefManager::GetInstance()->IsEnableOffsetRender() && handle_delegate_)
 		{
 			handle_delegate_->UpdateWindowPos();
@@ -156,17 +156,17 @@ void BrowserHandler::OnAfterCreated(CefRefPtr<CefBrowser> browser)
 		task_list_after_created_.Clear();
 	}));
 
-	// ±ØĞëÔÚcef uiÏß³Ìµ÷ÓÃRegisterDragDrop
-	// Ö´ĞĞ::DoDragDropÊ±£¬»áÔÚµ÷ÓÃRegisterDragDropµÄÏß³Ì´¥·¢µÄDragOver¡¢DragLeave¡¢Drop¡¢Drop»Øµ÷
-	// ½ø¶øµ÷ÓÃbrowser_->GetHost()->DragTargetDragEnter¡¢DragTargetDragOver¡¢DragTargetDragLeave¡¢DragTargetDrop
-	// Õâ¼¸¸öcef½Ó¿ÚÄÚ²¿·¢ÏÖ²»ÔÚcef uiÏß³Ì´¥·¢£¬Ôò»á×ª·¢µ½cef uiÏß³Ì
-	// µ¼ÖÂDragSourceEndedAt½Ó¿Ú±»µ÷ÓÃÊ±ÓĞ²¿·ÖDragTarget*·½·¨Ã»ÓĞ±»µ÷ÓÃ
-	// ×îÖÕÍÏ×§Ğ§¹û¾Í»áÓĞÎÊÌâ£¬Ïê¼ûDragSourceEndedAt½Ó¿ÚÃèÊö
-	// ËùÒÔÔÚcef uiÏß³Ìµ÷ÓÃRegisterDragDrop£¬ÈÃºóÃæÒ»ÏµÁĞ²Ù×÷¶¼ÔÚcef uiÏß³ÌÀïÍ¬²½Ö´ĞĞ£¬ÔòÃ»ÎÊÌâ
+	// å¿…é¡»åœ¨cef uiçº¿ç¨‹è°ƒç”¨RegisterDragDrop
+	// æ‰§è¡Œ::DoDragDropæ—¶ï¼Œä¼šåœ¨è°ƒç”¨RegisterDragDropçš„çº¿ç¨‹è§¦å‘çš„DragOverã€DragLeaveã€Dropã€Dropå›è°ƒ
+	// è¿›è€Œè°ƒç”¨browser_->GetHost()->DragTargetDragEnterã€DragTargetDragOverã€DragTargetDragLeaveã€DragTargetDrop
+	// è¿™å‡ ä¸ªcefæ¥å£å†…éƒ¨å‘ç°ä¸åœ¨cef uiçº¿ç¨‹è§¦å‘ï¼Œåˆ™ä¼šè½¬å‘åˆ°cef uiçº¿ç¨‹
+	// å¯¼è‡´DragSourceEndedAtæ¥å£è¢«è°ƒç”¨æ—¶æœ‰éƒ¨åˆ†DragTarget*æ–¹æ³•æ²¡æœ‰è¢«è°ƒç”¨
+	// æœ€ç»ˆæ‹–æ‹½æ•ˆæœå°±ä¼šæœ‰é—®é¢˜ï¼Œè¯¦è§DragSourceEndedAtæ¥å£æè¿°
+	// æ‰€ä»¥åœ¨cef uiçº¿ç¨‹è°ƒç”¨RegisterDragDropï¼Œè®©åé¢ä¸€ç³»åˆ—æ“ä½œéƒ½åœ¨cef uiçº¿ç¨‹é‡ŒåŒæ­¥æ‰§è¡Œï¼Œåˆ™æ²¡é—®é¢˜
 	//
-	// RegisterDragDropÄÚ²¿»áÔÚµ÷ÓÃÕâ¸öAPIµÄÏß³ÌÀï´´½¨Ò»¸ö´°¿Ú£¬ÓÃ¹ıÕâ¸ö´°¿ÚÀ´×öÏûÏ¢Ñ­»·Ä£Äâ×èÈûµÄ¹ı³Ì
-	// ËùÒÔÄÄ¸öÏß³Ìµ÷ÓÃRegisterDragDrop£¬¾Í»áÔÚÄÄ¸öÏß³Ì×èÈû²¢´¥·¢IDragTarget»Øµ÷
-	// ¼ûhttps://docs.microsoft.com/zh-cn/windows/win32/api/ole2/nf-ole2-registerdragdrop
+	// RegisterDragDropå†…éƒ¨ä¼šåœ¨è°ƒç”¨è¿™ä¸ªAPIçš„çº¿ç¨‹é‡Œåˆ›å»ºä¸€ä¸ªçª—å£ï¼Œç”¨è¿‡è¿™ä¸ªçª—å£æ¥åšæ¶ˆæ¯å¾ªç¯æ¨¡æ‹Ÿé˜»å¡çš„è¿‡ç¨‹
+	// æ‰€ä»¥å“ªä¸ªçº¿ç¨‹è°ƒç”¨RegisterDragDropï¼Œå°±ä¼šåœ¨å“ªä¸ªçº¿ç¨‹é˜»å¡å¹¶è§¦å‘IDragTargetå›è°ƒ
+	// è§https://docs.microsoft.com/zh-cn/windows/win32/api/ole2/nf-ole2-registerdragdrop
 	if (hwnd_)
 		drop_target_ = CefManager::GetInstance()->GetDropTarget(hwnd_);
 }
@@ -278,8 +278,8 @@ void BrowserHandler::OnPaint(CefRefPtr<CefBrowser> browser,
 {
 	if (handle_delegate_)
 	{
-		// ¶àÏß³ÌÏûÏ¢Ñ­»·Ä£Ê½ÖĞ£¬OnPaintÔÚCefµÄÏß³Ì±»´¥·¢£¬ÕâÊ±°ÑÊı¾İ±£´æµ½paint_buffer_ÖĞ£¬Ìø×ªµ½UIÏß³ÌÖ´ĞĞäÖÈ¾²Ù×÷¡£
-		// ÕâÀï²»¶Ôpaint_buffer_¼ÓËø£¬¼´Ê¹Á½¸öÏß³Ì²Ù×÷paint_buffer_·¢Éú¾ºÕù£¬Ò²Ö»ÊÇÈÃÄ³Ò»´ÎäÖÈ¾Ğ§¹ûÓĞè¦´Ã£¬²»»á±ÀÀ££¬Õâ¸öè¦´ÃÊÇ¿ÉÒÔ½ÓÊÜµÄ
+		// å¤šçº¿ç¨‹æ¶ˆæ¯å¾ªç¯æ¨¡å¼ä¸­ï¼ŒOnPaintåœ¨Cefçš„çº¿ç¨‹è¢«è§¦å‘ï¼Œè¿™æ—¶æŠŠæ•°æ®ä¿å­˜åˆ°paint_buffer_ä¸­ï¼Œè·³è½¬åˆ°UIçº¿ç¨‹æ‰§è¡Œæ¸²æŸ“æ“ä½œã€‚
+		// è¿™é‡Œä¸å¯¹paint_buffer_åŠ é”ï¼Œå³ä½¿ä¸¤ä¸ªçº¿ç¨‹æ“ä½œpaint_buffer_å‘ç”Ÿç«äº‰ï¼Œä¹Ÿåªæ˜¯è®©æŸä¸€æ¬¡æ¸²æŸ“æ•ˆæœæœ‰ç‘•ç–µï¼Œä¸ä¼šå´©æºƒï¼Œè¿™ä¸ªç‘•ç–µæ˜¯å¯ä»¥æ¥å—çš„
 		int buffer_length = width * height * 4;
 		if (buffer_length > (int)paint_buffer_.size())
 			paint_buffer_.resize(buffer_length + 1);
@@ -396,7 +396,7 @@ CefRefPtr<CefMenuModel> model)
 		{
 			if (model->GetCount() > 0)
 			{
-				// ½ûÖ¹ÓÒ¼ü²Ëµ¥
+				// ç¦æ­¢å³é”®èœå•
 				model->Clear();
 			}
 		}
@@ -478,7 +478,7 @@ void BrowserHandler::OnLoadError(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFra
 
 bool BrowserHandler::OnJSDialog(CefRefPtr<CefBrowser> browser, const CefString& origin_url, const CefString& accept_lang, JSDialogType dialog_type, const CefString& message_text, const CefString& default_prompt_text, CefRefPtr<CefJSDialogCallback> callback, bool& suppress_message)
 {
-	// releaseÊ±×èÖ¹µ¯³öjs¶Ô»°¿ò
+	// releaseæ—¶é˜»æ­¢å¼¹å‡ºjså¯¹è¯æ¡†
 #ifndef _DEBUG
 	suppress_message = true;
 #endif

@@ -13,31 +13,31 @@ public:
 	~MoveControlForm();
 
 	/**
-	 * Ò»ÏÂÈı¸ö½Ó¿ÚÊÇ±ØĞëÒª¸²Ğ´µÄ½Ó¿Ú£¬¸¸Àà»áµ÷ÓÃÕâÈı¸ö½Ó¿ÚÀ´¹¹½¨´°¿Ú
-	 * GetSkinFolder		½Ó¿ÚÉèÖÃÄãÒª»æÖÆµÄ´°¿ÚÆ¤·ô×ÊÔ´Â·¾¶
-	 * GetSkinFile			½Ó¿ÚÉèÖÃÄãÒª»æÖÆµÄ´°¿ÚµÄ xml ÃèÊöÎÄ¼ş
-	 * GetWindowClassName	½Ó¿ÚÉèÖÃ´°¿ÚÎ¨Ò»µÄÀàÃû³Æ
+	 * ä¸€ä¸‹ä¸‰ä¸ªæ¥å£æ˜¯å¿…é¡»è¦è¦†å†™çš„æ¥å£ï¼Œçˆ¶ç±»ä¼šè°ƒç”¨è¿™ä¸‰ä¸ªæ¥å£æ¥æ„å»ºçª—å£
+	 * GetSkinFolder		æ¥å£è®¾ç½®ä½ è¦ç»˜åˆ¶çš„çª—å£çš®è‚¤èµ„æºè·¯å¾„
+	 * GetSkinFile			æ¥å£è®¾ç½®ä½ è¦ç»˜åˆ¶çš„çª—å£çš„ xml æè¿°æ–‡ä»¶
+	 * GetWindowClassName	æ¥å£è®¾ç½®çª—å£å”¯ä¸€çš„ç±»åç§°
 	 */
 	virtual std::wstring GetSkinFolder() override;
 	virtual std::wstring GetSkinFile() override;
 	virtual std::wstring GetWindowClassName() const override;
 
 	/**
-	 * ÊÕµ½ WM_CREATE ÏûÏ¢Ê±¸Ãº¯Êı»á±»µ÷ÓÃ£¬Í¨³£×öÒ»Ğ©¿Ø¼ş³õÊ¼»¯µÄ²Ù×÷
+	 * æ”¶åˆ° WM_CREATE æ¶ˆæ¯æ—¶è¯¥å‡½æ•°ä¼šè¢«è°ƒç”¨ï¼Œé€šå¸¸åšä¸€äº›æ§ä»¶åˆå§‹åŒ–çš„æ“ä½œ
 	 */
 	virtual void InitWindow() override;
 
 	/**
-	 * ÊÕµ½ WM_CLOSE ÏûÏ¢Ê±¸Ãº¯Êı»á±»µ÷ÓÃ
+	 * æ”¶åˆ° WM_CLOSE æ¶ˆæ¯æ—¶è¯¥å‡½æ•°ä¼šè¢«è°ƒç”¨
 	 */
 	virtual LRESULT OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 	/**
-	* @brief ½ÓÊÕµ½Êó±ê×ó¼üµ¯ÆğÏûÏ¢Ê±±»µ÷ÓÃ
-	* @param[in] uMsg ÏûÏ¢ÄÚÈİ
-	* @param[in] wParam ÏûÏ¢¸½¼Ó²ÎÊı
-	* @param[in] lParam ÏûÏ¢¸½¼Ó²ÎÊı
-	* @param[out] bHandled ·µ»Ø false Ôò¼ÌĞøÅÉ·¢¸ÃÏûÏ¢£¬·ñÔò²»ÔÙÅÉ·¢¸ÃÏûÏ¢
-	* @return ·µ»ØÏûÏ¢´¦Àí½á¹û
+	* @brief æ¥æ”¶åˆ°é¼ æ ‡å·¦é”®å¼¹èµ·æ¶ˆæ¯æ—¶è¢«è°ƒç”¨
+	* @param[in] uMsg æ¶ˆæ¯å†…å®¹
+	* @param[in] wParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	* @param[in] lParam æ¶ˆæ¯é™„åŠ å‚æ•°
+	* @param[out] bHandled è¿”å› false åˆ™ç»§ç»­æ´¾å‘è¯¥æ¶ˆæ¯ï¼Œå¦åˆ™ä¸å†æ´¾å‘è¯¥æ¶ˆæ¯
+	* @return è¿”å›æ¶ˆæ¯å¤„ç†ç»“æœ
 	*/
 	virtual LRESULT OnLButtonUp(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
@@ -46,7 +46,7 @@ public:
 	static void ShowCustomWindow(const std::wstring& class_name, const std::wstring& theme_directory, const std::wstring& layout_xml);
 
 private:
-	//drag-dropÏà¹Ø
+	//drag-dropç›¸å…³
 	bool OnProcessAppItemDrag(ui::EventArgs* param);
 	void DoDrag(ui::Control* pAppItem, POINT pt_offset);
 	void DoBeforeDrag();

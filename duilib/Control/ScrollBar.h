@@ -15,7 +15,7 @@ public:
 	Box* GetOwner() const;
 	void SetOwner(ScrollableBox* pOwner);
 
-	/// ÖØĞ´¸¸Àà·½·¨£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ£¬Çë²Î¿¼¸¸ÀàÉùÃ÷
+	/// é‡å†™çˆ¶ç±»æ–¹æ³•ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½ï¼Œè¯·å‚è€ƒçˆ¶ç±»å£°æ˜
 	virtual std::wstring GetType() const override;
 	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual void SetEnabled(bool bEnable = true) override;
@@ -33,200 +33,200 @@ public:
 	virtual void ClearImageCache() override;
 
 	/**
-	 * @brief ÊÇ·ñÊÇË®Æ½¹ö¶¯Ìõ
-	 * @return ·µ»Ø true ´ú±íÊÇË®Æ½¹ö¶¯Ìõ£¬·ñÔòÎª false ´ú±íÊÇ´¹Ö±¹ö¶¯Ìõ
+	 * @brief æ˜¯å¦æ˜¯æ°´å¹³æ»šåŠ¨æ¡
+	 * @return è¿”å› true ä»£è¡¨æ˜¯æ°´å¹³æ»šåŠ¨æ¡ï¼Œå¦åˆ™ä¸º false ä»£è¡¨æ˜¯å‚ç›´æ»šåŠ¨æ¡
 	 */
 	bool IsHorizontal();
 
 	/**
-	 * @brief ÉèÖÃ¹ö¶¯Ìõ·½Ïò
-	 * @param[in] ÉèÖÃ true ´ú±íÊÇË®Æ½¹ö¶¯Ìõ£¬ÉèÖÃ false ´ú±íÊÇ´¹Ö±¹ö¶¯Ìõ£¬Ä¬ÈÏÎª true
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ»šåŠ¨æ¡æ–¹å‘
+	 * @param[in] è®¾ç½® true ä»£è¡¨æ˜¯æ°´å¹³æ»šåŠ¨æ¡ï¼Œè®¾ç½® false ä»£è¡¨æ˜¯å‚ç›´æ»šåŠ¨æ¡ï¼Œé»˜è®¤ä¸º true
+	 * @return æ— 
 	 */
 	void SetHorizontal(bool bHorizontal = true);
 
 	/**
-	 * @brief »ñÈ¡¹ö¶¯·¶Î§£¬¶ÔÓ¦ XML ÖĞ range ÊôĞÔ
-	 * @return ·µ»Ø¹ö¶¯·¶Î§
+	 * @brief è·å–æ»šåŠ¨èŒƒå›´ï¼Œå¯¹åº” XML ä¸­ range å±æ€§
+	 * @return è¿”å›æ»šåŠ¨èŒƒå›´
 	 */
 	int64_t GetScrollRange() const;
 
 	/**
-	 * @brief ÊÇÉèÖÃ¹ö¶¯·¶Î§
-	 * @param[in] nRange ÒªÉèÖÃµÄ¹ö¶¯·¶Î§
-	 * @return ÎŞ
+	 * @brief æ˜¯è®¾ç½®æ»šåŠ¨èŒƒå›´
+	 * @param[in] nRange è¦è®¾ç½®çš„æ»šåŠ¨èŒƒå›´
+	 * @return æ— 
 	 */
 	void SetScrollRange(int64_t nRange);
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÓĞĞ§
-	 * @return true ÎªÓĞĞ§£¬·ñÔòÎª false
+	 * @brief åˆ¤æ–­æ˜¯å¦æœ‰æ•ˆ
+	 * @return true ä¸ºæœ‰æ•ˆï¼Œå¦åˆ™ä¸º false
 	 */
 	bool IsValid() { return GetScrollRange() != 0; }
 
 	/**
-	 * @brief »ñÈ¡¹ö¶¯ÌõÎ»ÖÃ
-	 * @return ·µ»Ø¹ö¶¯ÌõÎ»ÖÃ
+	 * @brief è·å–æ»šåŠ¨æ¡ä½ç½®
+	 * @return è¿”å›æ»šåŠ¨æ¡ä½ç½®
 	 */
 	int64_t GetScrollPos() const;
 
 	/**
-	 * @brief ÉèÖÃ¹ö¶¯ÌõÎ»ÖÃ
-	 * @param[in] nPos ÒªÉèÖÃµÄÎ»ÖÃĞÅÏ¢
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ»šåŠ¨æ¡ä½ç½®
+	 * @param[in] nPos è¦è®¾ç½®çš„ä½ç½®ä¿¡æ¯
+	 * @return æ— 
 	 */
 	void SetScrollPos(int64_t nPos);
 
 	/**
-	 * @brief »ñÈ¡¹ö¶¯Ò»ĞĞµÄ´óĞ¡
-	 * @return ·µ»Ø¹ö¶¯Ò»ĞĞµÄ´óĞ¡
+	 * @brief è·å–æ»šåŠ¨ä¸€è¡Œçš„å¤§å°
+	 * @return è¿”å›æ»šåŠ¨ä¸€è¡Œçš„å¤§å°
 	 */
 	int GetLineSize() const;
 
 	/**
-	 * @brief ÉèÖÃ¹ö¶¯Ò»ĞĞµÄ´óĞ¡
-	 * @param[in] nSize ÒªÉèÖÃµÄ´óĞ¡ÊıÖµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ»šåŠ¨ä¸€è¡Œçš„å¤§å°
+	 * @param[in] nSize è¦è®¾ç½®çš„å¤§å°æ•°å€¼
+	 * @return æ— 
 	 */
 	void SetLineSize(int nSize);
 
 	/**
-	 * @brief »ñÈ¡»¬¿éµÄ×îĞ¡³¤¶È
-	 * @return ·µ»Ø»¬¿éµÄ×îĞ¡³¤¶È
+	 * @brief è·å–æ»‘å—çš„æœ€å°é•¿åº¦
+	 * @return è¿”å›æ»‘å—çš„æœ€å°é•¿åº¦
 	 */
 	int GetThumbMinLength() const;
 
 	/**
-	 * @brief ÉèÖÃ»¬¿éµÄ×îĞ¡³¤¶È
-	 * @param[in] nThumbMinLength ÒªÉèÖÃµÄ×îĞ¡³¤¶È
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ»‘å—çš„æœ€å°é•¿åº¦
+	 * @param[in] nThumbMinLength è¦è®¾ç½®çš„æœ€å°é•¿åº¦
+	 * @return æ— 
 	 */
 	void SetThumbMinLength(int nThumbMinLength);
 
 	/**
-	 * @brief ÊÇ·ñÏÔÊ¾×ó»òÉÏ°´Å¥
-	 * @return ·µ»Ø true ÎªÏÔÊ¾£¬false Îª²»ÏÔÊ¾
+	 * @brief æ˜¯å¦æ˜¾ç¤ºå·¦æˆ–ä¸ŠæŒ‰é’®
+	 * @return è¿”å› true ä¸ºæ˜¾ç¤ºï¼Œfalse ä¸ºä¸æ˜¾ç¤º
 	 */
 	bool IsShowButton1();
 
 	/**
-	 * @brief ÉèÖÃÊÇ·ñÏÔÊ¾×ó»òÉÏ°´Å¥
-	 * @param[in] bShow ÉèÖÃ true ÎªÏÔÊ¾£¬false Îª²»ÏÔÊ¾
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ˜¯å¦æ˜¾ç¤ºå·¦æˆ–ä¸ŠæŒ‰é’®
+	 * @param[in] bShow è®¾ç½® true ä¸ºæ˜¾ç¤ºï¼Œfalse ä¸ºä¸æ˜¾ç¤º
+	 * @return æ— 
 	 */
 	void SetShowButton1(bool bShow);
 
 	/**
-	 * @brief »ñÈ¡Ö¸¶¨×´Ì¬ÏÂµÄÏò×ó»òÏòÉÏ°´Å¥Í¼Æ¬
-	 * @param[in] stateType Òª»ñÈ¡µÄ×´Ì¬£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @return ·µ»ØÍ¼Æ¬Î»ÖÃ
+	 * @brief è·å–æŒ‡å®šçŠ¶æ€ä¸‹çš„å‘å·¦æˆ–å‘ä¸ŠæŒ‰é’®å›¾ç‰‡
+	 * @param[in] stateType è¦è·å–çš„çŠ¶æ€ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @return è¿”å›å›¾ç‰‡ä½ç½®
 	 */
 	std::wstring GetButton1StateImage(ControlStateType stateType);
 
 	/**
-	 * @brief ÉèÖÃÖ¸¶¨×´Ì¬ÏÂµÄÏò×ó»òÏòÉÏ°´Å¥Í¼Æ¬
-	 * @param[in] stateType ÒªÉèÖÃÄÄÖÖ×´Ì¬ÏÂµÄÍ¼Æ¬
-	 * @param[in] pStrImage Í¼Æ¬Î»ÖÃ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æŒ‡å®šçŠ¶æ€ä¸‹çš„å‘å·¦æˆ–å‘ä¸ŠæŒ‰é’®å›¾ç‰‡
+	 * @param[in] stateType è¦è®¾ç½®å“ªç§çŠ¶æ€ä¸‹çš„å›¾ç‰‡
+	 * @param[in] pStrImage å›¾ç‰‡ä½ç½®
+	 * @return æ— 
 	 */
 	void SetButton1StateImage(ControlStateType stateType, const std::wstring& pStrImage);
 
 	/**
-	 * @brief ÊÇ·ñÏÔÊ¾ÓÒ»òÏÂ°´Å¥
-	 * @return ·µ»Ø true ÎªÏÔÊ¾£¬false Îª²»ÏÔÊ¾
+	 * @brief æ˜¯å¦æ˜¾ç¤ºå³æˆ–ä¸‹æŒ‰é’®
+	 * @return è¿”å› true ä¸ºæ˜¾ç¤ºï¼Œfalse ä¸ºä¸æ˜¾ç¤º
 	 */
 	bool IsShowButton2();
 
 	/**
-	 * @brief ÉèÖÃÊÇ·ñÏÔÊ¾ÓÒ»òÏÂ°´Å¥
-	 * @param[in] bShow ÉèÖÃ true ÎªÏÔÊ¾£¬false Îª²»ÏÔÊ¾
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ˜¯å¦æ˜¾ç¤ºå³æˆ–ä¸‹æŒ‰é’®
+	 * @param[in] bShow è®¾ç½® true ä¸ºæ˜¾ç¤ºï¼Œfalse ä¸ºä¸æ˜¾ç¤º
+	 * @return æ— 
 	 */
 	void SetShowButton2(bool bShow);
 
 	/**
-	 * @brief »ñÈ¡Ö¸¶¨×´Ì¬ÏÂµÄÏòÓÒ»òÏòÏÂ°´Å¥Í¼Æ¬
-	 * @param[in] stateType Òª»ñÈ¡µÄ×´Ì¬£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @return ·µ»ØÍ¼Æ¬Î»ÖÃ
+	 * @brief è·å–æŒ‡å®šçŠ¶æ€ä¸‹çš„å‘å³æˆ–å‘ä¸‹æŒ‰é’®å›¾ç‰‡
+	 * @param[in] stateType è¦è·å–çš„çŠ¶æ€ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @return è¿”å›å›¾ç‰‡ä½ç½®
 	 */
 	std::wstring GetButton2StateImage(ControlStateType stateType);
 
 	/**
-	 * @brief ÉèÖÃÖ¸¶¨×´Ì¬ÏÂµÄÏòÓÒ»òÏòÏÂ°´Å¥Í¼Æ¬
-	 * @param[in] stateType ÒªÉèÖÃÄÄÖÖ×´Ì¬ÏÂµÄÍ¼Æ¬
-	 * @param[in] pStrImage Í¼Æ¬Î»ÖÃ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æŒ‡å®šçŠ¶æ€ä¸‹çš„å‘å³æˆ–å‘ä¸‹æŒ‰é’®å›¾ç‰‡
+	 * @param[in] stateType è¦è®¾ç½®å“ªç§çŠ¶æ€ä¸‹çš„å›¾ç‰‡
+	 * @param[in] pStrImage å›¾ç‰‡ä½ç½®
+	 * @return æ— 
 	 */
 	void SetButton2StateImage(ControlStateType stateType, const std::wstring& pStrImage);
 
 	/**
-	 * @brief »ñÈ¡»¬¿éÖ¸¶¨×´Ì¬ÏÂµÄÍ¼Æ¬
-	 * @param[in] stateType Òª»ñÈ¡µÄ×´Ì¬±êÊ¶£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @return ·µ»ØÍ¼Æ¬Î»ÖÃ
+	 * @brief è·å–æ»‘å—æŒ‡å®šçŠ¶æ€ä¸‹çš„å›¾ç‰‡
+	 * @param[in] stateType è¦è·å–çš„çŠ¶æ€æ ‡è¯†ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @return è¿”å›å›¾ç‰‡ä½ç½®
 	 */
 	std::wstring GetThumbStateImage(ControlStateType stateType);
 
 	/**
-	 * @brief ÉèÖÃ»¬¿éÖ¸¶¨×´Ì¬ÏÂµÄÍ¼Æ¬
-	 * @param[in] stateType ÒªÉèÖÃµÄ×´Ì¬±êÊ¶£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @param[in] pStrImage Í¼Æ¬Î»ÖÃ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ»‘å—æŒ‡å®šçŠ¶æ€ä¸‹çš„å›¾ç‰‡
+	 * @param[in] stateType è¦è®¾ç½®çš„çŠ¶æ€æ ‡è¯†ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @param[in] pStrImage å›¾ç‰‡ä½ç½®
+	 * @return æ— 
 	 */
 	void SetThumbStateImage(ControlStateType stateType, const std::wstring& pStrImage);
 
 	/**
-	 * @brief »ñÈ¡Ö¸¶¨×´Ì¬ÏÂ»¬¿éÖĞ¼ä±êÊ¶Í¼Æ¬
-	 * @param[in] stateType Òª»ñÈ¡µÄ×´Ì¬±êÊ¶£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @return ·µ»ØÍ¼Æ¬Î»ÖÃ
+	 * @brief è·å–æŒ‡å®šçŠ¶æ€ä¸‹æ»‘å—ä¸­é—´æ ‡è¯†å›¾ç‰‡
+	 * @param[in] stateType è¦è·å–çš„çŠ¶æ€æ ‡è¯†ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @return è¿”å›å›¾ç‰‡ä½ç½®
 	 */
 	std::wstring GetRailStateImage(ControlStateType stateType);
 
 	/**
-	 * @brief ÉèÖÃÖ¸¶¨×´Ì¬ÏÂ»¬¿éÖĞ¼ä±êÊ¶Í¼Æ¬
-	 * @param[in] stateType ÒªÉèÖÃµÄ×´Ì¬±êÊ¶£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @param[in] pStrImage Í¼Æ¬Î»ÖÃ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æŒ‡å®šçŠ¶æ€ä¸‹æ»‘å—ä¸­é—´æ ‡è¯†å›¾ç‰‡
+	 * @param[in] stateType è¦è®¾ç½®çš„çŠ¶æ€æ ‡è¯†ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @param[in] pStrImage å›¾ç‰‡ä½ç½®
+	 * @return æ— 
 	 */
 	void SetRailStateImage(ControlStateType stateType, const std::wstring& pStrImage);
 
 	/**
-	 * @brief »ñÈ¡Ö¸¶¨×´Ì¬ÏÂµÄ±³¾°Í¼Æ¬
-	 * @param[in] stateType Òª»ñÈ¡µÄ×´Ì¬±êÊ¶£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @return ·µ»ØÍ¼Æ¬Î»ÖÃ
+	 * @brief è·å–æŒ‡å®šçŠ¶æ€ä¸‹çš„èƒŒæ™¯å›¾ç‰‡
+	 * @param[in] stateType è¦è·å–çš„çŠ¶æ€æ ‡è¯†ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @return è¿”å›å›¾ç‰‡ä½ç½®
 	 */
 	std::wstring GetBkStateImage(ControlStateType stateType);
 
 	/**
-	 * @brief ÉèÖÃÖ¸¶¨×´Ì¬ÏÂµÄ±³¾°Í¼Æ¬
-	 * @param[in] stateType ÒªÉèÖÃµÄ×´Ì¬±êÊ¶£¬²Î¿¼ ControlStateType Ã¶¾Ù
-	 * @param[in] pStrImage Í¼Æ¬Î»ÖÃ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æŒ‡å®šçŠ¶æ€ä¸‹çš„èƒŒæ™¯å›¾ç‰‡
+	 * @param[in] stateType è¦è®¾ç½®çš„çŠ¶æ€æ ‡è¯†ï¼Œå‚è€ƒ ControlStateType æšä¸¾
+	 * @param[in] pStrImage å›¾ç‰‡ä½ç½®
+	 * @return æ— 
 	 */
 	void SetBkStateImage(ControlStateType stateType, const std::wstring& pStrImage);
 
 	/**
-	 * @brief ÊÇ·ñ×Ô¶¯Òş²Ø¹ö¶¯Ìõ
-	 * @return ·µ»Ø true ÎªÊÇ£¬·ñÔòÎª false
+	 * @brief æ˜¯å¦è‡ªåŠ¨éšè—æ»šåŠ¨æ¡
+	 * @return è¿”å› true ä¸ºæ˜¯ï¼Œå¦åˆ™ä¸º false
 	 */
 	bool IsAutoHideScroll(){return m_bAutoHide;}
 
 	/**
-	 * @brief ÉèÖÃÊÇ·ñ×Ô¶¯Òş²Ø¹ö¶¯Ìõ
-	 * @param[in] hide ÉèÖÃÎª true Îª×Ô¶¯Òş²Ø£¬false Îª²»×Ô¶¯Òş²Ø
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ˜¯å¦è‡ªåŠ¨éšè—æ»šåŠ¨æ¡
+	 * @param[in] hide è®¾ç½®ä¸º true ä¸ºè‡ªåŠ¨éšè—ï¼Œfalse ä¸ºä¸è‡ªåŠ¨éšè—
+	 * @return æ— 
 	 */
 	void SetAutoHideScroll(bool hide);
 
 	/**
-	 * @brief »ñÈ¡»¬¿é×´Ì¬
-	 * @return ·µ»Ø»¬¿é×´Ì¬£¬²Î¿¼ ControlStateType Ã¶¾Ù
+	 * @brief è·å–æ»‘å—çŠ¶æ€
+	 * @return è¿”å›æ»‘å—çŠ¶æ€ï¼Œå‚è€ƒ ControlStateType æšä¸¾
 	 */
 	ControlStateType GetThumbState() { return m_uThumbState; }
 
 private:
 	void ScrollTimeHandle();
 
-	/// »æÖÆÏà¹Øº¯Êı
+	/// ç»˜åˆ¶ç›¸å…³å‡½æ•°
 	void PaintBk(IRenderContext* pRender);
 	void PaintButton1(IRenderContext* pRender);
 	void PaintButton2(IRenderContext* pRender);

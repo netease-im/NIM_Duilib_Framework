@@ -1,4 +1,4 @@
-﻿// The base class of a cross flatform message pump implemention
+// The base class of a cross flatform message pump implemention
 
 #ifndef BASE_FRAMEWORK_MESSAGE_PUMP_H_
 #define BASE_FRAMEWORK_MESSAGE_PUMP_H_

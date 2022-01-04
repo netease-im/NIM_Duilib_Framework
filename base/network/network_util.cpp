@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2011, NetEase Inc. All rights reserved.
+// Copyright (c) 2011, NetEase Inc. All rights reserved.
 //
 // Author: rl
 // Date: 2011/11/6

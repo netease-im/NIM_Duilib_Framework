@@ -38,13 +38,13 @@ void RichlistForm::InitWindow()
 		ui::GlobalManager::FillBoxWithCache(item, L"richlist/item.xml");
 
 		std::wstring img = L"icon.png";
-		std::wstring title = nbase::StringPrintf(L"ÏÂÔØÈÎÎñ [%02d]", i + 1);
+		std::wstring title = nbase::StringPrintf(L"ä¸‹è½½ä»»åŠ¡ [%02d]", i + 1);
 
 		item->InitSubControls(img, title);
 		list_->Add(item);
 	}
 
-	// ¼àÌıÁĞ±íÖĞµã»÷Ñ¡Ôñ×ÓÏîµÄÊÂ¼ş
+	// ç›‘å¬åˆ—è¡¨ä¸­ç‚¹å‡»é€‰æ‹©å­é¡¹çš„äº‹ä»¶
 	list_->AttachSelect(nbase::Bind(&RichlistForm::OnSelected, this, std::placeholders::_1));
 }
 
@@ -55,8 +55,8 @@ bool RichlistForm::OnSelected(ui::EventArgs* args)
 	int old = args->lParam;
 
 
-	auto message = nbase::StringPrintf(L"ÄúÑ¡ÔñÁËË÷ÒıÎª %d µÄ×ÓÏî£¬ÉÏÒ»´ÎÑ¡Ôñ×ÓÏîË÷ÒıÎª %d", current, old);
-	nim_comp::ShowMsgBox(GetHWND(), nim_comp::MsgboxCallback(), message, false, L"ÌáÊ¾", false);
+	auto message = nbase::StringPrintf(L"æ‚¨é€‰æ‹©äº†ç´¢å¼•ä¸º %d çš„å­é¡¹ï¼Œä¸Šä¸€æ¬¡é€‰æ‹©å­é¡¹ç´¢å¼•ä¸º %d", current, old);
+	nim_comp::ShowMsgBox(GetHWND(), nim_comp::MsgboxCallback(), message, false, L"æç¤º", false);
 
 	return true;
 }

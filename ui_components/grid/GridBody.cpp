@@ -235,7 +235,7 @@ namespace ui
 			for (int row = 0; row < m_nFixedRow; row++)
 			{
 				posy += m_vLayout[row];
-				if (posy > grid_height)			//³¬³ögrid¸ß¶È
+				if (posy > grid_height)			//è¶…å‡ºgridé«˜åº¦
 				{
 					m_rcPaintRange.bottom = row;
 					break;
@@ -250,10 +250,10 @@ namespace ui
 				if (m_vLayout[row] == 0)
 					continue;
 				if (m_rcPaintRange.top == -1)
-					if (posy + m_vLayout[row] - szOff.cy > fixed_row_height)		//µ¥Ôª¸ñÏÂ±ßÏßÃ»ÓĞ³¬¹ıfixed_row_height
+					if (posy + m_vLayout[row] - szOff.cy > fixed_row_height)		//å•å…ƒæ ¼ä¸‹è¾¹çº¿æ²¡æœ‰è¶…è¿‡fixed_row_height
 						m_rcPaintRange.top = row;
 				posy += m_vLayout[row];
-				if (posy - szOff.cy > grid_height)			//³¬³ögrid¸ß¶È
+				if (posy - szOff.cy > grid_height)			//è¶…å‡ºgridé«˜åº¦
 				{
 					m_rcPaintRange.bottom = row;
 					break;
@@ -268,7 +268,7 @@ namespace ui
 			for (int col = 0; col < m_nFixedCol; col++)
 			{
 				posx += m_hLayout[col];
-				if (posx > grid_width)			//³¬³ögrid¿í¶È
+				if (posx > grid_width)			//è¶…å‡ºgridå®½åº¦
 				{
 					m_rcPaintRange.right = col;
 					break;
@@ -283,11 +283,11 @@ namespace ui
 				if (m_hLayout[col] == 0)
 					continue;
 				if (m_rcPaintRange.left == -1)
-					if (posx + m_hLayout[col] - szOff.cx > fixed_col_width)		//µ¥Ôª¸ñÓÒ±ßÏßÃ»ÓĞ³¬¹ıfixed_col_width
+					if (posx + m_hLayout[col] - szOff.cx > fixed_col_width)		//å•å…ƒæ ¼å³è¾¹çº¿æ²¡æœ‰è¶…è¿‡fixed_col_width
 						m_rcPaintRange.left = col;
 
 				posx += m_hLayout[col];
-				if (posx - szOff.cx > grid_width)		//³¬³ögrid¿í¶È
+				if (posx - szOff.cx > grid_width)		//è¶…å‡ºgridå®½åº¦
 				{
 					m_rcPaintRange.right = col;
 					break;
@@ -304,7 +304,7 @@ namespace ui
 		m_vLayout.push_back(m_defaultRowHeight);		//insert header hegith
 		m_vecRow.push_back(new GridRow());
 		SetFixedHeight(m_defaultRowHeight);
-		AddCol(L"ĞĞºÅ", 30);
+		AddCol(L"è¡Œå·", 30);
 		SetFixedColCount(1);
 		SetFixedRowCount(1);
 
@@ -389,12 +389,12 @@ namespace ui
 				m_vecRow[i]->items.erase(m_vecRow[i]->items.begin() + count, m_vecRow[i]->items.end());
 			}
 			
-			//Òì²½»ØÊÕÄÚ´æ
+			//å¼‚æ­¥å›æ”¶å†…å­˜
 			std::thread thread_delete([delay_delete_items](){
 				int index = 0;
 				for (auto it = delay_delete_items.cbegin(); it < delay_delete_items.cend(); it++, index++)
 				{
-					if (index % 1000 == 0)	//·ÀÖ¹cpu¿¨ËÀ
+					if (index % 1000 == 0)	//é˜²æ­¢cpuå¡æ­»
 						::Sleep(1);
 					delete *it;
 				}
@@ -471,20 +471,20 @@ namespace ui
 		{
 			_ClearModifyAndSel();
 			assert(m_vLayout.size() == m_vecRow.size());
-			if (count < 1)		//header±ØĞë±£Áô
+			if (count < 1)		//headerå¿…é¡»ä¿ç•™
 				count = 1;
 			int del_count = row_count - count;
 			int row_index = row_count - 1;
 			std::vector<GridRow*> delay_delete_rows;
 			delay_delete_rows.insert(delay_delete_rows.begin(), m_vecRow.begin() + count, m_vecRow.end());
 			
-			//Òì²½»ØÊÕÄÚ´æ
+			//å¼‚æ­¥å›æ”¶å†…å­˜
 			std::thread thread_delete([delay_delete_rows](){
 				int row_count = delay_delete_rows.size();
 				int row_index = 0;
 				for (int row_index = 0; row_index < row_count; row_index++)
 				{
-					if (row_index % 100 == 0)		//·ÀÖ¹cpu¿¨ËÀ
+					if (row_index % 100 == 0)		//é˜²æ­¢cpuå¡æ­»
 						::Sleep(1);
 					GridRow *grid_row = delay_delete_rows[row_index];
 					for (size_t i = 0; i < grid_row->size(); i++)
@@ -714,7 +714,7 @@ namespace ui
 
 	bool GridBody::AddRow()
 	{
-		assert(m_hLayout.size() > 0);	//ĞÂÔöĞĞÇ°±ØĞëÏÖÓĞÁĞ
+		assert(m_hLayout.size() > 0);	//æ–°å¢è¡Œå‰å¿…é¡»ç°æœ‰åˆ—
 		if (m_hLayout.size() == 0)
 			return false;
 		int row_index = m_vecRow.size();
@@ -782,7 +782,7 @@ namespace ui
 			delete grid_row;
 			m_vecRow.erase(m_vecRow.begin() + row_index);
 #if 1
-			//ÏÂÃæĞĞµÄGridItemµÄrow_index--
+			//ä¸‹é¢è¡Œçš„GridItemçš„row_index--
 			for (size_t i = row_index; i < m_vecRow.size(); i++)
 			{
 				GridRow *pRow = m_vecRow[i];
@@ -837,19 +837,19 @@ namespace ui
 			}
 			m_hLayout.erase(m_hLayout.begin() + col_index);
 
-			//Òì²½»ØÊÕÄÚ´æ
+			//å¼‚æ­¥å›æ”¶å†…å­˜
 			std::thread thread_delete([delay_delete_items](){
 				int index = 0;
 				for (auto it = delay_delete_items.cbegin(); it < delay_delete_items.cend(); it++, index++)
 				{
-					if (index % 1000 == 0)	//·ÀÖ¹cpu¿¨ËÀ
+					if (index % 1000 == 0)	//é˜²æ­¢cpuå¡æ­»
 						::Sleep(1);
 					delete *it;
 				}
 			});
 			thread_delete.detach();
 #if 1
-			//ÓÒ±ßÁĞµÄGridItemµÄcol_index--
+			//å³è¾¹åˆ—çš„GridItemçš„col_index--
 			for (size_t i = 0; i < m_vecRow.size(); i++)
 			{
 				GridRow *pRow = m_vecRow[i];
@@ -880,7 +880,7 @@ namespace ui
 
 		SetRowCount(1);
 
-		if (include_header)		//ÒÆ³ıheader
+		if (include_header)		//ç§»é™¤header
 		{
 			SetColCount(1);
 		}
@@ -923,7 +923,7 @@ namespace ui
 					{
 						int row_num = pSheet->lastRow();
 						int col_num = pSheet->lastCol();
-						int additional_header_row = (touch_header ? 0 : 1);	//¼ÆËã¶îÍâµÄÒ»ĞĞ
+						int additional_header_row = (touch_header ? 0 : 1);	//è®¡ç®—é¢å¤–çš„ä¸€è¡Œ
 						if (GetRowCount() < row_num + additional_header_row)
 							SetRowCount(row_num + additional_header_row);
 						if (GetColCount() < col_num + 1)
@@ -1117,7 +1117,7 @@ namespace ui
 				return true;
 
 			int posx = 0;
-			//µã»÷fixed rowºÍfixed colÇøÓò
+			//ç‚¹å‡»fixed rowå’Œfixed colåŒºåŸŸ
 			if (position.x < m_nFixedCol && position.y < m_nFixedRow)
 			{
 				if (position.y == 0)
@@ -1140,7 +1140,7 @@ namespace ui
 				return true;
 			}
 
-			if (position.x < m_nFixedCol)			//µã»÷µÚÒ»ÁĞ Ñ¡ÔñĞĞ
+			if (position.x < m_nFixedCol)			//ç‚¹å‡»ç¬¬ä¸€åˆ— é€‰æ‹©è¡Œ
 			{
 				if (position.x == 0){
 					m_bDragSel = true;
@@ -1148,7 +1148,7 @@ namespace ui
 					m_selRange.SetSelRow(position.y, ctrl, shift);
 				}
 			}
-			else if (position.y < m_nFixedRow)		//µã»÷µÚÒ»ĞĞ Ñ¡ÔñÁĞ
+			else if (position.y < m_nFixedRow)		//ç‚¹å‡»ç¬¬ä¸€è¡Œ é€‰æ‹©åˆ—
 			{
 				if (position.y == 0)
 				{
@@ -1168,7 +1168,7 @@ namespace ui
 							drag_col = true;
 							break;
 						}
-						if (posx - szOff.cx > grid_width)	//³¬³ö±ß½çÁË
+						if (posx - szOff.cx > grid_width)	//è¶…å‡ºè¾¹ç•Œäº†
 							break;
 					}
 					if (!drag_col){
@@ -1178,7 +1178,7 @@ namespace ui
 					}
 				}
 			}
-			else{		//µã»÷ÆÕÍ¨ÇøÓò
+			else{		//ç‚¹å‡»æ™®é€šåŒºåŸŸ
 				if (!ctrl && !shift)
 				{
 					GridItem *pItem = GetGridItem(position.y, position.x);
@@ -1292,16 +1292,16 @@ namespace ui
 		//assert(pt.x > 0 && pt.y > 0);
 		if (pt.x <= 0 || pt.y <= 0 || m_vLayout.size() == 0)
 			return true;
-		if ((msg.wParam & MK_LBUTTON) > 0)	//Êó±ê×ó¼ü±»°´ÏÂ
+		if ((msg.wParam & MK_LBUTTON) > 0)	//é¼ æ ‡å·¦é”®è¢«æŒ‰ä¸‹
 		{
-			if (m_nDragColIndex != -1)			//ÕıÔÚµ÷ÕûÁĞ¿í
+			if (m_nDragColIndex != -1)			//æ­£åœ¨è°ƒæ•´åˆ—å®½
 			{
 				m_ptDragColumnMoving = pt;
 				Invalidate();	
 			}
-			else if (m_bDragSel)				//ÕıÔÚÑ¡ÔñGridItem
+			else if (m_bDragSel)				//æ­£åœ¨é€‰æ‹©GridItem
 			{
-				if (pt.x >= m_pGrid->GetWidth() || pt.y >= m_pGrid->GetHeight())		//³¬³öGrid¿Ø¼şÎ»ÖÃÏŞÖÆ
+				if (pt.x >= m_pGrid->GetWidth() || pt.y >= m_pGrid->GetHeight())		//è¶…å‡ºGridæ§ä»¶ä½ç½®é™åˆ¶
 					return true;
 				CPoint position;
 				bool ctrl = (msg.wParam & MK_CONTROL);
@@ -1365,8 +1365,8 @@ namespace ui
 
 	bool GridBody::OnKeyDown(EventArgs& msg)
 	{
-		bool ctrl = (::GetKeyState(VK_CONTROL) & 0x80) > 0;		//ÅĞ¶ÏCTRL¼üÊÇ·ñÊÇ±»°´ÏÂµÄ×´Ì¬
-		bool shift = (::GetKeyState(VK_SHIFT) & 0x80) > 0;		//ÅĞ¶ÏShift¼üÊÇ·ñÊÇ±»°´ÏÂµÄ×´Ì¬
+		bool ctrl = (::GetKeyState(VK_CONTROL) & 0x80) > 0;		//åˆ¤æ–­CTRLé”®æ˜¯å¦æ˜¯è¢«æŒ‰ä¸‹çš„çŠ¶æ€
+		bool shift = (::GetKeyState(VK_SHIFT) & 0x80) > 0;		//åˆ¤æ–­Shifté”®æ˜¯å¦æ˜¯è¢«æŒ‰ä¸‹çš„çŠ¶æ€
 		//printf("GridBody::OnKeyDown %d\n", msg.chKey);
 		switch (msg.chKey)
 		{
@@ -1432,7 +1432,7 @@ namespace ui
 				CSize scrollPos = m_pGrid->GetScrollPos();
 				UiRect rcNewPaint = GetPaddingPos();
 				rcNewPaint.left += GetFixedColWidth();			
-				/*rcNewPaint.top += GetFixedRowHeight();*/		//¿ÉÄÜ±íÍ·´æÔÚ¿Ø¼ş
+				/*rcNewPaint.top += GetFixedRowHeight();*/		//å¯èƒ½è¡¨å¤´å­˜åœ¨æ§ä»¶
 				if (rcNewPaint.left > rcNewPaint.right) rcNewPaint.left = rcNewPaint.right;
 				if (rcNewPaint.top > rcNewPaint.bottom) rcNewPaint.top = rcNewPaint.bottom;
 				AutoClip alphaClip(pRender, rcNewPaint, m_bClip);
@@ -1492,7 +1492,7 @@ namespace ui
 				for (size_t i = m_nFixedRow; i < m_vLayout.size(); i++)
 				{
 					posy += m_vLayout[i];
-					if (posy - szOff.cy > grid_height)	//³¬³ögrid¸ß¶È
+					if (posy - szOff.cy > grid_height)	//è¶…å‡ºgridé«˜åº¦
 						break;
 					if (posy - szOff.cy > fixed_row_height && posy - szOff.cy < grid_height)
 					{
@@ -1515,7 +1515,7 @@ namespace ui
 				for (size_t i = m_nFixedCol; i < m_hLayout.size(); i++)
 				{
 					posx += m_hLayout[i];
-					if (posx - szOff.cx > grid_width)		//³¬³ögrid¿í¶È
+					if (posx - szOff.cx > grid_width)		//è¶…å‡ºgridå®½åº¦
 						break;
 					if (posx - szOff.cx > fixed_col_width)
 					{
@@ -1604,18 +1604,18 @@ namespace ui
 					if (m_hLayout[j] == 0)
 						continue;
 					std::wstring str = grid_row->at(j)->text;
-					if (!str.empty() && posx + m_hLayout[j] - szOff.cx > fixed_col_width)		//µ¥Ôª¸ñÓÒ±ßÏßÃ»ÓĞ³¬¹ıfixed_col_width
+					if (!str.empty() && posx + m_hLayout[j] - szOff.cx > fixed_col_width)		//å•å…ƒæ ¼å³è¾¹çº¿æ²¡æœ‰è¶…è¿‡fixed_col_width
 					{
 						UiRect rc = { posx, posy, posx + m_hLayout[j], posy + m_vLayout[i] };
 						rc.Offset({ m_rcItem.left - szOff.cx, m_rcItem.top });
 						pRender->DrawText(rc, str, dwDefColor, m_strGridFont, m_uTextStyle, 255, false);
 					}
 					posx += m_hLayout[j];
-					if (posx - szOff.cx > grid_width)	//³¬³ögrid¿í¶È
+					if (posx - szOff.cx > grid_width)	//è¶…å‡ºgridå®½åº¦
 						break;
 				}
 				posy += m_vLayout[i];
-				if (posy - szOff.cy > grid_height)		//³¬³ögrid¸ß¶È
+				if (posy - szOff.cy > grid_height)		//è¶…å‡ºgridé«˜åº¦
 					break;
 			}
 		}
@@ -1638,18 +1638,18 @@ namespace ui
 						continue;
 					GridRow *grid_row = m_vecRow[j];
 					std::wstring str = grid_row->at(i)->text;
-					if (!str.empty() && posy + m_vLayout[j] - szOff.cy > fixed_row_height)		//µ¥Ôª¸ñÏÂ±ßÏßÃ»ÓĞ³¬¹ıfixed_row_height
+					if (!str.empty() && posy + m_vLayout[j] - szOff.cy > fixed_row_height)		//å•å…ƒæ ¼ä¸‹è¾¹çº¿æ²¡æœ‰è¶…è¿‡fixed_row_height
 					{
 						UiRect rc = { posx, posy, posx + m_hLayout[i], posy + m_vLayout[j] };
 						rc.Offset({ m_rcItem.left, m_rcItem.top - szOff.cy });
 						pRender->DrawText(rc, str, dwDefColor, m_strGridFont, m_uTextStyle, 255, false);
 					}
 					posy += m_vLayout[j];
-					if (posy - szOff.cy > grid_height)	//³¬³ögrid¸ß¶È
+					if (posy - szOff.cy > grid_height)	//è¶…å‡ºgridé«˜åº¦
 						break;
 				}
 				posx += m_hLayout[i];
-				if (posx - szOff.cx > grid_width)		//³¬³ögrid¿í¶È
+				if (posx - szOff.cx > grid_width)		//è¶…å‡ºgridå®½åº¦
 					break;
 			}
 		}
@@ -1665,7 +1665,7 @@ namespace ui
 			{
 				if (m_vLayout[i] == 0)
 					continue;
-				if (posy + m_vLayout[i] - szOff.cy > fixed_row_height)		//µ¥Ôª¸ñÏÂ±ßÏßÃ»ÓĞ³¬¹ıfixed_row_height
+				if (posy + m_vLayout[i] - szOff.cy > fixed_row_height)		//å•å…ƒæ ¼ä¸‹è¾¹çº¿æ²¡æœ‰è¶…è¿‡fixed_row_height
 				{
 					GridRow *grid_row = m_vecRow[i];
 					posx = GetFixedColWidth();
@@ -1678,7 +1678,7 @@ namespace ui
 						UiRect rc = { posx, posy, posx + m_hLayout[j], posy + m_vLayout[i] };
 						rc.Offset({ m_rcItem.left - szOff.cx, m_rcItem.top - szOff.cy });
 						rc.Deflate({ 1, 1, 2, 2 });
-						//»æÖÆµ¥Ôª¸ñ±³¾°É«
+						//ç»˜åˆ¶å•å…ƒæ ¼èƒŒæ™¯è‰²
 						if (pItem->IsSelected())
 						{
 							pRender->DrawColor(rc, m_strSelForeColor, 255);
@@ -1688,9 +1688,9 @@ namespace ui
 							pRender->DrawColor(rc, pItem->bk_color, 255);
 						}
 
-						//»æÖÆtext
+						//ç»˜åˆ¶text
 						std::wstring str = pItem->text;
-						if (!str.empty() && posx + m_hLayout[j] - szOff.cx > fixed_col_width)		//µ¥Ôª¸ñÓÒ±ßÏßÃ»ÓĞ³¬¹ıfixed_col_width
+						if (!str.empty() && posx + m_hLayout[j] - szOff.cx > fixed_col_width)		//å•å…ƒæ ¼å³è¾¹çº¿æ²¡æœ‰è¶…è¿‡fixed_col_width
 						{
 							if (pItem->text_color.empty() && pItem->text_style == 0)
 								pRender->DrawText(rc, str, dwDefColor, m_strGridFont, m_uTextStyle, 255, false);
@@ -1701,12 +1701,12 @@ namespace ui
 							}
 						}
 						posx += m_hLayout[j];
-						if (posx - szOff.cx > grid_width)		//³¬³ögrid¿í¶È
+						if (posx - szOff.cx > grid_width)		//è¶…å‡ºgridå®½åº¦
 							break;
 					}
 				}
 				posy += m_vLayout[i];
-				if (posy - szOff.cy > grid_height)			//³¬³ögrid¸ß¶È
+				if (posy - szOff.cy > grid_height)			//è¶…å‡ºgridé«˜åº¦
 					break;
 			}
 		}

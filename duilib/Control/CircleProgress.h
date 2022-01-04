@@ -1,5 +1,5 @@
 /** @file CircleProgress.h
-* @brief »·ĞÍ½ø¶ÈÌõ¿Ø¼ş£¬Ô²»·ÖĞ¼ä¿ÉÒÔÓĞÎÄ±¾£¨Èç85%£©
+* @brief ç¯å‹è¿›åº¦æ¡æ§ä»¶ï¼Œåœ†ç¯ä¸­é—´å¯ä»¥æœ‰æ–‡æœ¬ï¼ˆå¦‚85%ï¼‰
 * @copyright (c) 2019-2022, NetEase Inc. All rights reserved
 * @author Xuhuajie
 * @date 2019/8/14
@@ -18,58 +18,58 @@ class UILIB_API CircleProgress : public Progress
 public:
 	CircleProgress();
 
-	/// ÖØĞ´¸¸Àà·½·¨£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ£¬Çë²Î¿¼¸¸ÀàÉùÃ÷
+	/// é‡å†™çˆ¶ç±»æ–¹æ³•ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½ï¼Œè¯·å‚è€ƒçˆ¶ç±»å£°æ˜
 	virtual std::wstring GetType() const override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 	virtual void PaintStatusImage(IRenderContext* pRender) override;
 	virtual void ClearImageCache() override;
 
 	/**
-	* @brief ÉèÖÃ»·ĞÍ½ø¶ÈÌõ£¬Ä¬ÈÏÎªÆÕÍ¨½ø¶ÈÌõ
-	* @param[in] bCircular Îª true Ê±ÉèÖÃÎª»·ĞÍ½ø¶ÈÌõ£¬false Ê±ÉèÖÃÎª¸¸¼¶½ø¶ÈÌõÑùÊ½£¬Ä¬ÈÏÎª true
-	* @return ÎŞ
+	* @brief è®¾ç½®ç¯å‹è¿›åº¦æ¡ï¼Œé»˜è®¤ä¸ºæ™®é€šè¿›åº¦æ¡
+	* @param[in] bCircular ä¸º true æ—¶è®¾ç½®ä¸ºç¯å‹è¿›åº¦æ¡ï¼Œfalse æ—¶è®¾ç½®ä¸ºçˆ¶çº§è¿›åº¦æ¡æ ·å¼ï¼Œé»˜è®¤ä¸º true
+	* @return æ— 
 	*/
 	void SetCircular(bool bCircular = true);
 
 	/**
-	* @brief ÉèÖÃµİÔö·½Ïò
-	* @param[in] bClockwise Îª true Ê±ÉèÖÃÎªË³Ê±Õë£¬false Ê±ÉèÖÃÎªÄæÊ±Õë£¬Ä¬ÈÏÎª true
-	* @return ÎŞ
+	* @brief è®¾ç½®é€’å¢æ–¹å‘
+	* @param[in] bClockwise ä¸º true æ—¶è®¾ç½®ä¸ºé¡ºæ—¶é’ˆï¼Œfalse æ—¶è®¾ç½®ä¸ºé€†æ—¶é’ˆï¼Œé»˜è®¤ä¸º true
+	* @return æ— 
 	*/
 	void SetClockwiseRotation(bool bClockwise = true);
 
 	/**
-	* @brief ÉèÖÃÔ²»·¿í¶È
-	* @param[in] nCircleWidth ¿í¶ÈÊıÖµ
-	* @return ÎŞ
+	* @brief è®¾ç½®åœ†ç¯å®½åº¦
+	* @param[in] nCircleWidth å®½åº¦æ•°å€¼
+	* @return æ— 
 	*/
 	void SetCircleWidth(int nCircleWidth);
 
 	/**
-	* @brief ÉèÖÃ½ø¶ÈÌõ±³¾°ÑÕÉ«
-	* @param[in] strColorÒªÉèÖÃµÄ±³¾°ÑÕÉ«×Ö·û´®£¬¸Ã×Ö·û´®±ØĞëÔÚ global.xml ÖĞ´æÔÚ
-	* @return ÎŞ
+	* @brief è®¾ç½®è¿›åº¦æ¡èƒŒæ™¯é¢œè‰²
+	* @param[in] strColorè¦è®¾ç½®çš„èƒŒæ™¯é¢œè‰²å­—ç¬¦ä¸²ï¼Œè¯¥å­—ç¬¦ä¸²å¿…é¡»åœ¨ global.xml ä¸­å­˜åœ¨
+	* @return æ— 
 	*/
 	void SetBackgroudColor(const std::wstring& strColor);
 
 	/**
-	* @brief ÉèÖÃ½ø¶ÈÌõÇ°¾°ÑÕÉ«
-	* @param[in] strColorÒªÉèÖÃµÄÇ°¾°ÑÕÉ«×Ö·û´®£¬¸Ã×Ö·û´®±ØĞëÔÚ global.xml ÖĞ´æÔÚ
-	* @return ÎŞ
+	* @brief è®¾ç½®è¿›åº¦æ¡å‰æ™¯é¢œè‰²
+	* @param[in] strColorè¦è®¾ç½®çš„å‰æ™¯é¢œè‰²å­—ç¬¦ä¸²ï¼Œè¯¥å­—ç¬¦ä¸²å¿…é¡»åœ¨ global.xml ä¸­å­˜åœ¨
+	* @return æ— 
 	*/
 	void SetForegroudColor(const std::wstring& strColor);
 
 	/**
-	* @brief ÉèÖÃ½ø¶ÈÌõÇ°¾°½¥±äÑÕÉ«£¬Óë SetForegroudColor Í¬Ê±Ê¹ÓÃ£¬¿ÉÒÔ²»ÉèÖÃ,ÔòÎŞ½¥±äĞ§¹û
-	* @param[in] strColorÒªÉèÖÃµÄÇ°¾°½¥±äÑÕÉ«×Ö·û´®£¬¸Ã×Ö·û´®±ØĞëÔÚ global.xml ÖĞ´æÔÚ
-	* @return ÎŞ
+	* @brief è®¾ç½®è¿›åº¦æ¡å‰æ™¯æ¸å˜é¢œè‰²ï¼Œä¸ SetForegroudColor åŒæ—¶ä½¿ç”¨ï¼Œå¯ä»¥ä¸è®¾ç½®,åˆ™æ— æ¸å˜æ•ˆæœ
+	* @param[in] strColorè¦è®¾ç½®çš„å‰æ™¯æ¸å˜é¢œè‰²å­—ç¬¦ä¸²ï¼Œè¯¥å­—ç¬¦ä¸²å¿…é¡»åœ¨ global.xml ä¸­å­˜åœ¨
+	* @return æ— 
 	*/
 	void SetCircleGradientColor(const std::wstring& strColor);
 
 	/**
-	* @brief ÉèÖÃ½ø¶ÈÖ¸Ê¾ÒÆ¶¯Í¼±ê
-	* @param[in] sIndicatorImage ÒªÉèÖÃµÄÍ¼Æ¬
-	* @return ÎŞ
+	* @brief è®¾ç½®è¿›åº¦æŒ‡ç¤ºç§»åŠ¨å›¾æ ‡
+	* @param[in] sIndicatorImage è¦è®¾ç½®çš„å›¾ç‰‡
+	* @return æ— 
 	*/
 	void SetIndicator(const std::wstring& sIndicatorImage);
 
@@ -80,7 +80,7 @@ protected:
 	DWORD			m_dwBackgroundColor;
 	DWORD			m_dwForegroundColor;
 	DWORD			m_dwGradientColor;
-	Gdiplus::Image*	m_pIndicator;   //´ËÀàÄ¿Ç°Î¬»¤×ÊÔ´¹ÜÀí
+	Gdiplus::Image*	m_pIndicator;   //æ­¤ç±»ç›®å‰ç»´æŠ¤èµ„æºç®¡ç†
 	std::wstring	m_sIndicatorImage;
 
 };

@@ -230,7 +230,7 @@ void RenderContext_GdiPlus::DrawImage(const UiRect& rcPaint, HBITMAP hBitmap, bo
 	UiRect rcDest;
 	UiRect rcDpiCorner = rcCorners;
 	DpiManager::GetInstance()->ScaleRect(rcDpiCorner);
-	// Èç¹ûÔ´Î»Í¼ÒÑ¾­°´ÕÕDPIËõ·Å¹ý£¬ÄÇÃ´¶ÔÓ¦µÄcornerÒ²Ëõ·ÅÒ»ÏÂ
+	// å¦‚æžœæºä½å›¾å·²ç»æŒ‰ç…§DPIç¼©æ”¾è¿‡ï¼Œé‚£ä¹ˆå¯¹åº”çš„cornerä¹Ÿç¼©æ”¾ä¸€ä¸‹
 	if (bBitmapDpiScale)
 		rcCorners = rcDpiCorner;
 
@@ -516,7 +516,7 @@ void RenderContext_GdiPlus::DrawRoundRect(const UiRect& rc, const CSize& roundSi
 	graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
 	Gdiplus::Pen pen(Gdiplus::Color(dwPenColor), (Gdiplus::REAL)nSize);
 
-	// ²Ã¼ôÇøÓò²»ÄÜ×÷»­£¬µ¼ÖÂ±ß¿òÓÐÊ±²»È«£¬ÍùÀïÊÕËõÒ»¸öÏñËØ
+	// è£å‰ªåŒºåŸŸä¸èƒ½ä½œç”»ï¼Œå¯¼è‡´è¾¹æ¡†æœ‰æ—¶ä¸å…¨ï¼Œå¾€é‡Œæ”¶ç¼©ä¸€ä¸ªåƒç´ 
 	// UiRect rcInflate = rc;
 	// rcInflate.Inflate({ -1, -1, -1, -1 });
 
@@ -603,7 +603,7 @@ void RenderContext_GdiPlus::DrawText(const UiRect& rc, const std::wstring& strTe
 	}
 	else if ((uStyle & DT_VCENTER) != 0) {
 		TFontInfo* fontInfo = GlobalManager::GetTFontInfo(strFontId);
-		if (fontInfo->sFontName == L"ÐÂËÎÌå") {
+		if (fontInfo->sFontName == L"æ–°å®‹ä½“") {
 			if (rcPaint.Height >= fontInfo->iSize + 2) {
 				rcPaint.Offset(0, 1);
 			}
@@ -752,8 +752,8 @@ void RenderContext_GdiPlus::DrawBoxShadow(const UiRect& rc,
 	// color matrix
 	//https://docs.microsoft.com/en-us/windows/win32/gdiplus/-gdiplus-using-a-color-matrix-to-transform-a-single-color-use
 	//https://docs.microsoft.com/en-us/windows/win32/api/gdipluscolormatrix/ns-gdipluscolormatrix-colormatrix
-	//A 5¡Á5 color matrix is a homogeneous matrix for a 4 - space transformation.
-	//The element in the fifth row and fifth column of a 5¡Á5 homogeneous matrix must be 1, 
+	//A 5Ã—5 color matrix is a homogeneous matrix for a 4 - space transformation.
+	//The element in the fifth row and fifth column of a 5Ã—5 homogeneous matrix must be 1, 
 	//and all of the other elements in the fifth column must be 0. 
 	//Color matrices are used to transform color vectors.
 	//The first four components of a color vector hold the red, green, blue,
@@ -817,7 +817,7 @@ ui::UiRect RenderContext_GdiPlus::MeasureText(const std::wstring& strText, const
 		Gdiplus::REAL height = 0;
 		if ((uStyle & DT_SINGLELINE) != 0) {
 			Gdiplus::RectF rcEmpty((Gdiplus::REAL)0, (Gdiplus::REAL)0, (Gdiplus::REAL)0, (Gdiplus::REAL)0);
-			graphics.MeasureString(L"²âÊÔ", 2, &font, rcEmpty, &stringFormat, &bounds);
+			graphics.MeasureString(L"æµ‹è¯•", 2, &font, rcEmpty, &stringFormat, &bounds);
 			height = bounds.Height;
 		}
 		Gdiplus::RectF rcText((Gdiplus::REAL)0, (Gdiplus::REAL)0, (Gdiplus::REAL)width, height);

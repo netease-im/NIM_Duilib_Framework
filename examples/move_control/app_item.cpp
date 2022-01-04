@@ -23,7 +23,7 @@ void AppItemUi::DoInit()
 		app_name_->SetText(app_data_._name);
 	}
 
-	//°ó¶¨ÊÂ¼þ
+	//ç»‘å®šäº‹ä»¶
 }
 
 void AppItemUi::SetAppdata(const AppItem& item,bool refresh)
@@ -91,17 +91,17 @@ void AppWindow::InitWindow()
 		root->Add(app_item);
 	}
 
-	//ÉèÖÃÏûÏ¢¹³×Ó£¬²»È»ÎÞ·¨¼´Ê±ÒÆ¶¯
+	//è®¾ç½®æ¶ˆæ¯é’©å­ï¼Œä¸ç„¶æ— æ³•å³æ—¶ç§»åŠ¨
 	InstallHook();
 
-	//ÒÆ¶¯µ½ºÏÊÊµÄÎ»ÖÃ
+	//ç§»åŠ¨åˆ°åˆé€‚çš„ä½ç½®
 	AdjustPos();
 	
 }
 
 LRESULT AppWindow::OnClose(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-	//ÇåÀíhook
+	//æ¸…ç†hook
 	UnInstallHook();
 	pThis_ = nullptr;
 	
@@ -114,13 +114,13 @@ AppWindow* AppWindow::pThis_;
 
 void AppWindow::AdjustPos()
 {
-	//ÒÆ¶¯µ½ºÏÊÊÎ»ÖÃ£¬²¢½Ó¹ÜÊó±ê
-	//ÒÆÖ²posµÄÎ»ÖÃ,×¢ÒâÈ¥µôÒõÓ°
+	//ç§»åŠ¨åˆ°åˆé€‚ä½ç½®ï¼Œå¹¶æŽ¥ç®¡é¼ æ ‡
+	//ç§»æ¤posçš„ä½ç½®,æ³¨æ„åŽ»æŽ‰é˜´å½±
 	//
 	ui::UiRect rcCorner = GetShadowCorner();
 	POINT ptCursor;
 	::GetCursorPos(&ptCursor);
-	//×óÉÏ½ÇµÄÎ»ÖÃ
+	//å·¦ä¸Šè§’çš„ä½ç½®
 	ptCursor.x -= pt_.x;
 	ptCursor.y -= pt_.y;
 
@@ -159,10 +159,10 @@ LRESULT CALLBACK AppWindow::LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM l
 		}
 		else if (wParam == WM_LBUTTONUP)
 		{
-			//Êó±êµ¯Æð£¬ÎÞÂÛÊ²Ã´Ê±ºò¶¼ÐèÒªÏú»Ù´°¿Ú
+			//é¼ æ ‡å¼¹èµ·ï¼Œæ— è®ºä»€ä¹ˆæ—¶å€™éƒ½éœ€è¦é”€æ¯çª—å£
 			if (pThis_)
 			{
-				//Í¨ÖªÖ÷´°¿ÚÊÂ¼þ
+				//é€šçŸ¥ä¸»çª—å£äº‹ä»¶
 				::PostMessage(GetParent(pThis_->GetHWND()), WM_LBUTTONUP, 0, 0);
 				pThis_->Close();
 			}

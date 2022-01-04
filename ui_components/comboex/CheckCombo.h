@@ -13,7 +13,7 @@ namespace nim_comp
 		CheckCombo& operator=(const CheckCombo& r) = delete;
 		virtual ~CheckCombo();
 
-		/// ÖØĞ´¸¸Àà·½·¨£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ£¬Çë²Î¿¼¸¸ÀàÉùÃ÷
+		/// é‡å†™çˆ¶ç±»æ–¹æ³•ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½ï¼Œè¯·å‚è€ƒçˆ¶ç±»å£°æ˜
 		virtual bool Add(Control* pControl) override;
 		virtual bool Remove(Control* pControl) override;
 		virtual bool RemoveAt(std::size_t iIndex) override;
@@ -28,82 +28,82 @@ namespace nim_comp
 		void ClearAllDate();
 
 		/**
-		* @brief »ñÈ¡µ±Ç°ËùÊôµÄ List ¶ÔÏó
-		* @return ·µ»ØËùÊôµÄ List ¶ÔÏóÖ¸Õë
+		* @brief è·å–å½“å‰æ‰€å±çš„ List å¯¹è±¡
+		* @return è¿”å›æ‰€å±çš„ List å¯¹è±¡æŒ‡é’ˆ
 		*/
 		ScrollableBox* GetListBox() { return m_pDropList.get(); }
 
 		/**
-		* @brief »ñÈ¡ÏÂÀ­¿òÊôĞÔĞÅÏ¢
-		* @return ·µ»Ø×Ö·û´®ĞÎÊ½µÄÊôĞÔĞÅÏ¢
+		* @brief è·å–ä¸‹æ‹‰æ¡†å±æ€§ä¿¡æ¯
+		* @return è¿”å›å­—ç¬¦ä¸²å½¢å¼çš„å±æ€§ä¿¡æ¯
 		*/
 		std::wstring GetDropBoxAttributeList();
 
 		/**
-		* @brief ÉèÖÃÏÂÀ­¿òµÄÊôĞÔĞÅÏ¢
-		* @param[in] pstrList ×ªÒåºóµÄ XML ¸ñÊ½ÊôĞÔÁĞ±í
-		* @return ÎŞ
+		* @brief è®¾ç½®ä¸‹æ‹‰æ¡†çš„å±æ€§ä¿¡æ¯
+		* @param[in] pstrList è½¬ä¹‰åçš„ XML æ ¼å¼å±æ€§åˆ—è¡¨
+		* @return æ— 
 		*/
 		void SetDropBoxAttributeList(const std::wstring& pstrList);
 
 		/**
-		* @brief »ñÈ¡ÏÂÀ­¿òÈİÆ÷´óĞ¡
-		* @return ·µ»ØÈİÆ÷´óĞ¡
+		* @brief è·å–ä¸‹æ‹‰æ¡†å®¹å™¨å¤§å°
+		* @return è¿”å›å®¹å™¨å¤§å°
 		*/
 		CSize GetDropBoxSize() const;
 
 		/**
-		* @brief ÉèÖÃÏÂÀ­¿òÈİÆ÷´óĞ¡
-		* @param[in] szDropBox ÒªÉèÖÃµÄ´óĞ¡ĞÅÏ¢
-		* @return ÎŞ
+		* @brief è®¾ç½®ä¸‹æ‹‰æ¡†å®¹å™¨å¤§å°
+		* @param[in] szDropBox è¦è®¾ç½®çš„å¤§å°ä¿¡æ¯
+		* @return æ— 
 		*/
 		void SetDropBoxSize(CSize szDropBox);
 
 		/**
-		* @brief ÉèÖÃ Combobox ÊÇ·ñÏòÉÏµ¯³ö
-		* @param[in] top Îª true ÔòÏòÉÏµ¯³ö£¬false ÎªÄ¬ÈÏÏòÏÂµ¯³ö
-		* @return ÎŞ
+		* @brief è®¾ç½® Combobox æ˜¯å¦å‘ä¸Šå¼¹å‡º
+		* @param[in] top ä¸º true åˆ™å‘ä¸Šå¼¹å‡ºï¼Œfalse ä¸ºé»˜è®¤å‘ä¸‹å¼¹å‡º
+		* @return æ— 
 		*/
 		void SetPopupTop(bool top) { m_bPopupTop = top; };
 
 		/**
-		* @brief ÅĞ¶Ï Combobox µ¯³öÄ£Ê½ÊÇ·ñÊÇÏòÉÏµ¯³ö
-		* @return ·µ»Ø true ±íÊ¾ÏòÉÏµ¯³ö£¬·ñÔòÎª false
+		* @brief åˆ¤æ–­ Combobox å¼¹å‡ºæ¨¡å¼æ˜¯å¦æ˜¯å‘ä¸Šå¼¹å‡º
+		* @return è¿”å› true è¡¨ç¤ºå‘ä¸Šå¼¹å‡ºï¼Œå¦åˆ™ä¸º false
 		*/
 		bool IsPopupTop() const { return m_bPopupTop; };
 
 		/**
-		* @brief Ñ¡ÔñÒ»¸ö×ÓÏî
-		* @param[in] iIndex ÒªÑ¡ÔñµÄ×ÓÏîË÷Òı
-		* @return ·µ»Ø true ±íÊ¾³É¹¦£¬·ñÔòÎª false
+		* @brief é€‰æ‹©ä¸€ä¸ªå­é¡¹
+		* @param[in] iIndex è¦é€‰æ‹©çš„å­é¡¹ç´¢å¼•
+		* @return è¿”å› true è¡¨ç¤ºæˆåŠŸï¼Œå¦åˆ™ä¸º false
 		*/
 		bool SelectItem(int iIndex);
 
 		/**
-		* @brief »ñÈ¡Ö¸¶¨Ë÷ÒıÏÂµÄ×ÓÏî¿Ø¼ş
-		* @param[in] iIndex Òª»ñÈ¡µÄ×ÓÏîË÷Òı
-		* @return ·µ»Ø¿Ø¼şÖ¸Õë
+		* @brief è·å–æŒ‡å®šç´¢å¼•ä¸‹çš„å­é¡¹æ§ä»¶
+		* @param[in] iIndex è¦è·å–çš„å­é¡¹ç´¢å¼•
+		* @return è¿”å›æ§ä»¶æŒ‡é’ˆ
 		*/
 		Control* GetItemAt(int iIndex);
 
 		/**
-		* @brief »ñÈ¡ËùÓĞ×ÓÏîÊıÁ¿
-		* @return ·µ»ØËùÓĞ×ÓÏîÊıÁ¿
+		* @brief è·å–æ‰€æœ‰å­é¡¹æ•°é‡
+		* @return è¿”å›æ‰€æœ‰å­é¡¹æ•°é‡
 		*/
 		virtual int GetCount() const { return m_pDropList->GetCount(); }
 
 		///**
-		//* @brief ¼àÌı×ÓÏî±»Ñ¡ÔñÊÂ¼ş
-		//* @param[in] callback ×ÓÏî±»Ñ¡Ôñºó´¥·¢µÄ»Øµ÷º¯Êı
-		//* @return ÎŞ
+		//* @brief ç›‘å¬å­é¡¹è¢«é€‰æ‹©äº‹ä»¶
+		//* @param[in] callback å­é¡¹è¢«é€‰æ‹©åè§¦å‘çš„å›è°ƒå‡½æ•°
+		//* @return æ— 
 		//*/
 		//void AttachSelect(const EventCallback& callback) { m_pLayout->AttachSelect(callback); }
 
 	private:
 		/**
-		* @brief Ä¬ÈÏµÄ×ÓÏî±»Ñ¡Ôñ´¦Àíº¯Êı
-		* @param[in] args ²ÎÊıÁĞ±í
-		* @return Ê¼ÖÕ·µ»Ø true
+		* @brief é»˜è®¤çš„å­é¡¹è¢«é€‰æ‹©å¤„ç†å‡½æ•°
+		* @param[in] args å‚æ•°åˆ—è¡¨
+		* @return å§‹ç»ˆè¿”å› true
 		*/
 		bool OnSelectItem(EventArgs* args);
 		bool OnUnSelectItem(EventArgs* args);

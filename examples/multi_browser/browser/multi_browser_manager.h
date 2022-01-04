@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "browser_box.h"
 
 enum ThreadId

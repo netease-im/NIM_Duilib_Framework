@@ -83,18 +83,18 @@ void GlobalManager::Startup(const std::wstring& strResourcePath, const CreateCon
 	GlobalManager::SetResourcePath(strResourcePath + theme);
 	m_createControlCallback = callback;
 
-    // ÊÊÅäDPI
+    // é€‚é…DPI
 	if (bAdaptDpi) {
 		DpiManager::GetInstance()->SetAdaptDPI();
 		DpiManager::GetInstance()->SetScale(DpiManager::GetMainMonitorDPI());
 	}
 
-    // ½âÎöÈ«¾Ö×ÊÔ´ĞÅÏ¢
+    // è§£æå…¨å±€èµ„æºä¿¡æ¯
 	LoadGlobalResource();
 
 	SetLanguagePath(strResourcePath + language);
 
-    // ¼ÓÔØ¶àÓïÑÔÎÄ¼ş£¬Èç¹ûÊ¹ÓÃÁË×ÊÔ´Ñ¹Ëõ°üÔò´ÓÄÚ´æÖĞ¼ÓÔØÓïÑÔÎÄ¼ş
+    // åŠ è½½å¤šè¯­è¨€æ–‡ä»¶ï¼Œå¦‚æœä½¿ç”¨äº†èµ„æºå‹ç¼©åŒ…åˆ™ä»å†…å­˜ä¸­åŠ è½½è¯­è¨€æ–‡ä»¶
 	if (g_hzip) {
 		HGLOBAL hGlobal = GetZipData(GetLanguagePath() + L"\\" + kLanguageFileName);
 		if (hGlobal) {
@@ -415,7 +415,7 @@ HFONT GlobalManager::AddFont(const std::wstring& strFontId, const std::wstring& 
 	static bool bOsOverXp = IsWindowsVistaOrGreater();
 	std::wstring fontName = strFontName;
 	if (fontName == L"system") {
-    fontName = bOsOverXp ? L"Î¢ÈíÑÅºÚ" : L"ĞÂËÎÌå";
+    fontName = bOsOverXp ? L"å¾®è½¯é›…é»‘" : L"æ–°å®‹ä½“";
 	}
 
 	LOGFONT lf = { 0 };
@@ -858,10 +858,10 @@ bool GlobalManager::ImageCacheKeyCompare::operator()(const std::wstring& key1, c
 	LPCWSTR pStr1End = pStr1Begin + nLen1;
 	LPCWSTR pStr2End = pStr2Begin + nLen2;
 
-    // ÄæÏò±È½Ï
+    // é€†å‘æ¯”è¾ƒ
 	while (--pStr1End >= pStr1Begin && --pStr2End >= pStr2Begin && *pStr1End == *pStr2End);
 
-    // Á½¸ö´®¶¼ÒÑ¾­±È¹âÁË£¬ÄÇÃ´¿Ï¶¨ÏàµÈ£¬·µ»Øfalse
+    // ä¸¤ä¸ªä¸²éƒ½å·²ç»æ¯”å…‰äº†ï¼Œé‚£ä¹ˆè‚¯å®šç›¸ç­‰ï¼Œè¿”å›false
 	if (pStr1End < pStr1Begin) {
 		return false;
 	}

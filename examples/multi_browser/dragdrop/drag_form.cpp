@@ -19,7 +19,7 @@ LRESULT CALLBACK DragForm::LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lP
 			{
 				if (NULL != s_drag_form)
 				{
-					//ÏµÍ³ÍÏ×§´°¿Ú¡£±êÌâ£ºDrag£¬ÀàÃû£ºSysDragImage£¬GWL_EXSTYLE:524456
+					//ç³»ç»Ÿæ‹–æ‹½çª—å£ã€‚æ ‡é¢˜ï¼šDragï¼Œç±»åï¼šSysDragImageï¼ŒGWL_EXSTYLE:524456
 					//WS_EX_TOPMOST--WS_EX_TRANSPARENT--WS_EX_PALETTEWINDOW--WS_EX_LAYERED--WS_EX_TOOLWINDOW
 					ui::UiRect rc(pMouseStruct->pt.x - s_point_offset.x, pMouseStruct->pt.y - s_point_offset.y, 0, 0);
 					s_drag_form->SetPos(rc, false, SWP_NOSIZE);
@@ -68,7 +68,7 @@ DragForm* DragForm::CreateDragForm(HBITMAP bitmap, POINT pt_offset)
 	::GetCursorPos(&pt);
 	GetObject(bitmap, sizeof(BITMAP), &bitmap_info);
 	
-	// ´°¿Ú³õÊ¼»¯µ½Êó±ê¹â±êµÄÖĞÉÏ·½Î»ÖÃ
+	// çª—å£åˆå§‹åŒ–åˆ°é¼ æ ‡å…‰æ ‡çš„ä¸­ä¸Šæ–¹ä½ç½®
 	UiRect rect;
 	rect.left = pt.x - pt_offset.x;
 	rect.top = pt.y - pt_offset.y;
@@ -119,7 +119,7 @@ void DragForm::InitWindow()
 	bitmap_control_ = static_cast<BitmapControl*>(FindControl(L"bitmap"));
 	ASSERT(NULL != bitmap_control_);
 
-	// ÉèÖÃ±³¾°Í¸Ã÷¶È
+	// è®¾ç½®èƒŒæ™¯é€æ˜åº¦
 	bitmap_control_->SetAlpha(128);
 	this->SetFocus(bitmap_control_);
 }

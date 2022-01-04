@@ -18,7 +18,7 @@ class WkeWebView : public ui::Control,
   void SetWindow(ui::Window* pManager, ui::Box* pParent, bool bInit) override;
 
   // override from ui::IUIMessageFilter
-  LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled) override; // 处理窗体消息，转发到miniblink
+  LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled) override; // 澶勭悊绐椾綋娑堟伅锛岃浆鍙戝埌miniblink
 
   void OnPaint(wkeWebView webView, const void* buffer, const wkeRect* r, int width, int height);
 

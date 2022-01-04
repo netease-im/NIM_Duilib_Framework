@@ -13,7 +13,7 @@ public:
 	OptionTemplate();
 	~OptionTemplate();
 		
-	/// ÖØĞ´¸¸Àà·½·¨£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ£¬Çë²Î¿¼¸¸ÀàÉùÃ÷
+	/// é‡å†™çˆ¶ç±»æ–¹æ³•ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½ï¼Œè¯·å‚è€ƒçˆ¶ç±»å£°æ˜
 	virtual std::wstring GetType() const override;
 	virtual void SetWindow(Window* pManager, Box* pParent, bool bInit = true) override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
@@ -21,15 +21,15 @@ public:
 	virtual void Activate() override;
 
 	/**
-	 * @brief »ñÈ¡ËùÊô×éÃû³Æ
-	 * @return ·µ»Ø×éÃû³Æ
+	 * @brief è·å–æ‰€å±ç»„åç§°
+	 * @return è¿”å›ç»„åç§°
 	 */
 	virtual  std::wstring GetGroup() const;
 
 	/**
-	 * @brief ÉèÖÃËùÊô×é
-	 * @param[in] strGroupName ×éÃû³Æ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ‰€å±ç»„
+	 * @param[in] strGroupName ç»„åç§°
+	 * @return æ— 
 	 */
 	virtual void SetGroup(const std::wstring& strGroupName);
 

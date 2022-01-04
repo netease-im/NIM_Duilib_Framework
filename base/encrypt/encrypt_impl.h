@@ -1055,7 +1055,7 @@ public:
 
 		case nbase::ENC_RSA:
 		{
-			assert(false);	//ÔİÊ±²»Ö§³Ö
+			assert(false);	//æš‚æ—¶ä¸æ”¯æŒ
 			return nullptr;
 		}
 		case nbase::ENC_ARC4:

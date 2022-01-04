@@ -49,9 +49,9 @@ ui::Control* ControlForm::CreateControl(const std::wstring& pstrClass)
 void ControlForm::InitWindow()
 {
 	/**
-	 * Ϊ���ô��뿴��������������⣬����ҪƵ���������ܿ�����ʾ������
-	 * ���ǽ�һЩ�ؼ�����Ϊ�ֲ���������ȷ��ʹ��Ӧ���ǽ�������Ϊ��Ա����
-	 * ��Ҫ��ÿ��ʹ�õ�ʱ����Ҫ FindControl�������Ӱ�����ܴ��벻�׶�
+	 * 为了让代码看起来相对容易理解，不需要频繁跟进才能看明白示例代码
+	 * 我们将一些控件储存为局部变量，正确的使用应该是将他们作为成员变量
+	 * 不要在每次使用的时候都需要 FindControl，否则会影响性能代码不易读
 	 */
 
 	/* Initialize ListBox data */

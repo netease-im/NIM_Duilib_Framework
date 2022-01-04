@@ -1,5 +1,5 @@
 /** @file browser_handler.h
-  * @brief ÊµÏÖCefClient½Ó¿Ú£¬´¦ÀíCefä¯ÀÀÆ÷¶ÔÏó·¢³öµÄ¸÷¸öÊÂ¼şºÍÏûÏ¢£¬²¢ÓëÉÏ²ã¿Ø¼ş½øĞĞÊı¾İ½»»¥
+  * @brief å®ç°CefClientæ¥å£ï¼Œå¤„ç†Cefæµè§ˆå™¨å¯¹è±¡å‘å‡ºçš„å„ä¸ªäº‹ä»¶å’Œæ¶ˆæ¯ï¼Œå¹¶ä¸ä¸Šå±‚æ§ä»¶è¿›è¡Œæ•°æ®äº¤äº’
   * @copyright (c) 2016, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2016/7/19
@@ -35,15 +35,15 @@ public:
 	BrowserHandler();
 
 	/** @class HandlerDelegate
-	 * @brief BrowserHandlerµÄÏûÏ¢Î¯ÍĞÀà½Ó¿Ú£¬BrowserHandlerÀà»á´¦Àí¶àÊıCefä¯ÀÀÆ÷¶ÔÏóµÄÊÂ¼ş
-	 *		 ÆäÖĞÒ»Ğ©ĞèÒªÓëÉÏ²ã½»»¥µÄÊÂ¼ş½Ó¿Ú·â×°µ½´ËÀàÖĞ£¬BrowserHandler°ÑÕâĞ©ÊÂ¼ş´«µİµ½Î¯ÍĞ½Ó¿ÚÖĞ
-	 *		 ¿ÉÒÔ¸ù¾İĞèÇóÀ´À©Õ¹´Ë½Ó¿Ú
+	 * @brief BrowserHandlerçš„æ¶ˆæ¯å§”æ‰˜ç±»æ¥å£ï¼ŒBrowserHandlerç±»ä¼šå¤„ç†å¤šæ•°Cefæµè§ˆå™¨å¯¹è±¡çš„äº‹ä»¶
+	 *		 å…¶ä¸­ä¸€äº›éœ€è¦ä¸ä¸Šå±‚äº¤äº’çš„äº‹ä»¶æ¥å£å°è£…åˆ°æ­¤ç±»ä¸­ï¼ŒBrowserHandleræŠŠè¿™äº›äº‹ä»¶ä¼ é€’åˆ°å§”æ‰˜æ¥å£ä¸­
+	 *		 å¯ä»¥æ ¹æ®éœ€æ±‚æ¥æ‰©å±•æ­¤æ¥å£
 	 */
 	class HandlerDelegate : public virtual nbase::SupportWeakCallback
 	{
 	public:
 
-		// ÔÚ·ÇUIÏß³ÌÖĞ±»µ÷ÓÃ
+		// åœ¨éUIçº¿ç¨‹ä¸­è¢«è°ƒç”¨
 		virtual void OnPaint(CefRefPtr<CefBrowser> browser,
 			CefRenderHandler::PaintElementType type,
 			const CefRenderHandler::RectList& dirtyRects,
@@ -59,10 +59,10 @@ public:
 
 		virtual void UpdateWindowPos() = 0;
 
-		// ÔÚ·ÇUIÏß³ÌÖĞ±»µ÷ÓÃ
+		// åœ¨éUIçº¿ç¨‹ä¸­è¢«è°ƒç”¨
 		virtual void OnBeforeContextMenu(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefContextMenuParams> params, CefRefPtr<CefMenuModel> model) = 0;
 
-		// ÔÚ·ÇUIÏß³ÌÖĞ±»µ÷ÓÃ
+		// åœ¨éUIçº¿ç¨‹ä¸­è¢«è°ƒç”¨
 		virtual bool OnContextMenuCommand(CefRefPtr<CefBrowser> browser,
 			CefRefPtr<CefFrame> frame,
 			CefRefPtr<CefContextMenuParams> params,
@@ -85,7 +85,7 @@ public:
 			const CefString& errorText,
 			const CefString& failedUrl) = 0;
 
-		// ÔÚ·ÇUIÏß³ÌÖĞ±»µ÷ÓÃ
+		// åœ¨éUIçº¿ç¨‹ä¸­è¢«è°ƒç”¨
 		virtual bool OnBeforePopup(CefRefPtr<CefBrowser> browser,
 			CefRefPtr<CefFrame> frame,
 			const CefString& target_url,
@@ -102,11 +102,11 @@ public:
 
 		virtual void OnBeforeClose(CefRefPtr<CefBrowser> browser) = 0;
 
-		// ÔÚ·ÇUIÏß³ÌÖĞ±»µ÷ÓÃ
+		// åœ¨éUIçº¿ç¨‹ä¸­è¢«è°ƒç”¨
 		virtual bool OnBeforeBrowse(CefRefPtr<CefBrowser> browser, CefRefPtr<CefFrame> frame, CefRefPtr<CefRequest> request, bool is_redirect) = 0;
 		virtual void OnProtocolExecution(CefRefPtr<CefBrowser> browser, const CefString& url, bool& allow_os_execution) = 0;
 
-		// ÔÚ·ÇUIÏß³ÌÖĞ±»µ÷ÓÃ
+		// åœ¨éUIçº¿ç¨‹ä¸­è¢«è°ƒç”¨
 		virtual ReturnValue OnBeforeResourceLoad(
 			CefRefPtr<CefBrowser> browser,
 			CefRefPtr<CefFrame> frame,
@@ -115,7 +115,7 @@ public:
 
 		virtual void OnRenderProcessTerminated(CefRefPtr<CefBrowser> browser, TerminationStatus status) = 0;
 
-		// ÎÄ¼şÏÂÔØÏà¹Ø
+		// æ–‡ä»¶ä¸‹è½½ç›¸å…³
 		virtual void OnBeforeDownload(
 			CefRefPtr<CefBrowser> browser,
 			CefRefPtr<CefDownloadItem> download_item,
@@ -127,7 +127,7 @@ public:
 			CefRefPtr<CefDownloadItem> download_item,
 			CefRefPtr<CefDownloadItemCallback> callback) = 0;
 
-		// ´ò¿ªÎÄ¼ş Dialog
+		// æ‰“å¼€æ–‡ä»¶ Dialog
 		virtual bool OnFileDialog(
 			CefRefPtr<CefBrowser> browser,
 			FileDialogMode mode,
@@ -137,7 +137,7 @@ public:
 			int selected_accept_filter,
 			CefRefPtr<CefFileDialogCallback> callback) = 0;
 
-		// ·â×°Ò»Ğ© JS Óë C++ ½»»¥µÄ¹¦ÄÜ
+		// å°è£…ä¸€äº› JS ä¸ C++ äº¤äº’çš„åŠŸèƒ½
 		virtual bool OnExecuteCppFunc(const CefString& function_name, const CefString& params, int js_callback_id, CefRefPtr<CefBrowser> browser) = 0;
 
 		virtual bool OnExecuteCppCallbackFunc(int cpp_callback_id, const CefString& json_string) = 0;
@@ -145,25 +145,25 @@ public:
 
 public:
 
-	// ÉèÖÃCefä¯ÀÀÆ÷¶ÔÏóËùÊôµÄ´°ÌåµÄ¾ä±ú
+	// è®¾ç½®Cefæµè§ˆå™¨å¯¹è±¡æ‰€å±çš„çª—ä½“çš„å¥æŸ„
 	void SetHostWindow(HWND hwnd){ hwnd_ = hwnd; }
 
-	// ÉèÖÃÎ¯ÍĞÀàÖ¸Õë£¬ä¯ÀÀÆ÷¶ÔÏóµÄÒ»Ğ©ÊÂ¼ş»á½»¸ø´ËÖ¸Õë¶ÔÏóÀ´´¦Àí
-	// µ±Ö¸ÕëËùÖ¸µÄ¶ÔÏó²»ĞèÒª´¦ÀíÊÂ¼şÊ±£¬Ó¦¸Ã¸ø²ÎÊı´«ÈëNULL
+	// è®¾ç½®å§”æ‰˜ç±»æŒ‡é’ˆï¼Œæµè§ˆå™¨å¯¹è±¡çš„ä¸€äº›äº‹ä»¶ä¼šäº¤ç»™æ­¤æŒ‡é’ˆå¯¹è±¡æ¥å¤„ç†
+	// å½“æŒ‡é’ˆæ‰€æŒ‡çš„å¯¹è±¡ä¸éœ€è¦å¤„ç†äº‹ä»¶æ—¶ï¼Œåº”è¯¥ç»™å‚æ•°ä¼ å…¥NULL
 	void SetHandlerDelegate(HandlerDelegate *handler){ handle_delegate_ = handler; }
 
-	// ÉèÖÃCefäÖÈ¾ÄÚÈİµÄ´óĞ¡
+	// è®¾ç½®Cefæ¸²æŸ“å†…å®¹çš„å¤§å°
 	void SetViewRect(RECT rc);
 
-	// µ±Ç°WebÒ³ÃæÖĞ»ñÈ¡½¹µãµÄÔªËØÊÇ·ñ¿É±à¼­
+	// å½“å‰Webé¡µé¢ä¸­è·å–ç„¦ç‚¹çš„å…ƒç´ æ˜¯å¦å¯ç¼–è¾‘
 	bool IsCurFieldEditable(){ return is_focus_oneditable_field_; }
 
 	CefRefPtr<CefBrowser> GetBrowser(){ return browser_; }
 
 	CefRefPtr<CefBrowserHost> GetBrowserHost();
 
-	// Ìí¼ÓÒ»¸öÈÎÎñµ½¶ÓÁĞÖĞ£¬µ±Browser¶ÔÏó´´½¨³É¹¦ºó£¬»áÒÀ´Î´¥·¢ÈÎÎñ
-	// ±ÈÈç´´½¨Browserºóµ÷ÓÃLoadUrl¼ÓÔØÍøÒ³£¬µ«ÊÇÕâÊ±BrowserºÜ¿ÉÄÜ»¹Ã»ÓĞ´´½¨³É¹¦£¬¾Í°ÑLoadUrlÈÎÎñÌí¼Óµ½¶ÓÁĞ
+	// æ·»åŠ ä¸€ä¸ªä»»åŠ¡åˆ°é˜Ÿåˆ—ä¸­ï¼Œå½“Browserå¯¹è±¡åˆ›å»ºæˆåŠŸåï¼Œä¼šä¾æ¬¡è§¦å‘ä»»åŠ¡
+	// æ¯”å¦‚åˆ›å»ºBrowseråè°ƒç”¨LoadUrlåŠ è½½ç½‘é¡µï¼Œä½†æ˜¯è¿™æ—¶Browserå¾ˆå¯èƒ½è¿˜æ²¡æœ‰åˆ›å»ºæˆåŠŸï¼Œå°±æŠŠLoadUrlä»»åŠ¡æ·»åŠ åˆ°é˜Ÿåˆ—
 	 UnregisterCallback AddAfterCreateTask(const StdClosure& cb);
 
 	 void CloseAllBrowser();

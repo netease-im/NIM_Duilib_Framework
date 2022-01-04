@@ -501,13 +501,13 @@ void CMarkup::_SkipWhitespace(LPTSTR& pstr) const
 
 void CMarkup::_SkipIdentifier(LPCTSTR& pstr) const
 {
-    // ÊôĞÔÖ»ÄÜÓÃÓ¢ÎÄ£¬ËùÒÔÕâÑù´¦ÀíÃ»ÓĞÎÊÌâ
+    // å±æ€§åªèƒ½ç”¨è‹±æ–‡ï¼Œæ‰€ä»¥è¿™æ ·å¤„ç†æ²¡æœ‰é—®é¢˜
     while( *pstr != _T('\0') && (*pstr == _T('_') || *pstr == _T(':') || _istalnum(*pstr)) ) pstr = ::CharNext(pstr);
 }
 
 void CMarkup::_SkipIdentifier(LPTSTR& pstr) const
 {
-    // ÊôĞÔÖ»ÄÜÓÃÓ¢ÎÄ£¬ËùÒÔÕâÑù´¦ÀíÃ»ÓĞÎÊÌâ
+    // å±æ€§åªèƒ½ç”¨è‹±æ–‡ï¼Œæ‰€ä»¥è¿™æ ·å¤„ç†æ²¡æœ‰é—®é¢˜
     while( *pstr != _T('\0') && (*pstr == _T('_') || *pstr == _T(':') || _istalnum(*pstr)) ) pstr = ::CharNext(pstr);
 }
 

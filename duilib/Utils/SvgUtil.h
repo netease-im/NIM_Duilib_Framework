@@ -1,4 +1,4 @@
-﻿#ifndef UI_UTILS_SVGUTIL_H_
+#ifndef UI_UTILS_SVGUTIL_H_
 #define UI_UTILS_SVGUTIL_H_
 
 namespace ui

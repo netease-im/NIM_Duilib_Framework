@@ -170,7 +170,7 @@ namespace ui
 			bool bInSelRow = false;
 			bool bInSelCol = false;
 
-			if (m_mapSelRow.find(row_index) != m_mapSelRow.end())	//row_indexÎªÑ¡ÖĞ×´Ì¬
+			if (m_mapSelRow.find(row_index) != m_mapSelRow.end())	//row_indexä¸ºé€‰ä¸­çŠ¶æ€
 			{
 				assert(bSelected);
 				bInSelRow = true;
@@ -184,7 +184,7 @@ namespace ui
 				//pItem->SetSelected(false);
 			}
 
-			if (m_mapSelCol.find(col_index) != m_mapSelCol.end())	//col_indexÎªÑ¡ÖĞ×´Ì¬
+			if (m_mapSelCol.find(col_index) != m_mapSelCol.end())	//col_indexä¸ºé€‰ä¸­çŠ¶æ€
 			{
 				assert(bSelected);
 				bInSelCol = true;
@@ -198,7 +198,7 @@ namespace ui
 				//pItem->SetSelected(false);
 			}
 
-			if (rc.left > col_index || rc.right < col_index || rc.top > row_index || rc.bottom < row_index)		//²»Î»ÓÚrcÖĞ
+			if (rc.left > col_index || rc.right < col_index || rc.top > row_index || rc.bottom < row_index)		//ä¸ä½äºrcä¸­
 			{
 				//assert(!bSelected);
 				rc.left = min(rc.left, col_index);
@@ -265,7 +265,7 @@ namespace ui
 		}
 		else
 		{
-			assert(m_vecRange.size() > 0);		//ButtonDownÊ±Ó¦¸Ãµ÷ÓÃÁËSetSelItem, ¸øm_vecRange¸³Öµ
+			assert(m_vecRange.size() > 0);		//ButtonDownæ—¶åº”è¯¥è°ƒç”¨äº†SetSelItem, ç»™m_vecRangeèµ‹å€¼
 			if (m_vecRange.size() == 0)
 			{
 				m_vecRange.push_back(rc);
@@ -366,7 +366,7 @@ namespace ui
 		assert(row_index <= row_index_end);
 		if (row_index > row_index_end)
 			return;
-		if (ctrl || shift)		//Ö±½Ó·µ»Ø²»´¦ÀíÁË, ¸ã²»ÇåÂß¼­ÁË
+		if (ctrl || shift)		//ç›´æ¥è¿”å›ä¸å¤„ç†äº†, æä¸æ¸…é€»è¾‘äº†
 			return;
 #if 0
 		if (ctrl && shift)
@@ -503,7 +503,7 @@ namespace ui
 		assert(col_index <= col_index_end);
 		if (col_index > col_index_end)
 			return;
-		if (ctrl || shift)		//Ö±½Ó·µ»Ø²»´¦ÀíÁË, ¸ã²»ÇåÂß¼­ÁË
+		if (ctrl || shift)		//ç›´æ¥è¿”å›ä¸å¤„ç†äº†, æä¸æ¸…é€»è¾‘äº†
 			return;
 #if 0
 		if (ctrl && shift)

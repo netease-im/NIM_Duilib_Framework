@@ -1,4 +1,4 @@
-﻿#ifndef BASE_FILE_FILE_PATH_H_
+#ifndef BASE_FILE_FILE_PATH_H_
 #define BASE_FILE_FILE_PATH_H_
 
 #include <string>

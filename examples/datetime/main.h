@@ -2,8 +2,8 @@
 
 #include "resource.h"
 
-/** @class ÔÓÊÂÏß³Ì
-* @brief ÔÓÊÂÏß³ÌÀà£¬¼Ì³Ğ nbase::FrameworkThread
+/** @class æ‚äº‹çº¿ç¨‹
+* @brief æ‚äº‹çº¿ç¨‹ç±»ï¼Œç»§æ‰¿ nbase::FrameworkThread
 * @copyright (c) 2015, NetEase Inc. All rights reserved
 * @date 2015/1/1
 */
@@ -18,14 +18,14 @@ public:
 
 private:
 	/**
-	* Ğéº¯Êı£¬³õÊ¼»¯Ïß³Ì
-	* @return void	ÎŞ·µ»ØÖµ
+	* è™šå‡½æ•°ï¼Œåˆå§‹åŒ–çº¿ç¨‹
+	* @return void	æ— è¿”å›å€¼
 	*/
 	virtual void Init() override;
 
 	/**
-	* Ğéº¯Êı£¬Ïß³ÌÍË³öÊ±£¬×öÒ»Ğ©ÇåÀí¹¤×÷
-	* @return void	ÎŞ·µ»ØÖµ
+	* è™šå‡½æ•°ï¼Œçº¿ç¨‹é€€å‡ºæ—¶ï¼Œåšä¸€äº›æ¸…ç†å·¥ä½œ
+	* @return void	æ— è¿”å›å€¼
 	*/
 	virtual void Cleanup() override;
 
@@ -34,7 +34,7 @@ private:
 };
 
 /** @class MainThread
-* @brief Ö÷Ïß³Ì£¨UIÏß³Ì£©Àà£¬¼Ì³Ğ nbase::FrameworkThread
+* @brief ä¸»çº¿ç¨‹ï¼ˆUIçº¿ç¨‹ï¼‰ç±»ï¼Œç»§æ‰¿ nbase::FrameworkThread
 * @copyright (c) 2015, NetEase Inc. All rights reserved
 * @date 2015/1/1
 */
@@ -46,17 +46,17 @@ public:
 
 private:
 	/**
-	* Ğéº¯Êı£¬³õÊ¼»¯Ö÷Ïß³Ì
-	* @return void	ÎŞ·µ»ØÖµ
+	* è™šå‡½æ•°ï¼Œåˆå§‹åŒ–ä¸»çº¿ç¨‹
+	* @return void	æ— è¿”å›å€¼
 	*/
 	virtual void Init() override;
 
 	/**
-	* Ğéº¯Êı£¬Ö÷Ïß³ÌÍË³öÊ±£¬×öÒ»Ğ©ÇåÀí¹¤×÷
-	* @return void	ÎŞ·µ»ØÖµ
+	* è™šå‡½æ•°ï¼Œä¸»çº¿ç¨‹é€€å‡ºæ—¶ï¼Œåšä¸€äº›æ¸…ç†å·¥ä½œ
+	* @return void	æ— è¿”å›å€¼
 	*/
 	virtual void Cleanup() override;
 
 private:
-	std::unique_ptr<MiscThread>	misc_thread_;	// ×¨ÃÅ´¦ÀíÔÓÊÂµÄÏß³Ì
+	std::unique_ptr<MiscThread>	misc_thread_;	// ä¸“é—¨å¤„ç†æ‚äº‹çš„çº¿ç¨‹
 };

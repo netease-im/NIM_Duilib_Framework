@@ -1,5 +1,5 @@
 /** @file cef_control.h
- * @brief ·â×°Cefä¯ÀÀÆ÷¶ÔÏóÎªduilib¿Ø¼ş
+ * @brief å°è£…Cefæµè§ˆå™¨å¯¹è±¡ä¸ºduilibæ§ä»¶
  * @copyright (c) 2016, NetEase Inc. All rights reserved
  * @author Redrain
  * @date 2016/7/19
@@ -25,9 +25,9 @@ public:
 	virtual void SetWindow(ui::Window* pManager, ui::Box* pParent, bool bInit) override;
 
 	/**
-	* @brief ´ò¿ª¿ª·¢Õß¹¤¾ß
-	* @param[in] view Ò»¸ö CefControl ¿Ø¼şÊµÀı(½öÔÚCefControlÀàÀïĞèÒª´«Èë)
-	* @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	* @brief æ‰“å¼€å¼€å‘è€…å·¥å…·
+	* @param[in] view ä¸€ä¸ª CefControl æ§ä»¶å®ä¾‹(ä»…åœ¨CefControlç±»é‡Œéœ€è¦ä¼ å…¥)
+	* @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	*/
 	virtual bool AttachDevTools(Control* view) override;
 

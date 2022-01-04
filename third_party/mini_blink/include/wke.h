@@ -1,4 +1,4 @@
-﻿/*
+/*
 *
 * wolar@qq.com
 * http://miniblink.net 文档地址

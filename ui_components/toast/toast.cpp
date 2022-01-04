@@ -51,12 +51,12 @@ LRESULT Toast::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	{
 		this->Close();
 	}
-	// Õû¸ötoast½çÃæ¶¼ÔÚ±êÌâÀ¸£¬ËùÒÔÒª´¦ÀíWM_NCÏûÏ¢
+	// æ•´ä¸ªtoastç•Œé¢éƒ½åœ¨æ ‡é¢˜æ ï¼Œæ‰€ä»¥è¦å¤„ç†WM_NCæ¶ˆæ¯
 	else if (uMsg == WM_NCLBUTTONDBLCLK || uMsg == WM_LBUTTONDBLCLK)
 	{
 		this->Close();
 	}
-	// duilibÔÚWM_MOUSELEAVEÏûÏ¢ÖÐ»á·¢ËÍÒ»¸ölparamÎª-1µÄWM_MOUSEMOVEÏûÏ¢
+	// duilibåœ¨WM_MOUSELEAVEæ¶ˆæ¯ä¸­ä¼šå‘é€ä¸€ä¸ªlparamä¸º-1çš„WM_MOUSEMOVEæ¶ˆæ¯
 	else if ((uMsg == WM_NCMOUSEMOVE || uMsg == WM_MOUSEMOVE) && lParam != -1)
 	{
 		if (NULL != close_button_ && !close_button_->IsVisible())
@@ -69,7 +69,7 @@ LRESULT Toast::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		ScreenToClient(m_hWnd, &pt);
 		UiRect client_rect;
 		::GetClientRect(m_hWnd, &client_rect);
-		// leaveÏûÏ¢´¥·¢Ê±£¬»ñÈ¡µÄÊó±ê×ø±êÓÐ¿ÉÄÜ»¹ÔÚclient_rect·¶Î§ÄÚ£¬»áÆ«²î1ÏñËØ£¬ÕâÀïËõ¼õ1ÏñËØ
+		// leaveæ¶ˆæ¯è§¦å‘æ—¶ï¼ŒèŽ·å–çš„é¼ æ ‡åæ ‡æœ‰å¯èƒ½è¿˜åœ¨client_rectèŒƒå›´å†…ï¼Œä¼šåå·®1åƒç´ ï¼Œè¿™é‡Œç¼©å‡1åƒç´ 
 		client_rect.Deflate(UiRect(1, 1, 1, 1));
 		if (NULL != close_button_ && !client_rect.IsPointIn(pt))
 			close_button_->SetVisible(false);

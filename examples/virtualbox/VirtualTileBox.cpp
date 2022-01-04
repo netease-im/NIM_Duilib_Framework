@@ -117,21 +117,21 @@ void VirtualTileLayout::LazyArrangeChild()
 
 	ASSERT(pList);
 
-	// ÁĞÔÚSetPosÊ±ÒÑ¾­ÉèÖÃºÃ
+	// åˆ—åœ¨SetPosæ—¶å·²ç»è®¾ç½®å¥½
 	ASSERT(m_nColumns);
 
-	// »ñÈ¡VirtualTileBoxµÄRect
+	// è·å–VirtualTileBoxçš„Rect
 	ui::UiRect rc = pList->GetPaddingPos();
 
-	// ×ÓÏîµÄ×ó±ßÆğÊ¼Î»ÖÃ 
+	// å­é¡¹çš„å·¦è¾¹èµ·å§‹ä½ç½® 
 	int iPosLeft = rc.left;
 
-	// ×ÓÏîµÄ¶¥²¿ÆğÊ¼Î»ÖÃ 
+	// å­é¡¹çš„é¡¶éƒ¨èµ·å§‹ä½ç½® 
 	int iPosTop = rc.top + pList->GetScrollPos().cy;
 
 	ui::CPoint ptTile(iPosLeft, iPosTop);
 
-	// ¶¥²¿index
+	// é¡¶éƒ¨index
 	int nTopBottom = 0;
 	int nTopIndex = pList->GetTopElementIndex(nTopBottom);
 
@@ -143,7 +143,7 @@ void VirtualTileLayout::LazyArrangeChild()
 		ui::UiRect rcTile(ptTile.x, ptTile.y, ptTile.x + m_szItem.cx, ptTile.y + m_szItem.cy);
 		pControl->SetPos(rcTile);
 
-		// Ìî³äÊı¾İ
+		// å¡«å……æ•°æ®
 		int nElementIndex = nTopIndex + iCount;
 		if (nElementIndex < pList->GetElementCount())
 		{
@@ -196,7 +196,7 @@ void VirtualTileBox::SetDataProvider(VirtualTileInterface *pProvider)
 	ASSERT(pProvider);
 	m_pDataProvider = pProvider;
 
-	// ×¢²áÄ£ĞÍÊı¾İ±ä¶¯Í¨Öª»Øµ÷
+	// æ³¨å†Œæ¨¡å‹æ•°æ®å˜åŠ¨é€šçŸ¥å›è°ƒ
 	pProvider->RegNotifys(
 		nbase::Bind(&VirtualTileBox::OnModelDataChanged, this, std::placeholders::_1, std::placeholders::_2),
 		nbase::Bind(&VirtualTileBox::OnModelCountChanged, this));
@@ -214,7 +214,7 @@ void VirtualTileBox::Refresh()
 	int nElementCount = GetElementCount();
 	int nItemCount = GetCount();
 
-	// Èç¹ûÏÖÓĞ×ÓÏî×ÜÊı´óÓÚÊı¾İ×ÜÊı£¬ ÒÆ³ö±ÈÊı¾İ×ÜÊı¶à³öµÄ×ÓÏî
+	// å¦‚æœç°æœ‰å­é¡¹æ€»æ•°å¤§äºæ•°æ®æ€»æ•°ï¼Œ ç§»å‡ºæ¯”æ•°æ®æ€»æ•°å¤šå‡ºçš„å­é¡¹
 	if (nItemCount > nElementCount)
 	{
 		
@@ -222,7 +222,7 @@ void VirtualTileBox::Refresh()
 		for (int i = 0; i < n; i++)
 			this->RemoveAt(0);
 	}
-	// Èç¹û×ÓÏî×ÜÊı¾İĞ¡ÓÚÊı¾İ×ÜÊı
+	// å¦‚æœå­é¡¹æ€»æ•°æ®å°äºæ•°æ®æ€»æ•°
 	else if (nItemCount < nElementCount) {
 		int n = 0;
 		if (nElementCount <= m_nMaxItemCount)
@@ -271,7 +271,7 @@ void VirtualTileBox::GetDisplayCollection(std::vector<int>& collection)
 	if (GetCount() == 0)
 		return;
 
-	// »ñÈ¡BoxµÄRect
+	// è·å–Boxçš„Rect
 	ui::UiRect rcThis = this->GetPaddingPos();
 
 	int nEleHeight = GetRealElementHeight();
@@ -311,12 +311,12 @@ void VirtualTileBox::EnsureVisible(int iIndex, bool bToTop /*= false*/)
 
 		if (iIndex > nTopIndex)
 		{
-			// ÏòÏÂ
+			// å‘ä¸‹
 			int height = CalcElementsHeight(iIndex + 1);
 			nNewPos = height - m_rcItem.GetHeight();
 		}
 		else {
-			// ÏòÉÏ
+			// å‘ä¸Š
 			nNewPos = CalcElementsHeight(iIndex);
 		}
 	}
@@ -485,7 +485,7 @@ bool VirtualTileBox::NeedReArrange(ScrollDirection &direction)
 	rcItem = m_items[0]->GetPos();
 
 	if (nPos >= m_nOldYScrollPos) {
-		// ÏÂ
+		// ä¸‹
 		rcItem = m_items[nCount - 1]->GetPos();
 		int nSub = (rcItem.bottom - rcThis.top) - (nPos + rcThis.GetHeight());
 		if (nSub < 0) {
@@ -494,7 +494,7 @@ bool VirtualTileBox::NeedReArrange(ScrollDirection &direction)
 		}
 	}
 	else {
-		// ÉÏ
+		// ä¸Š
 		rcItem = m_items[0]->GetPos();
 		if (nPos < (rcItem.top - rcThis.top)) {
 			direction = kScrollUp;

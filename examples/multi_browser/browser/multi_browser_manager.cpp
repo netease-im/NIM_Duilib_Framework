@@ -1,4 +1,4 @@
-﻿#include "multi_browser_manager.h"
+#include "multi_browser_manager.h"
 #include "multi_browser_form.h"
 #include "browser_box.h"
 #include "dragdrop/drag_form.h"

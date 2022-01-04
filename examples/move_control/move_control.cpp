@@ -34,11 +34,11 @@ std::wstring MoveControlForm::GetWindowClassName() const
 
 void MoveControlForm::InitWindow()
 {
-	//Ìí¼ÓÓ¦ÓÃ¡£Ó¦ÓÃÓĞ¿ÉÄÜÊÇ·şÎñÆ÷ÏÂ·¢µÄ£¬Ò»°ã±¾µØÒ²ÓĞ±£´æµÄ
+	//æ·»åŠ åº”ç”¨ã€‚åº”ç”¨æœ‰å¯èƒ½æ˜¯æœåŠ¡å™¨ä¸‹å‘çš„ï¼Œä¸€èˆ¬æœ¬åœ°ä¹Ÿæœ‰ä¿å­˜çš„
 	//loadFromDb
-	//getFromServer---->ºóÌ¨¿ÉÒÔÏÈ±£´æµ½db£¬ÔÙpost¸öÏûÏ¢³öÀ´£¬½çÃæÖØĞÂ´Ódb load¡£
+	//getFromServer---->åå°å¯ä»¥å…ˆä¿å­˜åˆ°dbï¼Œå†postä¸ªæ¶ˆæ¯å‡ºæ¥ï¼Œç•Œé¢é‡æ–°ä»db loadã€‚
 
-	//×÷Îªdemo£¬ÏÈĞ´ËÀ
+	//ä½œä¸ºdemoï¼Œå…ˆå†™æ­»
 	std::vector<AppItem> applist;
 	CAppDb::GetInstance().LoadFromDb(applist);
 
@@ -81,9 +81,9 @@ LRESULT MoveControlForm::OnLButtonUp(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 
 	if (!DoAfterDrag(frequent_app_) && !DoAfterDrag(my_app_))
 	{
-		//»Ø¹ö
+		//å›æ»š
 		pParent->AddAt(current_item_, current_item_->getIndex());
-		//´Óindex´¦¿ªÊ¼²¹È±¿Ú
+		//ä»indexå¤„å¼€å§‹è¡¥ç¼ºå£
 		for (int index = current_item_->getIndex()+1; index < pParent->GetCount(); ++index)
 		{
 			AppItemUi* _pItem = dynamic_cast<AppItemUi*>(pParent->GetItemAt(index));
@@ -94,7 +94,7 @@ LRESULT MoveControlForm::OnLButtonUp(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		}
 	}
 
-	//¸üĞÂAppĞÅÏ¢µ½Êı¾İ¿â
+	//æ›´æ–°Appä¿¡æ¯åˆ°æ•°æ®åº“
 	CAppDb::GetInstance().SaveToDb(current_item_->getAppData());
 
 	is_drag_state_ = false;
@@ -112,7 +112,7 @@ void MoveControlForm::ShowCustomWindow(const std::wstring& class_name, const std
 	window->ShowWindow();
 }
 
-//µÃÏë°ì·¨×¥ÆğÊó±êµ¯ÆğµÄÒ»¿Ì
+//å¾—æƒ³åŠæ³•æŠ“èµ·é¼ æ ‡å¼¹èµ·çš„ä¸€åˆ»
 bool MoveControlForm::OnProcessAppItemDrag(ui::EventArgs* param)
 {
 	switch (param->Type)
@@ -125,16 +125,16 @@ bool MoveControlForm::OnProcessAppItemDrag(ui::EventArgs* param)
 		{
 			break;
 		}
-		//¼ì²âÎ»ÒÆ
+		//æ£€æµ‹ä½ç§»
 		LONG cx = abs(param->ptMouse.x - old_drag_point_.x);
 		LONG cy = abs(param->ptMouse.y - old_drag_point_.y);
 		if (cx < 2 && cy < 2)
 		{
 			break;
 		}
-		//ÔÚÍÏ×§Ä£Ê½ÏÂ
-		//»ñÈ¡Êó±êÏà¶ÔAppItemµÄÎ»ÖÃ
-		ui::UiRect rect = param->pSender->GetPos(); //×óÉÏ½ÇÓĞĞ§
+		//åœ¨æ‹–æ‹½æ¨¡å¼ä¸‹
+		//è·å–é¼ æ ‡ç›¸å¯¹AppItemçš„ä½ç½®
+		ui::UiRect rect = param->pSender->GetPos(); //å·¦ä¸Šè§’æœ‰æ•ˆ
 		POINT pt = { param->ptMouse.x - rect.left, param->ptMouse.y - rect.top };
 
 		DoDrag(param->pSender, pt);
@@ -172,16 +172,16 @@ void MoveControlForm::DoDrag(ui::Control* pAppItem, POINT pos)
 
 void MoveControlForm::DoBeforeDrag()
 {
-	//¿Ù³ö¸ÃÏîÄ¿£¬ºóÃæµÄÏîÄ¿È«²¿×óÒÆ
+	//æŠ å‡ºè¯¥é¡¹ç›®ï¼Œåé¢çš„é¡¹ç›®å…¨éƒ¨å·¦ç§»
 	ASSERT(current_item_);
 	if (current_item_)
 	{
 		Box* pParent = current_item_->GetParent();
 		ASSERT(pParent);
-		pParent->SetAutoDestroyChild(false);  //×Ó¿Ø¼ş²»Ïú»Ù
+		pParent->SetAutoDestroyChild(false);  //å­æ§ä»¶ä¸é”€æ¯
 		pParent->Remove(current_item_);
 
-		//´Óindex´¦¿ªÊ¼²¹È±¿Ú
+		//ä»indexå¤„å¼€å§‹è¡¥ç¼ºå£
 		for (int index = current_item_->getIndex(); index < pParent->GetCount(); ++index)
 		{
 			AppItemUi* _pItem = dynamic_cast<AppItemUi*>(pParent->GetItemAt(index));
@@ -195,24 +195,24 @@ void MoveControlForm::DoBeforeDrag()
 
 void MoveControlForm::DoDraging(POINT pos)
 {
-	//ÕâÀï×¢Òâ£¬Èç¹ûÖ»ÊÇ¸¸¿Ø¼şÄÚ²¿ÒÆ¶¯µÄ»°£¬»á¼òµ¥ºÜ¶à
-	//ÉèÖÃÏÂcurrent_item_µÄsetmargin£¬ÖØĞÂadd»ØÈ¥£¬ÏÈ±£ÁôÔÚ¸¸¿Ø¼şµÄ×îºóÒ»¸ö
-	//index_±£´æÖ®Ç°µÄÎ»ÖÃ£¨·ÀÈ¡Ïû£©£¬µ±Êó±êµ¯ÆğÊ±£¬ÔÙÉèÖÃÏÂºÏÀíµÄÖµ£¬°üÀ¨ÔÚ¸¸¿Ø¼şµÄÎ»ÖÃ
+	//è¿™é‡Œæ³¨æ„ï¼Œå¦‚æœåªæ˜¯çˆ¶æ§ä»¶å†…éƒ¨ç§»åŠ¨çš„è¯ï¼Œä¼šç®€å•å¾ˆå¤š
+	//è®¾ç½®ä¸‹current_item_çš„setmarginï¼Œé‡æ–°addå›å»ï¼Œå…ˆä¿ç•™åœ¨çˆ¶æ§ä»¶çš„æœ€åä¸€ä¸ª
+	//index_ä¿å­˜ä¹‹å‰çš„ä½ç½®ï¼ˆé˜²å–æ¶ˆï¼‰ï¼Œå½“é¼ æ ‡å¼¹èµ·æ—¶ï¼Œå†è®¾ç½®ä¸‹åˆç†çš„å€¼ï¼ŒåŒ…æ‹¬åœ¨çˆ¶æ§ä»¶çš„ä½ç½®
 
-	//¿ç½ø³ÌÒÆ¶¯µÄ»°£¬ĞèÒª½èÓÃdrag-drop£¬Ò²ÊÇ¿ÉÒÔÊµÏÖµÄ£¬ÕâÀï´ÓÂÔ
+	//è·¨è¿›ç¨‹ç§»åŠ¨çš„è¯ï¼Œéœ€è¦å€Ÿç”¨drag-dropï¼Œä¹Ÿæ˜¯å¯ä»¥å®ç°çš„ï¼Œè¿™é‡Œä»ç•¥
 
-	//±¾DemoÊµÏÖµÄÊÇ¿ç¸¸¿Ø¼şÒÆ¶¯£¨¼æÈİ¸¸¿Ø¼şÄÚ²¿ÒÆ¶¯£©£¬²¢ÇÒ¿ÉÒÔÒÆ¶¯³ö´°¿Ú·¶Î§£¬Òò´Ë´´½¨ÁÙÊ±´°¿Ú
-	//·Ç³£ÒÅº¶£¬µ±ÁÙÊ±´°¿Ú´´½¨Ê±£¬ÁÙÊ±´°¿Ú²¢Ã»ÓĞ¼´Ê±µÄÍÏ×§¸Ğ£¬ÕâÀï²ÉÈ¡Hook·½·¨£¬ÔÚmousemoveÏûÏ¢ÒÆ¶¯¡£
+	//æœ¬Demoå®ç°çš„æ˜¯è·¨çˆ¶æ§ä»¶ç§»åŠ¨ï¼ˆå…¼å®¹çˆ¶æ§ä»¶å†…éƒ¨ç§»åŠ¨ï¼‰ï¼Œå¹¶ä¸”å¯ä»¥ç§»åŠ¨å‡ºçª—å£èŒƒå›´ï¼Œå› æ­¤åˆ›å»ºä¸´æ—¶çª—å£
+	//éå¸¸é—æ†¾ï¼Œå½“ä¸´æ—¶çª—å£åˆ›å»ºæ—¶ï¼Œä¸´æ—¶çª—å£å¹¶æ²¡æœ‰å³æ—¶çš„æ‹–æ‹½æ„Ÿï¼Œè¿™é‡Œé‡‡å–Hookæ–¹æ³•ï¼Œåœ¨mousemoveæ¶ˆæ¯ç§»åŠ¨ã€‚
 
 
-	//ÕâÀï´´½¨ĞÂ´°¿Ú µ±È»µÃÈ·±£²»ÄÜÖØ¸´ÓĞ´°¿Ú£¬ÕâÀïÊ¡ÂÔ
+	//è¿™é‡Œåˆ›å»ºæ–°çª—å£ å½“ç„¶å¾—ç¡®ä¿ä¸èƒ½é‡å¤æœ‰çª—å£ï¼Œè¿™é‡Œçœç•¥
 	AppWindow* pWindow = AppWindow::CreateAppWindow(GetHWND(), pos, current_item_->getAppData());
 	ASSERT(pWindow);
 }
 
 bool MoveControlForm::DoAfterDrag(ui::Box* check)
 {
-	//»ñÈ¡Êó±êµÄÎ»ÖÃ
+	//è·å–é¼ æ ‡çš„ä½ç½®
 	POINT pt;
 	GetCursorPos(&pt);
 	ScreenToClient(m_hWnd, &pt);
@@ -220,23 +220,23 @@ bool MoveControlForm::DoAfterDrag(ui::Box* check)
 	UiRect rectBox = check->GetPos();
 	if (rectBox.IsPointIn(pt))
 	{
-		//×îºÃÊÇÖØºÏÃæ»ı¸ü´óµÄ£¬ÕâÀï¸ù¾İÊó±êÎ»ÖÃÀ´ÁË
+		//æœ€å¥½æ˜¯é‡åˆé¢ç§¯æ›´å¤§çš„ï¼Œè¿™é‡Œæ ¹æ®é¼ æ ‡ä½ç½®æ¥äº†
 		for (findIndex = 0; findIndex < check->GetCount(); findIndex++)
 		{
 			auto control = check->GetItemAt(findIndex);
 			UiRect rectCtrl = control->GetPos();
 			if (rectCtrl.IsPointIn(pt))
 			{
-				//²åÈëµ½¸Ãindex
+				//æ’å…¥åˆ°è¯¥index
 				break;
 			}
 		}
-		//ºÏÀí°²ÅÅÇøÓò
+		//åˆç†å®‰æ’åŒºåŸŸ
 		if (findIndex < check->GetCount())
 		{
 			current_item_->FixPos(0, findIndex);
 			check->AddAt(current_item_, findIndex);
-			//´Óindex´¦¿ªÊ¼²¹È±¿Ú
+			//ä»indexå¤„å¼€å§‹è¡¥ç¼ºå£
 			for (int index = findIndex + 1; index < check->GetCount(); ++index)
 			{
 				AppItemUi* _pItem = dynamic_cast<AppItemUi*>(check->GetItemAt(index));
@@ -249,7 +249,7 @@ bool MoveControlForm::DoAfterDrag(ui::Box* check)
 		}
 		else
 		{
-			//·Åµ½×îºóÃæ
+			//æ”¾åˆ°æœ€åé¢
 			current_item_->FixPos(0, findIndex);
 			check->Add(current_item_);
 			return true;

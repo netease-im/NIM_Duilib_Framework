@@ -1,7 +1,7 @@
 #pragma once
 
 /** @class DragForm
-  * @brief Ä£·ÂÏµÍ³ÍÏ×§¹¦ÄÜµÄ°ëÍ¸Ã÷´°Ìå£¬ÒòÎªÊ¹ÓÃÁËµÍ¼¶¼üÅÌ¹³×ÓËùÒÔÒ»Ğ©°²È«Èí¼ş»áÀ¹½Ø
+  * @brief æ¨¡ä»¿ç³»ç»Ÿæ‹–æ‹½åŠŸèƒ½çš„åŠé€æ˜çª—ä½“ï¼Œå› ä¸ºä½¿ç”¨äº†ä½çº§é”®ç›˜é’©å­æ‰€ä»¥ä¸€äº›å®‰å…¨è½¯ä»¶ä¼šæ‹¦æˆª
   * @copyright (c) 2016, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2019/3/20
@@ -11,45 +11,45 @@ class DragForm : public ui::WindowImplBase
 {
 public:
 	/**
-	* µÍ¼¶¼üÅÌ¹³×ÓµÄ»Øµ÷º¯Êı
-	* @param[in] nCode ²Ù×÷Âë
-	* @param[in] wParam ¸½¼Ó²ÎÊı
-	* @param[in] lParam ¸½¼Ó²ÎÊı
-	* @return LRESULT	²Ù×÷½á¹û
+	* ä½çº§é”®ç›˜é’©å­çš„å›è°ƒå‡½æ•°
+	* @param[in] nCode æ“ä½œç 
+	* @param[in] wParam é™„åŠ å‚æ•°
+	* @param[in] lParam é™„åŠ å‚æ•°
+	* @return LRESULT	æ“ä½œç»“æœ
 	*/
 	static LRESULT CALLBACK LowLevelMouseProc(int nCode, WPARAM wParam, LPARAM lParam);
 
 	/**
-	* ´´½¨×Ô¶¨ÒåÍÏ×§´°¿Ú
-	* @param[in] bitmap ÍÏ×§Ğ§¹ûÎ»Í¼
-	* @param[in] pt_offset ÍÏ×§Í¼ÏñÏà¶ÔÓÚÊó±êµÄÆ«ÒÆ
-	* @return void	ÎŞ·µ»ØÖµ
+	* åˆ›å»ºè‡ªå®šä¹‰æ‹–æ‹½çª—å£
+	* @param[in] bitmap æ‹–æ‹½æ•ˆæœä½å›¾
+	* @param[in] pt_offset æ‹–æ‹½å›¾åƒç›¸å¯¹äºé¼ æ ‡çš„åç§»
+	* @return void	æ— è¿”å›å€¼
 	*/
 	static void CreateCustomDragImage(HBITMAP bitmap, POINT pt_offset);
 
 	/**
-	* ¹Ø±Õ×Ô¶¨ÒåÍÏ×§´°¿Ú
-	* @return void	ÎŞ·µ»ØÖµ
+	* å…³é—­è‡ªå®šä¹‰æ‹–æ‹½çª—å£
+	* @return void	æ— è¿”å›å€¼
 	*/
 	static void CloseCustomDragImage();
 
 public:	
-	// ¸²¸ÇĞéº¯Êı
+	// è¦†ç›–è™šå‡½æ•°
 	virtual std::wstring GetSkinFolder() override;
 	virtual std::wstring GetSkinFile() override;
 	virtual std::wstring GetWindowClassName() const override;
 	virtual UINT GetClassStyle() const override;
 
 	/**
-	* ¸ù¾İ¿Ø¼şÀàÃû´´½¨×Ô¶¨Òå¿Ø¼ş
-	* @param[in] pstrClass ¿Ø¼şÀàÃû
-	* @return Control* ´´½¨µÄ¿Ø¼şµÄÖ¸Õë
+	* æ ¹æ®æ§ä»¶ç±»ååˆ›å»ºè‡ªå®šä¹‰æ§ä»¶
+	* @param[in] pstrClass æ§ä»¶ç±»å
+	* @return Control* åˆ›å»ºçš„æ§ä»¶çš„æŒ‡é’ˆ
 	*/
 	virtual ui::Control* CreateControl(const std::wstring& pstrClass) override;
 
 	/**
-	* ´°¿Ú³õÊ¼»¯º¯Êı
-	* @return void	ÎŞ·µ»ØÖµ
+	* çª—å£åˆå§‹åŒ–å‡½æ•°
+	* @return void	æ— è¿”å›å€¼
 	*/
 	virtual void InitWindow() override;
 
@@ -58,17 +58,17 @@ private:
 	~DragForm(){};
 
 	/**
-	* ´´½¨Ò»¸öÍÏ×§Ğ§¹ûµÄ´°¿Ú
-	* @param[in] bitmap ÍÏ×§Ğ§¹ûÎ»Í¼¶ÔÏó
-	* @param[in] pt_offset ÍÏ×§Í¼ÏñÏà¶ÔÓÚÊó±êµÄÆ«ÒÆ
-	* @return void	ÎŞ·µ»ØÖµ
+	* åˆ›å»ºä¸€ä¸ªæ‹–æ‹½æ•ˆæœçš„çª—å£
+	* @param[in] bitmap æ‹–æ‹½æ•ˆæœä½å›¾å¯¹è±¡
+	* @param[in] pt_offset æ‹–æ‹½å›¾åƒç›¸å¯¹äºé¼ æ ‡çš„åç§»
+	* @return void	æ— è¿”å›å€¼
 	*/
 	static DragForm* CreateDragForm(HBITMAP bitmap, POINT pt_offset);
 
 	/**
-	* ÉèÖÃÍÏ×§Ğ§¹ûµÄÎ»Í¼
-	* @param[in] bitmap ÍÏ×§Ğ§¹ûÎ»Í¼¶ÔÏó
-	* @return void	ÎŞ·µ»ØÖµ
+	* è®¾ç½®æ‹–æ‹½æ•ˆæœçš„ä½å›¾
+	* @param[in] bitmap æ‹–æ‹½æ•ˆæœä½å›¾å¯¹è±¡
+	* @return void	æ— è¿”å›å€¼
 	*/
 	void SetDragImage(HBITMAP bitmap);
 public:

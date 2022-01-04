@@ -1,5 +1,5 @@
 /** @file ipc_string_define.h
-  * @brief ¶¨ÒåRender½ø³ÌÓëBrowser½ø³ÌÍ¨ĞÅËùÓÃ³£Á¿
+  * @brief å®šä¹‰Renderè¿›ç¨‹ä¸Browserè¿›ç¨‹é€šä¿¡æ‰€ç”¨å¸¸é‡
   * @copyright (c) 2016, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2016/7/19
@@ -8,9 +8,9 @@
 
 namespace nim_comp
 {
-	static const char kFocusedNodeChangedMessage[]	= "FocusedNodeChanged";		// webÒ³ÃæÖĞ»ñÈ¡½¹µãµÄÔªËØ¸Ä±ä
-	static const char kExecuteCppCallbackMessage[]	= "ExecuteCppCallback";		// Ö´ĞĞ C++ µÄÏûÏ¢»Øµ÷º¯Êı
-	static const char kCallCppFunctionMessage[]		= "CallCppFunction";		// webµ÷ÓÃC++½Ó¿Ú½Ó¿ÚµÄÍ¨Öª
-	static const char kExecuteJsCallbackMessage[]	= "ExecuteJsCallback";		// webµ÷ÓÃC++½Ó¿Ú½Ó¿ÚµÄÍ¨Öª
-	static const char kCallJsFunctionMessage[]		= "CallJsFunction";			// C++ µ÷ÓÃ JavaScript Í¨Öª
+	static const char kFocusedNodeChangedMessage[]	= "FocusedNodeChanged";		// webé¡µé¢ä¸­è·å–ç„¦ç‚¹çš„å…ƒç´ æ”¹å˜
+	static const char kExecuteCppCallbackMessage[]	= "ExecuteCppCallback";		// æ‰§è¡Œ C++ çš„æ¶ˆæ¯å›è°ƒå‡½æ•°
+	static const char kCallCppFunctionMessage[]		= "CallCppFunction";		// webè°ƒç”¨C++æ¥å£æ¥å£çš„é€šçŸ¥
+	static const char kExecuteJsCallbackMessage[]	= "ExecuteJsCallback";		// webè°ƒç”¨C++æ¥å£æ¥å£çš„é€šçŸ¥
+	static const char kCallJsFunctionMessage[]		= "CallJsFunction";			// C++ è°ƒç”¨ JavaScript é€šçŸ¥
 }

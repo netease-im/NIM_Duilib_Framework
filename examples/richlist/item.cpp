@@ -13,21 +13,21 @@ Item::~Item()
 
 void Item::InitSubControls(const std::wstring& img, const std::wstring& title)
 {
-	// ²éÕÒ Item ÏÂµÄ¿Ø¼þ
+	// æŸ¥æ‰¾ Item ä¸‹çš„æŽ§ä»¶
 	control_img_	= dynamic_cast<ui::Control*>(FindSubControl(L"control_img"));
 	label_title_	= dynamic_cast<ui::Label*>(FindSubControl(L"label_title"));
 	progress_		= dynamic_cast<ui::Progress*>(FindSubControl(L"progress"));
 	btn_del_		= dynamic_cast<ui::Button*>(FindSubControl(L"btn_del"));
 
-	// Ä£Äâ½ø¶ÈÌõ½ø¶È
+	// æ¨¡æ‹Ÿè¿›åº¦æ¡è¿›åº¦
 	nbase::TimeDelta time_delta = nbase::TimeDelta::FromMicroseconds(nbase::Time::Now().ToInternalValue());
 	progress_->SetValue((double)(time_delta.ToMilliseconds() % 100));
 
-	// ÉèÖÃÍ¼±êºÍÈÎÎñÃû³Æ
+	// è®¾ç½®å›¾æ ‡å’Œä»»åŠ¡åç§°
 	control_img_->SetBkImage(img);
 	label_title_->SetText(nbase::StringPrintf(L"%s %d%%", title.c_str(), time_delta.ToMilliseconds() % 100));
 
-	// °ó¶¨É¾³ýÈÎÎñ´¦Àíº¯Êý
+	// ç»‘å®šåˆ é™¤ä»»åŠ¡å¤„ç†å‡½æ•°
 	btn_del_->AttachClick(nbase::Bind(&Item::OnRemove, this, std::placeholders::_1));
 }
 

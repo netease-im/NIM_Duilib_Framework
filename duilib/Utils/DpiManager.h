@@ -6,7 +6,7 @@
 namespace ui
 {
 /** @class DpiManager
-  * @brief DPIÊÊÅä¹ÜÀíÀà
+  * @brief DPIé€‚é…ç®¡ç†ç±»
   * @copyright (c) 2016, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2016/10/10
@@ -17,93 +17,93 @@ public:
 	static DpiManager* GetInstance();
 
 	/**
-	* @brief »ñÈ¡ÏµÍ³DPI£¬¿ªÆôDPI¸ĞÖªºóÓĞĞ§
+	* @brief è·å–ç³»ç»ŸDPIï¼Œå¼€å¯DPIæ„ŸçŸ¥åæœ‰æ•ˆ
 	* @return UINT DPI
 	*/
 	static UINT GetSystemDPI();
 
 	/**
-	* @brief »ñÈ¡Ä³¸öÏÔÊ¾Æ÷µÄDPI£¬¿ªÆôDPI¸ĞÖªºóÓĞĞ§
-	* @param[in] HMONITOR¾ä±ú
+	* @brief è·å–æŸä¸ªæ˜¾ç¤ºå™¨çš„DPIï¼Œå¼€å¯DPIæ„ŸçŸ¥åæœ‰æ•ˆ
+	* @param[in] HMONITORå¥æŸ„
 	* @return UINT DPI
 	*/
 	static UINT GetMonitorDPI(HMONITOR hMonitor);
 
 	/**
-	* @brief »ñÈ¡Ö÷ÏÔÊ¾Æ÷DPI£¬¿ªÆôDPI¸ĞÖªºóÓĞĞ§
+	* @brief è·å–ä¸»æ˜¾ç¤ºå™¨DPIï¼Œå¼€å¯DPIæ„ŸçŸ¥åæœ‰æ•ˆ
 	* @return UINT DPI
 	*/
 	static UINT GetMainMonitorDPI();
 		
 	/**
-	* @brief ´Ó×¢²á±í»ñÈ¡DPI£¬²»¿ªÆôDPI¸ĞÖªÒ²ÓĞĞ§
+	* @brief ä»æ³¨å†Œè¡¨è·å–DPIï¼Œä¸å¼€å¯DPIæ„ŸçŸ¥ä¹Ÿæœ‰æ•ˆ
 	* @return UINT DPI
 	*/
 	static UINT GetDPIFromRegistry();
 
 	/**
-	* @brief ÊÇ·ñ³ÌĞò×Ô¼ºÊÊÅäDPIËõ·ÅĞ§¹û
-	* @return bool true ÊÇ£¬false ·ñ
+	* @brief æ˜¯å¦ç¨‹åºè‡ªå·±é€‚é…DPIç¼©æ”¾æ•ˆæœ
+	* @return bool true æ˜¯ï¼Œfalse å¦
 	*/
 	bool IsAdaptDPI();
 
 	/**
-	* @brief ÉèÖÃÊÇ·ñ³ÌĞò×Ô¼ºÊÊÅäDPIËõ·Å£¬Ä¬ÈÏ²»×Ô¼ºÊÊÅä
-	* @return bool true ÉèÖÃ³É¹¦£¬false ÉèÖÃÊ§°Ü
+	* @brief è®¾ç½®æ˜¯å¦ç¨‹åºè‡ªå·±é€‚é…DPIç¼©æ”¾ï¼Œé»˜è®¤ä¸è‡ªå·±é€‚é…
+	* @return bool true è®¾ç½®æˆåŠŸï¼Œfalse è®¾ç½®å¤±è´¥
 	*/
 	bool SetAdaptDPI();
 
 	/**
-	* @brief »ñÈ¡µ±Ç°½çÃæËõ·Å±È
-	* @return UINT	Ëõ·Å±È
+	* @brief è·å–å½“å‰ç•Œé¢ç¼©æ”¾æ¯”
+	* @return UINT	ç¼©æ”¾æ¯”
 	*/
 	UINT GetScale();
 
 	/**
-	* @brief ¸ù¾İDPIÖµÉèÖÃ½çÃæËõ·Å±È£¬Ö»ÓĞ³ÌĞò×Ô¼º´¦ÀíDPIËõ·ÅÊ±²ÅÓĞĞ§
-	* @param[in] uDPI DPIÖµ
-	* @return void	ÎŞ·µ»ØÖµ
+	* @brief æ ¹æ®DPIå€¼è®¾ç½®ç•Œé¢ç¼©æ”¾æ¯”ï¼Œåªæœ‰ç¨‹åºè‡ªå·±å¤„ç†DPIç¼©æ”¾æ—¶æ‰æœ‰æ•ˆ
+	* @param[in] uDPI DPIå€¼
+	* @return void	æ— è¿”å›å€¼
 	*/
 	void SetScale(UINT uDPI);
 
 	/**
-	* @brief ¸ù¾İ½çÃæËõ·Å±ÈÀ´Ëõ·ÅÕûÊı£¬Ö»ÓĞ³ÌĞò×Ô¼º´¦ÀíDPIËõ·ÅÊ±²ÅÓĞĞ§
-	* @param[in] iValue ÕûÊı
-	* @return int	Ëõ·ÅºóµÄÖµ
+	* @brief æ ¹æ®ç•Œé¢ç¼©æ”¾æ¯”æ¥ç¼©æ”¾æ•´æ•°ï¼Œåªæœ‰ç¨‹åºè‡ªå·±å¤„ç†DPIç¼©æ”¾æ—¶æ‰æœ‰æ•ˆ
+	* @param[in] iValue æ•´æ•°
+	* @return int	ç¼©æ”¾åçš„å€¼
 	*/
 	int ScaleInt(int &iValue);
 
 	/**
-	* @brief ¸ù¾İ½çÃæËõ·Å±ÈÀ´Ëõ·ÅSIZE£¬Ö»ÓĞ³ÌĞò×Ô¼º´¦ÀíDPIËõ·ÅÊ±²ÅÓĞĞ§
-	* @param[in] pSize SIZEÖ¸Õë
-	* @return void	ÎŞ·µ»ØÖµ
+	* @brief æ ¹æ®ç•Œé¢ç¼©æ”¾æ¯”æ¥ç¼©æ”¾SIZEï¼Œåªæœ‰ç¨‹åºè‡ªå·±å¤„ç†DPIç¼©æ”¾æ—¶æ‰æœ‰æ•ˆ
+	* @param[in] pSize SIZEæŒ‡é’ˆ
+	* @return void	æ— è¿”å›å€¼
 	*/
 	void ScaleSize(SIZE &size);
 
 	void ScaleSize(CSize &size);
 
 	/**
-	* @brief ¸ù¾İ½çÃæËõ·Å±ÈÀ´Ëõ·ÅPOINT£¬Ö»ÓĞ³ÌĞò×Ô¼º´¦ÀíDPIËõ·ÅÊ±²ÅÓĞĞ§
-	* @param[in] pSize SIZEÖ¸Õë
-	* @return void	ÎŞ·µ»ØÖµ
+	* @brief æ ¹æ®ç•Œé¢ç¼©æ”¾æ¯”æ¥ç¼©æ”¾POINTï¼Œåªæœ‰ç¨‹åºè‡ªå·±å¤„ç†DPIç¼©æ”¾æ—¶æ‰æœ‰æ•ˆ
+	* @param[in] pSize SIZEæŒ‡é’ˆ
+	* @return void	æ— è¿”å›å€¼
 	*/
 	void ScalePoint(POINT &point);
 
 	void ScalePoint(CPoint &point);
 
 	/**
-	* @brief ¸ù¾İ½çÃæËõ·Å±ÈÀ´Ëõ·ÅRECT£¬Ö»ÓĞ³ÌĞò×Ô¼º´¦ÀíDPIËõ·ÅÊ±²ÅÓĞĞ§
-	* @param[in] pSize SIZEÖ¸Õë
-	* @return void	ÎŞ·µ»ØÖµ
+	* @brief æ ¹æ®ç•Œé¢ç¼©æ”¾æ¯”æ¥ç¼©æ”¾RECTï¼Œåªæœ‰ç¨‹åºè‡ªå·±å¤„ç†DPIç¼©æ”¾æ—¶æ‰æœ‰æ•ˆ
+	* @param[in] pSize SIZEæŒ‡é’ˆ
+	* @return void	æ— è¿”å›å€¼
 	*/
 	void ScaleRect(RECT &rect);
 
 	void ScaleRect(UiRect &rect);
 
 	/**
-	* @brief ÉèÖÃ×î´óËõ·ÅÒò×Ó,ÔÚÃ»ÓĞÍê³É×ÔÊÊÓ¦Ö®Ç°ĞèÒªÏŞ¶¨×î´óËõ·ÅÒò×Ó
-	* @param[in] nScaleFactor ×î´óËõ·ÅÒò×Ó,-1 ±íÊ¾²»×öÏŞÖÆ
-	* @return void	ÎŞ·µ»ØÖµ
+	* @brief è®¾ç½®æœ€å¤§ç¼©æ”¾å› å­,åœ¨æ²¡æœ‰å®Œæˆè‡ªé€‚åº”ä¹‹å‰éœ€è¦é™å®šæœ€å¤§ç¼©æ”¾å› å­
+	* @param[in] nScaleFactor æœ€å¤§ç¼©æ”¾å› å­,-1 è¡¨ç¤ºä¸åšé™åˆ¶
+	* @return void	æ— è¿”å›å€¼
 	*/
 	void LimitScaleFactor(unsigned int nScaleFactor);
 

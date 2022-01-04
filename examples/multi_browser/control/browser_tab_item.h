@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 /** @class BrowserTabItem
   * @brief 多标签浏览器窗口顶部标签控件

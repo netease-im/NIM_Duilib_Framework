@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 
 /** @class BitmapControl
   * @brief 把HBITMAP作为背景的控件,控件不负责销毁HBITMAP

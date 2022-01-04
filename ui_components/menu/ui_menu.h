@@ -12,21 +12,21 @@ enum MenuAlignment
 	eMenuAlignment_Top = 1 << 2,
 	eMenuAlignment_Right = 1 << 3,
 	eMenuAlignment_Bottom = 1 << 4,
-	eMenuAlignment_Intelligent = 1 <<5    //ÖÇÄÜµÄ·ÀÖ¹±»ÕÚ±Î
+	eMenuAlignment_Intelligent = 1 <<5    //æ™ºèƒ½çš„é˜²æ­¢è¢«é®è”½
 };
 
 enum MenuCloseType
 {
-	eMenuCloseThis,  //ÊÊÓÃÓÚ¹Ø±Õµ±Ç°¼¶±ğµÄ²Ëµ¥´°¿Ú£¬ÈçÊó±êÒÆÈëÊ±
-	eMenuCloseAll     //¹Ø±ÕËùÓĞ²Ëµ¥´°¿Ú£¬ÈçÊ§È¥½¹µãÊ±
+	eMenuCloseThis,  //é€‚ç”¨äºå…³é—­å½“å‰çº§åˆ«çš„èœå•çª—å£ï¼Œå¦‚é¼ æ ‡ç§»å…¥æ—¶
+	eMenuCloseAll     //å…³é—­æ‰€æœ‰èœå•çª—å£ï¼Œå¦‚å¤±å»ç„¦ç‚¹æ—¶
 };
 
-//Ôö¼Ó¹Ø±ÕÊÂ¼şµÄ´«µİ¡£
+//å¢åŠ å…³é—­äº‹ä»¶çš„ä¼ é€’ã€‚
 /*
-µã»÷Ä³Ò»²Ëµ¥£¬»ñÈ¡¸Ã²Ëµ¥´°¿Ú¾ä±ú£¬Í¨Öª¸Ã²Ëµ¥´°¿Ú¿ÉÒÔ¹Ø±Õ×Ó²Ëµ¥ÏîÁË¡£
-¼´Ä³×Ó²Ëµ¥ÏîÄ¿µÄ¸¸´°¿ÚµÈÓÚ¸Ã´°¿Ú£¬¸Ã×Ó²Ëµ¥¹Ø±Õ¡£
-ÓÉÓÚ²Ëµ¥µÄ¸¸×Ó¹ØÏµ£¬»á×Ô¶¯¹Ø±ÕÆäËùÓĞ×ÓËï²Ëµ¥´°¿Ú
-ÕâÀïµÄÊÂ¼ş´«µİÉè¼Æ¿½±´Ô­ÉúDuilibµÄMenuDemo£¬²»¹ıRedrainµÄMenu¹¦ÄÜ¸üºÃ£¬Ö§³Ö²Ëµ¥¸´Ñ¡£¬ÕâÀïÔİÎ´ÊµÏÖ
+ç‚¹å‡»æŸä¸€èœå•ï¼Œè·å–è¯¥èœå•çª—å£å¥æŸ„ï¼Œé€šçŸ¥è¯¥èœå•çª—å£å¯ä»¥å…³é—­å­èœå•é¡¹äº†ã€‚
+å³æŸå­èœå•é¡¹ç›®çš„çˆ¶çª—å£ç­‰äºè¯¥çª—å£ï¼Œè¯¥å­èœå•å…³é—­ã€‚
+ç”±äºèœå•çš„çˆ¶å­å…³ç³»ï¼Œä¼šè‡ªåŠ¨å…³é—­å…¶æ‰€æœ‰å­å­™èœå•çª—å£
+è¿™é‡Œçš„äº‹ä»¶ä¼ é€’è®¾è®¡æ‹·è´åŸç”ŸDuilibçš„MenuDemoï¼Œä¸è¿‡Redrainçš„MenuåŠŸèƒ½æ›´å¥½ï¼Œæ”¯æŒèœå•å¤é€‰ï¼Œè¿™é‡Œæš‚æœªå®ç°
 */
 #include "observer_impl_base.hpp"   //copy from menuDemo
 struct ContextMenuParam
@@ -47,14 +47,14 @@ class CMenuElementUI;
 class CMenuWnd : public ui::WindowImplBase, public ContextMenuReceiver
 {
 public:
-	enum PopupPosType  //Êó±êµã»÷µÄpointÊôÓÚ²Ëµ¥µÄÄÄ¸öÎ»ÖÃ    1.-----.2       1×óÉÏ 2ÓÒÉÏ
+	enum PopupPosType  //é¼ æ ‡ç‚¹å‡»çš„pointå±äºèœå•çš„å“ªä¸ªä½ç½®    1.-----.2       1å·¦ä¸Š 2å³ä¸Š
 	{                                                 //      |     |
-		//ÕâÀï¼Ù¶¨ÓÃ»§ÊÇÏ²»¶ÖÇÄÜµÄ                            3.-----.4       3×óÏÂ 4ÓÒÏÂ
+		//è¿™é‡Œå‡å®šç”¨æˆ·æ˜¯å–œæ¬¢æ™ºèƒ½çš„                            3.-----.4       3å·¦ä¸‹ 4å³ä¸‹
 		RIGHT_BOTTOM = eMenuAlignment_Right | eMenuAlignment_Bottom | eMenuAlignment_Intelligent,
 		RIGHT_TOP = eMenuAlignment_Right | eMenuAlignment_Top | eMenuAlignment_Intelligent,
 		LEFT_BOTTOM = eMenuAlignment_Left | eMenuAlignment_Bottom | eMenuAlignment_Intelligent,
 		LEFT_TOP = eMenuAlignment_Intelligent | eMenuAlignment_Top | eMenuAlignment_Intelligent,
-		//ÕâÀïÊÇnormal£¬·ÇÖÇÄÜµÄ
+		//è¿™é‡Œæ˜¯normalï¼Œéæ™ºèƒ½çš„
 		RIGHT_BOTTOM_N = eMenuAlignment_Right | eMenuAlignment_Bottom,
 		RIGHT_TOP_N = eMenuAlignment_Right | eMenuAlignment_Top,
 		LEFT_BOTTOM_N = eMenuAlignment_Left | eMenuAlignment_Bottom,
@@ -63,9 +63,9 @@ public:
 	CMenuWnd(HWND hParent = NULL);
 	void Init(STRINGorID xml, LPCTSTR pSkinType, POINT point, PopupPosType popupPosType = LEFT_TOP, bool no_focus = false, CMenuElementUI* pOwner = NULL);
 	void Show();
-	// ÖØĞÂµ÷Õû²Ëµ¥µÄ´óĞ¡
+	// é‡æ–°è°ƒæ•´èœå•çš„å¤§å°
 	void ResizeMenu();
-	// ÖØĞÂµ÷Õû×Ó²Ëµ¥µÄ´óĞ¡
+	// é‡æ–°è°ƒæ•´å­èœå•çš„å¤§å°
 	void ResizeSubMenu();
 
 	void DetouchOwner();		//add by djj 20200506

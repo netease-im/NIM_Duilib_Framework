@@ -1,4 +1,4 @@
-﻿/*
+/*
  *	Author		wrt(guangguang)
  *	Date		2011-06-14
  *	Copyright	Hangzhou, Netease Inc.

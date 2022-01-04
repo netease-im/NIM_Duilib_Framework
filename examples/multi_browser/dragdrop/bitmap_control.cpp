@@ -1,4 +1,4 @@
-﻿#include "bitmap_control.h"
+#include "bitmap_control.h"
 
 using namespace ui;
 

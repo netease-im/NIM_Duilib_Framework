@@ -1,4 +1,4 @@
-﻿// This file defines Windows embedded menifest, including the file 
+// This file defines Windows embedded menifest, including the file 
 // in your project to make a modern look of all windows
 
 #ifndef BUILD_XP_STYLE_MANIFEST_WIN_H_

@@ -1,4 +1,4 @@
-﻿// a implemention of a Windows specific message pump for I/O,
+// a implemention of a Windows specific message pump for I/O,
 // the mechanism of which is from the Google Chrome project
 
 #ifndef BASE_FRAMEWORK_WIN_IO_MESSAGE_PUMP_H_

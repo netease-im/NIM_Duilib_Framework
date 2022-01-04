@@ -16,7 +16,7 @@ public:
 	TreeNode(const TreeNode& r) = delete;
 	TreeNode& operator=(const TreeNode& r) = delete;
 
-	/// ÖØĞ´¸¸Àà·½·¨£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ£¬Çë²Î¿¼¸¸ÀàÉùÃ÷
+	/// é‡å†™çˆ¶ç±»æ–¹æ³•ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½ï¼Œè¯·å‚è€ƒçˆ¶ç±»å£°æ˜
 	virtual std::wstring GetType() const override;
 	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual bool IsVisible() const override;
@@ -24,130 +24,130 @@ public:
 	virtual void SetWindow(Window* pManager, Box* pParent, bool bInit = true) override;
 
 	/**
-	 * @brief ×ÓÏî±»µã»÷Ê±´¥·¢
-	 * @param[in] param ÏûÏ¢Ìå
-	 * @return Ê¼ÖÕ·µ»Ø true
+	 * @brief å­é¡¹è¢«ç‚¹å‡»æ—¶è§¦å‘
+	 * @param[in] param æ¶ˆæ¯ä½“
+	 * @return å§‹ç»ˆè¿”å› true
 	 */
 	virtual bool OnClickItem(EventArgs* param);
 
 	/**
-	 * @brief ÉèÖÃ×ÓÏîËùÊôµÄÊôĞÔÁĞ±íÈİÆ÷
-	 * @param[in] pTreeView ÈİÆ÷Ö¸Õë
-	 * @return ÎŞ
+	 * @brief è®¾ç½®å­é¡¹æ‰€å±çš„å±æ€§åˆ—è¡¨å®¹å™¨
+	 * @param[in] pTreeView å®¹å™¨æŒ‡é’ˆ
+	 * @return æ— 
 	 */
 	void SetTreeView(TreeView* pTreeView);
 
 	/**
-	 * @brief »ñÈ¡¸¸½ÚµãÖ¸Õë
-	 * @return ·µ»Ø¸¸½ÚµãÖ¸Õë
+	 * @brief è·å–çˆ¶èŠ‚ç‚¹æŒ‡é’ˆ
+	 * @return è¿”å›çˆ¶èŠ‚ç‚¹æŒ‡é’ˆ
 	 */
 	TreeNode* GetParentNode();
 
 	/**
-	 * @brief ÉèÖÃ¸¸½Úµã
-	 * @param[in] pParentTreeNode ¸¸½ÚµãÖ¸Õë
-	 * @return ÎŞ
+	 * @brief è®¾ç½®çˆ¶èŠ‚ç‚¹
+	 * @param[in] pParentTreeNode çˆ¶èŠ‚ç‚¹æŒ‡é’ˆ
+	 * @return æ— 
 	 */
 	void SetParentNode(TreeNode* pParentTreeNode);
 
 	/**
-	 * @brief Ìí¼Ó×Ó½Úµã
-	 * @param[in] pTreeNode ×Ó½ÚµãÖ¸Õë
-	 * @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	 * @brief æ·»åŠ å­èŠ‚ç‚¹
+	 * @param[in] pTreeNode å­èŠ‚ç‚¹æŒ‡é’ˆ
+	 * @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	 */
 	bool AddChildNode(TreeNode* pTreeNode);
 
 	/**
-	 * @brief ÔÚÖ¸¶¨Î»ÖÃÌí¼Ó×Ó½Úµã
-	 * @param[in] pTreeNode ×Ó½ÚµãÖ¸Õë
-	 * @param[in] iIndex Òª²åÈëÄÄ¸öÎ»ÖÃÖ®ºó
-	 * @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	 * @brief åœ¨æŒ‡å®šä½ç½®æ·»åŠ å­èŠ‚ç‚¹
+	 * @param[in] pTreeNode å­èŠ‚ç‚¹æŒ‡é’ˆ
+	 * @param[in] iIndex è¦æ’å…¥å“ªä¸ªä½ç½®ä¹‹å
+	 * @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	 */
 	bool AddChildNodeAt(TreeNode* pTreeNode, std::size_t iIndex);
 
 	/**
-	 * @brief ´ÓÖ¸¶¨Î»ÖÃÒÆ³ıÒ»¸ö×Ó½Úµã
-	 * @param[in] index ÒªÒÆ³ıµÄ×Ó½ÚµãË÷Òı
-	 * @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	 * @brief ä»æŒ‡å®šä½ç½®ç§»é™¤ä¸€ä¸ªå­èŠ‚ç‚¹
+	 * @param[in] index è¦ç§»é™¤çš„å­èŠ‚ç‚¹ç´¢å¼•
+	 * @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	 */
 	bool RemoveChildNodeAt(std::size_t index);
 
 	/**
-	 * @brief ¸ù¾İ×Ó½ÚµãÖ¸ÕëÒÆ³ıÒ»¸ö×Ó½Úµã
-	 * @param[in] pTreeNode ×Ó½ÚµãÖ¸Õë
-	 * @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	 * @brief æ ¹æ®å­èŠ‚ç‚¹æŒ‡é’ˆç§»é™¤ä¸€ä¸ªå­èŠ‚ç‚¹
+	 * @param[in] pTreeNode å­èŠ‚ç‚¹æŒ‡é’ˆ
+	 * @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	 */
 	bool RemoveChildNode(TreeNode* pTreeNode);
 
 	/**
-	 * @brief ÒÆ³ıËùÓĞ×Ó½Úµã
-	 * @return ÎŞ
+	 * @brief ç§»é™¤æ‰€æœ‰å­èŠ‚ç‚¹
+	 * @return æ— 
 	 */
 	void RemoveAllChildNode();
 
 	/**
-	 * @brief µİ¹é»ñÈ¡ËùÓĞ×Ó½Úµã¸öÊı
-	 * @return ·µ»ØËùÓĞ×Ó½Úµã¸öÊı
+	 * @brief é€’å½’è·å–æ‰€æœ‰å­èŠ‚ç‚¹ä¸ªæ•°
+	 * @return è¿”å›æ‰€æœ‰å­èŠ‚ç‚¹ä¸ªæ•°
 	 */
 	int GetDescendantNodeCount();
 
 	/**
-	 * @brief »ñÈ¡ÏÂÒ»¼¶×Ó½Úµã¸öÊı
-	 * @return ·µ»Ø×Ó½Úµã¸öÊı
+	 * @brief è·å–ä¸‹ä¸€çº§å­èŠ‚ç‚¹ä¸ªæ•°
+	 * @return è¿”å›å­èŠ‚ç‚¹ä¸ªæ•°
 	 */
 	std::size_t GetChildNodeCount();
 
 	/**
-	 * @brief »ñÈ¡Ò»¸ö×Ó½ÚµãÖ¸Õë
-	 * @param[in] iIndex Òª»ñÈ¡µÄ×Ó½ÚµãË÷Òı
-	 * @return ·µ»Ø×Ó½ÚµãÖ¸Õë
+	 * @brief è·å–ä¸€ä¸ªå­èŠ‚ç‚¹æŒ‡é’ˆ
+	 * @param[in] iIndex è¦è·å–çš„å­èŠ‚ç‚¹ç´¢å¼•
+	 * @return è¿”å›å­èŠ‚ç‚¹æŒ‡é’ˆ
 	 */
 	TreeNode* GetChildNode(std::size_t iIndex);
 
 	/**
-	 * @brief ¸ù¾İ×Ó½ÚµãÖ¸Õë»ñÈ¡×Ó½ÚµãÎ»ÖÃË÷Òı
-	 * @param[in] pTreeNode ×Ó½ÚµãÖ¸Õë
-	 * @return ·µ»ØÎ»ÖÃË÷Òı
+	 * @brief æ ¹æ®å­èŠ‚ç‚¹æŒ‡é’ˆè·å–å­èŠ‚ç‚¹ä½ç½®ç´¢å¼•
+	 * @param[in] pTreeNode å­èŠ‚ç‚¹æŒ‡é’ˆ
+	 * @return è¿”å›ä½ç½®ç´¢å¼•
 	 */
 	int	GetChildNodeIndex(TreeNode* pTreeNode);
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñÕ¹¿ª×´Ì¬
-	 * @return ·µ»Ø true ÎªÕ¹¿ª×´Ì¬£¬·ñÔòÎª false
+	 * @brief åˆ¤æ–­æ˜¯å¦å±•å¼€çŠ¶æ€
+	 * @return è¿”å› true ä¸ºå±•å¼€çŠ¶æ€ï¼Œå¦åˆ™ä¸º false
 	 */
 	bool IsExpand() const; 
 
 	/**
-	 * @brief ÉèÖÃÊÇ·ñÕ¹¿ªÏÔÊ¾×Ó½Úµã
-	 * @param[in] bExpand Îª true Ê±Õ¹¿ª£¬Îª false ÊÇ²»Õ¹¿ª
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ˜¯å¦å±•å¼€æ˜¾ç¤ºå­èŠ‚ç‚¹
+	 * @param[in] bExpand ä¸º true æ—¶å±•å¼€ï¼Œä¸º false æ˜¯ä¸å±•å¼€
+	 * @return æ— 
 	 */
 	void SetExpand(bool bExpand, bool bTriggerEvent = false);
 
 	/**
-	 * @brief »ñÈ¡×ÓÏî²ã¼¶
-	 * @return ·µ»Øµ±Ç°²ã¼¶
+	 * @brief è·å–å­é¡¹å±‚çº§
+	 * @return è¿”å›å½“å‰å±‚çº§
 	 */
 	int GetDepth();
 
 	/**
-	 * @brief ¼àÌı×ÓÏîÕ¹¿ªÊÂ¼ş
-	 * @param[in] callback ×ÓÏîÕ¹¿ªÊ±´¥·¢µÄ»Øµ÷º¯Êı
-	 * @return ÎŞ
+	 * @brief ç›‘å¬å­é¡¹å±•å¼€äº‹ä»¶
+	 * @param[in] callback å­é¡¹å±•å¼€æ—¶è§¦å‘çš„å›è°ƒå‡½æ•°
+	 * @return æ— 
 	 */
 	void AttachExpand(const EventCallback& callback) { OnEvent[kEventExpand] += callback; }
 
 	/**
-	 * @brief ¼àÌı×ÓÏîÊÕËõÊÂ¼ş
-	 * @param[in] callback ×ÓÏîÊÕËõÊ±´¥·¢µÄ»Øµ÷º¯Êı
-	 * @return ÎŞ
+	 * @brief ç›‘å¬å­é¡¹æ”¶ç¼©äº‹ä»¶
+	 * @param[in] callback å­é¡¹æ”¶ç¼©æ—¶è§¦å‘çš„å›è°ƒå‡½æ•°
+	 * @return æ— 
 	 */
 	void AttachUnExpand(const EventCallback& callback) { OnEvent[kEventUnExpand] += callback; }
 
 private:
 	/**
-	 * @brief É¾³ı×ÔÉí
-	 * @return ³É¹¦·µ»Ø true£¬Ê§°Ü·µ»Ø false
+	 * @brief åˆ é™¤è‡ªèº«
+	 * @return æˆåŠŸè¿”å› trueï¼Œå¤±è´¥è¿”å› false
 	 */
 	bool RemoveSelf();
 
@@ -164,31 +164,31 @@ class UILIB_API TreeView : public ListBox
 public:
 	TreeView(void);
 
-	/// ÖØĞ´¸¸Àà·½·¨£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ£¬Çë²Î¿¼¸¸ÀàÉùÃ÷
+	/// é‡å†™çˆ¶ç±»æ–¹æ³•ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½ï¼Œè¯·å‚è€ƒçˆ¶ç±»å£°æ˜
 	virtual std::wstring GetType() const override;
 	virtual void SetAttribute(const std::wstring& strName, const std::wstring& strValue) override;
 
 	/**
-	 * @brief »ñÈ¡¸ù½Úµã
-	 * @return ·µ»Ø¸ù½ÚµãÖ¸Õë
+	 * @brief è·å–æ ¹èŠ‚ç‚¹
+	 * @return è¿”å›æ ¹èŠ‚ç‚¹æŒ‡é’ˆ
 	 */
 	TreeNode* GetRootNode()	{ return m_rootNode.get(); }
 
 	/**
-	 * @brief »ñÈ¡×Ó½ÚµãËõ½øÖµ
-	 * @return ·µ»Ø×Ó½ÚµãËõ½øÖµ
+	 * @brief è·å–å­èŠ‚ç‚¹ç¼©è¿›å€¼
+	 * @return è¿”å›å­èŠ‚ç‚¹ç¼©è¿›å€¼
 	 */
 	int GetIndent() { return m_iIndent;	}
 
 	/**
-	 * @brief ÉèÖÃ×Ó½ÚµãËõ½øÖµ
-	 * @param[in] indent ÒªÉèÖÃµÄËõ½øÖµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®å­èŠ‚ç‚¹ç¼©è¿›å€¼
+	 * @param[in] indent è¦è®¾ç½®çš„ç¼©è¿›å€¼
+	 * @return æ— 
 	 */
 	void SetIndent(int indent) { m_iIndent = indent; }
 
 private:
-	//ÒÔÏÂº¯Êı¹ÊÒâË½ÓĞ»¯£¬±íÃ÷½ûÖ¹Ê¹ÓÃ£»Ó¦¸ÃÊ¹ÓÃTreeNodeÖĞµÄÏà¹Øº¯Êı
+	//ä»¥ä¸‹å‡½æ•°æ•…æ„ç§æœ‰åŒ–ï¼Œè¡¨æ˜ç¦æ­¢ä½¿ç”¨ï¼›åº”è¯¥ä½¿ç”¨TreeNodeä¸­çš„ç›¸å…³å‡½æ•°
 	bool Add(Control* pControl) override;
 	bool AddAt(Control* pControl, std::size_t iIndex) override;
 	bool Remove(Control* pControl) override;

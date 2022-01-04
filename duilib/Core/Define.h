@@ -14,16 +14,16 @@ class Control;
 
 enum HorAlignType
 {
-	kHorAlignLeft,		// ¿¿×ó¶ÔÆë
-	kHorAlignCenter,	// Ë®Æ½¾ÓÖĞ
-	kHorAlignRight,		// ¿¿ÓÒ¶ÔÆë
+	kHorAlignLeft,		// é å·¦å¯¹é½
+	kHorAlignCenter,	// æ°´å¹³å±…ä¸­
+	kHorAlignRight,		// é å³å¯¹é½
 };
 
 enum VerAlignType
 {
-	kVerAlignTop,		// ¶¥¶Ë¶ÔÆë
-	kVerAlignCenter,	// ´¹Ö±¾ÓÖĞ
-	kVerAlignBottom,	// µ×²¿¶ÔÆë
+	kVerAlignTop,		// é¡¶ç«¯å¯¹é½
+	kVerAlignCenter,	// å‚ç›´å±…ä¸­
+	kVerAlignBottom,	// åº•éƒ¨å¯¹é½
 };
 
 enum StateImageType
@@ -37,10 +37,10 @@ enum StateImageType
 // Flags used for controlling the paint
 enum ControlStateType
 {
-	kControlStateNormal,	// ÆÕÍ¨×´Ì¬
-	kControlStateHot,		// ½¹µã×´Ì¬
-	kControlStatePushed,	// °´ÏÂ×´Ì¬
-	kControlStateDisabled	// ½ûÓÃ×´Ì¬
+	kControlStateNormal,	// æ™®é€šçŠ¶æ€
+	kControlStateHot,		// ç„¦ç‚¹çŠ¶æ€
+	kControlStatePushed,	// æŒ‰ä¸‹çŠ¶æ€
+	kControlStateDisabled	// ç¦ç”¨çŠ¶æ€
 };
 
 enum AnimationType
@@ -58,19 +58,19 @@ enum AnimationType
 
 enum GifStopType
 {
-	kGifStopCurrent = -1,	// µ±Ç°Ö¡
-	kGifStopFirst = 0,		// GIF Í£Ö¹Ê±¶¨Î»µ½µÚÒ»Ö¡	
-	kGifStopLast = 0xFFFF,	// ×îºóÒ»Ö¡
+	kGifStopCurrent = -1,	// å½“å‰å¸§
+	kGifStopFirst = 0,		// GIF åœæ­¢æ—¶å®šä½åˆ°ç¬¬ä¸€å¸§	
+	kGifStopLast = 0xFFFF,	// æœ€åä¸€å¸§
 };
 
 enum CursorType
 {
-	kCursorArrow,		// ¼ıÍ·
-	kCursorHand,		// ÊÖ±ú
+	kCursorArrow,		// ç®­å¤´
+	kCursorHand,		// æ‰‹æŸ„
 	kCursorHandIbeam	// 
 };
 
-//¶¨ÒåËùÓĞÏûÏ¢ÀàĞÍ
+//å®šä¹‰æ‰€æœ‰æ¶ˆæ¯ç±»å‹
 enum EventType
 {
 	kEventInternalDoubleClick,
@@ -142,7 +142,7 @@ enum EventType
 	kEventValueChange,
 	kEventResize,
 
-	kEventNotify,	//½ö×÷¼òµ¥µÄÍ¨Öª£¬ÓĞ¸´ÔÓÊı¾İÇëÍ¨¹ıÆäËû·½Ê½ÊµÏÖ
+	kEventNotify,	//ä»…ä½œç®€å•çš„é€šçŸ¥ï¼Œæœ‰å¤æ‚æ•°æ®è¯·é€šè¿‡å…¶ä»–æ–¹å¼å®ç°
 
 	kEventVisibleChange,
 
@@ -213,7 +213,7 @@ struct EventArgs
 EventType StringToEnum(const std::wstring& messageType);
 
 
-//¶¨ÒåËùÓĞ¿Ø¼şÀàĞÍ
+//å®šä¹‰æ‰€æœ‰æ§ä»¶ç±»å‹
 #define  DUI_CTR_CONTROL                         (_T("Control"))
 #define  DUI_CTR_LABEL                           (_T("Label"))
 #define  DUI_CTR_BUTTON                          (_T("Button"))

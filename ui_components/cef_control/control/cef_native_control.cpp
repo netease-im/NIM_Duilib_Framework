@@ -30,7 +30,7 @@ void CefNativeControl::Init()
 	{
 		LONG style = GetWindowLong(m_pWindow->GetHWND(), GWL_STYLE);
 		SetWindowLong(m_pWindow->GetHWND(), GWL_STYLE, style | WS_CLIPSIBLINGS | WS_CLIPCHILDREN);
-		ASSERT((GetWindowExStyle(m_pWindow->GetHWND()) & WS_EX_LAYERED) == 0 && L"ÎÞ·¨ÔÚ·Ö²ã´°¿ÚÄÚÊ¹ÓÃ±¾¿Ø¼þ");
+		ASSERT((GetWindowExStyle(m_pWindow->GetHWND()) & WS_EX_LAYERED) == 0 && L"æ— æ³•åœ¨åˆ†å±‚çª—å£å†…ä½¿ç”¨æœ¬æŽ§ä»¶");
 
 		browser_handler_ = new nim_comp::BrowserHandler;
 		browser_handler_->SetHostWindow(m_pWindow->GetHWND());
@@ -50,7 +50,7 @@ void CefNativeControl::ReCreateBrowser()
 {
 	if (browser_handler_->GetBrowser() == nullptr)
 	{
-		// Ê¹ÓÃÓÐ´°Ä£Ê½
+		// ä½¿ç”¨æœ‰çª—æ¨¡å¼
 		CefWindowInfo window_info;
 		window_info.SetAsChild(this->m_pWindow->GetHWND(), m_rcItem);
 
@@ -128,12 +128,12 @@ void CefNativeControl::SetWindow(ui::Window* pManager, ui::Box* pParent, bool bI
 	if (browser_handler_)
 		browser_handler_->SetHostWindow(pManager->GetHWND());
 
-	// ÉèÖÃCef´°¿Ú¾ä±úÎªÐÂµÄÖ÷´°¿ÚµÄ×Ó´°¿Ú
+	// è®¾ç½®Cefçª—å£å¥æŸ„ä¸ºæ–°çš„ä¸»çª—å£çš„å­çª—å£
 	auto hwnd = GetCefHandle();
 	if (hwnd)
 		SetParent(hwnd, pManager->GetHWND());
 
-	// ÎªÐÂµÄÖ÷´°¿ÚÖØÐÂÉèÖÃWS_CLIPSIBLINGS¡¢WS_CLIPCHILDRENÑùÊ½£¬·ñÔòCef´°¿ÚË¢ÐÂ»á³öÎÊÌâ
+	// ä¸ºæ–°çš„ä¸»çª—å£é‡æ–°è®¾ç½®WS_CLIPSIBLINGSã€WS_CLIPCHILDRENæ ·å¼ï¼Œå¦åˆ™Cefçª—å£åˆ·æ–°ä¼šå‡ºé—®é¢˜
 	LONG style = GetWindowLong(pManager->GetHWND(), GWL_STYLE);
 	SetWindowLong(pManager->GetHWND(), GWL_STYLE, style | WS_CLIPSIBLINGS | WS_CLIPCHILDREN);
 

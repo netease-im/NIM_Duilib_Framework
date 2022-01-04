@@ -4,7 +4,7 @@
 // Author: Redrain
 // Date: 2015/09/24
 //
-// brife: ÊµÏÖ¿Ø¼şµÄÍÏ×§ºÍ´°ÌåµÄÍÏ·Å¹¦ÄÜ
+// brife: å®ç°æ§ä»¶çš„æ‹–æ‹½å’Œçª—ä½“çš„æ‹–æ”¾åŠŸèƒ½
 #pragma once
 #include "OleIdl.h"
 #include "ShObjIdl.h"
@@ -79,7 +79,7 @@ public:
     virtual HRESULT STDMETHODCALLTYPE GiveFeedback( 
         /* [in] */ DWORD dwEffect);
 
-	// ÉèÖÃÍÏ×§Ê±Êó±ê¹â±êµÄÑùÊ½£¬Èç¹û²»ÉèÖÃÔòÊ¹ÓÃÏµÍ³Ä¬ÈÏ¹â±ê
+	// è®¾ç½®æ‹–æ‹½æ—¶é¼ æ ‡å…‰æ ‡çš„æ ·å¼ï¼Œå¦‚æœä¸è®¾ç½®åˆ™ä½¿ç”¨ç³»ç»Ÿé»˜è®¤å…‰æ ‡
 	void SetFeedbackCursor(HCURSOR cursor);
 private:
 	long	m_cRefCount;

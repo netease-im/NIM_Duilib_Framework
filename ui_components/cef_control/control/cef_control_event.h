@@ -1,5 +1,5 @@
 /** @file cef_control_event.h
-* @brief Cef控件事件处理接口
+* @brief Cef鎺т欢浜嬩欢澶勭悊鎺ュ彛
 * @copyright (c) 2016, NetEase Inc. All rights reserved
 * @author Redrain
 * @date 2016/7/22

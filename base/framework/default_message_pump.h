@@ -1,4 +1,4 @@
-﻿// A implemetation of a cross flatform waitable event based message loop 
+// A implemetation of a cross flatform waitable event based message loop 
 
 #ifndef BASE_FRAMEWORK_DEFAULT_MESSAGE_PUMP_H_
 #define BASE_FRAMEWORK_DEFAULT_MESSAGE_PUMP_H_

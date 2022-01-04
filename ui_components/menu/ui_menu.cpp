@@ -95,7 +95,7 @@ void CMenuWnd::DetouchOwner()
 
 		m_pLayout->RemoveAll();
 		m_pOwner->m_pSubWindow = NULL;
-		//m_pOwner->m_uButtonState &= ~UISTATE_PUSHED;  ÕâÀï¿ÉÄÜĞèÒªÌæ»»£¬ÔİÊ±×¢ÊÍ
+		//m_pOwner->m_uButtonState &= ~UISTATE_PUSHED;  è¿™é‡Œå¯èƒ½éœ€è¦æ›¿æ¢ï¼Œæš‚æ—¶æ³¨é‡Š
 		m_pOwner->Invalidate();
 		m_pOwner = NULL;
 	}
@@ -198,19 +198,19 @@ void CMenuWnd::ResizeMenu()
 	Control* pRoot = GetRoot();
 	MONITORINFO oMonitor = {};
 	oMonitor.cbSize = sizeof(oMonitor);
-	//µã»÷ÔÚÄÄÀï£¬ÒÔÄÄÀïµÄÆÁÄ»ÎªÖ÷
+	//ç‚¹å‡»åœ¨å“ªé‡Œï¼Œä»¥å“ªé‡Œçš„å±å¹•ä¸ºä¸»
 	::GetMonitorInfo(::MonitorFromPoint(m_BasedPoint, MONITOR_DEFAULTTOPRIMARY), &oMonitor);
 	UiRect rcWork = oMonitor.rcWork;
 
 	CSize szAvailable = { rcWork.right - rcWork.left, rcWork.bottom - rcWork.top };
-	szAvailable = pRoot->EstimateSize(szAvailable);   //ÕâÀï´øÉÏÁËÒõÓ°´°¿Ú
+	szAvailable = pRoot->EstimateSize(szAvailable);   //è¿™é‡Œå¸¦ä¸Šäº†é˜´å½±çª—å£
 	SetInitSize(szAvailable.cx, szAvailable.cy);
 	UiRect rcCorner = GetShadowCorner();
 	CSize szInit=szAvailable;   
 	szInit.cx -= rcCorner.left + rcCorner.right;
-	szInit.cy -= rcCorner.top + rcCorner.bottom; //ÕâÀïÈ¥µôÒõÓ°´°¿Ú£¬¼´ÓÃ»§µÄÊÓ¾õÓĞĞ§Ãæ»ı szInit<=szAvailable
+	szInit.cy -= rcCorner.top + rcCorner.bottom; //è¿™é‡Œå»æ‰é˜´å½±çª—å£ï¼Œå³ç”¨æˆ·çš„è§†è§‰æœ‰æ•ˆé¢ç§¯ szInit<=szAvailable
 	
-	CPoint point = m_BasedPoint;  //ÕâÀïÓĞ¸öbug£¬ÓÉÓÚ×ø±êµãÓë°üº¬ÔÚ´°¿ÚÄÚ£¬»áÖ±½Ó³ö·¢mouseenterµ¼ÖÂ³öÀ´×Ó²Ëµ¥£¬Æ«ÒÆ1¸öÏñËØ
+	CPoint point = m_BasedPoint;  //è¿™é‡Œæœ‰ä¸ªbugï¼Œç”±äºåæ ‡ç‚¹ä¸åŒ…å«åœ¨çª—å£å†…ï¼Œä¼šç›´æ¥å‡ºå‘mouseenterå¯¼è‡´å‡ºæ¥å­èœå•ï¼Œåç§»1ä¸ªåƒç´ 
 	if (m_popupPosType & eMenuAlignment_Right)
 	{
 		point.x += -szAvailable.cx + rcCorner.right + rcCorner.left;
@@ -274,7 +274,7 @@ void CMenuWnd::ResizeSubMenu()
 	CSize szAvailable = { rcWork.right - rcWork.left, rcWork.bottom - rcWork.top };
 
 	for (int it = 0; it < m_pLayout->GetCount(); it++) {
-		//È¡×Ó²Ëµ¥ÏîÖĞµÄ×î´óÖµ×÷Îª²Ëµ¥Ïî
+		//å–å­èœå•é¡¹ä¸­çš„æœ€å¤§å€¼ä½œä¸ºèœå•é¡¹
 		CMenuElementUI* pItem = dynamic_cast<CMenuElementUI*>(m_pLayout->GetItemAt(it));
 		if (pItem)
 		{
@@ -288,7 +288,7 @@ void CMenuWnd::ResizeSubMenu()
 	UiRect rcCorner = GetShadowCorner();
 	RECT rcWindow;
 	GetWindowRect(m_pOwner->GetWindow()->GetHWND(), &rcWindow);
-	//È¥ÒõÓ°
+	//å»é˜´å½±
 	{
 		rcWindow.left += rcCorner.left;
 		rcWindow.right -= rcCorner.right;
@@ -313,7 +313,7 @@ void CMenuWnd::ResizeSubMenu()
 	while (pReceiver != NULL) {
 		CMenuWnd* pContextMenu = dynamic_cast<CMenuWnd*>(pReceiver);
 		if (pContextMenu != NULL) {
-			GetWindowRect(pContextMenu->GetHWND(), &rcPreWindow);  //ĞèÒª¼õµôÒõÓ°
+			GetWindowRect(pContextMenu->GetHWND(), &rcPreWindow);  //éœ€è¦å‡æ‰é˜´å½±
 
 			bReachRight = (rcPreWindow.left + rcCorner.left) >= rcWindow.right;
 			bReachBottom = (rcPreWindow.top + rcCorner.top) >= rcWindow.bottom;
@@ -394,7 +394,7 @@ void CMenuWnd::Show()
 	}
 	else
 	{
-		//¼æÈİÀÏ°æ±¾
+		//å…¼å®¹è€ç‰ˆæœ¬
 		return;
 	}
 	UiRect rc;
@@ -405,7 +405,7 @@ void CMenuWnd::Show()
 		rc.top = monitor_rect.top;
 	}
 
-	//ÅĞ¶ÏÊÇ·ñ³¬³öÆÁÄ»
+	//åˆ¤æ–­æ˜¯å¦è¶…å‡ºå±å¹•
 	if (rc.left > monitor_rect.right - szInit.cx)
 	{
 		rc.left = monitor_rect.right - szInit.cx;
@@ -436,7 +436,7 @@ void CMenuWnd::InitWindow()
 			subMenuItem->SetInternVisible(true);		//add by djj 20200506
 			if (subMenuItem && subMenuItem->IsVisible())
 			{
-				m_pLayout->Add(subMenuItem); //ÄÚ²¿»áµ÷ÓÃsubMenuItem->SetOwner(m_pLayout); »áµ÷ÓÃSetWindows£¬¸Ä±äÁË¹éÊô´°¿Ú¡¢¸¸¿Ø¼ş¡£
+				m_pLayout->Add(subMenuItem); //å†…éƒ¨ä¼šè°ƒç”¨subMenuItem->SetOwner(m_pLayout); ä¼šè°ƒç”¨SetWindowsï¼Œæ”¹å˜äº†å½’å±çª—å£ã€çˆ¶æ§ä»¶ã€‚
 			}
 		}
 	}
@@ -445,7 +445,7 @@ void CMenuWnd::InitWindow()
 		m_pLayout = dynamic_cast<ListBox*>(m_pRoot);
 		if (m_pLayout == NULL)
 		{
-			//ÔÊĞíÍâÃæÌ×²ãÒõÓ°
+			//å…è®¸å¤–é¢å¥—å±‚é˜´å½±
 			if (m_pRoot->GetCount()>0)
 			{
 				m_pLayout = dynamic_cast<ListBox*>(m_pRoot->GetItemAt(0));
@@ -557,7 +557,7 @@ bool CMenuElementUI::ButtonUp(EventArgs& msg)
 	std::weak_ptr<nbase::WeakFlag> weakFlag = m_pWindow->GetWeakFlag();
 	bool ret = __super::ButtonUp(msg);
 	if (ret && !weakFlag.expired()) {
-		//ÕâÀï´¦ÀíÏÂÈç¹ûÓĞ×Ó²Ëµ¥ÔòÏÔÊ¾×Ó²Ëµ¥
+		//è¿™é‡Œå¤„ç†ä¸‹å¦‚æœæœ‰å­èœå•åˆ™æ˜¾ç¤ºå­èœå•
 		if (!CheckSubMenuItem())
 		{
 			ContextMenuParam param;
@@ -575,15 +575,15 @@ bool CMenuElementUI::MouseEnter(EventArgs& msg)
 	std::weak_ptr<nbase::WeakFlag> weakFlag = m_pWindow->GetWeakFlag();
 	bool ret = __super::MouseEnter(msg);
 	if (ret && !weakFlag.expired()) {
-		//ÕâÀï´¦ÀíÏÂÈç¹ûÓĞ×Ó²Ëµ¥ÔòÏÔÊ¾×Ó²Ëµ¥
+		//è¿™é‡Œå¤„ç†ä¸‹å¦‚æœæœ‰å­èœå•åˆ™æ˜¾ç¤ºå­èœå•
 		if (!CheckSubMenuItem())
 		{
 			ContextMenuParam param;
 			param.hWnd = GetWindow()->GetHWND();
 			param.wParam = eMenuCloseThis;
 			CMenuWnd::GetMenuObserver().RBroadcast(param);
-			//m_pOwner->SelectItem(GetIndex(), true);  ÓĞĞ©ÀÏ°æ±¾attachselect»á´¥·¢
-			//ÕâÀïµÃ°ÑÖ®Ç°Ñ¡ÖĞµÄÖÃÎªÎ´Ñ¡ÖĞ
+			//m_pOwner->SelectItem(GetIndex(), true);  æœ‰äº›è€ç‰ˆæœ¬attachselectä¼šè§¦å‘
+			//è¿™é‡Œå¾—æŠŠä¹‹å‰é€‰ä¸­çš„ç½®ä¸ºæœªé€‰ä¸­
 			m_pOwner->SelectItem(-1, false);
 		}
 	}
@@ -597,7 +597,7 @@ void CMenuElementUI::PaintChild(IRenderContext* pRender, const UiRect& rcPaint)
 	if (!::IntersectRect(&rcTemp, &rcPaint, &m_rcItem)) return;
 
 	for (auto it = m_items.begin(); it != m_items.end(); it++) {
-		//³¢ÊÔ×ªCMenuElementUI
+		//å°è¯•è½¬CMenuElementUI
 		CMenuElementUI* subMenuItem = dynamic_cast<CMenuElementUI*>(*it);
 		if (subMenuItem)
 		{
@@ -625,7 +625,7 @@ void CMenuElementUI::CreateMenuWnd()
 #if 0
 	if (m_pSubWindow)
 		return;
-#else		//add by djj 20200506 ¿ìËÙÇĞ»»×Ó²Ëµ¥Çé¿öÏÂ, ¿ÉÒÔÊ¹×Ó²Ëµ¥µ¯³ö¼°Ê±
+#else		//add by djj 20200506 å¿«é€Ÿåˆ‡æ¢å­èœå•æƒ…å†µä¸‹, å¯ä»¥ä½¿å­èœå•å¼¹å‡ºåŠæ—¶
 	if (m_pSubWindow)
 	{
 		if (m_pSubWindow->IsClosing())

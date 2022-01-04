@@ -28,7 +28,7 @@ std::wstring CefForm::GetWindowClassName() const
 
 ui::Control* CefForm::CreateControl(const std::wstring& pstrClass)
 {
-	// É¨Ãè XML ·¢ÏÖÓÐÃû³ÆÎª CefControl µÄ½Úµã£¬Ôò´´½¨Ò»¸ö ui::CefControl ¿Ø¼þ
+	// æ‰«æ XML å‘çŽ°æœ‰åç§°ä¸º CefControl çš„èŠ‚ç‚¹ï¼Œåˆ™åˆ›å»ºä¸€ä¸ª ui::CefControl æŽ§ä»¶
 	if (pstrClass == L"CefControl")
 	{
 		if (nim_comp::CefManager::GetInstance()->IsEnableOffsetRender())
@@ -42,26 +42,26 @@ ui::Control* CefForm::CreateControl(const std::wstring& pstrClass)
 
 void CefForm::InitWindow()
 {
-	// ¼àÌýÊó±êµ¥»÷ÊÂ¼þ
+	// ç›‘å¬é¼ æ ‡å•å‡»äº‹ä»¶
 	m_pRoot->AttachBubbledEvent(ui::kEventClick, nbase::Bind(&CefForm::OnClicked, this, std::placeholders::_1));
 
-	// ´Ó XML ÖÐ²éÕÒÖ¸¶¨¿Ø¼þ
+	// ä»Ž XML ä¸­æŸ¥æ‰¾æŒ‡å®šæŽ§ä»¶
 	cef_control_		= dynamic_cast<nim_comp::CefControlBase*>(FindControl(L"cef_control"));
 	cef_control_dev_	= dynamic_cast<nim_comp::CefControlBase*>(FindControl(L"cef_control_dev"));
 	btn_dev_tool_		= dynamic_cast<ui::Button*>(FindControl(L"btn_dev_tool"));
 	edit_url_			= dynamic_cast<ui::RichEdit*>(FindControl(L"edit_url"));
 
-	// ÉèÖÃÊäÈë¿òÑùÊ½
+	// è®¾ç½®è¾“å…¥æ¡†æ ·å¼
 	edit_url_->SetSelAllOnFocus(true);
 	edit_url_->AttachReturn(nbase::Bind(&CefForm::OnNavigate, this, std::placeholders::_1));
 
-	// ¼àÌýÒ³Ãæ¼ÓÔØÍê±ÏÍ¨Öª
+	// ç›‘å¬é¡µé¢åŠ è½½å®Œæ¯•é€šçŸ¥
 	cef_control_->AttachLoadEnd(nbase::Bind(&CefForm::OnLoadEnd, this, std::placeholders::_1));
 
-	// ´ò¿ª¿ª·¢Õß¹¤¾ß
+	// æ‰“å¼€å¼€å‘è€…å·¥å…·
 	cef_control_->AttachDevTools(cef_control_dev_);
 
-	// ¼ÓÔØÆ¤·ôÄ¿Â¼ÏÂµÄ html ÎÄ¼þ
+	// åŠ è½½çš®è‚¤ç›®å½•ä¸‹çš„ html æ–‡ä»¶
 	cef_control_->LoadURL(nbase::win32::GetCurrentModuleDirectory() + L"resources\\themes\\default\\cef\\cef.html");
 
 	if (!nim_comp::CefManager::GetInstance()->IsEnableOffsetRender())
@@ -130,7 +130,7 @@ void CefForm::OnLoadEnd(int httpStatusCode)
 	FindControl(L"btn_back")->SetEnabled(cef_control_->CanGoBack());
 	FindControl(L"btn_forward")->SetEnabled(cef_control_->CanGoForward());
 
-	// ×¢²áÒ»¸ö·½·¨Ìá¹©Ç°¶Ëµ÷ÓÃ
+	// æ³¨å†Œä¸€ä¸ªæ–¹æ³•æä¾›å‰ç«¯è°ƒç”¨
 	cef_control_->RegisterCppFunc(L"ShowMessageBox", ToWeakCallback([this](const std::string& params, nim_comp::ReportResultFunction callback) {
 		nim_comp::Toast::ShowToast(nbase::UTF8ToUTF16(params), 3000, GetHWND());
 		callback(false, R"({ "message": "Success." })");

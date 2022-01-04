@@ -10,7 +10,7 @@ namespace nim_comp {
 using namespace ui;
 
 /** @class ShadowWnd
- * @brief һ�����ӵ�����������Χ�Ĵ��ڣ����� WS_EX_LAYERED ������ʵ����Ӱ
+ * @brief 一个附加到基础窗口周围的窗口，带有 WS_EX_LAYERED 属性来实现阴影
  * @copyright (c) 2016, NetEase Inc. All rights reserved
  * @date 2019-03-22
  */
@@ -30,7 +30,7 @@ private:
 };
 
 /** @class ShadowWnd
- * @brief ʹ�ø�����Ӱ���ڵĻ��࣬ʵ���˴������ڲ����ӵĹ��ܣ��ṩû�� WS_EX_LAYERED ���ԵĴ��ڼ̳�
+ * @brief 使用附加阴影窗口的基类，实现了创建窗口并附加的功能，提供没有 WS_EX_LAYERED 属性的窗口继承
  * @copyright (c) 2016, NetEase Inc. All rights reserved
  * @date 2019-03-22
  */

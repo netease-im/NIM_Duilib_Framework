@@ -90,7 +90,7 @@ VERSIONHELPERAPI IsWindows8OrGreater()
     return IsWindowsVersionOrGreater(HIBYTE(_WIN32_WINNT_WIN8), LOBYTE(_WIN32_WINNT_WIN8), 0);
 }
 
-// win8以上的系统检测，必须要给程序附加manifest文件，并且用supportedOS标签指定支持win8.1和win10，否则无法最多检测到win8系统
+// win8浠ヤ笂鐨勭郴缁熸娴嬶紝蹇呴』瑕佺粰绋嬪簭闄勫姞manifest鏂囦欢锛屽苟涓旂敤supportedOS鏍囩鎸囧畾鏀寔win8.1鍜寃in10锛屽惁鍒欐棤娉曟渶澶氭娴嬪埌win8绯荤粺
 VERSIONHELPERAPI IsWindows8Point1OrGreater()
 {
 	return IsWindowsVersionOrGreater(HIBYTE(_WIN32_WINNT_WINBLUE), LOBYTE(_WIN32_WINNT_WINBLUE), 0);

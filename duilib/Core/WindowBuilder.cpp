@@ -11,9 +11,9 @@ WindowBuilder::WindowBuilder()
 Box* WindowBuilder::Create(STRINGorID xml, CreateControlCallback pCallback, 
 	Window* pManager, Box* pParent, Box* pUserDefinedBox)
 {
-	//×ÊÔ´IDÎª0-65535£¬Á½¸ö×Ö½Ú£»×Ö·û´®Ö¸ÕëÎª4¸ö×Ö½Ú
-	//×Ö·û´®ÒÔ<¿ªÍ·ÈÏÎªÊÇXML×Ö·û´®£¬·ñÔòÈÏÎªÊÇXMLÎÄ¼ş
-	//Èç¹ûÊ¹ÓÃÁË zip Ñ¹Ëõ°ü£¬Ôò´ÓÄÚ´æÖĞ¶ÁÈ¡
+	//èµ„æºIDä¸º0-65535ï¼Œä¸¤ä¸ªå­—èŠ‚ï¼›å­—ç¬¦ä¸²æŒ‡é’ˆä¸º4ä¸ªå­—èŠ‚
+	//å­—ç¬¦ä¸²ä»¥<å¼€å¤´è®¤ä¸ºæ˜¯XMLå­—ç¬¦ä¸²ï¼Œå¦åˆ™è®¤ä¸ºæ˜¯XMLæ–‡ä»¶
+	//å¦‚æœä½¿ç”¨äº† zip å‹ç¼©åŒ…ï¼Œåˆ™ä»å†…å­˜ä¸­è¯»å–
 	if (HIWORD(xml.m_lpstr) != NULL) {
 		if (*(xml.m_lpstr) == _T('<')) {
 			if (!m_xml.Load(xml.m_lpstr)) return NULL;
@@ -196,7 +196,7 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 			for( CMarkupNode node = root.GetChild() ; node.IsValid(); node = node.GetSibling() ) {
 				strClass = node.GetName();
 				if( strClass == _T("Image") ) {
-					ASSERT(FALSE);	//·ÏÆú
+					ASSERT(FALSE);	//åºŸå¼ƒ
 				}
 				else if (strClass == _T("FontResource")) {
 					nAttributes = node.GetAttributeCount();
@@ -335,7 +335,7 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 						}
 					}
 					if( !strClassName.empty() ) {
-						ASSERT( GlobalManager::GetClassAttributes(strClassName).empty() );	//´°¿ÚÖĞµÄClass²»ÄÜÓëÈ«¾ÖµÄÖØÃû
+						ASSERT( GlobalManager::GetClassAttributes(strClassName).empty() );	//çª—å£ä¸­çš„Classä¸èƒ½ä¸å…¨å±€çš„é‡å
 						StringHelper::TrimLeft(strAttribute);
 						pManager->AddClass(strClassName, strAttribute);
 					}
@@ -377,7 +377,7 @@ Box* WindowBuilder::Create(CreateControlCallback pCallback, Window* pManager, Bo
 
 				int nAttributes = node.GetAttributeCount();
 				for (int i = 0; i < nAttributes; i++) {
-					ASSERT(i == 0 || _tcscmp(node.GetAttributeName(i), _T("class")) != 0);	//class±ØĞëÊÇµÚÒ»¸öÊôĞÔ
+					ASSERT(i == 0 || _tcscmp(node.GetAttributeName(i), _T("class")) != 0);	//classå¿…é¡»æ˜¯ç¬¬ä¸€ä¸ªå±æ€§
 					pUserDefinedBox->SetAttribute(node.GetAttributeName(i), node.GetAttributeValue(i));
 				}
 				return pUserDefinedBox;
@@ -455,7 +455,7 @@ Control* WindowBuilder::_Parse(CMarkupNode* pRoot, Control* pParent, Window* pMa
 			continue;
 		}
 
-		// TreeViewÏà¹Ø±ØĞëÏÈÌí¼Óºó½âÎö
+		// TreeViewç›¸å…³å¿…é¡»å…ˆæ·»åŠ åè§£æ
 		if (strClass == DUI_CTR_TREENODE) {
 			TreeNode* pNode = static_cast<TreeNode*>(pControl);
 			TreeView* pTreeView = dynamic_cast<TreeView*>(pParent);
@@ -481,13 +481,13 @@ Control* WindowBuilder::_Parse(CMarkupNode* pRoot, Control* pParent, Window* pMa
 			// Set ordinary attributes
 			int nAttributes = node.GetAttributeCount();
 			for( int i = 0; i < nAttributes; i++ ) {
-				ASSERT(i == 0 || _tcscmp(node.GetAttributeName(i), _T("class")) != 0);	//class±ØĞëÊÇµÚÒ»¸öÊôĞÔ
+				ASSERT(i == 0 || _tcscmp(node.GetAttributeName(i), _T("class")) != 0);	//classå¿…é¡»æ˜¯ç¬¬ä¸€ä¸ªå±æ€§
 				pControl->SetAttribute(node.GetAttributeName(i), node.GetAttributeValue(i));
 			}
 		}
 
 		// Attach to parent
-        // ÒòÎªÄ³Ğ©ÊôĞÔºÍ¸¸´°¿ÚÏà¹Ø£¬±ÈÈçselected£¬±ØĞëÏÈAddµ½¸¸´°¿Ú
+        // å› ä¸ºæŸäº›å±æ€§å’Œçˆ¶çª—å£ç›¸å…³ï¼Œæ¯”å¦‚selectedï¼Œå¿…é¡»å…ˆAddåˆ°çˆ¶çª—å£
 		if (pParent != NULL && strClass != DUI_CTR_TREENODE) {
 			Box* pContainer = dynamic_cast<Box*>(pParent);
 			ASSERT(pContainer);

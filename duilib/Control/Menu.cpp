@@ -105,7 +105,7 @@ void MenuBox::RemoveAll()
 		}
 	}
 	else {
-		// ×Ó²Ëµ¥ÖĞµÄÁÙÊ±²Ëµ¥Ïî£¬Ò»¶¨»á±»Ïú»Ù
+		// å­èœå•ä¸­çš„ä¸´æ—¶èœå•é¡¹ï¼Œä¸€å®šä¼šè¢«é”€æ¯
 		for (auto it = m_items.begin(); it != m_items.end(); it++) {
 			MenuElement* pMenuItem = dynamic_cast<MenuElement*>((*it));
 			if (pMenuItem != NULL && pMenuItem->IsTempItem()) {
@@ -267,7 +267,7 @@ void MenuWndEx::ResizeMenu()
 	UiRect monitor_rect = oMonitor.rcMonitor;
 	ui::CSize szInit = { rcWork.right - rcWork.left, rcWork.bottom - rcWork.top };
 	szInit = GetRoot()->EstimateSize(szInit);
-	//±ØĞëÊÇMenu±êÇ©×÷ÎªxmlµÄ¸ù½Úµã
+	//å¿…é¡»æ˜¯Menuæ ‡ç­¾ä½œä¸ºxmlçš„æ ¹èŠ‚ç‚¹
 	MenuBox *pMenuRoot = static_cast<MenuBox*>(GetRoot());
 	ASSERT(pMenuRoot);
 
@@ -296,7 +296,7 @@ void MenuWndEx::ResizeMenu()
         rc.top = rc.bottom - szInit.cy;
     }
 
-	//ÅĞ¶ÏÊÇ·ñ³¬³öÆÁÄ»
+	//åˆ¤æ–­æ˜¯å¦è¶…å‡ºå±å¹•
 	if (rc.left > monitor_rect.right - szInit.cx)
 	{
 		rc.left = monitor_rect.right - szInit.cx;
@@ -343,7 +343,7 @@ void MenuWndEx::ResizeSubMenu()
 #endif
 
 	RECT rcOwner = m_pOwner->GetPos();
-	// ³õÊ¼»¯×Ó²Ëµ¥µÄµ¯³öÎ»ÖÃ
+	// åˆå§‹åŒ–å­èœå•çš„å¼¹å‡ºä½ç½®
 	UiRect rc = rcOwner;
 	rc.top = rcOwner.top;
 	rc.bottom = rc.top + szInit.cy;
@@ -591,7 +591,7 @@ LRESULT MenuWndEx::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 		ASSERT(pRoot);
 		if (pRoot == NULL) {
-			// MessageBox(NULL, _T("¼ÓÔØ×ÊÔ´ÎÄ¼şÊ§°Ü"), _T("Duilib"), MB_OK | MB_ICONERROR);
+			// MessageBox(NULL, _T("åŠ è½½èµ„æºæ–‡ä»¶å¤±è´¥"), _T("Duilib"), MB_OK | MB_ICONERROR);
 			return -1;
 		}
 
@@ -717,8 +717,8 @@ void MenuWndEx::SetWidth(const int width)
 MenuElement::MenuElement()
 {
 	m_cxyFixed.cy = 30;
-	// ²Ëµ¥Ïî´¦ÀíWM_POINTERÏûÏ¢£¬·ñÔòWM_POINTERÏûÏ¢¾Í»á×ª»»ÎªWM_TOUCH
-	// ´ËÊ±²Ëµ¥Èç¹ûÏûÊ§µÄ»°£¬µ¼ÖÂÏÂ²ã´°¿ÚÊÕµ½WM_TOUCHÏûÏ¢¶øµ¼ÖÂWindow::m_pEventPointerÎª·Ç¿Õ£¬µ¼ÖÂÊó±êÏûÏ¢ÎŞ·¨±»´¦Àí
+	// èœå•é¡¹å¤„ç†WM_POINTERæ¶ˆæ¯ï¼Œå¦åˆ™WM_POINTERæ¶ˆæ¯å°±ä¼šè½¬æ¢ä¸ºWM_TOUCH
+	// æ­¤æ—¶èœå•å¦‚æœæ¶ˆå¤±çš„è¯ï¼Œå¯¼è‡´ä¸‹å±‚çª—å£æ”¶åˆ°WM_TOUCHæ¶ˆæ¯è€Œå¯¼è‡´Window::m_pEventPointerä¸ºéç©ºï¼Œå¯¼è‡´é¼ æ ‡æ¶ˆæ¯æ— æ³•è¢«å¤„ç†
 	SetReceivePointerMsg(true);
 }
 
@@ -1020,19 +1020,19 @@ void MenuElement::SetAttribute(const std::wstring& strName, const std::wstring& 
 
 void MenuElement::PaintStatusColor(IRenderContext* pRender)
 {
-	// ²»»æÖÆSelect×´Ì¬
+	// ä¸ç»˜åˆ¶SelectçŠ¶æ€
 	Box::PaintStatusColor(pRender);
 }
 
 void MenuElement::PaintStatusImage(IRenderContext* pRender)
 {
-	// ²»»æÖÆSelect×´Ì¬
+	// ä¸ç»˜åˆ¶SelectçŠ¶æ€
 	Box::PaintStatusImage(pRender);
 }
 
 void MenuElement::PaintText(IRenderContext* pRender)
 {
-	// ²»»æÖÆSelect×´Ì¬
+	// ä¸ç»˜åˆ¶SelectçŠ¶æ€
 	LabelBox::PaintText(pRender);
 }
 

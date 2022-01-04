@@ -15,73 +15,73 @@ public:
 	virtual ~Layout() {}
 
 	/**
-	 * @brief ÉèÖÃËùÓĞÕß
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ‰€æœ‰è€…
+	 * @return æ— 
 	 */
 	void SetOwner(Box* pOwner);
 
 	/**
-	 * @brief ÉèÖÃ¸¡¶¯×´Ì¬ÏÂµÄ×ø±êĞÅÏ¢
-	 * @param[in] pControl ¿Ø¼ş¾ä±ú
-	 * @param[in] rcContainer ÒªÉèÖÃµÄÎ»ÖÃĞÅÏ¢
-	 * @return ·µ»Ø¿Ø¼ş×îÖÕµÄÎ»ÖÃĞÅÏ¢
+	 * @brief è®¾ç½®æµ®åŠ¨çŠ¶æ€ä¸‹çš„åæ ‡ä¿¡æ¯
+	 * @param[in] pControl æ§ä»¶å¥æŸ„
+	 * @param[in] rcContainer è¦è®¾ç½®çš„ä½ç½®ä¿¡æ¯
+	 * @return è¿”å›æ§ä»¶æœ€ç»ˆçš„ä½ç½®ä¿¡æ¯
 	 */
 	static CSize SetFloatPos(Control* pControl, UiRect rcContainer);
 
 	/**
-	 * @brief ÉèÖÃ²¼¾ÖÊôĞÔ
-	 * @param[in] strName ÒªÉèÖÃµÄÊôĞÔÃû
-	 * @param[in] strValue ÒªÉèÖÃµÄÊôĞÔÖµ
-	 * @return true ÉèÖÃ³É¹¦£¬false ÊôĞÔ²»´æÔÚ
+	 * @brief è®¾ç½®å¸ƒå±€å±æ€§
+	 * @param[in] strName è¦è®¾ç½®çš„å±æ€§å
+	 * @param[in] strValue è¦è®¾ç½®çš„å±æ€§å€¼
+	 * @return true è®¾ç½®æˆåŠŸï¼Œfalse å±æ€§ä¸å­˜åœ¨
 	 */
 	virtual bool SetAttribute(const std::wstring& strName, const std::wstring& strValue);
 
 	/**
-	 * @brief µ÷ÕûÄÚ²¿ËùÓĞ¿Ø¼şµÄÎ»ÖÃĞÅÏ¢
-	 * @param[in] items ¿Ø¼şÁĞ±í
-	 * @param[in] rc µ±Ç°ÈİÆ÷Î»ÖÃĞÅÏ¢
-	 * @return ·µ»ØÅÅÁĞºó×îÖÕºĞ×ÓµÄ¿í¶ÈºÍ¸ß¶ÈĞÅÏ¢
+	 * @brief è°ƒæ•´å†…éƒ¨æ‰€æœ‰æ§ä»¶çš„ä½ç½®ä¿¡æ¯
+	 * @param[in] items æ§ä»¶åˆ—è¡¨
+	 * @param[in] rc å½“å‰å®¹å™¨ä½ç½®ä¿¡æ¯
+	 * @return è¿”å›æ’åˆ—åæœ€ç»ˆç›’å­çš„å®½åº¦å’Œé«˜åº¦ä¿¡æ¯
 	 */
 	virtual CSize ArrangeChild(const std::vector<Control*>& items, UiRect rc);
 
 	/**
-	 * @brief ¸ù¾İÄÚ²¿×Ó¿Ø¼ş´óĞ¡µ÷ÕûÈİÆ÷×ÔÉí´óĞ¡
-	 * @param[in] items ¿Ø¼şÁĞ±í
-	 * @param[in] szAvailable ×Ó¿Ø¼şÔÊĞíµÄ×î´ó¿í¶È
-	 * @return ·µ»ØÅÅÁĞºó×îÖÕºĞ×ÓµÄ¿í¶ÈºÍ¸ß¶ÈĞÅÏ¢
+	 * @brief æ ¹æ®å†…éƒ¨å­æ§ä»¶å¤§å°è°ƒæ•´å®¹å™¨è‡ªèº«å¤§å°
+	 * @param[in] items æ§ä»¶åˆ—è¡¨
+	 * @param[in] szAvailable å­æ§ä»¶å…è®¸çš„æœ€å¤§å®½åº¦
+	 * @return è¿”å›æ’åˆ—åæœ€ç»ˆç›’å­çš„å®½åº¦å’Œé«˜åº¦ä¿¡æ¯
 	 */
 	virtual CSize AjustSizeByChild(const std::vector<Control*>& items, CSize szAvailable);
 
 	/**
-	 * @brief »ñÈ¡ÄÚ±ß¾à
-	 * @return ·µ»ØÄÚ±ß¾àËÄ±ßµÄ´óĞ¡
+	 * @brief è·å–å†…è¾¹è·
+	 * @return è¿”å›å†…è¾¹è·å››è¾¹çš„å¤§å°
 	 */
 	virtual UiRect GetPadding() const;
 
 	/**
-	 * @brief ÉèÖÃÄÚ±ß¾à£¬Ïàµ±ÓÚÉèÖÃ¿Í»§Çø
-	 * @param[in] rcPadding ÄÚ±ß¾àÊı¾İ
-	 * @param[in] bNeedDpiScale ÊÇ·ñ¸ù¾İ DPI ×ÔÊÊÓ¦£¬Ä¬ÈÏÎª true
-	 * @return ÎŞ
+	 * @brief è®¾ç½®å†…è¾¹è·ï¼Œç›¸å½“äºè®¾ç½®å®¢æˆ·åŒº
+	 * @param[in] rcPadding å†…è¾¹è·æ•°æ®
+	 * @param[in] bNeedDpiScale æ˜¯å¦æ ¹æ® DPI è‡ªé€‚åº”ï¼Œé»˜è®¤ä¸º true
+	 * @return æ— 
 	 */
 	virtual void SetPadding(UiRect rcPadding, bool bNeedDpiScale = true);
 
 	/**
-	 * @brief »ñÈ¡×Ó¿Ø¼şÖ®¼äµÄ¶îÍâ±ß¾à
-	 * @return ·µ»Ø¶îÍâ¼ä¾àµÄÊıÖµ
+	 * @brief è·å–å­æ§ä»¶ä¹‹é—´çš„é¢å¤–è¾¹è·
+	 * @return è¿”å›é¢å¤–é—´è·çš„æ•°å€¼
 	 */
 	virtual int GetChildMargin() const;
 
 	/**
-	 * @brief ÉèÖÃ×Ó¿Ø¼şÖ®¼äµÄ¶îÍâ±ß¾à
-	 * @param[in] iMargin ÒªÉèÖÃµÄ±ß¾àÊıÖµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®å­æ§ä»¶ä¹‹é—´çš„é¢å¤–è¾¹è·
+	 * @param[in] iMargin è¦è®¾ç½®çš„è¾¹è·æ•°å€¼
+	 * @return æ— 
 	 */
 	virtual void SetChildMargin(int iMargin);
 
 	/**
-	 * @brief »ñÈ¡³ıÁËÄÚ±ß¾àÍâµÄ¿ÉÓÃ·¶Î§
-	 * @return ·µ»Ø¿ÉÓÃ·¶Î§Î»ÖÃĞÅÏ¢
+	 * @brief è·å–é™¤äº†å†…è¾¹è·å¤–çš„å¯ç”¨èŒƒå›´
+	 * @return è¿”å›å¯ç”¨èŒƒå›´ä½ç½®ä¿¡æ¯
 	 */
 	UiRect GetInternalPos() const;
 
@@ -105,7 +105,7 @@ public:
     virtual ~Box();
 
 public:
-	/// ÖØĞ´¸¸Àà½Ó¿Ú£¬Ìá¹©¸öĞÔ»¯¹¦ÄÜ¡£·½·¨¾ßÌåËµÃ÷Çë²é¿´ Control ¿Ø¼ş             */
+	/// é‡å†™çˆ¶ç±»æ¥å£ï¼Œæä¾›ä¸ªæ€§åŒ–åŠŸèƒ½ã€‚æ–¹æ³•å…·ä½“è¯´æ˜è¯·æŸ¥çœ‹ Control æ§ä»¶             */
 	virtual std::wstring GetType() const override;
 	virtual UIAControlProvider* GetUIAProvider() override;
 	virtual void SetWindow(Window* pManager, Box* pParent, bool bInit = true) override;
@@ -124,188 +124,188 @@ public:
 	virtual void ClearImageCache() override;
 	virtual UINT GetControlFlags() const override;
 
-	/// ÈİÆ÷×ÔÓĞ·½·¨
+	/// å®¹å™¨è‡ªæœ‰æ–¹æ³•
 	/**
-	 * @brief ²éÕÒÖ¸¶¨×Ó¿Ø¼ş
-	 * @param[in] pstrSubControlName ×Ó¿Ø¼şÃû³Æ
-	 * @return ·µ»Ø×Ó¿Ø¼şÖ¸Õë
+	 * @brief æŸ¥æ‰¾æŒ‡å®šå­æ§ä»¶
+	 * @param[in] pstrSubControlName å­æ§ä»¶åç§°
+	 * @return è¿”å›å­æ§ä»¶æŒ‡é’ˆ
 	 */
 	Control* FindSubControl(const std::wstring& pstrSubControlName);
 
 	/**
-	 * @brief ²éÕÒÏÂÒ»¸ö¿ÉÑ¡¿Ø¼şµÄË÷Òı£¨ÃæÏò list¡¢combo£©
-	 * @param[in] iIndex Ö¸¶¨ÒªÆğÊ¼²éÕÒµÄË÷Òı
-	 * @param[in] bForward true ÎªµİÔö²éÕÒ£¬ false Îªµİ¼õ²éÕÒ
-	 * @return ÏÂÒ»¸ö¿ÉÑ¡¿Ø¼şµÄË÷Òı£¬·µ»Ø -1 ÎªÃ»ÓĞ¿ÉÑ¡¿Ø¼ş
+	 * @brief æŸ¥æ‰¾ä¸‹ä¸€ä¸ªå¯é€‰æ§ä»¶çš„ç´¢å¼•ï¼ˆé¢å‘ listã€comboï¼‰
+	 * @param[in] iIndex æŒ‡å®šè¦èµ·å§‹æŸ¥æ‰¾çš„ç´¢å¼•
+	 * @param[in] bForward true ä¸ºé€’å¢æŸ¥æ‰¾ï¼Œ false ä¸ºé€’å‡æŸ¥æ‰¾
+	 * @return ä¸‹ä¸€ä¸ªå¯é€‰æ§ä»¶çš„ç´¢å¼•ï¼Œè¿”å› -1 ä¸ºæ²¡æœ‰å¯é€‰æ§ä»¶
 	 */
 	virtual int FindSelectable(int iIndex, bool bForward = true) const;
 
 	/**
-	 * @brief ¸ù¾İË÷Òı²éÕÒÖ¸¶¨¿Ø¼ş
-	 * @param[in] iIndex ¿Ø¼şË÷Òı
-	 * @return ·µ»Ø¿Ø¼şÖ¸Õë
+	 * @brief æ ¹æ®ç´¢å¼•æŸ¥æ‰¾æŒ‡å®šæ§ä»¶
+	 * @param[in] iIndex æ§ä»¶ç´¢å¼•
+	 * @return è¿”å›æ§ä»¶æŒ‡é’ˆ
 	 */
 	virtual Control* GetItemAt(std::size_t iIndex) const;
 
 	/**
-	 * @brief ¸ù¾İ¿Ø¼şÖ¸Õë»ñÈ¡Ë÷Òı
-	 * @param[in] pControl ¿Ø¼şÖ¸Õë
-	 * @return ·µ»Ø pControl ËùÖ¸ÏòµÄ¿Ø¼şË÷Òı
+	 * @brief æ ¹æ®æ§ä»¶æŒ‡é’ˆè·å–ç´¢å¼•
+	 * @param[in] pControl æ§ä»¶æŒ‡é’ˆ
+	 * @return è¿”å› pControl æ‰€æŒ‡å‘çš„æ§ä»¶ç´¢å¼•
 	 */
 	virtual int GetItemIndex(Control* pControl) const;
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şË÷Òı£¨ÄÚ²¿»áÖØĞÂÅÅÁĞ¿Ø¼şÎ»ÖÃ£©
-	 * @param[in] pControl ¿Ø¼şÖ¸Õë
-	 * @param[in] iIndex ÒªÉèÖÃµÄË÷ÒıÖµ
-	 * @return ·µ»Ø true ÉèÖÃ³É¹¦£¬false ÉèÖÃÊ§°Ü
+	 * @brief è®¾ç½®æ§ä»¶ç´¢å¼•ï¼ˆå†…éƒ¨ä¼šé‡æ–°æ’åˆ—æ§ä»¶ä½ç½®ï¼‰
+	 * @param[in] pControl æ§ä»¶æŒ‡é’ˆ
+	 * @param[in] iIndex è¦è®¾ç½®çš„ç´¢å¼•å€¼
+	 * @return è¿”å› true è®¾ç½®æˆåŠŸï¼Œfalse è®¾ç½®å¤±è´¥
 	 */
 	virtual bool SetItemIndex(Control* pControl, std::size_t iIndex);
 
 	/**
-	 * @brief »ñÈ¡×Ó¿Ø¼şÊıÁ¿
-	 * @return ·µ»Ø×Ó¿Ø¼şÊıÁ¿
+	 * @brief è·å–å­æ§ä»¶æ•°é‡
+	 * @return è¿”å›å­æ§ä»¶æ•°é‡
 	 */
 	virtual int GetCount() const;
 
 	/**
-	 * @brief Ìí¼ÓÒ»¸ö¿Ø¼şµ½ÈİÆ÷ÖĞ
-	 * @param[in] pControl ¿Ø¼şÖ¸Õë
-	 * @return ·µ»Ø true Ìí¼Ó³É¹¦£¬false ÎªÌí¼ÓÊ§°Ü
+	 * @brief æ·»åŠ ä¸€ä¸ªæ§ä»¶åˆ°å®¹å™¨ä¸­
+	 * @param[in] pControl æ§ä»¶æŒ‡é’ˆ
+	 * @return è¿”å› true æ·»åŠ æˆåŠŸï¼Œfalse ä¸ºæ·»åŠ å¤±è´¥
 	 */
 	virtual bool Add(Control* pControl);
 
 	/**
-	 * @brief ÏòÖ¸¶¨Î»ÖÃÌí¼ÓÒ»¸ö¿Ø¼ş
-	 * @param[in] pControl ¿Ø¼şÖ¸Õë
-	 * @param[in] iIndex ÔÚ¸ÃË÷ÒıÖ®ºó²åÈë¿Ø¼ş
-	 * @return ·µ»Ø true ÎªÌí¼Ó³É¹¦£¬false ÎªÌí¼ÓÊ§°Ü
+	 * @brief å‘æŒ‡å®šä½ç½®æ·»åŠ ä¸€ä¸ªæ§ä»¶
+	 * @param[in] pControl æ§ä»¶æŒ‡é’ˆ
+	 * @param[in] iIndex åœ¨è¯¥ç´¢å¼•ä¹‹åæ’å…¥æ§ä»¶
+	 * @return è¿”å› true ä¸ºæ·»åŠ æˆåŠŸï¼Œfalse ä¸ºæ·»åŠ å¤±è´¥
 	 */
 	virtual bool AddAt(Control* pControl, std::size_t iIndex);
 
 	/**
-	 * @brief ¸ù¾İ¿Ø¼şÖ¸Õë´ÓÈİÆ÷ÖĞÒÆ³ıÒ»¸ö¿Ø¼ş
-	 * @param[in] pControl ¿Ø¼şµÄÖ¸Õë
-	 * @return ·µ»Ø true ÎªÒÆ³ı³É¹¦£¬false ÎªÒÆ³ıÊ§°Ü£¨¿Ø¼ş¿ÉÄÜ²»´æÔÚ£©
+	 * @brief æ ¹æ®æ§ä»¶æŒ‡é’ˆä»å®¹å™¨ä¸­ç§»é™¤ä¸€ä¸ªæ§ä»¶
+	 * @param[in] pControl æ§ä»¶çš„æŒ‡é’ˆ
+	 * @return è¿”å› true ä¸ºç§»é™¤æˆåŠŸï¼Œfalse ä¸ºç§»é™¤å¤±è´¥ï¼ˆæ§ä»¶å¯èƒ½ä¸å­˜åœ¨ï¼‰
 	 */
 	virtual bool Remove(Control* pControl);
 
 	/**
-	 * @brief ¸ù¾İ¿Ø¼şË÷Òı´ÓÈİÆ÷ÖĞÒÆ³ıÒ»¸ö¿Ø¼ş
-	 * @param[in] iIndex ÒªÒÆ³ıµÄ¿Ø¼şË÷Òı
-	 * @return ·µ»Ø true ÎªÒÆ³ı³É¹¦£¬false ÎªÒÆ³ıÊ§°Ü£¨Ë÷ÒıÖµÌ«Ğ¡»ò³¬³öÁË×Ó¿Ø¼ş×ÜÊı£©
+	 * @brief æ ¹æ®æ§ä»¶ç´¢å¼•ä»å®¹å™¨ä¸­ç§»é™¤ä¸€ä¸ªæ§ä»¶
+	 * @param[in] iIndex è¦ç§»é™¤çš„æ§ä»¶ç´¢å¼•
+	 * @return è¿”å› true ä¸ºç§»é™¤æˆåŠŸï¼Œfalse ä¸ºç§»é™¤å¤±è´¥ï¼ˆç´¢å¼•å€¼å¤ªå°æˆ–è¶…å‡ºäº†å­æ§ä»¶æ€»æ•°ï¼‰
 	 */
 	virtual bool RemoveAt(std::size_t iIndex);
 
 	/**
-	 * @brief ÒÆ³ıËùÓĞ×Ó¿Ø¼ş
-	 * @return ÎŞ
+	 * @brief ç§»é™¤æ‰€æœ‰å­æ§ä»¶
+	 * @return æ— 
 	 */
 	virtual void RemoveAll();
 
 	/**
-	 * @brief ¼ì²éÊÇ·ñ°üº¬Ä³Ò»¸ö¿Ø¼ş
-	 * @param[in] pControl ¿Ø¼şµÄÖ¸Õë
-	 * @return ·µ»Ø true °üº¬£¬false ²»°üº¬
+	 * @brief æ£€æŸ¥æ˜¯å¦åŒ…å«æŸä¸€ä¸ªæ§ä»¶
+	 * @param[in] pControl æ§ä»¶çš„æŒ‡é’ˆ
+	 * @return è¿”å› true åŒ…å«ï¼Œfalse ä¸åŒ…å«
 	 */
 	bool HasItem(Control* pControl) const;
 
 	/**
-	 * @brief ½»»»×Ó¿Ø¼şÎ»ÖÃ
-	 * @param[in] pChild1 ×Ó¿Ø¼ş1 Ö¸Õë
-	 * @param[in] pChild2 ×Ó¿Ø¼ş2 Ö¸Õë
-	 * @return ÎŞ
+	 * @brief äº¤æ¢å­æ§ä»¶ä½ç½®
+	 * @param[in] pChild1 å­æ§ä»¶1 æŒ‡é’ˆ
+	 * @param[in] pChild2 å­æ§ä»¶2 æŒ‡é’ˆ
+	 * @return æ— 
 	 */
 	void SwapChild(Control* pChild1, Control* pChild2);
 
 	/**
-	 * @brief ÖØÖÃÒ»¸ö×Ó¿Ø¼şÎ»ÖÃ
-	 * @param[in] pChild ¿Ø¼şÖ¸Õë
-	 * @param[in] iIndex ÒªÖØÖÃµÄÎ»ÖÃ
-	 * @return ÎŞ
+	 * @brief é‡ç½®ä¸€ä¸ªå­æ§ä»¶ä½ç½®
+	 * @param[in] pChild æ§ä»¶æŒ‡é’ˆ
+	 * @param[in] iIndex è¦é‡ç½®çš„ä½ç½®
+	 * @return æ— 
 	 */
 	void ResetChildIndex(Control* pChild, std::size_t iIndex);
 
 	/**
-	 * @brief ÅĞ¶ÏÊÇ·ñ×Ô¶¯Ïú»Ù
-	 * @return true Îª×Ô¶¯Ïú»Ù£¬false Îª²»×Ô¶¯Ïú»Ù
+	 * @brief åˆ¤æ–­æ˜¯å¦è‡ªåŠ¨é”€æ¯
+	 * @return true ä¸ºè‡ªåŠ¨é”€æ¯ï¼Œfalse ä¸ºä¸è‡ªåŠ¨é”€æ¯
 	 */
     virtual bool IsAutoDestroy() const;
 
 	/**
-	 * @brief ÉèÖÃ¿Ø¼şÊÇ·ñ×Ô¶¯Ïú»Ù
-	 * @param[in] bAuto true Îª×Ô¶¯Ïú»Ù£¬false Îª²»×Ô¶¯Ïú»Ù
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ§ä»¶æ˜¯å¦è‡ªåŠ¨é”€æ¯
+	 * @param[in] bAuto true ä¸ºè‡ªåŠ¨é”€æ¯ï¼Œfalse ä¸ºä¸è‡ªåŠ¨é”€æ¯
+	 * @return æ— 
 	 */
     virtual void SetAutoDestroyChild(bool bAuto);
 
 	/**
-	 * @brief ÅĞ¶Ï´°¿Ú¹Ø±ÕºóÊÇ·ñ×Ô¶¯Ïú»Ù
-	 * @return true Îª×Ô¶¯Ïú»Ù£¬false Îª²»×Ô¶¯Ïú»Ù
+	 * @brief åˆ¤æ–­çª—å£å…³é—­åæ˜¯å¦è‡ªåŠ¨é”€æ¯
+	 * @return true ä¸ºè‡ªåŠ¨é”€æ¯ï¼Œfalse ä¸ºä¸è‡ªåŠ¨é”€æ¯
 	 */
     virtual bool IsDelayedDestroy() const;
 
 	/**
-	 * @brief ÉèÖÃ´°¿Ú¹Ø±ÕºóÊÇ·ñ×Ô¶¯Ïú»Ù
-	 * @param[in] bDelayed true Îª×Ô¶¯Ïú»Ù£¬false Îª²»×Ô¶¯Ïú»Ù
-	 * @return ÎŞ
+	 * @brief è®¾ç½®çª—å£å…³é—­åæ˜¯å¦è‡ªåŠ¨é”€æ¯
+	 * @param[in] bDelayed true ä¸ºè‡ªåŠ¨é”€æ¯ï¼Œfalse ä¸ºä¸è‡ªåŠ¨é”€æ¯
+	 * @return æ— 
 	 */
     virtual void SetDelayedDestroy(bool bDelayed);
 
 	/**
-	 * @brief »ñÈ¡ÈİÆ÷ÊÇ·ñÏìÓ¦Êó±ê²Ù×÷
-	 * @return true ÎªÏìÓ¦£¬false Îª²»ÏìÓ¦
+	 * @brief è·å–å®¹å™¨æ˜¯å¦å“åº”é¼ æ ‡æ“ä½œ
+	 * @return true ä¸ºå“åº”ï¼Œfalse ä¸ºä¸å“åº”
 	 */
     virtual bool IsMouseChildEnabled() const;
 
 	/**
-	 * @brief ÉèÖÃÈİÆ÷ÏìÓ¦Êó±ê²Ù×÷
-	 * @param[in] bEnable ÉèÖÃÎª true ÎªÏìÓ¦Êó±ê²Ù×÷£¬ÉèÖÃÎª false Îª²»ÏìÓ¦£¬Ä¬ÈÏÎª true
-	 * @return ÎŞ
+	 * @brief è®¾ç½®å®¹å™¨å“åº”é¼ æ ‡æ“ä½œ
+	 * @param[in] bEnable è®¾ç½®ä¸º true ä¸ºå“åº”é¼ æ ‡æ“ä½œï¼Œè®¾ç½®ä¸º false ä¸ºä¸å“åº”ï¼Œé»˜è®¤ä¸º true
+	 * @return æ— 
 	 */
     virtual void SetMouseChildEnabled(bool bEnable = true);
 
 	/**
-	 * @brief »ñÈ¡ÈİÆ÷²¼¾Ö¶ÔÏóÖ¸Õë
-	 * @return ·µ»ØÈİÆ÷¹ØÁªµÄ²¼¾Ö¶ÔÏóÖ¸Õë
+	 * @brief è·å–å®¹å™¨å¸ƒå±€å¯¹è±¡æŒ‡é’ˆ
+	 * @return è¿”å›å®¹å™¨å…³è”çš„å¸ƒå±€å¯¹è±¡æŒ‡é’ˆ
 	 */
 	virtual Layout* GetLayout() const;
 
 	/**
-	 * @brief ÖØĞÂ¹ØÁª²¼¾Ö¶ÔÏó
-	 * @param[in] pLayout ²¼¾Ö¶ÔÏóÖ¸Õë
-	 * @return ÎŞ
+	 * @brief é‡æ–°å…³è”å¸ƒå±€å¯¹è±¡
+	 * @param[in] pLayout å¸ƒå±€å¯¹è±¡æŒ‡é’ˆ
+	 * @return æ— 
 	 */
 	virtual void ReSetLayout(Layout* pLayout);
 
 	/**
-	 * @brief »ñÈ¡ÄÚ±ß¾àµÄÎ»ÖÃĞÅÏ¢
-	 * @return ·µ»ØÄÚ±ß¾àµÄÎ»ÖÃĞÅÏ¢
+	 * @brief è·å–å†…è¾¹è·çš„ä½ç½®ä¿¡æ¯
+	 * @return è¿”å›å†…è¾¹è·çš„ä½ç½®ä¿¡æ¯
 	 */
 	virtual	UiRect GetPaddingPos() const;
 
 	/**
-	 * @brief °ó¶¨ÊÂ¼ş´¦Àíº¯Êı
-	 * @param[in] eventType ÊÂ¼şÀàĞÍ
-	 * @param[in] callback Ö¸¶¨»Øµ÷º¯Êı
-	 * @return void ÎŞ
+	 * @brief ç»‘å®šäº‹ä»¶å¤„ç†å‡½æ•°
+	 * @param[in] eventType äº‹ä»¶ç±»å‹
+	 * @param[in] callback æŒ‡å®šå›è°ƒå‡½æ•°
+	 * @return void æ— 
 	 */
  	void AttachBubbledEvent(EventType eventType, const EventCallback& callback)	{ OnBubbledEvent[eventType] += callback; }
  
 	/**
-	 * @brief ½â°óÊÂ¼ş´¦Àíº¯Êı
-	 * @param[in] eventType ÊÂ¼şÀàĞÍ
-	 * @return void ÎŞ
+	 * @brief è§£ç»‘äº‹ä»¶å¤„ç†å‡½æ•°
+	 * @param[in] eventType äº‹ä»¶ç±»å‹
+	 * @return void æ— 
 	 */
 	void DetachBubbledEvent(EventType eventType);
 private:
 	friend WindowBuilder;
 
 	/**
-	 * @brief °ó¶¨ XML ÖĞ±àĞ´µÄ Event ºÍ BubbleEvent ÊÂ¼şµÄ´¦Àíº¯Êı
-	 * @param[in] eventType ÊÂ¼şÀàĞÍ
-	 * @param[in] callback Ö¸¶¨»Øµ÷º¯Êı
-	 * @return void ÎŞ
+	 * @brief ç»‘å®š XML ä¸­ç¼–å†™çš„ Event å’Œ BubbleEvent äº‹ä»¶çš„å¤„ç†å‡½æ•°
+	 * @param[in] eventType äº‹ä»¶ç±»å‹
+	 * @param[in] callback æŒ‡å®šå›è°ƒå‡½æ•°
+	 * @return void æ— 
 	 */
 	void AttachXmlBubbledEvent(EventType eventType, const EventCallback& callback) { OnXmlBubbledEvent[eventType] += callback; }
 
@@ -320,7 +320,7 @@ protected:
 	EventMap OnBubbledEvent;
 };
 
- /// ´øÓĞ´¹Ö±»òË®Æ½¹ö¶¯ÌõµÄÈİÆ÷£¬Ê¹ÈİÆ÷¿ÉÒÔÈİÄÉ¸ü¶àÄÚÈİ
+ /// å¸¦æœ‰å‚ç›´æˆ–æ°´å¹³æ»šåŠ¨æ¡çš„å®¹å™¨ï¼Œä½¿å®¹å™¨å¯ä»¥å®¹çº³æ›´å¤šå†…å®¹
 class UILIB_API ScrollableBox : public Box
 {
 public:
@@ -342,314 +342,314 @@ public:
 	virtual void ClearImageCache() override;
 
 	/**
-	 * @brief »ñÈ¡¹ö¶¯ÌõÎ»ÖÃ
-	 * @return ·µ»Ø¹ö¶¯ÌõµÄÎ»ÖÃĞÅÏ¢
+	 * @brief è·å–æ»šåŠ¨æ¡ä½ç½®
+	 * @return è¿”å›æ»šåŠ¨æ¡çš„ä½ç½®ä¿¡æ¯
 	 */
 	virtual CSize GetScrollPos() const;
 
 	/**
-	 * @brief »ñÈ¡¹ö¶¯ÌõµÄ·¶Î§
-	 * @return ·µ»Ø¹ö¶¯ÌõµÄ·¶Î§ĞÅÏ¢
+	 * @brief è·å–æ»šåŠ¨æ¡çš„èŒƒå›´
+	 * @return è¿”å›æ»šåŠ¨æ¡çš„èŒƒå›´ä¿¡æ¯
 	 */
 	virtual CSize GetScrollRange() const;
 
 	/**
-	 * @brief ÉèÖÃ¹ö¶¯ÌõÎ»ÖÃ
-	 * @param[in] szPos ÒªÉèÖÃµÄÎ»ÖÃÊı¾İ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ»šåŠ¨æ¡ä½ç½®
+	 * @param[in] szPos è¦è®¾ç½®çš„ä½ç½®æ•°æ®
+	 * @return æ— 
 	 */
 	virtual void SetScrollPos(CSize szPos);
 
 	/**
-	 * @brief ÉèÖÃ¹ö¶¯Ìõ Y Öá×ø±ê
-	 * @param[in] y ÒªÉèÖÃµÄ Y Öá×ø±êÊıÖµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ»šåŠ¨æ¡ Y è½´åæ ‡
+	 * @param[in] y è¦è®¾ç½®çš„ Y è½´åæ ‡æ•°å€¼
+	 * @return æ— 
 	 */
 	virtual void SetScrollPosY(int y);
 	
 	/**
-	 * @brief ÉèÖÃ¹ö¶¯Ìõ X Öá×ø±ê
-	 * @param[in] x ÒªÉèÖÃµÄ X Öá×ø±êÊıÖµ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ»šåŠ¨æ¡ X è½´åæ ‡
+	 * @param[in] x è¦è®¾ç½®çš„ X è½´åæ ‡æ•°å€¼
+	 * @return æ— 
 	 */
     virtual void SetScrollPosX(int x);
 	
 	/**
-	 * @brief ÏòÉÏ¹ö¶¯¹ö¶¯Ìõ
-	 * @param[in] deltaValue ¹ö¶¯¾àÀë£¬Ä¬ÈÏÎª DUI_NOSET_VALUE
- 	 * @param[in] withAnimation ÊÇ·ñ¸½´ø¶¯»­Ğ§¹û£¬Ä¬ÈÏÎª true
-	 * @return ÎŞ
+	 * @brief å‘ä¸Šæ»šåŠ¨æ»šåŠ¨æ¡
+	 * @param[in] deltaValue æ»šåŠ¨è·ç¦»ï¼Œé»˜è®¤ä¸º DUI_NOSET_VALUE
+ 	 * @param[in] withAnimation æ˜¯å¦é™„å¸¦åŠ¨ç”»æ•ˆæœï¼Œé»˜è®¤ä¸º true
+	 * @return æ— 
 	 */
 	virtual void LineUp(int detaValue = DUI_NOSET_VALUE, bool withAnimation = true);
 	
 	/**
-	 * @brief ÏòÏÂ¹ö¶¯¹ö¶¯Ìõ
-	 * @param[in] deltaValue ¹ö¶¯¾àÀë£¬Ä¬ÈÏÎª DUI_NOSET_VALUE
- 	 * @param[in] withAnimation ÊÇ·ñ¸½´ø¶¯»­Ğ§¹û£¬Ä¬ÈÏÎª true
-	 * @return ÎŞ
+	 * @brief å‘ä¸‹æ»šåŠ¨æ»šåŠ¨æ¡
+	 * @param[in] deltaValue æ»šåŠ¨è·ç¦»ï¼Œé»˜è®¤ä¸º DUI_NOSET_VALUE
+ 	 * @param[in] withAnimation æ˜¯å¦é™„å¸¦åŠ¨ç”»æ•ˆæœï¼Œé»˜è®¤ä¸º true
+	 * @return æ— 
 	 */
 	virtual void LineDown(int detaValue = DUI_NOSET_VALUE, bool withAnimation = true);
 	
 	/**
-	 * @brief Ïò×ó¹ö¶¯¹ö¶¯Ìõ
-	 * @param[in] deltaValue ¹ö¶¯¾àÀë£¬Ä¬ÈÏÎª DUI_NOSET_VALUE
-	 * @return ÎŞ
+	 * @brief å‘å·¦æ»šåŠ¨æ»šåŠ¨æ¡
+	 * @param[in] deltaValue æ»šåŠ¨è·ç¦»ï¼Œé»˜è®¤ä¸º DUI_NOSET_VALUE
+	 * @return æ— 
 	 */
     virtual void LineLeft(int detaValue = DUI_NOSET_VALUE);
 	
 	/**
-	 * @brief ÏòÓÒ¹ö¶¯¹ö¶¯Ìõ
-	 * @param[in] deltaValue ¹ö¶¯¾àÀë£¬Ä¬ÈÏÎª DUI_NOSET_VALUE
-	 * @return ÎŞ
+	 * @brief å‘å³æ»šåŠ¨æ»šåŠ¨æ¡
+	 * @param[in] deltaValue æ»šåŠ¨è·ç¦»ï¼Œé»˜è®¤ä¸º DUI_NOSET_VALUE
+	 * @return æ— 
 	 */
     virtual void LineRight(int detaValue = DUI_NOSET_VALUE);
 	/**
-	 * @brief ÏòÉÏ¹ö¶¯Ò»¸öÒ³Ãæ´óĞ¡µÄ¾àÀë
-	 * @return ÎŞ
+	 * @brief å‘ä¸Šæ»šåŠ¨ä¸€ä¸ªé¡µé¢å¤§å°çš„è·ç¦»
+	 * @return æ— 
 	 */
 	virtual void PageUp();
 
 	/**
-	 * @brief ÏòÏÂ¹ö¶¯Ò»¸öÒ³Ãæ´óĞ¡µÄ¾àÀë
-	 * @return ÎŞ
+	 * @brief å‘ä¸‹æ»šåŠ¨ä¸€ä¸ªé¡µé¢å¤§å°çš„è·ç¦»
+	 * @return æ— 
 	 */
 	virtual void PageDown();
 
 	/**
-	 * @brief »Øµ½¹ö¶¯Ìõ×îÉÏ·½
-	 * @return ÎŞ
+	 * @brief å›åˆ°æ»šåŠ¨æ¡æœ€ä¸Šæ–¹
+	 * @return æ— 
 	 */
 	virtual void HomeUp();
 
 	/**
-	 * @brief ¹ö¶¯µ½×îÏÂ·½Î»ÖÃ
-	 * @param[in] arrange ÊÇ·ñÖØÖÃ¹ö¶¯ÌõÎ»ÖÃ£¬Ä¬ÈÏÎª true
-	 * @param[in] withAnimation ÊÇ·ñ°üº¬¶¯»­ÌØĞ§£¬Ä¬ÈÏÎª true
-	 * @return ÎŞ
+	 * @brief æ»šåŠ¨åˆ°æœ€ä¸‹æ–¹ä½ç½®
+	 * @param[in] arrange æ˜¯å¦é‡ç½®æ»šåŠ¨æ¡ä½ç½®ï¼Œé»˜è®¤ä¸º true
+	 * @param[in] withAnimation æ˜¯å¦åŒ…å«åŠ¨ç”»ç‰¹æ•ˆï¼Œé»˜è®¤ä¸º true
+	 * @return æ— 
 	 */
 	virtual void EndDown(bool arrange = true, bool withAnimation = true);
 	/**
-	 * @brief Ïò×ó¹ö¶¯Ò»¸öÒ³Ãæ´óĞ¡µÄ¾àÀë
-	 * @return ÎŞ
+	 * @brief å‘å·¦æ»šåŠ¨ä¸€ä¸ªé¡µé¢å¤§å°çš„è·ç¦»
+	 * @return æ— 
 	 */
 	virtual void PageLeft();
 
 	/**
-	 * @brief ÏòÓÒ¹ö¶¯Ò»¸öÒ³Ãæ´óĞ¡µÄ¾àÀë
-	 * @return ÎŞ
+	 * @brief å‘å³æ»šåŠ¨ä¸€ä¸ªé¡µé¢å¤§å°çš„è·ç¦»
+	 * @return æ— 
 	 */
 	virtual void PageRight();
 
 	/**
-	 * @brief ¹ö¶¯µ½×î×ó²à
-	 * @return ÎŞ
+	 * @brief æ»šåŠ¨åˆ°æœ€å·¦ä¾§
+	 * @return æ— 
 	 */
 	virtual void HomeLeft();
 
 	/**
-	 * @brief ¹ö¶¯µ½×îÓÒ²à
-	 * @return ÎŞ
+	 * @brief æ»šåŠ¨åˆ°æœ€å³ä¾§
+	 * @return æ— 
 	 */
 	virtual void EndRight();
 
 	/**
-	 * @brief ´¥ÃşÏòÉÏ¹ö¶¯£¨ÏìÓ¦ WM_TOUCH ÏûÏ¢£©
-	 * @param[in] deltaValue ¹ö¶¯¾àÀë
-	 * @return ÎŞ
+	 * @brief è§¦æ‘¸å‘ä¸Šæ»šåŠ¨ï¼ˆå“åº” WM_TOUCH æ¶ˆæ¯ï¼‰
+	 * @param[in] deltaValue æ»šåŠ¨è·ç¦»
+	 * @return æ— 
 	 */
 	virtual void TouchUp(int deltaValue);
 
 	/**
-	 * @brief ´¥ÃşÏòÏÂ¹ö¶¯£¨ÏìÓ¦ WM_TOUCH ÏûÏ¢£©
-	 * @param[in] deltaValue ¹ö¶¯¾àÀë
-	 * @return ÎŞ
+	 * @brief è§¦æ‘¸å‘ä¸‹æ»šåŠ¨ï¼ˆå“åº” WM_TOUCH æ¶ˆæ¯ï¼‰
+	 * @param[in] deltaValue æ»šåŠ¨è·ç¦»
+	 * @return æ— 
 	 */
 	virtual void TouchDown(int deltaValue);
 
 	/**
-	 * @brief ÆôÓÃ¹ö¶¯Ìõ
-	 * @param[in] bEnableVertical ÊÇ·ñÆôÓÃ´¹Ö±¹ö¶¯Ìõ£¬Ä¬ÈÏÎª true
-	 * @param[in] bEnableHorizontal ÊÇ·ñÆôÓÃË®Æ½¹ö¶¯Ìõ£¬Ä¬ÈÏÎª true
-	 * @return ÎŞ
+	 * @brief å¯ç”¨æ»šåŠ¨æ¡
+	 * @param[in] bEnableVertical æ˜¯å¦å¯ç”¨å‚ç›´æ»šåŠ¨æ¡ï¼Œé»˜è®¤ä¸º true
+	 * @param[in] bEnableHorizontal æ˜¯å¦å¯ç”¨æ°´å¹³æ»šåŠ¨æ¡ï¼Œé»˜è®¤ä¸º true
+	 * @return æ— 
 	 */
 	virtual void EnableScrollBar(bool bEnableVertical = true, bool bEnableHorizontal = false);
 
 	/**
-	 * @brief »ñÈ¡´¹Ö±¹ö¶¯Ìõ¶ÔÏóÖ¸Õë
-	 * @return ·µ»Ø´¹Ö±¹ö¶¯Ìõ¶ÔÏóÖ¸Õë
+	 * @brief è·å–å‚ç›´æ»šåŠ¨æ¡å¯¹è±¡æŒ‡é’ˆ
+	 * @return è¿”å›å‚ç›´æ»šåŠ¨æ¡å¯¹è±¡æŒ‡é’ˆ
 	 */
 	virtual ScrollBar* GetVerticalScrollBar() const;
 
 	/**
-	 * @brief »ñÈ¡Ë®Æ½¹ö¶¯Ìõ¶ÔÏóÖ¸Õë
-	 * @return ·µ»ØË®Æ½¹ö¶¯Ìõ¶ÔÏóÖ¸Õë
+	 * @brief è·å–æ°´å¹³æ»šåŠ¨æ¡å¯¹è±¡æŒ‡é’ˆ
+	 * @return è¿”å›æ°´å¹³æ»šåŠ¨æ¡å¯¹è±¡æŒ‡é’ˆ
 	 */
 	virtual ScrollBar* GetHorizontalScrollBar() const;
 
 	/**
-	 * @brief ´ı²¹³ä
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief å¾…è¡¥å……
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	virtual void ProcessVScrollBar(UiRect rc, int cyRequired);
 
 	/**
-	 * @brief ´ı²¹³ä
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief å¾…è¡¥å……
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	virtual void ProcessHScrollBar(UiRect rc, int cxRequired);
 
 	/**
-	 * @brief ÅĞ¶Ï´¹Ö±¹ö¶¯ÌõÊÇ·ñÓĞĞ§
-	 * @return ·µ»Ø true ±íÊ¾ÓĞĞ§£¬·ñÔò false ÎªÎŞĞ§
+	 * @brief åˆ¤æ–­å‚ç›´æ»šåŠ¨æ¡æ˜¯å¦æœ‰æ•ˆ
+	 * @return è¿”å› true è¡¨ç¤ºæœ‰æ•ˆï¼Œå¦åˆ™ false ä¸ºæ— æ•ˆ
 	 */
 	bool IsVScrollBarValid() const;
 
 	/**
-	 * @brief ÅĞ¶ÏË®Æ½¹ö¶¯ÌõÊÇ·ñÓĞĞ§
-	 * @return ·µ»Ø true ±íÊ¾ÓĞĞ§£¬·ñÔò false ÎªÎŞĞ§
+	 * @brief åˆ¤æ–­æ°´å¹³æ»šåŠ¨æ¡æ˜¯å¦æœ‰æ•ˆ
+	 * @return è¿”å› true è¡¨ç¤ºæœ‰æ•ˆï¼Œå¦åˆ™ false ä¸ºæ— æ•ˆ
 	 */
 	bool IsHScrollBarValid() const;
 
 	/**
-	 * @brief ´ı²¹³ä
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief å¾…è¡¥å……
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	void ReomveLastItemAnimation();
 
 	/**
-	 * @brief ´ı²¹³ä
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief å¾…è¡¥å……
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	void PlayRenderOffsetYAnimation(int nRenderY);
 
 	/**
-	 * @brief ÊÇ·ñÒÑ¾­ÔÚµ×²¿
-	 * @return ·µ»Ø true ±íÊ¾ÒÑ¾­ÔÚµ×²¿£¬·ñÔòÎª false
+	 * @brief æ˜¯å¦å·²ç»åœ¨åº•éƒ¨
+	 * @return è¿”å› true è¡¨ç¤ºå·²ç»åœ¨åº•éƒ¨ï¼Œå¦åˆ™ä¸º false
 	 */
 	bool IsAtEnd() const;
 
 	/**
-	 * @brief ÊÇ·ñËø¶¨µ½µ×²¿
-	 * @return »Ø true ±íÊ¾Ëø¶¨ÔÚµ×²¿£¬·ñÔòÎª false
+	 * @brief æ˜¯å¦é”å®šåˆ°åº•éƒ¨
+	 * @return å› true è¡¨ç¤ºé”å®šåœ¨åº•éƒ¨ï¼Œå¦åˆ™ä¸º false
 	 */
 	bool IsHoldEnd() const;
 
 	/**
-	 * @brief ÉèÖÃ¹ö¶¯ÌõÊÇ·ñÊ¼ÖÕËø¶¨µ½µ×²¿Î»ÖÃ
-	 * @param[in] bHoldEnd ÉèÖÃ true ±íÊ¾Ëø¶¨£¬false Îª²»Ëø¶¨
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ»šåŠ¨æ¡æ˜¯å¦å§‹ç»ˆé”å®šåˆ°åº•éƒ¨ä½ç½®
+	 * @param[in] bHoldEnd è®¾ç½® true è¡¨ç¤ºé”å®šï¼Œfalse ä¸ºä¸é”å®š
+	 * @return æ— 
 	 */
 	void SetHoldEnd(bool bHoldEnd);
 	
 	/**
-	 * @brief »ñÈ¡´¹Ö±¹ö¶¯Ìõ¹ö¶¯²½³¤
-	 * @return ·µ»Ø¹ö¶¯²½³¤
+	 * @brief è·å–å‚ç›´æ»šåŠ¨æ¡æ»šåŠ¨æ­¥é•¿
+	 * @return è¿”å›æ»šåŠ¨æ­¥é•¿
 	 */
 	int GetVerScrollUnitPixels() const;
 
 	/**
-	 * @brief ÉèÖÃ´¹Ö±¹ö¶¯Ìõ¹ö¶¯²½³¤
-	 * @param[in] nUnitPixels ÒªÉèÖÃµÄ²½³¤
-	 * @return ÎŞ
+	 * @brief è®¾ç½®å‚ç›´æ»šåŠ¨æ¡æ»šåŠ¨æ­¥é•¿
+	 * @param[in] nUnitPixels è¦è®¾ç½®çš„æ­¥é•¿
+	 * @return æ— 
 	 */
 	void SetVerScrollUnitPixels(int nUnitPixels);
 
 	/**
-	* @brief »ñÈ¡ºáÏò¹ö¶¯Ìõ¹ö¶¯²½³¤
-	* @return ·µ»Ø¹ö¶¯²½³¤
+	* @brief è·å–æ¨ªå‘æ»šåŠ¨æ¡æ»šåŠ¨æ­¥é•¿
+	* @return è¿”å›æ»šåŠ¨æ­¥é•¿
 	*/
 	int GetHorScrollUnitPixels() const;
 
 	/**
-	* @brief ÉèÖÃºáÏò¹ö¶¯Ìõ¹ö¶¯²½³¤
-	* @param[in] nUnitPixels ÒªÉèÖÃµÄ²½³¤
-	* @return ÎŞ
+	* @brief è®¾ç½®æ¨ªå‘æ»šåŠ¨æ¡æ»šåŠ¨æ­¥é•¿
+	* @param[in] nUnitPixels è¦è®¾ç½®çš„æ­¥é•¿
+	* @return æ— 
 	*/
 	void SetHorScrollUnitPixels(int nUnitPixels);
 
 	/**
-	 * @brief »ñÈ¡ÈİÆ÷µÄ¹ö¶¯ÌõÊÇ·ñĞü¸¡ÔÚ×Ó¿Ø¼şÉÏÃæ
-	 * @return ·µ»Ø true ±íÊ¾Ğü¸¡ÔÚ¹ö¶¯ÌõÉÏ£¬·ñÔòÎª false
+	 * @brief è·å–å®¹å™¨çš„æ»šåŠ¨æ¡æ˜¯å¦æ‚¬æµ®åœ¨å­æ§ä»¶ä¸Šé¢
+	 * @return è¿”å› true è¡¨ç¤ºæ‚¬æµ®åœ¨æ»šåŠ¨æ¡ä¸Šï¼Œå¦åˆ™ä¸º false
 	 */
 	bool GetScrollBarFloat() const;
 
 	/**
-	 * @brief ÉèÖÃÈİÆ÷µÄ¹ö¶¯ÌõÊÇ·ñĞü¸¡ÔÚ×Ó¿Ø¼şÉÏÃæ
-	 * @param[in] bScrollBarFloat true ±íÊ¾Ğü¸¡ÔÚ¹ö¶¯ÌõÉÏ£¬false ±íÊ¾²»Ğü¸¡ÔÚ¿Ø¼şÉÏ
-	 * @return ÎŞ
+	 * @brief è®¾ç½®å®¹å™¨çš„æ»šåŠ¨æ¡æ˜¯å¦æ‚¬æµ®åœ¨å­æ§ä»¶ä¸Šé¢
+	 * @param[in] bScrollBarFloat true è¡¨ç¤ºæ‚¬æµ®åœ¨æ»šåŠ¨æ¡ä¸Šï¼Œfalse è¡¨ç¤ºä¸æ‚¬æµ®åœ¨æ§ä»¶ä¸Š
+	 * @return æ— 
 	 */
 	void SetScrollBarFloat(bool bScrollBarFloat);
 
 	/**
-	 * @brief »ñÈ¡ÈİÆ÷µÄ¹ö¶¯ÌõÊÇ·ñÔÚ×ó²àÏÔÊ¾
-	 * @return ·µ»Ø true ±íÊ¾ÔÚ×ó²à£¬false ÎªÓÒ²à
+	 * @brief è·å–å®¹å™¨çš„æ»šåŠ¨æ¡æ˜¯å¦åœ¨å·¦ä¾§æ˜¾ç¤º
+	 * @return è¿”å› true è¡¨ç¤ºåœ¨å·¦ä¾§ï¼Œfalse ä¸ºå³ä¾§
 	 */
 	bool GetVScrollBarLeftPos() const;
 
 	/**
-	* @brief ÉèÖÃÈİÆ÷µÄ¹ö¶¯ÌõÊÇ·ñÔÚ×ó²àÏÔÊ¾
-	* @param[in] bLeftPos true ±íÊ¾ÔÚ×ó²à£¬false ÎªÓÒ²à
-	* @return ÎŞ
+	* @brief è®¾ç½®å®¹å™¨çš„æ»šåŠ¨æ¡æ˜¯å¦åœ¨å·¦ä¾§æ˜¾ç¤º
+	* @param[in] bLeftPos true è¡¨ç¤ºåœ¨å·¦ä¾§ï¼Œfalse ä¸ºå³ä¾§
+	* @return æ— 
 	*/
 	void SetVScrollBarLeftPos(bool bLeftPos);
 
 	/**
-	 * @brief »ñÈ¡¹ö¶¯ÌõµÄÍâ±ß¾à
-	 * @return ·µ»Ø±ß¾àĞÅÏ¢ 
+	 * @brief è·å–æ»šåŠ¨æ¡çš„å¤–è¾¹è·
+	 * @return è¿”å›è¾¹è·ä¿¡æ¯ 
 	 */
 	UiRect GetScrollBarPadding() const;
 
 	/**
-	 * @brief ÉèÖÃ¹ö¶¯ÌõµÄÍâ±ß¾à£¬¿ÉÒÔÈÃ¹ö¶¯Ìõ²»Õ¼ÂúÈİÆ÷
-	 * @param[in] rcScrollBarPadding ÒªÉèÖÃµÄ±ß¾à
-	 * @return ÎŞ
+	 * @brief è®¾ç½®æ»šåŠ¨æ¡çš„å¤–è¾¹è·ï¼Œå¯ä»¥è®©æ»šåŠ¨æ¡ä¸å æ»¡å®¹å™¨
+	 * @param[in] rcScrollBarPadding è¦è®¾ç½®çš„è¾¹è·
+	 * @return æ— 
 	 */
 	void SetScrollBarPadding(UiRect rcScrollBarPadding);
 
 	/**
-	 * @brief ´ı²¹³ä
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief å¾…è¡¥å……
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	bool GetDefaultDisplayScrollbar() const;
 
 	/**
-	 * @brief ´ı²¹³ä
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief å¾…è¡¥å……
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	void SetDefaultDisplayScrollbar(bool bDefaultDisplay);
 
 	/**
-	 * @brief ¼àÌı¹ö¶¯ÌõÎ»ÖÃ±ä»¯ÊÂ¼ş
-	 * @param[in] callback ÓĞ±ä»¯ºóÍ¨ÖªµÄ»Øµ÷º¯Êı
-	 * @return ÎŞ
+	 * @brief ç›‘å¬æ»šåŠ¨æ¡ä½ç½®å˜åŒ–äº‹ä»¶
+	 * @param[in] callback æœ‰å˜åŒ–åé€šçŸ¥çš„å›è°ƒå‡½æ•°
+	 * @return æ— 
 	 */
 	void AttachScrollChange(const EventCallback& callback) { OnEvent[kEventScrollChange] += callback; }
 protected:
 
 	/**
-	 * @brief ¼ÆËãËùĞèµÄ³ß´ç
-	 * @param[in] rc µ±Ç°Î»ÖÃĞÅÏ¢
-	 * @return ·µ»ØËùĞè³ß´ç´óĞ¡
+	 * @brief è®¡ç®—æ‰€éœ€çš„å°ºå¯¸
+	 * @param[in] rc å½“å‰ä½ç½®ä¿¡æ¯
+	 * @return è¿”å›æ‰€éœ€å°ºå¯¸å¤§å°
 	 */
 	virtual CSize CalcRequiredSize(const UiRect& rc);
 
 	/**
-	 * @brief ¼ÓÔØÍ¼Æ¬»º´æ£¬½ö¹© ScrollableBox ÄÚ²¿Ê¹ÓÃ
-	 * @param[in] bFromTopLeft ÔİÎŞÒâÒå
-	 * @return ÎŞ
+	 * @brief åŠ è½½å›¾ç‰‡ç¼“å­˜ï¼Œä»…ä¾› ScrollableBox å†…éƒ¨ä½¿ç”¨
+	 * @param[in] bFromTopLeft æš‚æ— æ„ä¹‰
+	 * @return æ— 
 	 */
 	virtual void LoadImageCache(bool bFromTopLeft);
 private:
 	/**
-	 * @brief ´ı²¹³ä
-	 * @param[in] ´ı²¹³ä
-	 * @return ´ı²¹³ä
+	 * @brief å¾…è¡¥å……
+	 * @param[in] å¾…è¡¥å……
+	 * @return å¾…è¡¥å……
 	 */
 	void SetPosInternally(UiRect rc);
 
@@ -659,7 +659,7 @@ protected:
 
 	int m_nVerScrollUnitPixels;
     int m_nHerScrollUnitPixels;
-	bool m_bScrollProcess; // ·ÀÖ¹SetPosÑ­»·µ÷ÓÃ
+	bool m_bScrollProcess; // é˜²æ­¢SetPoså¾ªç¯è°ƒç”¨
 	bool m_bHoldEnd;
 	bool m_bScrollBarFloat;
 	bool m_bDefaultDisplayScrollbar;

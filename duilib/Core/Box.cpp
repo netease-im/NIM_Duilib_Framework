@@ -380,15 +380,15 @@ void Box::SetVisible_(bool bVisible)
 	}
 }
 
-// Âß¼­ÉÏ£¬¶ÔÓÚContainer¿Ø¼ş²»¹«¿ª´Ë·½·¨
-// µ÷ÓÃ´Ë·½·¨µÄ½á¹ûÊÇ£¬ÄÚ²¿×Ó¿Ø¼şÒş²Ø£¬¿Ø¼ş±¾ÉíÒÀÈ»ÏÔÊ¾£¬±³¾°µÈĞ§¹û´æÔÚ
+// é€»è¾‘ä¸Šï¼Œå¯¹äºContaineræ§ä»¶ä¸å…¬å¼€æ­¤æ–¹æ³•
+// è°ƒç”¨æ­¤æ–¹æ³•çš„ç»“æœæ˜¯ï¼Œå†…éƒ¨å­æ§ä»¶éšè—ï¼Œæ§ä»¶æœ¬èº«ä¾ç„¶æ˜¾ç¤ºï¼ŒèƒŒæ™¯ç­‰æ•ˆæœå­˜åœ¨
 void Box::SetInternVisible(bool bVisible)
 {
 	Control::SetInternVisible(bVisible);
 	if (m_items.empty()) return;
 	for (auto it = m_items.begin(); it != m_items.end(); it++) {
-		// ¿ØÖÆ×Ó¿Ø¼şÏÔÊ¾×´Ì¬
-		// InternVisible×´Ì¬Ó¦ÓÉ×Ó¿Ø¼ş×Ô¼º¿ØÖÆ
+		// æ§åˆ¶å­æ§ä»¶æ˜¾ç¤ºçŠ¶æ€
+		// InternVisibleçŠ¶æ€åº”ç”±å­æ§ä»¶è‡ªå·±æ§åˆ¶
 		(*it)->SetInternVisible(IsVisible());
 	}
 }
@@ -774,7 +774,7 @@ void Box::ClearImageCache()
 
 UINT Box::GetControlFlags() const
 {
-	return UIFLAG_DEFAULT; // Box Ä¬ÈÏ²»Ö§³Ö TAB ÇĞ»»½¹µã
+	return UIFLAG_DEFAULT; // Box é»˜è®¤ä¸æ”¯æŒ TAB åˆ‡æ¢ç„¦ç‚¹
 }
 
 void Box::DetachBubbledEvent(EventType eventType)

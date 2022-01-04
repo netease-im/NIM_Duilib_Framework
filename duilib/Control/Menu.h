@@ -11,7 +11,7 @@
 namespace ui {
 
 /** @class ContextMenuParam
-  * @brief ÓÃÓÚÍ¨Öª²Ëµ¥¹Ø±Õ
+  * @brief ç”¨äºé€šçŸ¥èœå•å…³é—­
   * @copyright (c) 2020, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2020/3/20
@@ -29,7 +29,7 @@ struct ContextMenuParam
 
 class ObserverImplBase;
 /** @class SubjectImplBase
-  * @brief ¹Û²ìÕßÄ£Ê½£ºÖ÷Ìâ»ùÀà
+  * @brief è§‚å¯Ÿè€…æ¨¡å¼ï¼šä¸»é¢˜åŸºç±»
   * @copyright (c) 2020, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2020/3/20
@@ -44,7 +44,7 @@ public:
 };
 
 /** @class ObserverImplBase
-  * @brief ¹Û²ìÕßÄ£Ê½£º¹Û²ìÕß»ùÀà
+  * @brief è§‚å¯Ÿè€…æ¨¡å¼ï¼šè§‚å¯Ÿè€…åŸºç±»
   * @copyright (c) 2020, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2020/3/20
@@ -60,7 +60,7 @@ public:
 
 class ObserverImpl;
 /** @class SubjectImpl
-  * @brief ¹Û²ìÕßÄ£Ê½£ºÖ÷ÌâÊµÏÖ
+  * @brief è§‚å¯Ÿè€…æ¨¡å¼ï¼šä¸»é¢˜å®ç°
   * @copyright (c) 2020, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2020/3/20
@@ -135,7 +135,7 @@ protected:
 };
 
 /** @class ObserverImpl
-  * @brief ¹Û²ìÕßÄ£Ê½£º¹Û²ìÕßÊµÏÖ
+  * @brief è§‚å¯Ÿè€…æ¨¡å¼ï¼šè§‚å¯Ÿè€…å®ç°
   * @copyright (c) 2020, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2020/3/20
@@ -170,7 +170,7 @@ protected:
 
 class MenuWndEx;
 /** @class MenuManager
-  * @brief ²Ëµ¥¹ÜÀíÆ÷£¬¹ÜÀí²Ëµ¥Ö÷Ìâ¡¢µ±Ç°µ¯³öµÄ²Ëµ¥
+  * @brief èœå•ç®¡ç†å™¨ï¼Œç®¡ç†èœå•ä¸»é¢˜ã€å½“å‰å¼¹å‡ºçš„èœå•
   * @copyright (c) 2020, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2020/3/20
@@ -180,33 +180,33 @@ class UILIB_API MenuManager
 public:
 	static MenuManager* GetInstance();
 
-	/** @brief »ñÈ¡²Ëµ¥Ö÷Ìâ¶ÔÏó
-	  * @return SubjectImpl& ²Ëµ¥Ö÷Ìâ
+	/** @brief è·å–èœå•ä¸»é¢˜å¯¹è±¡
+	  * @return SubjectImpl& èœå•ä¸»é¢˜
 	  */
 	SubjectImpl& GetSubject();
 
-	/** @brief ¸ù¾İ²Ëµ¥Ãû×¢²á²Ëµ¥
-	  * @param[in] strMenuName ²Ëµ¥Ãû
-	  * @param[in] menu ²Ëµ¥´°¿ÚÖ¸Õë
-	  * @return void ÎŞ·µ»ØÖµ
+	/** @brief æ ¹æ®èœå•åæ³¨å†Œèœå•
+	  * @param[in] strMenuName èœå•å
+	  * @param[in] menu èœå•çª—å£æŒ‡é’ˆ
+	  * @return void æ— è¿”å›å€¼
 	  */
 	void RegisterMenu(const std::wstring strMenuName, MenuWndEx *menu);
 
-	/** @brief ¸ù¾İ²Ëµ¥Ãû×¢Ïú²Ëµ¥
-	  * @param [in] strMenuName ²Ëµ¥Ãû
-	  * @return  void ÎŞ·µ»ØÖµ
+	/** @brief æ ¹æ®èœå•åæ³¨é”€èœå•
+	  * @param [in] strMenuName èœå•å
+	  * @return  void æ— è¿”å›å€¼
 	  */
 	void UnRegisterMenu(const std::wstring strMenuName);
 
-	/** @brief ¸ù¾İ²Ëµ¥Ãû»ñÈ¡²Ëµ¥
-	  * @param[in] strMenuName ²Ëµ¥Ãû
-	  * @return MenuWndEx* ²Ëµ¥Ö¸Õë
+	/** @brief æ ¹æ®èœå•åè·å–èœå•
+	  * @param[in] strMenuName èœå•å
+	  * @return MenuWndEx* èœå•æŒ‡é’ˆ
 	  */
 	MenuWndEx* GetMenu(const std::wstring &strMenuName);
 
-	/** @brief ¸ù¾İ²Ëµ¥ÃûÏÔÊ¾²Ëµ¥
-	  * @param[in] strMenuName ²Ëµ¥Ãû
-	  * @return true ³É¹¦£¬false²Ëµ¥²»´æÔÚ
+	/** @brief æ ¹æ®èœå•åæ˜¾ç¤ºèœå•
+	  * @param[in] strMenuName èœå•å
+	  * @return true æˆåŠŸï¼Œfalseèœå•ä¸å­˜åœ¨
 	  */
 	bool ShowMenu(const std::wstring &strMenuName);
 private:
@@ -224,15 +224,15 @@ public:
 	MenuBox();
 	virtual ~MenuBox();
 
-	/** @brief Ïò²Ëµ¥ÈİÆ÷ÀïÌí¼Ó×Ó¿Ø¼ş£¬±»Ìí¼ÓµÄ¿Ø¼şÒ»Ö±»á´æÔÚ
-	  * @param[in] pControl ×Ó¿Ø¼ş
-	  * @return bool ÊÇ·ñ³É¹¦
+	/** @brief å‘èœå•å®¹å™¨é‡Œæ·»åŠ å­æ§ä»¶ï¼Œè¢«æ·»åŠ çš„æ§ä»¶ä¸€ç›´ä¼šå­˜åœ¨
+	  * @param[in] pControl å­æ§ä»¶
+	  * @return bool æ˜¯å¦æˆåŠŸ
 	  */
 	virtual bool Add(Control* pControl) override;
 	virtual bool AddAt(Control* pControl, std::size_t iIndex) override;
 
-	/** @brief ÒÆ³ıËùÓĞ×Ó¿Ø¼ş£¬Èç¹ûÊÇÁÙÊ±²Ëµ¥Ïî£¬ÔòÒ»¶¨»á±»Ïú»Ù
-	  * @return void ÎŞ·µ»ØÖµ
+	/** @brief ç§»é™¤æ‰€æœ‰å­æ§ä»¶ï¼Œå¦‚æœæ˜¯ä¸´æ—¶èœå•é¡¹ï¼Œåˆ™ä¸€å®šä¼šè¢«é”€æ¯
+	  * @return void æ— è¿”å›å€¼
 	  */
 	virtual void RemoveAll() override;
 
@@ -244,65 +244,65 @@ private:
 };
 
 /** @enum MenuAlign
-  * @brief ²Ëµ¥µ¯³öµÄÎ»ÖÃ
+  * @brief èœå•å¼¹å‡ºçš„ä½ç½®
   * @copyright (c) 2020, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2020/3/23
   */
 enum MenuAlign
 {
-	kLeft = 1 << 1,		// Êó±ê×ó²àµ¯³ö
-	kRight = 1 << 2,	// Êó±êÓÒ²àµ¯³ö
-	kCenter = 1 << 3,	// Êó±êµã×÷Îª²Ëµ¥Ë®Æ½·½Ïòµ¯³öÖĞ¼äµã
-	kTop = 1 << 4,		// Êó±êÉÏ²àµ¯³ö
-	kBottom = 1 << 5,	// Êó±êÏÂ²àµ¯³ö
-    kVCenter = 1 << 6,	// Êó±êµã×÷Îª²Ëµ¥ÊúÖ±·½Ïòµ¯³öÖĞ¼äµã
+	kLeft = 1 << 1,		// é¼ æ ‡å·¦ä¾§å¼¹å‡º
+	kRight = 1 << 2,	// é¼ æ ‡å³ä¾§å¼¹å‡º
+	kCenter = 1 << 3,	// é¼ æ ‡ç‚¹ä½œä¸ºèœå•æ°´å¹³æ–¹å‘å¼¹å‡ºä¸­é—´ç‚¹
+	kTop = 1 << 4,		// é¼ æ ‡ä¸Šä¾§å¼¹å‡º
+	kBottom = 1 << 5,	// é¼ æ ‡ä¸‹ä¾§å¼¹å‡º
+    kVCenter = 1 << 6,	// é¼ æ ‡ç‚¹ä½œä¸ºèœå•ç«–ç›´æ–¹å‘å¼¹å‡ºä¸­é—´ç‚¹
 };
-/** @brief °Ñ×Ö·û´®µÄ¶ÔÆëĞÅÏ¢×ª»»Îªenum
-  * @param[in] value ÀàËÆ"left bottom"µÄ×Ö·û´®ĞÅÏ¢
-  * @return int ¶ÔÆëĞÅÏ¢
+/** @brief æŠŠå­—ç¬¦ä¸²çš„å¯¹é½ä¿¡æ¯è½¬æ¢ä¸ºenum
+  * @param[in] value ç±»ä¼¼"left bottom"çš„å­—ç¬¦ä¸²ä¿¡æ¯
+  * @return int å¯¹é½ä¿¡æ¯
   */
 int StringToMenuAlign(const std::wstring &value);
 
-/** @brief °Ñ×Ö·û´®µÄµ¯³öĞÅÏ¢×ª»»ÎªCPoint
-  * @param[in] rect ¿Ø¼şÎ»ÖÃ
-  * @param[in] value ÀàËÆ"left vcenter"µÄ×Ö·û´®ĞÅÏ¢
-  * @return CPoint ²Ëµ¥µ¯³öÎ»ÖÃ
+/** @brief æŠŠå­—ç¬¦ä¸²çš„å¼¹å‡ºä¿¡æ¯è½¬æ¢ä¸ºCPoint
+  * @param[in] rect æ§ä»¶ä½ç½®
+  * @param[in] value ç±»ä¼¼"left vcenter"çš„å­—ç¬¦ä¸²ä¿¡æ¯
+  * @return CPoint èœå•å¼¹å‡ºä½ç½®
   */
 CPoint StringToMenuPopup(UiRect rect, const std::wstring &value);
 
-/** @brief °Ñ¿Ø¼şµÄmenupopup¡¢munualignÊôĞÔ½âÎöÎª²Ëµ¥µ¯³öĞÅÏ¢
-  * @param[in] control °üº¬ĞÅÏ¢µÄ¿Ø¼ş
-  * @param[out] point ²Ëµ¥µ¯³öÎ»ÖÃ
-  * @param[out] align ²Ëµ¥µ¯³ö·½Ïò
-  * @return void ÎŞ·µ»ØÖµ
+/** @brief æŠŠæ§ä»¶çš„menupopupã€munualignå±æ€§è§£æä¸ºèœå•å¼¹å‡ºä¿¡æ¯
+  * @param[in] control åŒ…å«ä¿¡æ¯çš„æ§ä»¶
+  * @param[out] point èœå•å¼¹å‡ºä½ç½®
+  * @param[out] align èœå•å¼¹å‡ºæ–¹å‘
+  * @return void æ— è¿”å›å€¼
   */
 void GetMenuPopupInfo(Control *control, CPoint &point, int &align);
 
 /** @enum MenuFlags$
-  * @brief ²Ëµ¥¶îÍâµÄ¿ØÖÆ²ÎÊı£¤
+  * @brief èœå•é¢å¤–çš„æ§åˆ¶å‚æ•°ï¿¥
   * @copyright (c) 2020, NetEase Inc. All rights reserved
   * @author Redrain
   * @date 2020/3/27
   */
 enum MenuFlags
 {
-	kNoFocus = 1 << 1,			// ²Ëµ¥µ¯³öÊ±²»»ñÈ¡½¹µã
-	kUseDefaultShadow = 1 << 2	// ²Ëµ¥µ¯³öÊ±Ê¹ÓÃÄ¬ÈÏÒõÓ°£¨¼´Ê¹xmlÖĞÖ¸¶¨ÁËÆäËûÒõÓ°£©
+	kNoFocus = 1 << 1,			// èœå•å¼¹å‡ºæ—¶ä¸è·å–ç„¦ç‚¹
+	kUseDefaultShadow = 1 << 2	// èœå•å¼¹å‡ºæ—¶ä½¿ç”¨é»˜è®¤é˜´å½±ï¼ˆå³ä½¿xmlä¸­æŒ‡å®šäº†å…¶ä»–é˜´å½±ï¼‰
 };
 
 class MenuElement;
 class UILIB_API MenuWndEx : public ui::WindowImplBase, public ObserverImpl
 {
 public:
-	/** @brief ´´½¨²Ëµ¥
-	  * @param xml		²Ëµ¥µÄ²¼¾ÖÎÄ¼ş
-	  * @param point	µ¯³ö²Ëµ¥µÄ×ø±ê
-	  * @param strMenuName	²Ëµ¥Ãû×Ö£¬ÓÃÓÚÎ¨Ò»±êÊ¶Ò»¸ö²Ëµ¥
-	  * @param align	²Ëµ¥µÄ³öÏÖÎ»ÖÃ£¬Ä¬ÈÏ³öÏÖÔÚÊó±êµÄÓÒÏÂ²à
-	  * @param hParnet	²Ëµ¥µÄ¸¸´°Ìå¾ä±ú
-	  * @param flags	MenuFlags£¬Ò»Ğ©¶îÍâµÄ¿ØÖÆ²ÎÊı	
-	  * @return MenuWndEx*	²Ëµ¥´°¿Ú
+	/** @brief åˆ›å»ºèœå•
+	  * @param xml		èœå•çš„å¸ƒå±€æ–‡ä»¶
+	  * @param point	å¼¹å‡ºèœå•çš„åæ ‡
+	  * @param strMenuName	èœå•åå­—ï¼Œç”¨äºå”¯ä¸€æ ‡è¯†ä¸€ä¸ªèœå•
+	  * @param align	èœå•çš„å‡ºç°ä½ç½®ï¼Œé»˜è®¤å‡ºç°åœ¨é¼ æ ‡çš„å³ä¸‹ä¾§
+	  * @param hParnet	èœå•çš„çˆ¶çª—ä½“å¥æŸ„
+	  * @param flags	MenuFlagsï¼Œä¸€äº›é¢å¤–çš„æ§åˆ¶å‚æ•°	
+	  * @return MenuWndEx*	èœå•çª—å£
 	  */
 	static MenuWndEx* CreateMenu(
 		STRINGorID xml,
@@ -313,23 +313,23 @@ public:
 		int flags = 0
 		);
 
-	/** @brief »ñÈ¡¸ù²Ëµ¥¿Ø¼ş£¬ÓÃÓÚ¶¯Ì¬Ìí¼Ó×Ó²Ëµ¥
-	  * @return MenuBox* ¸ù²Ëµ¥¿Ø¼ş
+	/** @brief è·å–æ ¹èœå•æ§ä»¶ï¼Œç”¨äºåŠ¨æ€æ·»åŠ å­èœå•
+	  * @return MenuBox* æ ¹èœå•æ§ä»¶
 	  */
 	MenuBox* GetMenu();
 
-	/** @brief ¶¯Ì¬Ìí¼Ó×Ó²Ëµ¥ºó£¬ÖØĞÂµ÷Õû²Ëµ¥µÄ´óĞ¡
-	  * @return void ÎŞ·µ»ØÖµ
+	/** @brief åŠ¨æ€æ·»åŠ å­èœå•åï¼Œé‡æ–°è°ƒæ•´èœå•çš„å¤§å°
+	  * @return void æ— è¿”å›å€¼
 	  */
 	void ResizeMenu();
 
-	/** @brief ¶¯Ì¬Ìí¼Ó×Ó²Ëµ¥ºó£¬ÖØĞÂµ÷Õû×Ó²Ëµ¥µÄ´óĞ¡
-	  * @return void ÎŞ·µ»ØÖµ
+	/** @brief åŠ¨æ€æ·»åŠ å­èœå•åï¼Œé‡æ–°è°ƒæ•´å­èœå•çš„å¤§å°
+	  * @return void æ— è¿”å›å€¼
 	  */
 	void ResizeSubMenu();
 
-	/** @brief ¼ì²éµ±Ç°ÉèÖÃĞÅÏ¢ÀïÊÇ·ñÓĞ¶ÔÓ¦µÄMenuFlags
-	  * @return bool ÊÇ·ñÓĞÕâ¸öflag
+	/** @brief æ£€æŸ¥å½“å‰è®¾ç½®ä¿¡æ¯é‡Œæ˜¯å¦æœ‰å¯¹åº”çš„MenuFlags
+	  * @return bool æ˜¯å¦æœ‰è¿™ä¸ªflag
 	  */
 	bool CheckFlag(MenuFlags flag);
 
@@ -338,31 +338,31 @@ public:
 	using SelectMap = std::map<ControlName, bool>;
 	using VisibleMap = std::map<ControlName, bool>;
 	using TextIdMap = std::map<ControlName, std::wstring>;
-	/** @brief ÅúÁ¿ÉèÖÃ×Ó¿Ø¼şµÄ×´Ì¬(½ûÓÃ¡¢Ñ¡Ôñ¡¢Òş²Ø¡¢ÎÄ±¾)£¬ÓÃÓÚ¿ìËÙ³õÊ¼»¯²Ëµ¥
-	  * @param[in] data ×´Ì¬Êı¾İ
-	  * @return void ÎŞ·µ»ØÖµ
+	/** @brief æ‰¹é‡è®¾ç½®å­æ§ä»¶çš„çŠ¶æ€(ç¦ç”¨ã€é€‰æ‹©ã€éšè—ã€æ–‡æœ¬)ï¼Œç”¨äºå¿«é€Ÿåˆå§‹åŒ–èœå•
+	  * @param[in] data çŠ¶æ€æ•°æ®
+	  * @return void æ— è¿”å›å€¼
 	  */
 	void SetEnableItems(const EnableMap &data);
 	void SetSelectItems(const SelectMap &data);
 	void SetVisibleItems(const VisibleMap &data);
 	void SetTextIdItems(const TextIdMap &data);
 
-	/** @brief ÉèÖÃ²Ëµ¥µÄ¿í¶È
-	  * @return void ÎŞ
+	/** @brief è®¾ç½®èœå•çš„å®½åº¦
+	  * @return void æ— 
 	  */
 	void SetWidth(const int width);
 
-	/** @brief ¼àÌıÄ³¸ö²Ëµ¥ÏîµÄÑ¡ÔñÊÂ¼ş
-	  * @param[in] strName ¿Ø¼şÃû
-	  * @param[in] callback ÊÂ¼ş´¦ÀíÆ÷
-	  * @return void ÎŞ·µ»ØÖµ
+	/** @brief ç›‘å¬æŸä¸ªèœå•é¡¹çš„é€‰æ‹©äº‹ä»¶
+	  * @param[in] strName æ§ä»¶å
+	  * @param[in] callback äº‹ä»¶å¤„ç†å™¨
+	  * @return void æ— è¿”å›å€¼
 	  */
 	void AttachSelect(const std::wstring& strName, const ui::EventCallback& callback);
 
-	/** @brief ¼àÌıÄ³¸ö×Ó²Ëµ¥¼´½«µ¯³öµÄÊÂ¼ş
-	  * @param[in] ×Ó²Ëµ¥¶ÔÓ¦µÄ²Ëµ¥ÏîÃû³Æ
-	  * @param[in] callback ÊÂ¼ş´¦ÀíÆ÷
-	  * @return void ÎŞ·µ»ØÖµ
+	/** @brief ç›‘å¬æŸä¸ªå­èœå•å³å°†å¼¹å‡ºçš„äº‹ä»¶
+	  * @param[in] å­èœå•å¯¹åº”çš„èœå•é¡¹åç§°
+	  * @param[in] callback äº‹ä»¶å¤„ç†å™¨
+	  * @return void æ— è¿”å›å€¼
 	  */
 	void AttachPopupSubMenu(const std::wstring& strName, const EventCallback& callback);
 
@@ -403,7 +403,7 @@ private:
 	std::wstring	m_skinFile;
     MenuElement*	m_pOwner = nullptr;
     MenuBox*		m_pMenuRoot = nullptr;
-	int				m_nAlignment = kRight | kBottom;	//²Ëµ¥¶ÔÆë·½Ê½
+	int				m_nAlignment = kRight | kBottom;	//èœå•å¯¹é½æ–¹å¼
 	int				m_nFlags = 0;;
 };
 
@@ -415,49 +415,49 @@ public:
     MenuElement();
 	~MenuElement();
 
-	/** @brief Ïò²Ëµ¥ÏîÀïÌí¼Ó×Ó¿Ø¼ş£¬±»Ìí¼ÓµÄ¿Ø¼şÒ»Ö±»á´æÔÚ
-	  * @param[in] pControl ×Ó¿Ø¼ş
-	  * @return bool ÊÇ·ñ³É¹¦
+	/** @brief å‘èœå•é¡¹é‡Œæ·»åŠ å­æ§ä»¶ï¼Œè¢«æ·»åŠ çš„æ§ä»¶ä¸€ç›´ä¼šå­˜åœ¨
+	  * @param[in] pControl å­æ§ä»¶
+	  * @return bool æ˜¯å¦æˆåŠŸ
 	  */
 	virtual bool Add(Control* pControl) override;
 	virtual bool AddAt(Control* pControl, std::size_t iIndex) override;
 
-	/** @brief ÏòÒÑ¾­µ¯³öµÄ×Ó²Ëµ¥´°¿ÚÀïÌí¼ÓÁÙÊ±²Ëµ¥Ïî£¬×Ó²Ëµ¥´°¿ÚÏú»Ùºó²Ëµ¥ÏîÒ²Ïú»Ù
-	  * @param[in] pMenuItem ÁÙÊ±²Ëµ¥Ïî
-	  * @return bool ÊÇ·ñ³É¹¦
+	/** @brief å‘å·²ç»å¼¹å‡ºçš„å­èœå•çª—å£é‡Œæ·»åŠ ä¸´æ—¶èœå•é¡¹ï¼Œå­èœå•çª—å£é”€æ¯åèœå•é¡¹ä¹Ÿé”€æ¯
+	  * @param[in] pMenuItem ä¸´æ—¶èœå•é¡¹
+	  * @return bool æ˜¯å¦æˆåŠŸ
 	  */
 	bool AddTempItem(MenuElement* pMenuItem);
 
-	/** @brief ¼àÌıÄ³¸ö×Ó²Ëµ¥¼´½«µ¯³öµÄÊÂ¼ş
-	  * @param[in] callback ÊÂ¼ş´¦ÀíÆ÷
-	  * @return void ÎŞ·µ»ØÖµ
+	/** @brief ç›‘å¬æŸä¸ªå­èœå•å³å°†å¼¹å‡ºçš„äº‹ä»¶
+	  * @param[in] callback äº‹ä»¶å¤„ç†å™¨
+	  * @return void æ— è¿”å›å€¼
 	  */
 	void AttachPopupSubMenu(const EventCallback& callback) { OnEvent[kEventNotify] += callback; }
 
-	/** @brief ²Ëµ¥Ïî±»µ¥»÷ºó£¬ÊÇ·ñ×Ô¶¯¹Ø±Õ²Ëµ¥
-	  * @param[in] value ÊÇ·ñ×Ô¶¯¹Ø±Õ²Ëµ¥
-	  * @return void ÎŞ·µ»ØÖµ
+	/** @brief èœå•é¡¹è¢«å•å‡»åï¼Œæ˜¯å¦è‡ªåŠ¨å…³é—­èœå•
+	  * @param[in] value æ˜¯å¦è‡ªåŠ¨å…³é—­èœå•
+	  * @return void æ— è¿”å›å€¼
 	  */
 	void SetAutoCloseWhenClick(bool value);
 	bool IsAutoCloseWhenClick();
 
-	/** @brief ²Ëµ¥ÏîÊÇ·ñ°üº¬×Ó²Ëµ¥
-	  * @param[in] has ÊÇ·ñ°üº¬×Ó²Ëµ¥
-	  * @return void ÎŞ·µ»ØÖµ
+	/** @brief èœå•é¡¹æ˜¯å¦åŒ…å«å­èœå•
+	  * @param[in] has æ˜¯å¦åŒ…å«å­èœå•
+	  * @return void æ— è¿”å›å€¼
 	  */
 	void SetHasSubMenu(bool has);
 	bool HasSubMenu();
 
-	/** @brief ²Ëµ¥Ïî¶ÔÓ¦µÄ×Ó²Ëµ¥µÄÒõÓ°Ğ§¹û
-	  * @return void ÎŞ·µ»ØÖµ
+	/** @brief èœå•é¡¹å¯¹åº”çš„å­èœå•çš„é˜´å½±æ•ˆæœ
+	  * @return void æ— è¿”å›å€¼
 	  */
 	void SetSubMenuShadowImage(const std::wstring &image);
 	std::wstring GetSubMenuShadowImage() const;
 	void SetSubMenuShadowCorner(const UiRect &rect);
 	UiRect GetSubMenuShadowCorner() const;
 
-	/** @brief ÊÇ·ñÎªÁÙÊ±²Ëµ¥Ïî£¬×Ó²Ëµ¥Ïú»ÙÊ±ÁÙÊ±²Ëµ¥ÏîÒ²»á±»Ïú»Ù
-	  * @return bool ÊÇ·ñÎªÁÙÊ±²Ëµ¥Ïî
+	/** @brief æ˜¯å¦ä¸ºä¸´æ—¶èœå•é¡¹ï¼Œå­èœå•é”€æ¯æ—¶ä¸´æ—¶èœå•é¡¹ä¹Ÿä¼šè¢«é”€æ¯
+	  * @return bool æ˜¯å¦ä¸ºä¸´æ—¶èœå•é¡¹
 	  */
 	bool IsTempItem();
 
@@ -475,13 +475,13 @@ protected:
 	virtual void PaintStatusImage(IRenderContext* pRender) override;
 	virtual void PaintText(IRenderContext* pRender) override;
 
-	/** @brief ×¼±¸´´½¨×Ó²Ëµ¥
-	  * @return bool ÊÇ·ñÕæµÄĞèÒª´´½¨×Ó²Ëµ¥
+	/** @brief å‡†å¤‡åˆ›å»ºå­èœå•
+	  * @return bool æ˜¯å¦çœŸçš„éœ€è¦åˆ›å»ºå­èœå•
 	  */
 	bool PrepareCreateMenu();
 
-	/** @brief ´´½¨×Ó²Ëµ¥
-	  * @return void ÎŞ·µ»ØÖµ
+	/** @brief åˆ›å»ºå­èœå•
+	  * @return void æ— è¿”å›å€¼
 	  */
 	void CreateMenuWnd();
 

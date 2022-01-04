@@ -21,7 +21,7 @@ namespace ui
 #define     GetWindowOwner(hwnd)    GetWindow(hwnd, GW_OWNER)
 
 ///////////////////////////////////////////////////////
-// WM_TOUCH触摸消息
+// WM_TOUCH瑙︽懜娑堟伅
 #define WM_TOUCH                        0x0240
 #define WM_GESTURE                      0x0119
 #define WM_GESTURENOTIFY                0x011A
@@ -57,7 +57,7 @@ namespace ui
 #define TOUCHINPUTMASKF_CONTACTAREA     0x0004  // the cxContact and cyContact fields are valid
 
 ///////////////////////////////////////////////////////
-// DPI适配
+// DPI閫傞厤
 typedef enum PROCESS_DPI_AWARENESS {
 	PROCESS_DPI_UNAWARE = 0,
 	PROCESS_SYSTEM_DPI_AWARE = 1,
@@ -87,7 +87,7 @@ typedef struct tagTOUCHINPUT {
 typedef TOUCHINPUT const * PCTOUCHINPUT;
 
 ///////////////////////////////////////////////////////
-// WM_POINTER消息
+// WM_POINTER娑堟伅
 #define WM_NCPOINTERUPDATE              0x0241
 #define WM_NCPOINTERDOWN                0x0242
 #define WM_NCPOINTERUP                  0x0243

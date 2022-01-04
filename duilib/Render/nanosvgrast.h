@@ -1205,7 +1205,7 @@ static void nsvg__unpremultiplyAlpha(unsigned char* image, int w, int h, int str
 	int x,y;
 
 	// Unpremultiply
-// redrain: nanosvgÒÑ¾­¶ÔÊı¾İ×öÁËÔ¤³Ë£¬ÕâÀï¶ÔRGBAÊı¾İ×ö·´Ô¤³Ë¡£µ«ÊÇ×îÖÕ½âÎöÊ±ĞèÒªÔ¤³ËÊı¾İ£¬ËùÒÔÆÁ±Îµô·´Ô¤³Ë´¦Àí
+// redrain: nanosvgå·²ç»å¯¹æ•°æ®åšäº†é¢„ä¹˜ï¼Œè¿™é‡Œå¯¹RGBAæ•°æ®åšåé¢„ä¹˜ã€‚ä½†æ˜¯æœ€ç»ˆè§£ææ—¶éœ€è¦é¢„ä¹˜æ•°æ®ï¼Œæ‰€ä»¥å±è”½æ‰åé¢„ä¹˜å¤„ç†
 // 	for (y = 0; y < h; y++) {
 // 		unsigned char *row = &image[y*stride];
 // 		for (x = 0; x < w; x++) {

@@ -21,10 +21,10 @@ struct TIMERINFO
 	}
 
 	TimerCallback timerCallback;
-	LONGLONG uPause;	//¶¨Ê±Æ÷¼ä¸ô
-	int iRepeatTime;	//ÖØ¸´´ÎÊı
-	LARGE_INTEGER dwTimeEnd;	//¶¨Ê±Æ÷½áÊøÊ±¼ä£¨µ¥Î»1ms£©
-	std::weak_ptr<nbase::WeakFlag> weakFlag;	//ÖØ¸´´ÎÊı	
+	LONGLONG uPause;	//å®šæ—¶å™¨é—´éš”
+	int iRepeatTime;	//é‡å¤æ¬¡æ•°
+	LARGE_INTEGER dwTimeEnd;	//å®šæ—¶å™¨ç»“æŸæ—¶é—´ï¼ˆå•ä½1msï¼‰
+	std::weak_ptr<nbase::WeakFlag> weakFlag;	//é‡å¤æ¬¡æ•°	
 };
 
 class TimerManager

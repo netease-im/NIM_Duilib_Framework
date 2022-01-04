@@ -1,16 +1,16 @@
-# Controls£¨¿Ø¼ş£©
+# Controlsï¼ˆæ§ä»¶ï¼‰
 
-¿Ø¼ş°üº¬ÁËËùÓĞ¿ÉÓÃµÄ¶ÀÁ¢¿Ø¼ş£¬Èç°´Å¥¡¢ÎÄ±¾¡¢½ø¶ÈÌõµÈ£¬Ìá¹©ÓÃ»§ÊäÈë»òÊä³öÄÚÈİÌá¹©Ê¹ÓÃÕß²é¿´¡£ÒÔÏÂÁĞ¾ÙÁËËùÓĞ¿ÉÓÃµÄ¿Ø¼şÁĞ±í¡£
+æ§ä»¶åŒ…å«äº†æ‰€æœ‰å¯ç”¨çš„ç‹¬ç«‹æ§ä»¶ï¼Œå¦‚æŒ‰é’®ã€æ–‡æœ¬ã€è¿›åº¦æ¡ç­‰ï¼Œæä¾›ç”¨æˆ·è¾“å…¥æˆ–è¾“å‡ºå†…å®¹æä¾›ä½¿ç”¨è€…æŸ¥çœ‹ã€‚ä»¥ä¸‹åˆ—ä¸¾äº†æ‰€æœ‰å¯ç”¨çš„æ§ä»¶åˆ—è¡¨ã€‚
 
- - [Window](Window.md) ÓÃÓÚÈİÄÉËùÓĞ¿Ø¼şµÄ´°¿Ú£¬ÕâÀïÔİÊ±·Åµ½¿Ø¼ş·ÖÀàÖĞ
- - [Control](Control.md) ËùÓĞ¿Ø¼şµÄ»ùÀà£¬°üº¬ÁË¿Ø¼şµÄ»ù±¾ÊôĞÔºÍ½Ó¿Ú
- - [Button](Button.md) °´Å¥¿Ø¼ş
- - [CheckBox](CheckBox.md) ¸´Ñ¡¿ò
- - [Option](Option.md) µ¥Ñ¡¿ò
- - [Label](Label.md) ÎÄ±¾
- - [Progress](Progress.md) ½ø¶ÈÌõ
- - [CircleProgress](CircleProgress.md) »·ĞÎ½ø¶ÈÌõ
- - [Slider](Slider.md) »¬¶¯Ìõ
- - [RichEdit](RichEdit.md) ¸»ÎÄ±¾
- - [ScrollBar](ScrollBar.md) ¹ö¶¯Ìõ
- - [CefControl](CefControl.md) CEF ¿Ø¼ş
+ - [Window](Window.md) ç”¨äºå®¹çº³æ‰€æœ‰æ§ä»¶çš„çª—å£ï¼Œè¿™é‡Œæš‚æ—¶æ”¾åˆ°æ§ä»¶åˆ†ç±»ä¸­
+ - [Control](Control.md) æ‰€æœ‰æ§ä»¶çš„åŸºç±»ï¼ŒåŒ…å«äº†æ§ä»¶çš„åŸºæœ¬å±æ€§å’Œæ¥å£
+ - [Button](Button.md) æŒ‰é’®æ§ä»¶
+ - [CheckBox](CheckBox.md) å¤é€‰æ¡†
+ - [Option](Option.md) å•é€‰æ¡†
+ - [Label](Label.md) æ–‡æœ¬
+ - [Progress](Progress.md) è¿›åº¦æ¡
+ - [CircleProgress](CircleProgress.md) ç¯å½¢è¿›åº¦æ¡
+ - [Slider](Slider.md) æ»‘åŠ¨æ¡
+ - [RichEdit](RichEdit.md) å¯Œæ–‡æœ¬
+ - [ScrollBar](ScrollBar.md) æ»šåŠ¨æ¡
+ - [CefControl](CefControl.md) CEF æ§ä»¶

@@ -8,7 +8,7 @@ class ShadowBox : public Box
 public:
 	virtual void Paint(IRenderContext* pRender, const UiRect& rcPaint) override
 	{
-		// ×÷ÎªÒõÓ°£¬ÖÐ¼ä²¿·ÖÊÇ¿ÕµÄ£¬²»ÐèÒª´¦ÀíÖØ»æ
+		// ä½œä¸ºé˜´å½±ï¼Œä¸­é—´éƒ¨åˆ†æ˜¯ç©ºçš„ï¼Œä¸éœ€è¦å¤„ç†é‡ç»˜
 		auto rcPos = GetPaddingPos();
 		if (rcPaint.left >= rcPos.left && rcPaint.top >= rcPos.top && rcPaint.right <= rcPos.right && rcPaint.bottom <= rcPos.bottom) {
 			return;

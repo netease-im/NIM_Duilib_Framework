@@ -58,7 +58,7 @@ void CefControl::ReCreateBrowser()
 {
 	if (browser_handler_->GetBrowser() == nullptr)
 	{
-		// Ê¹ÓÃÎŞ´°Ä£Ê½£¬ÀëÆÁäÖÈ¾
+		// ä½¿ç”¨æ— çª—æ¨¡å¼ï¼Œç¦»å±æ¸²æŸ“
 		CefWindowInfo window_info;
 		window_info.SetAsWindowless(m_pWindow->GetHWND(), false);
 		CefBrowserSettings browser_settings;
@@ -125,13 +125,13 @@ void CefControl::Paint(IRenderContext* pRender, const UiRect& rcPaint)
 
 	if (dc_cef_.IsValid() && browser_handler_.get() && browser_handler_->GetBrowser().get())
 	{
-		// »æÖÆcef PET_VIEWÀàĞÍµÄÎ»Í¼
+		// ç»˜åˆ¶cef PET_VIEWç±»å‹çš„ä½å›¾
 		BitBlt(pRender->GetDC(), m_rcItem.left, m_rcItem.top, m_rcItem.GetWidth(), m_rcItem.GetHeight(), dc_cef_.GetDC(), 0, 0, SRCCOPY);
 
-		// »æÖÆcef PET_POPUPÀàĞÍµÄÎ»Í¼
+		// ç»˜åˆ¶cef PET_POPUPç±»å‹çš„ä½å›¾
 		if (!rect_popup_.IsEmpty() && dc_cef_popup_.IsValid())
 		{
-			// ¼ÙÈçpopup´°¿ÚÎ»ÖÃÔÚ¿Ø¼şµÄ·¶Î§Íâ£¬ÔòĞŞÕıµ½¿Ø¼ş·¶Î§ÄÚ£¬Ö¸»æÖÆ¿Ø¼ş·¶Î§ÄÚµÄpopup´°¿Ú
+			// å‡å¦‚popupçª—å£ä½ç½®åœ¨æ§ä»¶çš„èŒƒå›´å¤–ï¼Œåˆ™ä¿®æ­£åˆ°æ§ä»¶èŒƒå›´å†…ï¼ŒæŒ‡ç»˜åˆ¶æ§ä»¶èŒƒå›´å†…çš„popupçª—å£
 			int paint_x = rect_popup_.x;
 			int paint_y = rect_popup_.y;
 			int paint_buffer_x = 0;
@@ -192,7 +192,7 @@ LRESULT CefControl::MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL
 
 	case WM_SETCURSOR:
 	{
-		// ÕâÀïÀ¹½ØWM_SETCURSORÏûÏ¢£¬²»ÈÃduilib´¦Àí£¨duilib»á¸Ä±ä¹â±êÑùÊ½£©£¬·ñÔò»áÓ°ÏìCefÖĞµÄÊó±ê¹â±ê
+		// è¿™é‡Œæ‹¦æˆªWM_SETCURSORæ¶ˆæ¯ï¼Œä¸è®©duilibå¤„ç†ï¼ˆduilibä¼šæ”¹å˜å…‰æ ‡æ ·å¼ï¼‰ï¼Œå¦åˆ™ä¼šå½±å“Cefä¸­çš„é¼ æ ‡å…‰æ ‡
 		POINT pt = { 0 };
 		::GetCursorPos(&pt);
 		::ScreenToClient(m_pWindow->GetHWND(), &pt);
@@ -364,7 +364,7 @@ LRESULT CefControl::SendButtonUpEvent(UINT uMsg, WPARAM wParam, LPARAM lParam, B
 	CefMouseEvent mouse_event;
 	if (uMsg == WM_RBUTTONUP)
 	{
-		mouse_event.x = pt.x/* - m_rcItem.left*/;	// ÕâÀï²»½øĞĞ×ø±ê×ª»»£¬·ñÔòÓÒ¼ü²Ëµ¥Î»ÖÃ²»ÕıÈ·
+		mouse_event.x = pt.x/* - m_rcItem.left*/;	// è¿™é‡Œä¸è¿›è¡Œåæ ‡è½¬æ¢ï¼Œå¦åˆ™å³é”®èœå•ä½ç½®ä¸æ­£ç¡®
 		mouse_event.y = pt.y/* - m_rcItem.top*/;
 	}
 	else

@@ -106,7 +106,7 @@ void MyGridBody::OnColumnCountChanged(int col_index, bool bRemove)
 
 bool MyGridBody::OnScrollPosChanged(ui::EventArgs* args)
 {
-	if (args->wParam > 0)	//y方向
+	if (args->wParam > 0)	//y鏂瑰悜
 	{
 		ResetHeanderComboPos();
 	}
@@ -210,7 +210,7 @@ void MyGridBody::PaintBody(IRenderContext* pRender)
 					if (m_hLayout[j] == 0)
 						continue;
 					std::wstring str = grid_row->at(j)->text;
-					if (!str.empty() && posx + m_hLayout[j] - szOff.cx > fixed_col_width)		//单元格右边线没有超过fixed_col_width
+					if (!str.empty() && posx + m_hLayout[j] - szOff.cx > fixed_col_width)		//鍗曞厓鏍煎彸杈圭嚎娌℃湁瓒呰繃fixed_col_width
 					{
 						UiRect rc = { posx, posy, posx + m_hLayout[j], posy + m_vLayout[i] };
 						if (i == 0)
@@ -221,11 +221,11 @@ void MyGridBody::PaintBody(IRenderContext* pRender)
 						pRender->DrawText(rc, str, dwDefColor, m_strGridFont, m_uTextStyle, 255, false);
 					}
 					posx += m_hLayout[j];
-					if (posx - szOff.cx > grid_width)	//超出grid宽度
+					if (posx - szOff.cx > grid_width)	//瓒呭嚭grid瀹藉害
 						break;
 				}
 				posy += m_vLayout[i];
-				if (posy - szOff.cy > grid_height)		//超出grid高度
+				if (posy - szOff.cy > grid_height)		//瓒呭嚭grid楂樺害
 					break;
 			}
 		}
@@ -248,18 +248,18 @@ void MyGridBody::PaintBody(IRenderContext* pRender)
 						continue;
 					GridRow *grid_row = m_vecRow[j];
 					std::wstring str = grid_row->at(i)->text;
-					if (!str.empty() && posy + m_vLayout[j] - szOff.cy > fixed_row_height)		//单元格下边线没有超过fixed_row_height
+					if (!str.empty() && posy + m_vLayout[j] - szOff.cy > fixed_row_height)		//鍗曞厓鏍间笅杈圭嚎娌℃湁瓒呰繃fixed_row_height
 					{
 						UiRect rc = { posx, posy, posx + m_hLayout[i], posy + m_vLayout[j] };
 						rc.Offset({ m_rcItem.left, m_rcItem.top - szOff.cy });
 						pRender->DrawText(rc, str, dwDefColor, m_strGridFont, m_uTextStyle, 255, false);
 					}
 					posy += m_vLayout[j];
-					if (posy - szOff.cy > grid_height)	//超出grid高度
+					if (posy - szOff.cy > grid_height)	//瓒呭嚭grid楂樺害
 						break;
 				}
 				posx += m_hLayout[i];
-				if (posx - szOff.cx > grid_width)		//超出grid宽度
+				if (posx - szOff.cx > grid_width)		//瓒呭嚭grid瀹藉害
 					break;
 			}
 		}
@@ -275,7 +275,7 @@ void MyGridBody::PaintBody(IRenderContext* pRender)
 			{
 				if (m_vLayout[i] == 0)
 					continue;
-				if (posy + m_vLayout[i] - szOff.cy > fixed_row_height)		//单元格下边线没有超过fixed_row_height
+				if (posy + m_vLayout[i] - szOff.cy > fixed_row_height)		//鍗曞厓鏍间笅杈圭嚎娌℃湁瓒呰繃fixed_row_height
 				{
 					GridRow *grid_row = m_vecRow[i];
 					posx = GetFixedColWidth();
@@ -289,7 +289,7 @@ void MyGridBody::PaintBody(IRenderContext* pRender)
 						UiRect rc = { posx, posy, posx + m_hLayout[j], posy + m_vLayout[i] };
 						rc.Offset({ m_rcItem.left - szOff.cx, m_rcItem.top - szOff.cy });
 						rc.Deflate({ 1, 1, 2, 2 });
-						//绘制单元格背景色
+						//缁樺埗鍗曞厓鏍艰儗鏅壊
 						if (pItem->IsSelected())
 						{
 							pRender->DrawColor(rc, m_strSelForeColor, 255);
@@ -299,9 +299,9 @@ void MyGridBody::PaintBody(IRenderContext* pRender)
 							pRender->DrawColor(rc, pItem->bk_color, 255);
 						}
 
-						//绘制text
+						//缁樺埗text
 						std::wstring str = pItem->text;
-						if (!str.empty() && posx + m_hLayout[j] - szOff.cx > fixed_col_width)		//单元格右边线没有超过fixed_col_width
+						if (!str.empty() && posx + m_hLayout[j] - szOff.cx > fixed_col_width)		//鍗曞厓鏍煎彸杈圭嚎娌℃湁瓒呰繃fixed_col_width
 						{
 							if (pItem->text_color.empty() && pItem->text_style == 0)
 								pRender->DrawText(rc, str, dwDefColor, m_strGridFont, m_uTextStyle, 255, false);
@@ -312,12 +312,12 @@ void MyGridBody::PaintBody(IRenderContext* pRender)
 							}
 						}
 						posx += m_hLayout[j];
-						if (posx - szOff.cx > grid_width)		//超出grid宽度
+						if (posx - szOff.cx > grid_width)		//瓒呭嚭grid瀹藉害
 							break;
 					}
 				}
 				posy += m_vLayout[i];
-				if (posy - szOff.cy > grid_height)			//超出grid高度
+				if (posy - szOff.cy > grid_height)			//瓒呭嚭grid楂樺害
 					break;
 			}
 		}
