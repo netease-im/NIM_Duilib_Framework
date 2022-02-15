@@ -141,7 +141,11 @@ size_t StringReplaceAllT(const std::basic_string<CharType> &find,
 
 inline int vsnprintfT(char *dst, size_t count, const char *format, va_list ap)
 {
+#if defined(OS_WIN)	
+	return _vsnprintf(dst, count, format, ap);
+#else	
 	return vsnprintf(dst, count, format, ap);
+#endif	
 }
 
 inline int vsnprintfT(wchar_t *dst, size_t count, const wchar_t *format, va_list ap)
@@ -176,11 +180,13 @@ void StringAppendVT(const CharType *format, va_list ap, std::basic_string<CharTy
 	std::basic_string<CharType> heap_buffer;
 	for (;;)
 	{
-		if (result != -1)
+#if !defined(OS_WIN)
+		if (result < 0)
 		{
 			assert(0);
 			return; /* not expected, result should be -1 here */
 		}
+#endif
 		buffer_size <<= 1; /* try doubling the buffer size */
 		if (buffer_size > 32 * 1024 * 1024)
 		{
