@@ -147,7 +147,6 @@ namespace nim_comp
 		m_pDropList->SetBkColor(L"bk_wnd_lightcolor");
 		m_pDropList->SetBorderColor(L"splitline_level1");
 		m_pDropList->SetBorderSize(UiRect(1, 1, 1, 1));
-		m_pDropList->SetAutoDestroyChild(false);
 		m_pDropList->EnableScrollBar();
 		m_pDropList->ApplyAttributeList(GetDropBoxAttributeList());
 

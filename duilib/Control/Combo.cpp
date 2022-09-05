@@ -160,7 +160,6 @@ Combo::Combo() :
 	m_pLayout->SetBorderSize(UiRect(1, 1, 1, 1));
 	m_pLayout->SetBkColor(L"white");
 	m_pLayout->SetBorderColor(L"gray");
-	m_pLayout->SetAutoDestroyChild(false);
 	m_pLayout->EnableScrollBar();
 	m_pLayout->ApplyAttributeList(GetDropBoxAttributeList());
 	m_pLayout->AttachSelect(nbase::Bind(&Combo::OnSelectItem, this, std::placeholders::_1));
