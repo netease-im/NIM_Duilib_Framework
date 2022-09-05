@@ -1237,13 +1237,13 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 				if (pInputs[0].dwFlags & TOUCHEVENTF_DOWN)
 				{
 					if (m_pEventClick != NULL)
-						break;
+						goto endtouch;
 
 					::SetFocus(m_hWnd);
 					m_ptLastMousePos = pt;
 					Control *pControl = FindControl(pt);
-					if (pControl == NULL) break;
-					if (pControl->GetWindow() != this) break;
+					if (pControl == NULL) goto endtouch;
+					if (pControl->GetWindow() != this) goto endtouch;
 					m_pEventPointer = pControl;
 					pControl->SetFocus();
 					SetCapture();
@@ -1253,15 +1253,15 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 				else if (pInputs[0].dwFlags & TOUCHEVENTF_MOVE)
 				{
 					if (m_pEventClick != NULL)
-						break;
+						goto endtouch;
 
 					if (m_ptLastMousePos.x == pt.x && m_ptLastMousePos.y == pt.y)
-						break;
+						goto endtouch;
 
 					m_ptLastMousePos = pt;
-					if (m_pEventPointer == NULL) break;
+					if (m_pEventPointer == NULL) goto endtouch;
 
-					if (!HandleMouseEnterLeave(pt, wParam, lParam)) break;
+					if (!HandleMouseEnterLeave(pt, wParam, lParam)) goto endtouch;
 
 					m_pEventPointer->HandleMessageTemplate(kEventTouchMove, 0, 0, 0, pt);
 				}
@@ -1270,14 +1270,14 @@ LRESULT Window::DoHandlMessage(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& ha
 					ReleaseEventClick(true, wParam, lParam);
 					m_ptLastMousePos = pt;
 					ReleaseCapture();
-					if (m_pEventPointer == NULL) break;
+					if (m_pEventPointer == NULL) goto endtouch;
 
 					m_pEventPointer->HandleMessageTemplate(kEventTouchUp, 0, lParam, 0, pt);
 					m_pEventPointer = NULL;
 				}
 			}
 		}
-
+	endtouch:
 		CloseTouchInputHandleWrapper((HTOUCHINPUT)lParam);
 		delete[] pInputs;
 	}
