@@ -932,7 +932,8 @@ CSize ScrollableBox::CalcRequiredSize(const UiRect& rc)
 
 void ScrollableBox::HandleMessage(EventArgs& event)
 {
-	if( !IsMouseEnabled() && event.Type > kEventMouseBegin && event.Type < kEventMouseEnd ) {
+	if( (!IsMouseEnabled() && event.Type > kEventMouseBegin && event.Type < kEventMouseEnd) || 
+		event.Type == kEventLast) {
 		if( m_pParent != NULL ) m_pParent->HandleMessageTemplate(event);
 		else Box::HandleMessage(event);
 		return;
