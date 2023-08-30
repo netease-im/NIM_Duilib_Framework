@@ -114,6 +114,7 @@ LRESULT CComboWnd::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
         m_pOwner->SetWindow(m_pOwner->GetWindow(), m_pOwner->GetParent(), false);
         m_pOwner->SetPos(m_pOwner->GetPos());
         m_pOwner->SetFocus();
+		m_pOwner->GetListBox()->SetWindow(nullptr, nullptr, false);// by isdebug
     }
     else if( uMsg == WM_KILLFOCUS ) {
 		if (m_hWnd != (HWND)wParam)	{ 
