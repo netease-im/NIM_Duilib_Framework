@@ -104,7 +104,7 @@ double GetValue(double def = 0)
     - `def` 取值失败时返回的缺省值
  - 返回值：返回控件中的实数
 
-### SetValue <a id="SetValue1"></a>
+### SetValue {#SetValue1}
 
 设置控件的数值(整数)
 
@@ -116,7 +116,7 @@ void SetValue(int value)
     - `value` 要设置的整数值
  - 返回值：无
 
-### SetValue <a id="SetValue2"></a>
+### SetValue {#SetValue2}
 
 设置控件的数值(实数)
 
