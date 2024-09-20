@@ -23,8 +23,8 @@
 | [SetAllowNegative](#SetAllowNegative) | 设置是否允许输入负数 |
 | [GetIntValue](#GetIntValue) | 获取控件中的整数 |
 | [GetValue](#GetValue) | 获取控件中的实数 |
-| [SetValue](#SetValue1) | 设置控件的数值(整数) |
-| [SetValue](#SetValue2) | 设置控件的数值(实数) |
+| [SetValue](#SetValue-1) | 设置控件的数值(整数) |
+| [SetValue](#SetValue-2) | 设置控件的数值(实数) |
 | [IsMaxValueEnabled](#IsMaxValueEnabled) | 判断是否开启最大值控制 |
 | [SetMaxValueEnabled](#SetMaxValueEnabled) | 设置是否是否开启最大值控制 |
 | [IsMinValueEnabled](#IsMinValueEnabled) | 判断是否开启最小值控制 |
@@ -104,7 +104,7 @@ double GetValue(double def = 0)
     - `def` 取值失败时返回的缺省值
  - 返回值：返回控件中的实数
 
-### SetValue {#SetValue1}
+### SetValue {#1}
 
 设置控件的数值(整数)
 
@@ -116,7 +116,7 @@ void SetValue(int value)
     - `value` 要设置的整数值
  - 返回值：无
 
-### SetValue {#SetValue2}
+### SetValue {#2}
 
 设置控件的数值(实数)
 
