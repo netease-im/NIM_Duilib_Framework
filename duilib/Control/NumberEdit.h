@@ -41,21 +41,92 @@ namespace ui
 		 */
 		void SetAllowNegative(bool bAllowNegative = false);
 
+		 /**
+		  * @brief 返回文本的整数值
+		  */
+		int GetIntValue(int def = 0);
+
 		/**
- 		 * @brief 设置控件的文本
- 		 * @param[in] strText 要设置的文本内容
- 		 * @return 无
- 		 */
+		 * @brief 返回文本的实数值
+		 */
+		double GetValue(double def=0);
+
+		/**
+		 * @brief 给文本框设置一个整数值
+		 */
+		void SetValue(int value);
+
+		/**
+		 * @brief 给文本框设置一个实数值
+		 */
+		void SetValue(double value);
+
+		/**
+         * @brief 判断是否开启最大值控制
+         * @return 返回 true 表示是
+        */
+		bool IsMaxValueEnabled();
+
+		/**
+		 * @brief 设置是否开启最大值控制
+		 * @param[in] bMaxValueEnabled 为 true 开启
+		 * @return 无
+		 */
+		void SetMaxValueEnabled(bool bMaxValueEnabled = false);
+
+		/**
+		 * @brief 判断是否开启最小值控制
+		 * @return 返回 true 表示是
+		*/
+		bool IsMinValueEnabled();
+
+		/**
+		 * @brief 设置是否开启最小值控制
+		 * @param[in] bMinValueEnabled 为 true 开启
+		 * @return 无
+		 */
+		void SetMinValueEnabled(bool bMinValueEnabled = false);
+
+		/**
+		 * @brief 返回最大值设定
+		 */
+		int GetMaxValue();
+
+		/**
+		 * @brief 设置最大值
+		 */
+		void SetMaxValue(int value);
+
+		/**
+		 * @brief 返回最小值设定
+		 */
+		int GetMinValue();
+
+		/**
+		 * @brief 设置最小值
+		 */
+		void SetMinValue(int value);
+
+		 /**
+		  * @brief 设置控件的文本
+		  * @param[in] strText 要设置的文本内容
+		  * @return 无
+		  */
 		virtual void SetText(const std::wstring& strText) override;
+
 		virtual void OnChar(EventArgs& event) override;
 		virtual void OnKeyDown(EventArgs& event) override;
+		virtual bool OnTxTextChanged() override;
 
 		virtual void SetAttribute(const std::wstring& pstrName, const std::wstring& pstrValue) override;
 
 	protected:
 		bool m_bIntOnly; //仅支持整数 默认否
 		bool m_bAllowNegative; //允许负数 默认否
-
+		bool m_bMaxValueEnabled; //启用最大值控制
+		bool m_bMinValueEnabled; //启用最小值控制
+		int m_iMaxValue; //最大值
+		int m_iMinValue; //最小值
 	private:
 		std::wstring _ToNumberStr(std::wstring str);
 	};

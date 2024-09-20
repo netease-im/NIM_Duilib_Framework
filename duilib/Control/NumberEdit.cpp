@@ -1,15 +1,32 @@
 #include "stdafx.h"
 #include "base/thread/thread_manager.h"
-
+#include <sstream>
 // These constants are for backward compatibility. They are the 
 // sizes used for initialization and reset in RichEdit 1.0
 
 namespace ui {
 
+	template <typename T1>
+	T1 StringToNum(const std::string& input, const T1 def) {
+		std::istringstream iss(input);
+		T1 num;
+		iss >> num;
+		if (iss.fail()) {
+			return def;
+		}
+		else {
+			return num;
+		}
+	}
+	
 	NumberEdit::NumberEdit() : 
 		RichEdit(), 
 		m_bIntOnly(false),
-		m_bAllowNegative(false)
+		m_bAllowNegative(false),
+		m_bMaxValueEnabled(false), 
+		m_iMaxValue(0),
+	    m_bMinValueEnabled(false),
+	    m_iMinValue(0) //×îÐ¡Öµ
 	{
 		m_bWantTab = false;
 		m_lTwhStyle &= ~ES_MULTILINE;
@@ -35,6 +52,65 @@ namespace ui {
 		m_bAllowNegative = bAllowNegative;
 	}
 
+	int NumberEdit::GetIntValue(int def)
+	{
+		return StringToNum<int>(GetUTF8Text(), def);
+	}
+
+	double NumberEdit::GetValue(double def)
+	{
+		return StringToNum<double>(GetUTF8Text(), def);
+	}
+
+	void NumberEdit::SetValue(int value)
+	{
+		SetText(std::to_wstring(value));
+	}
+
+	void NumberEdit::SetValue(double value)
+	{
+		SetText(std::to_wstring(value));
+	}
+
+	bool NumberEdit::IsMaxValueEnabled()
+	{
+		return m_bMaxValueEnabled;
+	}
+
+	void NumberEdit::SetMaxValueEnabled(bool bMaxValueEnabled)
+	{
+		m_bMaxValueEnabled = bMaxValueEnabled;
+	}
+
+	bool NumberEdit::IsMinValueEnabled()
+	{
+		return m_bMinValueEnabled;
+	}
+
+	void NumberEdit::SetMinValueEnabled(bool bMinValueEnabled)
+	{
+		m_bMinValueEnabled = bMinValueEnabled;
+	}
+
+	int NumberEdit::GetMaxValue()
+	{
+		return m_iMaxValue;
+	}
+
+	void NumberEdit::SetMaxValue(int value)
+	{
+		m_iMaxValue = value;
+	}
+
+	int NumberEdit::GetMinValue()
+	{
+		return m_iMinValue;
+	}
+
+	void NumberEdit::SetMinValue(int value)
+	{
+		m_iMinValue = value;
+	}
 	void NumberEdit::SetText(const std::wstring & strText)
 	{
 		std::wstring strNum = _ToNumberStr(strText);
@@ -136,6 +212,26 @@ namespace ui {
 		TxSendMessage(WM_KEYDOWN, event.wParam, event.lParam, NULL);
 	}
 
+	bool NumberEdit::OnTxTextChanged()
+	{
+		if (m_pWindow != NULL) {
+			if (m_bMaxValueEnabled) {
+				if (GetValue() > m_iMaxValue) {
+					SetValue(m_iMaxValue);
+				}
+			}
+
+			if (m_bMinValueEnabled) {
+				if (GetValue() < m_iMinValue) {
+					SetValue(m_iMinValue);
+				}
+			}
+
+			m_pWindow->SendNotify(this, kEventTextChange);
+		}
+
+		return true;
+	}
 	void NumberEdit::SetAttribute(const std::wstring& strName, const std::wstring& strValue)
 	{
 		if (strName == _T("number")) {}
@@ -143,6 +239,10 @@ namespace ui {
 		else if (strName == _T("multiline")) {}
 		else if (strName == _T("intonly")) SetIntOnly(strValue == _T("true"));
 		else if (strName == _T("allownegative")) SetAllowNegative(strValue == _T("true"));
+		else if (strName == _T("maxvalueenabled")) SetMaxValueEnabled(strValue == _T("true"));
+		else if (strName == _T("minvalueenabled")) SetMinValueEnabled(strValue == _T("true"));
+		else if (strName == _T("maxvalue")) SetMaxValue(std::stoi(strValue));
+		else if (strName == _T("minvalue")) SetMinValue(std::stoi(strValue));
 		else RichEdit::SetAttribute(strName, strValue);
 	}
 
